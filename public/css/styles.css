@@ -1,0 +1,11 @@
+body {
+  padding-top: 40px;
+}
+
+/* Container-views*/
+#items {
+    padding-left: 1%;
+    padding-right: 1%;
+    width: 98%;
+    margin-top: 40px;
+}
