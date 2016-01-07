@@ -9,11 +9,11 @@ var del = require('../controllers/docs/delete');
 
 
 // LIST
-router.get('/docs/', list.request);
+router.get('/docs', list.request);
 
 
 // POST
-router.post('/docs/', post.request);
+router.post('/docs', post.request);
 
 
 // GET
