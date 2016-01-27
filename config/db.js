@@ -1,7 +1,13 @@
 
 // MONGODB
 module.exports = {
-    getConnection: function() {
-        return 'mongodb://localhost/ethics-db';
+    getConnection: function(devStatus) {
+        if(devStatus) {
+            // LOCAL DEVELOPMENT DATABASE
+            return 'mongodb://localhost/ethics-db';
+        } else {
+            // PRODUCTION DATABASE ON SERVER
+            return 'mongodb://localhost/ethics-db';
+        }
     }
 }

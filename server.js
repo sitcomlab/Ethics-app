@@ -8,6 +8,18 @@ var debug = require('debug');
 var mongoose = require('mongoose');
 var nodemailer = require('nodemailer');
 var pdfkit = require('pdfkit');
+var program = require('commander');
+
+// COMMAND-LINE-PARAMS
+program
+  .version('0.0.1')
+  .option('-d, --dev', 'Use development database')
+  .parse(process.argv);
+
+var devStatus = false;
+if(program.dev){
+    devStatus = true;
+}
 
 
 // CONFIG
@@ -19,7 +31,7 @@ var docs = require ('./routes/docs');
 
 
 // DATABASE
-mongoose.connect(db.getConnection());
+mongoose.connect(db.getConnection(devStatus));
 
 
 // WEBSERVER
