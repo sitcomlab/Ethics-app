@@ -9,3 +9,7 @@ body {
     width: 98%;
     margin-top: 40px;
 }
+
+.bolder {
+    font-weight: bold;
+}

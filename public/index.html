@@ -1,48 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Nicholas Schiestel">
+        <meta name="author" content="Heinrich Löwen">
+        <!--<link rel="icon" href="images/favicon/favicon.ico"> -->
+
+        <!-- Detect phone numbers -->
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="x-rim-auto-match" content="none">
+
         <title>Ethics-App</title>
 
-        <link rel="stylesheet" href="css/styles.css" type="text/css">
+        <!-- Bootstrap core CSS -->
+        <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+        <!-- Font-Awesome -->
+        <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <!-- Custom styles for this template -->
+        <link href="css/styles.css" rel="stylesheet"/>
     </head>
 
-    <body>
+    <body ng-app="ethics-app">
+        <nav class="navbar navbar-fixed-top navbar-dark bg-inverse" ng-controller="NavController">
 
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Ethics-App (v1.0)</a>
-                </div>
-                <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.html">Home</a></li>
-                        <li><a href="index.html">Help</a></li>
-                        <li><a href="index.html">About</a></li>
-                    </ul>
-                </div>
-            </div>
+            <a class="navbar-brand" ng-href="#/">Ethics-App (v1.0)</a>
+
+            <!--NAVBAR LEFT -->
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link" ng-href="#/" ng-class="{ active: isActive('/') }">
+                        <i class="fa fa-home"></i>&nbsp;&nbsp;{{ 'NAV_HOME' | translate }}
+                    </a>
+                </li>
+                <li class="nav-item dropdown active">
+                  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa fa-cogs"></i>&nbsp;&nbsp;{{ 'NAV_SETTINGS' | translate}}&nbsp;
+                      <span class="caret"></span>
+                  </a>
+                  <div class="dropdown-menu">
+                      <h6 class="dropdown-header">{{ 'LANGUAGES' | translate}}</h6>
+                      <a class="dropdown-item" ng-click="updateLanguage('en_US')" style="cursor:pointer;">
+                          <span class="emoji">&#x1F1FA;&#x1F1F8;</span>&nbsp;&nbsp;
+                          <span ng-class="{ bolder: language=='en_US'}">{{ 'ENGLISH' | translate}}
+                              <small>({{ 'ENGLISH'}})</small>
+                          </span>
+                      </a>
+                      <a class="dropdown-item" ng-click="updateLanguage('de_DE')" style="cursor:pointer;">
+                          <span class="emoji">&#x1F1E9;&#x1F1EA;</span>&nbsp;&nbsp;
+                          <span ng-class="{ bolder: language=='de_DE'}">{{ 'GERMAN' | translate}}
+                              <small>({{ 'GERMAN'}})</small>
+                          </span>
+                      </a>
+                  </div>
+                </li>
+            </ul>
+
         </nav>
 
-        <div class="container-fluid" class="content"></div>
+        <div class="container-fluid" ng-view></div>
+
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+
+        <!-- External Modules -->
+        <script src="lib/jquery/dist/jquery.min.js"></script>
+        <script src="lib/underscore/underscore-min.js"></script>
+        <script src="lib/moment/moment.js"></script>
+        <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="lib/angular/angular.min.js"></script>
+        <script src="lib/angular-route/angular-route.min.js"></script>
+        <script src="lib/angular-translate/angular-translate.min.js"></script>
+        <script src="lib/bootbox/bootbox.js"></script>
+        <script src="lib/ngBootbox/ngBootbox.js"></script>
+        <script src="lib/angular-filter/dist/angular-filter.min.js"></script>
+
+        <!-- MODULES -->
+        <script src="js/modules/routes.js"></script>
+        <script src="js/modules/languages.js"></script>
+        <script src="js/modules/init.js"></script>
+        <script src="js/modules/filters.js"></script>
+
+        <!-- SERVICES -->
+        <script src="js/services/docService.js"></script>
+
+        <!-- MAIN-APP -->
+        <script src="js/app.js"></script>
+
+        <!-- CONTROLLERS -->
+        <script src="js/controllers/navController.js"></script>
+
+        <!-- LOGIN -->
+        <script src="js/controllers/loginController.js"></script>
+
+        <!-- DOCS -->
+        <script src="js/controllers/docs/list.js"></script>
+        <script src="js/controllers/docs/create.js"></script>
+        <script src="js/controllers/docs/details.js"></script>
 
     </body>
-
-    <!-- jQuery -->
-    <script src="lib/jquery/dist/jquery.min.js"></script>
-
-    <!-- Bootstrap -->
-    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
-
 </html>
