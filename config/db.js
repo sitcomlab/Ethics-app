@@ -9,5 +9,8 @@ module.exports = {
             // PRODUCTION DATABASE ON SERVER
             return 'mongodb://localhost/ethics-db';
         }
+    },
+    getSuperSecret: function(){
+        return 'ilovethemeanstack';
     }
 }

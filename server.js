@@ -6,7 +6,6 @@ var bodyParser = require('body-parser');
 var async = require('async');
 var debug = require('debug');
 var mongoose = require('mongoose');
-var nodemailer = require('nodemailer');
 var pdfkit = require('pdfkit');
 var program = require('commander');
 var jwt = require('jsonwebtoken');
