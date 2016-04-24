@@ -10,6 +10,11 @@ app.config(function($routeProvider) {
 			controller: "LoginController"
 		})
 
+		.when("/reset", {
+			templateUrl: "/js/templates/reset.html",
+			controller: "ResetController"
+		})
+
 		// DOCS
 		.when("/docs", {
 			templateUrl: "/js/templates/docs/list.html",

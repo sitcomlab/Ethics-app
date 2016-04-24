@@ -26,6 +26,9 @@ app.factory('$docService', function($http, $log, setup) {
         },
         delete: function(id, data) {
             return $http.delete(setup.apiURL + "/docs/" + id);
+        },
+        reset: function(email) {
+            return $http.get(setup.apiURL + "/reset/" + email);
         }
     };
 });
