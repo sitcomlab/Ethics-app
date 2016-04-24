@@ -9,6 +9,8 @@ var mongoose = require('mongoose');
 var nodemailer = require('nodemailer');
 var pdfkit = require('pdfkit');
 var program = require('commander');
+var jwt = require('jsonwebtoken');
+
 
 // COMMAND-LINE-PARAMS
 program
@@ -39,13 +41,8 @@ var app = express();
 app.set('port', process.env.PORT || 8000);
 
 var server = app.listen(app.get('port'), function() {
-  debug('Express server listening on port ' + server.address().port);
-  console.log('Express server listening on port ' + server.address().port);
+    console.log('Webserver is listening on port ' + server.address().port);
 });
-
-
-// WEBCLIENT
-app.use(express.static(path.join(__dirname, '/public')));
 app.use(logger('dev'));
 app.use(bodyParser({
     limit: 1024 * 1000
@@ -53,6 +50,10 @@ app.use(bodyParser({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+
+
+// WEBCLIENT
+app.use(express.static(path.join(__dirname, '/public')));
 
 
 // REST-API

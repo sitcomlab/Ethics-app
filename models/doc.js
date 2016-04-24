@@ -12,113 +12,296 @@ var DocSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    email: {
+    email_address: {
         type: String,
         required: true,
         validate: [validator.isEmail, 'invalid email']
     },
-    projectName: {
+    project_name: {
         type: String,
         required: true
     },
-    //Toggle editable boolean according to project status
+    // Toggle editable boolean according to project status
     editable: {
         type: Boolean,
         required: true
     },
-    //Part1 study description - English
-    part1english: {
-        q01: String, //Title of project = projectName; prefill with projectName; edit if experimenter makes changes
-        q02: String, //Name of the lead researcher, position and lab
-        q03: String, //Time scale of data collection (range)
-        q04: String, //theme and purpose of the study
-        q05: String, //procedure
-        q06: String, //duration
-        q07: String, //all risks
-        q08: String //benefits
+    // Part 1 study description - English
+    part1_english: {
+        q01: { //Title of project = projectName; prefill with projectName; edit if experimenter makes changes
+            type: String,
+            required: true
+        },
+        q02: { //Name of the lead researcher, position and lab
+            type: String,
+            required: true
+        },
+        q03: { // Time scale of data collection (range)
+            type: String,
+            required: true
+        },
+        q04: { // theme and purpose of the study
+            type: String,
+            required: true
+        },
+        q05: { // procedure
+            type: String,
+            required: true
+        },
+        q06: { // duration
+            type: String,
+            required: true
+        },
+        q07: { // all risks
+            type: String,
+            required: true
+        },
+        q08: { // benefits
+            type: String,
+            required: true
+        }
     },
-    //Part1 study description - German
-    part1german: {
-        q01: String, //Title of project = projectName; maybe not required
-        q02: String, //Name of the lead researcher, position and lab
-        q03: String, //Time scale of data collection (range)
-        q04: String, //theme and purpose of the study
-        q05: String, //procedure
-        q06: String, //duration
-        q07: String, //all risks
-        q08: String //benefits
+    // Part 1 study description - German
+    part1_german: {
+        q01: { // Title of project = projectName; maybe not required
+            type: String,
+            required: true
+        },
+        q02: { // Name of the lead researcher, position and lab
+            type: String,
+            required: true
+        },
+        q03: { // Time scale of data collection (range)
+            type: String,
+            required: true
+        },
+        q04: { // theme and purpose of the study
+            type: String,
+            required: true
+        },
+        q05: { // procedure
+            type: String,
+            required: true
+        },
+        q06: { // duration
+            type: String,
+            required: true
+        },
+        q07: { // all risks
+            type: String,
+            required: true
+        },
+        q08: { // benefits
+            type: String,
+            required: true
+        }
     },
-    //Part2 ethics checklist
-    part2ethics: {
-        q01: { //
-            checkbox: String, //[yes,no]
-            comment: String, //comment if checked yes
-            review: String //reviewers comment on experimenters answer
-        },
-        q02: { //
-            checkbox: String, //[yes,no]
-            comment: String, //comment if checked yes
-            review: String //reviewers comment on experimenters answer
-        },
-        q03: { //
-            checkbox: String, //[yes,no]
-            comment: String, //comment if checked yes
-            review: String //reviewers comment on experimenters answer
-        },
-        q04: { //
-            checkbox: String, //[yes,no]
-            comment: String, //comment if checked yes
-            review: String //reviewers comment on experimenters answer
-        },
-        q05: { //
-            checkbox: String, //[yes,no]
-            comment: String, //comment if checked yes
-            review: String //reviewers comment on experimenters answer
-        },
-        q06: { //
-            checkbox: String, //[yes,no]
-            comment: String, //comment if checked yes
-            review: String //reviewers comment on experimenters answer
-        },
-        q07: { //
-            checkbox: String, //[yes,no]
-            comment: String, //comment if checked yes
-            review: String //reviewers comment on experimenters answer
-        },
-        q08: { //
-            checkbox: String, //[yes,no]
-            comment: String, //comment if checked yes
-            review: String //reviewers comment on experimenters answer
-        },
-        q09: { //
-            checkbox: String, //[yes,no]
-            comment: String, //comment if checked yes
-            review: String //reviewers comment on experimenters answer
-        },
-        q10: { //
-            checkbox: String, //[yes,no]
-            comment: String, //comment if checked yes
-            review: String //reviewers comment on experimenters answer
-        },
-        q11: { //
-            checkbox: String, //[yes,no]
-            q11_1: {
-                checkbox: String, //[yes,no]
-                comment: String, //comment if checked yes
+    //Part 2 ethics checklist
+    part2_ethics: {
+        q01: {
+            checkbox: { // yes (true), no (false)
+                type: Boolean,
+                required: true
             },
-            review: String //reviewers comment on experimenters answer
+            comment: { // comment if checked yes
+                type: String,
+                required: true,
+                default: ""
+            },
+            review: { // reviewers comment on experimenters answer
+                type: String,
+                required: false
+            }
         },
-        q12: { //
-            checkbox: String, //[yes,no]
-            comment: String, //comment if checked yes
-            review: String //reviewers comment on experimenters answer
+        q02: {
+            checkbox: { // yes (true), no (false)
+                type: Boolean,
+                required: true
+            },
+            comment: { // comment if checked yes
+                type: String,
+                required: true,
+                default: ""
+            },
+            review: { // reviewers comment on experimenters answer
+                type: String,
+                required: false
+            }
         },
-        q13: { //
-            checkbox: String, //[yes,no]
-            comment: String, //comment if checked yes
-            review: String //reviewers comment on experimenters answer
+        q03: {
+            checkbox: { // yes (true), no (false)
+                type: Boolean,
+                required: true
+            },
+            comment: { // comment if checked yes
+                type: String,
+                required: true,
+                default: ""
+            },
+            review: { // reviewers comment on experimenters answer
+                type: String,
+                required: false
+            }
         },
-        generalComment: String
+        q04: {
+            checkbox: { // yes (true), no (false)
+                type: Boolean,
+                required: true
+            },
+            comment: { // comment if checked yes
+                type: String,
+                required: true,
+                default: ""
+            },
+            review: { // reviewers comment on experimenters answer
+                type: String,
+                required: false
+            }
+        },
+        q05: {
+            checkbox: { // yes (true), no (false)
+                type: Boolean,
+                required: true
+            },
+            comment: { // comment if checked yes
+                type: String,
+                required: true,
+                default: ""
+            },
+            review: { // reviewers comment on experimenters answer
+                type: String,
+                required: false
+            }
+        },
+        q06: {
+            checkbox: { // yes (true), no (false)
+                type: Boolean,
+                required: true
+            },
+            comment: { // comment if checked yes
+                type: String,
+                required: true,
+                default: ""
+            },
+            review: { // reviewers comment on experimenters answer
+                type: String,
+                required: false
+            }
+        },
+        q07: {
+            checkbox: { // yes (true), no (false)
+                type: Boolean,
+                required: true
+            },
+            comment: { // comment if checked yes
+                type: String,
+                required: true,
+                default: ""
+            },
+            review: { // reviewers comment on experimenters answer
+                type: String,
+                required: false
+            }
+        },
+        q08: {
+            checkbox: { // yes (true), no (false)
+                type: Boolean,
+                required: true
+            },
+            comment: { // comment if checked yes
+                type: String,
+                required: true,
+                default: ""
+            },
+            review: { // reviewers comment on experimenters answer
+                type: String,
+                required: false
+            }
+        },
+        q09: {
+            checkbox: { // yes (true), no (false)
+                type: Boolean,
+                required: true
+            },
+            comment: { // comment if checked yes
+                type: String,
+                required: true,
+                default: ""
+            },
+            review: { // reviewers comment on experimenters answer
+                type: String,
+                required: false
+            }
+        },
+        q10: {
+            checkbox: { // yes (true), no (false)
+                type: Boolean,
+                required: true
+            },
+            comment: { // comment if checked yes
+                type: String,
+                required: true,
+                default: ""
+            },
+            review: { // reviewers comment on experimenters answer
+                type: String,
+                required: false
+            }
+        },
+        q11: {
+            checkbox_1: { // yes (true), no (false)
+                type: Boolean,
+                required: true
+            },
+            checkbox_2: { // yes (true), no (false)
+                type: Boolean,
+                required: false
+            },
+            comment: { // comment if checked yes
+                type: String,
+                required: true,
+                default: ""
+            },
+            review: { // reviewers comment on experimenters answer
+                type: String,
+                required: false
+            }
+        },
+        q12: {
+            checkbox: { // yes (true), no (false)
+                type: Boolean,
+                required: true
+            },
+            comment: { // comment if checked yes
+                type: String,
+                required: true,
+                default: ""
+            },
+            review: { // reviewers comment on experimenters answer
+                type: String,
+                required: false
+            }
+        },
+        q13: {
+            checkbox: { // yes (true), no (false)
+                type: Boolean,
+                required: true
+            },
+            comment: { // comment if checked yes
+                type: String,
+                required: true,
+                default: ""
+            },
+            review: { // reviewers comment on experimenters answer
+                type: String,
+                required: false
+            }
+        },
+        general_comment: {
+            type: String,
+            required: true,
+            default: ""
+        }
     }
 });
 
