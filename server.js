@@ -33,6 +33,7 @@ var db = require('./config/db')
 
 // ROUTES
 var docs = require ('./routes/docs');
+var recover = require ('./routes/recover');
 
 
 // DATABASE
@@ -61,6 +62,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // REST-API
 app.use('/api', docs);
+app.use('/api', recover);
 
 
 /// catch 404 and forward to error handler

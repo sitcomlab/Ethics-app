@@ -24,7 +24,7 @@
                 <div class="jumbotron">
                     <center>
                         <h3>Hello {{first_name}} {{last_name}}</h3>
-                        <p>Your new Document has been created!</p>
+                        <p>You asked for your Document-IDs. Please find a list below with all of your Projects related to this Email-Address.</p>
                     </center>
                     <br>
                     <table class="table table-bordered table-striped">
@@ -36,17 +36,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <a href="giv-ethics-app.uni-muenster.de:8000/#/docs/{{_id}}" target="_blank">{{project_name}}</a>
-                                </td>
-                                <td>
-                                    <code>{{_id}}</code>
-                                </td>
-                                <td>
-                                    <small>{{created}}</small>
-                                </td>
-                            </tr>
+                            {{#docs}}
+                                <tr>
+                                    <td>
+                                        <a href="giv-ethics-app.uni-muenster.de:8000/#/docs/{{_id}}" target="_blank">{{project_name}}</a>
+                                    </td>
+                                    <td>
+                                        <code>{{_id}}</code>
+                                    </td>
+                                    <td>
+                                        <small>{{created}}</small>
+                                    </td>
+                                </tr>
+                            {{/docs}}
                         </tbody>
                     </table>
                 </div>
