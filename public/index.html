@@ -21,6 +21,9 @@
         <!-- Font-Awesome -->
         <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
 
+        <!-- Flag Icons -->
+        <link href="lib/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+
         <!-- Custom styles for this template -->
         <link href="css/styles.css" rel="stylesheet"/>
     </head>
@@ -38,25 +41,25 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown active">
-                  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                      <i class="fa fa-cogs"></i>&nbsp;&nbsp;{{ 'NAV_SETTINGS' | translate}}&nbsp;
-                      <span class="caret"></span>
-                  </a>
-                  <div class="dropdown-menu">
-                      <h6 class="dropdown-header">{{ 'LANGUAGES' | translate}}</h6>
-                      <a class="dropdown-item" ng-click="updateLanguage('en_US')" style="cursor:pointer;">
-                          <span class="emoji">&#x1F1FA;&#x1F1F8;</span>&nbsp;&nbsp;
-                          <span ng-class="{ bolder: language=='en_US'}">{{ 'ENGLISH' | translate}}
-                              <small>({{ 'ENGLISH'}})</small>
-                          </span>
-                      </a>
-                      <a class="dropdown-item" ng-click="updateLanguage('de_DE')" style="cursor:pointer;">
-                          <span class="emoji">&#x1F1E9;&#x1F1EA;</span>&nbsp;&nbsp;
-                          <span ng-class="{ bolder: language=='de_DE'}">{{ 'GERMAN' | translate}}
-                              <small>({{ 'GERMAN'}})</small>
-                          </span>
-                      </a>
-                  </div>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-cogs"></i>&nbsp;&nbsp;{{ 'NAV_SETTINGS' | translate}}&nbsp;
+                        <span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <h6 class="dropdown-header">{{ 'LANGUAGES' | translate}}</h6>
+                        <a class="dropdown-item" ng-click="updateLanguage('en_US')" style="cursor:pointer;">
+                            <span class="flag-icon flag-icon-gb"></span>&nbsp;&nbsp;
+                            <span ng-class="{ bolder: language=='en_US'}">{{ 'ENGLISH' | translate}}
+                                <small>({{ 'ENGLISH'}})</small>
+                            </span>
+                        </a>
+                        <a class="dropdown-item" ng-click="updateLanguage('de_DE')" style="cursor:pointer;">
+                            <span class="flag-icon flag-icon-de"></span>&nbsp;&nbsp;
+                            <span ng-class="{ bolder: language=='de_DE'}">{{ 'GERMAN' | translate}}
+                                <small>({{ 'GERMAN'}})</small>
+                            </span>
+                        </a>
+                    </div>
                 </li>
             </ul>
 
@@ -95,12 +98,12 @@
         <!-- CONTROLLERS -->
         <script src="js/controllers/navController.js"></script>
 
-        <!-- LOGIN -->
+        <!-- LOGIN & RESET -->
         <script src="js/controllers/loginController.js"></script>
+        <script src="js/controllers/resetController.js"></script>
 
         <!-- DOCS -->
         <script src="js/controllers/docs/list.js"></script>
-        <script src="js/controllers/docs/create.js"></script>
         <script src="js/controllers/docs/details.js"></script>
 
     </body>

@@ -21,8 +21,10 @@ app.config(function ($translateProvider) {
     // DIALOGS
     DIALOG_ATTENTION : 'Achtung',
     DIALOG_DELETE_DOC : 'Sind Sie sicher, dass Sie dieses Dokument ',
-    DIALOG_DELETE_END : ' löschen möchten?'
+    DIALOG_DELETE_END : ' löschen möchten?',
 
+    // TEST
+    DOCUMENTS : 'Dokumente'
 });
 
   $translateProvider.translations('en_US', {
@@ -44,8 +46,10 @@ app.config(function ($translateProvider) {
     // DIALOGS
     DIALOG_ATTENTION : 'Attention',
     DIALOG_DELETE_DOC : 'Are you sure, that you want to delete this document ',
-    DIALOG_DELETE_END : ' ?'
+    DIALOG_DELETE_END : ' ?',
 
+    // TEST
+    DOCUMENTS : 'Documents'
   });
 
   // Default Language (English)

@@ -14,7 +14,14 @@ app.controller("DocListController", function($scope, $location, $docService, $fi
     };
 
     // INIT
+    $scope.docs = [];
     $scope.loadData();
+
+
+    // CLEAN DOCS-ARRAY
+    $scope.clean = function() {
+        $scope.docs = [];
+    }
 
 
     // DELETE

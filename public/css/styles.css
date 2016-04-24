@@ -13,3 +13,8 @@ body {
 .bolder {
     font-weight: bold;
 }
+
+label {
+    font-size: 10pt;
+    font-weight: bold;
+}
