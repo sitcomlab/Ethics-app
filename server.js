@@ -15,12 +15,16 @@ var jwt = require('jsonwebtoken');
 program
   .version('0.0.1')
   .option('-d, --dev', 'Use development database')
+  .option('-g, --gmail [email]', 'Add the SMTP-address for nodemailer, e.g. user@gmail.com', 'user@gmail.com')
+  .option('-p, --password [password]', 'Add the SMTP-address for nodemailer, e.g. password', 'password')
   .parse(process.argv);
 
 var devStatus = false;
 if(program.dev){
     devStatus = true;
 }
+exports.user = program.gmail;
+exports.pass = program.password;
 
 
 // CONFIG

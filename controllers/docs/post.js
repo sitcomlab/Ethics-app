@@ -3,8 +3,8 @@ var mongoose = require('mongoose');
 require('../../models/doc');
 var Doc = mongoose.model('Doc');
 
-var transporter = require('./config/email.js').transporter;
-var mailOptions = require('./config/email.js').mailOptions;
+var transporter = require('../../config/email.js').transporter;
+var mailOptions = require('../../config/email.js').mailOptions;
 
 
 // POST

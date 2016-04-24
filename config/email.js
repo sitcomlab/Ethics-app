@@ -1,4 +1,7 @@
 var nodemailer = require('nodemailer');
+var user = require('../server.js').user;
+var pass = require('../server.js').pass;
+
 
 /**
  * SMTP Configuration
@@ -8,8 +11,8 @@ var smtpConfig = {
     port: 465,
     secure: true, // use SSL
     auth: {
-        user: 'EMAIL_ACCOUNT',
-        pass: 'PASSWORD'
+        user: user,
+        pass: pass
     }
 };
 
@@ -33,7 +36,7 @@ var transporter = nodemailer.createTransport(smtpConfig);
 
 // setup e-mail data with unicode symbols
 var mailOptions = {
-    from: '"Ethics-App [do-not-replay]" <sitcomlab245@gmail.com>', // sender address
+    from: '"Ethics-App [do-not-replay] "<' + user + '>', // sender address
     to: '',// list of receivers
     subject: '[IFGI-Ethics-App] ', // Subject line
     text: '', // plaintext body
