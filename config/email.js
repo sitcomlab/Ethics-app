@@ -31,17 +31,9 @@ var directConfig = {
     name: 'hostname' // must be the same that can be reverse resolved by DNS for your IP
 };*/
 
-// create reusable transporter object using the default SMTP transport
-var transporter = nodemailer.createTransport(smtpConfig);
 
-// setup e-mail data with unicode symbols
-var mailOptions = {
-    from: '"Ethics-App [do-not-replay] "<' + user + '>', // sender address
-    to: '',// list of receivers
-    subject: '[IFGI-Ethics-App] ', // Subject line
-    text: '', // plaintext body
-    html: ''// html body
-};
+// Create reusable transporter object using the default SMTP transport
+exports.transporter = nodemailer.createTransport(smtpConfig);
 
-exports.transporter;
-exports.mailOptions;
+// Default Mail options
+exports.mailOptions = { from: 'IFGI-Ethics-App <' + user + '>' };
