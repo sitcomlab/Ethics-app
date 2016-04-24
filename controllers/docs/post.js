@@ -9,7 +9,7 @@ var mailOptions = require('../../config/email.js').mailOptions;
 
 // POST
 exports.request = function(req, res){
-	var doc = new Doc(_.extend(_doc, req.body));
+	var doc = new Doc(req.body);
 	doc.save(function(err) {
 		if (err) {
 	       	res.send(err);
@@ -18,7 +18,8 @@ exports.request = function(req, res){
 			// Send Email with new Document-ID
 			mailOptions.to = doc.email;
 			mailOptions.subject = '[IFGI-Ethics-App] Your new Document has been created';
-			mailOptions.text = 'Ethics-App Document-ID';
+			mailOptions.text = 'Ethics-App\n\n' +
+				doc.project_title + ': ' + doc._id;
 			mailOptions.html = '<h1>Ethics-App</h1>' +
 				'<b>' + doc.project_title + '</b>: ' + '<pre><code>' + doc._id + '</code></pre>';
 

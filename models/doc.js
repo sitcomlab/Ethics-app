@@ -12,15 +12,15 @@ var DocSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    email_address: {
+    /*email_address: {
         type: String,
         required: true,
         validate: [validator.isEmail, 'invalid email']
-    },
+    },*/
     project_name: {
         type: String,
         required: true
-    },
+    }/*,
     // Toggle editable boolean according to project status
     editable: {
         type: Boolean,
@@ -302,7 +302,7 @@ var DocSchema = new Schema({
             required: true,
             default: ""
         }
-    }
+    }*/
 });
 
 
