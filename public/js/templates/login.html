@@ -9,42 +9,50 @@
             <hr class="m-y-2">
             <p>Please login or create a new document:</p>
             <div class="row">
-                <div class="col-xs-6" style="border-right: 1px solid rgba(0,0,0,.1);">
+                <div class="col-xs-6">
                     <label for="inputDocId">Document-ID</label>
                     <div class="input-group">
                         <span class="input-group-addon" id="docId">
                             <i class="fa fa-file-text"></i>
                         </span>
-                        <input type="text" class="form-control" placeholder="Document-ID" aria-describedby="inputDocId">
+                        <input type="text" class="form-control" ng-model="doc_id" placeholder="Document-ID" aria-describedby="inputDocId">
                     </div>
+                    <center><small><a ng-href="#/recover">I forgot my Document-ID</a></small></center>
                     <br>
-                    <center><a ng-href="#/reset">I forgot my Document-ID</a></center>
-                    <br>
-                    <br>
-                    <a class="btn btn-primary" href="#" role="button">Login</a>
+                    <a class="btn btn-primary" href="#" role="button">{{ 'LOGIN' | translate }}</a>
                 </div>
-                <div class="col-xs-6">
+                <div class="col-xs-6" style="border-left: 1px solid rgba(0,0,0,.1);">
 
-                    <label for="inputTitle">Title</label>
+                    <label for="inputTitle">{{ 'PROJECT_NAME' | translate }} ({{ 'TITLE' | translate }})</label>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="fa fa-file-text-o"></i>
                         </span>
-                        <input type="text" class="form-control" placeholder="Title" aria-describedby="inputTitle">
+                        <input type="text" class="form-control" ng-model="doc.project_name" placeholder="{{ 'TITLE' | translate }}" aria-describedby="inputTitle">
                         <span class="input-group-addon">
                             <span class="flag-icon flag-icon-gb"></span>
                         </span>
                     </div>
-
-                    <label for="inputEmailAddress">Email</label>
+                    <label for="inputEmailAddress">{{ 'EMAIL' | translate }}</label>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <b>@</b>
                         </span>
-                        <input type="email" class="form-control" id="inputEmailAddress" placeholder="Email-Address">
+                        <input type="email" class="form-control" ng-model="doc.email_address" id="inputEmailAddress" placeholder="{{ 'EMAIL_ADDRESS' | translate }}">
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="inputFirstName">{{ 'FIRST_NAME' | translate }}</label>
+                            <input type="text" class="form-control" ng-model="doc.first_name" id="inputFirstName" placeholder="{{ 'FIRST_NAME' | translate }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputLastName">{{ 'LAST_NAME' | translate }}</label>
+                            <input type="text" class="form-control" ng-model="doc.last_name" id="inputLastName" placeholder="{{ 'LAST_NAME' | translate }}">
+                        </div>
+                    </div>
+
                     <br>
-                    <a class="btn btn-primary" href="#" role="button">Create</a>
+                    <a class="btn btn-primary" ng-click="submit()" role="button">{{ 'SUBMIT' | translate }}</a>
                 </div>
             </div>
         </div>

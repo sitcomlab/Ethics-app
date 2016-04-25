@@ -10,9 +10,10 @@ app.config(function($routeProvider) {
 			controller: "LoginController"
 		})
 
-		.when("/reset", {
-			templateUrl: "/js/templates/reset.html",
-			controller: "ResetController"
+		// RECOVER
+		.when("/recover", {
+			templateUrl: "/js/templates/recover.html",
+			controller: "RecoverController"
 		})
 
 		// DOCS

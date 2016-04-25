@@ -8,15 +8,15 @@
             <hr class="m-y-2">
             <p>
                 <div>
-                    <label for="inputEmailAddress">Email</label>
+                    <label for="inputEmailAddress">{{ 'EMAIL' | translate }}</label>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <b>@</b>
                         </span>
-                        <input type="email" class="form-control" id="inputEmailAddress" ng-model="email" placeholder="Email-Address">
+                        <input type="email" class="form-control" id="inputEmailAddress" ng-model="email_address" placeholder="{{ 'EMAIL_ADDRESS' | translate }}">
                     </div>
                     <br>
-                    <a class="btn btn-primary" role="button" ng-click="reset()">Send</a>
+                    <a class="btn btn-primary" role="button" ng-click="send()">{{ 'SEND' | translate }}</a>
                 </div>
             </p>
         </div>

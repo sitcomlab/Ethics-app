@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 
-app.controller("LoginController", function($scope, $translate, $location, $log, setup) {
+app.controller("RecoverController", function($scope, $translate, $location, $log, setup, $docService) {
 
     // Init
     $scope.email = "";
@@ -10,13 +10,13 @@ app.controller("LoginController", function($scope, $translate, $location, $log, 
     $scope.send = function() {
 
         // Validate
-        if($scope.email === "") {
-            // TODO: Real Email-validation
+        if($scope.email_address === "") {
+            // TODO: Email-validation
             alert("Please enter a valid Email-Address!");
         } else {
 
             // Send request
-            $docService.reset($scope.email)
+            $docService.recover($scope.email_address)
     			.success(function(response) {
     	            $location.url("/");
     	        })

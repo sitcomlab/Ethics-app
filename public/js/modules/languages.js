@@ -23,8 +23,16 @@ app.config(function ($translateProvider) {
     DIALOG_DELETE_DOC : 'Sind Sie sicher, dass Sie dieses Dokument ',
     DIALOG_DELETE_END : ' löschen möchten?',
 
-    // TEST
-    DOCUMENTS : 'Dokumente'
+    LOGIN : 'Login',
+    TITLE : 'Titel',
+    PROJECT_NAME : 'Projektname',
+    EMAIL : 'Email',
+    EMAIL_ADDRESS : 'Email-Adresse',
+    FIRST_NAME : 'Vorname',
+    LAST_NAME : 'Nachname',
+    SUBMIT : 'Erstellen',
+    SEND: 'Senden'
+
 });
 
   $translateProvider.translations('en_US', {
@@ -48,8 +56,16 @@ app.config(function ($translateProvider) {
     DIALOG_DELETE_DOC : 'Are you sure, that you want to delete this document ',
     DIALOG_DELETE_END : ' ?',
 
-    // TEST
-    DOCUMENTS : 'Documents'
+    LOGIN : 'Login',
+    TITLE : 'Title',
+    PROJECT_NAME : 'Project name',
+    EMAIL : 'Email',
+    EMAIL_ADDRESS : 'Email-address',
+    FIRST_NAME : 'First name',
+    LAST_NAME : 'Last name',
+    SUBMIT : 'Submit',
+    SEND: 'Send'
+
   });
 
   // Default Language (English)
