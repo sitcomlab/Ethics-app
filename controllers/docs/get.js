@@ -7,7 +7,7 @@ var Doc = mongoose.model('Doc');
 
 // GET
 exports.request = function(req, res){
-	Doc.load(req.params.docId, function(err, doc){
+	Doc.load(req.params.doc_id, function(err, doc){
 		res.jsonp(doc);
 	});
 };

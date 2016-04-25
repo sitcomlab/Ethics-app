@@ -6,6 +6,7 @@ var post = require('../controllers/docs/post');
 var get = require('../controllers/docs/get');
 var put = require('../controllers/docs/put');
 var del = require('../controllers/docs/delete');
+var sub = require('../controllers/docs/submit');
 
 
 // LIST
@@ -17,15 +18,19 @@ router.post('/docs', post.request);
 
 
 // GET
-router.get('/docs/:docId', get.request);
+router.get('/docs/:doc_id', get.request);
 
 
 // PUT
-router.put('/docs/:docId', put.request);
+router.put('/docs/:doc_id', put.request);
 
 
 // DELETE
-router.delete('/docs/:docId', del.request);
+router.delete('/docs/:doc_id', del.request);
+
+
+// SUBMIT
+router.get('/docs/:doc_id/submit', sub.request);
 
 
 module.exports = router;
