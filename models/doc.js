@@ -29,8 +29,8 @@ var DocSchema = new Schema({
         type: Boolean,
         required: true,
         default: true
-    }/*,
-    general { // PART 1
+    },
+    general: { // PART 1
         english: { // study description - English
             q01: { //Title of project = projectName; prefill with projectName; edit if experimenter makes changes
                 type: String,
@@ -44,60 +44,60 @@ var DocSchema = new Schema({
                 type: String,
                 required: true
             },
-            q04: { // theme and purpose of the study
+            q04: { // Theme and purpose of the study
                 type: String,
                 required: true
             },
-            q05: { // procedure
+            q05: { // Procedure
                 type: String,
                 required: true
             },
-            q06: { // duration
+            q06: { // Duration
                 type: String,
                 required: true
             },
-            q07: { // all risks
+            q07: { // All risks
                 type: String,
                 required: true
             },
-            q08: { // benefits
+            q08: { // Benefits
                 type: String,
                 required: true
             }
         },
         german: { // study description - German
-            q01: { // Title of project = projectName; maybe not required
-                type: String,
-                required: true
-            },
-            q02: { // Name of the lead researcher, position and lab
-                type: String,
-                required: true
-            },
-            q03: { // Time scale of data collection (range)
-                type: String,
-                required: true
-            },
-            q04: { // theme and purpose of the study
-                type: String,
-                required: true
-            },
-            q05: { // procedure
-                type: String,
-                required: true
-            },
-            q06: { // duration
-                type: String,
-                required: true
-            },
-            q07: { // all risks
-                type: String,
-                required: true
-            },
-            q08: { // benefits
-                type: String,
-                required: true
-            }
+          q01: { //Title of project = projectName; prefill with projectName; edit if experimenter makes changes
+              type: String,
+              required: true
+          },
+          q02: { //Name of the lead researcher, position and lab
+              type: String,
+              required: true
+          },
+          q03: { // Time scale of data collection (range)
+              type: String,
+              required: true
+          },
+          q04: { // Theme and purpose of the study
+              type: String,
+              required: true
+          },
+          q05: { // Procedure
+              type: String,
+              required: true
+          },
+          q06: { // Duration
+              type: String,
+              required: true
+          },
+          q07: { // All risks
+              type: String,
+              required: true
+          },
+          q08: { // Benefits
+              type: String,
+              required: true
+          }
         }
     },
     ethics: { // PART 2
@@ -305,7 +305,7 @@ var DocSchema = new Schema({
             required: true,
             default: ""
         }
-    }*/
+    }
 });
 
 
