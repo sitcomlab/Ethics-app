@@ -4,12 +4,12 @@
     <div class="col-md-2"></div>
     <div class="col-md-8">
         <div class="jumbotron">
-            <h1 class="display-3">Welcome</h1>
+            <h1 class="display-4">{{ 'WELCOME' | translate }}</h1>
             <p class="lead">This application by the Institut for Geoinformatics, Münster provides an easy way to create formulars for your study.</p>
             <hr class="m-y-2">
             <p>Please login or create a new document:</p>
             <div class="row">
-                <div class="col-xs-6">
+                <div class="col-md-6">
                     <label for="inputDocId">Document-ID</label>
                     <div class="input-group">
                         <span class="input-group-addon" id="docId">
@@ -20,8 +20,9 @@
                     <center><small><a ng-href="#/recover">I forgot my Document-ID</a></small></center>
                     <br>
                     <a class="btn btn-primary" href="#" role="button">{{ 'LOGIN' | translate }}</a>
+                    <br>
                 </div>
-                <div class="col-xs-6" style="border-left: 1px solid rgba(0,0,0,.1);">
+                <div class="col-md-6" style="border-left: 1px solid rgba(0,0,0,.1);">
 
                     <label for="inputTitle">{{ 'PROJECT_NAME' | translate }} ({{ 'TITLE' | translate }})</label>
                     <div class="input-group">
@@ -50,9 +51,10 @@
                             <input type="text" class="form-control" ng-model="doc.last_name" id="inputLastName" placeholder="{{ 'LAST_NAME' | translate }}">
                         </div>
                     </div>
-
                     <br>
-                    <a class="btn btn-primary" ng-click="submit()" role="button">{{ 'SUBMIT' | translate }}</a>
+                    <a class="btn btn-primary" ng-click="submit()" role="button">{{ 'CREATE' | translate }}</a>
+                    <br>
+                    <br>
                 </div>
             </div>
         </div>

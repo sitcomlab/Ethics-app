@@ -30,8 +30,11 @@ app.config(function ($translateProvider) {
     EMAIL_ADDRESS : 'Email-Adresse',
     FIRST_NAME : 'Vorname',
     LAST_NAME : 'Nachname',
-    SUBMIT : 'Erstellen',
-    SEND: 'Senden'
+    SUBMIT : 'Einreichen',
+    SEND: 'Senden',
+    CREATE: 'Erstellen',
+
+    WELCOME: 'Willkommen'
 
 });
 
@@ -64,7 +67,10 @@ app.config(function ($translateProvider) {
     FIRST_NAME : 'First name',
     LAST_NAME : 'Last name',
     SUBMIT : 'Submit',
-    SEND: 'Send'
+    SEND: 'Send',
+    CREATE: 'Create',
+
+    WELCOME: 'Welcome'
 
   });
 
