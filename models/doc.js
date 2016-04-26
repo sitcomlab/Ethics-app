@@ -66,38 +66,38 @@ var DocSchema = new Schema({
             }
         },
         german: { // study description - German
-          q01: { //Title of project = projectName; prefill with projectName; edit if experimenter makes changes
-              type: String,
-              required: true
-          },
-          q02: { //Name of the lead researcher, position and lab
-              type: String,
-              required: true
-          },
-          q03: { // Time scale of data collection (range)
-              type: String,
-              required: true
-          },
-          q04: { // Theme and purpose of the study
-              type: String,
-              required: true
-          },
-          q05: { // Procedure
-              type: String,
-              required: true
-          },
-          q06: { // Duration
-              type: String,
-              required: true
-          },
-          q07: { // All risks
-              type: String,
-              required: true
-          },
-          q08: { // Benefits
-              type: String,
-              required: true
-          }
+            q01: { //Title of project = projectName; prefill with projectName; edit if experimenter makes changes
+                type: String,
+                required: true
+            },
+            q02: { //Name of the lead researcher, position and lab
+                type: String,
+                required: true
+            },
+            q03: { // Time scale of data collection (range)
+                type: String,
+                required: true
+            },
+            q04: { // Theme and purpose of the study
+                type: String,
+                required: true
+            },
+            q05: { // Procedure
+                type: String,
+                required: true
+            },
+            q06: { // Duration
+                type: String,
+                required: true
+            },
+            q07: { // All risks
+                type: String,
+                required: true
+            },
+            q08: { // Benefits
+                type: String,
+                required: true
+            }
         }
     },
     ethics: { // PART 2
