@@ -17,6 +17,8 @@ app.config(function ($translateProvider) {
     BUTTON_CANCEL: 'Abbrechen',
     BUTTON_OK: 'Okay',
     BUTTON_CLOSE: 'Schließen',
+    BUTTON_NEXT:"Weiter",
+    BUTTON_PREVIOUS:"Zurück",
 
     // DIALOGS
     DIALOG_ATTENTION : 'Achtung',
@@ -40,12 +42,20 @@ app.config(function ($translateProvider) {
     STUDY_DESCRIPTION: 'Experiment Beschreibung',
     SD_TITLE:"1. Titel des Projektes.",
     SD_NAME:"2. Name des Projektverantwortlichen, Position und Arbeitsgruppe.",
-    SD_TIME_SCALE:"3. Dauer des Experiments (von...bis).",
-    SD_THEME:"4. Beschreibe in ein paar Sätzen die Methodik und die Motivation des Experiments (nicht zu technisch - es muss nur verständlich für die Teilnehmer sein).",
+    SD_TIME_SCALE:"3. Zeitrahmen des Experiments (von...bis).",
+    SD_THEME:"4. Beschreibe in ein paar Sätzen die Motivation und die Methodik des Experiments (nicht zu technisch - es muss nur verständlich für die Teilnehmer sein).",
     SD_PROCEDURE:"5. Beschreibe den Ablauf des Experiments (gehe nicht zu stark ins Detail, aber achte darauf alle wichtigen Aktionen, die vom Teilnehmer erwartet werden, zu beschreiben). Achte vor allem darauf potentielle Schwierigkeiten oder Stressauslöser zu erwähnen.",
-    SD_DURATION:"TODO Translate 6. Briefly specify the duration (make sure you run a pilot study to estimate this).",
-    SD_RISKS:"TODO Translate 7. List potential all risks and activities which might be uncomfortable to some people. Potential risks include (but are not limited to): walking on stairs, nausea (in Virtual Reality studies), spending time in confined spaces, cycling or operating any other vehicle, navigating in crowded/heavy-traffic areas, observing quickly changing stimuli (computer-based studies), interacting with potentially strongly emotional content (such as pictures), wearing any additional electronics (eye-tracker, sensors), any activities that might cause physical effort or pain (e.g. attaching movement sensors to the body).",
-    SD_BENEFITS:"TODO Translate 8. List benefits (if applicable).",
+    SD_DURATION:"6. Beschreibe kurz die Dauer des Experiments (überprüfe dieses in deiner Vorstudie).",
+    SD_RISKS:"7. Benenne die potentiellen Risiken und Aufgaben, die möglicherweise unangenehm für den Teilnehmer sein könnten. Potentielle Rikiken können sein: Treppen steigen, Übelkeit (in Virtual Reality Experimenten), enge Räume, Fahren mit dem Fahrrad oder anderen Fahrzeugen, sich in überfüllten Umgebungen aufhalten, schnell wechselnden Reizen ausgesetzt sein (Experimente am PC), Aufgaben mit potentiell hochemotionalen Inhalten (z.B. Bilder), elektronische Gegenstände tragen (z.B. Eyetracker, Sensoren), irgendwelche Aktivitäten, die Schmerzen verursachen könnten (z.B. Bewegungssensoren am Körper).",
+    SD_BENEFITS:"8. Bennene den Nutzen (falls zutreffend).",
+    SD_TITLE_FIELD:"Titel",
+    SD_NAME_FIELD:"Name",
+    SD_TIME_SCALE_FIELD:"Zeitrahmen",
+    SD_THEME_FIELD:"Motivation und Methodik",
+    SD_PROCEDURE_FIELD:"Ablauf",
+    SD_DURATION_FIELD:"Dauer",
+    SD_RISKS_FIELD:"Risiken",
+    SD_BENEFITS_FIELD:"Nutzen",
 
 });
 
@@ -64,6 +74,8 @@ app.config(function ($translateProvider) {
     BUTTON_CANCEL: 'Cancel',
     BUTTON_OK: 'Okay',
     BUTTON_CLOSE: 'Close',
+    BUTTON_NEXT:"Next",
+    BUTTON_PREVIOUS:"Back",
 
     // DIALOGS
     DIALOG_ATTENTION : 'Attention',
@@ -93,6 +105,14 @@ app.config(function ($translateProvider) {
     SD_DURATION:"6. Briefly specify the duration (make sure you run a pilot study to estimate this).",
     SD_RISKS:"7. List potential all risks and activities which might be uncomfortable to some people. Potential risks include (but are not limited to): walking on stairs, nausea (in Virtual Reality studies), spending time in confined spaces, cycling or operating any other vehicle, navigating in crowded/heavy-traffic areas, observing quickly changing stimuli (computer-based studies), interacting with potentially strongly emotional content (such as pictures), wearing any additional electronics (eye-tracker, sensors), any activities that might cause physical effort or pain (e.g. attaching movement sensors to the body).",
     SD_BENEFITS:"8. List benefits (if applicable).",
+    SD_TITLE_FIELD:"Title",
+    SD_NAME_FIELD:"Name",
+    SD_TIME_SCALE_FIELD:"Time scale",
+    SD_THEME_FIELD:"Theme and purpose",
+    SD_PROCEDURE_FIELD:"Procedure",
+    SD_DURATION_FIELD:"Duration",
+    SD_RISKS_FIELD:"Risks",
+    SD_BENEFITS_FIELD:"Benefits",
   });
 
   // Default Language (English)

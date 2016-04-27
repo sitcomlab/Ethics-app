@@ -8,88 +8,47 @@
           <div class="row">
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_TITLE' | translate }}</label>
-                <div class="input-group">
-                    <span class="input-group-addon" id="docId">
-                        <i class="fa fa-file-text"></i>
-                    </span>
-                    <input type="text" class="form-control" ng-model="doc_id" placeholder="Title." aria-describedby="inputDocId">
-                </div>
+                <input type="text" class="form-control" ng-model="doc_id" placeholder="{{ 'SD_TITLE_FIELD' | translate }}" aria-describedby="inputDocId">
             </div>
             <br>
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_NAME' | translate }}</label>
-                <div class="input-group">
-                    <span class="input-group-addon" id="docId">
-                        <i class="fa fa-file-text"></i>
-                    </span>
-                    <input type="text" class="form-control" ng-model="doc_id" placeholder="Name" aria-describedby="inputDocId">
-                </div>
+                <input type="text" class="form-control" ng-model="doc_id" placeholder="{{ 'SD_NAME_FIELD' | translate }}" aria-describedby="inputDocId">
             </div>
             <br>
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
-                <div class="input-group">
-                    <span class="input-group-addon" id="docId">
-                        <i class="fa fa-file-text"></i>
-                    </span>
-                    <input type="text" class="form-control" ng-model="doc_id" placeholder="Time scale" aria-describedby="inputDocId">
-                </div>
+                <input type="text" class="form-control" ng-model="doc_id" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId">
             </div>
             <br>
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_THEME' | translate }}</label>
-                <div class="input-group">
-                    <span class="input-group-addon" id="docId">
-                        <i class="fa fa-file-text"></i>
-                    </span>
-                    <input type="text" class="form-control" ng-model="doc_id" placeholder="Theme and purpose" aria-describedby="inputDocId">
-                </div>
+                <textarea type="text" class="form-control" ng-model="doc_id" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
             </div>
             <br>
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}</label>
-                <div class="input-group">
-                    <span class="input-group-addon" id="docId">
-                        <i class="fa fa-file-text"></i>
-                    </span>
-                    <input type="text" class="form-control" ng-model="doc_id" placeholder="Procedure" aria-describedby="inputDocId">
-                </div>
+                <textarea type="text" class="form-control" ng-model="doc_id" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
             </div>
             <br>
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_DURATION' | translate }}</label>
-                <div class="input-group">
-                    <span class="input-group-addon" id="docId">
-                        <i class="fa fa-file-text"></i>
-                    </span>
-                    <input type="text" class="form-control" ng-model="doc_id" placeholder="Duration" aria-describedby="inputDocId">
-                </div>
+                <textarea type="text" class="form-control" ng-model="doc_id" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
             </div>
             <br>
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_RISKS' | translate }}</label>
-                <div class="input-group">
-                    <span class="input-group-addon" id="docId">
-                        <i class="fa fa-file-text"></i>
-                    </span>
-                    <input type="text" class="form-control" ng-model="doc_id" placeholder="Risks" aria-describedby="inputDocId">
-                </div>
+                <textarea type="text" class="form-control" ng-model="doc_id" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
             </div>
             <br>
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}</label>
-                <div class="input-group">
-                    <span class="input-group-addon" id="docId">
-                        <i class="fa fa-file-text"></i>
-                    </span>
-                    <input type="text" class="form-control" ng-model="doc_id" placeholder="Benefits" aria-describedby="inputDocId">
-                </div>
+                <textarea type="text" class="form-control" ng-model="doc_id" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
             </div>
             <br>
             <div class="col-md-10">
               <br>
-              <a class="btn btn-primary" ng-click="submit()" role="button">{{ 'CREATE' | translate }}</a>
-              <a class="btn btn-primary" ng-click="submit()" role="button">{{ 'CREATE' | translate }}</a>
+              <a class="btn btn-primary" ng-click="submit()" role="button">{{ 'BUTTON_NEXT' | translate }}</a>
             </div>
           </div>
       </div>
