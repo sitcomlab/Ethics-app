@@ -6,44 +6,44 @@
       <div class="jumbotron">
           <h1 class="display-4">{{ 'STUDY_DESCRIPTION' | translate }}</h1>
           <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-10" >
                 <label for="inputDocId">{{ 'SD_TITLE' | translate }}</label>
-                <input type="text" class="form-control" ng-model="doc_id" placeholder="{{ 'SD_TITLE_FIELD' | translate }}" aria-describedby="inputDocId">
+                <input type="text" class="form-control" ng-model="doc.project_name" placeholder="{{ 'SD_TITLE_FIELD' | translate }}" aria-describedby="inputDocId" value="Test">
             </div>
             <br>
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_NAME' | translate }}</label>
-                <input type="text" class="form-control" ng-model="doc_id" placeholder="{{ 'SD_NAME_FIELD' | translate }}" aria-describedby="inputDocId">
+                <input type="text" class="form-control" ng-model="doc.first_name" placeholder="{{ 'SD_NAME_FIELD' | translate }}" aria-describedby="inputDocId">
             </div>
             <br>
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
-                <input type="text" class="form-control" ng-model="doc_id" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId">
+                <input type="text" class="form-control" ng-model="doc.time_scale" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId">
             </div>
             <br>
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_THEME' | translate }}</label>
-                <textarea type="text" class="form-control" ng-model="doc_id" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                <textarea type="text" class="form-control" ng-model="doc.theme" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
             </div>
             <br>
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}</label>
-                <textarea type="text" class="form-control" ng-model="doc_id" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                <textarea type="text" class="form-control" ng-model="doc.procedure" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
             </div>
             <br>
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_DURATION' | translate }}</label>
-                <textarea type="text" class="form-control" ng-model="doc_id" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                <textarea type="text" class="form-control" ng-model="doc.duration" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
             </div>
             <br>
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_RISKS' | translate }}</label>
-                <textarea type="text" class="form-control" ng-model="doc_id" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                <textarea type="text" class="form-control" ng-model="doc.risks" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
             </div>
             <br>
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}</label>
-                <textarea type="text" class="form-control" ng-model="doc_id" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                <textarea type="text" class="form-control" ng-model="doc.benefits" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
             </div>
             <br>
             <div class="col-md-10">
