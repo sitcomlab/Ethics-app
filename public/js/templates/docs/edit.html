@@ -5,6 +5,112 @@
     <div class="col-md-6">
       <div class="jumbotron">
           <h1 class="display-4">{{ 'STUDY_DESCRIPTION' | translate }}</h1>
+          <div class="row">
+            <div class="col-md-10">
+                <label for="inputDocId">1. Title of the project.</label>
+                <div class="input-group">
+                    <span class="input-group-addon" id="docId">
+                        <i class="fa fa-file-text"></i>
+                    </span>
+                    <input type="text" class="form-control" ng-model="doc_id" placeholder="Title." aria-describedby="inputDocId">
+                </div>
+            </div>
+            <br>
+            <div class="col-md-10">
+                <label for="inputDocId">2. Name of the lead researcher, position and lab.</label>
+                <div class="input-group">
+                    <span class="input-group-addon" id="docId">
+                        <i class="fa fa-file-text"></i>
+                    </span>
+                    <input type="text" class="form-control" ng-model="doc_id" placeholder="Name" aria-describedby="inputDocId">
+                </div>
+            </div>
+            <br>
+            <div class="col-md-10">
+                <label for="inputDocId">3. Time scale of data collection (range).</label>
+                <div class="input-group">
+                    <span class="input-group-addon" id="docId">
+                        <i class="fa fa-file-text"></i>
+                    </span>
+                    <input type="text" class="form-control" ng-model="doc_id" placeholder="Time scale" aria-describedby="inputDocId">
+                </div>
+            </div>
+            <br>
+            <div class="col-md-10">
+                <label for="inputDocId">
+                    4. In few sentences, describe the theme and purpose of the study (don't get too technical -
+                    this should be understandable to your participants).
+                </label>
+                <div class="input-group">
+                    <span class="input-group-addon" id="docId">
+                        <i class="fa fa-file-text"></i>
+                    </span>
+                    <input type="text" class="form-control" ng-model="doc_id" placeholder="Theme and purpose" aria-describedby="inputDocId">
+                </div>
+            </div>
+            <br>
+            <div class="col-md-10">
+                <label for="inputDocId">
+                    5. Describe the procedure (don't get into details of your experimental design,
+                    but make sure you mention all important actions which will be required from the participant).
+                    In particular, all potentially difficult or distressing actions must be listed.
+                </label>
+                <div class="input-group">
+                    <span class="input-group-addon" id="docId">
+                        <i class="fa fa-file-text"></i>
+                    </span>
+                    <input type="text" class="form-control" ng-model="doc_id" placeholder="Procedure" aria-describedby="inputDocId">
+                </div>
+            </div>
+            <br>
+            <div class="col-md-10">
+                <label for="inputDocId">
+                    6. Briefly specify the duration (make sure you run a pilot study to estimate this).
+                </label>
+                <div class="input-group">
+                    <span class="input-group-addon" id="docId">
+                        <i class="fa fa-file-text"></i>
+                    </span>
+                    <input type="text" class="form-control" ng-model="doc_id" placeholder="Duration" aria-describedby="inputDocId">
+                </div>
+            </div>
+            <br>
+            <div class="col-md-10">
+                <label for="inputDocId">
+                    7. List potential all risks and activities which might be uncomfortable to some people.
+                    Potential risks include (but are not limited to): walking on stairs, nausea (in Virtual Reality studies),
+                    spending time in confined spaces, cycling or operating any other vehicle,
+                    navigating in crowded/heavy-traffic areas, observing quickly changing stimuli (computer-based studies),
+                    interacting with potentially strongly emotional content (such as pictures),
+                    wearing any additional electronics (eye-tracker, sensors), any activities that might cause physical
+                    effort or pain (e.g. attaching movement sensors to the body).
+                </label>
+                <div class="input-group">
+                    <span class="input-group-addon" id="docId">
+                        <i class="fa fa-file-text"></i>
+                    </span>
+                    <input type="text" class="form-control" ng-model="doc_id" placeholder="Risks" aria-describedby="inputDocId">
+                </div>
+            </div>
+            <br>
+            <div class="col-md-10">
+                <label for="inputDocId">
+                    8. List benefits (if applicable).
+                </label>
+                <div class="input-group">
+                    <span class="input-group-addon" id="docId">
+                        <i class="fa fa-file-text"></i>
+                    </span>
+                    <input type="text" class="form-control" ng-model="doc_id" placeholder="Benefits" aria-describedby="inputDocId">
+                </div>
+            </div>
+            <br>
+            <div class="col-md-10">
+              <br>
+              <a class="btn btn-primary" ng-click="submit()" role="button">{{ 'CREATE' | translate }}</a>
+              <a class="btn btn-primary" ng-click="submit()" role="button">{{ 'CREATE' | translate }}</a>
+            </div>
+          </div>
       </div>
     </div>
     <div class="col-md-3"></div>
