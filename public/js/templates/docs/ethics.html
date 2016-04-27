@@ -10,10 +10,10 @@
                 <label for="inputDocId">{{ 'EC_1' | translate }}</label>
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="blankRadio1" value="option1" aria-describedby="inputDocId"> No
-                        <input type="radio" name="blankRadio1" value="option2" aria-describedby="inputDocId"> Yes
+                        <input type="radio" name="blankRadio1" ng-value="false" aria-describedby="inputDocId" ng-model="doc.asdf" ng-change="changed()"> No
+                        <input type="radio" name="blankRadio1" ng-value="true" aria-describedby="inputDocId" ng-model="doc.asdf" ng-change="changed()"> Yes
                     </span>
-                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" ng-disabled="doc.asdf==true">
                 </div>
             </div>
             <br>

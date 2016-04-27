@@ -14,6 +14,10 @@ app.controller("DocEthicsController", function($scope, $routeParams, $location, 
     // INIT
     $scope.loadData();
 
+    $scope.doc = {"asdf":null};
+    $scope.changed = function() {
+      console.log($scope.doc);
+    };
 
     // API-REQUEST
     $scope.save = function() {
