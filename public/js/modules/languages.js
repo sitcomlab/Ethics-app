@@ -57,6 +57,22 @@ app.config(function ($translateProvider) {
     SD_RISKS_FIELD:"Risiken",
     SD_BENEFITS_FIELD:"Nutzen",
 
+    // ETHICS CHECKLIST
+    ETHICS_CHECKLIST:"Research Ethics Checklist",
+    EC_1:"1. Will the study involve potentially vulnerable groups of participants or people who are unable or unauthorized to give informed consent (e.g. children and youth under 18yo, participants with impairments, patients, people assisted by a carer, people recruited from groups associated with a specific mental or physical condition)?",
+    EC_2:"2. Will the study involve deception? Will participants be deliberately mislead in such a way that they might show distress or ask to retract their data when debriefed?",
+    EC_3:"3. Will the study involve discussion, judgment or presentation of strongly emotional or sensitive stimuli (e.g. images) or topics (e.g. questions related to sexuality)?",
+    EC_4:"4. Will participants be required to eat or drink any potentially allergic substances?",
+    EC_5:"5. Will you be in the position of power in relation to your participants (e.g. does the procedure require you to give orders that participants might hesitate to perform)?",
+    EC_6:"6. Will there be any other live observers present who are invisible to the participant and whose presence will not be disclosed to the participant?",
+    EC_7:"7. Can any element of the procedure cause physical pain or more than mild discomfort (e.g. attaching anything to participants' bodies)?",
+    EC_8:"8. Can the study cause psychological stress, anxiety or negative emotions stronger than what is experienced naturally on an everyday basis outside of research?",
+    EC_9:"9. Will any additional information on your participants be obtained from third parties?",
+    EC_10:"10. Does the procedure involve potential moments when the participant is left without the supervision of a researcher in a potentially challenging or dangerous situation in an uncontrolled environment (e.g. mobile HCI studies in heavy traffic areas)?",
+    EC_11:"11. Does the study involve audio or film recordings potentially identifying participants (spoken-aloud personal information, video recording of faces)?",
+    EC_12:"12. Is any raw data from the study likely to be passed on to external partners (e.g. companies, funding bodies, other universities)?",
+    EC_13:"13. Does the study involve collection of any information without obtaining an Informed Consent in a situation different from public observations or anonymous street surveys?",
+
 });
 
   $translateProvider.translations('en_US', {
@@ -113,6 +129,22 @@ app.config(function ($translateProvider) {
     SD_DURATION_FIELD:"Duration",
     SD_RISKS_FIELD:"Risks",
     SD_BENEFITS_FIELD:"Benefits",
+
+    // ETHICS CHECKLIST
+    ETHICS_CHECKLIST:"Research Ethics Checklist",
+    EC_1:"1. Will the study involve potentially vulnerable groups of participants or people who are unable or unauthorized to give informed consent (e.g. children and youth under 18yo, participants with impairments, patients, people assisted by a carer, people recruited from groups associated with a specific mental or physical condition)?",
+    EC_2:"2. Will the study involve deception? Will participants be deliberately mislead in such a way that they might show distress or ask to retract their data when debriefed?",
+    EC_3:"3. Will the study involve discussion, judgment or presentation of strongly emotional or sensitive stimuli (e.g. images) or topics (e.g. questions related to sexuality)?",
+    EC_4:"4. Will participants be required to eat or drink any potentially allergic substances?",
+    EC_5:"5. Will you be in the position of power in relation to your participants (e.g. does the procedure require you to give orders that participants might hesitate to perform)?",
+    EC_6:"6. Will there be any other live observers present who are invisible to the participant and whose presence will not be disclosed to the participant?",
+    EC_7:"7. Can any element of the procedure cause physical pain or more than mild discomfort (e.g. attaching anything to participants' bodies)?",
+    EC_8:"8. Can the study cause psychological stress, anxiety or negative emotions stronger than what is experienced naturally on an everyday basis outside of research?",
+    EC_9:"9. Will any additional information on your participants be obtained from third parties?",
+    EC_10:"10. Does the procedure involve potential moments when the participant is left without the supervision of a researcher in a potentially challenging or dangerous situation in an uncontrolled environment (e.g. mobile HCI studies in heavy traffic areas)?",
+    EC_11:"11. Does the study involve audio or film recordings potentially identifying participants (spoken-aloud personal information, video recording of faces)?",
+    EC_12:"12. Is any raw data from the study likely to be passed on to external partners (e.g. companies, funding bodies, other universities)?",
+    EC_13:"13. Does the study involve collection of any information without obtaining an Informed Consent in a situation different from public observations or anonymous street surveys?",
   });
 
   // Default Language (English)
