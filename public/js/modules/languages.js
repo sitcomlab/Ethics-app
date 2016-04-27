@@ -34,7 +34,8 @@ app.config(function ($translateProvider) {
     SEND: 'Senden',
     CREATE: 'Erstellen',
 
-    WELCOME: 'Willkommen'
+    WELCOME: 'Willkommen',
+    STUDY_DESCRIPTION: 'Experiment Beschreibung'
 
 });
 
@@ -70,7 +71,8 @@ app.config(function ($translateProvider) {
     SEND: 'Send',
     CREATE: 'Create',
 
-    WELCOME: 'Welcome'
+    WELCOME: 'Welcome',
+    STUDY_DESCRIPTION: 'Study desccription'
 
   });
 
