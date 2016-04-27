@@ -6,46 +6,55 @@
       <div class="jumbotron">
           <h1 class="display-4">{{ 'STUDY_DESCRIPTION' | translate }}</h1>
           <div class="row">
+            <!-- 1. -->
             <div class="col-md-10" >
                 <label for="inputDocId">{{ 'SD_TITLE' | translate }}</label>
                 <input type="text" class="form-control" ng-model="doc.project_name" placeholder="{{ 'SD_TITLE_FIELD' | translate }}" aria-describedby="inputDocId" value="Test">
             </div>
             <br>
+            <!-- 2. -->
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_NAME' | translate }}</label>
                 <input type="text" class="form-control" ng-model="doc.first_name" placeholder="{{ 'SD_NAME_FIELD' | translate }}" aria-describedby="inputDocId">
             </div>
             <br>
+            <!-- 3. -->
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
-                <input type="text" class="form-control" ng-model="doc.time_scale" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId">
+                <input type="text" class="form-control" ng-model="doc.general.english.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId">
             </div>
             <br>
+            <!-- 4. -->
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_THEME' | translate }}</label>
-                <textarea type="text" class="form-control" ng-model="doc.theme" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                <textarea type="text" class="form-control" ng-model="doc.general.english.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
             </div>
             <br>
+            <!-- 5. -->
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}</label>
-                <textarea type="text" class="form-control" ng-model="doc.procedure" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                <textarea type="text" class="form-control" ng-model="doc.general.english.q05" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
             </div>
             <br>
+            <!-- 6. -->
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_DURATION' | translate }}</label>
-                <textarea type="text" class="form-control" ng-model="doc.duration" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                <textarea type="text" class="form-control" ng-model="doc.general.english.q06" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
             </div>
             <br>
+            <!-- 7. -->
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_RISKS' | translate }}</label>
-                <textarea type="text" class="form-control" ng-model="doc.risks" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                <textarea type="text" class="form-control" ng-model="doc.general.english.q07" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
             </div>
             <br>
+            <!-- 8. -->
             <div class="col-md-10">
                 <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}</label>
-                <textarea type="text" class="form-control" ng-model="doc.benefits" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                <textarea type="text" class="form-control" ng-model="doc.general.english.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
             </div>
             <br>
+            <!-- Submit -->
             <div class="col-md-10">
               <br>
               <a class="btn btn-primary" ng-click="submit()" role="button">{{ 'BUTTON_NEXT' | translate }}</a>

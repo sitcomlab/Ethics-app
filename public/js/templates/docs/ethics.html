@@ -10,10 +10,10 @@
                 <label for="inputDocId">{{ 'EC_1' | translate }}</label>
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="blankRadio1" ng-value="false" aria-describedby="inputDocId" ng-model="doc.asdf" ng-change="changed()"> No
-                        <input type="radio" name="blankRadio1" ng-value="true" aria-describedby="inputDocId" ng-model="doc.asdf" ng-change="changed()"> Yes
+                        <input type="radio" name="radio-bnt1" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q01" ng-change="changed()"> No
+                        <input type="radio" name="radio-bnt1" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q01" ng-change="changed()"> Yes
                     </span>
-                    <input type="text" class="form-control" aria-label="Text input with checkbox" ng-disabled="doc.asdf==true">
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" ng-disabled="doc.ethics.q01==false">
                 </div>
             </div>
             <br>
@@ -21,10 +21,10 @@
                 <label for="inputDocId">{{ 'EC_2' | translate }}</label>
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="blankRadio2" value="option1" aria-describedby="inputDocId"> No
-                        <input type="radio" name="blankRadio2" value="option2" aria-describedby="inputDocId"> Yes
+                        <input type="radio" name="radio-bnt2" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q02" ng-change="changed()"> No
+                        <input type="radio" name="radio-bnt2" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q02" ng-change="changed()"> Yes
                     </span>
-                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" ng-disabled="doc.ethics.q02==false">
                 </div>
             </div>
             <br>
@@ -32,10 +32,10 @@
                 <label for="inputDocId">{{ 'EC_3' | translate}}</label>
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="blankRadio3" value="option1" aria-describedby="inputDocId"> No
-                        <input type="radio" name="blankRadio3" value="option2" aria-describedby="inputDocId"> Yes
+                        <input type="radio" name="radio-bnt3" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q03" ng-change="changed()"> No
+                        <input type="radio" name="radio-bnt3" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q03" ng-change="changed()"> Yes
                     </span>
-                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" ng-disabled="doc.ethics.q03==false">
                 </div>
             </div>
             <br>
@@ -43,10 +43,10 @@
                 <label for="inputDocId">{{ 'EC_4' | translate }}</label>
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="blankRadio4" value="option1" aria-describedby="inputDocId"> No
-                        <input type="radio" name="blankRadio4" value="option2" aria-describedby="inputDocId"> Yes
+                        <input type="radio" name="radio-bnt4" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q04" ng-change="changed()"> No
+                        <input type="radio" name="radio-bnt4" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q04" ng-change="changed()"> Yes
                     </span>
-                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" ng-disabled="doc.ethics.q04==false">
                 </div>
             </div>
             <br>
@@ -54,10 +54,10 @@
                 <label for="inputDocId">{{ 'EC_5' | translate }}</label>
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="blankRadio5" value="option1" aria-describedby="inputDocId"> No
-                        <input type="radio" name="blankRadio5" value="option2" aria-describedby="inputDocId"> Yes
+                        <input type="radio" name="radio-bnt5" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q05" ng-change="changed()"> No
+                        <input type="radio" name="radio-bnt5" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q05" ng-change="changed()"> Yes
                     </span>
-                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" ng-disabled="doc.ethics.q05==false">
                 </div>
             </div>
             <br>
@@ -65,10 +65,10 @@
                 <label for="inputDocId">{{ 'EC_6' | translate }}</label>
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="blankRadio6" value="option1" aria-describedby="inputDocId"> No
-                        <input type="radio" name="blankRadio6" value="option2" aria-describedby="inputDocId"> Yes
+                        <input type="radio" name="radio-bnt6" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q06" ng-change="changed()"> No
+                        <input type="radio" name="radio-bnt6" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q06" ng-change="changed()"> Yes
                     </span>
-                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" ng-disabled="doc.ethics.q06==false">
                 </div>
             </div>
             <br>
@@ -76,10 +76,10 @@
                 <label for="inputDocId">{{ 'EC_7' | translate }}</label>
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="blankRadio7" value="option1" aria-describedby="inputDocId"> No
-                        <input type="radio" name="blankRadio7" value="option2" aria-describedby="inputDocId"> Yes
+                        <input type="radio" name="radio-bnt7" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q07" ng-change="changed()"> No
+                        <input type="radio" name="radio-bnt7" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q07" ng-change="changed()"> Yes
                     </span>
-                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" ng-disabled="doc.ethics.q07==false">
                 </div>
             </div>
             <br>
@@ -87,10 +87,10 @@
                 <label for="inputDocId">{{ 'EC_8' | translate }}</label>
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="blankRadio8" value="option1" aria-describedby="inputDocId"> No
-                        <input type="radio" name="blankRadio8" value="option2" aria-describedby="inputDocId"> Yes
+                        <input type="radio" name="radio-bnt8" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q08" ng-change="changed()"> No
+                        <input type="radio" name="radio-bnt8" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q08" ng-change="changed()"> Yes
                     </span>
-                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" ng-disabled="doc.ethics.q08==false">
                 </div>
             </div>
             <br>
@@ -98,10 +98,10 @@
                 <label for="inputDocId">{{ 'EC_9' | translate }}</label>
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="blankRadio9" value="option1" aria-describedby="inputDocId"> No
-                        <input type="radio" name="blankRadio9" value="option2" aria-describedby="inputDocId"> Yes
+                        <input type="radio" name="radio-bnt9" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q09" ng-change="changed()"> No
+                        <input type="radio" name="radio-bnt9" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q09" ng-change="changed()"> Yes
                     </span>
-                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" ng-disabled="doc.ethics.q09==false">
                 </div>
             </div>
             <br>
@@ -109,10 +109,10 @@
                 <label for="inputDocId">{{ 'EC_10' | translate }}</label>
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="blankRadio10" value="option1" aria-describedby="inputDocId"> No
-                        <input type="radio" name="blankRadio10" value="option2" aria-describedby="inputDocId"> Yes
+                        <input type="radio" name="radio-bnt10" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q10" ng-change="changed()"> No
+                        <input type="radio" name="radio-bnt10" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q10" ng-change="changed()"> Yes
                     </span>
-                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" ng-disabled="doc.ethics.q10==false">
                 </div>
             </div>
             <br>
@@ -120,10 +120,10 @@
                 <label for="inputDocId">{{ 'EC_11' | translate }}</label>
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="blankRadio11" value="option1" aria-describedby="inputDocId"> No
-                        <input type="radio" name="blankRadio11" value="option2" aria-describedby="inputDocId"> Yes
+                        <input type="radio" name="radio-bnt11" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q11" ng-change="changed()"> No
+                        <input type="radio" name="radio-bnt11" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q11" ng-change="changed()"> Yes
                     </span>
-                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" ng-disabled="doc.ethics.q11==false">
                 </div>
             </div>
             <br>
@@ -131,10 +131,10 @@
                 <label for="inputDocId">{{ 'EC_12' | translate }}</label>
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="blankRadio12" value="option1" aria-describedby="inputDocId"> No
-                        <input type="radio" name="blankRadio12" value="option2" aria-describedby="inputDocId"> Yes
+                        <input type="radio" name="radio-bnt12" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q12" ng-change="changed()"> No
+                        <input type="radio" name="radio-bnt12" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q12" ng-change="changed()"> Yes
                     </span>
-                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" ng-disabled="doc.ethics.q12==false">
                 </div>
             </div>
             <br>
@@ -142,10 +142,10 @@
                 <label for="inputDocId">{{ 'EC_13' | translate }}</label>
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="blankRadio13" value="option1" aria-describedby="inputDocId"> No
-                        <input type="radio" name="blankRadio13" value="option2" aria-describedby="inputDocId"> Yes
+                        <input type="radio" name="radio-bnt13" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q13" ng-change="changed()"> No
+                        <input type="radio" name="radio-bnt13" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q13" ng-change="changed()"> Yes
                     </span>
-                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" ng-disabled="doc.ethics.q13==false">
                 </div>
             </div>
             <br>
