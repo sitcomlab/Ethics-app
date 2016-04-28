@@ -42,7 +42,8 @@ var DocSchema = new Schema({
         english: { // study description - English
             q02: { //Name of the lead researcher, position and lab
                 type: String,
-                required: false
+                required: false,
+                default: " "
             },
             q03: { // Time scale of data collection (range)
                 type: String,
@@ -72,7 +73,8 @@ var DocSchema = new Schema({
         german: { // study description - German
             q02: { //Name of the lead researcher, position and lab
                 type: String,
-                required: false
+                required: false,
+                default: " "
             },
             q03: { // Time scale of data collection (range)
                 type: String,
@@ -104,13 +106,11 @@ var DocSchema = new Schema({
         q01: {
             checkbox: { // yes (true), no (false)
                 type: Boolean,
-                required: true,
-                default: false
+                required: false
             },
             comment: { // comment if checked yes
                 type: String,
-                required: true,
-                default: " "
+                required: false
             },
             review: { // reviewers comment on experimenters answer
                 type: String,
@@ -120,13 +120,11 @@ var DocSchema = new Schema({
         q02: {
             checkbox: { // yes (true), no (false)
                 type: Boolean,
-                required: true,
-                default: false
+                required: false
             },
             comment: { // comment if checked yes
                 type: String,
-                required: true,
-                default: " "
+                required: false
             },
             review: { // reviewers comment on experimenters answer
                 type: String,
@@ -136,13 +134,11 @@ var DocSchema = new Schema({
         q03: {
             checkbox: { // yes (true), no (false)
                 type: Boolean,
-                required: true,
-                default: false
+                required: false
             },
             comment: { // comment if checked yes
                 type: String,
-                required: true,
-                default: " "
+                required: false
             },
             review: { // reviewers comment on experimenters answer
                 type: String,
@@ -152,13 +148,11 @@ var DocSchema = new Schema({
         q04: {
             checkbox: { // yes (true), no (false)
                 type: Boolean,
-                required: true,
-                default: false
+                required: false
             },
             comment: { // comment if checked yes
                 type: String,
-                required: true,
-                default: " "
+                required: false
             },
             review: { // reviewers comment on experimenters answer
                 type: String,
@@ -168,13 +162,11 @@ var DocSchema = new Schema({
         q05: {
             checkbox: { // yes (true), no (false)
                 type: Boolean,
-                required: true,
-                default: false
+                required: false
             },
             comment: { // comment if checked yes
                 type: String,
-                required: true,
-                default: " "
+                required: false
             },
             review: { // reviewers comment on experimenters answer
                 type: String,
@@ -184,13 +176,11 @@ var DocSchema = new Schema({
         q06: {
             checkbox: { // yes (true), no (false)
                 type: Boolean,
-                required: true,
-                default: false
+                required: false
             },
             comment: { // comment if checked yes
                 type: String,
-                required: true,
-                default: " "
+                required: false
             },
             review: { // reviewers comment on experimenters answer
                 type: String,
@@ -200,13 +190,11 @@ var DocSchema = new Schema({
         q07: {
             checkbox: { // yes (true), no (false)
                 type: Boolean,
-                required: true,
-                default: false
+                required: false
             },
             comment: { // comment if checked yes
                 type: String,
-                required: true,
-                default: " "
+                required: false
             },
             review: { // reviewers comment on experimenters answer
                 type: String,
@@ -216,13 +204,11 @@ var DocSchema = new Schema({
         q08: {
             checkbox: { // yes (true), no (false)
                 type: Boolean,
-                required: true,
-                default: false
+                required: false
             },
             comment: { // comment if checked yes
                 type: String,
-                required: true,
-                default: " "
+                required: false
             },
             review: { // reviewers comment on experimenters answer
                 type: String,
@@ -232,13 +218,11 @@ var DocSchema = new Schema({
         q09: {
             checkbox: { // yes (true), no (false)
                 type: Boolean,
-                required: true,
-                default: false
+                required: false
             },
             comment: { // comment if checked yes
                 type: String,
-                required: true,
-                default: " "
+                required: false
             },
             review: { // reviewers comment on experimenters answer
                 type: String,
@@ -248,13 +232,11 @@ var DocSchema = new Schema({
         q10: {
             checkbox: { // yes (true), no (false)
                 type: Boolean,
-                required: true,
-                default: false
+                required: false
             },
             comment: { // comment if checked yes
                 type: String,
-                required: true,
-                default: " "
+                required: false
             },
             review: { // reviewers comment on experimenters answer
                 type: String,
@@ -264,8 +246,7 @@ var DocSchema = new Schema({
         q11: {
             checkbox_1: { // yes (true), no (false)
                 type: Boolean,
-                required: true,
-                default: false
+                required: false
             },
             checkbox_2: { // yes (true), no (false)
                 type: Boolean,
@@ -273,8 +254,7 @@ var DocSchema = new Schema({
             },
             comment: { // comment if checked yes
                 type: String,
-                required: true,
-                default: " "
+                required: false
             },
             review: { // reviewers comment on experimenters answer
                 type: String,
@@ -284,13 +264,11 @@ var DocSchema = new Schema({
         q12: {
             checkbox: { // yes (true), no (false)
                 type: Boolean,
-                required: true,
-                default: false
+                required: false
             },
             comment: { // comment if checked yes
                 type: String,
-                required: true,
-                default: " "
+                required: false
             },
             review: { // reviewers comment on experimenters answer
                 type: String,
@@ -300,13 +278,11 @@ var DocSchema = new Schema({
         q13: {
             checkbox: { // yes (true), no (false)
                 type: Boolean,
-                required: true,
-                default: false
+                required: false
             },
             comment: { // comment if checked yes
                 type: String,
-                required: true,
-                default: " "
+                required: false
             },
             review: { // reviewers comment on experimenters answer
                 type: String,
