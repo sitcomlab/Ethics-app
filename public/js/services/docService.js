@@ -11,6 +11,14 @@ app.factory('$docService', function($http, $log, setup) {
                 first_name: "",
                 last_name: "",
                 editable: true,
+                general: {
+                    english: {
+                        q02: " "
+                    },
+                    german: {
+                        q02: " "
+                    }
+                }
             };
         },
         list: function() {

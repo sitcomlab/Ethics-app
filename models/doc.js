@@ -42,8 +42,7 @@ var DocSchema = new Schema({
         english: { // study description - English
             q02: { //Name of the lead researcher, position and lab
                 type: String,
-                required: false,
-                default: " "
+                required: false
             },
             q03: { // Time scale of data collection (range)
                 type: String,
@@ -73,8 +72,7 @@ var DocSchema = new Schema({
         german: { // study description - German
             q02: { //Name of the lead researcher, position and lab
                 type: String,
-                required: false,
-                default: " "
+                required: false
             },
             q03: { // Time scale of data collection (range)
                 type: String,
