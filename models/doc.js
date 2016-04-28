@@ -25,6 +25,14 @@ var DocSchema = new Schema({
         type: String,
         required: true
     },
+    first_name: {
+        type: String,
+        required: true
+    },
+    last_name: {
+        type: String,
+        required: true
+    },
     editable: { // Toggle editable boolean according to project status
         type: Boolean,
         required: true,
@@ -32,10 +40,6 @@ var DocSchema = new Schema({
     },
     general: { // PART 1
         english: { // study description - English
-            q01: { //Title of project = projectName; prefill with projectName; edit if experimenter makes changes
-                type: String,
-                required: false
-            },
             q02: { //Name of the lead researcher, position and lab
                 type: String,
                 required: false
@@ -66,10 +70,6 @@ var DocSchema = new Schema({
             }
         },
         german: { // study description - German
-            q01: { //Title of project = projectName; prefill with projectName; edit if experimenter makes changes
-                type: String,
-                required: false
-            },
             q02: { //Name of the lead researcher, position and lab
                 type: String,
                 required: false

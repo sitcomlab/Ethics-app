@@ -10,24 +10,23 @@ app.controller("LoginController", function($scope, $translate, $location, $log, 
     $scope.submit = function() {
         console.log($scope.doc);
         $docService.create($scope.doc)
-            .success(function(response) {
-                $scope.doc = response;
-                $location.url("/docs/" + $scope.doc._id + "/edit");
-            })
-            .error(function(response) {
-				alert("An error occured!");
-            });
+        .success(function(response) {
+            $scope.doc = response;
+            $location.url("/docs/" + $scope.doc._id + "/edit");
+        })
+        .error(function(response) {
+            alert("An error occured!");
+        });
     };
 
     // Login with DocumentId
     $scope.login = function() {
         $docService.get($scope.doc_id)
-			.success(function(response) {
-	            $location.url("/docs/" + $scope.doc._id + "/edit");
-	        })
-			.error(function(response) {
-				alert("An error occured!");
-			});
+        .success(function(response) {
+            $location.url("/docs/" + $scope.doc._id + "/edit");
+        })
+        .error(function(response) {
+            alert("An error occured!");
+        });
     };
-
 });

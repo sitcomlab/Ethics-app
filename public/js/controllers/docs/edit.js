@@ -13,15 +13,43 @@ app.controller("DocEditController", function($scope, $routeParams, $location, $d
 
     // INIT
     $scope.loadData();
+    $scope.isShown = function() {
+      return false
+    }
 
 
     // API-REQUEST
-    $scope.save = function() {
+    $scope.next = function() {
         $docService.edit($scope.doc._id, $scope.doc)
-            .success(function(response) {
-                $scope.doc = response;
-                $location.url("/docs/" + $scope.doc._id);
-            });
+        .success(function(response) {
+            $scope.doc = response;
+            //$location.url("/docs/" + $scope.doc._id + "/ethics");
+            $scope.isShown = function() {
+              return true
+            }
+        })
+        .error(function(response) {
+            alert("An error occured!");
+        });
+    };
+
+    // BACK
+    $scope.previous = function() {
+      $scope.isShown = function() {
+        return false
+      }
+    };
+
+    // SUBMIT
+    $scope.submit = function() {
+        $docService.edit($scope.doc._id, $scope.doc)
+        .success(function(response) {
+            $scope.doc = response;
+            $location.url("/docs/" + $scope.doc._id);
+        })
+        .error(function(response) {
+            alert("An error occured!");
+        });
     };
 
 });

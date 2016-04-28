@@ -25,10 +25,6 @@ app.config(function($routeProvider) {
 			templateUrl: "/js/templates/docs/edit.html",
 			controller: "DocEditController"
 		})
-		.when("/docs/:doc_id/ethics", {
-			templateUrl: "/js/templates/docs/ethics.html",
-			controller: "DocEthicsController"
-		})
 
 		.otherwise({
 			redirectTo: "/"
