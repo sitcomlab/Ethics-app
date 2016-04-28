@@ -7,7 +7,10 @@ app.controller("DocEditController", function($scope, $routeParams, $location, $d
     // API
     $scope.loadData = function() {
         $docService.get($routeParams.doc_id).success(function(response) {
+            //console.log(response);
             $scope.doc = response;
+            $scope.doc.general.english.q02 = {}
+            $scope.doc.general.english.q02 = angular.copy($scope.doc.first_name + " " + $scope.doc.last_name);
         });
     };
 
@@ -15,8 +18,7 @@ app.controller("DocEditController", function($scope, $routeParams, $location, $d
     $scope.loadData();
     $scope.isShown = function() {
       return false
-    }
-
+    };
 
     // API-REQUEST
     $scope.next = function() {
