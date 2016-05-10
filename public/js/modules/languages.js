@@ -83,7 +83,7 @@ app.config(function ($translateProvider) {
     NAV_SETTINGS: 'Settings',
     NAV_HELP: 'Help',
     ENGLISH: 'English',
-    GERMAN: 'Deutsch',
+    GERMAN: 'German',
 
     // BUTTONS
     BUTTON_SAVE: 'Save',

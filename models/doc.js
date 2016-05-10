@@ -294,6 +294,9 @@ var DocSchema = new Schema({
     }
 });
 
+DocSchema.path('email_address').validate(function(value) {
+    //Validate
+}, 'Validation Error');
 
 DocSchema.statics = {
     load: function(id, cb) {
