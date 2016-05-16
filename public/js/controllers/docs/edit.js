@@ -49,6 +49,7 @@ app.controller("DocEditController", function($scope, $routeParams, $location, $d
         .success(function(response) {
             $scope.doc = response;
             $location.url("/docs/" + $scope.doc._id);
+            $window.scrollTo(0, 0);
         })
         .error(function(response) {
             alert("An error occured!");
