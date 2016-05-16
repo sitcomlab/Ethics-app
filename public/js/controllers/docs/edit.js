@@ -48,7 +48,7 @@ app.controller("DocEditController", function($scope, $routeParams, $location, $d
         $docService.edit($scope.doc._id, $scope.doc)
         .success(function(response) {
             $scope.doc = response;
-            //$location.url("/docs/" + $scope.doc._id);
+            $location.url("/docs/" + $scope.doc._id);
         })
         .error(function(response) {
             alert("An error occured!");

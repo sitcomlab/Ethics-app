@@ -25,6 +25,10 @@ app.config(function($routeProvider) {
 			templateUrl: "/js/templates/docs/edit.html",
 			controller: "DocEditController"
 		})
+		.when("/docs/:doc_id", {
+			templateUrl: "/js/templates/docs/summary.html",
+			controller: "DocSummaryController"
+		})
 
 		.otherwise({
 			redirectTo: "/"
