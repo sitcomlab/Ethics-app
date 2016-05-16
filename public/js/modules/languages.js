@@ -19,6 +19,7 @@ app.config(function ($translateProvider) {
     BUTTON_CLOSE: 'Schließen',
     BUTTON_NEXT:'Weiter',
     BUTTON_PREVIOUS:'Zurück',
+    BUTTON_SUBMIT: 'Abschicken',
 
     // DIALOGS
     DIALOG_ATTENTION : 'Achtung',
@@ -40,6 +41,7 @@ app.config(function ($translateProvider) {
 
     // STUDY DESCRIPTION
     STUDY_DESCRIPTION: 'Experiment Beschreibung',
+    STUDY_DESCRIPTION_INFO:'Dieses Formular wird verwendet um die Einverständniserklärung, die jeder Teilnehmer unterschreiben muss, zu generieren. Bitte fülle die englische und die deutsche Version aus, damit die Einverständniserklärung in beiden Sprachen gerneriert werden kann.',
     SD_TITLE:'1. Titel des Projektes.',
     SD_NAME:'2. Name des Projektverantwortlichen, Position und Arbeitsgruppe.',
     SD_TIME_SCALE:'3. Zeitrahmen des Experiments (von...bis).',
@@ -69,10 +71,11 @@ app.config(function ($translateProvider) {
     EC_8:'8. Can the study cause psychological stress, anxiety or negative emotions stronger than what is experienced naturally on an everyday basis outside of research?',
     EC_9:'9. Will any additional information on your participants be obtained from third parties?',
     EC_10:'10. Does the procedure involve potential moments when the participant is left without the supervision of a researcher in a potentially challenging or dangerous situation in an uncontrolled environment (e.g. mobile HCI studies in heavy traffic areas)?',
-    EC_11:'11. Does the study involve audio or film recordings potentially identifying participants (spoken-aloud personal information, video recording of faces)?',
+    EC_11_1:'11. Does the study involve audio or film recordings potentially identifying participants (spoken-aloud personal information, video recording of faces)?',
+    EC_11_2:'If "yes": Will the study involve any recording without prior consent?',
     EC_12:'12. Is any raw data from the study likely to be passed on to external partners (e.g. companies, funding bodies, other universities)?',
     EC_13:'13. Does the study involve collection of any information without obtaining an Informed Consent in a situation different from public observations or anonymous street surveys?',
-
+    EC_EXPLAIN:"explain",
 });
 
   $translateProvider.translations('en_US', {
@@ -91,7 +94,8 @@ app.config(function ($translateProvider) {
     BUTTON_OK: 'Okay',
     BUTTON_CLOSE: 'Close',
     BUTTON_NEXT:'Next',
-    BUTTON_PREVIOUS:'Back',
+    BUTTON_PREVIOUS:'Previous',
+    BUTTON_SUBMIT: 'Submit',
 
     // DIALOGS
     DIALOG_ATTENTION : 'Attention',
@@ -113,6 +117,7 @@ app.config(function ($translateProvider) {
 
     // STUDY DESCRIPTION
     STUDY_DESCRIPTION: 'Study description',
+    STUDY_DESCRIPTION_INFO:'This form will be used to automatically generate the Informed Consent Form that every participant of your study will have to sign. Please fill the german and the english version in order to get the Informed Consent Form generated in both languages.',
     SD_TITLE:'1. Title of the project.',
     SD_NAME:'2. Name of the lead researcher, position and lab.',
     SD_TIME_SCALE:'3. Time scale of data collection (range).',
@@ -142,9 +147,11 @@ app.config(function ($translateProvider) {
     EC_8:'8. Can the study cause psychological stress, anxiety or negative emotions stronger than what is experienced naturally on an everyday basis outside of research?',
     EC_9:'9. Will any additional information on your participants be obtained from third parties?',
     EC_10:'10. Does the procedure involve potential moments when the participant is left without the supervision of a researcher in a potentially challenging or dangerous situation in an uncontrolled environment (e.g. mobile HCI studies in heavy traffic areas)?',
-    EC_11:'11. Does the study involve audio or film recordings potentially identifying participants (spoken-aloud personal information, video recording of faces)?',
+    EC_11_1:'11. Does the study involve audio or film recordings potentially identifying participants (spoken-aloud personal information, video recording of faces)?',
+    EC_11_2:'If "yes": Will the study involve any recording without prior consent?',
     EC_12:'12. Is any raw data from the study likely to be passed on to external partners (e.g. companies, funding bodies, other universities)?',
     EC_13:'13. Does the study involve collection of any information without obtaining an Informed Consent in a situation different from public observations or anonymous street surveys?',
+    EC_EXPLAIN:"explain",
   });
 
   // Default Language (English)

@@ -2,13 +2,14 @@ var app = angular.module("ethics-app");
 
 
 // PUT
-app.controller("DocEditController", function($scope, $routeParams, $location, $docService) {
+app.controller("DocEditController", function($scope, $routeParams, $location, $docService, $window) {
 
     // API
     $scope.loadData = function() {
         $docService.get($routeParams.doc_id).success(function(response) {
             $scope.doc = response;
             $scope.doc.general.english.q02 = angular.copy($scope.doc.first_name + " " + $scope.doc.last_name);
+            $scope.doc.general.german.q02 = angular.copy($scope.doc.first_name + " " + $scope.doc.last_name);
         });
     };
 
@@ -26,7 +27,8 @@ app.controller("DocEditController", function($scope, $routeParams, $location, $d
             //$location.url("/docs/" + $scope.doc._id + "/ethics");
             $scope.isShown = function() {
               return true
-            }
+            };
+            $window.scrollTo(0, 0);
         })
         .error(function(response) {
             alert("An error occured!");
@@ -37,7 +39,8 @@ app.controller("DocEditController", function($scope, $routeParams, $location, $d
     $scope.previous = function() {
       $scope.isShown = function() {
         return false
-      }
+      };
+      $window.scrollTo(0, 0);
     };
 
     // SUBMIT
@@ -45,7 +48,7 @@ app.controller("DocEditController", function($scope, $routeParams, $location, $d
         $docService.edit($scope.doc._id, $scope.doc)
         .success(function(response) {
             $scope.doc = response;
-            $location.url("/docs/" + $scope.doc._id);
+            //$location.url("/docs/" + $scope.doc._id);
         })
         .error(function(response) {
             alert("An error occured!");
