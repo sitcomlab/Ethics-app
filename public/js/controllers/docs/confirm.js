@@ -11,4 +11,10 @@ app.controller("DocSummaryController", function($scope, $routeParams, $location,
         });
     };
 
+    // INIT
+    $scope.loadData();
+    $scope.validateEthics = function() {
+      return false
+    };
+
 });

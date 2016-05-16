@@ -26,7 +26,7 @@ app.config(function($routeProvider) {
 			controller: "DocEditController"
 		})
 		.when("/docs/:doc_id", {
-			templateUrl: "/js/templates/docs/summary.html",
+			templateUrl: "/js/templates/docs/confirm.html",
 			controller: "DocSummaryController"
 		})
 

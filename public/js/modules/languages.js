@@ -76,6 +76,18 @@ app.config(function ($translateProvider) {
     EC_12:'12. Is any raw data from the study likely to be passed on to external partners (e.g. companies, funding bodies, other universities)?',
     EC_13:'13. Does the study involve collection of any information without obtaining an Informed Consent in a situation different from public observations or anonymous street surveys?',
     EC_EXPLAIN:"explain",
+
+    // SUMMARY
+    SUM_HEADING:'Confirmation',
+    SUM_CONFIRM_INFO:'There were no ethical issues found. Please find below the following documents and next steps for your experiment:',
+    SUM_NOT_CONFIRM_INFO:'Your project is not confirmed, yet, because there might be ethical conserns. Your answers will be reviewed by the ethical committee and you will be notified soon. Your project ID has been send to your for a later login. For an urgent request please contact committee@ethics-app.com.',
+    SUM_LI_1_TOPIC:'Statement of the Researcher',
+    SUM_LI_1:'to be printed, signed and stored together with the Informed Consent Form and other hardcopy material.',
+    SUM_LI_2_TOPIC:'Debriefing information',
+    SUM_LI_2:'To be prepared in written form or provided verbally to all participants after the experiment.',
+    SUM_LI_3_TOPIC:'Template of the Informed Consent Form',
+    SUM_LI_3:'To be printed and signed by every particiant in advance to the experiment.',
+
 });
 
   $translateProvider.translations('en_US', {
@@ -152,6 +164,18 @@ app.config(function ($translateProvider) {
     EC_12:'12. Is any raw data from the study likely to be passed on to external partners (e.g. companies, funding bodies, other universities)?',
     EC_13:'13. Does the study involve collection of any information without obtaining an Informed Consent in a situation different from public observations or anonymous street surveys?',
     EC_EXPLAIN:"explain",
+
+    // SUMMARY
+    SUM_HEADING:'Confirmation',
+    SUM_CONFIRM_INFO:'There were no ethical issues found. Please find below the following documents and next steps for your experiment:',
+    SUM_NOT_CONFIRM_INFO:'Your project is not confirmed, yet, because there might be ethical conserns. Your answers will be reviewed by the ethical committee and you will be notified soon. Your project ID has been send to your for a later login. For an urgent request please contact committee@ethics-app.com.',
+    SUM_LI_1_TOPIC:'Statement of the Researcher',
+    SUM_LI_1:'to be printed, signed and stored together with the Informed Consent Form and other hardcopy material.',
+    SUM_LI_2_TOPIC:'Debriefing information',
+    SUM_LI_2:'To be prepared in written form or provided verbally to all participants after the experiment.',
+    SUM_LI_3_TOPIC:'Template of the Informed Consent Form',
+    SUM_LI_3:'To be printed and signed by every particiant in advance to the experiment.',
+
   });
 
   // Default Language (English)
