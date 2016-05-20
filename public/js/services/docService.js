@@ -38,6 +38,9 @@ app.factory('$docService', function($http, $log, setup) {
         },
         recover: function(email) {
             return $http.get(setup.apiURL + "/recover/" + email);
+        },
+        pdf: function() {
+            return $http.post(setup.apiURL + "/pdf");
         }
     };
 });

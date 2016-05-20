@@ -27,7 +27,7 @@ app.config(function($routeProvider) {
 		})
 		.when("/docs/:doc_id", {
 			templateUrl: "/js/templates/docs/confirm.html",
-			controller: "DocSummaryController"
+			controller: "DocConfirmController"
 		})
 
 		.otherwise({

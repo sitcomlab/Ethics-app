@@ -35,6 +35,7 @@ var db = require('./config/db')
 var docs = require ('./routes/docs');
 var members = require ('./routes/members');
 var recover = require ('./routes/recover');
+var pdf = require ('./routes/pdf');
 
 
 // DATABASE
@@ -65,6 +66,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use('/api', docs); // documents
 app.use('/api', members); // committee members
 app.use('/api', recover); // recovery
+app.use('/api', pdf); // recovery
 
 
 /// catch 404 and forward to error handler
