@@ -1,4 +1,5 @@
 node_modules/*
 public/lib/*
+public/files/tmp/*
 
 .DS_Store
