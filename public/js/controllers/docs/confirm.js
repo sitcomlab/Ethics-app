@@ -8,11 +8,12 @@ app.controller("DocConfirmController", function($scope, $routeParams, $location,
     $scope.loadData = function() {
         $docService.get($routeParams.doc_id).success(function(response) {
             $scope.doc = response;
+            $scope.icf_eng = angular.copy($scope.doc._id + "_eng.pdf");
+            $scope.icf_ger = angular.copy($scope.doc._id + "_ger.pdf");
         });
         // Call pdf generation function
-        $docService.pdf($routeParams.doc_id).success(function(response) {
-            console.log("Trigger pdf");
-        });
+        $docService.pdf($routeParams.doc_id).success(function(response) {});
+
     };
 
     // INIT
