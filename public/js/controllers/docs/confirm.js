@@ -9,12 +9,12 @@ app.controller("DocConfirmController", function($scope, $routeParams, $location,
         $docService.get($routeParams.doc_id).success(function(response) {
             console.log("Check confirm get");
             $scope.doc = response;
+            $scope.icf_eng = angular.copy($scope.doc._id + "_eng.pdf");
+            $scope.icf_ger = angular.copy($scope.doc._id + "_ger.pdf");
         });
         // Call pdf generation function
         $docService.pdf($routeParams.doc_id).success(function(response) {
           console.log("Check confirm pdf");
-          $scope.icf_eng = angular.copy($scope.doc._id + "_eng.pdf");
-          $scope.icf_ger = angular.copy($scope.doc._id + "_ger.pdf");
         });
 
     };
