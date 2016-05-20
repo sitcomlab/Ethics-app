@@ -5,7 +5,7 @@ var pdf = require('../config/pdf');
 
 
 // LIST
-router.post('/pdf', pdf.generate);
+router.post('/pdf/:doc_id', pdf.generate);
 
 
 module.exports = router;
