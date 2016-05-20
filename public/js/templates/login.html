@@ -15,11 +15,11 @@
                         <span class="input-group-addon" id="docId">
                             <i class="fa fa-file-text"></i>
                         </span>
-                        <input type="text" class="form-control" ng-model="doc_id" placeholder="Document-ID" aria-describedby="inputDocId">
+                        <input type="text" class="form-control" ng-model="doc._id" placeholder="Document-ID" aria-describedby="inputDocId">
                     </div>
                     <center><small><a ng-href="#/recover">I forgot my Document-ID</a></small></center>
                     <br>
-                    <a class="btn btn-primary" href="#" role="button">{{ 'LOGIN' | translate }}</a>
+                    <a class="btn btn-primary" ng-click="login()" role="button">{{ 'LOGIN' | translate }}</a>
                     <br>
                 </div>
                 <div class="col-md-6" style="border-left: 1px solid rgba(0,0,0,.1);">

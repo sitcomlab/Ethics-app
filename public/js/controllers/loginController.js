@@ -21,7 +21,7 @@ app.controller("LoginController", function($scope, $translate, $location, $log, 
 
     // Login with DocumentId
     $scope.login = function() {
-        $docService.get($scope.doc_id)
+        $docService.get($scope.doc._id)
         .success(function(response) {
             $location.url("/docs/" + $scope.doc._id + "/edit");
         })
