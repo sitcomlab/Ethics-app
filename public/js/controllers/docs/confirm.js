@@ -7,12 +7,13 @@ app.controller("DocConfirmController", function($scope, $routeParams, $location,
     // API
     $scope.loadData = function() {
         $docService.get($routeParams.doc_id).success(function(response) {
-            $scope.doc = response;
-            $scope.icf_eng = angular.copy($scope.doc._id + "_eng.pdf");
-            $scope.icf_ger = angular.copy($scope.doc._id + "_ger.pdf");
+            $scope.doc = response;      
         });
         // Call pdf generation function
-        $docService.pdf($routeParams.doc_id).success(function(response) {});
+        $docService.pdf($routeParams.doc_id).success(function(response) {
+          $scope.icf_eng = angular.copy($scope.doc._id + "_eng.pdf");
+          $scope.icf_ger = angular.copy($scope.doc._id + "_ger.pdf");
+        });
 
     };
 

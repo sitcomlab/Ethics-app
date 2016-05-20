@@ -11,7 +11,6 @@ var fs = require('fs');
 exports.generate = function(req, res) {
   console.log("Generate PDF");
   Doc.load(req.params.doc_id, function(err, doc) {
-    console.log(doc);
     var docEng = new pdf();
     docEng.pipe(fs.createWriteStream('./public/files/tmp/' + doc._id + '_eng.pdf'));
 
@@ -96,7 +95,8 @@ exports.generate = function(req, res) {
       underline: false,
     });
 
-
     docGer.end();
+
+    res.end();
   });
 };
