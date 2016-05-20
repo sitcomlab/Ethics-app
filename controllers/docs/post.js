@@ -20,8 +20,6 @@ exports.request = function(req, res){
 		} else {
 
 			var _doc = result.toObject();
-			_doc.first_name = "Nicho"; // TODO: _doc.first_name
-			_doc.last_name = "S."; // TODO: _doc.last_name
 
 		    // Read Template
 		    fs.readFile(path.join(__dirname, '../../templates/reminder.html'), function (err, data) {
