@@ -8,6 +8,7 @@ app.controller("DocConfirmController", function($scope, $routeParams, $location,
     $scope.loadData = function() {
         $docService.get($routeParams.doc_id).success(function(response) {
             $scope.doc = response;
+            $scope.generatePDF();
         });
     };
 
@@ -20,7 +21,6 @@ app.controller("DocConfirmController", function($scope, $routeParams, $location,
 
     // INIT
     $scope.loadData();
-    $scope.generatePDF();
     $scope.validateEthics = function() {
         return false
     };
