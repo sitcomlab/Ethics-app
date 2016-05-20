@@ -9,6 +9,7 @@ var fs = require('fs');
  * Generate PDF
  */
 exports.generate = function(req, res) {
+  console.log("Generate PDF");
   Doc.load(req.params.doc_id, function(err, doc) {
     var docEng = new pdf();
     docEng.pipe(fs.createWriteStream('./public/files/tmp/' + doc._id + '_eng.pdf'));
