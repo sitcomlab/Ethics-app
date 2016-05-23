@@ -22,7 +22,7 @@ exports.request = function(req, res){
 		_doc.last_name = "S."; // TODO: _doc.last_name
 
 		// Read Template
-		fs.readFile(path.join(__dirname, '../../templates/recover.html'), function (err, data) {
+		fs.readFile(path.join(__dirname, '../../templates/email/recover.html'), function (err, data) {
 			if (err) throw err;
 
 			// Render HTML-content
