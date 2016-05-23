@@ -12,15 +12,12 @@ var conversion = require("phantom-html-to-pdf")();
 exports.generate = function(req, res) {
     Doc.load(req.params.doc_id, function(err, doc) {
 
-        console.log(doc);
-
         // Create english pdf
         fs.readFile(path.join(__dirname, '../templates/pdf/informed_consent_form_eng.html'), function(err, data) {
             if (err) throw err;
 
             // Render HTML-content
             var output = mustache.render(data.toString(), doc);
-            console.log(output);
 
             conversion({
                 html: output,
@@ -35,7 +32,6 @@ exports.generate = function(req, res) {
 
             // Render HTML-content
             var output = mustache.render(data.toString(), doc);
-            console.log(output);
 
             conversion({
                 html: output,

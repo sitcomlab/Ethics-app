@@ -22,7 +22,7 @@ app.controller("DocConfirmController", function($scope, $routeParams, $location,
     // INIT
     $scope.loadData();
     $scope.validateEthics = function() {
-        return false
+        return !$scope.doc.confirmed
     };
 
 });

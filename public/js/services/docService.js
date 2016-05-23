@@ -11,6 +11,7 @@ app.factory('$docService', function($http, $log, setup) {
                 first_name: "",
                 last_name: "",
                 editable: true,
+                confirmed: false,
                 general: {
                     english: {
                         q02: " "

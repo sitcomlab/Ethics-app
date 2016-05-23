@@ -38,6 +38,11 @@ var DocSchema = new Schema({
         required: true,
         default: true
     },
+    confirmed: { // Toggle beeolean according to confirmation
+        type: Boolean,
+        required: true,
+        default: false
+    },
     general: { // PART 1
         english: { // study description - English
             q02: { //Name of the lead researcher, position and lab
