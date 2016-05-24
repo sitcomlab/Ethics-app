@@ -37,7 +37,7 @@
             </div>
             <br>
             <div class="row">
-                <div class="col-md-6" ng-style="myStyle" ng-hide="!checkboxEnglish">
+                <div class="" ng-class="{'col-md-6': checkboxGerman, 'col-md-12': !checkboxGerman}" ng-style="myStyle" ng-hide="!checkboxEnglish">
                     <h3>{{ 'ENGLISH' | translate }}</h3>
                     <!-- 1. -->
                     <label for="inputDocId">{{ 'SD_TITLE' | translate }}</label>
@@ -79,7 +79,7 @@
                     <textarea type="text" class="form-control" ng-model="doc.general.english.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
                     <br>
                 </div>
-                <div class="col-md-6" ng-hide="!checkboxGerman">
+                <div class="" ng-class="{'col-md-6': checkboxEnglish, 'col-md-12': !checkboxEnglish}" ng-hide="!checkboxGerman">
                     <h3>{{ 'GERMAN' | translate }}</h3>
 
                     <!-- 1. -->
