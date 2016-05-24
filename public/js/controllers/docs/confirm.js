@@ -17,12 +17,12 @@ app.controller("DocConfirmController", function($scope, $routeParams, $location,
             $scope.icf_eng = angular.copy($scope.doc._id + "_eng.pdf");
             $scope.icf_ger = angular.copy($scope.doc._id + "_ger.pdf");
         });
-    }
+    };
 
     // INIT
     $scope.loadData();
     $scope.validateEthics = function() {
-        return !$scope.doc.confirmed
+        return !$scope.doc.confirmed;
     };
 
 });
