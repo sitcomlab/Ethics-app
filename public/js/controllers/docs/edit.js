@@ -20,8 +20,7 @@ app.controller("DocEditController", function($scope, $routeParams, $location, $d
     };
 
     // API-REQUEST
-    $scope.next = function(isValid) {
-      if(isValid) {
+    $scope.next = function() {
         $docService.edit($scope.doc._id, $scope.doc)
         .success(function(response) {
             $scope.doc = response;
@@ -34,9 +33,6 @@ app.controller("DocEditController", function($scope, $routeParams, $location, $d
         .error(function(response) {
             alert("An error occured!");
         });
-      } else {
-        alert("Please fill all fields");
-      }
     };
 
     // BACK
