@@ -40,6 +40,22 @@
                         <i class="fa fa-home"></i>&nbsp;&nbsp;{{ 'NAV_HOME' | translate }}
                     </a>
                 </li>
+
+                <!-- Show Document-ID and Status -->
+                <li class="nav-item pull-xs-right" ng-if="doc">
+                    <a class="nav-link active">
+                        <i class="fa fa-unlock-alt" ng-if="doc.editable"></i>
+                        <i class="fa fa-lock" ng-if="!doc.editable"></i>
+                    </a>
+                </li>
+                <li class="nav-item pull-xs-right" ng-if="doc">
+                    <a class="nav-link active">
+                        <i class="fa fa-file"></i>&nbsp;&nbsp;{{doc._id}}&nbsp;
+                    </a>
+                </li>
+
+                <!-- Language Switcher -->
+                <!--
                 <li class="nav-item dropdown active pull-xs-right">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-cogs"></i>&nbsp;&nbsp;{{ 'NAV_SETTINGS' | translate}}&nbsp;
@@ -61,8 +77,9 @@
                         </a>
                     </div>
                 </li>
-            </ul>
+                -->
 
+            </ul>
         </nav>
 
         <div class="container-fluid" ng-view></div>

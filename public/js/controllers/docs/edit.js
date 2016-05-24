@@ -2,14 +2,18 @@ var app = angular.module("ethics-app");
 
 
 // PUT
-app.controller("DocEditController", function($scope, $routeParams, $location, $docService, $window, $ngBootbox) {
+app.controller("DocEditController", function($scope, $rootScope, $routeParams, $location, $docService, $window, $ngBootbox) {
+
 
     /**
      * Request Document by its Id
      */
     $scope.loadData = function() {
         $docService.get($routeParams.doc_id).success(function(response) {
+            console.log(response);
             $scope.doc = response;
+            $rootScope.doc = response;
+            $rootScope.$broadcast('updateNavbar');
 
             // Check if Document was already submitted
             if(!$scope.doc.editable){
@@ -105,9 +109,12 @@ app.controller("DocEditController", function($scope, $routeParams, $location, $d
                     label: '<i class="fa fa-hand-o-right"></i>&nbsp;&nbsp;Submit',
                     className: "btn-warning",
                     callback: function() {
+                        $scope.doc.editable = false;
                         $docService.edit($scope.doc._id, $scope.doc)
                             .success(function(response) {
                                 $scope.doc = response;
+                                $rootScope.doc = response;
+                                $rootScope.$broadcast('updateNavbar');
                                 $location.url("/docs/" + $scope.doc._id);
                                 $window.scrollTo(0, 0);
                             })
