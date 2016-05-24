@@ -10,99 +10,101 @@
             <div>{{ 'STUDY_DESCRIPTION_INFO' | translate }}</div>
             <br>
             <div class="row">
-                <div class="col-md-6" style="border-right: 1px solid rgba(0,0,0,.1);">
-                    <h3>{{ 'ENGLISH' | translate }}</h3>
-                    <!-- 1. -->
-                    <label for="inputDocId">{{ 'SD_TITLE' | translate }}</label>
-                    <input type="text" class="form-control" ng-model="doc.project_name" placeholder="{{ 'SD_TITLE_FIELD' | translate }}" aria-describedby="inputDocId" value="Test">
-                    <br>
+                <form name="descriptionForm" novalidate>
+                    <div class="col-md-6" style="border-right: 1px solid rgba(0,0,0,.1);">
+                        <h3>{{ 'ENGLISH' | translate }}</h3>
+                        <!-- 1. -->
+                        <label for="inputDocId">{{ 'SD_TITLE' | translate }}</label>
+                        <input type="text" class="form-control" ng-model="doc.project_name" placeholder="{{ 'SD_TITLE_FIELD' | translate }}" aria-describedby="inputDocId" value="Test" required>
+                        <br>
 
-                    <!-- 2. -->
-                    <label for="inputDocId">{{ 'SD_NAME' | translate }}</label>
-                    <input type="text" class="form-control" ng-model="doc.general.english.q02" placeholder="{{ 'SD_NAME_FIELD' | translate }}" aria-describedby="inputDocId">
-                    <br>
+                        <!-- 2. -->
+                        <label for="inputDocId">{{ 'SD_NAME' | translate }}</label>
+                        <input type="text" class="form-control" ng-model="doc.general.english.q02" placeholder="{{ 'SD_NAME_FIELD' | translate }}" aria-describedby="inputDocId" required>
+                        <br>
 
-                    <!-- 3. -->
-                    <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
-                    <input type="text" class="form-control" ng-model="doc.general.english.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId">
-                    <br>
+                        <!-- 3. -->
+                        <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
+                        <input type="text" class="form-control" ng-model="doc.general.english.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId" required>
+                        <br>
 
-                    <!-- 4. -->
-                    <label for="inputDocId">{{ 'SD_THEME' | translate }}</label>
-                    <textarea type="text" class="form-control" ng-model="doc.general.english.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                    <br>
+                        <!-- 4. -->
+                        <label for="inputDocId">{{ 'SD_THEME' | translate }}</label>
+                        <textarea type="text" class="form-control" ng-model="doc.general.english.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId" required></textarea>
+                        <br>
 
-                    <!-- 5. -->
-                    <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}</label>
-                    <textarea type="text" class="form-control" ng-model="doc.general.english.q05" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                    <br>
+                        <!-- 5. -->
+                        <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}</label>
+                        <textarea type="text" class="form-control" ng-model="doc.general.english.q05" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId" required></textarea>
+                        <br>
 
-                    <!-- 6. -->
-                    <label for="inputDocId">{{ 'SD_DURATION' | translate }}</label>
-                    <textarea type="text" class="form-control" ng-model="doc.general.english.q06" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                    <br>
+                        <!-- 6. -->
+                        <label for="inputDocId">{{ 'SD_DURATION' | translate }}</label>
+                        <textarea type="text" class="form-control" ng-model="doc.general.english.q06" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId" required></textarea>
+                        <br>
 
-                    <!-- 7. -->
-                    <label for="inputDocId">{{ 'SD_RISKS' | translate }}</label>
-                    <textarea type="text" class="form-control" ng-model="doc.general.english.q07" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                    <br>
+                        <!-- 7. -->
+                        <label for="inputDocId">{{ 'SD_RISKS' | translate }}</label>
+                        <textarea type="text" class="form-control" ng-model="doc.general.english.q07" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId" required></textarea>
+                        <br>
 
-                    <!-- 8. -->
-                    <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}</label>
-                    <textarea type="text" class="form-control" ng-model="doc.general.english.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                    <br>
-                </div>
+                        <!-- 8. -->
+                        <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}</label>
+                        <textarea type="text" class="form-control" ng-model="doc.general.english.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId" required></textarea>
+                        <br>
+                    </div>
 
-                <div class="col-md-6">
-                    <h3>{{ 'GERMAN' | translate }}</h3>
+                    <div class="col-md-6">
+                        <h3>{{ 'GERMAN' | translate }}</h3>
 
-                    <!-- 1. -->
-                    <label for="inputDocId">{{ 'SD_TITLE' | translate }}</label>
-                    <input type="text" class="form-control" ng-model="doc.project_name" placeholder="{{ 'SD_TITLE_FIELD' | translate }}" aria-describedby="inputDocId" value="Test">
-                    <br>
+                        <!-- 1. -->
+                        <label for="inputDocId">{{ 'SD_TITLE' | translate }}</label>
+                        <input type="text" class="form-control" ng-model="doc.project_name" placeholder="{{ 'SD_TITLE_FIELD' | translate }}" aria-describedby="inputDocId" value="Test" required>
+                        <br>
 
-                    <!-- 2. -->
-                    <label for="inputDocId">{{ 'SD_NAME' | translate }}</label>
-                    <input type="text" class="form-control" ng-model="doc.general.german.q02" placeholder="{{ 'SD_NAME_FIELD' | translate }}" aria-describedby="inputDocId">
-                    <br>
+                        <!-- 2. -->
+                        <label for="inputDocId">{{ 'SD_NAME' | translate }}</label>
+                        <input type="text" class="form-control" ng-model="doc.general.german.q02" placeholder="{{ 'SD_NAME_FIELD' | translate }}" aria-describedby="inputDocId" required>
+                        <br>
 
-                    <!-- 3. -->
-                    <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
-                    <input type="text" class="form-control" ng-model="doc.general.german.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId">
-                    <br>
+                        <!-- 3. -->
+                        <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
+                        <input type="text" class="form-control" ng-model="doc.general.german.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId" required>
+                        <br>
 
-                    <!-- 4. -->
-                    <label for="inputDocId">{{ 'SD_THEME' | translate }}</label>
-                    <textarea type="text" class="form-control" ng-model="doc.general.german.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                    <br>
+                        <!-- 4. -->
+                        <label for="inputDocId">{{ 'SD_THEME' | translate }}</label>
+                        <textarea type="text" class="form-control" ng-model="doc.general.german.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId" required></textarea>
+                        <br>
 
-                    <!-- 5. -->
-                    <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}</label>
-                    <textarea type="text" class="form-control" ng-model="doc.general.german.q05" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                    <br>
+                        <!-- 5. -->
+                        <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}</label>
+                        <textarea type="text" class="form-control" ng-model="doc.general.german.q05" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId" required></textarea>
+                        <br>
 
-                    <!-- 6. -->
-                    <label for="inputDocId">{{ 'SD_DURATION' | translate }}</label>
-                    <textarea type="text" class="form-control" ng-model="doc.general.german.q06" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                    <br>
+                        <!-- 6. -->
+                        <label for="inputDocId">{{ 'SD_DURATION' | translate }}</label>
+                        <textarea type="text" class="form-control" ng-model="doc.general.german.q06" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId" required></textarea>
+                        <br>
 
-                    <!-- 7. -->
-                    <label for="inputDocId">{{ 'SD_RISKS' | translate }}</label>
-                    <textarea type="text" class="form-control" ng-model="doc.general.german.q07" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                    <br>
+                        <!-- 7. -->
+                        <label for="inputDocId">{{ 'SD_RISKS' | translate }}</label>
+                        <textarea type="text" class="form-control" ng-model="doc.general.german.q07" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId" required></textarea>
+                        <br>
 
-                    <!-- 8. -->
-                    <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}</label>
-                    <textarea type="text" class="form-control" ng-model="doc.general.german.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                    <br>
-                </div>
+                        <!-- 8. -->
+                        <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}</label>
+                        <textarea type="text" class="form-control" ng-model="doc.general.german.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId" required></textarea>
+                        <br>
+                    </div>
+                </form>
             </div>
 
             <!-- Submit -->
             <div class="row">
                 <div class="col-md-12">
                     <br>
-                    <a class="btn btn-primary pull-right" ng-click="next()" role="button">{{ 'BUTTON_NEXT' | translate }}</a>
+                    <a class="btn btn-primary pull-right" ng-click="next(descriptionForm.$valid)" role="button">{{ 'BUTTON_NEXT' | translate }}</a>
                 </div>
             </div>
         </div>
@@ -117,6 +119,7 @@
             </div>
             <br>
             <div class="row">
+              <form name="ethicsForm" novalidate>
                 <!-- 1. -->
                 <div class="col-md-12">
                     <label for="inputDocId">{{ 'EC_1' | translate }}</label>
@@ -294,6 +297,7 @@
                 </div>
                 <br>
             </div>
+          </form>
             <!-- Submit -->
             <div class="row">
                 <div class="col-md-12">
