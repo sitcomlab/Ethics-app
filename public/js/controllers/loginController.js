@@ -1,12 +1,18 @@
 var app = angular.module("ethics-app");
 
 
-app.controller("LoginController", function($scope, $translate, $location, $log, setup, $docService) {
+app.controller("LoginController", function($scope, $rootScope, $translate, $location, $log, setup, $docService) {
 
-    // INIT
+    /**
+     * Init
+     */
     $scope.doc = $docService.getDefaultDoc();
+    $rootScope.$broadcast('resetNavbar');
 
-    // Create new Document
+
+    /**
+     * Create a new Document
+     */
     $scope.submit = function() {
         console.log($scope.doc);
         $docService.create($scope.doc)
@@ -19,7 +25,10 @@ app.controller("LoginController", function($scope, $translate, $location, $log, 
         });
     };
 
-    // Login with DocumentId
+
+    /**
+     * Login with existing Document by its Id
+     */
     $scope.login = function() {
         $docService.get($scope.doc._id)
         .success(function(response) {
