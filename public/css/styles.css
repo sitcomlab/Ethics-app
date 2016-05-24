@@ -37,3 +37,7 @@ html {
   position: relative;
   min-height: 100%;
 }
+
+.c-indicator {
+    background-color: #FFFFFF;
+}
