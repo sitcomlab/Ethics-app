@@ -29,94 +29,99 @@
             <div>{{ 'STUDY_DESCRIPTION_INFO' | translate }}</div>
             <br>
             <div class="row">
-                <form name="descriptionForm" novalidate>
-                    <div class="col-md-6" style="border-right: 1px solid rgba(0,0,0,.1);">
-                        <h3>{{ 'ENGLISH' | translate }}</h3>
-                        <!-- 1. -->
-                        <label for="inputDocId">{{ 'SD_TITLE' | translate }}</label>
-                        <input type="text" class="form-control" ng-model="doc.project_name" placeholder="{{ 'SD_TITLE_FIELD' | translate }}" aria-describedby="inputDocId" value="Test">
-                        <br>
+                <div class="col-md-12">
+                    Please select for which language you want to generate consent forms: {{ 'ENGLISH' | translate }}
+                    <input type="checkbox" ng-model="checkboxEnglish" ng-init="checkboxEnglish=true"> {{ 'GERMAN' | translate }}
+                    <input type="checkbox" ng-model="checkboxGerman" ng-init="checkboxGerman=true">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6" ng-style="myStyle" ng-hide="!checkboxEnglish">
+                    <h3>{{ 'ENGLISH' | translate }}</h3>
+                    <!-- 1. -->
+                    <label for="inputDocId">{{ 'SD_TITLE' | translate }}</label>
+                    <input type="text" class="form-control" ng-model="doc.project_name" placeholder="{{ 'SD_TITLE_FIELD' | translate }}" aria-describedby="inputDocId" value="Test">
+                    <br>
 
-                        <!-- 2. -->
-                        <label for="inputDocId">{{ 'SD_NAME' | translate }}</label>
-                        <input type="text" class="form-control" ng-model="doc.general.english.q02" placeholder="{{ 'SD_NAME_FIELD' | translate }}" aria-describedby="inputDocId">
-                        <br>
+                    <!-- 2. -->
+                    <label for="inputDocId">{{ 'SD_NAME' | translate }}</label>
+                    <input type="text" class="form-control" ng-model="doc.general.english.q02" placeholder="{{ 'SD_NAME_FIELD' | translate }}" aria-describedby="inputDocId">
+                    <br>
 
-                        <!-- 3. -->
-                        <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
-                        <input type="text" class="form-control" ng-model="doc.general.english.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId">
-                        <br>
+                    <!-- 3. -->
+                    <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
+                    <input type="text" class="form-control" ng-model="doc.general.english.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId">
+                    <br>
 
-                        <!-- 4. -->
-                        <label for="inputDocId">{{ 'SD_THEME' | translate }}</label>
-                        <textarea type="text" class="form-control" ng-model="doc.general.english.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                        <br>
+                    <!-- 4. -->
+                    <label for="inputDocId">{{ 'SD_THEME' | translate }}</label>
+                    <textarea type="text" class="form-control" ng-model="doc.general.english.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                    <br>
 
-                        <!-- 5. -->
-                        <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}</label>
-                        <textarea type="text" class="form-control" ng-model="doc.general.english.q05" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                        <br>
+                    <!-- 5. -->
+                    <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}</label>
+                    <textarea type="text" class="form-control" ng-model="doc.general.english.q05" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                    <br>
 
-                        <!-- 6. -->
-                        <label for="inputDocId">{{ 'SD_DURATION' | translate }}</label>
-                        <textarea type="text" class="form-control" ng-model="doc.general.english.q06" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                        <br>
+                    <!-- 6. -->
+                    <label for="inputDocId">{{ 'SD_DURATION' | translate }}</label>
+                    <textarea type="text" class="form-control" ng-model="doc.general.english.q06" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                    <br>
 
-                        <!-- 7. -->
-                        <label for="inputDocId">{{ 'SD_RISKS' | translate }}</label>
-                        <textarea type="text" class="form-control" ng-model="doc.general.english.q07" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                        <br>
+                    <!-- 7. -->
+                    <label for="inputDocId">{{ 'SD_RISKS' | translate }}</label>
+                    <textarea type="text" class="form-control" ng-model="doc.general.english.q07" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                    <br>
 
-                        <!-- 8. -->
-                        <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}</label>
-                        <textarea type="text" class="form-control" ng-model="doc.general.english.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                        <br>
-                    </div>
+                    <!-- 8. -->
+                    <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}</label>
+                    <textarea type="text" class="form-control" ng-model="doc.general.english.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                    <br>
+                </div>
+                <div class="col-md-6" ng-hide="!checkboxGerman">
+                    <h3>{{ 'GERMAN' | translate }}</h3>
 
-                    <div class="col-md-6">
-                        <h3>{{ 'GERMAN' | translate }}</h3>
+                    <!-- 1. -->
+                    <label for="inputDocId">{{ 'SD_TITLE' | translate }}</label>
+                    <input type="text" class="form-control" ng-model="doc.project_name" placeholder="{{ 'SD_TITLE_FIELD' | translate }}" aria-describedby="inputDocId" value="Test">
+                    <br>
 
-                        <!-- 1. -->
-                        <label for="inputDocId">{{ 'SD_TITLE' | translate }}</label>
-                        <input type="text" class="form-control" ng-model="doc.project_name" placeholder="{{ 'SD_TITLE_FIELD' | translate }}" aria-describedby="inputDocId" value="Test">
-                        <br>
+                    <!-- 2. -->
+                    <label for="inputDocId">{{ 'SD_NAME' | translate }}</label>
+                    <input type="text" class="form-control" ng-model="doc.general.german.q02" placeholder="{{ 'SD_NAME_FIELD' | translate }}" aria-describedby="inputDocId">
+                    <br>
 
-                        <!-- 2. -->
-                        <label for="inputDocId">{{ 'SD_NAME' | translate }}</label>
-                        <input type="text" class="form-control" ng-model="doc.general.german.q02" placeholder="{{ 'SD_NAME_FIELD' | translate }}" aria-describedby="inputDocId">
-                        <br>
+                    <!-- 3. -->
+                    <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
+                    <input type="text" class="form-control" ng-model="doc.general.german.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId">
+                    <br>
 
-                        <!-- 3. -->
-                        <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
-                        <input type="text" class="form-control" ng-model="doc.general.german.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId">
-                        <br>
+                    <!-- 4. -->
+                    <label for="inputDocId">{{ 'SD_THEME' | translate }}</label>
+                    <textarea type="text" class="form-control" ng-model="doc.general.german.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                    <br>
 
-                        <!-- 4. -->
-                        <label for="inputDocId">{{ 'SD_THEME' | translate }}</label>
-                        <textarea type="text" class="form-control" ng-model="doc.general.german.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                        <br>
+                    <!-- 5. -->
+                    <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}</label>
+                    <textarea type="text" class="form-control" ng-model="doc.general.german.q05" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                    <br>
 
-                        <!-- 5. -->
-                        <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}</label>
-                        <textarea type="text" class="form-control" ng-model="doc.general.german.q05" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                        <br>
+                    <!-- 6. -->
+                    <label for="inputDocId">{{ 'SD_DURATION' | translate }}</label>
+                    <textarea type="text" class="form-control" ng-model="doc.general.german.q06" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                    <br>
 
-                        <!-- 6. -->
-                        <label for="inputDocId">{{ 'SD_DURATION' | translate }}</label>
-                        <textarea type="text" class="form-control" ng-model="doc.general.german.q06" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                        <br>
+                    <!-- 7. -->
+                    <label for="inputDocId">{{ 'SD_RISKS' | translate }}</label>
+                    <textarea type="text" class="form-control" ng-model="doc.general.german.q07" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                    <br>
 
-                        <!-- 7. -->
-                        <label for="inputDocId">{{ 'SD_RISKS' | translate }}</label>
-                        <textarea type="text" class="form-control" ng-model="doc.general.german.q07" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                        <br>
-
-                        <!-- 8. -->
-                        <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}</label>
-                        <textarea type="text" class="form-control" ng-model="doc.general.german.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
-                        <br>
-                    </div>
-                </form>
+                    <!-- 8. -->
+                    <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}</label>
+                    <textarea type="text" class="form-control" ng-model="doc.general.german.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId"></textarea>
+                    <br>
+                </div>
             </div>
             <br>
             <hr>
@@ -138,219 +143,213 @@
             <!--<label>{{ 'ETHICS_CHECKLIST_INFO' | translate }}</label>-->
             <div>
                 Feel in the checklist below. In case you answer "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk (this will be reviewed by the ifgi-Ethics Committee).
-                <br>
-                Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is not valid.
-                <br>
-                The checklist is intended as a guideline and is here to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the ifgi-Ethics Committee.
+                <br> Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is not valid.
+                <br> The checklist is intended as a guideline and is here to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the ifgi-Ethics Committee.
             </div>
             <br>
             <div class="row">
-                <form name="ethicsForm">
-                    <!-- 1. -->
-                    <div class="col-md-12">
-                        <label for="inputDocId">{{ 'EC_1' | translate }}</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
+                <!-- 1. -->
+                <div class="col-md-12">
+                    <label for="inputDocId">{{ 'EC_1' | translate }}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt1" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q01.checkbox" ng-change="changed()" required>
                                 No
                                 <input type="radio" name="radio-bnt1" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q01.checkbox" ng-change="changed()" required>
                                 Yes
                             </span>
-                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q01.comment" ng-disabled="doc.ethics.q01.checkbox==false">
-                        </div>
-                        <label style="color:red">{{doc.ethics.q01.review}}</label>
+                        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q01.comment" ng-disabled="doc.ethics.q01.checkbox==false">
                     </div>
-                    <br>
-                    <!-- 2. -->
-                    <div class="col-md-12">
-                        <label for="inputDocId">{{ 'EC_2' | translate }}</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
+                    <label style="color:red">{{doc.ethics.q01.review}}</label>
+                </div>
+                <br>
+                <!-- 2. -->
+                <div class="col-md-12">
+                    <label for="inputDocId">{{ 'EC_2' | translate }}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt2" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q02.checkbox" ng-change="changed()">
                                 No
                                 <input type="radio" name="radio-bnt2" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q02.checkbox" ng-change="changed()">
                                 Yes
                             </span>
-                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q02.comment" ng-disabled="doc.ethics.q02.checkbox==false">
-                        </div>
-                        <label style="color:red">{{doc.ethics.q02.review}}</label>
+                        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q02.comment" ng-disabled="doc.ethics.q02.checkbox==false">
                     </div>
-                    <br>
-                    <!-- 3. -->
-                    <div class="col-md-12">
-                        <label for="inputDocId">{{ 'EC_3' | translate}}</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
+                    <label style="color:red">{{doc.ethics.q02.review}}</label>
+                </div>
+                <br>
+                <!-- 3. -->
+                <div class="col-md-12">
+                    <label for="inputDocId">{{ 'EC_3' | translate}}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt3" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q03.checkbox" ng-change="changed()">
                                 No
                                 <input type="radio" name="radio-bnt3" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q03.checkbox" ng-change="changed()">
                                 Yes
                             </span>
-                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q03.comment" ng-disabled="doc.ethics.q03.checkbox==false">
-                        </div>
-                        <label style="color:red">{{doc.ethics.q03.review}}</label>
+                        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q03.comment" ng-disabled="doc.ethics.q03.checkbox==false">
                     </div>
-                    <br>
-                    <!-- 4. -->
-                    <div class="col-md-12">
-                        <label for="inputDocId">{{ 'EC_4' | translate }}</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
+                    <label style="color:red">{{doc.ethics.q03.review}}</label>
+                </div>
+                <br>
+                <!-- 4. -->
+                <div class="col-md-12">
+                    <label for="inputDocId">{{ 'EC_4' | translate }}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt4" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q04.checkbox" ng-change="changed()">
                                 No
                                 <input type="radio" name="radio-bnt4" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q04.checkbox" ng-change="changed()">
                                 Yes
                             </span>
-                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q04.comment" ng-disabled="doc.ethics.q04.checkbox==false">
-                        </div>
-                        <label style="color:red">{{doc.ethics.q04.review}}</label>
+                        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q04.comment" ng-disabled="doc.ethics.q04.checkbox==false">
                     </div>
-                    <br>
-                    <!-- 5. -->
-                    <div class="col-md-12">
-                        <label for="inputDocId">{{ 'EC_5' | translate }}</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
+                    <label style="color:red">{{doc.ethics.q04.review}}</label>
+                </div>
+                <br>
+                <!-- 5. -->
+                <div class="col-md-12">
+                    <label for="inputDocId">{{ 'EC_5' | translate }}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt5" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q05.checkbox" ng-change="changed()">
                                 No
                                 <input type="radio" name="radio-bnt5" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q05.checkbox" ng-change="changed()">
                                 Yes
                             </span>
-                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q05.comment" ng-disabled="doc.ethics.q05.checkbox==false">
-                        </div>
-                        <label style="color:red">{{doc.ethics.q05.review}}</label>
+                        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q05.comment" ng-disabled="doc.ethics.q05.checkbox==false">
                     </div>
-                    <br>
-                    <!-- 6. -->
-                    <div class="col-md-12">
-                        <label for="inputDocId">{{ 'EC_6' | translate }}</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
+                    <label style="color:red">{{doc.ethics.q05.review}}</label>
+                </div>
+                <br>
+                <!-- 6. -->
+                <div class="col-md-12">
+                    <label for="inputDocId">{{ 'EC_6' | translate }}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt6" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q06.checkbox" ng-change="changed()">
                                 No
                                 <input type="radio" name="radio-bnt6" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q06.checkbox" ng-change="changed()">
                                 Yes
                             </span>
-                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q06.comment" ng-disabled="doc.ethics.q06.checkbox==false">
-                        </div>
-                        <label style="color:red">{{doc.ethics.q06.review}}</label>
+                        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q06.comment" ng-disabled="doc.ethics.q06.checkbox==false">
                     </div>
-                    <br>
-                    <!-- 7. -->
-                    <div class="col-md-12">
-                        <label for="inputDocId">{{ 'EC_7' | translate }}</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
+                    <label style="color:red">{{doc.ethics.q06.review}}</label>
+                </div>
+                <br>
+                <!-- 7. -->
+                <div class="col-md-12">
+                    <label for="inputDocId">{{ 'EC_7' | translate }}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt7" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q07.checkbox" ng-change="changed()">
                                 No
                                 <input type="radio" name="radio-bnt7" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q07.checkbox" ng-change="changed()">
                                 Yes
                             </span>
-                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q07.comment" ng-disabled="doc.ethics.q07.checkbox==false">
-                        </div>
-                        <label style="color:red">{{doc.ethics.q07.review}}</label>
+                        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q07.comment" ng-disabled="doc.ethics.q07.checkbox==false">
                     </div>
-                    <br>
-                    <!-- 8. -->
-                    <div class="col-md-12">
-                        <label for="inputDocId">{{ 'EC_8' | translate }}</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
+                    <label style="color:red">{{doc.ethics.q07.review}}</label>
+                </div>
+                <br>
+                <!-- 8. -->
+                <div class="col-md-12">
+                    <label for="inputDocId">{{ 'EC_8' | translate }}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt8" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q08.checkbox" ng-change="changed()">
                                 No
                                 <input type="radio" name="radio-bnt8" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q08.checkbox" ng-change="changed()">
                                 Yes
                             </span>
-                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q08.comment" ng-disabled="doc.ethics.q08.checkbox==false">
-                        </div>
-                        <label style="color:red">{{doc.ethics.q08.review}}</label>
+                        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q08.comment" ng-disabled="doc.ethics.q08.checkbox==false">
                     </div>
-                    <br>
-                    <!-- 9. -->
-                    <div class="col-md-12">
-                        <label for="inputDocId">{{ 'EC_9' | translate }}</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
+                    <label style="color:red">{{doc.ethics.q08.review}}</label>
+                </div>
+                <br>
+                <!-- 9. -->
+                <div class="col-md-12">
+                    <label for="inputDocId">{{ 'EC_9' | translate }}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt9" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q09.checkbox" ng-change="changed()">
                                 No
                                 <input type="radio" name="radio-bnt9" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q09.checkbox" ng-change="changed()">
                                 Yes
                             </span>
-                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q09.comment" ng-disabled="doc.ethics.q09.checkbox==false">
-                        </div>
-                        <label style="color:red">{{doc.ethics.q09.review}}</label>
+                        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q09.comment" ng-disabled="doc.ethics.q09.checkbox==false">
                     </div>
-                    <br>
-                    <!-- 10. -->
-                    <div class="col-md-12">
-                        <label for="inputDocId">{{ 'EC_10' | translate }}</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
+                    <label style="color:red">{{doc.ethics.q09.review}}</label>
+                </div>
+                <br>
+                <!-- 10. -->
+                <div class="col-md-12">
+                    <label for="inputDocId">{{ 'EC_10' | translate }}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt10" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q10.checkbox" ng-change="changed()">
                                 No
                                 <input type="radio" name="radio-bnt10" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q10.checkbox" ng-change="changed()">
                                 Yes
                             </span>
-                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q10.comment" ng-disabled="doc.ethics.q10.checkbox==false">
-                        </div>
-                        <label style="color:red">{{doc.ethics.q10.review}}</label>
+                        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q10.comment" ng-disabled="doc.ethics.q10.checkbox==false">
                     </div>
-                    <br>
-                    <!-- 11. -->
-                    <div class="col-md-12">
-                        <label for="inputDocId">{{ 'EC_11_1' | translate }}</label>
+                    <label style="color:red">{{doc.ethics.q10.review}}</label>
+                </div>
+                <br>
+                <!-- 11. -->
+                <div class="col-md-12">
+                    <label for="inputDocId">{{ 'EC_11_1' | translate }}</label>
+                    <div class="input-group">
+                        <input type="radio" name="radio-bnt11_1" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q11.checkbox_1" ng-change="changed()"> No
+                        <input type="radio" name="radio-bnt11_1" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q11.checkbox_1" ng-change="changed()" ng-click=""> Yes (additional note will be added to Informed Consent Form)
+                    </div>
+                    <div ng-hide="true" ng-show="doc.ethics.q11.checkbox_1==true">
+                        <label for="inputDocId">{{ 'EC_11_2' | translate }}</label>
                         <div class="input-group">
-                            <input type="radio" name="radio-bnt11_1" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q11.checkbox_1" ng-change="changed()">
-                            No
-                            <input type="radio" name="radio-bnt11_1" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q11.checkbox_1" ng-change="changed()" ng-click="">
-                            Yes (additional note will be added to Informed Consent Form)
-                        </div>
-                        <div ng-hide="true" ng-show="doc.ethics.q11.checkbox_1==true">
-                            <label for="inputDocId">{{ 'EC_11_2' | translate }}</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
+                            <span class="input-group-addon">
                                     <input type="radio" name="radio-bnt11_2" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q11.checkbox_2" ng-change="changed()" ng-disabled="doc.ethics.q11.checkbox_1==false">
                                     No
                                     <input type="radio" name="radio-bnt11_2" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q11.checkbox_2" ng-change="changed()" ng-disabled="doc.ethics.q11.checkbox_1==false">
                                     Yes
                                 </span>
-                                <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q11.comment" ng-disabled="doc.ethics.q11.checkbox_2==false">
-                            </div>
+                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q11.comment" ng-disabled="doc.ethics.q11.checkbox_2==false">
                         </div>
-                        <label style="color:red">{{doc.ethics.q11.review}}</label>
                     </div>
-                    <br>
-                    <!-- 12. -->
-                    <div class="col-md-12">
-                        <label for="inputDocId">{{ 'EC_12' | translate }}</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
+                    <label style="color:red">{{doc.ethics.q11.review}}</label>
+                </div>
+                <br>
+                <!-- 12. -->
+                <div class="col-md-12">
+                    <label for="inputDocId">{{ 'EC_12' | translate }}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt12" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q12.checkbox" ng-change="changed()">
                                 No
                                 <input type="radio" name="radio-bnt12" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q12.checkbox" ng-change="changed()">
                                 Yes
                             </span>
-                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q12.comment" ng-disabled="doc.ethics.q12.checkbox==false">
-                        </div>
-                        <label style="color:red">{{doc.ethics.q12.review}}</label>
+                        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q12.comment" ng-disabled="doc.ethics.q12.checkbox==false">
                     </div>
-                    <br>
-                    <!-- 13. -->
-                    <div class="col-md-12">
-                        <label for="inputDocId">{{ 'EC_13' | translate }}</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
+                    <label style="color:red">{{doc.ethics.q12.review}}</label>
+                </div>
+                <br>
+                <!-- 13. -->
+                <div class="col-md-12">
+                    <label for="inputDocId">{{ 'EC_13' | translate }}</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt13" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q13.checkbox" ng-change="changed()">
                                 No
                                 <input type="radio" name="radio-bnt13" aria-describedby="inputDocId" ng-value="true" ng-model="doc.ethics.q13.checkbox" ng-change="changed()">
                                 Yes
                             </span>
-                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q13.comment" ng-disabled="doc.ethics.q13.checkbox==false">
-                        </div>
-                        <label style="color:red">{{doc.ethics.q13.review}}</label>
+                        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q13.comment" ng-disabled="doc.ethics.q13.checkbox==false">
                     </div>
-                    <br>
-                </form>
+                    <label style="color:red">{{doc.ethics.q13.review}}</label>
+                </div>
+                <br>
             </div>
             <br>
 
