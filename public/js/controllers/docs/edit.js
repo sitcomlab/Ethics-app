@@ -15,7 +15,11 @@ app.directive('showErrors', function() {
             // only apply the has-error class after the user leaves the text box
             inputNgEl.bind('blur', function() {
                 el.toggleClass('has-danger', formCtrl[inputName].$invalid);
-            })
+            });
+            // inside the directive's link function from the previous example
+            scope.$on('show-errors-check-validity', function() {
+                el.toggleClass('has-danger', formCtrl[inputName].$invalid);
+            });
         }
     }
 });
@@ -55,7 +59,7 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
     /**
      * Next page
      */
-    $scope.next = function() {
+    $scope.next1 = function() {
         $docService.edit($scope.doc._id, $scope.doc)
             .success(function(response) {
                 $scope.doc = response;
@@ -68,21 +72,24 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
     };
 
     // Testing
-    $scope.next1 = function(isValid) {
-        if (isValid) {
-            console.log("Form valid");
-            $docService.edit($scope.doc._id, $scope.doc)
-                .success(function(response) {
-                    $scope.doc = response;
-                    $scope.page = $scope.page + 1;
-                    $window.scrollTo(0, 0);
-                })
-                .error(function(response) {
-                    alert("An error occured!");
-                });
-        } else {
-            console.log("Form invalid");
+    $scope.next2 = function() {
+        $scope.$broadcast('show-errors-check-validity');
+        if ($scope.descriptionFormEng.$invalid) {
+            return;
         }
+        if ($scope.descriptionFormGer.$invalid) {
+            return;
+        }
+        console.log("Form valid");
+        $docService.edit($scope.doc._id, $scope.doc)
+            .success(function(response) {
+                $scope.doc = response;
+                $scope.page = $scope.page + 1;
+                $window.scrollTo(0, 0);
+            })
+            .error(function(response) {
+                alert("An error occured!");
+            });
     };
 
 
