@@ -11,6 +11,34 @@
                 <!-- TODO: Add steps and introduction for users -->
             </center>
             <br>
+
+
+            <form name="userForm" novalidate>
+
+      <div class="form-group" show-errors>
+
+        <label class="control-label">Name</label>
+
+        <input type="text" class="form-control" name="name" ng-model="user.name" required placeholder="Name" />
+
+      </div>
+
+      <div class="form-group" show-errors>
+
+        <label class="control-label">Email</label>
+
+        <input type="email" class="form-control" name="email" ng-model="user.email" required placeholder="Email" />
+
+      </div>
+
+
+
+      <button class="btn btn-primary" ng-click="save()">Add User</button>
+
+      <button class="btn btn-link" ng-click="reset()">Reset</button>
+
+    </form>
+
             <hr>
 
             <!-- next page -->
@@ -49,175 +77,175 @@
             </div>
             <br>
             <div class="row">
-                <form name="descriptionsForm">
-                    <div class="" ng-class="{'col-md-6': checkboxGerman, 'col-md-12': !checkboxGerman}" ng-style="myStyle" ng-hide="!checkboxEnglish">
-                        <center>
-                            <h3>{{ 'ENGLISH' | translate }}</h3></center>
+                <div class="" ng-class="{'col-md-6': checkboxGerman, 'col-md-12': !checkboxGerman}" ng-style="myStyle" ng-hide="!checkboxEnglish">
+                    <center>
+                        <h3>{{ 'ENGLISH' | translate }}</h3></center>
+                    <form name="descriptionFormEng" novalidate>
                         <!-- 1. -->
                         <label for="inputDocId">{{ 'SD_TITLE' | translate }}</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" ng-model="doc.project_name" placeholder="{{ 'SD_TITLE_FIELD' | translate }}" aria-describedby="inputDocId" value="Test" ng-required="checkboxEnglish && nextClicked">
+                        <div class="input-group form-group" show-errors>
+                            <input type="text" name="sd_title_eng" class="form-control" ng-model="doc.project_name" placeholder="{{ 'SD_TITLE_FIELD' | translate }}" aria-describedby="inputDocId" value="Test" ng-required="checkboxEnglish">
                             <span class="input-group-addon">
-                                <span class="flag-icon flag-icon-gb"></span>
+                                    <span class="flag-icon flag-icon-gb"></span>
                             </span>
                         </div>
                         <br>
 
                         <!-- 2. -->
                         <label for="inputDocId">{{ 'SD_NAME' | translate }}</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" ng-model="doc.general.english.q02" placeholder="{{ 'SD_NAME_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish && nextClicked">
+                        <div class="input-group form-group" show-errors>
+                            <input type="text" name="sd_name_eng" class="form-control" ng-model="doc.general.english.q02" placeholder="{{ 'SD_NAME_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish">
                             <span class="input-group-addon">
-                            <span class="flag-icon flag-icon-gb"></span>
+                                    <span class="flag-icon flag-icon-gb"></span>
                             </span>
                         </div>
                         <br>
 
                         <!-- 3. -->
                         <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" ng-model="doc.general.english.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId" ng-required="checkboxEnglish && nextClicked">
+                        <div class="input-group form-group" show-errors>
+                            <input type="text" name="sd_time_eng" class="form-control" ng-model="doc.general.english.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId" ng-required="checkboxEnglish">
                             <span class="input-group-addon">
-                                <span class="flag-icon flag-icon-gb"></span>
+                                    <span class="flag-icon flag-icon-gb"></span>
                             </span>
                         </div>
                         <br>
 
                         <!-- 4. -->
                         <label for="inputDocId">{{ 'SD_THEME' | translate }}</label>
-                        <div class="input-group">
-                            <textarea type="text" class="form-control" ng-model="doc.general.english.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish && nextClicked"></textarea>
+                        <div class="input-group form-group" show-errors>
+                            <textarea type="text" name="sd_theme_eng" class="form-control" ng-model="doc.general.english.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish"></textarea>
                             <span class="input-group-addon">
-                                <span class="flag-icon flag-icon-gb"></span>
+                                    <span class="flag-icon flag-icon-gb"></span>
                             </span>
                         </div>
                         <br>
 
                         <!-- 5. -->
                         <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}</label>
-                        <div class="input-group">
-                            <textarea type="text" class="form-control" ng-model="doc.general.english.q05" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish && nextClicked"></textarea>
+                        <div class="input-group form-group">
+                            <textarea type="text" name="sd_procedure_eng" class="form-control" ng-model="doc.general.english.q05" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish"></textarea>
                             <span class="input-group-addon">
-                                        <span class="flag-icon flag-icon-gb"></span>
+                                    <span class="flag-icon flag-icon-gb"></span>
                             </span>
                         </div>
                         <br>
 
                         <!-- 6. -->
                         <label for="inputDocId">{{ 'SD_DURATION' | translate }}</label>
-                        <div class="input-group">
-                            <textarea type="text" class="form-control" ng-model="doc.general.english.q06" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish && nextClicked"></textarea>
+                        <div class="input-group form-group">
+                            <textarea type="text" name="sd_duration_eng" class="form-control" ng-model="doc.general.english.q06" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish"></textarea>
                             <span class="input-group-addon">
-                                            <span class="flag-icon flag-icon-gb"></span>
+                                    <span class="flag-icon flag-icon-gb"></span>
                             </span>
                         </div>
                         <br>
 
                         <!-- 7. -->
                         <label for="inputDocId">{{ 'SD_RISKS' | translate }}</label>
-                        <div class="input-group">
-                            <textarea type="text" class="form-control" ng-model="doc.general.english.q07" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish && nextClicked"></textarea>
+                        <div class="input-group form-group">
+                            <textarea type="text" name="sd_risks_eng" class="form-control" ng-model="doc.general.english.q07" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish"></textarea>
                             <span class="input-group-addon">
-                                                <span class="flag-icon flag-icon-gb"></span>
+                                    <span class="flag-icon flag-icon-gb"></span>
                             </span>
                         </div>
                         <br>
 
                         <!-- 8. -->
                         <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}</label>
-                        <div class="input-group">
-                            <textarea type="text" class="form-control" ng-model="doc.general.english.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish && nextClicked"></textarea>
+                        <div class="input-group form-group">
+                            <textarea type="text" name="sd_benefits_eng" class="form-control" ng-model="doc.general.english.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish"></textarea>
                             <span class="input-group-addon">
-                                                    <span class="flag-icon flag-icon-gb"></span>
+                                    <span class="flag-icon flag-icon-gb"></span>
                             </span>
                         </div>
-                        <br>
+                    </form>
+                    <br>
+                </div>
+                <div class="" ng-class="{'col-md-6': checkboxEnglish, 'col-md-12': !checkboxEnglish}" ng-hide="!checkboxGerman">
+                    <center>
+                        <h3>{{ 'GERMAN' | translate }}</h3></center>
+
+                    <!-- 1. -->
+                    <label for="inputDocId">{{ 'SD_TITLE' | translate }}</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="doc.project_name" placeholder="{{ 'SD_TITLE_FIELD' | translate }}" aria-describedby="inputDocId" value="Test" ng-required="checkboxGerman">
+                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-de"></span>
+                        </span>
                     </div>
-                    <div class="" ng-class="{'col-md-6': checkboxEnglish, 'col-md-12': !checkboxEnglish}" ng-hide="!checkboxGerman">
-                        <center>
-                            <h3>{{ 'GERMAN' | translate }}</h3></center>
+                    <br>
 
-                        <!-- 1. -->
-                        <label for="inputDocId">{{ 'SD_TITLE' | translate }}</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" ng-model="doc.project_name" placeholder="{{ 'SD_TITLE_FIELD' | translate }}" aria-describedby="inputDocId" value="Test" ng-required="checkboxGerman && nextClicked">
-                            <span class="input-group-addon">
+                    <!-- 2. -->
+                    <label for="inputDocId">{{ 'SD_NAME' | translate }}</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="doc.general.german.q02" placeholder="{{ 'SD_NAME_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman">
+                        <span class="input-group-addon">
                                             <span class="flag-icon flag-icon-de"></span>
-                            </span>
-                        </div>
-                        <br>
-
-                        <!-- 2. -->
-                        <label for="inputDocId">{{ 'SD_NAME' | translate }}</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" ng-model="doc.general.german.q02" placeholder="{{ 'SD_NAME_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman && nextClicked">
-                            <span class="input-group-addon">
-                                            <span class="flag-icon flag-icon-de"></span>
-                            </span>
-                        </div>
-                        <br>
-
-                        <!-- 3. -->
-                        <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" ng-model="doc.general.german.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId" ng-required="checkboxGerman && nextClicked">
-                            <span class="input-group-addon">
-                                            <span class="flag-icon flag-icon-de"></span>
-                            </span>
-                        </div>
-                        <br>
-
-                        <!-- 4. -->
-                        <label for="inputDocId">{{ 'SD_THEME' | translate }}</label>
-                        <div class="input-group">
-                            <textarea type="text" class="form-control" ng-model="doc.general.german.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman && nextClicked"></textarea>
-                            <span class="input-group-addon">
-                                            <span class="flag-icon flag-icon-de"></span>
-                            </span>
-                        </div>
-                        <br>
-
-                        <!-- 5. -->
-                        <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}</label>
-                        <div class="input-group">
-                            <textarea type="text" class="form-control" ng-model="doc.general.german.q05" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman && nextClicked"></textarea>
-                            <span class="input-group-addon">
-                                            <span class="flag-icon flag-icon-de"></span>
-                            </span>
-                        </div>
-                        <br>
-
-                        <!-- 6. -->
-                        <label for="inputDocId">{{ 'SD_DURATION' | translate }}</label>
-                        <div class="input-group">
-                            <textarea type="text" class="form-control" ng-model="doc.general.german.q06" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman && nextClicked"></textarea>
-                            <span class="input-group-addon">
-                                            <span class="flag-icon flag-icon-de"></span>
-                            </span>
-                        </div>
-                        <br>
-
-                        <!-- 7. -->
-                        <label for="inputDocId">{{ 'SD_RISKS' | translate }}</label>
-                        <div class="input-group">
-                            <textarea type="text" class="form-control" ng-model="doc.general.german.q07" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman && nextClicked"></textarea>
-                            <span class="input-group-addon">
-                                            <span class="flag-icon flag-icon-de"></span>
-                            </span>
-                        </div>
-                        <br>
-
-                        <!-- 8. -->
-                        <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}</label>
-                        <div class="input-group">
-                            <textarea type="text" class="form-control" ng-model="doc.general.german.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman && nextClicked"></textarea>
-                            <span class="input-group-addon">
-                                            <span class="flag-icon flag-icon-de"></span>
-                            </span>
-                        </div>
-                        <br>
+                        </span>
                     </div>
-                </form>
+                    <br>
+
+                    <!-- 3. -->
+                    <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="doc.general.german.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId" ng-required="checkboxGerman">
+                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-de"></span>
+                        </span>
+                    </div>
+                    <br>
+
+                    <!-- 4. -->
+                    <label for="inputDocId">{{ 'SD_THEME' | translate }}</label>
+                    <div class="input-group">
+                        <textarea type="text" class="form-control" ng-model="doc.general.german.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman"></textarea>
+                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-de"></span>
+                        </span>
+                    </div>
+                    <br>
+
+                    <!-- 5. -->
+                    <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}</label>
+                    <div class="input-group">
+                        <textarea type="text" class="form-control" ng-model="doc.general.german.q05" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman"></textarea>
+                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-de"></span>
+                        </span>
+                    </div>
+                    <br>
+
+                    <!-- 6. -->
+                    <label for="inputDocId">{{ 'SD_DURATION' | translate }}</label>
+                    <div class="input-group">
+                        <textarea type="text" class="form-control" ng-model="doc.general.german.q06" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman"></textarea>
+                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-de"></span>
+                        </span>
+                    </div>
+                    <br>
+
+                    <!-- 7. -->
+                    <label for="inputDocId">{{ 'SD_RISKS' | translate }}</label>
+                    <div class="input-group">
+                        <textarea type="text" class="form-control" ng-model="doc.general.german.q07" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman"></textarea>
+                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-de"></span>
+                        </span>
+                    </div>
+                    <br>
+
+                    <!-- 8. -->
+                    <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}</label>
+                    <div class="input-group">
+                        <textarea type="text" class="form-control" ng-model="doc.general.german.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman"></textarea>
+                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-de"></span>
+                        </span>
+                    </div>
+                    <br>
+                </div>
             </div>
             <br>
             <hr>
@@ -228,7 +256,7 @@
                     <button class="btn btn-primary" ng-click="previous()" role="button"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;{{ 'BUTTON_PREVIOUS' | translate }}</button>
                 </div>
                 <div class="col-xs-6">
-                    <button class="btn btn-primary pull-right" ng-model="nextClicked" ng-init="nextClicked = false" ng-click="nextClicked = true; next()" role="button" ng-disabled="!checkboxEnglish && !checkboxGerman">{{ 'BUTTON_NEXT' | translate }}&nbsp;&nbsp;<i class="fa fa-angle-right"></i></button>
+                    <button class="btn btn-primary pull-right" ng-click="next()" role="button" ng-disabled="!checkboxEnglish && !checkboxGerman">{{ 'BUTTON_NEXT' | translate }}&nbsp;&nbsp;<i class="fa fa-angle-right"></i></button>
                 </div>
             </div>
         </div>

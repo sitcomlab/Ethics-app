@@ -1,19 +1,18 @@
 var app = angular.module("ethics-app", [
 
-        // External Modules
-        "ngRoute",
-        "pascalprecht.translate",
-        "ngBootbox",
-        "angular.filter",
+    // External Modules
+    "ngRoute",
+    "pascalprecht.translate",
+    "ngBootbox",
+    "angular.filter",
 
-        // Own Modules
-        "init",
-        "routes",
-        "filters",
-        "languages",
-        "docService"
-    ]
-);
+    // Own Modules
+    "init",
+    "routes",
+    "filters",
+    "languages",
+    "docService"
+]);
 
 
 // Constants

@@ -1,5 +1,43 @@
 var app = angular.module("ethics-app");
 
+// Custom Directive
+app.directive('showErrors', function() {
+
+    return {
+
+      restrict: 'A',
+
+      require: '^form',
+
+      link: function (scope, el, attrs, formCtrl) {
+
+        // find the text box element, which has the 'name' attribute
+
+        var inputEl   = el[0].querySelector("[name]");
+
+        // convert the native text box element to an angular element
+
+        var inputNgEl = angular.element(inputEl);
+
+        // get the name on the text box
+
+        var inputName = inputNgEl.attr('name');
+
+
+
+        // only apply the has-error class after the user leaves the text box
+
+        inputNgEl.bind('blur', function() {
+
+          el.toggleClass('has-danger', formCtrl[inputName].$invalid);
+
+        })
+
+      }
+
+    }
+
+  });
 
 // PUT
 app.controller("DocEditController", function($scope, $rootScope, $routeParams, $location, $docService, $window, $ngBootbox) {
@@ -16,7 +54,7 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
             $rootScope.$broadcast('updateNavbar');
 
             // Check if Document was already submitted
-            if(!$scope.doc.editable){
+            if (!$scope.doc.editable) {
                 $location.url("/docs/" + $scope.doc._id);
             } else {
                 $scope.doc.general.english.q02 = angular.copy($scope.doc.first_name + " " + $scope.doc.last_name);
@@ -40,7 +78,7 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
         $docService.edit($scope.doc._id, $scope.doc)
             .success(function(response) {
                 $scope.doc = response;
-                $scope.page = $scope.page+1;
+                $scope.page = $scope.page + 1;
                 $window.scrollTo(0, 0);
             })
             .error(function(response) {
@@ -51,18 +89,18 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
     // Testing
     $scope.next1 = function(isValid) {
         if (isValid) {
-          console.log("Form valid");
-        $docService.edit($scope.doc._id, $scope.doc)
-            .success(function(response) {
-                $scope.doc = response;
-                $scope.page = $scope.page+1;
-                $window.scrollTo(0, 0);
-            })
-            .error(function(response) {
-                alert("An error occured!");
-            });
+            console.log("Form valid");
+            $docService.edit($scope.doc._id, $scope.doc)
+                .success(function(response) {
+                    $scope.doc = response;
+                    $scope.page = $scope.page + 1;
+                    $window.scrollTo(0, 0);
+                })
+                .error(function(response) {
+                    alert("An error occured!");
+                });
         } else {
-          console.log("Form invalid");
+            console.log("Form invalid");
         }
     };
 
@@ -74,7 +112,7 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
         $docService.edit($scope.doc._id, $scope.doc)
             .success(function(response) {
                 $scope.doc = response;
-                $scope.page = $scope.page-1;
+                $scope.page = $scope.page - 1;
                 $window.scrollTo(0, 0);
             })
             .error(function(response) {
@@ -106,7 +144,7 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
 
         // Create Final Submit-Dialog
         var message;
-        if($scope.doc.confirmed){
+        if ($scope.doc.confirmed) {
             message = '<h4 class="text-success"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;You have no ethical concerns!</h4>' +
                 'After you submit your Document, you are no longer able to edit your Document, but you can download your consent-forms. Please make sure, that you correctly filled out the formular before submitting it!';
         } else {
