@@ -48,6 +48,7 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
             });
     };
 
+    // Testing
     $scope.next1 = function(isValid) {
         if (isValid) {
           console.log("Form valid");
