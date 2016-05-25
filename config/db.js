@@ -13,4 +13,4 @@ module.exports = {
     getSuperSecret: function(){
         return 'ilovethemeanstack';
     }
-}
+};
