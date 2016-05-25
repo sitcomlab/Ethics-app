@@ -15,7 +15,6 @@ exports.request = function(req, res){
 	        	res.send(err);
 		    } else {
 		        res.jsonp(doc);
-		        //console.log(doc);
 	        }
     	});
 	});
