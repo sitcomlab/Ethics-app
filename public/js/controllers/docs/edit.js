@@ -48,6 +48,23 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
             });
     };
 
+    $scope.next1 = function(isValid) {
+        if (isValid) {
+          console.log("Form valid");
+        $docService.edit($scope.doc._id, $scope.doc)
+            .success(function(response) {
+                $scope.doc = response;
+                $scope.page = $scope.page+1;
+                $window.scrollTo(0, 0);
+            })
+            .error(function(response) {
+                alert("An error occured!");
+            });
+        } else {
+          console.log("Form invalid");
+        }
+    };
+
 
     /**
      * Previous page
