@@ -17,9 +17,22 @@ app.directive('showErrors', function() {
                 el.toggleClass('has-danger', formCtrl[inputName].$invalid);
             });
             // inside the directive's link function from the previous example
-            scope.$on('show-errors-check-validity', function() {
+            scope.$on('show-errors-check-validity-eng', function() {
+                if(formCtrl.$name === 'descriptionFormEng') {
                 el.toggleClass('has-danger', formCtrl[inputName].$invalid);
+              }
             });
+            scope.$on('show-errors-check-validity-ger', function() {
+                if(formCtrl.$name === 'descriptionFormGer') {
+                el.toggleClass('has-danger', formCtrl[inputName].$invalid);
+              }
+            });
+            scope.$on('show-errors-check-validity-ethics', function() {
+                if(formCtrl.$name === 'ethicsForm') {
+                el.toggleClass('has-danger', formCtrl[inputName].$invalid);
+              }
+            });
+
         }
     }
 });
@@ -73,7 +86,8 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
 
     // Testing
     $scope.next2 = function() {
-        $scope.$broadcast('show-errors-check-validity');
+        $scope.$broadcast('show-errors-check-validity-eng');
+        $scope.$broadcast('show-errors-check-validity-ger');
         if ($scope.descriptionFormEng.$invalid) {
             return;
         }
@@ -113,6 +127,10 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
      * Final submit
      */
     $scope.submit = function() {
+      $scope.$broadcast('show-errors-check-validity-ethics');
+      if ($scope.ethicsForm.$invalid) {
+          return;
+      }
         if ($scope.doc.ethics.q01.checkbox) $scope.doc.confirmed = false;
         else if ($scope.doc.ethics.q02.checkbox) $scope.doc.confirmed = false;
         else if ($scope.doc.ethics.q03.checkbox) $scope.doc.confirmed = false;
