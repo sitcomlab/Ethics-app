@@ -68,9 +68,13 @@ app.directive('showWrong', function() {
             // inside the directive's link function from the previous example
             scope.$on('show-errors-check-validity-ethics', function() {
                 if (formCtrl.$name === 'ethicsForm') {
-                    el.toggleClass('has-danger', formCtrl[inputName1].$invalid);
-                    el.toggleClass('has-danger', formCtrl[inputName2].$invalid);
-                    el.toggleClass('has-danger', formCtrl[inputName3].$invalid);
+                    if (formCtrl[inputName1].$invalid) {
+                        el.toggleClass('has-danger', formCtrl[inputName1].$invalid);
+                    } else if (formCtrl[inputName2].$invalid){
+                        el.toggleClass('has-danger', formCtrl[inputName2].$invalid);
+                    } else if (formCtrl[inputName3].$invalid){
+                        el.toggleClass('has-danger', formCtrl[inputName3].$invalid);
+                    }
                 }
             });
 
