@@ -18,19 +18,19 @@ app.directive('showErrors', function() {
             });
             // inside the directive's link function from the previous example
             scope.$on('show-errors-check-validity-eng', function() {
-                if(formCtrl.$name === 'descriptionFormEng') {
-                el.toggleClass('has-danger', formCtrl[inputName].$invalid);
-              }
+                if (formCtrl.$name === 'descriptionFormEng') {
+                    el.toggleClass('has-danger', formCtrl[inputName].$invalid);
+                }
             });
             scope.$on('show-errors-check-validity-ger', function() {
-                if(formCtrl.$name === 'descriptionFormGer') {
-                el.toggleClass('has-danger', formCtrl[inputName].$invalid);
-              }
+                if (formCtrl.$name === 'descriptionFormGer') {
+                    el.toggleClass('has-danger', formCtrl[inputName].$invalid);
+                }
             });
             scope.$on('show-errors-check-validity-ethics', function() {
-                if(formCtrl.$name === 'ethicsForm') {
-                el.toggleClass('has-danger', formCtrl[inputName].$invalid);
-              }
+                if (formCtrl.$name === 'ethicsForm') {
+                    el.toggleClass('has-danger', formCtrl[inputName].$invalid);
+                }
             });
 
         }
@@ -67,11 +67,11 @@ app.directive('showWrong', function() {
             });
             // inside the directive's link function from the previous example
             scope.$on('show-errors-check-validity-ethics', function() {
-                if(formCtrl.$name === 'ethicsForm') {
-                el.toggleClass('has-danger', formCtrl[inputName1].$invalid);
-                el.toggleClass('has-danger', formCtrl[inputName2].$invalid);
-                el.toggleClass('has-danger', formCtrl[inputName3].$invalid);
-              }
+                if (formCtrl.$name === 'ethicsForm') {
+                    el.toggleClass('has-danger', formCtrl[inputName1].$invalid);
+                    el.toggleClass('has-danger', formCtrl[inputName2].$invalid);
+                    el.toggleClass('has-danger', formCtrl[inputName3].$invalid);
+                }
             });
 
         }
@@ -113,27 +113,16 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
     /**
      * Next page
      */
-    $scope.next1 = function() {
-        $docService.edit($scope.doc._id, $scope.doc)
-            .success(function(response) {
-                $scope.doc = response;
-                $scope.page = $scope.page + 1;
-                $window.scrollTo(0, 0);
-            })
-            .error(function(response) {
-                alert("An error occured!");
-            });
-    };
-
-    // Testing
-    $scope.next2 = function() {
-        $scope.$broadcast('show-errors-check-validity-eng');
-        $scope.$broadcast('show-errors-check-validity-ger');
-        if ($scope.descriptionFormEng.$invalid) {
-            return;
-        }
-        if ($scope.descriptionFormGer.$invalid) {
-            return;
+    $scope.next = function() {
+        if ($scope.page === 2) {
+            $scope.$broadcast('show-errors-check-validity-eng');
+            $scope.$broadcast('show-errors-check-validity-ger');
+            if ($scope.descriptionFormEng.$invalid) {
+                return;
+            }
+            if ($scope.descriptionFormGer.$invalid) {
+                return;
+            }
         }
         console.log("Form valid");
         $docService.edit($scope.doc._id, $scope.doc)
@@ -168,10 +157,10 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
      * Final submit
      */
     $scope.submit = function() {
-      $scope.$broadcast('show-errors-check-validity-ethics');
-      if ($scope.ethicsForm.$invalid) {
-          return;
-      }
+        $scope.$broadcast('show-errors-check-validity-ethics');
+        if ($scope.ethicsForm.$invalid) {
+            return;
+        }
         if ($scope.doc.ethics.q01.checkbox) $scope.doc.confirmed = false;
         else if ($scope.doc.ethics.q02.checkbox) $scope.doc.confirmed = false;
         else if ($scope.doc.ethics.q03.checkbox) $scope.doc.confirmed = false;
