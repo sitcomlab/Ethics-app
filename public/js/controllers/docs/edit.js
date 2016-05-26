@@ -118,9 +118,11 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
             $scope.$broadcast('show-errors-check-validity-eng');
             $scope.$broadcast('show-errors-check-validity-ger');
             if ($scope.descriptionFormEng.$invalid) {
+                $window.scrollTo(0, 0);
                 return;
             }
             if ($scope.descriptionFormGer.$invalid) {
+                $window.scrollTo(0, 0);
                 return;
             }
         }
@@ -159,6 +161,7 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
     $scope.submit = function() {
         $scope.$broadcast('show-errors-check-validity-ethics');
         if ($scope.ethicsForm.$invalid) {
+            $window.scrollTo(0, 0);
             return;
         }
         if ($scope.doc.ethics.q01.checkbox) $scope.doc.confirmed = false;
