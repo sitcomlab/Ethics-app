@@ -38,6 +38,7 @@ app.config(function ($translateProvider) {
     CREATE: 'Erstellen',
 
     WELCOME: 'Willkommen',
+    DEVELOPERS: 'Entwickler',
 
     // STUDY DESCRIPTION
     STUDY_DESCRIPTION: 'Experiment Beschreibung',
@@ -126,6 +127,11 @@ app.config(function ($translateProvider) {
     CREATE: 'Create',
 
     WELCOME: 'Welcome',
+    DEVELOPERS: 'Developers',
+    DOCUMENT: ' document',
+    SAVE: 'Save',
+    DELETE: 'Delete',
+    LOGOUT: 'Logout',
 
     // STUDY DESCRIPTION
     STUDY_DESCRIPTION: 'Study description',

@@ -1,20 +1,24 @@
 var app = angular.module("ethics-app");
 
 
-app.controller("LoginController", function($scope, $rootScope, $translate, $location, $log, setup, $docService) {
+app.controller("LoginController", function($scope, $rootScope, $translate, $location, $log, config, $docService) {
+
 
     /**
      * Init
      */
-    $scope.doc = $docService.getDefaultDoc();
-    $rootScope.$broadcast('resetNavbar');
+    if($rootScope.doc){
+        $location.url("/docs/" + $scope.doc._id + "/edit");
+    } else {
+        $scope.doc = $docService.getDefaultDoc();
+        $rootScope.$broadcast('resetNavbar');
+    }
 
 
     /**
      * Create a new Document
      */
     $scope.submit = function() {
-        console.log($scope.doc);
         $docService.create($scope.doc)
         .success(function(response) {
             $scope.doc = response;
@@ -32,7 +36,11 @@ app.controller("LoginController", function($scope, $rootScope, $translate, $loca
     $scope.login = function() {
         $docService.get($scope.doc._id)
         .success(function(response) {
-            $location.url("/docs/" + $scope.doc._id + "/edit");
+            if($scope.doc._id !== null){
+                $location.url("/docs/" + $scope.doc._id + "/edit");
+            } else {
+                alert("Document not found!");
+            }
         })
         .error(function(response) {
             alert("An error occured!");

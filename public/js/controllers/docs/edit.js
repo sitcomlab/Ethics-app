@@ -1,86 +1,5 @@
 var app = angular.module("ethics-app");
 
-// Custom Directive
-app.directive('showErrors', function() {
-    return {
-        restrict: 'A',
-        require: '^form',
-        link: function(scope, el, attrs, formCtrl) {
-            // find the text box element, which has the 'name' attribute
-            var inputEl = el[0].querySelector("[name]");
-            // convert the native text box element to an angular element
-            var inputNgEl = angular.element(inputEl);
-            // get the name on the text box
-            var inputName = inputNgEl.attr('name');
-            // only apply the has-error class after the user leaves the text box
-            inputNgEl.bind('blur', function() {
-                el.toggleClass('has-danger', formCtrl[inputName].$invalid);
-            });
-            // inside the directive's link function from the previous example
-            scope.$on('show-errors-check-validity-eng', function() {
-                if (formCtrl.$name === 'descriptionFormEng') {
-                    el.toggleClass('has-danger', formCtrl[inputName].$invalid);
-                }
-            });
-            scope.$on('show-errors-check-validity-ger', function() {
-                if (formCtrl.$name === 'descriptionFormGer') {
-                    el.toggleClass('has-danger', formCtrl[inputName].$invalid);
-                }
-            });
-            scope.$on('show-errors-check-validity-ethics', function() {
-                if (formCtrl.$name === 'ethicsForm') {
-                    el.toggleClass('has-danger', formCtrl[inputName].$invalid);
-                }
-            });
-
-        }
-    }
-});
-
-app.directive('showWrong', function() {
-    return {
-        restrict: 'A',
-        require: '^form',
-        link: function(scope, el, attrs, formCtrl) {
-            // find the text box element, which has the 'name' attribute
-            var inputEls = el[0].querySelectorAll("[name]");
-            var inputEl1 = inputEls[0];
-            var inputEl2 = inputEls[1];
-            var inputEl3 = inputEls[2];
-            // convert the native text box element to an angular element
-            var inputNgEl1 = angular.element(inputEl1);
-            var inputNgEl2 = angular.element(inputEl2);
-            var inputNgEl3 = angular.element(inputEl3);
-            // get the name on the text box
-            var inputName1 = inputNgEl1.attr('name');
-            var inputName2 = inputNgEl2.attr('name');
-            var inputName3 = inputNgEl3.attr('name');
-            // only apply the has-error class after the user leaves the text box
-            inputNgEl1.bind('blur', function() {
-                el.toggleClass('has-danger', formCtrl[inputName1].$invalid);
-            });
-            inputNgEl2.bind('blur', function() {
-                el.toggleClass('has-danger', formCtrl[inputName2].$invalid);
-            });
-            inputNgEl3.bind('blur', function() {
-                el.toggleClass('has-danger', formCtrl[inputName3].$invalid);
-            });
-            // inside the directive's link function from the previous example
-            scope.$on('show-errors-check-validity-ethics', function() {
-                if (formCtrl.$name === 'ethicsForm') {
-                    if (formCtrl[inputName1].$invalid) {
-                        el.toggleClass('has-danger', formCtrl[inputName1].$invalid);
-                    } else if (formCtrl[inputName2].$invalid){
-                        el.toggleClass('has-danger', formCtrl[inputName2].$invalid);
-                    } else if (formCtrl[inputName3].$invalid){
-                        el.toggleClass('has-danger', formCtrl[inputName3].$invalid);
-                    }
-                }
-            });
-
-        }
-    }
-});
 
 // PUT
 app.controller("DocEditController", function($scope, $rootScope, $routeParams, $location, $docService, $window, $ngBootbox) {
@@ -91,7 +10,6 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
      */
     $scope.loadData = function() {
         $docService.get($routeParams.doc_id).success(function(response) {
-            console.log(response);
             $scope.doc = response;
             $rootScope.doc = response;
             $rootScope.$broadcast('updateNavbar');
@@ -158,6 +76,23 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
             });
     };
 
+
+    /**
+     * Save document
+     */
+    $rootScope.$on('saveDocument', function(){
+        if ($scope.doc.editable) {
+            $docService.edit($scope.doc._id, $scope.doc)
+            .success(function(response) {
+                $scope.doc = response;
+                $rootScope.doc = response;
+                $rootScope.$broadcast('updateNavbar');
+            })
+            .error(function(response) {
+                alert("An error occured!");
+            });
+        }
+    });
 
     /**
      * Final submit

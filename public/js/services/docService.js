@@ -1,7 +1,7 @@
 var app = angular.module("docService", []);
 
 // DOC-SERVICE
-app.factory('$docService', function($http, $log, setup) {
+app.factory('$docService', function($http, $log, config) {
 
     return {
         getDefaultDoc: function() {
@@ -23,25 +23,25 @@ app.factory('$docService', function($http, $log, setup) {
             };
         },
         list: function() {
-            return $http.get(setup.apiURL + "/docs");
+            return $http.get(config.apiURL + "/docs");
         },
         create: function(data) {
-            return $http.post(setup.apiURL + "/docs", data);
+            return $http.post(config.apiURL + "/docs", data);
         },
         get: function(id) {
-            return $http.get(setup.apiURL + "/docs/" + id);
+            return $http.get(config.apiURL + "/docs/" + id);
         },
         edit: function(id, data) {
-            return $http.put(setup.apiURL + "/docs/" + id, data);
+            return $http.put(config.apiURL + "/docs/" + id, data);
         },
         delete: function(id, data) {
-            return $http.delete(setup.apiURL + "/docs/" + id);
+            return $http.delete(config.apiURL + "/docs/" + id);
         },
         recover: function(email) {
-            return $http.get(setup.apiURL + "/recover/" + email);
+            return $http.get(config.apiURL + "/recover/" + email);
         },
         pdf: function(id) {
-            return $http.post(setup.apiURL + "/pdf/" + id);
+            return $http.post(config.apiURL + "/pdf/" + id);
         }
     };
 });

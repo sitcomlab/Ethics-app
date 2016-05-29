@@ -1,5 +1,12 @@
 var app = angular.module("ethics-app", [
 
+    // Config
+    "config",
+
+    // Directives
+    "showErrors",
+    "showWrong",
+
     // External Modules
     "ngRoute",
     "pascalprecht.translate",
@@ -13,18 +20,6 @@ var app = angular.module("ethics-app", [
     "languages",
     "docService"
 ]);
-
-
-// Constants
-app.constant("setup", {
-    appName: "Ethics-app",
-    appDevelopers: ["Nicholas Schiestel", "Heinrich Löwen"],
-    appGithub: "",
-    appVersion: 1.0,
-    apiURL: "/api",
-    timeZone: "+0100",
-    standardLanguage: 'en_US'
-});
 
 
 // Config

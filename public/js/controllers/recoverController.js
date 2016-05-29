@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 
-app.controller("RecoverController", function($scope, $translate, $location, $log, setup, $docService) {
+app.controller("RecoverController", function($scope, $translate, $location, $log, config, $docService) {
 
     // Init
     $scope.email = "";

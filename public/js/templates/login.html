@@ -1,13 +1,13 @@
-<br>
-<br>
+<!DOCTYPE html>
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-        <div class="jumbotron">
-            <h1 class="display-4">{{ 'WELCOME' | translate }}</h1>
-            <p class="lead">This application by the Institut for Geoinformatics, Münster provides an easy way to create formulars for your study.</p>
-            <hr class="m-y-2">
-            <p>Please login or create a new document:</p>
+        <div class="jumbotron" style="padding-top: 30px; padding-bottom: 30px;">
+            <center>
+                <h1 class="display-4">{{ 'WELCOME' | translate }}</h1>
+                <p class="lead">This application by the Institut for Geoinformatics Münster provides an easy way to create formulars for your study. Please login or create a new document.</p>
+            </center>
+            <br>
             <div class="row">
                 <div class="col-md-6">
                     <label for="inputDocId">Document-ID</label>
@@ -17,9 +17,15 @@
                         </span>
                         <input type="text" class="form-control" ng-model="doc._id" placeholder="Document-ID" aria-describedby="inputDocId">
                     </div>
-                    <center><small><a ng-href="#/recover">I forgot my Document-ID</a></small></center>
+                    <center>
+                        <small>
+                            <a ng-href="#/recover">I forgot my Document-ID</a>
+                        </small>
+                    </center>
                     <br>
-                    <a class="btn btn-primary" ng-click="login()" role="button">{{ 'LOGIN' | translate }}</a>
+                    <button class="form-control btn btn-primary" ng-click="login()" role="button">
+                        <i class="fa fa-sign-in"></i>&nbsp;&nbsp;{{ 'LOGIN' | translate }}
+                    </button>
                     <br>
                 </div>
                 <div class="col-md-6" style="border-left: 1px solid rgba(0,0,0,.1);">
@@ -34,6 +40,7 @@
                             <span class="flag-icon flag-icon-gb"></span>
                         </span>
                     </div>
+
                     <label for="inputEmailAddress">{{ 'EMAIL' | translate }}</label>
                     <div class="input-group">
                         <span class="input-group-addon">
@@ -41,6 +48,7 @@
                         </span>
                         <input type="email" class="form-control" ng-model="doc.email_address" id="inputEmailAddress" placeholder="{{ 'EMAIL_ADDRESS' | translate }}">
                     </div>
+
                     <div class="row">
                         <div class="col-md-6">
                             <label for="inputFirstName">{{ 'FIRST_NAME' | translate }}</label>
@@ -51,8 +59,11 @@
                             <input type="text" class="form-control" ng-model="doc.last_name" id="inputLastName" placeholder="{{ 'LAST_NAME' | translate }}">
                         </div>
                     </div>
+
                     <br>
-                    <a class="btn btn-primary" ng-click="submit()" role="button">{{ 'CREATE' | translate }}</a>
+                    <button class="form-control btn btn-primary" ng-click="submit()" role="button">
+                        {{ 'CREATE' | translate }}
+                    </button>
                     <br>
                     <br>
                 </div>
@@ -61,8 +72,3 @@
     </div>
     <div class="col-md-2"></div>
 </div>
-
-<!-- template end -->
-<br>
-<br>
-<br>

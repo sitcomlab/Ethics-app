@@ -26,80 +26,6 @@
 
         <!-- Custom styles for this template -->
         <link href="css/styles.css" rel="stylesheet"/>
-    </head>
-
-    <body ng-app="ethics-app">
-        <nav class="navbar navbar-fixed-top navbar-dark bg-inverse" ng-controller="NavController">
-
-            <a class="navbar-brand" ng-href="#/">Ethics-App (v1.0)</a>
-
-            <!--NAVBAR LEFT -->
-            <ul class="nav nav-pills">
-                <li class="nav-item">
-                    <a class="nav-link" ng-href="#/" ng-class="{ active: isActive('/') }">
-                        <i class="fa fa-home"></i>&nbsp;&nbsp;{{ 'NAV_HOME' | translate }}
-                    </a>
-                </li>
-
-                <!-- Show Document-ID and Status -->
-                <li class="nav-item pull-xs-right" ng-if="doc">
-                    <a class="nav-link active">
-                        <i class="fa fa-unlock-alt" ng-if="doc.editable"></i>
-                        <i class="fa fa-lock" ng-if="!doc.editable"></i>
-                    </a>
-                </li>
-                <li class="nav-item pull-xs-right" ng-if="doc">
-                    <a class="nav-link active">
-                        <i class="fa fa-file"></i>&nbsp;&nbsp;{{doc._id}}&nbsp;
-                    </a>
-                </li>
-
-                <!-- Language Switcher -->
-                <!--
-                <li class="nav-item dropdown active pull-xs-right">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-cogs"></i>&nbsp;&nbsp;{{ 'NAV_SETTINGS' | translate}}&nbsp;
-                        <span class="caret"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <h6 class="dropdown-header">{{ 'LANGUAGES' | translate}}</h6>
-                        <a class="dropdown-item" ng-click="updateLanguage('en_US')" style="cursor:pointer;">
-                            <span class="flag-icon flag-icon-gb"></span>&nbsp;&nbsp;
-                            <span ng-class="{ bolder: language=='en_US'}">{{ 'ENGLISH' | translate}}
-                                <small>({{ 'ENGLISH'}})</small>
-                            </span>
-                        </a>
-                        <a class="dropdown-item" ng-click="updateLanguage('de_DE')" style="cursor:pointer;">
-                            <span class="flag-icon flag-icon-de"></span>&nbsp;&nbsp;
-                            <span ng-class="{ bolder: language=='de_DE'}">{{ 'GERMAN' | translate}}
-                                <small>({{ 'GERMAN'}})</small>
-                            </span>
-                        </a>
-                    </div>
-                </li>
-                -->
-
-            </ul>
-        </nav>
-
-        <div class="container-fluid" ng-view></div>
-
-        <footer class="footer">
-            <div class="container-fluid">
-                <address>
-                    <center>
-                        <small>
-                            © 2016 <b>Ethics-App</b> by <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a><br>
-                            Heisenbergstraße 2 • 48149 • Münster • Germany
-                        </small>
-                    </center>
-                </address>
-            </div>
-        </footer>
-
-        <!-- Bootstrap core JavaScript
-    ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
 
         <!-- External Modules -->
         <script src="lib/jquery/dist/jquery.min.js"></script>
@@ -113,11 +39,95 @@
         <script src="lib/ngBootbox/ngBootbox.js"></script>
         <script src="lib/angular-filter/dist/angular-filter.min.js"></script>
 
+    </head>
+
+    <body ng-app="ethics-app">
+
+        <div class="container-fluid">
+            <nav class="navbar navbar-fixed-top navbar-dark bg-inverse" ng-controller="NavController">
+
+                <!-- APP-NAME -->
+                <a class="navbar-brand" ng-href="#/">{{config.appName}}</a>
+
+                <!--NAVBAR LEFT -->
+                <ul class="nav navbar-nav">
+                    <li class="nav-item nav-pills">
+                        <a class="nav-link" ng-href="#/" ng-class="{ active: isActive('/') }">
+                            <i class="fa fa-home"></i>&nbsp;&nbsp;{{ 'NAV_HOME' | translate }}
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- NAVBAR RIGHT -->
+                <ul class="nav navbar-nav pull-right" ng-if="doc">
+                    <li class="nav-item nav-pills">
+                        <a class="nav-link active" ng-style="doc.editable && {'background-color': 'green' }">
+                            <i class="fa fa-unlock-alt" ng-if="doc.editable"></i>
+                            <i class="fa fa-lock" ng-if="!doc.editable"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item nav-pills dropdown">
+                        <a class="nav-link dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="cursor:pointer;">
+                            <i class="fa fa-file"></i>&nbsp;&nbsp;{{doc._id}}&nbsp;
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" ng-click="save()" style="cursor:pointer;" ng-if="doc.editable">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SAVE' | translate }} {{ 'DOCUMENT' | translate }}
+                            </a>
+                            <a class="dropdown-item" ng-click="delete(doc)" style="cursor:pointer;" ng-if="doc.editable">
+                                <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'DELETE' | translate }} {{ 'DOCUMENT' | translate }}
+                            </a>
+                            <a class="dropdown-item" ng-click="logout()" style="cursor:pointer;">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LOGOUT' | translate }}
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="container-fluid main" ng-view></div>
+
+        <footer class="footer" ng-controller="FooterController">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 middle">
+                        <small>
+                            &copy; {{config.appReleaseYear}} <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a> • Heisenbergstraße 2 • 48149 • Münster • Germany<br>
+                        </small>
+                        <a href="{{config.appGithub}}" target="_blank"><i class="fa fa-github"></i></a>
+                        <small>{{ 'DEVELOPERS' | translate }}
+                            <span ng-repeat="developer in config.appDevelopers">
+                                <a href="{{developer.github}}" target="_blank">{{developer.name}}</a><span ng-if="!$last">,</span>
+                            </span>
+                        </small>
+                    </div>
+                    <div class="col-md-2 right">
+                        <br>
+                        <small>
+                            <span class="label label-pill label-default">v{{config.appVersion}}</span>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+
         <!-- MODULES -->
+        <script src="js/modules/config.js"></script>
         <script src="js/modules/routes.js"></script>
         <script src="js/modules/languages.js"></script>
         <script src="js/modules/init.js"></script>
         <script src="js/modules/filters.js"></script>
+
+        <!-- DIRECTIVES -->
+        <script src="js/modules/showErrors.js"></script>
+        <script src="js/modules/showWrong.js"></script>
 
         <!-- SERVICES -->
         <script src="js/services/docService.js"></script>
@@ -127,6 +137,7 @@
 
         <!-- CONTROLLERS -->
         <script src="js/controllers/navController.js"></script>
+        <script src="js/controllers/footerController.js"></script>
 
         <!-- LOGIN & RESET -->
         <script src="js/controllers/loginController.js"></script>
