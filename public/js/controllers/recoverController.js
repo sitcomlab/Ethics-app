@@ -1,28 +1,68 @@
 var app = angular.module("ethics-app");
 
 
-app.controller("RecoverController", function($scope, $translate, $location, $log, config, $docService) {
+app.controller("RecoverController", function($scope, $rootScope, $timeout, $translate, $location, $log, config, $ngBootbox, $docService) {
 
-    // Init
-    $scope.email = "";
+    /**
+     * Init
+     */
+    $scope.email_address = "";
 
-    // Login with DocumentId
+
+    /**
+     * Submit request
+     */
     $scope.send = function() {
 
-        // Validate
+        // Validate Email-Address
         if($scope.email_address === "") {
-            // TODO: Email-validation
-            alert("Please enter a valid Email-Address!");
+
+            $ngBootbox.customDialog({
+                message: '<span class="text-warning">Please input a valid Email-address!</span>',
+                title: '<i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;Attention',
+                buttons: {
+                    success: {
+                        label: 'Okay',
+                        className: "btn-primary",
+                        callback: function() {}
+                    }
+                }
+            });
+
         } else {
 
             // Send request
             $docService.recover($scope.email_address)
-    			.success(function(response) {
-    	            $location.url("/");
-    	        })
-    			.error(function(response) {
-    				alert("Email-Address ot found!");
-    			});
+    		.success(function(response) {
+                $ngBootbox.customDialog({
+                    message: '<span class="text-success">An Email was sent to your address!</span>',
+                    title: '<i class="fa fa-info-circle"></i>&nbsp;&nbsp;Information',
+                    buttons: {
+                        success: {
+                            label: 'Okay',
+                            className: "btn-primary",
+                            callback: function() {
+                                $timeout(function(){
+                                    $location.url("/");
+                                },1);
+                            }
+                        }
+                    }
+                });
+    	    })
+    		.error(function(response) {
+                $ngBootbox.customDialog({
+                    message: '<span class="text-danger">No Document could be found with this Email-address!</span>',
+                    title: '<i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;Attention',
+                    buttons: {
+                        success: {
+                            label: 'Okay',
+                            className: "btn-primary",
+                            callback: function() {}
+                        }
+                    }
+                });
+            });
         }
 
     };
