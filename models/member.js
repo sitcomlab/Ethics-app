@@ -17,6 +17,11 @@ var MemberSchema = new Schema({
         required: true,
         validate: [validator.isEmail, 'invalid email']
     },
+    password: {
+        type: String,
+        required: true,
+        minLength: 6
+    },
     title: { // Example: "Prof. Dr."
         type: String,
         required: false,

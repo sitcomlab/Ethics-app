@@ -28,7 +28,7 @@ exports.pass = program.password;
 
 
 // CONFIG
-var db = require('./config/db')
+var db = require('./config/db');
 
 
 // ROUTES
