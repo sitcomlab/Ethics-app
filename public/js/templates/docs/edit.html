@@ -74,9 +74,10 @@
 
                         <!-- 3. -->
                         <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
-                        <div class="input-group" show-errors>
+                        <div class="input-group" show-errors title="{{ 'SD_TIME_SCALE_INFO' | translate}}">
                             <input type="text" name="sd_time_eng" class="form-control" ng-model="doc.general.english.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId" ng-required="checkboxEnglish">
                             <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-info-sign"></span>
                                     <span class="flag-icon flag-icon-gb"></span>
                             </span>
                         </div>
@@ -241,9 +242,9 @@
             <!--<label>{{ 'ETHICS_CHECKLIST_INFO' | translate }}</label>-->
             <div class="row">
                 <div class="col-md-12">
-                    Feel in the checklist below. In case you answer "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk (this will be reviewed by the ifgi-Ethics Committee).
-                    <br> Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is not valid.
-                    <br> The checklist is intended as a guideline and is here to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the ifgi-Ethics Committee.
+                  Complete the checklist below. If you have answered "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the ifgi-Ethics Committee.
+                  <br>Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid.
+                  <br>The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the ifgi’s Ethics Committee.
                 </div>
             </div>
             <br>

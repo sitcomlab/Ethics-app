@@ -123,11 +123,11 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
         // Create Final Submit-Dialog
         var message;
         if ($scope.doc.confirmed) {
-            message = '<h4 class="text-success"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;You have no ethical concerns!</h4>' +
-                'After you submit your Document, you are no longer able to edit your Document, but you can download your consent-forms. Please make sure, that you correctly filled out the formular before submitting it!';
+            message = '<h4 class="text-success"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;The ethical clearance can be automatically granted.</h4>' +
+                'After submitting the form you will no longer be allowed to edit it. Please make sure you have correctly filled in the form. You will now be able to download the Informed Consent Forms and other required documents.';
         } else {
             message = '<h4 class="text-danger"><i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;You have one or more ethical concerns!</h4>' +
-                'After you submit your Document, you are no longer able to edit your Document and your data will be send to the Ethic-Committe. You will be notified by an Email as soon as the Ethic-Committe confirmed your request. After that you can download your consent-forms. Please make sure, that you correctly filled out the formular before submitting it!';
+                'After submitting the form you will no longer be allowed to edit it. Your data will be send to the Ethic-Committe. You will be notified by an Email as soon as the Ethic-Committe confirmed your request. After that you will be able to download the Informed Consent Forms and other required documents. Please make sure you have correctly filled in the form.';
         }
 
         $ngBootbox.customDialog({
