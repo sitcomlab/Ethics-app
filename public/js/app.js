@@ -12,6 +12,7 @@ var app = angular.module("ethics-app", [
     "pascalprecht.translate",
     "ngBootbox",
     "angular.filter",
+    "ui.bootstrap",
 
     // Own Modules
     "init",

@@ -73,11 +73,10 @@
                         <br>
 
                         <!-- 3. -->
-                        <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
+                        <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}
+                            <i class="fa fa-info-circle" uib-popover="{{ 'SD_TIME_SCALE_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-errors>
-                          <span class="input-group-addon">
-                              <span class="fa fa-info-circle" title="{{ 'SD_TIME_SCALE_INFO' | translate}}"></span>
-                          </span>
                             <input type="text" name="sd_time_eng" class="form-control" ng-model="doc.general.english.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId" ng-required="checkboxEnglish">
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-gb"></span>
@@ -86,7 +85,9 @@
                         <br>
 
                         <!-- 4. -->
-                        <label for="inputDocId">{{ 'SD_THEME' | translate }}</label>
+                        <label for="inputDocId">{{ 'SD_THEME' | translate }}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'SD_THEME_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-errors>
                             <textarea type="text" name="sd_theme_eng" class="form-control" ng-model="doc.general.english.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish"></textarea>
                             <span class="input-group-addon">
@@ -96,7 +97,9 @@
                         <br>
 
                         <!-- 5. -->
-                        <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}</label>
+                        <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}
+                            <i class="fa fa-info-circle" uib-popover="{{ 'SD_PROCEDURE_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-errors>
                             <textarea type="text" name="sd_procedure_eng" class="form-control" ng-model="doc.general.english.q05" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish"></textarea>
                             <span class="input-group-addon">
@@ -106,7 +109,9 @@
                         <br>
 
                         <!-- 6. -->
-                        <label for="inputDocId">{{ 'SD_DURATION' | translate }}</label>
+                        <label for="inputDocId">{{ 'SD_DURATION' | translate }}
+                            <i class="fa fa-info-circle" uib-popover="{{ 'SD_DURATION_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-errors>
                             <textarea type="text" name="sd_duration_eng" class="form-control" ng-model="doc.general.english.q06" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish"></textarea>
                             <span class="input-group-addon">
@@ -116,7 +121,9 @@
                         <br>
 
                         <!-- 7. -->
-                        <label for="inputDocId">{{ 'SD_RISKS' | translate }}</label>
+                        <label for="inputDocId">{{ 'SD_RISKS' | translate }}
+                            <i class="fa fa-info-circle" uib-popover="{{ 'SD_RISKS_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-errors>
                             <textarea type="text" name="sd_risks_eng" class="form-control" ng-model="doc.general.english.q07" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish"></textarea>
                             <span class="input-group-addon">
@@ -126,7 +133,9 @@
                         <br>
 
                         <!-- 8. -->
-                        <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}</label>
+                        <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}
+                            <i class="fa fa-info-circle" uib-popover="{{ 'SD_BENEFITS_INFO' | translate}}" popover-trigger="mouseenter"></i>
+                        </label>
                         <div class="input-group" show-errors>
                             <textarea type="text" name="sd_benefits_eng" class="form-control" ng-model="doc.general.english.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish"></textarea>
                             <span class="input-group-addon">
@@ -162,37 +171,45 @@
                         <br>
 
                         <!-- 3. -->
-                        <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
+                        <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'SD_TIME_SCALE_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-errors>
                             <input type="text" name="sd_scale_ger" class="form-control" ng-model="doc.general.german.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId" ng-required="checkboxGerman">
                             <span class="input-group-addon">
-                                            <span class="flag-icon flag-icon-de"></span>
+                                <span class="flag-icon flag-icon-de"></span>
                             </span>
                         </div>
                         <br>
 
                         <!-- 4. -->
-                        <label for="inputDocId">{{ 'SD_THEME' | translate }}</label>
+                        <label for="inputDocId">{{ 'SD_THEME' | translate }}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'SD_THEME_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-errors>
                             <textarea type="text" name="sd_theme_ger" class="form-control" ng-model="doc.general.german.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman"></textarea>
                             <span class="input-group-addon">
-                                            <span class="flag-icon flag-icon-de"></span>
+                                <span class="flag-icon flag-icon-de"></span>
                             </span>
                         </div>
                         <br>
 
                         <!-- 5. -->
-                        <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}</label>
+                        <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'SD_PROCEDURE_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-errors>
                             <textarea type="text" name="sd_procedure_ger" class="form-control" ng-model="doc.general.german.q05" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman"></textarea>
                             <span class="input-group-addon">
-                                            <span class="flag-icon flag-icon-de"></span>
+                                <span class="flag-icon flag-icon-de"></span>
                             </span>
                         </div>
                         <br>
 
                         <!-- 6. -->
-                        <label for="inputDocId">{{ 'SD_DURATION' | translate }}</label>
+                        <label for="inputDocId">{{ 'SD_DURATION' | translate }}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'SD_DURATION_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-errors>
                             <textarea type="text" name="sd_duration_ger" class="form-control" ng-model="doc.general.german.q06" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman"></textarea>
                             <span class="input-group-addon">
@@ -202,7 +219,9 @@
                         <br>
 
                         <!-- 7. -->
-                        <label for="inputDocId">{{ 'SD_RISKS' | translate }}</label>
+                        <label for="inputDocId">{{ 'SD_RISKS' | translate }}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'SD_RISKS_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-errors>
                             <textarea type="text" name="sd_risks_ger" class="form-control" ng-model="doc.general.german.q07" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman"></textarea>
                             <span class="input-group-addon">
@@ -212,7 +231,9 @@
                         <br>
 
                         <!-- 8. -->
-                        <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}</label>
+                        <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'SD_BENEFITS_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-errors>
                             <textarea type="text" name="sd_benefits_ger" class="form-control" ng-model="doc.general.german.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman"></textarea>
                             <span class="input-group-addon">
@@ -254,7 +275,9 @@
                 <div class="col-md-12">
                     <form name="ethicsForm" novalidate>
                         <!-- 1. -->
-                        <label for="inputDocId">{{ 'EC_1' | translate }}</label>
+                        <label for="inputDocId">{{ 'EC_1' | translate }}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_1_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt1" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q01.checkbox" required>
@@ -268,7 +291,9 @@
                         <br>
 
                         <!-- 2. -->
-                        <label for="inputDocId">{{ 'EC_2' | translate }}</label>
+                        <label for="inputDocId">{{ 'EC_2' | translate }}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_2_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt2" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q02.checkbox" required>
@@ -282,7 +307,9 @@
                         <br>
 
                         <!-- 3. -->
-                        <label for="inputDocId">{{ 'EC_3' | translate}}</label>
+                        <label for="inputDocId">{{ 'EC_3' | translate}}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_3_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt3" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q03.checkbox" required>
@@ -310,7 +337,9 @@
                         <br>
 
                         <!-- 5. -->
-                        <label for="inputDocId">{{ 'EC_5' | translate }}</label>
+                        <label for="inputDocId">{{ 'EC_5' | translate }}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_5_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt5" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q05.checkbox" required>
@@ -338,7 +367,9 @@
                         <br>
 
                         <!-- 7. -->
-                        <label for="inputDocId">{{ 'EC_7' | translate }}</label>
+                        <label for="inputDocId">{{ 'EC_7' | translate }}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_7_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt7" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q07.checkbox" required>
@@ -366,7 +397,9 @@
                         <br>
 
                         <!-- 9. -->
-                        <label for="inputDocId">{{ 'EC_9' | translate }}</label>
+                        <label for="inputDocId">{{ 'EC_9' | translate }}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_9_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt9" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q09.checkbox" required>
@@ -380,7 +413,9 @@
                         <br>
 
                         <!-- 10. -->
-                        <label for="inputDocId">{{ 'EC_10' | translate }}</label>
+                        <label for="inputDocId">{{ 'EC_10' | translate }}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_10_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt10" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q10.checkbox" required>
@@ -394,7 +429,9 @@
                         <br>
 
                         <!-- 11. -->
-                        <label for="inputDocId">{{ 'EC_11_1' | translate }}</label>
+                        <label for="inputDocId">{{ 'EC_11_1' | translate }}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_11_1_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
                             <input type="radio" name="radio-bnt11_1" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q11.checkbox_1" required> No
@@ -420,7 +457,9 @@
 
 
                         <!-- 12. -->
-                        <label for="inputDocId">{{ 'EC_12' | translate }}</label>
+                        <label for="inputDocId">{{ 'EC_12' | translate }}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_12_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt12" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q12.checkbox" required>
@@ -434,7 +473,9 @@
                         <br>
 
                         <!-- 13. -->
-                        <label for="inputDocId">{{ 'EC_13' | translate }}</label>
+                        <label for="inputDocId">{{ 'EC_13' | translate }}
+                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_13_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                        </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
                                 <input type="radio" name="radio-bnt13" aria-describedby="inputDocId" ng-value="false" ng-model="doc.ethics.q13.checkbox" required>
@@ -445,6 +486,16 @@
                             <input type="text" name="input-13" class="form-control" aria-label="Text input with checkbox" placeholder="{{ 'EC_EXPLAIN' | translate }}" ng-model="doc.ethics.q13.comment" ng-disabled="!doc.ethics.q13.checkbox" ng-required="doc.ethics.q13.checkbox">
                         </div>
                         <label style="color:red">{{doc.ethics.q13.review}}</label>
+                        <br>
+
+                        <!-- General Comment -->
+                        <label for="inputDocId">{{ 'EC_GENERAL_COMMENT' | translate }}</label>
+                        <div class="input-group" show-wrong>
+                          <span class="input-group-addon">
+                              <i class="fa fa-commenting-o"></i>
+                          </span>
+                          <input type="text" name="input-general-comment" class="form-control" aria-label="Text input with checkbox" placeholder="comment" ng-model="doc.ethics.general_comment">
+                        </div>
                     </form>
                 </div>
             </div>
