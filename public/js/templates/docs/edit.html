@@ -75,10 +75,10 @@
                         <!-- 3. -->
                         <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}</label>
                         <div class="input-group" show-errors>
+                          <span class="input-group-addon">
+                              <span class="fa fa-info-circle" title="{{ 'SD_TIME_SCALE_INFO' | translate}}"></span>
+                          </span>
                             <input type="text" name="sd_time_eng" class="form-control" ng-model="doc.general.english.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId" ng-required="checkboxEnglish">
-                            <span class="input-group-addon">
-                                <span class="fa fa-info-circle" title="{{ 'SD_TIME_SCALE_INFO' | translate}}"></span>
-                            </span>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-gb"></span>
                             </span>
