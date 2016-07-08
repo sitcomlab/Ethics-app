@@ -22,6 +22,15 @@ exports.generate = function(req, res) {
 
             conversion({
                 html: output,
+                paperSize: {
+                    //format,
+                    //orientation,
+                    margin: "2cm",
+                    //width,
+                    //height,
+                    //headerHeight,
+                    //footerHeight
+                },
             }, function(err, pdf) {
                 pdf.stream.pipe(fs.createWriteStream('public/files/tmp/' + doc._id + '_eng.pdf'));
             });
@@ -36,6 +45,15 @@ exports.generate = function(req, res) {
 
             conversion({
                 html: output,
+                paperSize: {
+                    //format,
+                    //orientation,
+                    margin: "2cm",
+                    //width,
+                    //height,
+                    //headerHeight,
+                    //footerHeight
+                },
             }, function(err, pdf) {
                 pdf.stream.pipe(fs.createWriteStream('public/files/tmp/' + doc._id + '_ger.pdf'));
             });
