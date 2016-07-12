@@ -40,6 +40,10 @@ app.config(function ($translateProvider) {
     WELCOME: 'Willkommen',
     DEVELOPERS: 'Entwickler',
 
+    // PREVIEW
+    PREVIEW: 'Einführung',
+    PREVIEW_TEXT: 'You will be asked a series of questions, based on which the EthicsApp will auto-generate 3 documents. You are required to use these documents in your experiment. The key document is the Informed Consent Form - both you and your participant should sign and keep a copy. See the example bellow.',
+
     // STUDY DESCRIPTION
     STUDY_DESCRIPTION: 'Study description',
     STUDY_DESCRIPTION_INFO:'This form will be used to automatically generate the Informed Consent Form that every participant of your study will have to sign. Please fill in the German and/or the English version depending on the language(s) in which you want your Informed Consent Forms to be generated.',
@@ -149,6 +153,10 @@ app.config(function ($translateProvider) {
     SAVE: 'Save',
     DELETE: 'Delete',
     LOGOUT: 'Logout',
+
+    // PREVIEW
+    PREVIEW: 'Getting Started',
+    PREVIEW_TEXT: 'You will be asked a series of questions, based on which the EthicsApp will auto-generate 3 documents. You are required to use these documents in your experiment. The key document is the Informed Consent Form - both you and your participant should sign and keep a copy. See the example bellow.',
 
     // STUDY DESCRIPTION
     STUDY_DESCRIPTION: 'Study description',

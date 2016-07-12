@@ -4,6 +4,12 @@ var app = angular.module("ethics-app");
 // PUT
 app.controller("DocEditController", function($scope, $rootScope, $routeParams, $location, $docService, $window, $ngBootbox) {
 
+    /**
+     * Open url in new window
+     */
+    $scope.openInNewWindow = function(path) {
+        $window.open(path);
+    };
 
     /**
      * Request Document by its Id
@@ -80,17 +86,17 @@ app.controller("DocEditController", function($scope, $rootScope, $routeParams, $
     /**
      * Save document
      */
-    $rootScope.$on('saveDocument', function(){
+    $rootScope.$on('saveDocument', function() {
         if ($scope.doc.editable) {
             $docService.edit($scope.doc._id, $scope.doc)
-            .success(function(response) {
-                $scope.doc = response;
-                $rootScope.doc = response;
-                $rootScope.$broadcast('updateNavbar');
-            })
-            .error(function(response) {
-                alert("An error occured!");
-            });
+                .success(function(response) {
+                    $scope.doc = response;
+                    $rootScope.doc = response;
+                    $rootScope.$broadcast('updateNavbar');
+                })
+                .error(function(response) {
+                    alert("An error occured!");
+                });
         }
     });
 

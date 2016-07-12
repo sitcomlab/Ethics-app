@@ -7,9 +7,17 @@
         <div class="jumbotron" ng-hide="page != 1">
             <center>
                 <h1 class="display-4">{{ 'PREVIEW' | translate }}</h1>
-                <!-- TODO: Add steps and introduction for users -->
             </center>
+            <div>{{ 'PREVIEW_TEXT' | translate }}</div>
             <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="../../img/pic1.png" alt="page1" style="width:100%;" ng-click="openInNewWindow('img/pic1.png')"/>
+                </div>
+                <div class="col-md-6">
+                    <img src="../../img/pic2.png" alt="page2" style="width:100%;" ng-click="openInNewWindow('img/pic2.png')">
+                </div>
+            </div>
             <hr>
 
             <!-- next page -->
@@ -86,7 +94,7 @@
 
                         <!-- 4. -->
                         <label for="inputDocId">{{ 'SD_THEME' | translate }}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'SD_THEME_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'SD_THEME_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-errors>
                             <textarea type="text" name="sd_theme_eng" class="form-control" ng-model="doc.general.english.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxEnglish"></textarea>
@@ -172,7 +180,7 @@
 
                         <!-- 3. -->
                         <label for="inputDocId">{{ 'SD_TIME_SCALE' | translate}}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'SD_TIME_SCALE_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'SD_TIME_SCALE_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-errors>
                             <input type="text" name="sd_scale_ger" class="form-control" ng-model="doc.general.german.q03" placeholder="{{ 'SD_TIME_SCALE_FIELD' | translate}}" aria-describedby="inputDocId" ng-required="checkboxGerman">
@@ -184,7 +192,7 @@
 
                         <!-- 4. -->
                         <label for="inputDocId">{{ 'SD_THEME' | translate }}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'SD_THEME_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'SD_THEME_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-errors>
                             <textarea type="text" name="sd_theme_ger" class="form-control" ng-model="doc.general.german.q04" placeholder="{{ 'SD_THEME_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman"></textarea>
@@ -196,7 +204,7 @@
 
                         <!-- 5. -->
                         <label for="inputDocId">{{ 'SD_PROCEDURE' | translate }}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'SD_PROCEDURE_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'SD_PROCEDURE_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-errors>
                             <textarea type="text" name="sd_procedure_ger" class="form-control" ng-model="doc.general.german.q05" placeholder="{{ 'SD_PROCEDURE_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman"></textarea>
@@ -208,7 +216,7 @@
 
                         <!-- 6. -->
                         <label for="inputDocId">{{ 'SD_DURATION' | translate }}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'SD_DURATION_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'SD_DURATION_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-errors>
                             <textarea type="text" name="sd_duration_ger" class="form-control" ng-model="doc.general.german.q06" placeholder="{{ 'SD_DURATION_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman"></textarea>
@@ -220,7 +228,7 @@
 
                         <!-- 7. -->
                         <label for="inputDocId">{{ 'SD_RISKS' | translate }}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'SD_RISKS_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'SD_RISKS_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-errors>
                             <textarea type="text" name="sd_risks_ger" class="form-control" ng-model="doc.general.german.q07" placeholder="{{ 'SD_RISKS_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman"></textarea>
@@ -232,7 +240,7 @@
 
                         <!-- 8. -->
                         <label for="inputDocId">{{ 'SD_BENEFITS' | translate }}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'SD_BENEFITS_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'SD_BENEFITS_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-errors>
                             <textarea type="text" name="sd_benefits_ger" class="form-control" ng-model="doc.general.german.q08" placeholder="{{ 'SD_BENEFITS_FIELD' | translate }}" aria-describedby="inputDocId" ng-required="checkboxGerman"></textarea>
@@ -265,9 +273,9 @@
             <!--<label>{{ 'ETHICS_CHECKLIST_INFO' | translate }}</label>-->
             <div class="row">
                 <div class="col-md-12">
-                  Complete the checklist below. If you have answered "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the ifgi-Ethics Committee.
-                  <br>Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid.
-                  <br>The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the ifgi’s Ethics Committee.
+                    Complete the checklist below. If you have answered "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the ifgi-Ethics Committee.
+                    <br>Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid.
+                    <br>The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the ifgi’s Ethics Committee.
                 </div>
             </div>
             <br>
@@ -276,7 +284,7 @@
                     <form name="ethicsForm" novalidate>
                         <!-- 1. -->
                         <label for="inputDocId">{{ 'EC_1' | translate }}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_1_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'EC_1_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
@@ -292,7 +300,7 @@
 
                         <!-- 2. -->
                         <label for="inputDocId">{{ 'EC_2' | translate }}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_2_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'EC_2_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
@@ -308,7 +316,7 @@
 
                         <!-- 3. -->
                         <label for="inputDocId">{{ 'EC_3' | translate}}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_3_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'EC_3_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
@@ -338,7 +346,7 @@
 
                         <!-- 5. -->
                         <label for="inputDocId">{{ 'EC_5' | translate }}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_5_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'EC_5_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
@@ -368,7 +376,7 @@
 
                         <!-- 7. -->
                         <label for="inputDocId">{{ 'EC_7' | translate }}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_7_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'EC_7_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
@@ -398,7 +406,7 @@
 
                         <!-- 9. -->
                         <label for="inputDocId">{{ 'EC_9' | translate }}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_9_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'EC_9_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
@@ -414,7 +422,7 @@
 
                         <!-- 10. -->
                         <label for="inputDocId">{{ 'EC_10' | translate }}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_10_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'EC_10_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
@@ -430,7 +438,7 @@
 
                         <!-- 11. -->
                         <label for="inputDocId">{{ 'EC_11_1' | translate }}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_11_1_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'EC_11_1_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
@@ -458,7 +466,7 @@
 
                         <!-- 12. -->
                         <label for="inputDocId">{{ 'EC_12' | translate }}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_12_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'EC_12_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
@@ -474,7 +482,7 @@
 
                         <!-- 13. -->
                         <label for="inputDocId">{{ 'EC_13' | translate }}
-                          <i class="fa fa-info-circle" uib-popover="{{ 'EC_13_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
+                            <i class="fa fa-info-circle" uib-popover="{{ 'EC_13_INFO' | translate}}" popover-trigger="mouseenter" popover-placement="left"></i>
                         </label>
                         <div class="input-group" show-wrong>
                             <span class="input-group-addon">
@@ -491,10 +499,10 @@
                         <!-- General Comment -->
                         <label for="inputDocId">{{ 'EC_GENERAL_COMMENT' | translate }}</label>
                         <div class="input-group" show-wrong>
-                          <span class="input-group-addon">
+                            <span class="input-group-addon">
                               <i class="fa fa-commenting-o"></i>
                           </span>
-                          <input type="text" name="input-general-comment" class="form-control" aria-label="Text input with checkbox" placeholder="comment" ng-model="doc.ethics.general_comment">
+                            <input type="text" name="input-general-comment" class="form-control" aria-label="Text input with checkbox" placeholder="comment" ng-model="doc.ethics.general_comment">
                         </div>
                     </form>
                 </div>
