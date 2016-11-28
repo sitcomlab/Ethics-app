@@ -59,6 +59,52 @@ exports.generate = function(req, res) {
             });
         });
 
+        // Create english pdf
+        fs.readFile(path.join(__dirname, '../templates/pdf/debriefing_information.html'), function(err, data) {
+            if (err) throw err;
+
+            // Render HTML-content
+            var output = mustache.render(data.toString(), doc);
+
+            conversion({
+                html: output,
+                paperSize: {
+                    //format,
+                    //orientation,
+                    margin: "2cm",
+                    //width,
+                    //height,
+                    //headerHeight,
+                    //footerHeight
+                },
+            }, function(err, pdf) {
+                pdf.stream.pipe(fs.createWriteStream('public/files/tmp/debriefing_information.pdf'));
+            });
+        });
+
+        // Create english pdf
+        fs.readFile(path.join(__dirname, '../templates/pdf/statement_of_researcher.html'), function(err, data) {
+            if (err) throw err;
+
+            // Render HTML-content
+            var output = mustache.render(data.toString(), doc);
+
+            conversion({
+                html: output,
+                paperSize: {
+                    //format,
+                    //orientation,
+                    margin: "2cm",
+                    //width,
+                    //height,
+                    //headerHeight,
+                    //footerHeight
+                },
+            }, function(err, pdf) {
+                pdf.stream.pipe(fs.createWriteStream('public/files/tmp/statement_of_researcher.pdf'));
+            });
+        });
+
         res.end('{"success" : "PDFs generated successful", "status" : 200}');
     });
 };
