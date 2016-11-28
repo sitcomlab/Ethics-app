@@ -102,7 +102,7 @@ app.config(function ($translateProvider) {
     // SUMMARY
     SUM_HEADING:'Confirmation',
     SUM_CONFIRM_INFO:'There were no ethical issues found. Please find below the following documents and next steps for your experiment:',
-    SUM_NOT_CONFIRM_INFO:'Your project is not confirmed, yet, because there might be ethical conserns. Your answers will be reviewed by the ethical committee and you will be notified soon. Your project ID has been send to your for a later login. For an urgent request please contact committee@ethics-app.com.',
+    SUM_NOT_CONFIRM_INFO:'Your project is not confirmed, yet, because there might be ethical conserns. Your answers will be reviewed by the ethical committee and you will be notified soon. Your project ID has been send to your for a later login. For an urgent request please contact ifgi-ethics@uni-muenster.de.',
     SUM_LI_1_TOPIC:'Statement of the Researcher',
     SUM_LI_1:'to be printed, signed and stored together with the Informed Consent Form and other hardcopy material.',
     SUM_LI_2_TOPIC:'Debriefing information',
@@ -216,7 +216,7 @@ app.config(function ($translateProvider) {
     // SUMMARY
     SUM_HEADING:'Confirmation',
     SUM_CONFIRM_INFO:'No ethical issues were identified. The ethical clearance is automatically granted, conditional on the following steps. Please find below the generated documents together with the steps required:',
-    SUM_NOT_CONFIRM_INFO:'Your project is not confirmed, yet, because there might be ethical conserns. Your answers will be reviewed by the ethical committee and you will be notified soon. Your project ID has been send to your for a later login. For an urgent request please contact committee@ethics-app.com.',
+    SUM_NOT_CONFIRM_INFO:'Your project is not confirmed, yet, because there might be ethical conserns. Your answers will be reviewed by the ethical committee and you will be notified soon. Your project ID has been send to your for a later login. For an urgent request please contact ifgi-ethics@uni-muenster.de.',
     SUM_LI_1_TOPIC:'Statement of the Researcher',
     SUM_LI_1:'to be printed, signed and stored together with the Informed Consent Form and other hardcopy material.',
     SUM_LI_2_TOPIC:'Debriefing information',
