@@ -1,93 +1,89 @@
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <style type="text/css">
-
-    </style>
-</head>
-
-<body style="font-size: small">
-    <div class="firstpage">
-        <p align="center" style="font-size: medium"><b>Einverständniserklärung</b></p>
-        <p align="center" style="font-size: x-small">(doppelseitig: bitte zusammen aufbewahren)</p>
-        <br>
-        <p align="center" style="font-size: medium">Projekt Titel: <b>{{project_name}}</b></p>
-        <br>
-        <p>
-            Lieber Teilnehmer,
-        </p>
-        <p>
-            Vielen Dank für deine Teilnahme an der Studie.
-        </p>
-        <p style="text-align: justify">
-            <b>Zweck der Studie: </b>{{general.german.q04}}
-        </p>
-        <p style="text-align: justify">
-            <b>Vorgehensweise: </b>{{general.german.q05}}
-        </p>
-        <p style="text-align: justify">
-            <b>Dauer: </b>{{general.german.q06}}
-        </p>
-        <p style="text-align: justify">
-            <b>Potentielle Risiken: </b>{{general.german.q07}}
-        </p>
-        <p style="text-align: justify">
-            <b>Datenschutz: </b>Die Daten, die in dieser Studie erhoben werden, werden in anonymisierter Form erhoben und verarbeitet. In dieser Form werden die Daten ggf. in akademischen Journalen, Präsentationen oder anderen Medien veröffenlicht, jedoch
-            niemals so, dass eine Identifizierung der einzelnen Teilnehmer möglich wäre. Eine Woche nach Abschluss der Studie wird es deshalb wahrscheinlich selbst dem Experimentleiter nicht mehr möglich sein die Daten aus deiner Teilnahme zu identifizieren
-            und aus der Studie auszuschließen.
-        </p>
-    </div>
-    <div class="secondpage" style="page-break-before:always;">
-        <br>
-        <p>
-            Du darfst <b>zu jeder Zeit</b> ohne Angabe von Gründen aufhören und deine Antworten zurückziehen. Dies wird keine weiteren Konsequenzen für dich haben. <b>Falls du noch Fragen hast, stelle sie bitte jetzt.</b>
-        </p>
-        <p>
-            Bei weiteren Fragen oder auch Beschwerden kannst du die Ethik-Kommission des Instituts kontaktieren: <i>ifgi-ethics@uni-muenster.de</i>
-        </p>
-        <br>
-        <p>
-            &#9634; Ich bestätige, dass ich freiwillig an der Studie teilnehme.
-        </p>
-        <p>
-            &#9634; Ich bestätige, dass ich meine Fragen stellen durfte und Antworten bekommen habe.
-        </p>
-        <p>
-            &#9634; Ich bestätige, dass mir dieses Dokument vor der Studie ausgehändigt wurde.
-        </p>
-        <p>
-            &#9634; Ich bestätige und verstehe, dass ich die Studie zu jedem Zeitpunkt abbrechen kann.
-        </p>
-        <p>
-            {{#ethics.q11.checkbox_1}}
-            &#9634; Ich bestätige das aufnehmen von Audio/Video*, einschließlich meiner Stimme/mein Bild*. [*streiche nicht zutreffendes]
-            {{/ethics.q11.checkbox_1}}
-        </p>
-        <br>
-        <p>
-            <table style="width:100%;font-size: small">
-                <tr>
-                    <td align="center">_______________</td>
-                    <td align="center">_________________________________</td>
-                    <td align="center">_________________________________</td>
-                </tr>
-                <tr>
-                    <td align="center">Datum</td>
-                    <td align="center">Unterschrift des Experimentleiters</td>
-                    <td align="center">Unterschrift des Teilnehmers</td>
-                </tr>
-            </table>
-        </p>
-        <br>
-        <p>
-            <b>Freiwillig</b>: Bitte trage deine Email-Adresse ein, falls du über weitere Studien am Institut für Geoinformatik informiert werden willst.
-        </p>
-        <br>
-        <p>
-            Email: ________________________________________________
-        </p>
-    </div>
-</body>
-
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Informed Consent Form</title>
+    </head>
+    <body style="font-size: small">
+        <div class="firstpage">
+            <p align="center" style="font-size: medium"><b>Einverständniserklärung</b></p>
+            <p align="center" style="font-size: x-small">(doppelseitig: bitte zusammen aufbewahren)</p>
+            <br>
+            <p align="center" style="font-size: medium">Projekt Titel: <b>{{project_name}}</b></p>
+            <br>
+            <p>
+                Lieber Teilnehmer,
+            </p>
+            <p>
+                Vielen Dank für deine Teilnahme an der Studie.
+            </p>
+            <p style="text-align: justify">
+                <b>Zweck der Studie: </b>{{general.german.q04}}
+            </p>
+            <p style="text-align: justify">
+                <b>Vorgehensweise: </b>{{general.german.q05}}
+            </p>
+            <p style="text-align: justify">
+                <b>Dauer: </b>{{general.german.q06}}
+            </p>
+            <p style="text-align: justify">
+                <b>Potentielle Risiken: </b>{{general.german.q07}}
+            </p>
+            <p style="text-align: justify">
+                <b>Datenschutz: </b>Die Daten, die in dieser Studie erhoben werden, werden in anonymisierter Form erhoben und verarbeitet. In dieser Form werden die Daten ggf. in akademischen Journalen, Präsentationen oder anderen Medien veröffenlicht, jedoch
+                niemals so, dass eine Identifizierung der einzelnen Teilnehmer möglich wäre. Eine Woche nach Abschluss der Studie wird es deshalb wahrscheinlich selbst dem Experimentleiter nicht mehr möglich sein die Daten aus deiner Teilnahme zu identifizieren
+                und aus der Studie auszuschließen.
+            </p>
+        </div>
+        <div class="secondpage" style="page-break-before:always;">
+            <br>
+            <p>
+                Du darfst <b>zu jeder Zeit</b> ohne Angabe von Gründen aufhören und deine Antworten zurückziehen. Dies wird keine weiteren Konsequenzen für dich haben. <b>Falls du noch Fragen hast, stelle sie bitte jetzt.</b>
+            </p>
+            <p>
+                Bei weiteren Fragen oder auch Beschwerden kannst du die Ethik-Kommission des Instituts kontaktieren: <i>ifgi-ethics@uni-muenster.de</i>
+            </p>
+            <br>
+            <p>
+                &#9634; Ich bestätige, dass ich freiwillig an der Studie teilnehme.
+            </p>
+            <p>
+                &#9634; Ich bestätige, dass ich meine Fragen stellen durfte und Antworten bekommen habe.
+            </p>
+            <p>
+                &#9634; Ich bestätige, dass mir dieses Dokument vor der Studie ausgehändigt wurde.
+            </p>
+            <p>
+                &#9634; Ich bestätige und verstehe, dass ich die Studie zu jedem Zeitpunkt abbrechen kann.
+            </p>
+            <p>
+                {{#ethics.q11.checkbox_1}}
+                &#9634; Ich bestätige das aufnehmen von Audio/Video*, einschließlich meiner Stimme/mein Bild*. [*streiche nicht zutreffendes]
+                {{/ethics.q11.checkbox_1}}
+            </p>
+            <br>
+            <p>
+                <table style="width:100%;font-size: small">
+                    <tr>
+                        <td align="center">_______________</td>
+                        <td align="center">_________________________________</td>
+                        <td align="center">_________________________________</td>
+                    </tr>
+                    <tr>
+                        <td align="center">Datum</td>
+                        <td align="center">Unterschrift des Experimentleiters</td>
+                        <td align="center">Unterschrift des Teilnehmers</td>
+                    </tr>
+                </table>
+            </p>
+            <br>
+            <p>
+                <b>Freiwillig</b>: Bitte trage deine Email-Adresse ein, falls du über weitere Studien am Institut für Geoinformatik informiert werden willst.
+            </p>
+            <br>
+            <p>
+                Email: ________________________________________________
+            </p>
+        </div>
+    </body>
 </html>
