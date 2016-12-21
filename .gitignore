@@ -1,6 +1,4 @@
 node_modules/*
-public/lib/*
-public/files/tmp/*
-!*.gitkeep/
-
+public/bower_components/*
+public/files/temp/*
 .DS_Store
