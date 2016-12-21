@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS Concerns CASCADE;
+DROP TABLE IF EXISTS Comments CASCADE;
 
 -- SCHEMA
-CREATE TABLE Concerns (
+CREATE TABLE Comments (
 
     -- General
     comment_id SERIAL PRIMARY KEY,

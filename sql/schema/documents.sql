@@ -9,7 +9,7 @@ CREATE TABLE Documents (
     updated TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
 
     -- Attributes
-    user_id CHARACTER VARYING(255) NOT NULL REFERENCES Users(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    user_id INTEGER NOT NULL REFERENCES Users(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
     document_title CHARACTER VARYING(255) NOT NULL,
     status SMALLINT NOT NULL CHECK (status >= 0 AND status <= 10) DEFAULT 0
     -- 0 = unsubmitted - init (empty)
