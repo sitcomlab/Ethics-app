@@ -1,89 +1,151 @@
+var colors = require('colors');
 var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var async = require('async');
-var debug = require('debug');
-var mongoose = require('mongoose');
-var pdfkit = require('pdfkit');
-var program = require('commander');
-var jwt = require('jsonwebtoken');
+var cookieParser = require('cookie-parser');
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+var pg = require('pg');
+var path = require('path');
+var nodemailer = require('nodemailer');
+
+// ENVIRONMENT VARIABLES
+var server_url = process.env.SERVER_URL || 'http://giv-ethics-app.uni-muenster.de';
+var httpPort = process.env.HTTP_PORT || 5000;
+var httpsPort = httpPort + 443;
+var db_host = process.env.DB_HOST || 'localhost';
+var db_port = process.env.DB_PORT || 5432;
+var db_name = process.env.DB_NAME || 'ethics-app';
+var db_user = process.env.DB_USER || 'Nicho';
+var db_password = process.env.DB_PW || undefined;
+var db_ssl = process.env.DB_SSL || false;
+var from_email_address = process.env.FROM || 'ifgi-ethics@uni-muenster.de';
+var smtp_host = process.env.SMTP_HOST || 'smtp.gmail.com';
+var smtp_port = process.env.SMTP_PORT || 465;
+var smtp_ssl = process.env.SMTP_SSL || true;
+var smtp_email_address = process.env.SMTP_EMAIL || '';
+var smtp_password = process.env.SMTP_PW || '';
+var secret = process.env.SECRET || 'superSecretKey';
+exports.pool = pool;
+exports.httpPort = httpPort;
+exports.server_url = server_url;
+
+// DATABASE CONFIGURATION
+var config = {
+    user: db_user,
+    password: db_password,
+    host: db_host,
+    port: db_port,
+    database: db_name,
+    ssl: JSON.parse(db_ssl)
+};
+var pool = new pg.Pool(config);
+exports.pool = pool;
 
 
-// COMMAND-LINE-PARAMS
-program
-  .version('0.0.1')
-  .option('-d, --dev', 'Use development database')
-  .option('-g, --gmail [email]', 'Add the SMTP-address for nodemailer, e.g. user@gmail.com', 'user@gmail.com')
-  .option('-p, --password [password]', 'Add the SMTP-address for nodemailer, e.g. password', 'password')
-  .parse(process.argv);
-
-var devStatus = false;
-if(program.dev){
-    devStatus = true;
-}
-exports.user = program.gmail;
-exports.pass = program.password;
-
-
-// CONFIG
-var db = require('./config/db');
-
-
-// ROUTES
-var docs = require ('./routes/docs');
-var members = require ('./routes/members');
-var recover = require ('./routes/recover');
-var pdf = require ('./routes/pdf');
-
-
-// DATABASE
-mongoose.connect(db.getConnection(devStatus));
-
-
-// WEBSERVER
-var app = express();
-app.set('port', process.env.PORT || 8000);
-
-var server = app.listen(app.get('port'), function() {
-    console.log('Webserver is listening on port ' + server.address().port);
+// Check database connection
+pool.connect(function(err, client, done) {
+    if(err) {
+        console.error(err);
+        console.error(colors.red("Database is not running!"));
+    } else {
+        client.query("SELECT true;", function(err, result) {
+            done();
+            if (err) {
+                console.error(colors.red(JSON.stringify(err)));
+            } else {
+                console.log(colors.green("Database is running!"));
+            }
+        });
+    }
 });
-app.use(logger('dev'));
-app.use(bodyParser({
-    limit: 1024 * 1000
+
+pool.on('error', function (err, client) {
+    console.error('idle client error', err.message, err.stack);
+});
+
+
+// SMTP CONFIGURATION
+exports.transporter = nodemailer.createTransport({
+    host: smtp_host,
+    port: smtp_port,
+    secure: smtp_ssl,
+    auth: {
+        user: smtp_email_address,
+        pass: smtp_password
+    }
+});
+exports.mail_options = {
+    from: 'IFGI-Ethics-App <' + from_email_address + '>'
+};
+
+
+// Load certificstes
+if (false) {
+    var privateKey = fs.readFileSync('sslcert/server.key', 'utf8');
+    var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+
+    var credentials = {
+        key: privateKey,
+        cert: certificate
+    };
+}
+
+// Setup settings
+var app = express();
+app.use(bodyParser.json({
+    limit: 52428800 // 50MB
 }));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({
+    extended: false,
+    limit: 52428800 // 50MB
+}));
 app.use(cookieParser());
 
-
-// WEBCLIENT
-app.use(express.static(path.join(__dirname, '/public')));
-
-
-// REST-API
-app.use('/api', docs); // documents
-app.use('/api', members); // committee members
-app.use('/api', recover); // recovery
-app.use('/api', pdf); // recovery
+// Set folder for static files
+app.use(express.static(__dirname + '/public', {
+    redirect: false
+}));
 
 
-/// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+// Load dependencies
+var users = require ('./routes/users');
+// var committee = require ('./routes/committee');
+var documents = require ('./routes/documents');
+// var revisions = require ('./routes/revisions');
+// var descriptions = require ('./routes/descriptions');
+// var concerns = require ('./routes/concerns');
+// var comments = require ('./routes/comments');
+var recovery = require ('./routes/recovery');
+
+// Load API routes
+app.use('/api', users);
+// app.use('/api', committee);
+app.use('/api', documents);
+// app.use('/api', revisions);
+// app.use('/api', descriptions);
+// app.use('/api', concerns);
+// app.use('/api', comments);
+app.use('/api', recovery);
+
+
+// Resolve path after refreshing inside app
+app.get('/*', function(req, res, next) {
+    res.sendFile(path.resolve('public/index.html'));
 });
 
-/// error handlers
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.send(JSON.stringify({
-        message: err.message,
-        error: {}
-    }));
+
+// Start Webserver
+var httpServer = http.createServer(app);
+httpServer.listen(httpPort, function() {
+    console.log(colors.blue("HTTP-Server is listening at port " + httpPort));
 });
+if (false) {
+    var httpsServer = https.createServer(credentials, app);
+    httpsServer.listen(httpsPort, function() {
+        console.log(colors.blue("HTTPS-Server is listening at port " + httpsPort));
+    });
+}
 
 
 module.exports = app;
