@@ -7,10 +7,12 @@ var router = express.Router();
 // var put = require('../controllers/revisions/put');
 // var del = require('../controllers/revisions/delete');
 
+var list_by_document = require('../controllers/revisions/list_by_document');
 
 
-// LIST
-// router.get('/documents/:document_id/revisions/', list.request);
+
+// LIST BY DOCUMENT
+router.get('/documents/:document_id/revisions/', list_by_document.request);
 
 // POST
 // router.post('/documents/:document_id/revisions/', post.request);

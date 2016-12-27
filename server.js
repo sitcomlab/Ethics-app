@@ -112,7 +112,7 @@ app.use(express.static(__dirname + '/public', {
 var users = require ('./routes/users');
 // var committee = require ('./routes/committee');
 var documents = require ('./routes/documents');
-// var revisions = require ('./routes/revisions');
+var revisions = require ('./routes/revisions');
 // var descriptions = require ('./routes/descriptions');
 // var concerns = require ('./routes/concerns');
 // var comments = require ('./routes/comments');
@@ -122,7 +122,7 @@ var recovery = require ('./routes/recovery');
 app.use('/api', users);
 // app.use('/api', committee);
 app.use('/api', documents);
-// app.use('/api', revisions);
+app.use('/api', revisions);
 // app.use('/api', descriptions);
 // app.use('/api', concerns);
 // app.use('/api', comments);
