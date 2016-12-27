@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<div class="row">
+    <div class="col-xs-12 col-md-1"></div>
+    <div class="col-xs-12 col-md-10">
+
+        <!-- Content -->
+        <div class="row">
+            <div class="col-xs-12 col-md-2"></div>
+
+            <!-- Account settings -->
+            <div class="col-xs-12 col-md-8" ng-show="tab==1">
+
+                <div class="card" style="padding: 40px 10px 40px 10px;">
+                    <center>
+                        <p class="lead">
+                            {{ 'CHANGE_YOUR_ACCOUNT' | translate }}
+                        </p>
+                    </center>
+                    <div class="card-block">
+                        <form class="form-horizontal" name="userEditForm" ng-submit="saveUser()">
+                            <input type="text" class="form-control form-control-lg" ng-model="updated_user.title" id="inputTitle" placeholder="{{ 'TITLE' | translate }}" autofocus autocomplete="on">
+                            <br>
+                            <input type="text" class="form-control form-control-lg" ng-model="updated_user.first_name" id="inputFirstName" placeholder="{{ 'FIRST_NAME' | translate }}*" required autocomplete="on">
+                            <br>
+                            <input type="text" class="form-control form-control-lg" ng-model="updated_user.last_name" id="inputLastName" placeholder="{{ 'LAST_NAME' | translate }}*" required autocomplete="on">
+                            <br>
+                            <input type="email" class="form-control form-control-lg" ng-model="updated_user.email_address" id="inputEmailAddress" placeholder="{{ 'EMAIL_ADDRESS' | translate }}*" required autocomplete="on">
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <button class="form-control btn btn-lg btn-secondary" role="button" ng-click="cancel()">
+                                        {{ 'CANCEL' | translate }}
+                                    </button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="form-control btn btn-lg btn-primary" role="submit">
+                                        {{ 'SAVE' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Document settings -->
+            <div class="col-xs-12 col-md-8" ng-show="tab==2">
+                <div class="card" style="padding: 40px 10px 40px 10px;">
+                    <center>
+                        <p class="lead">
+                            {{ 'CHANGE_DOCUMENT_SETTINGS' | translate }}
+                        </p>
+                    </center>
+                    <div class="card-block">
+                        <form class="form-horizontal" name="documentEditForm" ng-submit="saveDocument()">
+                            <div class="input-group">
+                                <input type="text" class="form-control form-control-lg" ng-model="updated_document.document_title" placeholder="{{ 'DOCUMENT_TITLE' | translate }}*" aria-describedby="inputTitle" autofocus>
+                                <span class="input-group-addon">
+                                    <span class="flag-icon flag-icon-gb"></span>
+                                </span>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <button class="form-control btn btn-lg btn-secondary" role="button" ng-click="cancel()">
+                                        {{ 'CANCEL' | translate }}
+                                    </button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="form-control btn btn-lg btn-primary" role="submit">
+                                        {{ 'SAVE' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document -->
+            <div class="col-xs-12 col-md-8" ng-show="tab==0">
+
+                <!-- Status 0/1 (unsubmitted - initialised) -->
+                <div class="card" ng-if="document.status==0 || document.status==1" style="padding: 40px 10px 40px 10px;">
+                    <div class="card-block">
+                        unsubmitted - initialised<br>
+                        {{document}}
+                    </div>
+                </div>
+
+                <!-- Status 2 (submitted - ok) -->
+                <div class="card" ng-if="document.status==2" style="padding: 40px 10px 40px 10px;">
+                    <div class="card-block">
+                        submitted - ok<br>
+                        {{document}}
+                    </div>
+                </div>
+
+                <!-- Status 3 (submitted - review required) -->
+                <div class="card" ng-if="document.status==3" style="padding: 40px 10px 40px 10px;">
+                    <div class="card-block">
+                        submitted - review required<br>
+                        {{document}}
+                    </div>
+                </div>
+
+                <!-- Status 4 (submitted - under review) -->
+                <div class="card" ng-if="document.status==4" style="padding: 40px 10px 40px 10px;">
+                    <div class="card-block">
+                        submitted - under review<br>
+                        {{document}}
+                    </div>
+                </div>
+
+                <!-- Status 5 (reviewed - partly accepted) -->
+                <div class="card" ng-if="document.status==5" style="padding: 40px 10px 40px 10px;">
+                    <div class="card-block">
+                        reviewed - partly accepted<br>
+                        {{document}}
+                    </div>
+                </div>
+
+                <!-- Status 6 (reviewed - ok) -->
+                <div class="card" ng-if="document.status==6" style="padding: 40px 10px 40px 10px;">
+                    <div class="card-block">
+                        reviewed - ok<br>
+                        {{document}}
+                    </div>
+                </div>
+
+                <!-- Status 7 (reviewed - rejected) -->
+                <div class="card" ng-if="document.status==7" style="padding: 40px 10px 40px 10px;">
+                    <div class="card-block">
+                        reviewed - rejected<br>
+                        {{document}}
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-md-2"></div>
+        </div>
+    </div>
+</div>
+<br>

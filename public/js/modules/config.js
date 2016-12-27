@@ -1,24 +1,21 @@
 var app = angular.module("config", []);
 
-/**
- * Constants
- */
+// Constants
 app.constant("config", {
     appName: "Ethics-app",
-    appVersion: "1.0",
-    appReleaseYear: 2016,
-    appLanguage: 'en_US',
-    appDevelopers: [
-        {
-            "name": "Nicholas Schiestel",
-            "github": "https://github.com/nicho90"
-        },
-        {
-            "name": "Heinrich Löwen",
-            "github": "https://github.com/heinrichloewen"
-        }
-    ],
+    appDevelopers: [{
+        name: "Nicholas Schiestel",
+        github: "nicho90"
+    },{
+        name: "Heinrich Löwen",
+        github: "heinrichloewen"
+    }],
     appGithub: "https://github.com/sitcomlab/Ethics-app",
+    appVersion: "v1.0",
+    appLanguage: 'en_US',
+    appYear: moment().format("YYYY"),
     apiURL: "/api",
-    timeZone: "+0100"
+    timeZone: "Europe/Berlin",
+    debugMode: false,
+    html5Mode: true,
 });

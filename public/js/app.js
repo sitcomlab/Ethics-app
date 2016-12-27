@@ -1,29 +1,45 @@
 var app = angular.module("ethics-app", [
 
-    // Config
+    // App Settings
     "config",
-
-    // Directives
-    "showErrors",
-    "showWrong",
 
     // External Modules
     "ngRoute",
-    "pascalprecht.translate",
+    "ngSanitize",
     "ngBootbox",
-    "angular.filter",
-    "ui.bootstrap",
+    "pascalprecht.translate",
+    "angular-momentjs",
 
     // Own Modules
-    "init",
-    "routes",
     "filters",
+    "routes",
     "languages",
-    "docService"
+
+    // Services
+    "loginService",
+    "documentService",
+    "revisionService",
+    "userService",
+    "recoveryService"
+
 ]);
 
 
-// Config
-app.config(function($logProvider) {
-    $logProvider.debugEnabled(true);
+/**
+ * Log Provider
+ * turn on/off debug logging
+ */
+app.config(function($logProvider, config) {
+    $logProvider.debugEnabled(config.debugMode);
+});
+
+
+/**
+ * Start application
+ */
+app.run(function($translate, config) {
+
+    // Use Translator and set Language
+    $translate.use(config.appLanguage);
+
 });

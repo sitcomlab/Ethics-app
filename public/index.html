@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Base -->
+        <base href="/index.html"/>
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
+        <meta name="description" content="Ethics-App">
         <meta name="author" content="Nicholas Schiestel">
         <meta name="author" content="Heinrich Löwen">
-        <!--<link rel="icon" href="images/favicon/favicon.ico"> -->
+        <!-- <link rel="icon" href="images/favicon/favicon.ico"> -->
 
         <!-- Detect phone numbers -->
         <meta name="format-detection" content="telephone=no">
@@ -16,140 +19,103 @@
         <title>Ethics-App</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="lib/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet"/>
+        <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+        <!-- only for alpha version -->
+        <link href="bower_components/tether/dist/css/tether.min.css" rel="stylesheet"/>
+        <script src="bower_components/tether/dist/js/tether.min.js"></script>
 
         <!-- Font-Awesome -->
-        <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
 
-        <!-- Flag Icons -->
-        <link href="lib/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+        <!-- Flag icons -->
+        <link href="bower_components/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
 
-        <!-- Custom styles for this template -->
+        <!-- Custom styles -->
         <link href="css/styles.css" rel="stylesheet"/>
 
-        <!-- External Modules -->
-        <script src="lib/jquery/dist/jquery.min.js"></script>
-        <script src="lib/underscore/underscore-min.js"></script>
-        <script src="lib/moment/moment.js"></script>
-        <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="lib/angular/angular.min.js"></script>
-        <script src="lib/angular-route/angular-route.min.js"></script>
-        <script src="lib/angular-translate/angular-translate.min.js"></script>
-        <script src="lib/bootbox/bootbox.js"></script>
-        <script src="lib/ngBootbox/ngBootbox.js"></script>
-        <script src="lib/angular-filter/dist/angular-filter.min.js"></script>
-        <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <!-- JavaScript dependecies -->
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="bower_components/moment/min/moment.min.js"></script>
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-route/angular-route.min.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+        <script src="bower_components/angular-translate/angular-translate.min.js"></script>
+        <script src="bower_components/angular-momentjs/angular-momentjs.js"></script>
+        <script src="bower_components/bootbox/bootbox.js"></script>
+        <script src="bower_components/ngBootbox/dist/ngBootbox.min.js"></script>
 
     </head>
 
     <body ng-app="ethics-app">
 
+        <!-- Header -->
         <div class="container-fluid">
-            <nav class="navbar navbar-fixed-top navbar-dark bg-inverse" ng-controller="NavController">
+            <nav class="navbar navbar-dark bg-inverse navbar-fixed-top" ng-controller="navController">
+                <a href="http://ifgi.uni-muenster.de" target="_blank">
+                    <img src="/img/ifgi-logo.svg" height="54" class="d-inline-block align-middle" alt="" style="background: #f5f5f5; padding:2px 10px 2px 10px; position:absolute; top: 0px; left: 0px;">
+                </a>
+                <a class="navbar-brand" href="/" style="margin-left: 160px;">
+                    {{config.appName}}
+                </a>
 
-                <!-- APP-NAME -->
-                <a class="navbar-brand" ng-href="#/">{{config.appName}}</a>
-
-                <!--NAVBAR LEFT -->
-                <ul class="nav navbar-nav">
-                    <li class="nav-item nav-pills">
-                        <a class="nav-link" ng-href="#/" ng-class="{ active: isActive('/') }">
-                            <i class="fa fa-home"></i>&nbsp;&nbsp;{{ 'NAV_HOME' | translate }}
-                        </a>
-                    </li>
-                </ul>
-
-                <!-- NAVBAR RIGHT -->
-                <ul class="nav navbar-nav pull-right" ng-if="doc">
-                    <li class="nav-item nav-pills">
-                        <a class="nav-link active" ng-style="doc.editable && {'background-color': 'green' }">
-                            <i class="fa fa-unlock-alt" ng-if="doc.editable"></i>
-                            <i class="fa fa-lock" ng-if="!doc.editable"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item nav-pills dropdown">
-                        <a class="nav-link dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="cursor:pointer;">
-                            <i class="fa fa-file"></i>&nbsp;&nbsp;{{doc._id}}&nbsp;
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" ng-click="save()" style="cursor:pointer;" ng-if="doc.editable">
-                                <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SAVE' | translate }} {{ 'DOCUMENT' | translate }}
-                            </a>
-                            <a class="dropdown-item" ng-click="delete(doc)" style="cursor:pointer;" ng-if="doc.editable">
-                                <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'DELETE' | translate }} {{ 'DOCUMENT' | translate }}
-                            </a>
-                            <a class="dropdown-item" ng-click="logout()" style="cursor:pointer;">
-                                <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LOGOUT' | translate }}
-                            </a>
-                        </div>
-                    </li>
-                </ul>
+                <div class="btn-group float-xs-right" ng-if="user">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{user.title}} {{user.first_name}} {{user.last_name}}
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <h6 class="dropdown-header">{{ 'ACCOUNT' | translate }}</h6>
+                        <a class="dropdown-item" href="" ng-click="changeTab(1)">{{ 'SETTINGS' | translate }}</a>
+                        <div class="dropdown-divider"></div>
+                        <h6 class="dropdown-header">{{ 'DOCUMENT' | translate }}</h6>
+                        <a class="dropdown-item" href="" ng-click="changeTab(2)">{{ 'CHANGE_DOCUMENT_TITLE' | translate }}</a>
+                        <a class="dropdown-item" href="" ng-click="deleteDocument(document)">{{ 'DELETE_DOCUMENT' | translate }}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="" ng-click="logout()">{{ 'LOGOUT' | translate }}</a>
+                    </div>
+                </div>
             </nav>
         </div>
 
+        <!-- Main content -->
         <div class="container-fluid main" ng-view></div>
 
-        <footer class="footer" ng-controller="FooterController">
-
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8 middle">
-                        <small>
-                            &copy; {{config.appReleaseYear}} <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a> • Heisenbergstraße 2 • 48149 • Münster • Germany • <a href="mailto:ifgi-ethics@uni-muenster.de" target="_blank">ifgi-ethics@uni-muenster.de</a><br>
-                        </small>
-                        <a href="{{config.appGithub}}" target="_blank"><i class="fa fa-github"></i></a>
-                        <small>{{ 'DEVELOPERS' | translate }}
-                            <span ng-repeat="developer in config.appDevelopers">
-                                <a href="{{developer.github}}" target="_blank">{{developer.name}}</a><span ng-if="!$last">,</span>
-                            </span>
-                        </small>
-                    </div>
-                    <div class="col-md-2 right">
-                        <br>
-                        <small>
-                            <span class="label label-pill label-default">v{{config.appVersion}}</span>
-                        </small>
-                    </div>
-                </div>
+        <!-- Footer -->
+        <footer class="footer" ng-controller="footerController">
+            <div class="container-fluid middle">
+                <span class="text-muted">
+                    <small>
+                        &copy; {{config.appYear}}
+                        <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <a href="{{config.appGithub}}" target="_blank" class="link">
+                            <i class="fa fa-github" aria-hidden="true"></i>
+                        </a>
+                    </small>
+                </span>
             </div>
         </footer>
 
-        <!-- Bootstrap core JavaScript
-    ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
 
-        <!-- MODULES -->
+        <!-- Modules -->
         <script src="js/modules/config.js"></script>
         <script src="js/modules/routes.js"></script>
         <script src="js/modules/languages.js"></script>
-        <script src="js/modules/init.js"></script>
         <script src="js/modules/filters.js"></script>
 
-        <!-- DIRECTIVES -->
-        <script src="js/modules/showErrors.js"></script>
-        <script src="js/modules/showWrong.js"></script>
+        <!-- Services -->
+        <script src="js/services/loginService.js"></script>
+        <script src="js/services/documentService.js"></script>
+        <script src="js/services/revisionService.js"></script>
+        <script src="js/services/userService.js"></script>
+        <script src="js/services/recoveryService.js"></script>
 
-        <!-- SERVICES -->
-        <script src="js/services/docService.js"></script>
-
-        <!-- MAIN-APP -->
+        <!-- Controllers -->
         <script src="js/app.js"></script>
-
-        <!-- CONTROLLERS -->
         <script src="js/controllers/navController.js"></script>
         <script src="js/controllers/footerController.js"></script>
-
-        <!-- LOGIN & RESET -->
         <script src="js/controllers/loginController.js"></script>
-        <script src="js/controllers/recoverController.js"></script>
-
-        <!-- DOCS -->
-        <script src="js/controllers/docs/list.js"></script>
-        <script src="js/controllers/docs/edit.js"></script>
-        <script src="js/controllers/docs/confirm.js"></script>
-        <script src="js/controllers/docs/details.js"></script>
+        <script src="js/controllers/documentController.js"></script>
 
     </body>
 </html>

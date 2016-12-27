@@ -1,11 +1,9 @@
 var app = angular.module("ethics-app");
 
 
-app.controller("FooterController", function($scope, config) {
+app.controller("footerController", function($scope, config) {
 
-	/**
-	 * Init
-	 */
+	// Init
 	$scope.config = config;
 
 });

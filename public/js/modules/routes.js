@@ -1,36 +1,24 @@
 var app = angular.module("routes", []);
 
 
-app.config(function($routeProvider) {
+app.config(function($routeProvider, $locationProvider, config) {
 	$routeProvider
 
-		// HOME (LOGIN)
+		// Home
 		.when("/", {
 			templateUrl: "/js/templates/login.html",
-			controller: "LoginController"
+			controller: "loginController"
 		})
 
-		// RECOVER
-		.when("/recover", {
-			templateUrl: "/js/templates/recover.html",
-			controller: "RecoverController"
-		})
-
-		// DOCS
-		.when("/docs", {
-			templateUrl: "/js/templates/docs/list.html",
-			controller: "DocListController"
-		})
-		.when("/docs/:doc_id/edit", {
-			templateUrl: "/js/templates/docs/edit.html",
-			controller: "DocEditController"
-		})
-		.when("/docs/:doc_id", {
-			templateUrl: "/js/templates/docs/confirm.html",
-			controller: "DocConfirmController"
+		// Document
+		.when("/documents/:document_id", {
+			templateUrl: "/js/templates/document.html",
+			controller: "documentController"
 		})
 
 		.otherwise({
 			redirectTo: "/"
 		});
+
+	$locationProvider.html5Mode(config.html5Mode);
 });
