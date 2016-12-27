@@ -17,9 +17,11 @@ var fs = require("fs");
 var dir_1 = "/../../templates/emails/";
 var dir_2 = "/../../sql/queries/users/";
 var dir_3 = "/../../sql/queries/documents/";
+var dir_4 = "/../../sql/queries/revisions/";
 var template = fs.readFileSync(__dirname + dir_1 + 'document_created.html', 'utf8').toString();
 var query_get_user = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
 var query_create_document = fs.readFileSync(__dirname + dir_3 + 'create.sql', 'utf8').toString();
+var query_create_revision = fs.readFileSync(__dirname + dir_4 + 'create.sql', 'utf8').toString();
 
 
 // POST
@@ -71,67 +73,78 @@ exports.request = function(req, res) {
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, client, done, user, result.rows);
+                    callback(null, client, done, user, result.rows[0]);
                 }
             });
         },
-        function(client, done, user, documents, callback){
+        function(client, done, user, document, callback){
+            // Database query
+            client.query(query_create_revision, [
+                document.document_id,
+                1
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    callback(null, client, done, user, document, result.rows[0]);
+                }
+            });
+        },
+        function(client, done, user, document, revision, callback){
+            var _document = document;
 
             // Formatting
-            for(var i=0; i<documents.length; i++){
-                switch(documents[i].status){
-                    case 0: {
-                        documents[i].label = "tag-default";
-                        documents[i].status_description = "initialised";
-                        break;
-                    }
-                    case 1: {
-                        documents[i].label = "tag-default";
-                        documents[i].status_description = "unsubmitted";
-                        break;
-                    }
-                    case 2: {
-                        documents[i].label = "tag-success";
-                        documents[i].status_description = "submitted";
-                        break;
-                    }
-                    case 3: {
-                        documents[i].label = "tag-primary";
-                        documents[i].status_description = "review pending";
-                        break;
-                    }
-                    case 4: {
-                        documents[i].label = "tag-info";
-                        documents[i].status_description = "under review";
-                        break;
-                    }
-                    case 5: {
-                        documents[i].label = "tag-warning";
-                        documents[i].status_description = "partly accepted";
-                        break;
-                    }
-                    case 6: {
-                        documents[i].label = "tag-success";
-                        documents[i].status_description = "reviewed";
-                        break;
-                    }
-                    case 7: {
-                        documents[i].label = "tag-danger";
-                        documents[i].status_description = "rejected";
-                        break;
-                    }
+            switch(_document.status){
+                case 0: {
+                    _document.label = "tag-default";
+                    _document.status_description = "initialised";
+                    break;
+                }
+                case 1: {
+                    _document.label = "tag-default";
+                    _document.status_description = "unsubmitted";
+                    break;
+                }
+                case 2: {
+                    _document.label = "tag-success";
+                    _document.status_description = "submitted";
+                    break;
+                }
+                case 3: {
+                    _document.label = "tag-primary";
+                    _document.status_description = "review pending";
+                    break;
+                }
+                case 4: {
+                    _document.label = "tag-info";
+                    _document.status_description = "under review";
+                    break;
+                }
+                case 5: {
+                    _document.label = "tag-warning";
+                    _document.status_description = "partly accepted";
+                    break;
+                }
+                case 6: {
+                    _document.label = "tag-success";
+                    _document.status_description = "reviewed";
+                    break;
+                }
+                case 7: {
+                    _document.label = "tag-danger";
+                    _document.status_description = "rejected";
+                    break;
                 }
             }
 
             // Formatting
-            for(var j=0; j<documents.length; j++){
-                documents[j].link = server_url + ":" + httpPort + "/documents/" + documents[j].document_id;
-            }
+            _document.link = server_url + ":" + httpPort + "/documents/" + _document.document_id;
 
             // Render HTML content
             var output = mustache.render(template, {
                 user: user,
-                documents: documents,
+                documents: _document,
                 year: moment().format("YYYY")
             });
 
@@ -149,7 +162,7 @@ exports.request = function(req, res) {
                 if (err) {
                     callback(err);
                 } else {
-                    callback(null, 201, documents[0]);
+                    callback(null, 201, document);
                 }
             });
         }

@@ -9,6 +9,6 @@ CREATE TABLE Revisions (
 
     -- Attributes
     document_id CHARACTER VARYING(255) NOT NULL REFERENCES Documents(document_id) ON UPDATE CASCADE ON DELETE CASCADE,
-    version SMALLINT NOT NULL
+    version SMALLINT NOT NULL CHECK (version > 0) DEFAULT 1
 
 );
