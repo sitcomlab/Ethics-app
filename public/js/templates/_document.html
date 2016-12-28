@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<div class="row">
+    <div class="col-xs-12 col-md-1"></div>
+    <div class="col-xs-12 col-md-10">
+
+        <!-- Content -->
+        <div class="row">
+            <div class="col-xs-12 col-md-2"></div>
+
+            <!-- Account settings -->
+            <div class="col-xs-12 col-md-8" ng-show="tab==1">
+
+                <div class="card" style="padding: 40px 10px 40px 10px;">
+                    <center>
+                        <p class="lead">
+                            {{ 'YOUR_ACCOUNT' | translate }}
+                        </p>
+                    </center>
+                    <div class="card-block">
+                        <form class="form-horizontal" name="userEditForm" ng-submit="saveUser()">
+                            <input type="text" class="form-control form-control-lg" ng-model="updated_user.title" id="inputTitle" placeholder="{{ 'TITLE' | translate }}" autofocus autocomplete="on">
+                            <br>
+                            <input type="text" class="form-control form-control-lg" ng-model="updated_user.first_name" id="inputFirstName" placeholder="{{ 'FIRST_NAME' | translate }}*" required autocomplete="on">
+                            <br>
+                            <input type="text" class="form-control form-control-lg" ng-model="updated_user.last_name" id="inputLastName" placeholder="{{ 'LAST_NAME' | translate }}*" required autocomplete="on">
+                            <br>
+                            <input type="email" class="form-control form-control-lg" ng-model="updated_user.email_address" id="inputEmailAddress" placeholder="{{ 'EMAIL_ADDRESS' | translate }}*" required autocomplete="on">
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <button class="form-control btn btn-lg btn-secondary" role="button" ng-click="cancel()">
+                                        {{ 'CANCEL' | translate }}
+                                    </button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="form-control btn btn-lg btn-primary" role="submit">
+                                        {{ 'SAVE' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Document settings -->
+            <div class="col-xs-12 col-md-8" ng-show="tab==2">
+                <div class="card" style="padding: 40px 10px 40px 10px;">
+                    <center>
+                        <p class="lead">
+                            {{ 'YOUR_DOCUMENT_TITLE' | translate }}
+                        </p>
+                    </center>
+                    <div class="card-block">
+                        <form class="form-horizontal" name="documentEditForm" ng-submit="saveDocument()">
+                            <div class="input-group">
+                                <input type="text" class="form-control form-control-lg" ng-model="updated_document.document_title" placeholder="{{ 'DOCUMENT_TITLE' | translate }}*" aria-describedby="inputTitle" autofocus>
+                                <span class="input-group-addon">
+                                    <span class="flag-icon flag-icon-gb"></span>
+                                </span>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <button class="form-control btn btn-lg btn-secondary" role="button" ng-click="cancel()">
+                                        {{ 'CANCEL' | translate }}
+                                    </button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="form-control btn btn-lg btn-primary" role="submit">
+                                        {{ 'SAVE' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document-ID -->
+            <div class="col-xs-12 col-md-8" ng-show="tab==3">
+                <div class="card" style="padding: 40px 10px 40px 10px;">
+                    <center>
+                        <p class="lead">
+                            {{ 'YOUR_DOCUMENT_ID' | translate }}
+                        </p>
+                    </center>
+                    <div class="card-block">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-lg" ng-model="document_id" id="documentId" placeholder="{{ 'TITLE' | translate }}" autofocus disabled>
+                            <span class="input-group-btn">
+                                <button class="btn btn-lg btn-secondary" role="button" ng-click="copyToClipboard()">
+                                    <i class="fa fa-clipboard" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button class="form-control btn btn-lg btn-primary" role="button" ng-click="cancel()">
+                                    {{ 'BACK' | translate }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document Introduction -->
+            <div class="col-xs-12 col-md-8" ng-show="tab==4">
+                <div class="card" style="padding: 40px 10px 40px 10px;">
+                    <center>
+                        <p class="lead">
+                            {{ 'GETTING_STARTED' | translate }}
+                        </p>
+                    </center>
+                    <div class="card-block">
+                        <div style="text-align: justify;">
+                            You will be asked a series of questions, based on which the EthicsApp will auto-generate 3 documents. You are required to use these documents in your experiment. The key document is the Informed Consent Form - both you and your participant should
+                            sign and keep a copy. See the example bellow.
+                        </div>
+                        <br>
+                        <!-- TODO: Insert images -->
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button class="form-control btn btn-lg btn-primary" role="button" ng-click="confirmIntro()">
+                                    {{ 'NEXT' | translate }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document -->
+            <div class="col-xs-12 col-md-8" ng-show="tab==0">
+
+                <!-- Status 0/1 (unsubmitted - initialised) -->
+                <div class="card" ng-if="document.status==0 || document.status==1" style="padding: 40px 10px 40px 10px;">
+
+                    <!-- Page 0: Description -->
+                    <div ng-show="page==0">
+                        <center>
+                            <p class="lead">
+                                {{ 'STUDY_DESCRIPTION' | translate }}
+                            </p>
+                        </center>
+                        <div class="card-block">
+                            <div style="text-align: justify;">
+                                This form will be used to automatically generate the Informed Consent Form that every participant of your study will have to sign. Please fill in the German and/or the English version depending on the language(s) in which you want your Informed
+                                Consent Forms to be generated. Move your mouse over the
+                                <kbd>i</kbd>
+                                icon to see more details and some examples.
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-12 middle">
+                                    Please select the language, in which you want to generate the consent forms:
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-xs-6 middle">
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" ng-model="en">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">
+                                            <span class="flag-icon flag-icon-gb"></span>&nbsp;&nbsp;{{ 'ENGLISH' | translate }}
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="col-xs-6 middle">
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" ng-model="de">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">
+                                            <span class="flag-icon flag-icon-de"></span>&nbsp;&nbsp;{{ 'GERMAN' | translate }}
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <br>
+
+                            <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                            <!-- 1. study description title -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="descriptionTitle">
+                                            <b>1. Title of the project</b>
+                                        </label>
+                                        <div ng-if="en">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" ng-model="" placeholder="{{ 'TITLE' | translate }}*" aria-describedby="descriptionTitle" required autofocus autocomplete="on">
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-gb"></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div ng-if="de">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" ng-model="" placeholder="{{ 'TITLE' | translate }}*" aria-describedby="descriptionTitle" required autocomplete="on">
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-de"></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 2. study description researcher -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="descriptionResearcher">
+                                            <b>2. Name of the lead researcher, his/her position (and his/her lab)</b>
+                                        </label>
+                                        <div ng-if="en">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" ng-model="" placeholder="{{ 'NAME' | translate }}*" aria-describedby="descriptionResearcher" required autocomplete="on">
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-gb"></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div ng-if="de">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" ng-model="" placeholder="{{ 'NAME' | translate }}*" aria-describedby="descriptionResearcher" required autocomplete="on">
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-de"></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 3. study description time -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="descriptionTime">
+                                            <b>3. Time scale of the data collection process (range)</b>
+                                        </label>
+                                        <div ng-if="en">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" ng-model="" placeholder="{{ 'TIME' | translate }}*" aria-describedby="descriptionResearcher" required autocomplete="on">
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-gb"></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div ng-if="de">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" ng-model="" placeholder="{{ 'TIME' | translate }}*" aria-describedby="descriptionResearcher" required autocomplete="on">
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-de"></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 4. study description purpose -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="descriptionPurpose">
+                                            <b>4. Theme and purpose of the study</b>
+                                        </label>
+                                        <div ng-if="en">
+                                            <div class="input-group">
+                                                <textarea class="form-control" rows="3" placeholder="{{ 'PURPOSE' | translate }}*" required></textarea>
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-gb"></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div ng-if="de">
+                                            <div class="input-group">
+                                                <textarea class="form-control" rows="3" placeholder="{{ 'PURPOSE' | translate }}*" required></textarea>
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-de"></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 5. study description purpose -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="descriptionProcedure">
+                                            <b>5. Describe the procedure of your study (make sure to list, all potentially difficult or distressing actions that you will require from your participants)</b>
+                                        </label>
+                                        <div ng-if="en">
+                                            <div class="input-group">
+                                                <textarea class="form-control" rows="3" placeholder="{{ 'PROCEDURE' | translate }}*" required></textarea>
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-gb"></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div ng-if="de">
+                                            <div class="input-group">
+                                                <textarea class="form-control" rows="3" placeholder="{{ 'PROCEDURE' | translate }}*" required></textarea>
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-de"></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 6. study description duration -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="descriptionDuration">
+                                            <b>6. Specify the estimated duration of the study, for a single person</b>
+                                        </label>
+                                        <div ng-if="en">
+                                            <div class="input-group">
+                                                <textarea class="form-control" rows="3" placeholder="{{ 'DURATION' | translate }}*" required></textarea>
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-gb"></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div ng-if="de">
+                                            <div class="input-group">
+                                                <textarea class="form-control" rows="3" placeholder="{{ 'DURATION' | translate }}*" required></textarea>
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-de"></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 7. study description risks -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="descriptionRisks">
+                                            <b>7. List all potential risks and uncomfortable activities which can occur to your participants over the course of the study</b>
+                                        </label>
+                                        <div ng-if="en">
+                                            <div class="input-group">
+                                                <textarea class="form-control" rows="3" placeholder="{{ 'RISKS' | translate }}*" required></textarea>
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-gb"></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div ng-if="de">
+                                            <div class="input-group">
+                                                <textarea class="form-control" rows="3" placeholder="{{ 'RISKS' | translate }}*" required></textarea>
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-de"></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 8. study description benefits -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="descriptionRisks">
+                                            <b>8. List benefits (if applicable)</b>
+                                        </label>
+                                        <div ng-if="en">
+                                            <div class="input-group">
+                                                <textarea class="form-control" rows="3" placeholder="{{ 'BENEFITS' | translate }}*" required></textarea>
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-gb"></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div ng-if="de">
+                                            <div class="input-group">
+                                                <textarea class="form-control" rows="3" placeholder="{{ 'BENEFITS' | translate }}*" required></textarea>
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-de"></span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button class="form-control btn btn-lg btn-primary" role="button" ng-click="nextPage()">
+                                        {{ 'NEXT' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Page 1: Concerns -->
+                    <div ng-show="page==1">
+                        <center>
+                            <p class="lead">
+                                {{ 'STUDY_CONCERNS' | translate }}
+                            </p>
+                        </center>
+                        <div class="card-block">
+                            <div style="text-align: justify;">
+                                Complete the checklist below. If you have answered "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the ifgi-Ethics Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the ifgi’s Ethics Committee.
+                            </div>
+                            <br>
+
+                            <!-- 1. concern -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="cornern1">
+                                            <b>1. Will the study involve potentially vulnerable groups of participants or people who are unable or unauthorized to give informed consent?</b>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 2. concern -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="cornern2">
+                                            <b>2. Will the study involve deception?</b>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 3. concern -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="cornern2">
+                                            <b>3. Will the study involve discussion, judgment or presentation of strongly emotional or sensitive stimuli or topics?</b>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <button class="form-control btn btn-lg btn-primary" role="button" ng-click="previousPage()">
+                                        {{ 'BACK' | translate }}
+                                    </button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="form-control btn btn-lg btn-primary" role="button" ng-click="nextPage()">
+                                        {{ 'NEXT' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Page 2: Validation and submit request -->
+                    <div ng-show="page==2">
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Status 2 (submitted - ok) -->
+            <div class="card" ng-if="document.status==2" style="padding: 40px 10px 40px 10px;">
+                <div class="card-block">
+                    submitted - ok<br>
+                    {{document}}
+                </div>
+            </div>
+
+            <!-- Status 3 (submitted - review required) -->
+            <div class="card" ng-if="document.status==3" style="padding: 40px 10px 40px 10px;">
+                <div class="card-block">
+                    submitted - review required<br>
+                    {{document}}
+                </div>
+            </div>
+
+            <!-- Status 4 (submitted - under review) -->
+            <div class="card" ng-if="document.status==4" style="padding: 40px 10px 40px 10px;">
+                <div class="card-block">
+                    submitted - under review<br>
+                    {{document}}
+                </div>
+            </div>
+
+            <!-- Status 5 (reviewed - partly accepted) -->
+            <div class="card" ng-if="document.status==5" style="padding: 40px 10px 40px 10px;">
+                <div class="card-block">
+                    reviewed - partly accepted<br>
+                    {{document}}
+                </div>
+            </div>
+
+            <!-- Status 6 (reviewed - ok) -->
+            <div class="card" ng-if="document.status==6" style="padding: 40px 10px 40px 10px;">
+                <center>
+                    <p class="lead">
+                        {{document.document_title}}
+                        <small>
+                            <span class="tag tag-danger">
+                                {{ 'REVIEWED' | translate }}
+                            </span>
+                        </small>
+                    </p>
+                </center>
+                <div class="card-block">
+                    <div style="text-align: justify;">
+                        Your document has been rejected. Please ask <kbd></kbd>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status 7 (reviewed - rejected) -->
+            <div class="card" ng-if="document.status==7" style="padding: 40px 10px 40px 10px;">
+                <center>
+                    <p class="lead">
+                        {{ 'DOCUMENT_REJECTED' | translate }}
+                    </p>
+                </center>
+                <div class="card-block">
+                    <div style="text-align: justify;">
+                        Unfortunately your document has been rejected. Please ask <kbd></kbd> for more information.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-md-2"></div>
+    </div>
+</div>
+<br>
+
+<!--<label class="c-input c-checkbox">
+    <input type="checkbox" ng-model="checkboxEnglish" ng-init="checkboxEnglish=true">
+    <span class="c-indicator"></span>
+    {{ 'ENGLISH' | translate }}
+</label>
+<label class="c-input c-checkbox">
+    <input type="checkbox" ng-model="checkboxGerman" ng-init="checkboxGerman=true">
+    <span class="c-indicator"></span>
+    {{ 'GERMAN' | translate }}
+</label>-->
+
+<!--{{document.document_title}}
+<small>
+<span class="tag tag-default" ng-if="document.status==0">{{ 'INITIALISED' | translate }}</span>
+<span class="tag tag-default" ng-if="document.status==1">{{ 'UNSUBMITTED' | translate }}</span>
+<span class="tag tag-success" ng-if="document.status==2">{{ 'SUBMITTED' | translate }}</span>
+<span class="tag tag-success" ng-if="document.status==3">{{ 'REVIEW_PENDING' | translate }}</span>
+<span class="tag tag-success" ng-if="document.status==4">{{ 'UNDER_REVIEW' | translate }}</span>
+<span class="tag tag-success" ng-if="document.status==5">{{ 'PARTLY_ACCEPTED' | translate }}</span>
+<span class="tag tag-success" ng-if="document.status==6">{{ 'REVIEWED' | translate }}</span>
+<span class="tag tag-success" ng-if="document.status==7">{{ 'REJECTED' | translate }}</span>
+</small>-->

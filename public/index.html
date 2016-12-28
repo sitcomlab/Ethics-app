@@ -58,20 +58,28 @@
                 <a class="navbar-brand" href="/" style="margin-left: 160px;">
                     {{config.appName}}
                 </a>
-
-                <div class="btn-group float-xs-right" ng-if="user">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{user.title}} {{user.first_name}} {{user.last_name}}
+                <div class="btn-group float-xs-right" style="margin-left:5px;" ng-if="user">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;<span ng-if="user.title">{{user.title}}&nbsp;</span>{{user.first_name}} {{user.last_name}}
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <h6 class="dropdown-header">{{ 'ACCOUNT' | translate }}</h6>
-                        <a class="dropdown-item" href="" ng-click="changeTab(1)">{{ 'SETTINGS' | translate }}</a>
-                        <div class="dropdown-divider"></div>
-                        <h6 class="dropdown-header">{{ 'DOCUMENT' | translate }}</h6>
-                        <a class="dropdown-item" href="" ng-click="changeTab(2)">{{ 'CHANGE_DOCUMENT_TITLE' | translate }}</a>
-                        <a class="dropdown-item" href="" ng-click="deleteDocument(document)">{{ 'DELETE_DOCUMENT' | translate }}</a>
+                        <a class="dropdown-item" href="" ng-click="editUser(document.document_id)">{{ 'SETTINGS' | translate }}</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="" ng-click="logout()">{{ 'LOGOUT' | translate }}</a>
+                    </div>
+                </div>
+                <div class="btn-group float-xs-right" ng-if="document">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;{{document.document_title}}
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <h6 class="dropdown-header">{{ 'DOCUMENT' | translate }}</h6>
+                        <a class="dropdown-item" href="" ng-click="showDocumentId(document.document_id)">{{ 'SHOW_DOCUMENT_ID' | translate }}</a>
+                        <a class="dropdown-item" href="" ng-click="changeDocumentTitle(document.document_id)">{{ 'CHANGE_DOCUMENT_TITLE' | translate }}</a>
+                        <a class="dropdown-item" href="" ng-click="saveDocument(document.document_id)">{{ 'SAVE_DOCUMENT' | translate }}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="" ng-click="deleteDocument(document.document_id)">{{ 'DELETE_DOCUMENT' | translate }}</a>
                     </div>
                 </div>
             </nav>
@@ -115,7 +123,18 @@
         <script src="js/controllers/navController.js"></script>
         <script src="js/controllers/footerController.js"></script>
         <script src="js/controllers/loginController.js"></script>
+        <script src="js/controllers/userController.js"></script>
         <script src="js/controllers/documentController.js"></script>
+        <script src="js/controllers/documentIdController.js"></script>
+        <script src="js/controllers/documentTitleController.js"></script>
+        <script src="js/controllers/statusController_0.js"></script>
+        <script src="js/controllers/statusController_1.js"></script>
+        <script src="js/controllers/statusController_2.js"></script>
+        <script src="js/controllers/statusController_3.js"></script>
+        <script src="js/controllers/statusController_4.js"></script>
+        <script src="js/controllers/statusController_5.js"></script>
+        <script src="js/controllers/statusController_6.js"></script>
+        <script src="js/controllers/statusController_7.js"></script>
 
     </body>
 </html>

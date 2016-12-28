@@ -6,24 +6,34 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
     // Init
     $scope.config = config;
 
-
     /**
-     * Highlight active menu button
-     *
-    $scope.isActive = function(viewLocation) {
-        return viewLocation === $location.path();
-    }; */
-
-
-    /**
-     * [changeTab description]
-     * @param  {[type]} tab [description]
-     * @return {[type]}     [description]
+     * [editUser description]
+     * @param  {[type]} document_id [description]
+     * @return {[type]}             [description]
      */
-    $scope.changeTab = function(tab){
-        $rootScope.$broadcast('changeTab', {
-            tab: tab
-        });
+    $scope.editUser = function(document_id){
+        // Redirect
+        $location.url("/documents/" + document_id + "/user");
+    };
+
+    /**
+     * [showDocumentId description]
+     * @param  {[type]} document_id [description]
+     * @return {[type]}             [description]
+     */
+    $scope.showDocumentId = function(document_id){
+        // Redirect
+        $location.url("/documents/" + document_id + "/id");
+    };
+
+    /**
+     * [changeDocumentTitle description]
+     * @param  {[type]} document_id [description]
+     * @return {[type]}             [description]
+     */
+    $scope.changeDocumentTitle = function(document_id){
+        // Redirect
+        $location.url("/documents/" + document_id + "/title");
     };
 
 

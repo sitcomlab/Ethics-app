@@ -28,10 +28,34 @@ app.config(function ($translateProvider) {
         SEND: 'Send',
         SAVE: 'Save',
         CANCEL: 'Cancel',
+        NEXT: 'Next',
+        BACK: 'Back',
         SEND_RECOVERY_EMAIL: 'Send recovery email',
 
         HI: 'Hi',
         NEW_USER: 'You are a new user, please fill out the following fields',
+
+
+        ACCOUNT: 'Account',
+        SETTINGS: 'Settings',
+        DOCUMENT: 'Document',
+        LOGOUT: 'Logout',
+        SHOW_DOCUMENT_ID: 'Show Document-ID',
+        CHANGE_DOCUMENT_TITLE: 'Change document title',
+        YOUR_DOCUMENT_TITLE: 'Your document title',
+        DELETE_DOCUMENT: 'Delete document',
+        YOUR_DOCUMENT_ID: 'Your Document-ID',
+        YOUR_ACCOUNT: 'Your account',
+
+        INITIALISED: 'initialised',
+        UNSUBMITTED: 'unsubmitted',
+        SUBMITTED: 'submitted',
+        REVIEW_PENDING: 'review pending',
+        UNDER_REVIEW: 'under review',
+        PARTLY_ACCEPTED: 'partly accepted',
+        REVIEWED: 'reviewed',
+        REJECTED: 'rejected'
+
     });
 
     // Default Language (English)

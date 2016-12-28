@@ -8,7 +8,7 @@ body {
 }
 
 .main {
-    padding-top: 90px;
+    padding-top: 100px;
 }
 
 .footer {
@@ -31,6 +31,6 @@ body {
 }
 
 
-/*.c-indicator {
+.c-indicator, {
     background-color: #FFFFFF;
-}*/
+}
