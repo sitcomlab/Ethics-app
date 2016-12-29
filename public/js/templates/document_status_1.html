@@ -14,7 +14,7 @@
                 <div class="card" style="padding: 40px 10px 40px 10px;" ng-show="page==0">
                     <center>
                         <p class="lead">
-                            {{ 'STUDY_DESCRIPTION' | translate }}
+                            <b>{{ 'STUDY_DESCRIPTION' | translate }}</b>
                         </p>
                     </center>
                     <div class="card-block">
@@ -298,20 +298,23 @@
 
                         <br>
                         <div class="row">
-                            <div class="col-xs-12">
+                            <div class="col-xs-6"></div>
+                            <div class="col-xs-6">
                                 <button class="form-control btn btn-lg btn-primary" role="button" ng-click="nextPage()">
-                                    {{ 'NEXT' | translate }}
+                                    {{ 'NEXT' | translate }}&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
+
+
                 <!-- Concerns -->
                 <div class="card" style="padding: 40px 10px 40px 10px;" ng-show="page==1">
                     <center>
                         <p class="lead">
-                            {{ 'STUDY_CONCERNS' | translate }}
+                            <b>{{ 'STUDY_CONCERNS' | translate }}</b>
                         </p>
                     </center>
                     <div class="card-block">
@@ -322,15 +325,352 @@
                         </div>
                         <br>
 
+                        <!-- 1. concern -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cornern1">
+                                        <b>1. {{ 'CONCERN_1' | translate }}?</b>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[0].value" ng-value="false" required> {{ 'NO' | translate }}
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[0].value" ng-value="true" required> {{ 'YES' | translate }}
+                                        </span>
+                                        <input type="text" class="form-control" ng-model="concerns[0].comment" placeholder="{{ 'EXPLANATION' | translate }}*" ng-disabled="!concerns[0].value" ng-required="concerns[0].value" autofocus>
+                                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-gb"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- 2. concern -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cornern2">
+                                        <b>2. {{ 'CONCERN_2' | translate }}?</b>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[1].value" ng-value="false" required> {{ 'NO' | translate }}
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[1].value" ng-value="true" required> {{ 'YES' | translate }}
+                                        </span>
+                                        <input type="text" class="form-control" ng-model="concerns[1].comment" placeholder="{{ 'EXPLANATION' | translate }}*" ng-disabled="!concerns[1].value" ng-required="concerns[1].value" autofocus>
+                                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-gb"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- 3. concern -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cornern3">
+                                        <b>3. {{ 'CONCERN_3' | translate }}?</b>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[2].value" ng-value="false" required> {{ 'NO' | translate }}
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[2].value" ng-value="true" required> {{ 'YES' | translate }}
+                                        </span>
+                                        <input type="text" class="form-control" ng-model="concerns[2].comment" placeholder="{{ 'EXPLANATION' | translate }}*" ng-disabled="!concerns[2].value" ng-required="concerns[2].value" autofocus>
+                                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-gb"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- 4. concern -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cornern4">
+                                        <b>4. {{ 'CONCERN_4' | translate }}?</b>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[3].value" ng-value="false" required> {{ 'NO' | translate }}
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[3].value" ng-value="true" required> {{ 'YES' | translate }}
+                                        </span>
+                                        <input type="text" class="form-control" ng-model="concerns[3].comment" placeholder="{{ 'EXPLANATION' | translate }}*" ng-disabled="!concerns[3].value" ng-required="concerns[3].value" autofocus>
+                                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-gb"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- 5. concern -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cornern5">
+                                        <b>5. {{ 'CONCERN_5' | translate }}?</b>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[4].value" ng-value="false" required> {{ 'NO' | translate }}
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[4].value" ng-value="true" required> {{ 'YES' | translate }}
+                                        </span>
+                                        <input type="text" class="form-control" ng-model="concerns[4].comment" placeholder="{{ 'EXPLANATION' | translate }}*" ng-disabled="!concerns[4].value" ng-required="concerns[4].value" autofocus>
+                                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-gb"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- 6. concern -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cornern6">
+                                        <b>6. {{ 'CONCERN_6' | translate }}?</b>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[5].value" ng-value="false" required> {{ 'NO' | translate }}
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[5].value" ng-value="true" required> {{ 'YES' | translate }}
+                                        </span>
+                                        <input type="text" class="form-control" ng-model="concerns[5].comment" placeholder="{{ 'EXPLANATION' | translate }}*" ng-disabled="!concerns[5].value" ng-required="concerns[5].value" autofocus>
+                                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-gb"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- 7. concern -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cornern7">
+                                        <b>7. {{ 'CONCERN_7' | translate }}?</b>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[6].value" ng-value="false" required> {{ 'NO' | translate }}
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[6].value" ng-value="true" required> {{ 'YES' | translate }}
+                                        </span>
+                                        <input type="text" class="form-control" ng-model="concerns[6].comment" placeholder="{{ 'EXPLANATION' | translate }}*" ng-disabled="!concerns[6].value" ng-required="concerns[6].value" autofocus>
+                                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-gb"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- 8. concern -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cornern8">
+                                        <b>8. {{ 'CONCERN_8' | translate }}?</b>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[7].value" ng-value="false" required> {{ 'NO' | translate }}
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[7].value" ng-value="true" required> {{ 'YES' | translate }}
+                                        </span>
+                                        <input type="text" class="form-control" ng-model="concerns[7].comment" placeholder="{{ 'EXPLANATION' | translate }}*" ng-disabled="!concerns[7].value" ng-required="concerns[7].value" autofocus>
+                                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-gb"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- 9. concern -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cornern9">
+                                        <b>9. {{ 'CONCERN_9' | translate }}?</b>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[8].value" ng-value="false" required> {{ 'NO' | translate }}
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[8].value" ng-value="true" required> {{ 'YES' | translate }}
+                                        </span>
+                                        <input type="text" class="form-control" ng-model="concerns[8].comment" placeholder="{{ 'EXPLANATION' | translate }}*" ng-disabled="!concerns[8].value" ng-required="concerns[8].value" autofocus>
+                                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-gb"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- 10. concern -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cornern10">
+                                        <b>10. {{ 'CONCERN_10' | translate }}?</b>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[9].value" ng-value="false" required> {{ 'NO' | translate }}
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[9].value" ng-value="true" required> {{ 'YES' | translate }}
+                                        </span>
+                                        <input type="text" class="form-control" ng-model="concerns[9].comment" placeholder="{{ 'EXPLANATION' | translate }}*" ng-disabled="!concerns[9].value" ng-required="concerns[9].value" autofocus>
+                                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-gb"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- 11. concern -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cornern11">
+                                        <b>11. {{ 'CONCERN_11' | translate }}?</b>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[10].value" ng-value="false" required> {{ 'NO' | translate }}
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[10].value" ng-value="true" required> {{ 'YES' | translate }}
+                                        </span>
+                                        <input type="text" class="form-control" ng-model="concerns[10].comment" placeholder="{{ 'EXPLANATION' | translate }}*" ng-disabled="!concerns[10].value" ng-required="concerns[10].value" autofocus>
+                                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-gb"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- 12.1. concern -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cornern12">
+                                        <b>12. {{ 'CONCERN_12' | translate }}?</b>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[11].value" ng-value="false" required> {{ 'NO' | translate }}
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[11].value" ng-value="true" required> {{ 'YES' | translate }}
+                                        </span>
+                                        <input type="text" class="form-control" ng-model="concerns[11].comment" placeholder="{{ 'EXPLANATION' | translate }}*" ng-disabled="!concerns[11].value" ng-required="concerns[11].value" autofocus>
+                                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-gb"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- 12.2. concern -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cornern13">
+                                        <b>13. {{ 'CONCERN_13' | translate }}?</b>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[12].value" ng-value="false" required> {{ 'NO' | translate }}
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[12].value" ng-value="true" required> {{ 'YES' | translate }}
+                                        </span>
+                                        <input type="text" class="form-control" ng-model="concerns[12].comment" placeholder="{{ 'EXPLANATION' | translate }}*" ng-disabled="!concerns[12].value" ng-required="concerns[12].value" autofocus>
+                                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-gb"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- 13. concern -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cornern14">
+                                        <b>13. {{ 'CONCERN_14' | translate }}?</b>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[13].value" ng-value="false" required> {{ 'NO' | translate }}
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <input type="radio" ng-model="concerns[13].value" ng-value="true" required> {{ 'YES' | translate }}
+                                        </span>
+                                        <input type="text" class="form-control" ng-model="concerns[13].comment" placeholder="{{ 'EXPLANATION' | translate }}*" ng-disabled="!concerns[13].value" ng-required="concerns[13].value" autofocus>
+                                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-gb"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <br>
                         <div class="row">
                             <div class="col-xs-6">
                                 <button class="form-control btn btn-lg btn-primary" role="button" ng-click="previousPage()">
-                                    {{ 'BACK' | translate }}
+                                    <i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'BACK' | translate }}
                                 </button>
                             </div>
                             <div class="col-xs-6">
                                 <button class="form-control btn btn-lg btn-primary" role="button" ng-click="nextPage()">
-                                    {{ 'NEXT' | translate }}
+                                    {{ 'NEXT' | translate }}&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </div>
@@ -341,7 +681,7 @@
                 <div class="card" style="padding: 40px 10px 40px 10px;" ng-show="page==2">
                     <center>
                         <p class="lead">
-                            {{ 'SUBMIT' | translate }}
+                            <b>{{ 'SUBMIT' | translate }}</b>
                         </p>
                     </center>
                     <div class="card-block">
@@ -351,7 +691,7 @@
                         <div class="row">
                             <div class="col-xs-6">
                                 <button class="form-control btn btn-lg btn-primary" role="button" ng-click="previousPage()">
-                                    {{ 'BACK' | translate }}
+                                    <i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'BACK' | translate }}
                                 </button>
                             </div>
                             <div class="col-xs-6">
