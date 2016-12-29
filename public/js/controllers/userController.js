@@ -37,11 +37,11 @@ app.controller("userController", function($scope, $rootScope, $routeParams, $tra
             $scope.user = $userService.get();
             $scope.updated_user = $userService.copy();
 
-            // Redirect
-            $location.url("/documents/" + $routeParams.document_id);
-
             // Update navbar
             $rootScope.$broadcast('updateNavbar');
+
+            // Redirect
+            $location.url("/documents/" + $routeParams.document_id);
         })
         .error(function(response) {
             console.log(response);

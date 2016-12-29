@@ -57,6 +57,9 @@ app.factory('$documentService', function($http, $log, config) {
         retrieve: function(document_id) {
             return $http.get(config.apiURL + "/documents/" + document_id);
         },
+        confirmIntro: function(document_id) {
+            return $http.get(config.apiURL + "/documents/" + document_id + "/intro");
+        },
         edit: function(document_id, data) {
             return $http.put(config.apiURL + "/documents/" + document_id, data);
         },

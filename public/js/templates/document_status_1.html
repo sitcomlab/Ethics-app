@@ -9,31 +9,363 @@
 
             <!-- Document -->
             <div class="col-xs-12 col-md-8">
-                <div class="card" style="padding: 40px 10px 40px 10px;">
+
+                <!-- Descriptions -->
+                <div class="card" style="padding: 40px 10px 40px 10px;" ng-show="page==0">
                     <center>
                         <p class="lead">
-                            {{ 'DOCUMENT' | translate }}
+                            {{ 'STUDY_DESCRIPTION' | translate }}
                         </p>
                     </center>
                     <div class="card-block">
                         <div style="text-align: justify;">
-                            status 1
+                            This form will be used to automatically generate the Informed Consent Form that every participant of your study will have to sign. Please fill in the German and/or the English version depending on the language(s) in which you want your Informed
+                            Consent Forms to be generated. Move your mouse over the
+                            <kbd>i</kbd>
+                            icon to see more details and some examples.
                         </div>
                         <br>
+                        <div class="row">
+                            <div class="col-xs-12 middle">
+                                Please select the language, in which you want to generate the consent forms:
+                            </div>
+                        </div>
                         <br>
+
+                        <div class="row">
+                            <div class="col-xs-6 middle">
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" ng-model="en" disabled>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description" style="color:#000000;">
+                                        <span class="flag-icon flag-icon-gb"></span>&nbsp;&nbsp;<b>{{ 'ENGLISH' | translate }}*</b>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="col-xs-6 middle">
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" ng-model="de">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">
+                                        <span class="flag-icon flag-icon-de"></span>&nbsp;&nbsp;<b>{{ 'GERMAN' | translate }}</b>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+
+                        <!-- 1. study description title -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="descriptionTitle">
+                                        <b>1.
+                                            {{ 'DESCRIPTION_1' | translate }}</b>
+                                    </label>
+                                    <div>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" ng-model="en.descriptions[0].value" placeholder="{{ 'TITLE' | translate }}*" aria-describedby="descriptionTitle" required autocomplete="on" autofocus>
+                                            <span class="input-group-addon">
+                                                <span class="flag-icon flag-icon-gb"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div ng-if="de">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" ng-model="de.descriptions[0].value" placeholder="{{ 'TITLE' | translate }}*" aria-describedby="descriptionTitle" required autocomplete="on">
+                                            <span class="input-group-addon">
+                                                <span class="flag-icon flag-icon-de"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. study description researcher -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="descriptionResearcher">
+                                        <b>2.
+                                            {{ 'DESCRIPTION_2' | translate }}</b>
+                                    </label>
+                                    <div>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" ng-model="en.descriptions[1].value" placeholder="{{ 'NAME' | translate }}*" aria-describedby="descriptionResearcher" required autocomplete="on">
+                                            <span class="input-group-addon">
+                                                <span class="flag-icon flag-icon-gb"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div ng-if="de">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" ng-model="de.descriptions[1].value" placeholder="{{ 'NAME' | translate }}*" aria-describedby="descriptionResearcher" required autocomplete="on">
+                                            <span class="input-group-addon">
+                                                <span class="flag-icon flag-icon-de"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. study description time -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="descriptionTime">
+                                        <b>3.
+                                            {{ 'DESCRIPTION_3' | translate }}</b>
+                                    </label>
+                                    <div>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" ng-model="en.descriptions[2].value" placeholder="{{ 'TIME' | translate }}*" aria-describedby="descriptionResearcher" required autocomplete="on">
+                                            <span class="input-group-addon">
+                                                <span class="flag-icon flag-icon-gb"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div ng-if="de">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" ng-model="de.descriptions[2].value" placeholder="{{ 'TIME' | translate }}*" aria-describedby="descriptionResearcher" required autocomplete="on">
+                                            <span class="input-group-addon">
+                                                <span class="flag-icon flag-icon-de"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. study description purpose -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="descriptionPurpose">
+                                        <b>4.
+                                            {{ 'DESCRIPTION_4' | translate }}</b>
+                                    </label>
+                                    <div>
+                                        <div class="input-group">
+                                            <textarea class="form-control" rows="5" placeholder="{{ 'PURPOSE' | translate }}*" ng-model="en.descriptions[3].value" required></textarea>
+                                            <span class="input-group-addon">
+                                                <span class="flag-icon flag-icon-gb"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div ng-if="de">
+                                        <div class="input-group">
+                                            <textarea class="form-control" rows="5" placeholder="{{ 'PURPOSE' | translate }}*" ng-model="de.descriptions[3].value" required></textarea>
+                                            <span class="input-group-addon">
+                                                <span class="flag-icon flag-icon-de"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. study description purpose -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="descriptionProcedure">
+                                        <b>5.
+                                            {{ 'DESCRIPTION_5' | translate }}</b>
+                                    </label>
+                                    <div>
+                                        <div class="input-group">
+                                            <textarea class="form-control" rows="5" placeholder="{{ 'PROCEDURE' | translate }}*" ng-model="en.descriptions[4].value" required></textarea>
+                                            <span class="input-group-addon">
+                                                <span class="flag-icon flag-icon-gb"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div ng-if="de">
+                                        <div class="input-group">
+                                            <textarea class="form-control" rows="5" placeholder="{{ 'PROCEDURE' | translate }}*" ng-model="de.descriptions[4].value" required></textarea>
+                                            <span class="input-group-addon">
+                                                <span class="flag-icon flag-icon-de"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6. study description duration -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="descriptionDuration">
+                                        <b>6.
+                                            {{ 'DESCRIPTION_6' | translate }}</b>
+                                    </label>
+                                    <div>
+                                        <div class="input-group">
+                                            <textarea class="form-control" rows="5" placeholder="{{ 'DURATION' | translate }}*" ng-model="en.descriptions[5].value" required></textarea>
+                                            <span class="input-group-addon">
+                                                <span class="flag-icon flag-icon-gb"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div ng-if="de">
+                                        <div class="input-group">
+                                            <textarea class="form-control" rows="5" placeholder="{{ 'DURATION' | translate }}*" ng-model="de.descriptions[5].value" required></textarea>
+                                            <span class="input-group-addon">
+                                                <span class="flag-icon flag-icon-de"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 7. study description risks -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="descriptionRisks">
+                                        <b>7.
+                                            {{ 'DESCRIPTION_7' | translate }}</b>
+                                    </label>
+                                    <div>
+                                        <div class="input-group">
+                                            <textarea class="form-control" rows="5" placeholder="{{ 'RISKS' | translate }}*" ng-model="en.descriptions[6].value" required></textarea>
+                                            <span class="input-group-addon">
+                                                <span class="flag-icon flag-icon-gb"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div ng-if="de">
+                                        <div class="input-group">
+                                            <textarea class="form-control" rows="5" placeholder="{{ 'RISKS' | translate }}*" ng-model="de.descriptions[6].value" required></textarea>
+                                            <span class="input-group-addon">
+                                                <span class="flag-icon flag-icon-de"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 8. study description benefits -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="descriptionRisks">
+                                        <b>8.
+                                            {{ 'DESCRIPTION_8' | translate }}</b>
+                                    </label>
+                                    <div>
+                                        <div class="input-group">
+                                            <textarea class="form-control" rows="5" placeholder="{{ 'BENEFITS' | translate }}*" ng-model="en.descriptions[7].value" required></textarea>
+                                            <span class="input-group-addon">
+                                                <span class="flag-icon flag-icon-gb"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div ng-if="de">
+                                        <div class="input-group">
+                                            <textarea class="form-control" rows="5" placeholder="{{ 'BENEFITS' | translate }}*" ng-model="de.descriptions[7].value" required></textarea>
+                                            <span class="input-group-addon">
+                                                <span class="flag-icon flag-icon-de"></span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <br>
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="form-control btn btn-lg btn-primary" role="button" ng-click="confirmIntro()">
+                                <button class="form-control btn btn-lg btn-primary" role="button" ng-click="nextPage()">
                                     {{ 'NEXT' | translate }}
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+                <!-- Concerns -->
+                <div class="card" style="padding: 40px 10px 40px 10px;" ng-show="page==1">
+                    <center>
+                        <p class="lead">
+                            {{ 'STUDY_CONCERNS' | translate }}
+                        </p>
+                    </center>
+                    <div class="card-block">
+                        <div style="text-align: justify;">
+                            Complete the checklist below. If you have answered "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the ifgi-Ethics Committee.
+                            Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study.
+                            Make sure you discuss any concerns with the members of the ifgi’s Ethics Committee.
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button class="form-control btn btn-lg btn-primary" role="button" ng-click="previousPage()">
+                                    {{ 'BACK' | translate }}
+                                </button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button class="form-control btn btn-lg btn-primary" role="button" ng-click="nextPage()">
+                                    {{ 'NEXT' | translate }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUBMIT -->
+                <div class="card" style="padding: 40px 10px 40px 10px;" ng-show="page==2">
+                    <center>
+                        <p class="lead">
+                            {{ 'SUBMIT' | translate }}
+                        </p>
+                    </center>
+                    <div class="card-block">
+                        <div style="text-align: justify;"></div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button class="form-control btn btn-lg btn-primary" role="button" ng-click="previousPage()">
+                                    {{ 'BACK' | translate }}
+                                </button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button class="form-control btn btn-lg btn-success" role="button" ng-click="submit()">
+                                    {{ 'SUBMIT' | translate }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
         <div class="col-xs-12 col-md-2"></div>
     </div>
 </div>

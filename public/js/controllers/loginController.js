@@ -12,7 +12,11 @@ app.controller("loginController", function($scope, $rootScope, $translate, $loca
 
     // Init
     $scope.tab = 0;
-    $scope.login_document = $loginService.init();
+    //$scope.login_document = $loginService.init();
+    // TEST
+    $scope.login_document = {
+        document_id: "fe7d7ee0-cdb9-11e6-9f69-e1a812a1e826"
+    };
     $scope.new_document = $documentService.init();
     $scope.new_user = $userService.init();
     $scope.recovery_user = $recoveryService.init();
@@ -37,8 +41,9 @@ app.controller("loginController", function($scope, $rootScope, $translate, $loca
         // Find document
         $documentService.retrieve($scope.login_document.document_id)
         .success(function(response) {
+            $documentService.set(response);
             // Redirect
-            $location.url("/documents/" + $scope.document.document_id);
+            $location.url("/documents/" + $documentService.getId());
         })
         .error(function(response) {
             console.log(response);
@@ -60,9 +65,10 @@ app.controller("loginController", function($scope, $rootScope, $translate, $loca
             $documentService.create($userService.getId(), $scope.new_document)
             .success(function(response) {
                 $documentService.set(response);
+
                 // Redirect
-                $location.url("/documents/" + $documentService.getId());
                 $scope.tab = 0;
+                $location.url("/documents/" + $documentService.getId());
             })
             .error(function(response) {
                 console.log(response);

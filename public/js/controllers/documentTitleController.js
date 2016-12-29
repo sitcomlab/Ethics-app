@@ -40,12 +40,11 @@ app.controller("documentTitleController", function($scope, $rootScope, $routePar
             $scope.document = $documentService.get();
             $scope.updated_document = $documentService.copy();
 
-            // Redirect
-            $location.url("/documents/" + $routeParams.document_id);
-
             // Update navbar
             $rootScope.$broadcast('updateNavbar');
 
+            // Redirect
+            $location.url("/documents/" + $routeParams.document_id);
         })
         .error(function(response) {
             console.log(response);

@@ -54,7 +54,16 @@ app.config(function ($translateProvider) {
         UNDER_REVIEW: 'under review',
         PARTLY_ACCEPTED: 'partly accepted',
         REVIEWED: 'reviewed',
-        REJECTED: 'rejected'
+        REJECTED: 'rejected',
+
+        DESCRIPTION_1: 'Title of the project',
+        DESCRIPTION_2: 'Name of the lead researcher, his/her position (and his/her lab)',
+        DESCRIPTION_3: 'Time scale of the data collection process (range)',
+        DESCRIPTION_4: 'Theme and purpose of the study',
+        DESCRIPTION_5: 'Describe the procedure of your study (make sure to list, all potentially difficult or distressing actions that you will require from your participants)',
+        DESCRIPTION_6: 'Specify the estimated duration of the study, for a single person',
+        DESCRIPTION_7: 'List all potential risks and uncomfortable activities which can occur to your participants over the course of the study',
+        DESCRIPTION_8: 'List benefits (if applicable)'
 
     });
 
