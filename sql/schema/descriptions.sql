@@ -6,6 +6,7 @@ CREATE TABLE Descriptions (
     -- General
     description_id SERIAL PRIMARY KEY,
     created TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+    updated TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
 
     -- Attributes
     revision_id INTEGER NOT NULL REFERENCES Revisions(revision_id) ON UPDATE CASCADE ON DELETE CASCADE,
