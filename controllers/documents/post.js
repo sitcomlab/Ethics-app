@@ -18,10 +18,14 @@ var dir_1 = "/../../templates/emails/";
 var dir_2 = "/../../sql/queries/users/";
 var dir_3 = "/../../sql/queries/documents/";
 var dir_4 = "/../../sql/queries/revisions/";
+var dir_5 = "/../../sql/queries/descriptions/";
+var dir_6 = "/../../sql/queries/concerns/";
 var template = fs.readFileSync(__dirname + dir_1 + 'document_created.html', 'utf8').toString();
 var query_get_user = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
 var query_create_document = fs.readFileSync(__dirname + dir_3 + 'create.sql', 'utf8').toString();
 var query_create_revision = fs.readFileSync(__dirname + dir_4 + 'create.sql', 'utf8').toString();
+var query_create_description = fs.readFileSync(__dirname + dir_5 + 'create.sql', 'utf8').toString();
+var query_create_concern = fs.readFileSync(__dirname + dir_6 + 'create.sql', 'utf8').toString();
 
 
 // POST
@@ -92,6 +96,47 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, user, document, revision, callback){
+            // Database query
+            client.query(query_create_description, [
+                revision.revision_id,
+                'en'
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    callback(null, client, done, user, document, revision);
+                }
+            });
+        },
+        function(client, done, user, document, revision, callback){
+            // Database query
+            client.query(query_create_description, [
+                revision.revision_id,
+                'de'
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    callback(null, client, done, user, document, revision);
+                }
+            });
+        },
+        function(client, done, user, document, revision, callback){
+            // Database query
+            client.query(query_create_concern, [
+                revision.revision_id
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    callback(null, client, done, user, document);
+                }
+            });
+        },
+        function(client, done, user, document, callback){
             var _document = document;
 
             // Formatting

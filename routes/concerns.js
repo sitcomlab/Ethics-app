@@ -4,13 +4,14 @@ var router = express.Router();
 // var list = require('../controllers/concerns/list');
 // var post = require('../controllers/concerns/post');
 // var get = require('../controllers/concerns/get');
-// var put = require('../controllers/concerns/put');
+var put = require('../controllers/concerns/put');
 // var del = require('../controllers/concerns/delete');
 
+var get_by_revision = require('../controllers/concerns/get_by_revision');
 
 
-// LIST
-// router.get('/documents/:document_id/revisions/:revision_id/concerns', list.request);
+// GET BY REVISION
+router.get('/revisions/:revision_id/concerns', get_by_revision.request);
 
 // POST
 // router.post('/documents/:document_id/revisions/:revision_id/concerns', post.request);
@@ -19,7 +20,7 @@ var router = express.Router();
 // router.get('/documents/:document_id/revisions/:revision_id/concerns/:concern_id', get.request);
 
 // PUT
-// router.put('/documents/:document_id/revisions/:revision_id/concerns/:concern_id', put.request);
+router.put('/concerns/:concern_id', put.request);
 
 // DELETE
 // router.delete('/documents/:document_id/revisions/:revision_id/concerns/:concern_id', del.request);

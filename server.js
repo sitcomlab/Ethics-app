@@ -114,7 +114,7 @@ var users = require ('./routes/users');
 var documents = require ('./routes/documents');
 var revisions = require ('./routes/revisions');
 var descriptions = require ('./routes/descriptions');
-// var concerns = require ('./routes/concerns');
+var concerns = require ('./routes/concerns');
 // var comments = require ('./routes/comments');
 var recovery = require ('./routes/recovery');
 
@@ -124,7 +124,7 @@ app.use('/api', users);
 app.use('/api', documents);
 app.use('/api', revisions);
 app.use('/api', descriptions);
-// app.use('/api', concerns);
+app.use('/api', concerns);
 // app.use('/api', comments);
 app.use('/api', recovery);
 
