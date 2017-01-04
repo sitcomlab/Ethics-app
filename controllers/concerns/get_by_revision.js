@@ -10,7 +10,7 @@ var fs = require("fs");
 var dir_1 = "/../../sql/queries/revisions/";
 var dir_2 = "/../../sql/queries/concerns/";
 var query_get_revision = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
-var query_get_by_revision = fs.readFileSync(__dirname + dir_2 + 'get_by_revision.sql', 'utf8').toString();
+var query_get_concern_by_revision = fs.readFileSync(__dirname + dir_2 + 'get_by_revision.sql', 'utf8').toString();
 
 
 // GET BY REVISION
@@ -47,7 +47,7 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_get_by_revision, [
+            client.query(query_get_concern_by_revision, [
                 req.params.revision_id
             ], function(err, result) {
                 done();
