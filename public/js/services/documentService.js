@@ -23,7 +23,14 @@ app.factory('$documentService', function($http, $log, config) {
                 return document.document_id;
             }
         },
-        getRivisions: function(){
+        getStatus: function(){
+            if(document === undefined){
+                return undefined;
+            } else {
+                return document.status;
+            }
+        },
+        getRevisions: function(){
             if(document === undefined){
                 return undefined;
             } else if(document.revisions === undefined) {
@@ -39,11 +46,50 @@ app.factory('$documentService', function($http, $log, config) {
                 return document.revisions[0];
             }
         },
+        getFiles: function(){
+            if(document === undefined){
+                return undefined;
+            } else if(document.files === undefined) {
+                return undefined;
+            } else {
+                return document.files;
+            }
+        },
         set: function(data){
             document = data;
         },
         setRevisions: function(data){
             document.revisions = data;
+        },
+        setDescription: function(revision_id, language, data){
+            for(var i=0; i<document.revisions.length;i++){
+                // Find revision
+                if(document.revisions[i].revision_id === revision_id){
+                    // Attach descriptions by language
+                    switch(language){
+                        case 'en': {
+                            document.revisions[i].en = data;
+                            break;
+                        }
+                        case 'de': {
+                            document.revisions[i].de = data;
+                            break;
+                        }
+                    }
+                }
+            }
+        },
+        setConcerns: function(revision_id, data){
+            for(var i=0; i<document.revisions.length;i++){
+                // Find revision
+                if(document.revisions[i].revision_id === revision_id){
+                    // Attach concerns
+                    document.revisions[i].concerns = data;
+                }
+            }
+        },
+        setFiles: function(data){
+            document.files = data;
         },
         copy: function(){
             return {
@@ -59,6 +105,12 @@ app.factory('$documentService', function($http, $log, config) {
         },
         confirmIntro: function(document_id) {
             return $http.get(config.apiURL + "/documents/" + document_id + "/intro");
+        },
+        submit: function(document_id) {
+            return $http.get(config.apiURL + "/documents/" + document_id + "/submit");
+        },
+        generateFiles: function(document_id) {
+            return $http.get(config.apiURL + "/documents/" + document_id + "/files");
         },
         edit: function(document_id, data) {
             return $http.put(config.apiURL + "/documents/" + document_id, data);

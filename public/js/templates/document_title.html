@@ -1,48 +1,44 @@
 <!DOCTYPE html>
 <div class="row">
-    <div class="col-xs-12 col-md-1"></div>
-    <div class="col-xs-12 col-md-10">
 
-        <!-- Content -->
-        <div class="row">
-            <div class="col-xs-12 col-md-2"></div>
+    <!-- Left padding -->
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-2"></div>
 
-            <!-- Document settings -->
-            <div class="col-xs-12 col-md-8">
-                <div class="card" style="padding: 40px 10px 40px 10px;">
-                    <center>
-                        <p class="lead">
-                            <b>{{ 'YOUR_DOCUMENT_TITLE' | translate }}</b>
-                        </p>
-                    </center>
-                    <div class="card-block">
-                        <form class="form-horizontal" name="documentEditForm" ng-submit="saveDocument()">
-                            <div class="input-group">
-                                <input type="text" class="form-control form-control-lg" ng-model="updated_document.document_title" placeholder="{{ 'DOCUMENT_TITLE' | translate }}*" aria-describedby="inputTitle" autofocus>
-                                <span class="input-group-addon">
-                                    <span class="flag-icon flag-icon-gb"></span>
-                                </span>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <button class="form-control btn btn-lg btn-secondary" role="button" ng-click="cancel()">
-                                        {{ 'CANCEL' | translate }}
-                                    </button>
-                                </div>
-                                <div class="col-xs-6">
-                                    <button class="form-control btn btn-lg btn-primary" role="submit">
-                                        {{ 'SAVE' | translate }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+    <!-- Content -->
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
+        <div class="card" style="padding: 40px 10px 40px 10px;">
+            <center>
+                <p class="lead">
+                    <b>{{ 'YOUR_DOCUMENT_TITLE' | translate }}</b>
+                </p>
+            </center>
+            <div class="card-block">
+                <form class="form-horizontal" name="documentEditForm" ng-submit="saveDocument()">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-lg" ng-model="updated_document.document_title" placeholder="{{ 'DOCUMENT_TITLE' | translate }}*" aria-describedby="inputTitle" autofocus>
+                        <span class="input-group-addon">
+                            <span class="flag-icon flag-icon-gb"></span>
+                        </span>
                     </div>
-                </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <button class="form-control btn btn-lg btn-secondary" role="button" ng-click="cancel()">
+                                {{ 'CANCEL' | translate }}
+                            </button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button class="form-control btn btn-lg btn-success" role="submit">
+                                {{ 'SAVE' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-
         </div>
-        <div class="col-xs-12 col-md-2"></div>
     </div>
+
+    <!-- Right padding -->
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
 </div>
 <br>

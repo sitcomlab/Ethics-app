@@ -34,7 +34,7 @@ app.controller("documentTitleController", function($scope, $rootScope, $routePar
     $scope.saveDocument = function(){
         $documentService.edit($documentService.getId(), $scope.updated_document)
         .success(function(response) {
-            var _revisions = $documentService.getRivisions();
+            var _revisions = $documentService.getRevisions();
             $documentService.set(response);
             $documentService.setRevisions(_revisions);
             $scope.document = $documentService.get();

@@ -38,6 +38,17 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
 
 
     /**
+     * [deleteDocument description]
+     * @param  {[type]} document_id [description]
+     * @return {[type]}             [description]
+     */
+    $scope.deleteDocument = function(document_id){
+        // Redirect
+        $location.url("/documents/" + document_id + "/delete");
+    };
+
+
+    /**
      * [logout description]
      * @return {[type]} [description]
      */

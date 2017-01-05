@@ -23,6 +23,10 @@ app.config(function($routeProvider, $locationProvider, config) {
 			templateUrl: "/js/templates/document_title.html",
 			controller: "documentTitleController"
 		})
+		.when("/documents/:document_id/delete", {
+			templateUrl: "/js/templates/document_delete.html",
+			controller: "documentDeleteController"
+		})
 		.when("/documents/:document_id/user", {
 			templateUrl: "/js/templates/user.html",
 			controller: "userController"
@@ -30,8 +34,7 @@ app.config(function($routeProvider, $locationProvider, config) {
 
 		// Status
 		.when("/documents/:document_id/status/0", {
-			templateUrl: "/js/templates/document_status_0.html",
-			controller: "statusController_0"
+			redirectTo: "/documents/:document_id/status/1"
 		})
 		.when("/documents/:document_id/status/1", {
 			templateUrl: "/js/templates/document_status_1.html",

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<div class="row">
+
+    <!-- Left padding -->
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-2"></div>
+
+    <!-- Content -->
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
+        <div class="card" style="padding: 40px 10px 40px 10px;">
+            <center>
+                <p class="lead">
+                    <b>{{ 'DELETE_YOUR_DOCUMENT' | translate }} <br>
+                    <code>{{document.document_id}}</code>?
+                    </b>
+                </p>
+            </center>
+            <div class="card-block">
+                <label>{{ 'PLEASE_TYPE_IN' | translate }}</label>
+                <input type="text" class="form-control form-control-lg" ng-model="input" id="documentTitle" placeholder="{{ 'TITLE' | translate }}" autofocus>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button class="form-control btn btn-lg btn-secondary" role="button" ng-click="cancel()">
+                            {{ 'CANCEL' | translate }}
+                        </button>
+                    </div>
+                    <div class="col-xs-6">
+                        <button class="form-control btn btn-lg btn-danger" style="background-color:#d9534f" role="button" ng-click="deleteDocument()" ng-disabled="input != document.document_title">
+                            {{ 'DELETE' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right padding -->
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+</div>
+<br>

@@ -1,40 +1,92 @@
 <!DOCTYPE html>
-<div class="row">
-    <div class="col-xs-12 col-md-1"></div>
-    <div class="col-xs-12 col-md-10">
+<!-- LOADING -->
+<div class="loading" ng-show="page==0">
+    <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+</div>
 
-        <!-- Content -->
-        <div class="row">
-            <div class="col-xs-12 col-md-2"></div>
 
-            <!-- Document -->
-            <div class="col-xs-12 col-md-8">
-                <div class="card" style="padding: 40px 10px 40px 10px;">
-                    <center>
-                        <p class="lead">
-                            {{ 'DOCUMENT' | translate }}
+<!-- MAIN -->
+<div class="row" ng-show="page>0">
+
+    <!-- Left padding -->
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-2"></div>
+
+    <!-- Content -->
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
+
+        <!-- DOWNLOAD -->
+        <div class="card" style="padding: 40px 10px 40px 10px;" ng-show="page==1">
+            <center>
+                <p class="lead">
+                    <b>{{ 'DOWNLOAD_YOUR_FILES' | translate }}</b>
+                </p>
+            </center>
+            <div class="card-block">
+                <div style="text-align: justify;">
+                    Your document was reviewed successfully and your files have been created. Please click on the following icons to download them.
+                </div>
+                <br>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle" ng-if="files.en">
+                        <p>
+                            <a href="{{files.path}}/debriefing_information.pdf" download="debriefing_information.pdf" target="_blank">
+                                <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
+                            </a>
                         </p>
-                    </center>
-                    <div class="card-block">
-                        <div style="text-align: justify;">
-                            status 6
-                        </div>
+                        <p class="text-muted">
+                            {{ 'DEBRIEFING_INFORMATION' | translate }}
+                        </p>
                         <br>
                         <br>
                         <br>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <button class="form-control btn btn-lg btn-primary" role="button" ng-click="confirmIntro()">
-                                    {{ 'NEXT' | translate }}
-                                </button>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle" ng-if="files.de">
+                        <p>
+                            <a href="{{files.path}}/statement_of_researcher.pdf" download="statement_of_researcher.pdf" target="_blank">
+                                <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
+                            </a>
+                        </p>
+                        <p class="text-muted">
+                            {{ 'STATEMENT_OF_RESEARCHER' | translate }}
+                        </p>
+                        <br>
+                        <br>
+                        <br>
                     </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle" ng-if="files.en">
+                        <p>
+                            <a href="{{files.path}}/consent_form_en.pdf" download="consent_form_en.pdf" target="_blank">
+                                <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
+                            </a>
+                        </p>
+                        <p class="text-muted">
+                            <span class="flag-icon flag-icon-gb"></span>&nbsp;&nbsp;{{ 'INFORMED_CONSENT_FORM' | translate }}
+                        </p>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle" ng-if="files.de">
+                        <p>
+                            <a href="{{files.path}}/consent_form_de.pdf" download="consent_form_de.pdf" target="_blank">
+                                <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
+                            </a>
+                        <p>
+                        <p class="text-muted">
+                            <span class="flag-icon flag-icon-de"></span>&nbsp;&nbsp;{{ 'INFORMED_CONSENT_FORM' | translate }}
+                        </p>
+                    </div>
+                </div>
 
+            </div>
         </div>
-        <div class="col-xs-12 col-md-2"></div>
     </div>
+
+    <!-- Right padding -->
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
 </div>
 <br>

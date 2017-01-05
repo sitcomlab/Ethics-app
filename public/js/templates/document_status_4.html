@@ -1,40 +1,39 @@
 <!DOCTYPE html>
+<!-- MAIN -->
 <div class="row">
-    <div class="col-xs-12 col-md-1"></div>
-    <div class="col-xs-12 col-md-10">
 
-        <!-- Content -->
-        <div class="row">
-            <div class="col-xs-12 col-md-2"></div>
+    <!-- Left padding -->
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-2"></div>
 
-            <!-- Document -->
-            <div class="col-xs-12 col-md-8">
-                <div class="card" style="padding: 40px 10px 40px 10px;">
-                    <center>
-                        <p class="lead">
-                            {{ 'DOCUMENT' | translate }}
-                        </p>
-                    </center>
-                    <div class="card-block">
-                        <div style="text-align: justify;">
-                            status 4
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <button class="form-control btn btn-lg btn-primary" role="button" ng-click="confirmIntro()">
-                                    {{ 'NEXT' | translate }}
-                                </button>
-                            </div>
-                        </div>
+    <!-- Content -->
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
+
+        <!-- NOTIFICATION -->
+        <div class="card" style="padding: 40px 10px 40px 10px;">
+            <center>
+                <p class="lead">
+                    <b>{{ 'DOCUMENT_IS_CURRENTLY_UNDER_REVIEW' | translate }}</b>
+                </p>
+            </center>
+            <div class="card-block">
+                <div style="text-align: justify;">
+                    Your document was submitted successfully, but has one or more ethical concerns. The committee has started to review it. You will get an email as soon as the committee has reviewed it completely.
+                </div>
+                <br>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button class="form-control btn btn-lg btn-primary" role="button" ng-click="logout()">
+                            {{ 'CLOSE' | translate }}
+                        </button>
                     </div>
                 </div>
             </div>
-
         </div>
-        <div class="col-xs-12 col-md-2"></div>
     </div>
+
+    <!-- Right padding -->
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
 </div>
 <br>

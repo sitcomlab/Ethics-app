@@ -2,11 +2,16 @@ var app = angular.module("ethics-app");
 
 
 // Document ID controller
-app.controller("documentIdController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window) {
+app.controller("documentIdController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $documentService) {
 
 
     // Init
-    $scope.document_id = $routeParams.document_id;
+    if($documentService.get()){
+        $scope.document = $documentService.get();
+    } else {
+        // Redirect
+        $location.url("/");
+    }
 
 
     /**
@@ -15,7 +20,7 @@ app.controller("documentIdController", function($scope, $rootScope, $routeParams
      */
     $scope.cancel = function(){
         // Redirect
-        $location.url("/documents/" + $routeParams.document_id);
+        $location.url("/documents/" + $documentService.getId());
     };
 
 

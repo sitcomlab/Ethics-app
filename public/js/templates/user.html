@@ -1,74 +1,47 @@
 <!DOCTYPE html>
 <div class="row">
-    <div class="col-xs-12 col-md-1"></div>
-    <div class="col-xs-12 col-md-10">
 
-        <!-- Content -->
-        <div class="row">
-            <div class="col-xs-12 col-md-2"></div>
+    <!-- Left padding -->
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-2"></div>
 
-            <!-- Account settings -->
-            <div class="col-xs-12 col-md-8">
+    <!-- Content -->
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
 
-                <div class="card" style="padding: 40px 10px 40px 10px;">
-                    <center>
-                        <p class="lead">
-                            <b>{{ 'YOUR_ACCOUNT' | translate }}</b>
-                        </p>
-                    </center>
-                    <div class="card-block">
-                        <form class="form-horizontal" name="userEditForm" ng-submit="saveUser()">
-                            <input type="text" class="form-control form-control-lg" ng-model="updated_user.title" id="inputTitle" placeholder="{{ 'TITLE' | translate }}" autofocus autocomplete="on">
-                            <br>
-                            <input type="text" class="form-control form-control-lg" ng-model="updated_user.first_name" id="inputFirstName" placeholder="{{ 'FIRST_NAME' | translate }}*" required autocomplete="on">
-                            <br>
-                            <input type="text" class="form-control form-control-lg" ng-model="updated_user.last_name" id="inputLastName" placeholder="{{ 'LAST_NAME' | translate }}*" required autocomplete="on">
-                            <br>
-                            <input type="email" class="form-control form-control-lg" ng-model="updated_user.email_address" id="inputEmailAddress" placeholder="{{ 'EMAIL_ADDRESS' | translate }}*" required autocomplete="on">
-                            <br>
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <button class="form-control btn btn-lg btn-secondary" role="button" ng-click="cancel()">
-                                        {{ 'CANCEL' | translate }}
-                                    </button>
-                                </div>
-                                <div class="col-xs-6">
-                                    <button class="form-control btn btn-lg btn-primary" role="submit">
-                                        {{ 'SAVE' | translate }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+        <div class="card" style="padding: 40px 10px 40px 10px;">
+            <center>
+                <p class="lead">
+                    <b>{{ 'YOUR_ACCOUNT' | translate }}</b>
+                </p>
+            </center>
+            <div class="card-block">
+                <form class="form-horizontal" name="userEditForm" ng-submit="saveUser()">
+                    <input type="text" class="form-control form-control-lg" ng-model="updated_user.title" id="inputTitle" placeholder="{{ 'TITLE' | translate }}" autofocus autocomplete="on">
+                    <br>
+                    <input type="text" class="form-control form-control-lg" ng-model="updated_user.first_name" id="inputFirstName" placeholder="{{ 'FIRST_NAME' | translate }}*" required autocomplete="on">
+                    <br>
+                    <input type="text" class="form-control form-control-lg" ng-model="updated_user.last_name" id="inputLastName" placeholder="{{ 'LAST_NAME' | translate }}*" required autocomplete="on">
+                    <br>
+                    <input type="email" class="form-control form-control-lg" ng-model="updated_user.email_address" id="inputEmailAddress" placeholder="{{ 'EMAIL_ADDRESS' | translate }}*" required autocomplete="on">
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <button class="form-control btn btn-lg btn-secondary" role="button" ng-click="cancel()">
+                                {{ 'CANCEL' | translate }}
+                            </button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button class="form-control btn btn-lg btn-success" role="submit">
+                                {{ 'SAVE' | translate }}
+                            </button>
+                        </div>
                     </div>
-                </div>
-
+                </form>
             </div>
-
         </div>
-        <div class="col-xs-12 col-md-2"></div>
+
     </div>
+
+    <!-- Right padding -->
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
 </div>
 <br>
-
-<!--<label class="c-input c-checkbox">
-    <input type="checkbox" ng-model="checkboxEnglish" ng-init="checkboxEnglish=true">
-    <span class="c-indicator"></span>
-    {{ 'ENGLISH' | translate }}
-</label>
-<label class="c-input c-checkbox">
-    <input type="checkbox" ng-model="checkboxGerman" ng-init="checkboxGerman=true">
-    <span class="c-indicator"></span>
-    {{ 'GERMAN' | translate }}
-</label>-->
-
-<!--{{document.document_title}}
-<small>
-<span class="tag tag-default" ng-if="document.status==0">{{ 'INITIALISED' | translate }}</span>
-<span class="tag tag-default" ng-if="document.status==1">{{ 'UNSUBMITTED' | translate }}</span>
-<span class="tag tag-success" ng-if="document.status==2">{{ 'SUBMITTED' | translate }}</span>
-<span class="tag tag-success" ng-if="document.status==3">{{ 'REVIEW_PENDING' | translate }}</span>
-<span class="tag tag-success" ng-if="document.status==4">{{ 'UNDER_REVIEW' | translate }}</span>
-<span class="tag tag-success" ng-if="document.status==5">{{ 'PARTLY_ACCEPTED' | translate }}</span>
-<span class="tag tag-success" ng-if="document.status==6">{{ 'REVIEWED' | translate }}</span>
-<span class="tag tag-success" ng-if="document.status==7">{{ 'REJECTED' | translate }}</span>
-</small>-->

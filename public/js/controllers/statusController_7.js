@@ -8,11 +8,18 @@ app.controller("statusController_7", function($scope, $rootScope, $routeParams, 
     // Init
     if($documentService.get()){
         $scope.document = $documentService.get();
-        $scope.updated_document = $documentService.copy();
     } else {
         // Redirect
         $location.url("/");
     }
 
+    /**
+     * [logout description]
+     * @return {[type]} [description]
+     */
+    $scope.logout = function(){
+        // Redirect
+        $location.url("/");
+    };
 
 });

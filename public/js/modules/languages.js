@@ -21,7 +21,7 @@ app.config(function ($translateProvider) {
         LAST_NAME : 'Last name',
 
         CREATE_NEW_DOCUMENT: 'Create a new document',
-        FORGOT_YOUR_DOCUMENT_ID: 'Forgot your Document-ID',
+        FORGOT_YOUR_DOCUMENT_ID: 'Forgot your document-ID',
 
         LOGIN : 'Login',
         SUBMIT : 'Submit',
@@ -39,13 +39,13 @@ app.config(function ($translateProvider) {
         SETTINGS: 'Settings',
         DOCUMENT: 'Document',
         LOGOUT: 'Logout',
-        SHOW_DOCUMENT_ID: 'Show Document-ID',
+        SHOW_DOCUMENT_ID: 'Show document-ID',
         SHOW_INTRO: 'Show intro',
         CHANGE_DOCUMENT_TITLE: 'Change document title',
         YOUR_DOCUMENT_TITLE: 'Your document title',
         SAVE_DOCUMENT: 'Save document',
         DELETE_DOCUMENT: 'Delete document',
-        YOUR_DOCUMENT_ID: 'Your Document-ID',
+        YOUR_DOCUMENT_ID: 'Your document-ID',
         YOUR_ACCOUNT: 'Your account',
 
         INITIALISED: 'initialised',
@@ -76,10 +76,10 @@ app.config(function ($translateProvider) {
         CONCERN_8: 'Can the study cause psychological stress, anxiety or negative emotions stronger than what is experienced naturally on an everyday basis outside of research',
         CONCERN_9: 'Will any additional information on your participants be obtained from third parties',
         CONCERN_10: 'Does the procedure involve potential moments when the participant is left without the supervision of a researcher in a potentially challenging or dangerous situation in an uncontrolled environment',
-        CONCERN_11: 'Does the study involve audio or film recordings potentially identifying participants',
-        CONCERN_12: 'If "yes": Will the study involve any recording without prior consent',
-        CONCERN_13: 'Is any raw data from the study likely to be passed on to external partners',
-        CONCERN_14: 'Does the study involve collection of any information without obtaining an Informed Consent in a situation different from public observations or anonymous street surveys',
+        CONCERN_11_1: 'Does the study involve audio or film recordings potentially identifying participants',
+        CONCERN_11_2: 'If "yes": Will the study involve any recording without prior consent',
+        CONCERN_12: 'Is any raw data from the study likely to be passed on to external partners',
+        CONCERN_13: 'Does the study involve collection of any information without obtaining an Informed Consent in a situation different from public observations or anonymous street surveys',
 
         YES: 'yes',
         NO: 'no',
@@ -89,6 +89,37 @@ app.config(function ($translateProvider) {
 
         STUDY_DESCRIPTION: 'Study description',
         STUDY_CONCERNS: 'Study concerns',
+
+        DOWNLOAD_YOUR_FILES: 'Download your files',
+        DEBRIEFING_INFORMATION: 'Debriefing information',
+        STATEMENT_OF_RESEARCHER: 'Statement of researcher',
+        INFORMED_CONSENT_FORM: 'Informed consent form',
+
+        DELETE_YOUR_DOCUMENT: 'Are you sure you want to delete your document',
+        PLEASE_TYPE_IN: 'Please type in the document title',
+        DELETE: 'Delete',
+
+        GETTING_STARTED: 'Getting started',
+        OKAY: 'Okay',
+
+        REQUIRED: 'required',
+        OPTIONAL: 'optional',
+
+        NAME: 'Name',
+        TIME: 'Time',
+        PURPOSE: 'Purpose',
+        PROCEDURE: 'Procedure',
+        DURATION: 'Duration',
+        RISKS: 'Risks',
+        BENEFITS: 'Benefits',
+
+        CLOSE: 'Close',
+        ADMIN: 'admin',
+        YOUR_DOCUMENT_NEEDS_TO_BE_REVIEWED: 'Your document needs to be reviewed',
+        DOCUMENT_IS_CURRENTLY_UNDER_REVIEW: 'Your document is currently under review',
+        DOCUMENT_REVIEWED_SUCCESSFULLY: 'Your document has been reviewed successfully',
+        DOCUMENT_PARTLY_ACCEPTED: 'Your document has been partly accepted',
+        YOUR_DOCUMENT_HAS_BEEN_REJECTED: 'Your document has been rejected'
 
     });
 
