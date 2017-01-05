@@ -9,6 +9,10 @@ app.config(function($routeProvider, $locationProvider, config) {
 			templateUrl: "/admin/js/templates/login.html",
 			controller: "loginController"
 		})
+		.when("/documents", {
+			templateUrl: "/admin/js/templates/documents.html",
+			controller: "documentsController"
+		})
 
 		.otherwise({
 			redirectTo: "/"

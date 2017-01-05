@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 
-app.controller("navController", function($scope, $rootScope, $ngBootbox, $translate, $location, $log, config) {
+app.controller("navController", function($scope, $rootScope, $ngBootbox, $translate, $location, $log, config, $authenticationService) {
 
     // Init
     $scope.config = config;
@@ -24,7 +24,7 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
      * @type {[type]}
      */
     $rootScope.$on('updateNavbar', function() {
-        //$scope.user = $userService.get();
+        $scope.user = $authenticationService.get();
     });
 
 

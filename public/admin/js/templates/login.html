@@ -46,20 +46,20 @@
         <!-- Tab 1 (Login) -->
         <div class="card" style="padding: 40px 10px 40px 10px;" ng-show="tab==1">
             <div class="card-block">
-                <form class="form-horizontal" name="loginForm" ng-submit="login()">
-                    <div class="form-group" ng-class="{'has-danger': loginForm.email_address.$invalid && !loginForm.email_address.$pristine }">
+                <form class="form-horizontal" name="loginForm" ng-submit="submitLogin()">
+                    <div class="form-group" ng-class="{'has-danger': loginForm.username.$invalid && !loginForm.username.$pristine }">
                         <input
                             type="email"
                             class="form-control form-control-lg"
-                            ng-model="login.email_address"
-                            name="email_address"
-                            id="email_address"
+                            ng-model="login_user.username"
+                            name="username"
+                            id="username"
                             placeholder="{{ 'EMAIL' | translate }}*"
-                            aria-describedby="inputEmailAddress"
+                            aria-describedby="inputUsername"
                             required
                             autofocus
                             autocomplete="on">
-                        <span ng-show="loginForm.email_address.$error.required && !loginForm.email_address.$pristine" class="text-danger">
+                        <span ng-show="loginForm.username.$error.required && !loginForm.username.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}
                             </small>
@@ -69,11 +69,11 @@
                         <input
                             type="password"
                             class="form-control form-control-lg"
-                            ng-model="login.password"
+                            ng-model="login_user.password"
                             name="password"
                             id="password"
                             placeholder="{{ 'PASSWORD' | translate }}*"
-                            aria-describedby="inputEmailAddress"
+                            aria-describedby="inputPassword"
                             required
                             autofocus
                             autocomplete="on">
@@ -90,7 +90,7 @@
                     <br>
                     <br>
                     <div class="middle">
-                        <a href="" ng-click="changeTab(1)">
+                        <a href="" ng-click="changeTab(2)">
                             {{ 'FORGOT_YOUR_PASSWORD' | translate }}?
                         </a>
                     </div>
@@ -99,7 +99,33 @@
         </div>
 
         <!-- Tab 2 (Recovery) -->
-        <!-- TODO: -->
+        <div class="card" style="padding: 40px 10px 40px 10px;" ng-show="tab==2">
+            <div class="card-block">
+                <form class="form-horizontal" name="recoveryForm" ng-submit="recovery()">
+                    <div class="form-group" ng-class="{'has-danger': recoveryForm.recovery_email_address.$invalid && !recoveryForm.recovery_email_address.$pristine }">
+                        <input type="email" class="form-control form-control-lg" ng-model="recovery_user.email_address" name="recovery_email_address" id="recovery_email_address" placeholder="{{ 'EMAIL_ADDRESS' | translate }}*" required autofocus autocomplete="on">
+                        <span ng-show="recoveryForm.recovery_email_address.$error.required && !recoveryForm.recovery_email_address.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                    <button class="form-control btn btn-lg btn-primary" role="submit">
+                        {{ 'SEND_RECOVERY_EMAIL' | translate }}
+                    </button>
+                    <br>
+                    <br>
+                    <div class="middle">
+                        <a href="" ng-click="changeTab(1)">
+                            {{ 'LOGIN' | translate }}
+                        </a>
+                    </div>
+                    <br>
+                </form>
+            </div>
+        </div>
+
     </div>
 
     <!-- Right padding -->

@@ -3,6 +3,9 @@ var app = angular.module("ethics-app");
 // Login controller
 app.controller("loginController", function($scope, $rootScope, $translate, $location, config, $loginService, $documentService, $userService, $fileService, $recoveryService, $window) {
 
+    // REDIRECT FOR TESTING
+    // $window.location.href = "http://localhost:5000/admin/";
+
     // Reset
     $rootScope.$broadcast('resetNavbar');
     $userService.set();

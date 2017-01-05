@@ -1,17 +1,18 @@
 var app = angular.module("ethics-app");
 
 // Login controller
-app.controller("loginController", function($scope, $rootScope, $translate, $location, config, $window) {
+app.controller("loginController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $recoveryService, $documentsService) {
 
     // Reset
-    //$rootScope.$broadcast('resetNavbar');
-    //$userService.set();
-    //delete $scope.user;
+    $rootScope.$broadcast('resetNavbar');
+    $authenticationService.set();
+    $documentsService.set();
 
     // Init
     $scope.tab = 1;
-    //$scope.login_document = $loginService.init();
-    //$scope.recovery_user = $recoveryService.init();
+    $scope.login_user = $authenticationService.init();
+    $scope.recovery_user = $recoveryService.init();
+
 
     /**
      * [changeTab description]
@@ -27,15 +28,25 @@ app.controller("loginController", function($scope, $rootScope, $translate, $loca
      * [login description]
      * @return {[type]} [description]
      */
-    $scope.login = function(){
-
+    $scope.submitLogin = function(){
+        $authenticationService.login($scope.login_user)
+        .success(function(response) {
+            $authenticationService.set(response);
+            // Update navbar
+            $rootScope.$broadcast('updateNavbar');
+            // Redirect
+            $location.url("/documents");
+        })
+        .error(function(response) {
+            $window.alert(response);
+        });
     };
 
 
     /**
      * [recovery description]
      * @return {[type]} [description]
-     *
+     */
     $scope.recovery = function(){
         // Check input
         if($scope.recoveryForm.$invalid) {
@@ -55,15 +66,13 @@ app.controller("loginController", function($scope, $rootScope, $translate, $loca
                 $scope.tab = 1;
             })
             .error(function(response) {
-                console.log(response);
+                // Show dialog
+                $window.alert(response);
                 // Redirect
-                $scope.tab = 3;
-                // TODO: Show dialog
-                $window.alert("This email-address could not be found!");
-                //$window.alert("No documents could be found with this email-address!");
+                $scope.tab = 2;
             });
         }
-    };*/
+    };
 
 
 });
