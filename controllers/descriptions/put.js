@@ -48,6 +48,7 @@ exports.request = function(req, res) {
             // TODO: Add object/schema validation
             var object = {
                 description_id: req.params.description_id,
+                used: req.body.used,
                 title: req.body.title,
                 researcher: req.body.researcher,
                 study_time: req.body.study_time,

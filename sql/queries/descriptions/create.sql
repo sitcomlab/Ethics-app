@@ -1,7 +1,9 @@
 INSERT INTO Descriptions (
     revision_id,
-    language
+    language,
+    used
 ) VALUES (
     $1::INTEGER,
-    $2::languages
+    $2::languages,
+    $3::BOOLEAN
 ) RETURNING *;

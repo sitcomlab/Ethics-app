@@ -5,10 +5,11 @@ var router = express.Router();
 var post = require('../controllers/documents/post');
 var get = require('../controllers/documents/get');
 var put = require('../controllers/documents/put');
-// var del = require('../controllers/documents/delete');
+var del = require('../controllers/documents/delete');
 
 var confirm_intro = require('../controllers/documents/confirm_intro');
 var submit = require('../controllers/documents/submit');
+var generate_files = require('../controllers/documents/generate_files');
 
 
 // LIST
@@ -24,14 +25,17 @@ router.get('/documents/:document_id', get.request);
 router.put('/documents/:document_id', put.request);
 
 // DELETE
-// router.delete('/documents/:document_id', del.request);
+router.delete('/documents/:document_id', del.request);
 
 
 // CONFIRM INTRO
 router.get('/documents/:document_id/intro', confirm_intro.request);
 
-// SUBMIT INTRO
+// SUBMIT DOCUMENT
 router.get('/documents/:document_id/submit', submit.request);
+
+// GENERATE FILES
+router.get('/documents/:document_id/files', generate_files.request);
 
 
 module.exports = router;

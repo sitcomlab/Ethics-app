@@ -11,6 +11,7 @@ CREATE TABLE Descriptions (
     -- Attributes
     revision_id INTEGER NOT NULL REFERENCES Revisions(revision_id) ON UPDATE CASCADE ON DELETE CASCADE,
     language languages NOT NULL,
+    used BOOLEAN NOT NULL,
     title CHARACTER VARYING(255) DEFAULT NULL,          -- 1st question
     researcher CHARACTER VARYING(255) DEFAULT NULL,     -- 2nd question
     study_time CHARACTER VARYING(255) DEFAULT NULL,     -- 3rd question

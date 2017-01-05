@@ -99,7 +99,8 @@ exports.request = function(req, res) {
             // Database query
             client.query(query_create_description, [
                 revision.revision_id,
-                'en'
+                'en',
+                true
             ], function(err, result) {
                 done();
                 if (err) {
@@ -113,7 +114,8 @@ exports.request = function(req, res) {
             // Database query
             client.query(query_create_description, [
                 revision.revision_id,
-                'de'
+                'de',
+                false
             ], function(err, result) {
                 done();
                 if (err) {
