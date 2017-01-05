@@ -15,7 +15,7 @@
         <meta name="format-detection" content="telephone=no">
         <meta http-equiv="x-rim-auto-match" content="none">
 
-        <title>Ethics-App | ADMIN</title>
+        <title>Ethics-App | admin</title>
 
         <!-- Bootstrap core CSS -->
         <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
@@ -46,61 +46,34 @@
 
     </head>
 
-    <!--<body ng-app="ethics-app-admin">-->
-    <body>
+    <body ng-app="ethics-app">
 
         <!-- Header -->
         <div class="container-fluid">
             <nav class="navbar navbar-dark bg-inverse navbar-fixed-top" ng-controller="navController">
                 <a href="http://ifgi.uni-muenster.de" target="_blank">
-                    <img src="/img/ifgi-logo.svg" height="54" class="d-inline-block align-middle" alt="" style="background: #f5f5f5; padding:2px 10px 2px 10px; position:absolute; top: 0px; left: 0px;">
+                    <img src="../img/ifgi-logo.svg" height="54" class="d-inline-block align-middle" alt="" style="background: #f5f5f5; padding:2px 10px 2px 10px; position:absolute; top: 0px; left: 0px;">
                 </a>
                 <a class="navbar-brand" href="/admin" style="margin-left: 160px;">
                     {{config.appName}}
                 </a>
-                <!--<div class="btn-group float-xs-right" style="margin-left:5px;" ng-if="user">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;<span ng-if="user.title">{{user.title}}&nbsp;</span>{{user.first_name}} {{user.last_name}}
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <h6 class="dropdown-header">{{ 'ACCOUNT' | translate }}</h6>
-                        <a class="dropdown-item" href="" ng-click="editUser(document.document_id)">{{ 'SETTINGS' | translate }}</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="" ng-click="logout()">{{ 'LOGOUT' | translate }}</a>
-                    </div>
-                </div>
-                <div class="btn-group float-xs-right" ng-if="document">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;{{document.document_title}}
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <h6 class="dropdown-header">{{ 'DOCUMENT' | translate }}</h6>
-                        <a class="dropdown-item" href="" ng-click="showDocumentId(document.document_id)">{{ 'SHOW_DOCUMENT_ID' | translate }}</a>
-                        <a class="dropdown-item" href="" ng-click="showIntro(document.document_id)">{{ 'SHOW_INTRO' | translate }}</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="" ng-click="changeDocumentTitle(document.document_id)">{{ 'CHANGE_DOCUMENT_TITLE' | translate }}</a>
-                        <a class="dropdown-item" href="" ng-click="saveDocument(document.document_id)">{{ 'SAVE_DOCUMENT' | translate }}</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="" ng-click="deleteDocument(document.document_id)">{{ 'DELETE_DOCUMENT' | translate }}</a>
-                    </div>
-                </div>-->
             </nav>
         </div>
 
         <!-- Main content -->
-        <!--<div class="container-fluid main" ng-view></div>-->
-        <div class="container-fluid main">
-            ADMIN SECTION
-        </div>
+        <div class="container-fluid main" ng-view></div>
 
         <!-- Footer -->
-        <!--<footer class="footer" ng-controller="footerController">-->
-        <footer class="footer">
+        <footer class="footer" ng-controller="footerController">
             <div class="container-fluid middle">
                 <span class="text-muted">
                     <small>
                         &copy; {{config.appYear}}
                         <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <a href="/" target="_self" class="link">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </a>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
                         <a href="{{config.appGithub}}" target="_blank" class="link">
                             <i class="fa fa-github" aria-hidden="true"></i>
@@ -112,10 +85,10 @@
 
 
         <!-- Modules -->
-        <!--<script src="js/modules/config.js"></script>
+        <script src="js/modules/config.js"></script>
         <script src="js/modules/routes.js"></script>
         <script src="js/modules/languages.js"></script>
-        <script src="js/modules/filters.js"></script>-->
+        <!--<script src="js/modules/filters.js"></script>-->
 
         <!-- Services -->
         <!--<script src="js/services/loginService.js"></script>
@@ -125,11 +98,11 @@
         <script src="js/services/recoveryService.js"></script>-->
 
         <!-- Controllers -->
-        <!--<script src="js/app.js"></script>
+        <script src="js/app.js"></script>
         <script src="js/controllers/navController.js"></script>
         <script src="js/controllers/footerController.js"></script>
         <script src="js/controllers/loginController.js"></script>
-        <script src="js/controllers/userController.js"></script>
+        <!--<script src="js/controllers/userController.js"></script>
         <script src="js/controllers/documentController.js"></script>
         <script src="js/controllers/documentIdController.js"></script>
         <script src="js/controllers/documentTitleController.js"></script>

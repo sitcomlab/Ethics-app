@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!-- LOADING -->
+<div class="loading" ng-show="tab==0">
+    <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+</div>
+
+<!-- MAIN -->
+<!-- HEADERS -->
+<div class="row" ng-show="tab>0">
+
+    <!-- Left padding -->
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+
+    <!-- Content -->
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+        <!-- Main -->
+        <div class="middle">
+            <center>
+                <br>
+                <h1 class="display-3">
+                    {{ 'WELCOME' | translate }}
+                </h1>
+                <br>
+                <p class="lead">
+                    {{ 'WELCOME_MESSAGE' | translate }}
+                </p>
+                <br>
+            </center>
+        </div>
+
+    </div>
+
+    <!-- Right padding -->
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+
+</div>
+
+<!-- FORMS -->
+<div class="row" ng-show="tab>0">
+    <!-- Left padding -->
+    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-2"></div>
+
+    <!-- Content -->
+    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-8">
+
+        <!-- Tab 1 (Login) -->
+        <div class="card" style="padding: 40px 10px 40px 10px;" ng-show="tab==1">
+            <div class="card-block">
+                <form class="form-horizontal" name="loginForm" ng-submit="login()">
+                    <div class="form-group" ng-class="{'has-danger': loginForm.email_address.$invalid && !loginForm.email_address.$pristine }">
+                        <input
+                            type="email"
+                            class="form-control form-control-lg"
+                            ng-model="login.email_address"
+                            name="email_address"
+                            id="email_address"
+                            placeholder="{{ 'EMAIL' | translate }}*"
+                            aria-describedby="inputEmailAddress"
+                            required
+                            autofocus
+                            autocomplete="on">
+                        <span ng-show="loginForm.email_address.$error.required && !loginForm.email_address.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <div class="form-group" ng-class="{'has-danger': loginForm.password.$invalid && !loginForm.password.$pristine }">
+                        <input
+                            type="password"
+                            class="form-control form-control-lg"
+                            ng-model="login.password"
+                            name="password"
+                            id="password"
+                            placeholder="{{ 'PASSWORD' | translate }}*"
+                            aria-describedby="inputEmailAddress"
+                            required
+                            autofocus
+                            autocomplete="on">
+                        <span ng-show="loginForm.password.$error.required && !loginForm.password.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                    <button class="form-control btn btn-lg btn-success" role="submit">
+                        {{ 'LOGIN' | translate }}
+                    </button>
+                    <br>
+                    <br>
+                    <div class="middle">
+                        <a href="" ng-click="changeTab(1)">
+                            {{ 'FORGOT_YOUR_PASSWORD' | translate }}?
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tab 2 (Recovery) -->
+        <!-- TODO: -->
+    </div>
+
+    <!-- Right padding -->
+    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-2"></div>
+</div>
+<br>
