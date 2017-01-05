@@ -8,6 +8,7 @@ var https = require('https');
 var pg = require('pg');
 var path = require('path');
 var nodemailer = require('nodemailer');
+var jwt = require('jsonwebtoken');
 
 // ENVIRONMENT VARIABLES
 var server_url = process.env.SERVER_URL || 'http://giv-ethics-app.uni-muenster.de';
@@ -25,10 +26,11 @@ var smtp_port = process.env.SMTP_PORT || 465;
 var smtp_ssl = process.env.SMTP_SSL || true;
 var smtp_email_address = process.env.SMTP_EMAIL || '';
 var smtp_password = process.env.SMTP_PW || '';
-var secret = process.env.SECRET || 'superSecretKey';
+var jwtSecret = process.env.JWTSECRET || 'superSecretKey';
 exports.pool = pool;
 exports.httpPort = httpPort;
 exports.server_url = server_url;
+exports.jwtSecret = jwtSecret;
 
 // DATABASE CONFIGURATION
 var config = {
@@ -109,6 +111,7 @@ app.use(express.static(__dirname + '/public', {
 
 
 // Load dependencies
+var login = require ('./routes/login');
 var users = require ('./routes/users');
 // var committee = require ('./routes/committee');
 var documents = require ('./routes/documents');
@@ -119,6 +122,7 @@ var concerns = require ('./routes/concerns');
 var recovery = require ('./routes/recovery');
 
 // Load API routes
+app.use('/api', login);
 app.use('/api', users);
 // app.use('/api', committee);
 app.use('/api', documents);

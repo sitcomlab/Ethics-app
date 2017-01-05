@@ -10,7 +10,6 @@ var db_name = process.env.DB_NAME || 'ethics-app';
 var db_user = process.env.DB_USER || 'Nicho';
 var db_password = process.env.DB_PW || undefined;
 var db_ssl = process.env.DB_SSL || false;
-var secret = process.env.SECRET || 'superSecretKey';
 
 
 // DATABASE CONFIGURATION

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-// var list = require('../controllers/documents/list');
+var list = require('../controllers/documents/list');
 var post = require('../controllers/documents/post');
 var get = require('../controllers/documents/get');
 var put = require('../controllers/documents/put');
@@ -13,7 +13,7 @@ var generate_files = require('../controllers/documents/generate_files');
 
 
 // LIST
-// router.get('/documents', list.request);
+router.get('/documents', list.request);
 
 // POST
 router.post('/users/:user_id/documents', post.request);
