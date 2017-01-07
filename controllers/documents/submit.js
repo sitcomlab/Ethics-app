@@ -27,7 +27,7 @@ var query_get_latest_revision_by_document = fs.readFileSync(__dirname + dir_3 + 
 var query_get_description_by_revision = fs.readFileSync(__dirname + dir_4 + 'get_by_revision.sql', 'utf8').toString();
 var query_get_concern_by_revision = fs.readFileSync(__dirname + dir_5 + 'get_by_revision.sql', 'utf8').toString();
 var query_get_user = fs.readFileSync(__dirname + dir_6 + 'get.sql', 'utf8').toString();
-var query_list_committee_by_subscription = fs.readFileSync(__dirname + dir_7 + 'list_by_subscription.sql', 'utf8').toString();
+var query_list_members_by_subscription = fs.readFileSync(__dirname + dir_7 + 'list_by_subscription.sql', 'utf8').toString();
 
 
 // SUBMIT
@@ -191,7 +191,7 @@ exports.request = function(req, res) {
         },
         function(client, done, document, revision, description, concern, author, callback){
             // Database query
-            client.query(query_list_committee_by_subscription, function(err, result) {
+            client.query(query_list_members_by_subscription, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
@@ -200,7 +200,7 @@ exports.request = function(req, res) {
                 }
             });
         },
-        function(client, done, document, revision, description, concern, author, committee, callback){
+        function(client, done, document, revision, description, concern, author, members, callback){
             if(document.status === 2){
                 callback(null, 204, null);
             } else {
@@ -208,101 +208,101 @@ exports.request = function(req, res) {
                 // Formatting
                 if(concern.q01_value){
                     concern.q01_label = "tag-danger";
-                    concern.q01_sign = "!";
+                    concern.q01_sign = "yes";
                 } else {
                     concern.q01_label = "tag-success";
-                    concern.q01_sign = "&#10004;";
+                    concern.q01_sign = "no";
                 }
                 if(concern.q02_value){
                     concern.q02_label = "tag-danger";
-                    concern.q02_sign = "!";
+                    concern.q02_sign = "yes";
                 } else {
                     concern.q02_label = "tag-success";
-                    concern.q02_sign = "&#10004;";
+                    concern.q02_sign = "no";
                 }
                 if(concern.q03_value){
                     concern.q03_label = "tag-danger";
-                    concern.q03_sign = "!";
+                    concern.q03_sign = "yes";
                 } else {
                     concern.q03_label = "tag-success";
-                    concern.q03_sign = "&#10004;";
+                    concern.q03_sign = "no";
                 }
                 if(concern.q04_value){
                     concern.q04_label = "tag-danger";
-                    concern.q04_sign = "!";
+                    concern.q04_sign = "yes";
                 } else {
                     concern.q04_label = "tag-success";
-                    concern.q04_sign = "&#10004;";
+                    concern.q04_sign = "no";
                 }
                 if(concern.q05_value){
                     concern.q05_label = "tag-danger";
-                    concern.q05_sign = "!";
+                    concern.q05_sign = "yes";
                 } else {
                     concern.q05_label = "tag-success";
-                    concern.q05_sign = "&#10004;";
+                    concern.q05_sign = "no";
                 }
                 if(concern.q06_value){
                     concern.q06_label = "tag-danger";
-                    concern.q06_sign = "!";
+                    concern.q06_sign = "yes";
                 } else {
                     concern.q06_label = "tag-success";
-                    concern.q06_sign = "&#10004;";
+                    concern.q06_sign = "no";
                 }
                 if(concern.q07_value){
                     concern.q07_label = "tag-danger";
-                    concern.q07_sign = "!";
+                    concern.q07_sign = "yes";
                 } else {
                     concern.q07_label = "tag-success";
-                    concern.q07_sign = "&#10004;";
+                    concern.q07_sign = "no";
                 }
                 if(concern.q08_value){
                     concern.q08_label = "tag-danger";
-                    concern.q08_sign = "!";
+                    concern.q08_sign = "yes";
                 } else {
                     concern.q08_label = "tag-success";
-                    concern.q08_sign = "&#10004;";
+                    concern.q08_sign = "no";
                 }
                 if(concern.q09_value){
                     concern.q09_label = "tag-danger";
-                    concern.q09_sign = "!";
+                    concern.q09_sign = "yes";
                 } else {
                     concern.q09_label = "tag-success";
-                    concern.q09_sign = "&#10004;";
+                    concern.q09_sign = "no";
                 }
                 if(concern.q10_value){
                     concern.q10_label = "tag-danger";
-                    concern.q10_sign = "!";
+                    concern.q10_sign = "yes";
                 } else {
                     concern.q10_label = "tag-success";
-                    concern.q10_sign = "&#10004;";
+                    concern.q10_sign = "no";
                 }
                 if(concern.q11_1_value){
                     concern.q11_1_label = "tag-danger";
-                    concern.q11_1_sign = "!";
+                    concern.q11_1_sign = "yes";
                 } else {
                     concern.q11_1_label = "tag-success";
-                    concern.q11_1_sign = "&#10004;";
+                    concern.q11_1_sign = "no";
                 }
                 if(concern.q11_2_value){
                     concern.q11_2_label = "tag-danger";
-                    concern.q11_2_sign = "!";
+                    concern.q11_2_sign = "yes";
                 } else {
                     concern.q11_2_label = "tag-success";
-                    concern.q11_2_sign = "&#10004;";
+                    concern.q11_2_sign = "no";
                 }
                 if(concern.q12_value){
                     concern.q12_label = "tag-danger";
-                    concern.q12_sign = "!";
+                    concern.q12_sign = "yes";
                 } else {
                     concern.q12_label = "tag-success";
-                    concern.q12_sign = "&#10004;";
+                    concern.q12_sign = "no";
                 }
                 if(concern.q13_value){
                     concern.q13_label = "tag-danger";
-                    concern.q13_sign = "!";
+                    concern.q13_sign = "yes";
                 } else {
                     concern.q13_label = "tag-success";
-                    concern.q13_sign = "&#10004;";
+                    concern.q13_sign = "no";
                 }
 
                 // Formatting
@@ -310,8 +310,8 @@ exports.request = function(req, res) {
 
                 var link = server_url + ":" + httpPort + "/admin/";
 
-                // Notify each committee member
-                async.eachOfSeries(committee, function (member, key, callback) {
+                // Notify each committee members
+                async.eachOfSeries(members, function (member, key, callback) {
 
                     // Render HTML content
                     var output = mustache.render(template, {

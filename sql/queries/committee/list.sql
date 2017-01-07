@@ -1,7 +1,4 @@
 SELECT
-    -- committee_id,
-    email_address,
-    -- password,
     title,
     first_name,
     last_name,
@@ -10,8 +7,5 @@ SELECT
     office_room_number,
     office_phone_number,
     office_email_address
-    -- admin,
-    -- subscribed,
-    -- fails
 FROM Committee
-WHERE subscribed=true;
+WHERE subscribed=true AND admin=false;

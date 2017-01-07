@@ -9,28 +9,18 @@ CREATE TABLE Committee (
     updated TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
 
     -- Attributes
-    user_id INTEGER NOT NULL REFERENCES Users(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    email_address CHARACTER VARYING(255) UNIQUE NOT NULL,
     password TEXT NOT NULL,
-    subscribed BOOLEAN DEFAULT true,
+    title CHARACTER VARYING(255) DEFAULT NULL,
+    first_name CHARACTER VARYING(255) NOT NULL,
+    last_name CHARACTER VARYING(255) NOT NULL,
     institute CHARACTER VARYING(255) DEFAULT NULL,
     research_lab CHARACTER VARYING(255) DEFAULT NULL,
     office_room_number CHARACTER VARYING(255) DEFAULT NULL,
     office_phone_number CHARACTER VARYING(255) DEFAULT NULL,
-    office_fax_number CHARACTER VARYING(255) DEFAULT NULL,
+    office_email_address CHARACTER VARYING(255) DEFAULT NULL,
+    admin BOOLEAN DEFAULT false NOT NULL,
+    subscribed BOOLEAN DEFAULT true NOT NULL,
     fails SMALLINT DEFAULT 0 NOT NULL
-);
 
--- Admin-account
-INSERT INTO Committee (
-    user_id,
-    password,
-    institute,
-    office_room_number,
-    office_phone_number
-) VALUES (
-    1,
-    crypt('123456', gen_salt('md5')),
-    'Institute for Geoinformatics',
-    '117',
-    '+492518333080'
 );

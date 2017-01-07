@@ -38,6 +38,7 @@ queries.push(fs.readFileSync(__dirname + dir + 'descriptions.sql', 'utf8').toStr
 queries.push(fs.readFileSync(__dirname + dir + 'concerns.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'description_comments.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'concern_comments.sql', 'utf8').toString());
+queries.push(fs.readFileSync(__dirname + dir + 'examples.sql', 'utf8').toString());
 
 
 // Start setup

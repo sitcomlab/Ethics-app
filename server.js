@@ -113,7 +113,7 @@ app.use(express.static(__dirname + '/public', {
 // Load dependencies
 var login = require ('./routes/login');
 var users = require ('./routes/users');
-// var committee = require ('./routes/committee');
+var committee = require ('./routes/committee');
 var documents = require ('./routes/documents');
 var revisions = require ('./routes/revisions');
 var descriptions = require ('./routes/descriptions');
@@ -124,7 +124,7 @@ var recovery = require ('./routes/recovery');
 // Load API routes
 app.use('/api', login);
 app.use('/api', users);
-// app.use('/api', committee);
+app.use('/api', committee);
 app.use('/api', documents);
 app.use('/api', revisions);
 app.use('/api', descriptions);
