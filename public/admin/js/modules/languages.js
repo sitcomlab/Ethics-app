@@ -27,14 +27,28 @@ app.config(function ($translateProvider) {
         DOCUMENT: 'Document',
         LOGOUT: 'Logout',
 
+        STATUS: 'Status',
         INITIALISED: 'initialised',
         UNSUBMITTED: 'unsubmitted',
         SUBMITTED: 'submitted',
-        REVIEW_PENDING: 'review pending',
-        UNDER_REVIEW: 'under review',
+        SUBMITTED_OKAY: 'submitted (okay)',
+        REVIEW_REQUIRED: 'review required',
+        SUBMITTED_REVIEW_REQUIRED: 'submitted (review required)',
+        REVIEW_IN_PROGRESS: 'review in progress',
         PARTLY_ACCEPTED: 'partly accepted',
+        REVIEWED_PARTLY_ACCEPTED: 'reviewed (partly accepted)',
         REVIEWED: 'reviewed',
+        REVIEWED_OKAY: 'reviewed (okay)',
         REJECTED: 'rejected',
+        REVIEWED_REJECTED: 'reviewed (rejected)',
+
+        REV: 'rev',
+        SEARCH: 'Search',
+        SEARCH_FOR_DOCUMENT_TITLES_AND_AUTHORS: 'Search for document titles and authors',
+        FILTER_BY_STATUS_ETC: 'Filter by status, etc.',
+        DEFAULT: 'Default',
+        ALL: 'all',
+        NO_DOCUMENTS_FOUND: 'no documents found',
     });
 
     // Default Language (English)

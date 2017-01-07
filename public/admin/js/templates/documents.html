@@ -16,28 +16,91 @@
         <div class="card" style="padding: 40px 10px 40px 10px;" ng-show="tab==1">
 
             <div class="card-block">
-            </div>
-            <div class="list-group">
-                <a href="" ng-click="goTo(document.document_id)" class="list-group-item list-group-item-action" ng-repeat="document in documents">
-                    <span class="tag float-xs-right" ng-class="{'tag-default': document.status==0 || document.status==1, 'tag-success': document.status==2 || document.status==6, 'tag-primary': document.status==3, 'tag-info': document.status==4, 'tag-warning': document.status=='5', 'tag-danger': document.status==7}">
-                        <span ng-if="document.status==0">{{ 'INITIALISED' | translate }}</span>
-                        <span ng-if="document.status==1">{{ 'UNSUBMITTED' | translate }}</span>
-                        <span ng-if="document.status==2">{{ 'SUBMITTED' | translate }}</span>
-                        <span ng-if="document.status==3">{{ 'REVIEW_PENDING' | translate }}</span>
-                        <span ng-if="document.status==4">{{ 'UNDER_REVIEW' | translate }}</span>
-                        <span ng-if="document.status==5">{{ 'PARTLY_ACCEPTED' | translate }}</span>
-                        <span ng-if="document.status==6">{{ 'REVIEWED' | translate }}</span>
-                        <span ng-if="document.status==7">{{ 'REJECTED' | translate }}</span>
-                    </span>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-md-6">
-                            <code>{{document.document_id}}</code>
+
+                <div class="row">
+                    <!-- SEARCH -->
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" class="form-control" placeholder="{{ 'SEARCH' | translate }}" ng-model="searchText">
+                            <span class="input-group-btn" ng-if="searchText">
+                                <a href="" class="btn btn-secondary" ng-click="resetSearch()">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </a>
+                            </span>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-md-6">
-                            <i>{{document.author_title_name}} {{document.author_first_name}} {{document.author_last_name}}</i>
-                        </div>
+                        <small class="form-text text-muted">{{ 'SEARCH_FOR_DOCUMENT_TITLES_AND_AUTHORS' | translate }}</small>
+                        <br>
                     </div>
-                </a>
+                    <!-- FILTER -->
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <select class="form-control custom-select" ng-model="filter" ng-change="filterDocuments()">
+                            <optgroup label="{{ 'DEFAULT' | translate }}">
+                                <option value="">{{ 'ALL' | translate }}</option>
+                            </optgroup>
+                            <optgroup label="{{ 'STATUS' | translate }}">
+                                <option value="0">{{ 'INITIALISED' | translate }}</option>
+                                <option value="1">{{ 'UNSUBMITTED' | translate }}</option>
+                                <option value="2">{{ 'SUBMITTED_OKAY' | translate }}</option>
+                                <option value="3">{{ 'SUBMITTED_REVIEW_REQUIRED' | translate }}</option>
+                                <option value="4">{{ 'REVIEW_IN_PROGRESS' | translate }}</option>
+                                <option value="5">{{ 'REVIEWED_PARTLY_ACCEPTED' | translate }}</option>
+                                <option value="6">{{ 'REVIEWED_OKAY' | translate }}</option>
+                                <option value="7">{{ 'REJECTED' | translate }}</option>
+                            </optgroup>
+                        </select>
+                        <small class="form-text text-muted">{{ 'FILTER_BY_STATUS_ETC' | translate }}</small>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="middle" ng-if="!documents">
+                    <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+                </div>
+                <div class="middle" ng-if="documents && documents.length==0">
+                    - {{ 'NO_DOCUMENTS_FOUND' | translate }} -
+                </div>
+                <div class="list-group" ng-if="documents && documents.length>0">
+                    <a href="" ng-click="showDetails(document.document_id)" class="list-group-item list-group-item-action" ng-repeat="document in documents | filter: searchText">
+                        <div class="row">
+                            <div class="col-xs-8 col-sm-8 col-md-9 col-lg-9">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <span class="tag tag-primary">
+                                            {{ 'REV' | translate}}{{document.revision_version}}
+                                        </span>
+                                        &nbsp;&nbsp;
+                                        <b>{{document.document_title}}</b>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <i>
+                                            <span ng-if="document.author_title_name">{{document.author_title_name}} </span>{{document.author_first_name}} {{document.author_last_name}}
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 right">
+                                <span class="tag" ng-class="{'tag-default': document.status==0 || document.status==1, 'tag-success': document.status==2 || document.status==6, 'tag-primary': document.status==3, 'tag-info': document.status==4, 'tag-warning': document.status=='5', 'tag-danger': document.status==7}">
+                                    <span ng-if="document.status==0">{{ 'INITIALISED' | translate }}</span>
+                                    <span ng-if="document.status==1">{{ 'UNSUBMITTED' | translate }}</span>
+                                    <span ng-if="document.status==2">{{ 'SUBMITTED' | translate }}</span>
+                                    <span ng-if="document.status==3">{{ 'REVIEW_REQUIRED' | translate }}</span>
+                                    <span ng-if="document.status==4">{{ 'UNDER_REVIEW' | translate }}</span>
+                                    <span ng-if="document.status==5">{{ 'PARTLY_ACCEPTED' | translate }}</span>
+                                    <span ng-if="document.status==6">{{ 'REVIEWED' | translate }}</span>
+                                    <span ng-if="document.status==7">{{ 'REJECTED' | translate }}</span>
+                                </span>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 timestamp right">
+                                {{document.updated}}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
             </div>
         </div>
 

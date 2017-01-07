@@ -61,7 +61,7 @@ app.controller("loginController", function($scope, $rootScope, $translate, $loca
                 // Reset
                 $scope.recovery_user = $recoveryService.init();
                 // Show dialog
-                $window.alert("An email with your document-IDs was sent!");
+                $window.alert("An email was sent to you!");
                 // Redirect
                 $scope.tab = 1;
             })

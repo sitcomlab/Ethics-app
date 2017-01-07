@@ -10,7 +10,8 @@ app.controller("documentsController", function($scope, $rootScope, $translate, $
 
         // Check authentication
         if($authenticationService.authenticated()){
-            $documentsService.list()
+
+            $documentsService.list($scope.filter)
             .success(function(response) {
                 $documentsService.set(response);
                 $scope.documents = $documentsService.get();
@@ -29,5 +30,50 @@ app.controller("documentsController", function($scope, $rootScope, $translate, $
 
     // Init
     $scope.load();
+    $scope.filter = "";
+    $scope.searchText = "";
+
+
+    /**
+     * [resetSearch description]
+     */
+    $scope.resetSearch = function(){
+        $scope.searchText = "";
+    };
+
+
+    /**
+     * [filterDocuments description]
+     * @return {[type]} [description]
+     */
+    $scope.filterDocuments = function(){
+        $documentsService.set();
+        $scope.documents = $documentsService.get();
+
+        // Check authentication
+        if($authenticationService.authenticated()){
+            $documentsService.list($scope.filter)
+            .success(function(response) {
+                $documentsService.set(response);
+                $scope.documents = $documentsService.get();
+            })
+            .error(function(response) {
+                $window.alert(response);
+            });
+        } else {
+            // Redirect
+            $location.url("/");
+        }
+    };
+
+
+    /**
+     * [showDetails description]
+     * @return {[type]} [description]
+     */
+    $scope.showDetails = function(document_id){
+        // Redirect
+        $location.url("/documents/" + document_id);
+    };
 
 });

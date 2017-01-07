@@ -13,20 +13,20 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
         set: function(data) {
             documents = data;
         },
-        list: function(attribute, value) {
-            var query = "?";
-            if(attribute){
-                query = attribute + "=" + value;
+        list: function(value) {
+            if(value){
+                query = "?status=" + value;
             } else {
                 query = "";
             }
+
             return $http.get(config.apiURL + "/documents" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         }
-        
+
     };
 
 });
