@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<div class="row">
+
+    <!-- Left padding -->
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-2"></div>
+
+    <!-- Content -->
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
+        <div class="card" style="padding: 40px 10px 40px 10px;">
+            <center>
+                <p class="lead">
+                    <b>{{ 'ETHICS_COMMITTEE' | translate }}</b>
+                </p>
+            </center>
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-repeat="member in members | orderBy: ['last_name', 'first_name']">
+                        <div class="card">
+                            <div class="card-block">
+                                <h4 class="card-title">
+                                    {{member.title}} {{member.first_name}} {{member.last_name}}
+                                </h4>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    {{member.institute}} <span ng-if="member.research_lab">({{member.research_lab}})</span>
+                                </h6>
+                                <p class="card-text">
+                                    <div class="row">
+                                        <div class="col-xs-12" ng-if="member.office_room_number">
+                                            <p>
+                                                <b>{{ 'OFFICE' | translate }}</b>: {{member.office_room_number}}
+                                            </p>
+                                        </div>
+                                        <div class="col-xs-12" ng-if="member.office_phone_number">
+                                            <i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp;&nbsp;
+                                            <a href="tel:{{member.office_phone_number}}">{{member.office_phone_number}}</a>
+                                        </div>
+                                        <div class="col-xs-12" ng-if="member.office_email_address">
+                                            <i class="fa fa-envelope-square" aria-hidden="true"></i>&nbsp;&nbsp;
+                                            <a href="mailto:{{member.office_email_address}}">
+                                                {{member.office_email_address}}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <a href="" class="form-control btn btn-lg btn-primary" ng-click="close()">
+                            {{ 'CLOSE' | translate }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right padding -->
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+</div>
+<br>

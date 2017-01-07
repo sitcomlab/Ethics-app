@@ -49,6 +49,16 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
 
 
     /**
+     * [showMembers description]
+     * @return {[type]} [description]
+     */
+    $scope.showMembers = function(){
+        // Redirect
+        $location.url("/committee");
+    };
+
+
+    /**
      * [logout description]
      * @return {[type]} [description]
      */

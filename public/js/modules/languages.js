@@ -107,6 +107,7 @@ app.config(function ($translateProvider) {
 
         NAME: 'Name',
         TIME: 'Time',
+        RESEARCHER: 'Reseacher(s)',
         PURPOSE: 'Purpose',
         PROCEDURE: 'Procedure',
         DURATION: 'Duration',
@@ -119,7 +120,20 @@ app.config(function ($translateProvider) {
         DOCUMENT_IS_CURRENTLY_UNDER_REVIEW: 'Your document is currently under review',
         DOCUMENT_REVIEWED_SUCCESSFULLY: 'Your document has been reviewed successfully',
         DOCUMENT_PARTLY_ACCEPTED: 'Your document has been partly accepted',
-        YOUR_DOCUMENT_HAS_BEEN_REJECTED: 'Your document has been rejected'
+        YOUR_DOCUMENT_HAS_BEEN_REJECTED: 'Your document has been rejected',
+
+        YOUR_DOCUMENT: 'Your document',
+        LATEST_REVISION: 'Latest revision',
+        REV: 'rev',
+        SHOW_DOCUMENT: 'Show document',
+        SHOW_HISTORY: 'Show history',
+        HIDE_HISTORY: 'Hide history',
+        SHOW_COMMENTS: 'Show comments',
+        HIDE_COMMENTS: 'Hide comments',
+
+        ETHICS_COMMITTEE: 'Ethics committee',
+        SHOW_MEMBERS: 'Show members',
+        OFFICE: 'Office',
 
     });
 

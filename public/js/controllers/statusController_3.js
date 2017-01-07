@@ -21,5 +21,5 @@ app.controller("statusController_3", function($scope, $rootScope, $routeParams, 
         // Redirect
         $location.url("/");
     };
-    
+
 });

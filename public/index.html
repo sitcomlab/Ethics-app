@@ -69,11 +69,13 @@
                         <h6 class="dropdown-header">{{ 'DOCUMENT' | translate }}</h6>
                         <a class="dropdown-item" href="" ng-click="showDocumentId(document.document_id)">{{ 'SHOW_DOCUMENT_ID' | translate }}</a>
                         <a class="dropdown-item" href="" ng-click="changeDocumentTitle(document.document_id)">{{ 'CHANGE_DOCUMENT_TITLE' | translate }}</a>
-                        <!--<a class="dropdown-item" href="" ng-click="saveDocument(document.document_id)">{{ 'SAVE_DOCUMENT' | translate }}</a>-->
                         <a class="dropdown-item" href="" ng-click="deleteDocument(document.document_id)" ng-if="document.status<=1">{{ 'DELETE_DOCUMENT' | translate }}</a>
                         <div class="dropdown-divider"></div>
                         <h6 class="dropdown-header">{{ 'ACCOUNT' | translate }}</h6>
                         <a class="dropdown-item" href="" ng-click="editUser(document.document_id)">{{ 'SETTINGS' | translate }}</a>
+                        <div class="dropdown-divider"></div>
+                        <h6 class="dropdown-header">{{ 'ETHICS_COMMITTEE' | translate }}</h6>
+                        <a class="dropdown-item" href="" ng-click="showMembers()">{{ 'SHOW_MEMBERS' | translate }}</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="" ng-click="logout()">{{ 'LOGOUT' | translate }}</a>
                     </div>
@@ -120,6 +122,7 @@
         <script src="js/services/userService.js"></script>
         <script src="js/services/recoveryService.js"></script>
         <script src="js/services/fileService.js"></script>
+        <script src="js/services/committeeService.js"></script>
 
         <!-- Controllers -->
         <script src="js/app.js"></script>
@@ -131,6 +134,7 @@
         <script src="js/controllers/documentIdController.js"></script>
         <script src="js/controllers/documentTitleController.js"></script>
         <script src="js/controllers/documentDeleteController.js"></script>
+        <script src="js/controllers/committeeController.js"></script>
         <script src="js/controllers/statusController_1.js"></script>
         <script src="js/controllers/statusController_2.js"></script>
         <script src="js/controllers/statusController_3.js"></script>

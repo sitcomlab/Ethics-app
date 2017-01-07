@@ -65,6 +65,12 @@ app.config(function($routeProvider, $locationProvider, config) {
 			controller: "statusController_7"
 		})
 
+		// Committee
+		.when("/committee", {
+			templateUrl: "/js/templates/committee.html",
+			controller: "committeeController"
+		})
+
 		.otherwise({
 			redirectTo: "/"
 		});

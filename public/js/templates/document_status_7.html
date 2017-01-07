@@ -8,8 +8,1112 @@
     <!-- Content -->
     <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
 
+        <!-- INTRO -->
+        <div class="card" style="padding: 40px 10px 40px 10px;" ng-show="page==1">
+            <center>
+                <p class="lead">
+                    <b>{{ 'GETTING_STARTED' | translate }}</b>
+                </p>
+            </center>
+            <div class="card-block">
+                <div style="text-align: justify;">
+                    You will be asked a series of questions, based on which the EthicsApp will auto-generate 3 documents. You are required to use these documents in your experiment. The key document is the Informed Consent Form - both you and your participant should
+                    sign and keep a copy. See the example bellow.
+                </div>
+                <br>
+                <!-- TODO: Insert images -->
+                <br>
+
+                <br>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <a href="" class="form-control btn btn-lg btn-primary" ng-click="nextPage()">
+                            {{ 'OKAY' | translate }}
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- INPUTS -->
+        <div class="card" style="padding: 40px 10px 40px 10px;" ng-show="page==2">
+            <center>
+                <p class="lead">
+                    <b>{{ 'YOUR_DOCUMENT' | translate }}</b>
+                </p>
+            </center>
+            <div class="card-block">
+
+                <!--{{document.revisions}}-->
+
+                <h6 class="text-muted">{{ 'GENERAL' | translate }}</h6>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-9 col-sm-9 col-md-6 col-lg-6">
+                                <b>{{ 'LATEST_REVISION' | translate }}</b>
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-6 col-lg-6 right">
+                                <span class="tag tag-primary">
+                                    {{ 'REV' | translate}}{{latest_revision.version}}
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <br>
+
+                <!-- English description -->
+                <div class="row inputs">
+                    <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6">
+                        <h6 class="text-muted">
+                            <span class="flag-icon flag-icon-gb"></span>&nbsp;&nbsp;{{ 'STUDY_DESCRIPTION' | translate }}
+                        </h6>
+                    </div>
+                    <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
+                        <small>
+                            <a href="" ng-click="toggleDescriptionHistory('en')">{{ 'SHOW_HISTORY' | translate }}</a>
+                            &nbsp;&nbsp;|&nbsp;&nbsp;
+                            <a href="" ng-click="toggleDescriptionComments('en')">{{ 'SHOW_COMMENTS' | translate }}</a>
+                        </small>
+                    </div>
+                </div>
+
+                <!-- Properties -->
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="row" ng-if="!descriptionHistoryEn">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <b>{{ 'TITLE' | translate }}</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                <i>{{latest_revision.en.title}}</i>
+                            </div>
+                        </div>
+                        <div ng-if="descriptionHistoryEn">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <b>{{ 'TITLE' | translate }}</b>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-primary">
+                                            {{ 'REV' | translate}}{{revision.version}}
+                                        </span>
+                                        &nbsp;&nbsp;
+                                        <i>{{revision.en.title}}</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row" ng-if="!descriptionHistoryEn">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <b>{{ 'RESEARCHER' | translate }}</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                <i>{{latest_revision.en.researcher}}</i>
+                            </div>
+                        </div>
+                        <div ng-if="descriptionHistoryEn">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <b>{{ 'RESEARCHER' | translate }}</b>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-primary">
+                                            {{ 'REV' | translate}}{{revision.version}}
+                                        </span>
+                                        &nbsp;&nbsp;
+                                        <i>{{revision.en.researcher}}</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row" ng-if="!descriptionHistoryEn">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <b>{{ 'TIME' | translate }}</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                <i>{{latest_revision.en.study_time}}</i>
+                            </div>
+                        </div>
+                        <div ng-if="descriptionHistoryEn">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <b>{{ 'TIME' | translate }}</b>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-primary">
+                                            {{ 'REV' | translate}}{{revision.version}}
+                                        </span>
+                                        &nbsp;&nbsp;
+                                        <i>{{revision.en.study_time}}</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row" ng-if="!descriptionHistoryEn">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <b>{{ 'PURPOSE' | translate }}</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                <i>{{latest_revision.en.purpose}}</i>
+                            </div>
+                        </div>
+                        <div ng-if="descriptionHistoryEn">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <b>{{ 'PURPOSE' | translate }}</b>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-primary">
+                                            {{ 'REV' | translate}}{{revision.version}}
+                                        </span>
+                                        &nbsp;&nbsp;
+                                        <i>{{revision.en.purpose}}</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row" ng-if="!descriptionHistoryEn">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <b>{{ 'PROCEDURE' | translate }}</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                <i>{{latest_revision.en.procedure}}</i>
+                            </div>
+                        </div>
+                        <div ng-if="descriptionHistoryEn">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <b>{{ 'PROCEDURE' | translate }}</b>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-primary">
+                                            {{ 'REV' | translate}}{{revision.version}}
+                                        </span>
+                                        &nbsp;&nbsp;
+                                        <i>{{revision.en.procedure}}</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row" ng-if="!descriptionHistoryEn">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <b>{{ 'DURATION' | translate }}</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                <i>{{latest_revision.en.duration}}</i>
+                            </div>
+                        </div>
+                        <div ng-if="descriptionHistoryEn">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <b>{{ 'DURATION' | translate }}</b>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-primary">
+                                            {{ 'REV' | translate}}{{revision.version}}
+                                        </span>
+                                        &nbsp;&nbsp;
+                                        <i>{{revision.en.duration}}</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row" ng-if="!descriptionHistoryEn">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <b>{{ 'RISKS' | translate }}</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                <i>{{latest_revision.en.risks}}</i>
+                            </div>
+                        </div>
+                        <div ng-if="descriptionHistoryEn">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <b>{{ 'RISKS' | translate }}</b>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-primary">
+                                            {{ 'REV' | translate}}{{revision.version}}
+                                        </span>
+                                        &nbsp;&nbsp;
+                                        <i>{{revision.en.risks}}</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row" ng-if="!descriptionHistoryEn">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <b>{{ 'BENEFITS' | translate }}</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                <i>{{latest_revision.en.benefits}}</i>
+                            </div>
+                        </div>
+                        <div ng-if="descriptionHistoryEn">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <b>{{ 'BENEFITS' | translate }}</b>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-primary">
+                                            {{ 'REV' | translate}}{{revision.version}}
+                                        </span>
+                                        &nbsp;&nbsp;
+                                        <i>{{revision.en.benefits}}</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <br>
+
+
+                <!-- German description -->
+                <div ng-if="!latest_revision.de.used">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h6 class="text-muted">
+                                <span class="flag-icon flag-icon-de"></span>&nbsp;&nbsp;
+                                {{ 'STUDY_DESCRIPTION' | translate }}
+                            </h6>
+                        </div>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item middle">
+                            - {{ 'NOT_USED' | translate }} -
+                        </li>
+                    </ul>
+                    <br>
+                </div>
+                <div ng-if="latest_revision.de.used">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <h6 class="text-muted">
+                                <span class="flag-icon flag-icon-de"></span>&nbsp;&nbsp;
+                                {{ 'STUDY_DESCRIPTION' | translate }}
+                            </h6>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 right">
+                            <small>
+                                <a href="" ng-click="toggleDescriptionHistory('de')">{{ 'SHOW_HISTORY' | translate }}</a>
+                                &nbsp;&nbsp;|&nbsp;&nbsp;
+                                <a href="" ng-click="toggleDescriptionComments('de')">{{ 'SHOW_COMMENTS' | translate }}</a>
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Properties -->
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row" ng-if="!descriptionHistoryDe">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <b>{{ 'TITLE' | translate }}</b>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                    <i>{{latest_revision.de.title}}</i>
+                                </div>
+                            </div>
+                            <div ng-if="descriptionHistoryDe">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <b>{{ 'TITLE' | translate }}</b>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                        <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.de.title}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row" ng-if="!descriptionHistoryDe">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <b>{{ 'RESEARCHER' | translate }}</b>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                    <i>{{latest_revision.de.researcher}}</i>
+                                </div>
+                            </div>
+                            <div ng-if="descriptionHistoryDe">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <b>{{ 'RESEARCHER' | translate }}</b>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                        <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.de.researcher}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row" ng-if="!descriptionHistoryDe">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <b>{{ 'TIME' | translate }}</b>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                    <i>{{latest_revision.de.study_time}}</i>
+                                </div>
+                            </div>
+                            <div ng-if="descriptionHistoryDe">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <b>{{ 'TIME' | translate }}</b>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                        <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.de.study_time}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row" ng-if="!descriptionHistoryDe">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <b>{{ 'PURPOSE' | translate }}</b>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                    <i>{{latest_revision.de.purpose}}</i>
+                                </div>
+                            </div>
+                            <div ng-if="descriptionHistoryDe">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <b>{{ 'PURPOSE' | translate }}</b>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                        <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.de.purpose}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row" ng-if="!descriptionHistoryDe">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <b>{{ 'PROCEDURE' | translate }}</b>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                    <i>{{latest_revision.de.procedure}}</i>
+                                </div>
+                            </div>
+                            <div ng-if="descriptionHistoryDe">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <b>{{ 'PROCEDURE' | translate }}</b>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                        <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.de.procedure}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row" ng-if="!descriptionHistoryDe">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <b>{{ 'DURATION' | translate }}</b>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                    <i>{{latest_revision.de.duration}}</i>
+                                </div>
+                            </div>
+                            <div ng-if="descriptionHistoryDe">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <b>{{ 'DURATION' | translate }}</b>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                        <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.de.duration}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row" ng-if="!descriptionHistoryDe">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <b>{{ 'RISKS' | translate }}</b>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                    <i>{{latest_revision.de.risks}}</i>
+                                </div>
+                            </div>
+                            <div ng-if="descriptionHistoryDe">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <b>{{ 'RISKS' | translate }}</b>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                        <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.de.risks}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row" ng-if="!descriptionHistoryDe">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <b>{{ 'BENEFITS' | translate }}</b>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                    <i>{{latest_revision.de.benefits}}</i>
+                                </div>
+                            </div>
+                            <div ng-if="descriptionHistoryDe">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <b>{{ 'BENEFITS' | translate }}</b>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                        <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.de.benefits}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <br>
+                </div>
+
+                <div class="row inputs">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <h6 class="text-muted">
+                            {{ 'STUDY_CONCERNS' | translate }}
+                        </h6>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 right">
+                        <small>
+                            <a href="" ng-click="toggleConcernHistory()">{{ 'SHOW_HISTORY' | translate }}</a>
+                            &nbsp;&nbsp;|&nbsp;&nbsp;
+                            <a href="" ng-click="toggleConcernComments()">{{ 'SHOW_COMMENTS' | translate }}</a>
+                        </small>
+                    </div>
+                </div>
+
+                <!-- Questions -->
+                <ul class="list-group">
+                    <!-- 1st question -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                                <b>1. {{ 'CONCERN_1' | translate }}?</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div ng-if="!concernHistory">
+                                    <span class="tag tag-danger tag-pill float-xs-right" ng-if="latest_revision.concerns.q01_value">
+                                        {{ 'YES' | translate }}
+                                    </span>
+                                    <span class="tag tag-success tag-pill float-xs-right" ng-if="!latest_revision.concerns.q01_value">
+                                        {{ 'NO' | translate }}
+                                    </span>
+                                    <span ng-if="latest_revision.concerns.q01_value">
+                                        <i>{{latest_revision.concerns.q01_explanation}}</i>
+                                    </span>
+                                </div>
+                                <div ng-if="concernHistory">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-danger tag-pill float-xs-right" ng-if="revision.concerns.q01_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="tag tag-success tag-pill float-xs-right" ng-if="!revision.concerns.q01_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        <div>
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.concerns.q01_explanation}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 2nd question -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                                <b>2. {{ 'CONCERN_2' | translate }}?</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div ng-if="!concernHistory">
+                                    <span class="tag tag-danger tag-pill float-xs-right" ng-if="latest_revision.concerns.q02_value">
+                                        {{ 'YES' | translate }}
+                                    </span>
+                                    <span class="tag tag-success tag-pill float-xs-right" ng-if="!latest_revision.concerns.q02_value">
+                                        {{ 'NO' | translate }}
+                                    </span>
+                                    <span ng-if="latest_revision.concerns.q02_value">
+                                        <i>{{latest_revision.concerns.q02_explanation}}</i>
+                                    </span>
+                                </div>
+                                <div ng-if="concernHistory">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-danger tag-pill float-xs-right" ng-if="revision.concerns.q02_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="tag tag-success tag-pill float-xs-right" ng-if="!revision.concerns.q02_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        <div>
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.concerns.q02_explanation}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 3rd question -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                                <b>3. {{ 'CONCERN_3' | translate }}?</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div ng-if="!concernHistory">
+                                    <span class="tag tag-danger tag-pill float-xs-right" ng-if="latest_revision.concerns.q03_value">
+                                        {{ 'YES' | translate }}
+                                    </span>
+                                    <span class="tag tag-success tag-pill float-xs-right" ng-if="!latest_revision.concerns.q03_value">
+                                        {{ 'NO' | translate }}
+                                    </span>
+                                    <span ng-if="latest_revision.concerns.q03_value">
+                                        <i>{{latest_revision.concerns.q03_explanation}}</i>
+                                    </span>
+                                </div>
+                                <div ng-if="concernHistory">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-danger tag-pill float-xs-right" ng-if="revision.concerns.q03_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="tag tag-success tag-pill float-xs-right" ng-if="!revision.concerns.q03_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        <div>
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.concerns.q03_explanation}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 4th question -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                                <b>4. {{ 'CONCERN_4' | translate }}?</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div ng-if="!concernHistory">
+                                    <span class="tag tag-danger tag-pill float-xs-right" ng-if="latest_revision.concerns.q04_value">
+                                        {{ 'YES' | translate }}
+                                    </span>
+                                    <span class="tag tag-success tag-pill float-xs-right" ng-if="!latest_revision.concerns.q04_value">
+                                        {{ 'NO' | translate }}
+                                    </span>
+                                    <span ng-if="latest_revision.concerns.q04_value">
+                                        <i>{{latest_revision.concerns.q04_explanation}}</i>
+                                    </span>
+                                </div>
+                                <div ng-if="concernHistory">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-danger tag-pill float-xs-right" ng-if="revision.concerns.q04_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="tag tag-success tag-pill float-xs-right" ng-if="!revision.concerns.q04_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        <div>
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.concerns.q04_explanation}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 5th question -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                                <b>5. {{ 'CONCERN_5' | translate }}?</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div ng-if="!concernHistory">
+                                    <span class="tag tag-danger tag-pill float-xs-right" ng-if="latest_revision.concerns.q05_value">
+                                        {{ 'YES' | translate }}
+                                    </span>
+                                    <span class="tag tag-success tag-pill float-xs-right" ng-if="!latest_revision.concerns.q05_value">
+                                        {{ 'NO' | translate }}
+                                    </span>
+                                    <span ng-if="latest_revision.concerns.q05_value">
+                                        <i>{{latest_revision.concerns.q05_explanation}}</i>
+                                    </span>
+                                </div>
+                                <div ng-if="concernHistory">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-danger tag-pill float-xs-right" ng-if="revision.concerns.q05_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="tag tag-success tag-pill float-xs-right" ng-if="!revision.concerns.q05_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        <div>
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.concerns.q05_explanation}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 6th question -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                                <b>6. {{ 'CONCERN_6' | translate }}?</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div ng-if="!concernHistory">
+                                    <span class="tag tag-danger tag-pill float-xs-right" ng-if="latest_revision.concerns.q06_value">
+                                        {{ 'YES' | translate }}
+                                    </span>
+                                    <span class="tag tag-success tag-pill float-xs-right" ng-if="!latest_revision.concerns.q06_value">
+                                        {{ 'NO' | translate }}
+                                    </span>
+                                    <span ng-if="latest_revision.concerns.q06_value">
+                                        <i>{{latest_revision.concerns.q06_explanation}}</i>
+                                    </span>
+                                </div>
+                                <div ng-if="concernHistory">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-danger tag-pill float-xs-right" ng-if="revision.concerns.q06_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="tag tag-success tag-pill float-xs-right" ng-if="!revision.concerns.q06_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        <div>
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.concerns.q06_explanation}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 7th question -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                                <b>7. {{ 'CONCERN_7' | translate }}?</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div ng-if="!concernHistory">
+                                    <span class="tag tag-danger tag-pill float-xs-right" ng-if="latest_revision.concerns.q07_value">
+                                        {{ 'YES' | translate }}
+                                    </span>
+                                    <span class="tag tag-success tag-pill float-xs-right" ng-if="!latest_revision.concerns.q07_value">
+                                        {{ 'NO' | translate }}
+                                    </span>
+                                    <span ng-if="latest_revision.concerns.q07_value">
+                                        <i>{{latest_revision.concerns.q07_explanation}}</i>
+                                    </span>
+                                </div>
+                                <div ng-if="concernHistory">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-danger tag-pill float-xs-right" ng-if="revision.concerns.q07_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="tag tag-success tag-pill float-xs-right" ng-if="!revision.concerns.q07_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        <div>
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.concerns.q07_explanation}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 8th question -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                                <b>8. {{ 'CONCERN_8' | translate }}?</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div ng-if="!concernHistory">
+                                    <span class="tag tag-danger tag-pill float-xs-right" ng-if="latest_revision.concerns.q08_value">
+                                        {{ 'YES' | translate }}
+                                    </span>
+                                    <span class="tag tag-success tag-pill float-xs-right" ng-if="!latest_revision.concerns.q08_value">
+                                        {{ 'NO' | translate }}
+                                    </span>
+                                    <span ng-if="latest_revision.concerns.q08_value">
+                                        <i>{{latest_revision.concerns.q08_explanation}}</i>
+                                    </span>
+                                </div>
+                                <div ng-if="concernHistory">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-danger tag-pill float-xs-right" ng-if="revision.concerns.q08_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="tag tag-success tag-pill float-xs-right" ng-if="!revision.concerns.q08_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        <div>
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.concerns.q08_explanation}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 9th question -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                                <b>9. {{ 'CONCERN_9' | translate }}?</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div ng-if="!concernHistory">
+                                    <span class="tag tag-danger tag-pill float-xs-right" ng-if="latest_revision.concerns.q09_value">
+                                        {{ 'YES' | translate }}
+                                    </span>
+                                    <span class="tag tag-success tag-pill float-xs-right" ng-if="!latest_revision.concerns.q09_value">
+                                        {{ 'NO' | translate }}
+                                    </span>
+                                    <span ng-if="latest_revision.concerns.q09_value">
+                                        <i>{{latest_revision.concerns.q09_explanation}}</i>
+                                    </span>
+                                </div>
+                                <div ng-if="concernHistory">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-danger tag-pill float-xs-right" ng-if="revision.concerns.q09_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="tag tag-success tag-pill float-xs-right" ng-if="!revision.concerns.q09_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        <div>
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.concerns.q09_explanation}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 10th question -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                                <b>10. {{ 'CONCERN_10' | translate }}?</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div ng-if="!concernHistory">
+                                    <span class="tag tag-danger tag-pill float-xs-right" ng-if="latest_revision.concerns.q10_value">
+                                        {{ 'YES' | translate }}
+                                    </span>
+                                    <span class="tag tag-success tag-pill float-xs-right" ng-if="!latest_revision.concerns.q10_value">
+                                        {{ 'NO' | translate }}
+                                    </span>
+                                    <span ng-if="latest_revision.concerns.q10_value">
+                                        <i>{{latest_revision.concerns.q10_explanation}}</i>
+                                    </span>
+                                </div>
+                                <div ng-if="concernHistory">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-danger tag-pill float-xs-right" ng-if="revision.concerns.q10_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="tag tag-success tag-pill float-xs-right" ng-if="!revision.concerns.q10_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        <div>
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.concerns.q10_explanation}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 11th 1st question -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                                <b>11.1. {{ 'CONCERN_11_1' | translate }}?</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div ng-if="!concernHistory">
+                                    <span class="tag tag-danger tag-pill float-xs-right" ng-if="latest_revision.concerns.q11_1_value">
+                                        {{ 'YES' | translate }}
+                                    </span>
+                                    <span class="tag tag-success tag-pill float-xs-right" ng-if="!latest_revision.concerns.q11_1_value">
+                                        {{ 'NO' | translate }}
+                                    </span>
+                                    <span ng-if="latest_revision.concerns.q11_1_value">
+                                        <i>{{latest_revision.concerns.q11_1_explanation}}</i>
+                                    </span>
+                                </div>
+                                <div ng-if="concernHistory">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-danger tag-pill float-xs-right" ng-if="revision.concerns.q11_1_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="tag tag-success tag-pill float-xs-right" ng-if="!revision.concerns.q11_1_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        <div>
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.concerns.q11_1_explanation}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 11th 2nd question -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                                <b>11.2. {{ 'CONCERN_11_2' | translate }}?</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div ng-if="!concernHistory">
+                                    <span class="tag tag-danger tag-pill float-xs-right" ng-if="latest_revision.concerns.q11_2_value">
+                                        {{ 'YES' | translate }}
+                                    </span>
+                                    <span class="tag tag-success tag-pill float-xs-right" ng-if="!latest_revision.concerns.q02_value">
+                                        {{ 'NO' | translate }}
+                                    </span>
+                                    <span ng-if="latest_revision.concerns.q11_2_value">
+                                        <i>{{latest_revision.concerns.q11_2_explanation}}</i>
+                                    </span>
+                                </div>
+                                <div ng-if="concernHistory">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-danger tag-pill float-xs-right" ng-if="revision.concerns.q11_2_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="tag tag-success tag-pill float-xs-right" ng-if="!revision.concerns.q11_2_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        <div>
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.concerns.q11_2_explanation}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 12th question -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                                <b>12. {{ 'CONCERN_12' | translate }}?</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div ng-if="!concernHistory">
+                                    <span class="tag tag-danger tag-pill float-xs-right" ng-if="latest_revision.concerns.q12_value">
+                                        {{ 'YES' | translate }}
+                                    </span>
+                                    <span class="tag tag-success tag-pill float-xs-right" ng-if="!latest_revision.concerns.q12_value">
+                                        {{ 'NO' | translate }}
+                                    </span>
+                                    <span ng-if="latest_revision.concerns.q12_value">
+                                        <i>{{latest_revision.concerns.q12_explanation}}</i>
+                                    </span>
+                                </div>
+                                <div ng-if="concernHistory">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-danger tag-pill float-xs-right" ng-if="revision.concerns.q12_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="tag tag-success tag-pill float-xs-right" ng-if="!revision.concerns.q12_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        <div>
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.concerns.q12_explanation}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 13th question -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                                <b>13. {{ 'CONCERN_13' | translate }}?</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div ng-if="!concernHistory">
+                                    <span class="tag tag-danger tag-pill float-xs-right" ng-if="latest_revision.concerns.q13_value">
+                                        {{ 'YES' | translate }}
+                                    </span>
+                                    <span class="tag tag-success tag-pill float-xs-right" ng-if="!latest_revision.concerns.q13_value">
+                                        {{ 'NO' | translate }}
+                                    </span>
+                                    <span ng-if="latest_revision.concerns.q13_value">
+                                        <i>{{latest_revision.concerns.q1312_explanation}}</i>
+                                    </span>
+                                </div>
+                                <div ng-if="concernHistory">
+                                    <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
+                                        <span class="tag tag-danger tag-pill float-xs-right" ng-if="revision.concerns.q13_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="tag tag-success tag-pill float-xs-right" ng-if="!revision.concerns.q13_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        <div>
+                                            <span class="tag tag-primary">
+                                                {{ 'REV' | translate}}{{revision.version}}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <i>{{revision.concerns.q13_explanation}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <br>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button class="form-control btn btn-lg btn-secondary" role="button" ng-click="previousPage()">
+                            {{ 'SHOW_INTRO' | translate }}
+                        </button>
+                    </div>
+                    <div class="col-xs-6">
+                        <button class="form-control btn btn-lg btn-primary" role="button" ng-click="nextPage()">
+                            {{ 'OKAY' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <!-- NOTIFICATION -->
-        <div class="card" style="padding: 40px 10px 40px 10px;">
+        <div class="card" style="padding: 40px 10px 40px 10px;" ng-show="page==3">
             <center>
                 <p class="lead">
                     <b>{{ 'YOUR_DOCUMENT_HAS_BEEN_REJECTED' | translate }}</b>
@@ -23,7 +1127,12 @@
                 <br>
                 <br>
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-xs-6">
+                        <button class="form-control btn btn-lg btn-secondary" role="button" ng-click="previousPage()">
+                            {{ 'SHOW_DOCUMENT' | translate }}
+                        </button>
+                    </div>
+                    <div class="col-xs-6">
                         <button class="form-control btn btn-lg btn-primary" role="button" ng-click="logout()">
                             {{ 'CLOSE' | translate }}
                         </button>

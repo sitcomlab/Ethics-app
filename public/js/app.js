@@ -23,7 +23,8 @@ var app = angular.module("ethics-app", [
     "concernService",
     "userService",
     "recoveryService",
-    "fileService"
+    "fileService",
+    "committeeService"
 
 ]);
 
