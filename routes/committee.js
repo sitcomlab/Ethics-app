@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-// var list = require('../controllers/committee/list');
+var list = require('../controllers/committee/list');
 // var post = require('../controllers/committee/post');
 // var get = require('../controllers/committee/get');
 // var put = require('../controllers/committee/put');
@@ -10,7 +10,7 @@ var router = express.Router();
 
 
 // LIST
-// router.get('/committee', list.request);
+router.get('/committee', list.request);
 
 // POST
 // router.post('/committee', post.request);

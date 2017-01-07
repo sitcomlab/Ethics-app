@@ -6,7 +6,6 @@ var post = require('../controllers/documents/post');
 var get = require('../controllers/documents/get');
 var put = require('../controllers/documents/put');
 var del = require('../controllers/documents/delete');
-
 var confirm_intro = require('../controllers/documents/confirm_intro');
 var submit = require('../controllers/documents/submit');
 var generate_files = require('../controllers/documents/generate_files');
@@ -26,7 +25,6 @@ router.put('/documents/:document_id', put.request);
 
 // DELETE
 router.delete('/documents/:document_id', del.request);
-
 
 // CONFIRM INTRO
 router.get('/documents/:document_id/intro', confirm_intro.request);
