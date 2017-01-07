@@ -3,9 +3,6 @@ SELECT
     Documents.created,
     Documents.updated,
     Documents.user_id,
-    Users.user_id,
-    Users.user_id,
-    Users.user_id,
     Documents.document_title,
     Documents.status
 FROM Documents

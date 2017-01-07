@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS Reviews CASCADE;
+
+-- SCHEMA
+CREATE TABLE Reviews (
+
+    -- General
+    review_id SERIAL PRIMARY KEY,
+    created TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+    updated TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+
+    -- Attributes
+    committee_id INTEGER NOT NULL REFERENCES Committee(committee_id) ON UPDATE CASCADE ON DELETE SET NULL,
+    revision_id INTEGER NOT NULL REFERENCES Revisions(revision_id) ON UPDATE CASCADE ON DELETE SET NULL,
+    comment TEXT DEFAULT NULL
+
+);
