@@ -21,7 +21,8 @@
                                     {{member.title}} {{member.first_name}} {{member.last_name}}
                                 </h4>
                                 <h6 class="card-subtitle mb-2 text-muted">
-                                    {{member.institute}} <span ng-if="member.research_lab">({{member.research_lab}})</span>
+                                    <span ng-if="member.institute">{{member.institute}}<br></span>
+                                    <span ng-if="member.research_lab">({{member.research_lab}})</span>
                                 </h6>
                                 <p class="card-text">
                                     <div class="row">
