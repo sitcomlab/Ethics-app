@@ -7,11 +7,11 @@ var _ = require('underscore');
 var pool = require('../../server.js').pool;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/committee/";
-var query_list_members = fs.readFileSync(__dirname + dir + 'list.sql', 'utf8').toString();
+var dir = "/../../sql/queries/users/";
+var query_list_users = fs.readFileSync(__dirname + dir + 'list.sql', 'utf8').toString();
 
 
-// LIST (ADMIN)
+// LIST
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -31,7 +31,7 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_list_members, function(err, result) {
+            client.query(query_list_users, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

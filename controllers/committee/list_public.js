@@ -8,10 +8,10 @@ var pool = require('../../server.js').pool;
 
 var fs = require("fs");
 var dir = "/../../sql/queries/committee/";
-var query_list_members = fs.readFileSync(__dirname + dir + 'list.sql', 'utf8').toString();
+var query_list_public_members = fs.readFileSync(__dirname + dir + 'list_public.sql', 'utf8').toString();
 
 
-// LIST (ADMIN)
+// LIST (PUBLIC)
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -26,12 +26,8 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            // TODO: Authentication
-            callback(null, client, done);
-        },
-        function(client, done, callback) {
             // Database query
-            client.query(query_list_members, function(err, result) {
+            client.query(query_list_public_members, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

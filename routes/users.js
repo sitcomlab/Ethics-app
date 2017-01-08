@@ -1,11 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
+var list = require('../controllers/users/list');
 var post = require('../controllers/users/post');
 var get = require('../controllers/users/get');
 var put = require('../controllers/users/put');
 var find_by_email = require('../controllers/users/find_by_email');
 
+
+// LIST (ONLY MEMBERS)
+router.get('/admin/users', list.request);
 
 // POST
 router.post('/users', post.request);

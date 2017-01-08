@@ -11,8 +11,8 @@ var submit = require('../controllers/documents/submit');
 var generate_files = require('../controllers/documents/generate_files');
 
 
-// LIST
-router.get('/documents', list.request);
+// LIST (ONLY MEMBERS)
+router.get('/admin/documents', list.request);
 
 // POST
 router.post('/users/:user_id/documents', post.request);

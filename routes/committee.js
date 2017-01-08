@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+var list_public = require('../controllers/committee/list_public');
 var list = require('../controllers/committee/list');
 // var post = require('../controllers/committee/post');
 // var get = require('../controllers/committee/get');
@@ -10,7 +11,10 @@ var list = require('../controllers/committee/list');
 
 
 // LIST
-router.get('/committee', list.request);
+router.get('/committee', list_public.request);
+
+// LIST (ONLY MEMBERS)
+router.get('/admin/members', list.request);
 
 // POST
 // router.post('/committee', post.request);
