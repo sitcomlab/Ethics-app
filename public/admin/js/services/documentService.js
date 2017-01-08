@@ -2,7 +2,7 @@ var app = angular.module("documentService", []);
 
 
 // Document service
-app.factory('$documentService', function($http, $log, config, $authenticationService) {
+app.factory('$documentService', function($http, $log, config, $rootScope, $authenticationService) {
 
     var document;
 
@@ -51,6 +51,8 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
         },
         set: function(data){
             document = data;
+            // Update navbar
+            $rootScope.$broadcast('updateNavbar');
         },
         setRevisions: function(data){
             document.revisions = data;

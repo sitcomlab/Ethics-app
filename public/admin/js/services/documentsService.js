@@ -20,7 +20,7 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
                 query = "";
             }
 
-            return $http.get(config.apiURL + "/documents" + query, {
+            return $http.get(config.apiURL + "/admin/documents" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

@@ -57,21 +57,41 @@
                 <a class="navbar-brand" href="/admin" style="margin-left: 160px;">
                     {{config.appName}}
                 </a>
-                <div class="btn-group float-xs-right" style="margin-left:5px;" ng-if="user">
-                    <button type="button" class="btn" ng-class="{'btn-secondary': document.status==0 || document.status==1, 'btn-success': document.status==2 || document.status==6, 'btn-primary': document.status==3, 'btn-info': document.status==4, 'btn-warning': document.status=='5', 'btn-danger': document.status==7}" aria-haspopup="true" aria-expanded="false" ng-if="document">
-                        <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;{{document.document_title}}
-                    </button>
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;<span ng-if="user.title">{{user.title}}&nbsp;</span>{{user.first_name}} {{user.last_name}}
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <h6 class="dropdown-header">{{ 'DOCUMENT' | translate }}</h6>
-                        <a class="dropdown-item" href="" ng-click="deleteDocument(document.document_id)" ng-if="document.status<=1">{{ 'DELETE_DOCUMENT' | translate }}</a>
-                        <div class="dropdown-divider"></div>
-                        <h6 class="dropdown-header">{{ 'ACCOUNT' | translate }}</h6>
-                        <a class="dropdown-item" href="" ng-click="editUser(document.document_id)">{{ 'SETTINGS' | translate }}</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="" ng-click="logout()">{{ 'LOGOUT' | translate }}</a>
+                <div class="btn-group float-xs-right" style="margin-left:5px;" ng-if="user" role="group" aria-label="navbar">
+                    <div class="btn-group" role="group" ng-if="document">
+                        <button id="document_dropdown" type="button" class="btn dropdown-toggle" ng-class="{'btn-secondary': document.status==0 || document.status==1, 'btn-success': document.status==2 || document.status==6, 'btn-primary': document.status==3, 'btn-info': document.status==4, 'btn-warning': document.status=='5', 'btn-danger': document.status==7}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                            <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;{{document.document_title}}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="document_dropdown">
+                            <h6 class="dropdown-header">{{ 'DOCUMENT' | translate }}</h6>
+                            <a class="dropdown-item" href="" ng-click="showDocumentId(document.document_id)">{{ 'SHOW_DOCUMENT_ID' | translate }}</a>
+                            <a class="dropdown-item" href="" ng-click="changeDocumentTitle(document.document_id)">{{ 'CHANGE_DOCUMENT_TITLE' | translate }}</a>
+                            <a class="dropdown-item" href="" ng-click="editDocument(document.document_id)">{{ 'EDIT_DOCUMENT' | translate }}</a>
+                            <a class="dropdown-item" href="" ng-click="deleteDocument(document.document_id)">{{ 'DELETE_DOCUMENT' | translate }}</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="" ng-click="closeDocument()">{{ 'CLOSE_DOCUMENT' | translate }}</a>
+                        </div>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="user_dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;<span ng-if="user.title">{{user.title}}&nbsp;</span>{{user.first_name}} {{user.last_name}}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user_dropdown">
+                            <h6 class="dropdown-header">{{ 'ACCOUNT' | translate }}</h6>
+                            <a class="dropdown-item" href="" ng-click="editUser(document.document_id)">{{ 'SETTINGS' | translate }}</a>
+                            <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">{{ 'ETHICS_COMMITTEE' | translate }}</h6>
+                            <a class="dropdown-item" href="" ng-click="showMembers()">{{ 'SHOW_MEMBERS' | translate }}</a>
+                            <a class="dropdown-item" href="" ng-click="addMember()">{{ 'ADD_MEMBER' | translate }}</a>
+                            <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">{{ 'USERS' | translate }}</h6>
+                            <a class="dropdown-item" href="" ng-click="showUsers()">{{ 'SHOW_USERS' | translate }}</a>
+                            <a class="dropdown-item" href="" ng-click="addUser()">{{ 'ADD_USER' | translate }}</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="" ng-click="logout()">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LOGOUT' | translate }}
+                            </a>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -110,8 +130,12 @@
         <!-- Services -->
         <script src="js/services/authenticationService.js"></script>
         <script src="js/services/documentsService.js"></script>
-        <!--<script src="js/services/revisionService.js"></script>
-        <script src="js/services/userService.js"></script>-->
+        <script src="js/services/documentService.js"></script>
+        <!--<script src="js/services/revisionService.js"></script>-->
+        <script src="js/services/usersService.js"></script>
+        <script src="js/services/userService.js"></script>
+        <script src="js/services/membersService.js"></script>
+        <script src="js/services/memberService.js"></script>
         <script src="js/services/recoveryService.js"></script>
 
         <!-- Controllers -->
@@ -120,8 +144,14 @@
         <script src="js/controllers/footerController.js"></script>
         <script src="js/controllers/loginController.js"></script>
         <script src="js/controllers/documentsController.js"></script>
-        <!--<script src="js/controllers/userController.js"></script>
-        <script src="js/controllers/documentIdController.js"></script>
+        <script src="js/controllers/documentController.js"></script>
+        <script src="js/controllers/usersController.js"></script>
+        <script src="js/controllers/userController.js"></script>
+        <script src="js/controllers/userAddController.js"></script>
+        <script src="js/controllers/membersController.js"></script>
+        <script src="js/controllers/memberController.js"></script>
+        <script src="js/controllers/memberAddController.js"></script>
+        <!--<script src="js/controllers/documentIdController.js"></script>
         <script src="js/controllers/documentTitleController.js"></script>
         <script src="js/controllers/statusController_0.js"></script>
         <script src="js/controllers/statusController_1.js"></script>

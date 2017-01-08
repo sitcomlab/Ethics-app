@@ -49,6 +49,21 @@ app.config(function ($translateProvider) {
         DEFAULT: 'Default',
         ALL: 'all',
         NO_DOCUMENTS_FOUND: 'no documents found',
+
+        ETHICS_COMMITTEE: 'Ethics committee',
+        SHOW_MEMBERS: 'Show members',
+        ADD_MEMBER: 'Add member',
+        SHOW_USERS: 'Show users',
+        ADD_USER: 'Add user',
+        USERS: 'Users',
+        SEARCH_FOR_MEMBERS: 'Search for members',
+
+        SHOW_DOCUMENT_ID: 'Show document-ID',
+        CHANGE_DOCUMENT_TITLE: 'Change document title',
+        EDIT_DOCUMENT: 'Edit document',
+        SAVE_DOCUMENT: 'Save document',
+        DELETE_DOCUMENT: 'Delete document',
+        CLOSE_DOCUMENT: 'Close document',
     });
 
     // Default Language (English)

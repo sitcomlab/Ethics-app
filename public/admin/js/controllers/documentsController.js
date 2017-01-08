@@ -1,34 +1,25 @@
 var app = angular.module("ethics-app");
 
 // Documents controller
-app.controller("documentsController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentsService) {
+app.controller("documentsController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentsService, $documentService) {
 
     // Init
     $scope.load = function(){
-        // Loading screen
-        $scope.tab = 0;
+        $documentsService.list($scope.filter)
+        .success(function(response) {
+            $documentsService.set(response);
+            $scope.documents = $documentsService.get();
 
-        // Check authentication
-        if($authenticationService.authenticated()){
-
-            $documentsService.list($scope.filter)
-            .success(function(response) {
-                $documentsService.set(response);
-                $scope.documents = $documentsService.get();
-
-                // Redirect
-                $scope.tab = 1;
-            })
-            .error(function(response) {
-                $window.alert(response);
-            });
-        } else {
             // Redirect
-            $location.url("/");
-        }
+            $scope.tab = 1;
+        })
+        .error(function(response) {
+            $window.alert(response);
+        });
     };
 
     // Init
+    $scope.tab = 0;
     $scope.load();
     $scope.filter = "";
     $scope.searchText = "";
@@ -49,21 +40,7 @@ app.controller("documentsController", function($scope, $rootScope, $translate, $
     $scope.filterDocuments = function(){
         $documentsService.set();
         $scope.documents = $documentsService.get();
-
-        // Check authentication
-        if($authenticationService.authenticated()){
-            $documentsService.list($scope.filter)
-            .success(function(response) {
-                $documentsService.set(response);
-                $scope.documents = $documentsService.get();
-            })
-            .error(function(response) {
-                $window.alert(response);
-            });
-        } else {
-            // Redirect
-            $location.url("/");
-        }
+        $scope.load();
     };
 
 
@@ -71,9 +48,10 @@ app.controller("documentsController", function($scope, $rootScope, $translate, $
      * [showDetails description]
      * @return {[type]} [description]
      */
-    $scope.showDetails = function(document_id){
+    $scope.showDetails = function(document){
+        $documentService.set(document);
         // Redirect
-        $location.url("/documents/" + document_id);
+        $location.url("/documents/" + $documentService.getId());
     };
 
 });

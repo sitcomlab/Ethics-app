@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!-- LOADING -->
+<!-- LOADING
 <div class="loading" ng-show="tab==0">
     <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
-</div>
+</div>-->
 
 <!-- MAIN -->
 <div class="row" ng-show="tab>0">
@@ -13,7 +13,7 @@
     <div class="col-xs-12 col-sm-10 col-md-10 col-lg-8">
 
         <!-- DOUCMENTS -->
-        <div class="card" style="padding: 40px 10px 40px 10px;" ng-show="tab==1">
+        <div class="card" style="padding: 30px 10px 30px 10px;" ng-show="tab==1">
 
             <div class="card-block">
 
@@ -58,13 +58,15 @@
                 </div>
 
                 <div class="middle" ng-if="!documents">
+                    <br>
                     <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+                    <br>
                 </div>
                 <div class="middle" ng-if="documents && documents.length==0">
                     - {{ 'NO_DOCUMENTS_FOUND' | translate }} -
                 </div>
                 <div class="list-group" ng-if="documents && documents.length>0">
-                    <a href="" ng-click="showDetails(document.document_id)" class="list-group-item list-group-item-action" ng-repeat="document in documents | filter: searchText">
+                    <a href="" ng-click="showDetails(document)" class="list-group-item list-group-item-action" ng-repeat="document in documents | filter: searchText">
                         <div class="row">
                             <div class="col-xs-8 col-sm-8 col-md-9 col-lg-9">
                                 <div class="row">

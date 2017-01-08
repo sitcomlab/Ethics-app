@@ -2,9 +2,9 @@ var app = angular.module("authenticationService", []);
 
 
 // Authentication service
-app.factory('$authenticationService', function($http, $log, config) {
+app.factory('$authenticationService', function($http, $log, config, $rootScope) {
 
-    var user;
+    var authenticated_user;
 
     return {
         init: function(){
@@ -14,27 +14,29 @@ app.factory('$authenticationService', function($http, $log, config) {
             };
         },
         get: function(){
-            return user;
+            return authenticated_user;
         },
         set: function(data){
-            user = data;
+            authenticated_user = data;
+            // Update navbar
+            $rootScope.$broadcast('updateNavbar');
         },
         authenticated: function(){
-            if(user === undefined){
+            if(authenticated_user === undefined){
                 return false;
-            } else if(user.token === undefined){
+            } else if(authenticated_user.token === undefined){
                 return false;
             } else {
                 return true;
             }
         },
         getToken: function(){
-            if(user === undefined){
+            if(authenticated_user === undefined){
                 return undefined;
-            } else if(user.token === undefined){
+            } else if(authenticated_user.token === undefined){
                 return undefined;
             } else {
-                return user.token;
+                return authenticated_user.token;
             }
         },
         login: function(data) {
