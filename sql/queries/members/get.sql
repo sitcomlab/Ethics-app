@@ -1,7 +1,8 @@
 SELECT
-    -- committee_id,
+    member_id,
+    created,
+    updated,
     email_address,
-    -- password,
     title,
     first_name,
     last_name,
@@ -9,9 +10,8 @@ SELECT
     research_lab,
     office_room_number,
     office_phone_number,
-    office_email_address
-    -- admin,
-    -- subscribed,
-    -- fails
-FROM Committee
-WHERE subscribed=true;
+    office_email_address,
+    admin,
+    subscribed
+FROM Members
+WHERE member_id=$1::INTEGER;

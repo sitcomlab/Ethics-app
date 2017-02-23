@@ -1,8 +1,5 @@
 SELECT
-    committee_id,
-    created,
-    updated,
-    email_address,
+    member_id,
     title,
     first_name,
     last_name,
@@ -13,5 +10,11 @@ SELECT
     office_email_address,
     admin,
     subscribed
-FROM Committee
+FROM Members
+WHERE
+        admin!=true
+    /*
+    AND
+        deleted!=true
+     */
 ORDER BY admin DESC, last_name, first_name;

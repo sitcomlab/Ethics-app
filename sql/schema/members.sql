@@ -1,10 +1,10 @@
-DROP TABLE IF EXISTS Committee CASCADE;
+DROP TABLE IF EXISTS Members CASCADE;
 
 -- SCHEMA
-CREATE TABLE Committee (
+CREATE TABLE Members (
 
     -- General
-    committee_id SERIAL PRIMARY KEY,
+    member_id SERIAL PRIMARY KEY,
     created TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
     updated TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
 
@@ -21,6 +21,7 @@ CREATE TABLE Committee (
     office_email_address CHARACTER VARYING(255) DEFAULT NULL,
     admin BOOLEAN DEFAULT false NOT NULL,
     subscribed BOOLEAN DEFAULT true NOT NULL,
-    fails SMALLINT DEFAULT 0 NOT NULL
+    fails SMALLINT DEFAULT 0 NOT NULL,
+    deleted BOOLEAN DEFAULT false
 
 );

@@ -10,15 +10,22 @@ CREATE TABLE Descriptions (
 
     -- Attributes
     revision_id INTEGER NOT NULL REFERENCES Revisions(revision_id) ON UPDATE CASCADE ON DELETE CASCADE,
-    language languages NOT NULL,
-    used BOOLEAN NOT NULL,
-    title TEXT DEFAULT NULL,          -- 1st question
-    researcher TEXT DEFAULT NULL,     -- 2nd question
-    study_time TEXT DEFAULT NULL,     -- 3rd question
-    purpose TEXT DEFAULT NULL,        -- 4th question
-    procedure TEXT DEFAULT NULL,      -- 5th question
-    duration TEXT DEFAULT NULL,       -- 6th question
-    risks TEXT DEFAULT NULL,          -- 7th question
-    benefits TEXT DEFAULT NULL        -- 8th question
+    de_used BOOLEAN NOT NULL DEFAULT false,
+    en_title TEXT DEFAULT NULL,          -- 1st question
+    en_researcher TEXT DEFAULT NULL,     -- 2nd question
+    en_study_time TEXT DEFAULT NULL,     -- 3rd question
+    en_purpose TEXT DEFAULT NULL,        -- 4th question
+    en_procedure TEXT DEFAULT NULL,      -- 5th question
+    en_duration TEXT DEFAULT NULL,       -- 6th question
+    en_risks TEXT DEFAULT NULL,          -- 7th question
+    en_benefits TEXT DEFAULT NULL,       -- 8th question
+    de_title TEXT DEFAULT NULL,          -- 1st question
+    de_researcher TEXT DEFAULT NULL,     -- 2nd question
+    de_study_time TEXT DEFAULT NULL,     -- 3rd question
+    de_purpose TEXT DEFAULT NULL,        -- 4th question
+    de_procedure TEXT DEFAULT NULL,      -- 5th question
+    de_duration TEXT DEFAULT NULL,       -- 6th question
+    de_risks TEXT DEFAULT NULL,          -- 7th question
+    de_benefits TEXT DEFAULT NULL       -- 8th question
 
 );

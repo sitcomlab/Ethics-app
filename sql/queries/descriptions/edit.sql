@@ -1,14 +1,22 @@
 UPDATE Descriptions SET (
     updated,
-    used,
-    title,
-    researcher,
-    study_time,
-    purpose,
-    procedure,
-    duration,
-    risks,
-    benefits
+    de_used,
+    en_title,
+    en_researcher,
+    en_study_time,
+    en_purpose,
+    en_procedure,
+    en_duration,
+    en_risks,
+    en_benefits,
+    de_title,
+    de_researcher,
+    de_study_time,
+    de_purpose,
+    de_procedure,
+    de_duration,
+    de_risks,
+    de_benefits
 ) = (
     now(),
     $2::BOOLEAN,
@@ -19,5 +27,13 @@ UPDATE Descriptions SET (
     $7::TEXT,
     $8::TEXT,
     $9::TEXT,
-    $10::TEXT
+    $10::TEXT,
+    $11::TEXT,
+    $12::TEXT,
+    $13::TEXT,
+    $14::TEXT,
+    $15::TEXT,
+    $16::TEXT,
+    $17::TEXT,
+    $18::TEXT
 ) WHERE description_id=$1::INTEGER RETURNING *;

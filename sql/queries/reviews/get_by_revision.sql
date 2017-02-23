@@ -1,3 +1,3 @@
 SELECT *
-FROM Descriptions
+FROM Reviews
 WHERE revision_id=$1::INTEGER;
