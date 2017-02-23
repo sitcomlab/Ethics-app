@@ -7,13 +7,13 @@ var _ = require('underscore');
 var pool = require('../../server.js').pool;
 
 var fs = require("fs");
-var dir_1 = "/../../sql/queries/documents/";
-var dir_2 = "/../../sql/queries/revisions/";
-var query_get_document = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
-var query_list_by_document = fs.readFileSync(__dirname + dir_2 + 'list_by_document.sql', 'utf8').toString();
+var dir_1 = "/../../sql/queries/revisions/";
+var dir_2 = "/../../sql/queries/reviews/";
+var query_get_revision = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
+var query_get_review_by_revision = fs.readFileSync(__dirname + dir_2 + 'get_by_revision.sql', 'utf8').toString();
 
 
-// LIST BY DOCUMENT
+// GET BY REVISION
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -33,16 +33,16 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_get_document, [
-                req.params.document_id
+            client.query(query_get_revision, [
+                req.params.revision_id
             ], function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    // Check if Document exists
+                    // Check if Revision exists
                     if (result.rows.length === 0) {
-                        callback(new Error("Document not found"), 404);
+                        callback(new Error("Revision not found"), 404);
                     } else {
                         callback(null, client, done);
                     }
@@ -51,14 +51,19 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_list_by_document, [
-                req.params.document_id
+            client.query(query_get_review_by_revision, [
+                req.params.revision_id
             ], function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, 200, result.rows);
+                    // Check if Review exists
+                    if (result.rows.length === 0) {
+                        callback(new Error("Review not found"), 404);
+                    } else {
+                        callback(null, 200, result.rows[0]);
+                    }
                 }
             });
         }

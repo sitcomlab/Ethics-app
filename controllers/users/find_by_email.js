@@ -26,6 +26,10 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
+            // TODO: Authentication
+            callback(null, client, done);
+        },
+        function(client, done, callback) {
             // Database query
             client.query(query_find_user_by_email, [
                 req.params.email_address
@@ -36,9 +40,9 @@ exports.request = function(req, res) {
                 } else {
                     // Check if User exists
                     if (result.rows.length === 0) {
-                        callback(new Error("User not found"), 404);
+                        callback(null, 200, false);
                     } else {
-                        callback(null, 200, result.rows[0]);
+                        callback(null, 200, true);
                     }
                 }
             });

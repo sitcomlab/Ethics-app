@@ -27,6 +27,10 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
+            // TODO: Authentication
+            callback(null, client, done);
+        },
+        function(client, done, callback) {
             // Database query
             client.query(query_get_description, [
                 req.params.description_id
@@ -48,15 +52,23 @@ exports.request = function(req, res) {
             // TODO: Add object/schema validation
             var object = {
                 description_id: req.params.description_id,
-                used: req.body.used,
-                title: req.body.title,
-                researcher: req.body.researcher,
-                study_time: req.body.study_time,
-                purpose: req.body.purpose,
-                procedure: req.body.procedure,
-                duration: req.body.duration,
-                risks: req.body.risks,
-                benefits: req.body.benefits
+                de_used: req.body.de_used,
+                en_title: req.body.en_title,
+                en_researcher: req.body.en_researcher,
+                en_study_time: req.body.en_study_time,
+                en_purpose: req.body.en_purpose,
+                en_procedure: req.body.en_procedure,
+                en_duration: req.body.en_duration,
+                en_risks: req.body.en_risks,
+                en_benefits: req.body.en_benefits,
+                de_title: req.body.de_title,
+                de_researcher: req.body.de_researcher,
+                de_study_time: req.body.de_study_time,
+                de_purpose: req.body.de_purpose,
+                de_procedure: req.body.de_procedure,
+                de_duration: req.body.de_duration,
+                de_risks: req.body.de_risks,
+                de_benefits: req.body.de_benefits
             };
             var params = _.values(object);
             callback(null, client, done, params);

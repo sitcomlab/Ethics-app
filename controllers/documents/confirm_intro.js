@@ -27,6 +27,10 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
+            // TODO: Authentication
+            callback(null, client, done);
+        },
+        function(client, done, callback) {
             // Database query
             client.query(query_get_document, [
                 req.params.document_id
@@ -39,30 +43,34 @@ exports.request = function(req, res) {
                     if (result.rows.length === 0) {
                         callback(new Error("Document not found"), 404);
                     } else {
-                        callback(null, client, done);
+                        callback(null, client, done, result.rows[0]);
                     }
                 }
             });
         },
-        function(client, done, callback) {
+        function(client, done, document, callback) {
             // TODO: Add object/schema validation
             var object = {
                 document_id: req.params.document_id,
                 status: 1
             };
             var params = _.values(object);
-            callback(null, client, done, params);
+            callback(null, client, done, document, params);
         },
-        function(client, done, params, callback){
-            // Database query
-            client.query(query_change_status, params, function(err, result) {
-                done();
-                if (err) {
-                    callback(err, 500);
-                } else {
-                    callback(null, 200, result.rows[0]);
-                }
-            });
+        function(client, done, document, params, callback){
+            if(document.status > 0){
+                callback(null, 200, document);
+            } else {
+                // Database query
+                client.query(query_change_status, params, function(err, result) {
+                    done();
+                    if (err) {
+                        callback(err, 500);
+                    } else {
+                        callback(null, 200, result.rows[0]);
+                    }
+                });
+            }
         },
     ], function(err, code, result) {
         if(err){

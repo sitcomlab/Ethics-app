@@ -7,13 +7,11 @@ var _ = require('underscore');
 var pool = require('../../server.js').pool;
 
 var fs = require("fs");
-var dir_1 = "/../../sql/queries/documents/";
-var dir_2 = "/../../sql/queries/revisions/";
-var query_get_document = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
-var query_list_by_document = fs.readFileSync(__dirname + dir_2 + 'list_by_document.sql', 'utf8').toString();
+var dir = "/../../sql/queries/members/";
+var query_list_members = fs.readFileSync(__dirname + dir + 'list.sql', 'utf8').toString();
 
 
-// LIST BY DOCUMENT
+// LIST (ADMIN)
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -33,27 +31,7 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_get_document, [
-                req.params.document_id
-            ], function(err, result) {
-                done();
-                if (err) {
-                    callback(err, 500);
-                } else {
-                    // Check if Document exists
-                    if (result.rows.length === 0) {
-                        callback(new Error("Document not found"), 404);
-                    } else {
-                        callback(null, client, done);
-                    }
-                }
-            });
-        },
-        function(client, done, callback) {
-            // Database query
-            client.query(query_list_by_document, [
-                req.params.document_id
-            ], function(err, result) {
+            client.query(query_list_members, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

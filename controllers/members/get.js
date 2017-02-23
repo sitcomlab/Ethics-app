@@ -7,13 +7,11 @@ var _ = require('underscore');
 var pool = require('../../server.js').pool;
 
 var fs = require("fs");
-var dir_1 = "/../../sql/queries/documents/";
-var dir_2 = "/../../sql/queries/revisions/";
-var query_get_document = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
-var query_list_by_document = fs.readFileSync(__dirname + dir_2 + 'list_by_document.sql', 'utf8').toString();
+var dir = "/../../sql/queries/members/";
+var query_get_member = fs.readFileSync(__dirname + dir + 'get.sql', 'utf8').toString();
 
 
-// LIST BY DOCUMENT
+// GET
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -33,32 +31,19 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_get_document, [
-                req.params.document_id
+            client.query(query_get_member, [
+                req.params.member_id
             ], function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    // Check if Document exists
+                    // Check if Member exists
                     if (result.rows.length === 0) {
-                        callback(new Error("Document not found"), 404);
+                        callback(new Error("Member not found"), 404);
                     } else {
-                        callback(null, client, done);
+                        callback(null, 200, result.rows[0]);
                     }
-                }
-            });
-        },
-        function(client, done, callback) {
-            // Database query
-            client.query(query_list_by_document, [
-                req.params.document_id
-            ], function(err, result) {
-                done();
-                if (err) {
-                    callback(err, 500);
-                } else {
-                    callback(null, 200, result.rows);
                 }
             });
         }

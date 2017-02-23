@@ -12,7 +12,7 @@ var query_list_documents_with_author = fs.readFileSync(__dirname + dir + 'list_w
 var query_list_documents_filter_by_status = fs.readFileSync(__dirname + dir + 'list_filter_by_status.sql', 'utf8').toString();
 
 
-// LIST
+// LIST ALL
 exports.request = function(req, res) {
 
     async.waterfall([

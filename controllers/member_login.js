@@ -11,7 +11,7 @@ var server_url = require('../server.js').server_url;
 var jwtSecret = require('../server.js').jwtSecret;
 
 var fs = require("fs");
-var dir = "/../sql/queries/committee/";
+var dir = "/../sql/queries/members/";
 var query_find_by_email = fs.readFileSync(__dirname + dir + 'find_by_email.sql', 'utf8').toString();
 var query_login = fs.readFileSync(__dirname + dir + 'login.sql', 'utf8').toString();
 var query_increase_fails = fs.readFileSync(__dirname + dir + 'increase_fails.sql', 'utf8').toString();
@@ -53,7 +53,7 @@ exports.request = function(req, res) {
         function(client, done, member, callback) {
             // Database query
             client.query(query_login, [
-                member.committee_id,
+                member.member_id,
                 req.body.password
             ], function(err, result) {
                 done();
@@ -79,7 +79,7 @@ exports.request = function(req, res) {
             if(loginStatus){
                 // Database query
                 client.query(query_reset_fails, [
-                    member.committee_id,
+                    member.member_id,
                 ], function(err, result) {
                     done();
                     if (err) {
@@ -90,6 +90,8 @@ exports.request = function(req, res) {
                             iss: server_url,
                             name: member.title + ' ' + member.first_name + ' ' + member.last_name,
                             email_address: member.email_address,
+                            committee: true,
+                            admin: member.admin,
                             exp: moment().add(1, 'days').format('x')
                         };
                         // Create JWT
@@ -100,7 +102,7 @@ exports.request = function(req, res) {
             } else {
                 // Database query
                 client.query(query_increase_fails, [
-                    member.committee_id,
+                    member.member_id,
                 ], function(err, result) {
                     done();
                     if (err) {

@@ -28,6 +28,10 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
+            // TODO: Authentication
+            callback(null, client, done);
+        },
+        function(client, done, callback) {
             // Database query
             client.query(query_get_revision, [
                 req.params.revision_id
@@ -48,8 +52,7 @@ exports.request = function(req, res) {
         function(client, done, callback) {
             // Database query
             client.query(query_get_by_revision, [
-                req.params.revision_id,
-                req.params.language
+                req.params.revision_id
             ], function(err, result) {
                 done();
                 if (err) {

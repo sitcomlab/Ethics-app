@@ -21,7 +21,7 @@ var dir_4 = "/../../sql/queries/revisions/";
 var dir_5 = "/../../sql/queries/descriptions/";
 var dir_6 = "/../../sql/queries/concerns/";
 var template = fs.readFileSync(__dirname + dir_1 + 'document_created.html', 'utf8').toString();
-var query_get_user = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
+var query_find_user_by_email = fs.readFileSync(__dirname + dir_2 + 'find_by_email.sql', 'utf8').toString();
 var query_create_document = fs.readFileSync(__dirname + dir_3 + 'create.sql', 'utf8').toString();
 var query_create_revision = fs.readFileSync(__dirname + dir_4 + 'create.sql', 'utf8').toString();
 var query_create_description = fs.readFileSync(__dirname + dir_5 + 'create.sql', 'utf8').toString();
@@ -43,9 +43,13 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
+            // TODO: Authentication
+            callback(null, client, done);
+        },
+        function(client, done, callback) {
             // Database query
-            client.query(query_get_user, [
-                req.params.user_id
+            client.query(query_find_user_by_email, [
+                req.body.email_address
             ], function(err, result) {
                 done();
                 if (err) {
@@ -64,7 +68,7 @@ exports.request = function(req, res) {
             // TODO: Add object/schema validation
             var object = {
                 document_id: uuid.v1(),
-                user_id: req.params.user_id,
+                user_id: user.user_id,
                 document_title: req.body.document_title,
             };
             var params = _.values(object);
@@ -98,24 +102,7 @@ exports.request = function(req, res) {
         function(client, done, user, document, revision, callback){
             // Database query
             client.query(query_create_description, [
-                revision.revision_id,
-                'en',
-                true
-            ], function(err, result) {
-                done();
-                if (err) {
-                    callback(err, 500);
-                } else {
-                    callback(null, client, done, user, document, revision);
-                }
-            });
-        },
-        function(client, done, user, document, revision, callback){
-            // Database query
-            client.query(query_create_description, [
-                revision.revision_id,
-                'de',
-                false
+                revision.revision_id
             ], function(err, result) {
                 done();
                 if (err) {
@@ -144,42 +131,42 @@ exports.request = function(req, res) {
             // Formatting
             switch(_document.status){
                 case 0: {
-                    _document.label = "tag-default";
+                    _document.label = "badge-default";
                     _document.status_description = "initialised";
                     break;
                 }
                 case 1: {
-                    _document.label = "tag-default";
+                    _document.label = "badge-default";
                     _document.status_description = "unsubmitted";
                     break;
                 }
                 case 2: {
-                    _document.label = "tag-success";
+                    _document.label = "badge-success";
                     _document.status_description = "submitted";
                     break;
                 }
                 case 3: {
-                    _document.label = "tag-primary";
+                    _document.label = "badge-primary";
                     _document.status_description = "review pending";
                     break;
                 }
                 case 4: {
-                    _document.label = "tag-info";
+                    _document.label = "badge-info";
                     _document.status_description = "under review";
                     break;
                 }
                 case 5: {
-                    _document.label = "tag-warning";
+                    _document.label = "badge-warning";
                     _document.status_description = "partly accepted";
                     break;
                 }
                 case 6: {
-                    _document.label = "tag-success";
+                    _document.label = "badge-success";
                     _document.status_description = "reviewed";
                     break;
                 }
                 case 7: {
-                    _document.label = "tag-danger";
+                    _document.label = "badge-danger";
                     _document.status_description = "rejected";
                     break;
                 }
@@ -200,7 +187,7 @@ exports.request = function(req, res) {
 
             // Send email
             transporter.sendMail({
-                from: mail_options.from,
+                from: mail_options,
                 to: user.email_address,
                 subject: 'Your new document has been created',
                 text: '',

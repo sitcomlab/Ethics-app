@@ -11,7 +11,7 @@ var dir = "/../../sql/queries/users/";
 var query_get_user = fs.readFileSync(__dirname + dir + 'get.sql', 'utf8').toString();
 
 
-// FIND BY EMAIL
+// GET
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -24,6 +24,10 @@ exports.request = function(req, res) {
                     callback(null, client, done);
                 }
             });
+        },
+        function(client, done, callback) {
+            // TODO: Authentication
+            callback(null, client, done);
         },
         function(client, done, callback) {
             // Database query

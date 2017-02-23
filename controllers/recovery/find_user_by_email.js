@@ -63,12 +63,7 @@ exports.request = function(req, res) {
                 if (err) {
                     callback(err, 500);
                 } else {
-                    // Check if Documents exist
-                    if (result.rows.length === 0) {
-                        callback(new Error("No Documents found"), 404);
-                    } else {
-                        callback(null, client, done, user, result.rows);
-                    }
+                    callback(null, client, done, user, result.rows);
                 }
             });
         },
@@ -78,42 +73,42 @@ exports.request = function(req, res) {
             for(var i=0; i<documents.length; i++){
                 switch(documents[i].status){
                     case 0: {
-                        documents[i].label = "tag-default";
+                        documents[i].label = "badge-default";
                         documents[i].status_description = "initialised";
                         break;
                     }
                     case 1: {
-                        documents[i].label = "tag-default";
+                        documents[i].label = "badge-default";
                         documents[i].status_description = "unsubmitted";
                         break;
                     }
                     case 2: {
-                        documents[i].label = "tag-success";
+                        documents[i].label = "badge-success";
                         documents[i].status_description = "submitted";
                         break;
                     }
                     case 3: {
-                        documents[i].label = "tag-primary";
+                        documents[i].label = "badge-primary";
                         documents[i].status_description = "review pending";
                         break;
                     }
                     case 4: {
-                        documents[i].label = "tag-info";
+                        documents[i].label = "badge-info";
                         documents[i].status_description = "under review";
                         break;
                     }
                     case 5: {
-                        documents[i].label = "tag-warning";
+                        documents[i].label = "badge-warning";
                         documents[i].status_description = "partly accepted";
                         break;
                     }
                     case 6: {
-                        documents[i].label = "tag-success";
+                        documents[i].label = "badge-success";
                         documents[i].status_description = "reviewed";
                         break;
                     }
                     case 7: {
-                        documents[i].label = "tag-danger";
+                        documents[i].label = "badge-danger";
                         documents[i].status_description = "rejected";
                         break;
                     }
@@ -125,10 +120,22 @@ exports.request = function(req, res) {
                 documents[j].link = server_url + ":" + httpPort + "/documents/" + documents[j].document_id;
             }
 
+            // Formatting
+            var length;
+            if(documents.length === 0){
+                length = documents.length + " documents were found";
+            } else if(documents.length === 1){
+                length = documents.length + " document was found";
+            } else {
+                length = documents.length+ " documents were found";
+            }
+
+
             // Render HTML content
             var output = mustache.render(template, {
                 user: user,
                 documents: documents,
+                length: length,
                 year: moment().format("YYYY")
             });
 
@@ -137,7 +144,7 @@ exports.request = function(req, res) {
 
             // Send email
             transporter.sendMail({
-                from: mail_options.from,
+                from: mail_options,
                 to: user.email_address,
                 subject: 'You asked for your Document-IDs',
                 text: '',

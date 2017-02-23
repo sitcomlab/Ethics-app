@@ -35,6 +35,10 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
+            // TODO: Authentication
+            callback(null, client, done);
+        },
+        function(client, done, callback) {
             // Database query
             client.query(query_get_user, [
                 req.params.user_id
@@ -91,7 +95,7 @@ exports.request = function(req, res) {
 
                 // Send email
                 transporter.sendMail({
-                    from: mail_options.from,
+                    from: mail_options,
                     to: user.email_address,
                     subject: 'Your email-address has been changed',
                     text: '',

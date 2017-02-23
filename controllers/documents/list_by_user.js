@@ -7,11 +7,13 @@ var _ = require('underscore');
 var pool = require('../../server.js').pool;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/committee/";
-var query_list_members = fs.readFileSync(__dirname + dir + 'list.sql', 'utf8').toString();
+var dir_1 = "/../../sql/queries/users/";
+var dir_2 = "/../../sql/queries/documents/";
+var query_get_user = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
+var query_list_documents_filter_by_user = fs.readFileSync(__dirname + dir_2 + 'list_filter_by_user.sql', 'utf8').toString();
 
 
-// LIST (ADMIN)
+// LIST BY USER
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -31,11 +33,32 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_list_members, function(err, result) {
+            client.query(query_get_user, [
+                req.params.user_id
+            ], function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
+                    // Check if User exists
+                    if (result.rows.length === 0) {
+                        callback(new Error("User not found"), 404);
+                    } else {
+                        callback(null, client, done, result.rows[0]);
+                    }
+                }
+            });
+        },
+        function(client, done, user, callback) {
+            // Database query
+            client.query(query_list_documents_filter_by_user, [
+                req.params.user_id
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    console.log(result.rows);
                     callback(null, 200, result.rows);
                 }
             });

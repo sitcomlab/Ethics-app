@@ -41,6 +41,10 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
+            // TODO: Authentication
+            callback(null, client, done);
+        },
+        function(client, done, callback) {
             // Database query
             client.query(query_get_document, [
                 req.params.document_id
@@ -86,8 +90,7 @@ exports.request = function(req, res) {
         function(client, done, document, revision, callback) {
             // Database query
             client.query(query_get_description, [
-                revision.revision_id,
-                'en'
+                revision.revision_id
             ], function(err, result) {
                 done();
                 if (err) {
@@ -102,26 +105,7 @@ exports.request = function(req, res) {
                 }
             });
         },
-        function(client, done, document, revision, description_en, callback) {
-            // Database query
-            client.query(query_get_description, [
-                revision.revision_id,
-                'de'
-            ], function(err, result) {
-                done();
-                if (err) {
-                    callback(err, 500);
-                } else {
-                    // Check if Description exists
-                    if (result.rows.length === 0) {
-                        callback(new Error("Description not found"), 404);
-                    } else {
-                        callback(null, client, done, document, revision, description_en, result.rows[0]);
-                    }
-                }
-            });
-        },
-        function(client, done, document, revision, description_en, description_de, callback) {
+        function(client, done, document, revision, description, callback) {
 
             // Prepare working folders
             var folders = {
@@ -133,9 +117,7 @@ exports.request = function(req, res) {
 
             // Prepare result
             var result = {
-                path: '/files/temp/' + folders.dateFolderName + "/" + folders.filesFolderName,
-                en: true,
-                de: false
+                path: '/files/temp/' + folders.dateFolderName + "/" + folders.filesFolderName
             };
 
             // Create temporary folders
@@ -210,8 +192,7 @@ exports.request = function(req, res) {
                 },
                 function(callback) { // Generate consent form (German)
                     // Check if a German description was used
-                    if(description_de.used){
-                        result.de = true;
+                    if(description.de_used){
 
                         // Render HTML-content
                         var html = mustache.render(template_consent_form_de, {

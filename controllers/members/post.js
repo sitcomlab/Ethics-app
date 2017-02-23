@@ -7,13 +7,11 @@ var _ = require('underscore');
 var pool = require('../../server.js').pool;
 
 var fs = require("fs");
-var dir_1 = "/../../sql/queries/documents/";
-var dir_2 = "/../../sql/queries/revisions/";
-var query_get_document = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
-var query_list_by_document = fs.readFileSync(__dirname + dir_2 + 'list_by_document.sql', 'utf8').toString();
+var dir = "/../../sql/queries/members/";
+var query_create_member = fs.readFileSync(__dirname + dir + 'create.sql', 'utf8').toString();
 
 
-// LIST BY DOCUMENT
+// POST
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -32,33 +30,31 @@ exports.request = function(req, res) {
             callback(null, client, done);
         },
         function(client, done, callback) {
-            // Database query
-            client.query(query_get_document, [
-                req.params.document_id
-            ], function(err, result) {
-                done();
-                if (err) {
-                    callback(err, 500);
-                } else {
-                    // Check if Document exists
-                    if (result.rows.length === 0) {
-                        callback(new Error("Document not found"), 404);
-                    } else {
-                        callback(null, client, done);
-                    }
-                }
-            });
+            // TODO: Add object/schema validation
+            var object = {
+                email_address: req.body.email_address,
+                password: req.body.password,
+                title: req.body.title,
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                institute: req.body.institute,
+                research_lab: req.body.research_lab,
+                office_room_number: req.body.office_room_number,
+                office_phone_number: req.body.office_phone_number,
+                office_email_address: req.body.office_email_address,
+                subscribed: req.body.subscribed
+            };
+            var params = _.values(object);
+            callback(null, client, done, params);
         },
-        function(client, done, callback) {
+        function(client, done, params, callback){
             // Database query
-            client.query(query_list_by_document, [
-                req.params.document_id
-            ], function(err, result) {
+            client.query(query_create_member, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, 200, result.rows);
+                    callback(null, 201, result.rows[0]);
                 }
             });
         }
