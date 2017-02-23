@@ -11,9 +11,10 @@ var nodemailer = require('nodemailer');
 var jwt = require('jsonwebtoken');
 
 // ENVIRONMENT VARIABLES
+var environment = process.env.NODE_ENV || 'development';
 var server_url = process.env.SERVER_URL || 'http://giv-ethics-app.uni-muenster.de';
 var httpPort = process.env.HTTP_PORT || 5000;
-var httpsPort = httpPort + 443;
+var httpsPort = process.env.HTTPS_PORT || (httpPort + 443);
 var db_host = process.env.DB_HOST || 'localhost';
 var db_port = process.env.DB_PORT || 5432;
 var db_name = process.env.DB_NAME || 'ethics-app';
@@ -78,14 +79,15 @@ exports.transporter = nodemailer.createTransport({
     }
 });
 exports.mail_options = {
-    from: 'IFGI-Ethics-App <' + from_email_address + '>'
+    name: "IFGI-Ethics-App",
+    address: from_email_address
 };
 
 
 // Load certificstes
-if (false) {
-    var privateKey = fs.readFileSync('sslcert/server.key', 'utf8');
-    var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+if (environment === "production") {
+    var privateKey = fs.readFileSync('ssl/server.key', 'utf8');
+    var certificate = fs.readFileSync('ssl/server.crt', 'utf8');
 
     var credentials = {
         key: privateKey,
@@ -113,23 +115,23 @@ app.use(express.static(__dirname + '/public', {
 // Load dependencies
 var login = require ('./routes/login');
 var users = require ('./routes/users');
-var committee = require ('./routes/committee');
+var members = require ('./routes/members');
 var documents = require ('./routes/documents');
 var revisions = require ('./routes/revisions');
 var descriptions = require ('./routes/descriptions');
 var concerns = require ('./routes/concerns');
-// var comments = require ('./routes/comments');
+var reviews = require ('./routes/reviews');
 var recovery = require ('./routes/recovery');
 
 // Load API routes
 app.use('/api', login);
 app.use('/api', users);
-app.use('/api', committee);
+app.use('/api', members);
 app.use('/api', documents);
 app.use('/api', revisions);
 app.use('/api', descriptions);
 app.use('/api', concerns);
-// app.use('/api', comments);
+app.use('/api', reviews);
 app.use('/api', recovery);
 
 
@@ -144,7 +146,7 @@ var httpServer = http.createServer(app);
 httpServer.listen(httpPort, function() {
     console.log(colors.blue("HTTP-Server is listening at port " + httpPort));
 });
-if (false) {
+if(environment === "production") {
     var httpsServer = https.createServer(credentials, app);
     httpsServer.listen(httpsPort, function() {
         console.log(colors.blue("HTTPS-Server is listening at port " + httpsPort));

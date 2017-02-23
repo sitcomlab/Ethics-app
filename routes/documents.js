@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-var list = require('../controllers/documents/list');
+var list_all = require('../controllers/documents/list_all');
+var list_by_user = require('../controllers/documents/list_by_user');
 var post = require('../controllers/documents/post');
 var get = require('../controllers/documents/get');
 var put = require('../controllers/documents/put');
@@ -11,11 +12,14 @@ var submit = require('../controllers/documents/submit');
 var generate_files = require('../controllers/documents/generate_files');
 
 
-// LIST (ONLY MEMBERS)
-router.get('/admin/documents', list.request);
+// LIST ALL (ONLY MEMBERS)
+router.get('/documents', list_all.request);
+
+// LIST ALL FROM USER (ONLY MEMBERS)
+router.get('/users/:user_id/documents', list_by_user.request);
 
 // POST
-router.post('/users/:user_id/documents', post.request);
+router.post('/documents', post.request);
 
 // GET
 router.get('/documents/:document_id', get.request);
