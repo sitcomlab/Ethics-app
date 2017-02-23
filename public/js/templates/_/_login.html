@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<!-- LOADING -->
+<div class="loading" ng-show="tab==0">
+    <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+</div>
+
+<!-- MAIN -->
+<!-- HEADERS -->
+<div class="row" ng-show="tab>0">
+
+    <!-- Left padding -->
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+
+    <!-- Welcome -->
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 middle" ng-show="tab<4">
+        <h1 class="display-3">
+            {{ 'WELCOME' | translate }}
+        </h1>
+        <br>
+        <p class="lead">
+            {{ 'WELCOME_MESSAGE' | translate }}
+        </p>
+        <br>
+    </div>
+    <!-- New user -->
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 middle" ng-show="tab==4">
+        <h1 class="display-3">
+            {{ 'HI' | translate }}
+        </h1>
+        <br>
+        <p class="lead">
+            {{ 'NEW_USER' | translate }}
+        </p>
+        <br>
+    </div>
+
+    <!-- Right padding -->
+    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
+
+</div>
+
+<!-- FORMS -->
+<div class="row" ng-show="tab>0">
+    <!-- Left padding -->
+    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-2"></div>
+
+    <!-- Content -->
+    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-8">
+
+        <!-- Tab 1 (Login)-->
+        <div class="card" style="padding: 30px 10px 20px 10px;" ng-show="tab==1">
+            <div class="card-block">
+                <form class="form-horizontal" name="loginForm" ng-submit="login()">
+                    <div class="form-group" ng-class="{'has-danger': loginForm.login_document_id.$invalid && !loginForm.login_document_id.$pristine }">
+                        <input
+                            type="text"
+                            class="form-control form-control-lg"
+                            ng-model="login_document.document_id"
+                            name="login_document_id"
+                            id="login_document_id"
+                            placeholder="{{ 'DOCUMENT_ID' | translate }}*"
+                            aria-describedby="inputDocumentId"
+                            required
+                            autofocus
+                            autocomplete="on">
+                        <span ng-show="loginForm.login_document_id.$error.required && !loginForm.login_document_id.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                    <button class="form-control btn btn-lg btn-success" role="submit">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LOGIN' | translate }}
+                    </button>
+                    <br>
+                    <br>
+                    <div class="middle">
+                        <a href="" ng-click="changeTab(2)">
+                            {{ 'CREATE_NEW_DOCUMENT' | translate }}
+                        </a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <a href="" ng-click="changeTab(3)">
+                            {{ 'FORGOT_YOUR_DOCUMENT_ID' | translate }}?
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tab 2 (Create new document) -->
+        <div class="card" style="padding: 30px 10px 20px 10px;" ng-show="tab==2">
+            <div class="card-block">
+                <form class="form-horizontal" name="createForm" ng-submit="createDocument()">
+                    <div class="form-group" ng-class="{'has-success': createForm.new_document_title.$valid && !createForm.new_document_title.$pristine, 'has-danger': createForm.new_document_title.$invalid && !createForm.new_document_title.$pristine }">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-lg" ng-model="new_document.document_title" name="new_document_title" id="new_document_title" placeholder="{{ 'DOCUMENT_TITLE' | translate }}*" aria-describedby="inputTitle" autofocus required>
+                            <span class="input-group-addon">
+                                <span class="flag-icon flag-icon-gb"></span>
+                            </span>
+                        </div>
+                        <span ng-show="createForm.new_document_title.$error.required && !createForm.new_document_title.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                    <div
+                        class="form-group"
+                        ng-class="{'has-success': createForm.new_document_email_address.$valid && !createForm.new_document_email_address.$pristine, 'has-danger': createForm.new_document_email_address.$invalid && !createForm.new_document_email_address.$pristine }">
+                        <input type="email" class="form-control form-control-lg" ng-model="new_document.email_address" name="new_document_email_address" id="new_document_email_address" placeholder="{{ 'EMAIL_ADDRESS' | translate }}*" required autocomplete="on">
+                        <span ng-show="createForm.new_document_email_address.$error.required && !createForm.new_document_email_address.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                    <button class="form-control btn btn-lg btn-primary" role="submit">
+                        {{ 'SUBMIT' | translate }}
+                    </button>
+                    <br>
+                    <br>
+                    <div class="middle">
+                        <a href="" ng-click="changeTab(1)">
+                            {{ 'LOGIN' | translate }}
+                        </a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <a href="" ng-click="changeTab(3)">
+                            {{ 'FORGOT_YOUR_DOCUMENT_ID' | translate }}?
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tab 3 (Recovery) -->
+        <div class="card" style="padding: 30px 10px 20px 10px;" ng-show="tab==3">
+            <div class="card-block">
+                <form class="form-horizontal" name="recoveryForm" ng-submit="recovery()">
+                    <div class="form-group" ng-class="{'has-danger': recoveryForm.recovery_email_address.$invalid && !recoveryForm.recovery_email_address.$pristine }">
+                        <input type="email" class="form-control form-control-lg" ng-model="recovery_user.email_address" name="recovery_email_address" id="recovery_email_address" placeholder="{{ 'EMAIL_ADDRESS' | translate }}*" required autofocus autocomplete="on">
+                        <span ng-show="recoveryForm.recovery_email_address.$error.required && !recoveryForm.recovery_email_address.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                    <button class="form-control btn btn-lg btn-primary" role="submit">
+                        {{ 'SEND_RECOVERY_EMAIL' | translate }}
+                    </button>
+                    <br>
+                    <br>
+                    <div class="middle">
+                        <a href="" ng-click="changeTab(1)">
+                            {{ 'LOGIN' | translate }}
+                        </a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <a href="" ng-click="changeTab(2)">
+                            {{ 'CREATE_NEW_DOCUMENT' | translate }}
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tab 4 (New user) -->
+        <div class="card" style="padding: 30px 10px 20px 10px;" ng-show="tab==4">
+            <div class="card-block">
+                <form class="form-horizontal" name="userForm" ng-submit="createUser()">
+                    <div class="form-group" ng-class="{'has-success': userForm.new_user_title.$valid && !userForm.new_user_title.$pristine, 'has-danger': userForm.new_user_title.$invalid && !userForm.new_user_title.$pristine }">
+                        <input type="text" class="form-control form-control-lg" ng-model="new_user.title" name="new_user_title" id="new_user_title" placeholder="{{ 'TITLE' | translate }}" autofocus>
+                    </div>
+                    <br>
+                    <div class="form-group" ng-class="{'has-success': userForm.new_user_first_name.$valid && !userForm.new_user_first_name.$pristine, 'has-danger': userForm.new_user_first_name.$invalid && !userForm.new_user_first_name.$pristine }">
+                        <input type="text" class="form-control form-control-lg" ng-model="new_user.first_name" name="new_user_first_name" id="new_user_first_name" placeholder="{{ 'FIRST_NAME' | translate }}*" required>
+                        <span ng-show="userForm.new_user_first_name.$error.required && !userForm.new_user_first_name.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                    <div class="form-group" ng-class="{'has-success': userForm.new_user_last_name.$valid && !userForm.new_user_last_name.$pristine, 'has-danger': userForm.new_user_last_name.$invalid && !userForm.new_user_last_name.$pristine }">
+                        <input type="text" class="form-control form-control-lg" ng-model="new_user.last_name" name="new_user_last_name" id="new_user_last_name" placeholder="{{ 'LAST_NAME' | translate }}*" required>
+                        <span ng-show="userForm.new_user_last_name.$error.required && !userForm.new_user_last_name.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                    <button class="form-control btn btn-lg btn-primary" role="submit">
+                        {{ 'NEXT' | translate }}
+                    </button>
+                    <br>
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right padding -->
+    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-2"></div>
+</div>
+<br>

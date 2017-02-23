@@ -55,9 +55,9 @@
                     <img src="../img/ifgi-logo.svg" height="54" class="d-inline-block align-middle" alt="" style="background: #f5f5f5; padding:2px 10px 2px 10px; position:absolute; top: 0px; left: 0px;">
                 </a>
                 <a class="navbar-brand" href="/admin" style="margin-left: 160px;">
-                    {{config.appName}}
+                    {{config.appName}} <small>({{config.appSubname}})</small>
                 </a>
-                <div class="btn-group float-xs-right" style="margin-left:5px;" ng-if="user" role="group" aria-label="navbar">
+                <div class="btn-group float-xs-right" style="margin-left:5px;" ng-if="authenticated_member" role="group" aria-label="navbar">
                     <div class="btn-group" role="group" ng-if="document">
                         <button id="document_dropdown" type="button" class="btn dropdown-toggle" ng-class="{'btn-secondary': document.status==0 || document.status==1, 'btn-success': document.status==2 || document.status==6, 'btn-primary': document.status==3, 'btn-info': document.status==4, 'btn-warning': document.status=='5', 'btn-danger': document.status==7}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                             <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;{{document.document_title}}
@@ -74,11 +74,14 @@
                     </div>
                     <div class="btn-group" role="group">
                         <button id="user_dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;<span ng-if="user.title">{{user.title}}&nbsp;</span>{{user.first_name}} {{user.last_name}}
+                            <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;&nbsp;<span ng-if="authenticated_member.title">{{authenticated_member.title}}&nbsp;</span>{{authenticated_member.first_name}} {{authenticated_member.last_name}}
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user_dropdown">
                             <h6 class="dropdown-header">{{ 'ACCOUNT' | translate }}</h6>
-                            <a class="dropdown-item" href="" ng-click="editUser(document.document_id)">{{ 'SETTINGS' | translate }}</a>
+                            <a class="dropdown-item" href="" ng-click="showAccount()">{{ 'SETTINGS' | translate }}</a>
+                            <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">{{ 'DOCUMENTS' | translate }}</h6>
+                            <a class="dropdown-item" href="" ng-click="showDocuments()">{{ 'SHOW_DOCUMENTS' | translate }}</a>
                             <div class="dropdown-divider"></div>
                             <h6 class="dropdown-header">{{ 'ETHICS_COMMITTEE' | translate }}</h6>
                             <a class="dropdown-item" href="" ng-click="showMembers()">{{ 'SHOW_MEMBERS' | translate }}</a>
@@ -131,36 +134,36 @@
         <script src="js/services/authenticationService.js"></script>
         <script src="js/services/documentsService.js"></script>
         <script src="js/services/documentService.js"></script>
-        <!--<script src="js/services/revisionService.js"></script>-->
         <script src="js/services/usersService.js"></script>
         <script src="js/services/userService.js"></script>
         <script src="js/services/membersService.js"></script>
         <script src="js/services/memberService.js"></script>
         <script src="js/services/recoveryService.js"></script>
+        <script src="js/services/revisionService.js"></script>
+        <script src="js/services/descriptionService.js"></script>
+        <script src="js/services/concernService.js"></script>
 
         <!-- Controllers -->
         <script src="js/app.js"></script>
         <script src="js/controllers/navController.js"></script>
         <script src="js/controllers/footerController.js"></script>
         <script src="js/controllers/loginController.js"></script>
-        <script src="js/controllers/documentsController.js"></script>
-        <script src="js/controllers/documentController.js"></script>
-        <script src="js/controllers/usersController.js"></script>
-        <script src="js/controllers/userController.js"></script>
-        <script src="js/controllers/userAddController.js"></script>
-        <script src="js/controllers/membersController.js"></script>
-        <script src="js/controllers/memberController.js"></script>
-        <script src="js/controllers/memberAddController.js"></script>
-        <!--<script src="js/controllers/documentIdController.js"></script>
-        <script src="js/controllers/documentTitleController.js"></script>
-        <script src="js/controllers/statusController_0.js"></script>
-        <script src="js/controllers/statusController_1.js"></script>
-        <script src="js/controllers/statusController_2.js"></script>
-        <script src="js/controllers/statusController_3.js"></script>
-        <script src="js/controllers/statusController_4.js"></script>
-        <script src="js/controllers/statusController_5.js"></script>
-        <script src="js/controllers/statusController_6.js"></script>
-        <script src="js/controllers/statusController_7.js"></script>-->
+        <script src="js/controllers/account/editController.js"></script>
+        <script src="js/controllers/account/deleteController.js"></script>
+        <script src="js/controllers/document/listController.js"></script>
+        <script src="js/controllers/document/detailsController.js"></script>
+        <script src="js/controllers/document/editController.js"></script>
+        <script src="js/controllers/document/editIdController.js"></script>
+        <script src="js/controllers/document/editTitleController.js"></script>
+        <script src="js/controllers/document/deleteController.js"></script>
+        <script src="js/controllers/user/listController.js"></script>
+        <script src="js/controllers/user/detailsController.js"></script>
+        <script src="js/controllers/user/editController.js"></script>
+        <script src="js/controllers/user/createController.js"></script>
+        <script src="js/controllers/user/deleteController.js"></script>
+        <script src="js/controllers/member/listController.js"></script>
+        <script src="js/controllers/member/detailsController.js"></script>
+        <script src="js/controllers/member/createController.js"></script>
 
     </body>
 </html>

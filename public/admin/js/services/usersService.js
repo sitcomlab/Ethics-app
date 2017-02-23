@@ -14,7 +14,7 @@ app.factory('$usersService', function($http, $log, config, $authenticationServic
             users = data;
         },
         list: function() {
-            return $http.get(config.apiURL + "/admin/users", {
+            return $http.get(config.apiURL + "/users", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

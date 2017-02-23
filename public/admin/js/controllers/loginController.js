@@ -1,13 +1,18 @@
 var app = angular.module("ethics-app");
 
 // Login controller
-app.controller("loginController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $recoveryService, $documentsService, $documentService) {
+app.controller("loginController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $recoveryService, $documentsService, $documentService, $membersService, $memberService, $usersService, $userService) {
 
     // Reset
     $rootScope.$broadcast('resetNavbar');
     $authenticationService.set();
+    $authenticationService.setToken();
     $documentsService.set();
     $documentService.set();
+    $membersService.set();
+    $memberService.set();
+    $usersService.set();
+    $userService.set();
 
     // Init
     $scope.tab = 1;
@@ -33,6 +38,8 @@ app.controller("loginController", function($scope, $rootScope, $translate, $loca
         $authenticationService.login($scope.login_user)
         .success(function(response) {
             $authenticationService.set(response);
+            $authenticated_member = $authenticationService.get();
+            $authenticationService.setToken($authenticated_member.token);
             // Redirect
             $location.url("/documents");
         })

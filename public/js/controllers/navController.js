@@ -1,20 +1,39 @@
 var app = angular.module("ethics-app");
 
 
-app.controller("navController", function($scope, $rootScope, $ngBootbox, $translate, $location, $log, config, $documentService, $userService) {
+app.controller("navController", function($scope, $rootScope, $ngBootbox, $translate, $location, $log, config, $documentService, $authenticationService) {
 
-    // Init
-    $scope.config = config;
+    /*************************************************
+        FUNCTIONS
+     *************************************************/
 
     /**
      * [editUser description]
      * @param  {[type]} document_id [description]
      * @return {[type]}             [description]
      */
-    $scope.editUser = function(document_id){
-        // Redirect
-        $location.url("/documents/" + document_id + "/user");
+    $scope.editAccount = function(){
+        $scope.redirect("/account/edit");
     };
+
+    /**
+     * [redirect description]
+     * @param  {[type]} path [description]
+     * @return {[type]}      [description]
+     */
+    $scope.redirect = function(path){
+        $location.url(path);
+    };
+
+    /**
+     * [showDocumentIntro description]
+     * @param  {[type]} document_id [description]
+     * @return {[type]}             [description]
+     */
+    $scope.showDocumentIntro = function(document_id){
+        $scope.redirect("/documents/" + document_id + "/intro");
+    };
+
 
     /**
      * [showDocumentId description]
@@ -22,18 +41,16 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
      * @return {[type]}             [description]
      */
     $scope.showDocumentId = function(document_id){
-        // Redirect
-        $location.url("/documents/" + document_id + "/id");
+        $scope.redirect("/documents/" + document_id + "/id");
     };
 
     /**
-     * [changeDocumentTitle description]
+     * [editDocumentTitle description]
      * @param  {[type]} document_id [description]
      * @return {[type]}             [description]
      */
-    $scope.changeDocumentTitle = function(document_id){
-        // Redirect
-        $location.url("/documents/" + document_id + "/title");
+    $scope.editDocumentTitle = function(document_id){
+        $scope.redirect("/documents/" + document_id + "/title");
     };
 
 
@@ -43,8 +60,7 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
      * @return {[type]}             [description]
      */
     $scope.deleteDocument = function(document_id){
-        // Redirect
-        $location.url("/documents/" + document_id + "/delete");
+        $scope.redirect("/documents/" + document_id + "/delete");
     };
 
 
@@ -53,8 +69,7 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
      * @return {[type]} [description]
      */
     $scope.showMembers = function(){
-        // Redirect
-        $location.url("/committee");
+        $scope.redirect("/members");
     };
 
 
@@ -64,29 +79,36 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
      */
     $scope.logout = function(){
         delete $scope.document;
-        delete $scope.user;
-        // Redirect
-        $location.url("/");
+        delete $scope.authenticated_user;
+        $scope.redirect("/");
     };
 
 
+    /*************************************************
+        EVENT LISTENERS
+     *************************************************/
+
     /**
-     * Update Navbar, if user logged in
+     * [document description]
      * @type {[type]}
      */
     $rootScope.$on('updateNavbar', function() {
         $scope.document = $documentService.get();
-        $scope.user = $userService.get();
+        $scope.authenticated_user = $authenticationService.get();
     });
 
 
     /**
-     * Reset Navbar
+     *
      */
     $rootScope.$on('resetNavbar', function() {
         delete $scope.document;
-        delete $scope.user;
+        delete $scope.authenticated_user;
     });
 
 
+    /*************************************************
+        INIT
+     *************************************************/
+    $scope.config = config;
 });

@@ -13,9 +13,40 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
      */
     $scope.logout = function(){
         delete $scope.document;
-        delete $scope.user;
+        delete $scope.authenticated_member;
         // Redirect
         $location.url("/");
+    };
+
+    /**
+     * [showDocumentId description]
+     * @param  {[type]} document_id [description]
+     * @return {[type]}             [description]
+     */
+    $scope.showDocumentId = function(document_id){
+        // Redirect
+        $location.url("/documents/" + document_id + "/id");
+    };
+
+    /**
+     * [changeDocumentTitle description]
+     * @param  {[type]} document_id [description]
+     * @return {[type]}             [description]
+     */
+    $scope.changeDocumentTitle = function(document_id){
+        // Redirect
+        $location.url("/documents/" + document_id + "/title");
+    };
+
+
+    /**
+     * [deleteDocument description]
+     * @param  {[type]} document_id [description]
+     * @return {[type]}             [description]
+     */
+    $scope.deleteDocument = function(document_id){
+        // Redirect
+        $location.url("/documents/" + document_id + "/delete");
     };
 
 
@@ -26,6 +57,26 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
     $scope.closeDocument = function(){
         delete $scope.document;
         $documentService.set();
+        // Redirect
+        $location.url("/documents");
+    };
+
+
+    /**
+     * [showDocuments description]
+     * @return {[type]} [description]
+     */
+    $scope.showAccount = function(){
+        // Redirect
+        $location.url("/account");
+    };
+
+
+    /**
+     * [showDocuments description]
+     * @return {[type]} [description]
+     */
+    $scope.showDocuments = function(){
         // Redirect
         $location.url("/documents");
     };
@@ -74,7 +125,7 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
      * @type {[type]}
      */
     $rootScope.$on('updateNavbar', function() {
-        $scope.user = $authenticationService.get();
+        $scope.authenticated_member = $authenticationService.get();
         $scope.document = $documentService.get();
     });
 
@@ -83,7 +134,7 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
      * Reset Navbar
      */
     $rootScope.$on('resetNavbar', function() {
-        delete $scope.user;
+        delete $scope.authenticated_member;
         delete $scope.document;
     });
 

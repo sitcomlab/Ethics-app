@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!-- LOADING -->
+<div class="loading" ng-show="tab==0">
+    <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+</div>
+
+<!-- MAIN -->
+<div class="row" ng-show="tab>0">
+    <!-- Left padding -->
+    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-2"></div>
+
+    <!-- Content -->
+    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-8" ng-show="tab==1">
+        <br>
+        <div class="card" ng-show="tab==1">
+            <div class="card-header middle" style="font-size: 20pt;">
+                {{ 'ETHICS_COMMITTEE' | translate }}
+            </div>
+            <div class="card-block">
+                <br>
+                <h6 class="text-muted">
+                    {{ 'MEMBERS' | translate }}
+                </h6>
+                <div class="list-group" ng-if="members && members.length>0">
+                    <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in members | orderBy: ['last_name', 'first_name']">
+                        <div class="d-flex w-100 justify-content-between">
+                            <div>
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                &nbsp;&nbsp;
+                                <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}} </b>
+                                <span class="text-muted" ng-if="member.research_lab">
+                                    <small>&nbsp;({{member.research_lab}})</small>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-success" ng-if="member.subscribed">
+                                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                </span>
+                                <span class="text-danger" ng-if="!member.subscribed">
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="row">
+                    <div class="col text-muted right">
+                        <small>
+                            <span class="text-success">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            </span> = {{ 'AVAILABLE' | translate }}
+                            &nbsp;&nbsp;|&nbsp;&nbsp;
+                            <span class="text-danger">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            </span> = {{ 'CURRENTLY_NOT_AVAILABLE' | translate }}
+                        </small>
+                    </div>
+                </div>
+                <br>
+
+                <h6 class="text-muted">
+                    {{ 'FORMER_MEMBERS' | translate }}
+                </h6>
+                <div class="list-group" ng-if="former_members && former_members.length>0">
+                    <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action" ng-repeat="member in former_members | orderBy: ['last_name', 'first_name']">
+                        <i class="fa fa-user-times" aria-hidden="true"></i>
+                        &nbsp;&nbsp;
+                        <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}} </b>
+                        <span class="text-muted" ng-if="member.research_lab">
+                            <small>&nbsp;({{member.research_lab}})</small>
+                        </span>
+                    </a>
+                </div>
+                <div class="list-group" ng-if="!former_members || former_members.length==0">
+                    <div class="list-group-item flex-column align-items-center">
+                        <div class="d-flex">
+                            - {{ 'NONE' | translate }} -
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button class="btn btn-primary btn-block" role="button" ng-click="cancel()">
+                            {{ 'CLOSE' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right padding -->
+    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-2"></div>
+</div>
+<br>

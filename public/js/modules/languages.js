@@ -95,8 +95,8 @@ app.config(function ($translateProvider) {
         STATEMENT_OF_RESEARCHER: 'Statement of researcher',
         INFORMED_CONSENT_FORM: 'Informed consent form',
 
-        DELETE_YOUR_DOCUMENT: 'Are you sure you want to delete your document',
-        PLEASE_TYPE_IN: 'Please type in the document title',
+        DELETE_THIS_DOCUMENT: 'Are you sure you want to delete this document',
+        PLEASE_TYPE_IN_THE_DOCUMENT_TITLE_TO_CONFIRM: 'Please type in the document title to confirm',
         DELETE: 'Delete',
 
         GETTING_STARTED: 'Getting started',

@@ -5,7 +5,7 @@ var app = angular.module("concernService", []);
 app.factory('$concernService', function($http, $log, config) {
 
     return {
-        getByRevision: function(revision_id, language) {
+        getByRevision: function(revision_id) {
             return $http.get(config.apiURL + "/revisions/" + revision_id + "/concerns");
         },
         save: function(concern_id, data) {

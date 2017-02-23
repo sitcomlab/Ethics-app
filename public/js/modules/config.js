@@ -6,9 +6,6 @@ app.constant("config", {
     appDevelopers: [{
         name: "Nicholas Schiestel",
         github: "nicho90"
-    },{
-        name: "Heinrich Löwen",
-        github: "heinrichloewen"
     }],
     appGithub: "https://github.com/sitcomlab/Ethics-app",
     appVersion: "v1.0",

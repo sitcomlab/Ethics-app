@@ -8,7 +8,7 @@ var app = angular.module("ethics-app", [
     "ngSanitize",
     "ngBootbox",
     "pascalprecht.translate",
-    // "angular-momentjs",
+    "angular-momentjs",
 
     // Own Modules
     // "filters",
@@ -23,7 +23,10 @@ var app = angular.module("ethics-app", [
     "usersService",
     "userService",
     "membersService",
-    "memberService"
+    "memberService",
+    "revisionService",
+    "descriptionService",
+    "concernService"
 
 ]);
 

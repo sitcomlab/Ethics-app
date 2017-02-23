@@ -9,8 +9,8 @@ app.factory('$documentService', function($http, $log, config) {
     return {
         init: function(){
             return {
-                email_address: "",
-                document_title: ""
+                email_address: "nicho90@live.de",
+                document_title: "test-1"
             };
         },
         get: function(){
@@ -21,6 +21,13 @@ app.factory('$documentService', function($http, $log, config) {
                 return undefined;
             } else {
                 return document.document_id;
+            }
+        },
+        getUserId: function(){
+            if(document === undefined){
+                return undefined;
+            } else {
+                return document.user_id;
             }
         },
         getStatus: function(){
@@ -61,30 +68,30 @@ app.factory('$documentService', function($http, $log, config) {
         setRevisions: function(data){
             document.revisions = data;
         },
-        setDescription: function(revision_id, language, data){
+        setDescription: function(revision_id, data){
             for(var i=0; i<document.revisions.length;i++){
                 // Find revision
                 if(document.revisions[i].revision_id === revision_id){
-                    // Attach descriptions by language
-                    switch(language){
-                        case 'en': {
-                            document.revisions[i].en = data;
-                            break;
-                        }
-                        case 'de': {
-                            document.revisions[i].de = data;
-                            break;
-                        }
-                    }
+                    // Attach descriptions
+                    document.revisions[i].description = data;
                 }
             }
         },
-        setConcerns: function(revision_id, data){
+        setConcern: function(revision_id, data){
             for(var i=0; i<document.revisions.length;i++){
                 // Find revision
                 if(document.revisions[i].revision_id === revision_id){
                     // Attach concerns
-                    document.revisions[i].concerns = data;
+                    document.revisions[i].concern = data;
+                }
+            }
+        },
+        setReview: function(revision_id, data){
+            for(var i=0; i<document.revisions.length;i++){
+                // Find revision
+                if(document.revisions[i].revision_id === revision_id){
+                    // Attach review
+                    document.revisions[i].review = data;
                 }
             }
         },
@@ -97,8 +104,8 @@ app.factory('$documentService', function($http, $log, config) {
                 document_title: document.document_title
             };
         },
-        create: function(user_id, data) {
-            return $http.post(config.apiURL + "/users/" + user_id + "/documents", data);
+        create: function(data) {
+            return $http.post(config.apiURL + "/documents", data);
         },
         retrieve: function(document_id) {
             return $http.get(config.apiURL + "/documents/" + document_id);

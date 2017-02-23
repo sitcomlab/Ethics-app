@@ -16,15 +16,16 @@ var app = angular.module("ethics-app", [
     "languages",
 
     // Services
-    "loginService",
+    "authenticationService",
     "documentService",
     "revisionService",
     "descriptionService",
     "concernService",
+    "reviewService",
     "userService",
     "recoveryService",
     "fileService",
-    "committeeService"
+    "membersService"
 
 ]);
 

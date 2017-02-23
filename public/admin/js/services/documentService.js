@@ -94,20 +94,29 @@ app.factory('$documentService', function($http, $log, config, $rootScope, $authe
             };
         },
         retrieve: function(document_id) {
-            return $http.get(config.apiURL + "/admin/documents/" + document_id);
-        },
-        generateFiles: function(document_id) {
-            return $http.get(config.apiURL + "/admin/documents/" + document_id + "/files");
-        },
-        edit: function(document_id) {
-            return $http.put(config.apiURL + "/admin/documents/" + document_id, {
+            return $http.get(config.apiURL + "/documents/" + document_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
+        generateFiles: function(document_id) {
+            return $http.get(config.apiURL + "/documents/" + document_id + "/files", {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        edit: function(document_id) {
+            return $http.put(config.apiURL + "/documents/" + document_id, data, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken(),
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
         delete: function(document_id) {
-            return $http.delete(config.apiURL + "/admin/documents/" + document_id, {
+            return $http.delete(config.apiURL + "/documents/" + document_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
