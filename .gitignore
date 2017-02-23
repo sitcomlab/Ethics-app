@@ -1,4 +1,7 @@
 node_modules/*
+ssl/*
 public/bower_components/*
 public/files/temp/*
 .DS_Store
+
+sql/schema/examples.sql

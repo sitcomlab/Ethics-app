@@ -39,5 +39,8 @@
   "scripts": {
     "start": "node server.js",
     "postinstall": "bower install"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
   }
 }

@@ -2,8 +2,7 @@
     "name": "ethics-app",
     "version": "0.0.1",
     "authors": [
-        "Nicholas Schiestel <n.schiestel@uni-muenster.de>",
-        "Heinrich Löwen <loewen.heinrich@uni-muenster.de>"
+        "Nicholas Schiestel <n.schiestel@uni-muenster.de>"
     ],
     "description": "Ethics-App for the Institute for Geoinformatics, Münster",
     "license": "MIT",
@@ -14,7 +13,7 @@
         "angular-route": "^1.5.8",
         "angular-sanitize": "^1.5.8",
         "angular-translate": "^2.11.1",
-        "bootstrap": "v4.0.0-alpha.5",
+        "bootstrap": "v4.0.0-alpha.6",
         "font-awesome": "^4.6.3",
         "jquery": "^3.1.0",
         "moment": "^2.14.1",
@@ -25,6 +24,6 @@
     },
     "resolutions": {
         "angular": "1.5.9",
-        "bootstrap": "v4.0.0-alpha.5"
+        "bootstrap": "v4.0.0-alpha.6"
     }
 }
