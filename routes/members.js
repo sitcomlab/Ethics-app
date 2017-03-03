@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var isAuthenticated = require('../server.js').isAuthenticated;
 
 var list_active = require('../controllers/members/list_active');
 var list_all = require('../controllers/members/list_all');

@@ -4,24 +4,23 @@ var pg = require('pg');
 var fs = require('fs');
 
 // ENVIRONMENT VARIABLES
-var db_host = process.env.DB_HOST || 'localhost';
-var db_port = process.env.DB_PORT || 5432;
-var db_name = process.env.DB_NAME || 'ethics-app';
-var db_user = process.env.DB_USER || 'Nicho';
-var db_password = process.env.DB_PW || undefined;
-var db_ssl = process.env.DB_SSL || false;
+var postgres_host = process.env.POSTGRES_HOST || 'localhost';
+var postgres_port = process.env.POSTGRES_PORT || 5432;
+var postgres_db_name = process.env.POSTGRES_DB_NAME || 'ethics-app';
+var postgres_username = process.env.POSTGRES_USERNAME || 'Nicho';
+var postgres_password = process.env.POSTGRES_PASSWORD || undefined;
+var postgres_ssl = process.env.POSTGRES_SSL || false;
 
 
 // DATABASE CONFIGURATION
-var config = {
-    user: db_user,
-    password: db_password,
-    host: db_host,
-    port: db_port,
-    database: db_name,
-    ssl: JSON.parse(db_ssl)
-};
-var pool = new pg.Pool(config);
+var pool = new pg.Pool({
+    user: postgres_username,
+    password: postgres_password,
+    host: postgres_host,
+    port: postgres_port,
+    database: postgres_db_name,
+    ssl: JSON.parse(postgres_ssl)
+});
 
 // Load files
 var dir = "/sql/schema/";

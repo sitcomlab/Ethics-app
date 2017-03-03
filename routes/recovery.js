@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var isAuthenticated = require('../server.js').isAuthenticated;
 
 var find_user_by_email = require('../controllers/recovery/find_user_by_email');
 var find_member_by_email = require('../controllers/recovery/find_member_by_email');

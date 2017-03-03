@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var isAuthenticated = require('../server.js').isAuthenticated;
 
 var list = require('../controllers/users/list');
 var post = require('../controllers/users/post');
@@ -9,23 +10,23 @@ var del = require('../controllers/users/delete');
 var find_by_email = require('../controllers/users/find_by_email');
 
 
-// LIST (ONLY MEMBERS)
-router.get('/users', list.request);
+// LIST (ONLY FOR MEMBERS)
+router.get('/users', isAuthenticated, list.request);
 
 // POST
 router.post('/users', post.request);
 
 // GET
-router.get('/users/:user_id', get.request);
+router.get('/users/:user_id', isAuthenticated, get.request);
 
 // PUT
-router.put('/users/:user_id', put.request);
+router.put('/users/:user_id', isAuthenticated, put.request);
 
-// DELETE (ONLY MEMBERS)
-router.delete('/users/:user_id', del.request);
+// DELETE (ONLY FOR  MEMBERS)
+router.delete('/users/:user_id', isAuthenticated, del.request);
 
 // FIND BY EMAIL
-router.get('/user/:email_address', find_by_email.request);
+router.get('/user/:email_address', isAuthenticated, find_by_email.request);
 
 
 module.exports = router;

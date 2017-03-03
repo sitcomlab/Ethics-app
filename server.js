@@ -15,18 +15,18 @@ var environment = process.env.NODE_ENV || 'development';
 var server_url = process.env.SERVER_URL || 'http://giv-ethics-app.uni-muenster.de';
 var httpPort = process.env.HTTP_PORT || 5000;
 var httpsPort = process.env.HTTPS_PORT || (httpPort + 443);
-var db_host = process.env.DB_HOST || 'localhost';
-var db_port = process.env.DB_PORT || 5432;
-var db_name = process.env.DB_NAME || 'ethics-app';
-var db_user = process.env.DB_USER || 'Nicho';
-var db_password = process.env.DB_PW || undefined;
-var db_ssl = process.env.DB_SSL || false;
+var postgres_host = process.env.POSTGRES_HOST || 'localhost';
+var postgres_port = process.env.POSTGRES_PORT || 5432;
+var postgres_db_name = process.env.POSTGRES_DB_NAME || 'ethics-app';
+var postgres_username = process.env.POSTGRES_USERNAME || 'Nicho';
+var postgres_password = process.env.POSTGRES_PASSWORD || undefined;
+var postgres_ssl = process.env.POSTGRES_SSL || false;
 var from_email_address = process.env.FROM || 'ifgi-ethics@uni-muenster.de';
 var smtp_host = process.env.SMTP_HOST || 'smtp.gmail.com';
 var smtp_port = process.env.SMTP_PORT || 465;
 var smtp_ssl = process.env.SMTP_SSL || true;
-var smtp_email_address = process.env.SMTP_EMAIL || '';
-var smtp_password = process.env.SMTP_PW || '';
+var smtp_email_address = process.env.SMTP_EMAIL_ADDRESS || '';
+var smtp_password = process.env.SMTP_PASSWORD || '';
 var jwtSecret = process.env.JWTSECRET || 'superSecretKey';
 exports.pool = pool;
 exports.httpPort = httpPort;
@@ -34,15 +34,14 @@ exports.server_url = server_url;
 exports.jwtSecret = jwtSecret;
 
 // DATABASE CONFIGURATION
-var config = {
-    user: db_user,
-    password: db_password,
-    host: db_host,
-    port: db_port,
-    database: db_name,
-    ssl: JSON.parse(db_ssl)
-};
-var pool = new pg.Pool(config);
+var pool = new pg.Pool({
+    user: postgres_username,
+    password: postgres_password,
+    host: postgres_host,
+    port: postgres_port,
+    database: postgres_db_name,
+    ssl: JSON.parse(postgres_ssl)
+});
 exports.pool = pool;
 
 
@@ -50,14 +49,14 @@ exports.pool = pool;
 pool.connect(function(err, client, done) {
     if(err) {
         console.error(err);
-        console.error(colors.red("Database is not running!"));
+        console.error(colors.red(new Date() + " Postgres is not running!"));
     } else {
         client.query("SELECT true;", function(err, result) {
             done();
             if (err) {
                 console.error(colors.red(JSON.stringify(err)));
             } else {
-                console.log(colors.green("Database is running!"));
+                console.log(colors.green(new Date() + " Postgres is running on port " + postgres_port));
             }
         });
     }
@@ -111,45 +110,62 @@ app.use(express.static(__dirname + '/public', {
     redirect: false
 }));
 
+// Authentication
+exports.isAuthenticated = function isAuthenticated(req, res, next) {
+    if (req.headers.authorization) {
+        var token = req.headers.authorization.substring(7);
 
-// Load dependencies
-var login = require ('./routes/login');
-var users = require ('./routes/users');
-var members = require ('./routes/members');
-var documents = require ('./routes/documents');
-var revisions = require ('./routes/revisions');
-var descriptions = require ('./routes/descriptions');
-var concerns = require ('./routes/concerns');
-var reviews = require ('./routes/reviews');
-var recovery = require ('./routes/recovery');
+        // Verify token
+        jwt.verify(token, jwtSecret, function(err, decoded) {
+            if(err){
+                res.status(401).send("Authentication failed!");
+            } else {
+                // Authorization
+                if(decoded.username === account.username && decoded.iss === server_url){
+                    return next();
+                } else {
+                    res.status(401).send("Authentication failed!");
+                }
+            }
+        });
+    } else {
+        res.status(401).send("Authentication failed!");
+    }
+};
+
+// API endpoint
+var prefix = '/api';
 
 // Load API routes
-app.use('/api', login);
-app.use('/api', users);
-app.use('/api', members);
-app.use('/api', documents);
-app.use('/api', revisions);
-app.use('/api', descriptions);
-app.use('/api', concerns);
-app.use('/api', reviews);
-app.use('/api', recovery);
+app.use(prefix, require ('./routes/login'));
+app.use(prefix, require ('./routes/users'));
+app.use(prefix, require ('./routes/members'));
+app.use(prefix, require ('./routes/documents'));
+app.use(prefix, require ('./routes/revisions'));
+app.use(prefix, require ('./routes/descriptions'));
+app.use(prefix, require ('./routes/concerns'));
+app.use(prefix, require ('./routes/reviews'));
+app.use(prefix, require ('./routes/recovery'));
 
 
 // Resolve path after refreshing inside app
-app.get('/*', function(req, res, next) {
+app.get('/', function(req, res, next) {
     res.sendFile(path.resolve('public/index.html'));
+});
+app.get('/admin/*', function(req, res, next) {
+    res.sendFile(path.resolve('public/admin/index.html'));
 });
 
 
 // Start Webserver
 var httpServer = http.createServer(app);
 httpServer.listen(httpPort, function() {
-    console.log(colors.blue("HTTP-Server is listening at port " + httpPort));
+    console.log(colors.green(new Date() + " HTTP-Server is listening at port " + httpPort));
 });
 if(environment === "production") {
     var httpsServer = https.createServer(credentials, app);
     httpsServer.listen(httpsPort, function() {
-        console.log(colors.blue("HTTPS-Server is listening at port " + httpsPort));
+        console.log(colors.green(new Date() + " HTTPS-Server is listening at port " + httpsPort));
     });
 }
 
