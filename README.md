@@ -66,6 +66,14 @@ or as root:
 sudo bower install --allow-root
 ```
 
+##### 2.3. Configure App:
+
+Execute the following Command inside our local repository-folder:
+```
+cp config.js.sample config.js
+```
+Open config.js with your preferred Text Editor and configure the App appropiately for your setup.
+
 ### 3. Run
 
 * Please make sure, that your Postgres-database is running, otherwise open a new terminal and start the deamon with the following command:
