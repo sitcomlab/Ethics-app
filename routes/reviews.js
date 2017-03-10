@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var isAuthenticated = require('../server.js').isAuthenticated;
 
 // TODO: var put = require('../controllers/reviews/put');
 var get_by_revision = require('../controllers/reviews/get_by_revision');
