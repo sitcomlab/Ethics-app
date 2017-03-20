@@ -3,5 +3,5 @@ ssl/*
 public/bower_components/*
 public/files/temp/*
 .DS_Store
-
+config.js
 sql/schema/examples.sql

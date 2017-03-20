@@ -78,6 +78,7 @@ set node setup.js
 ### 2. Ethics-app
 
 ##### 2.1. Git/GitHub
+
 * If you have Git already installed, you can use the CLI in your terminal.
 
 * Install Git: [https://git-scm.com](https://git-scm.com)
@@ -121,6 +122,16 @@ bower install
 sudo bower install --allow-root
 ```
 
+##### 2.3. Configure App:
+
+Execute the following Command inside our local repository-folder:
+```
+cp config.js.sample config.js
+```
+Open config.js with your preferred Text Editor and configure the App appropiately for your setup.
+
+### 3. Run
+=======
 ##### (Server settings)
 
 * If you have installed the Ethics-app on a Linux server, you can create a cronjob to automatically start the server after a reboot. Open `sudo nano /etc/crontab` and add the following lines:
