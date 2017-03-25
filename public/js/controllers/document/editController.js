@@ -66,20 +66,20 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
 
         // Save description
         $descriptionService.save($scope.latest_revision.description.description_id, $scope.latest_revision.description)
-        .success(function(response) {
+        .then(function onSuccess(response) {
             save_description.resolve();
         })
-        .error(function(response) {
-            $window.alert(response);
+        .catch(function onError(response) {
+            $window.alert(response.data);
         });
 
         // Save concern
         $concernService.save($scope.latest_revision.concern.concern_id, $scope.latest_revision.concern)
-        .success(function(response) {
+        .then(function onSuccess(response) {
             save_concern.resolve();
         })
-        .error(function(response) {
-            $window.alert(response);
+        .catch(function onError(response) {
+            $window.alert(response.data);
         });
 
         // Promises
@@ -201,11 +201,11 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
             $scope.changeTab(0);
 
             $documentService.submit($documentService.getId())
-            .success(function(response) {
+            .then(function onSuccess(response) {
                 $scope.redirect("/documents/" + $documentService.getId());
             })
-            .error(function(response) {
-                $window.alert(response);
+            .catch(function onError(response) {
+                $window.alert(response.data);
             });
         }
     };

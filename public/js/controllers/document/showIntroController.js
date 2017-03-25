@@ -48,16 +48,16 @@ app.controller("documentShowIntroController", function($scope, $rootScope, $tran
         if($documentService.getStatus()===0){
             // Confirm intro
             $documentService.confirmIntro($documentService.getId())
-            .success(function(response) {
-                $documentService.set(response);
+            .then(function onSuccess(response) {
+                $documentService.set(response.data);
 
                 // Update navbar
                 $rootScope.$broadcast('updateNavbar');
 
                 $scope.redirect("/documents/" + $documentService.getId());
             })
-            .error(function(response) {
-                console.log(response);
+            .catch(function onError(response) {
+                $window.alert(response.data);
             });
         } else {
             $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());

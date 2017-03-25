@@ -45,15 +45,15 @@ app.controller("memberListController", function($scope, $rootScope, $translate, 
     $scope.changeTab(0);
 
     $membersService.list()
-    .success(function(response) {
+    .then(function onSuccess(response) {
         $scope.changeTab(1);
-        $scope.members = response;
+        $scope.members = response.data;
 
         // TODO: Implement former_members
         $scope.former_members = [$scope.members[2]];
     })
-    .error(function(response) {
-        $window.alert(response);
+    .catch(function onError(response) {
+        $window.alert(response.data);
     });
 
 

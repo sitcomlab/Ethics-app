@@ -45,12 +45,12 @@ app.controller("memberDetailsController", function($scope, $rootScope, $routePar
     $scope.changeTab(0);
 
     $membersService.retrieve($routeParams.member_id)
-    .success(function(response) {
+    .then(function onSuccess(response) {
         $scope.changeTab(1);
-        $scope.member = response;
+        $scope.member = response.data;
     })
-    .error(function(response) {
-        $window.alert(response);
+    .catch(function onError(response) {
+        $window.alert(response.data);
     });
 
 

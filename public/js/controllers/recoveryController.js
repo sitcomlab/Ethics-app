@@ -51,7 +51,7 @@ app.controller("recoveryController", function($scope, $rootScope, $translate, $l
             $scope.changeTab(0);
 
             $recoveryService.findByEmail($scope.recovery.email_address)
-            .success(function(response) {
+            .then(function onSuccess(response) {
                 // Reset
                 $scope.recovery.email_address = $authenticationService.getEmailAddress() || "";
 
@@ -66,7 +66,7 @@ app.controller("recoveryController", function($scope, $rootScope, $translate, $l
                 }
 
             })
-            .error(function(response) {
+            .catch(function onError(response) {
                 $window.alert("This email-address could not be found!");
             });
         }

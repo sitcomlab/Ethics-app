@@ -46,7 +46,7 @@ app.controller("documentDeleteController", function($scope, $rootScope, $transla
         $scope.changeTab(0);
 
         $documentService.delete($documentService.getId())
-        .success(function(response) {
+        .then(function onSuccess(response) {
             // Reset
             $documentService.set();
 
@@ -55,8 +55,8 @@ app.controller("documentDeleteController", function($scope, $rootScope, $transla
 
             $scope.redirect("/");
         })
-        .error(function(response) {
-            $window.alert(response);
+        .catch(function onError(response) {
+            $window.alert(response.data);
         });
     };
 

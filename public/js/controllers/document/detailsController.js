@@ -36,18 +36,18 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
     $timeout(function(){
         // Authentication
         $authenticationService.loginByDocumentId($routeParams.document_id)
-        .success(function(response) {
-            $authenticationService.set(response);
+        .then(function onSuccess(response) {
+            $authenticationService.set(response.data);
 
             // Load document
             $documentService.retrieve($routeParams.document_id)
-            .success(function(response) {
-                $documentService.set(response);
+            .then(function onSuccess(response) {
+                $documentService.set(response.data);
 
                 // Load revisions
                 $revisionService.listByDocument($documentService.getId())
-                .success(function(response) {
-                    $documentService.setRevisions(response);
+                .then(function onSuccess(response) {
+                    $documentService.setRevisions(response.data);
 
                     // Load descriptions, concerns and reviews for each revision
                     angular.forEach($documentService.getRevisions(), function(revision, key) {
@@ -59,35 +59,35 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
 
                         // Checkout descriptions
                         $descriptionService.getByRevision(revision.revision_id)
-                        .success(function(response) {
-                            $documentService.setDescription(revision.revision_id, response);
+                        .then(function onSuccess(response) {
+                            $documentService.setDescription(revision.revision_id, response.data);
                             // Resolve promise
                             checkout_description.resolve();
                         })
-                        .error(function(response) {
-                            $window.alert(response);
+                        .catch(function onError(response) {
+                            $window.alert(response.data);
                         });
 
                         // Checkout concerns
                         $concernService.getByRevision(revision.revision_id)
-                        .success(function(response) {
-                            $documentService.setConcern(revision.revision_id, response);
+                        .then(function onSuccess(response) {
+                            $documentService.setConcern(revision.revision_id, response.data);
                             // Resolve promise
                             checkout_concern.resolve();
                         })
-                        .error(function(response) {
-                            $window.alert(response);
+                        .catch(function onError(response) {
+                            $window.alert(response.data);
                         });
 
                         // Checkout reviews
                         $reviewService.getByRevision(revision.revision_id)
-                        .success(function(response) {
-                            $documentService.setReview(revision.revision_id, response);
+                        .then(function onSuccess(response) {
+                            $documentService.setReview(revision.revision_id, response.data);
                             // Resolve promise
                             checkout_review.resolve();
                         })
-                        .error(function(response) {
-                            $window.alert(response);
+                        .catch(function onError(response) {
+                            $window.alert(response.data);
                         });
 
 
@@ -128,13 +128,13 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                     $scope.loading_message = "Generating files";
 
                                     $documentService.generateFiles($documentService.getId())
-                                    .success(function(response) {
-                                        $fileService.set(response);
+                                    .then(function onSuccess(response) {
+                                        $fileService.set(response.data);
                                         $documentService.setFiles($fileService.get());
                                         $scope.redirect(path);
                                     })
-                                    .error(function(response) {
-                                        $window.alert(response);
+                                    .catch(function onError(response) {
+                                        $window.alert(response.data);
                                     });
                                 }
                             } else {
@@ -143,18 +143,18 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                         });
                     });
                 })
-                .error(function(response) {
-                    $window.alert(response);
+                .catch(function onError(response) {
+                    $window.alert(response.data);
                     $scope.redirect("/");
                 });
             })
-            .error(function(response) {
-                $window.alert(response);
+            .catch(function onError(response) {
+                $window.alert(response.data);
                 $scope.redirect("/");
             });
         })
-        .error(function(response) {
-            $window.alert(response);
+        .catch(function onError(response) {
+            $window.alert(response.data);
             $scope.redirect("/");
         });
     }, 1000);

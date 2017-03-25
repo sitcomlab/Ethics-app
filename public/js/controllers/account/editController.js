@@ -46,19 +46,18 @@ app.controller("accountEditController", function($scope, $rootScope, $translate,
         $scope.changeTab(0);
 
         $userService.edit($authenticationService.getId(), $scope.updated_user)
-        .success(function(response) {
-            $authenticationService.set(response);
+        .then(function onSuccess(response) {
+            $authenticationService.set(response.data);
 
             // Update navbar
             $rootScope.$broadcast('updateNavbar');
 
             $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
         })
-        .error(function(response) {
-            console.log(response);
+        .catch(function onError(response) {
+            $window.alert(response.data);
         });
     };
-
 
     /*************************************************
         INIT

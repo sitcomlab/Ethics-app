@@ -8,7 +8,7 @@
     "license": "MIT",
     "private": true,
     "dependencies": {
-        "angular": "1.5.9",
+        "angular": "1.6.2",
         "angular-momentjs": "^0.2.2",
         "angular-route": "^1.5.8",
         "angular-sanitize": "^1.5.8",
@@ -23,7 +23,7 @@
         "flag-icon-css": "^2.0.0"
     },
     "resolutions": {
-        "angular": "1.5.9",
+        "angular": "1.6.2",
         "bootstrap": "v4.0.0-alpha.6"
     }
 }

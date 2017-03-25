@@ -52,24 +52,24 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
             $scope.changeTab(0);
 
             $userService.findByEmail($scope.new_document.email_address)
-            .success(function(response) {
+            .then(function onSuccess(response) {
                 // Check if user exists
-                if(JSON.parse(response)){
+                if(JSON.parse(response.data)){
                     $documentService.create($scope.new_document)
-                    .success(function(response) {
+                    .then(function onSuccess(response) {
                         $window.alert("Your new document has been created and an email with the document-ID has been sent to you!");
                         $scope.redirect("/");
                     })
-                    .error(function(response) {
-                        $window.alert(response);
+                    .catch(function onError(response) {
+                        $window.alert(response.data);
                     });
                 } else {
                     $scope.new_user.email_address = $scope.new_document.email_address || "";
                     $scope.changeTab(2);
                 }
             })
-            .error(function(response) {
-                $window.alert(response);
+            .catch(function onError(response) {
+                $window.alert(response.data);
             });
         }
     };
@@ -91,7 +91,7 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
             $scope.changeTab(0);
 
             $userService.create($scope.new_user)
-            .success(function(response) {
+            .then(function onSuccess(response) {
                 $window.alert("You have signed up successfully, you can create now your document!");
 
                 // Retry creating new document
@@ -99,8 +99,8 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
 
                 $scope.changeTab(1);
             })
-            .error(function(response) {
-                $window.alert(response);
+            .catch(function onError(response) {
+                $window.alert(response.data);
                 $scope.redirect("/");
             });
         }

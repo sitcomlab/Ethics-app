@@ -46,8 +46,8 @@ app.controller("documentEditTitleController", function($scope, $rootScope, $tran
         $scope.changeTab(0);
 
         $documentService.edit($documentService.getId(), $scope.updated_document)
-        .success(function(response) {
-            $documentService.set(response);
+        .then(function onSuccess(response) {
+            $documentService.set(response.data);
             $scope.updated_document = $documentService.copy();
 
             // Update navbar
@@ -55,8 +55,8 @@ app.controller("documentEditTitleController", function($scope, $rootScope, $tran
 
             $scope.redirect("/documents/" + $documentService.getId());
         })
-        .error(function(response) {
-            $window.alert(response);
+        .catch(function onError(response) {
+            $window.alert(response.data);
         });
     };
 
