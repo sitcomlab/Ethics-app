@@ -28,7 +28,6 @@ var queries = [];
 
 // General
 queries.push(fs.readFileSync(__dirname + dir + 'reset.sql', 'utf8').toString());
-queries.push(fs.readFileSync(__dirname + dir + 'languages.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'universities.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'institutes.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'research_groups.sql', 'utf8').toString());
@@ -36,7 +35,7 @@ queries.push(fs.readFileSync(__dirname + dir + 'defaults.sql', 'utf8').toString(
 queries.push(fs.readFileSync(__dirname + dir + 'courses.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'users.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'members.sql', 'utf8').toString());
-queries.push(fs.readFileSync(__dirname + dir + 'persons_in_charge.sql', 'utf8').toString());
+queries.push(fs.readFileSync(__dirname + dir + 'responsibilities.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'documents.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'revisions.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'descriptions.sql', 'utf8').toString());
