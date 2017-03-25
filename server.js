@@ -12,7 +12,25 @@ var jwt = require('jsonwebtoken');
 var helmet = require('helmet');
 var config = require('./config');
 
-exports.pool = pool;
+// ENVIRONMENT VARIABLES
+config.environment = process.env.NODE_ENV || config.environment;
+config.server_url = process.env.SERVER_URL || config.server_url;
+config.httpPort = process.env.HTTP_PORT || config.httpPort;
+config.httpsPort = process.env.HTTPS_PORT || config.httpsPort;
+config.postgres_host = process.env.POSTGRES_HOST || config.postgres_host;
+config.postgres_port = process.env.POSTGRES_PORT || config.postgres_port;
+config.postgres_db_name = process.env.POSTGRES_DB_NAME || config.postgres_db_name;
+config.postgres_username = process.env.POSTGRES_USERNAME || config.postgres_username;
+config.postgres_password = process.env.POSTGRES_PASSWORD || config.postgres_password;
+config.postgres_ssl = JSON.parse(process.env.POSTGRES_SSL) || config.postgres_ssl;
+config.from_email_address = process.env.FROM || config.from_email_address;
+config.smtp_host = process.env.SMTP_HOST || config.smtp_host;
+config.smtp_port = process.env.SMTP_PORT || config.smtp_port;
+config.smtp_ssl = process.env.SMTP_SSL || config.smtp_ssl;
+config.smtp_email_address = process.env.SMTP_EMAIL || config.smtp_email_address;
+config.smtp_password = process.env.SMTP_PW || config.smtp_password;
+config.jwtSecret = process.env.JWTSECRET || config.jwtSecret;
+
 exports.httpPort = config.httpPort;
 exports.server_url = config.server_url;
 exports.jwtSecret = config.jwtSecret;
@@ -24,10 +42,9 @@ var db_config = {
     host: config.db_host,
     port: config.db_port,
     database: config.db_name,
-    ssl: JSON.parse(config.db_ssl)
+    ssl: config.db_ssl
 };
 var pool = new pg.Pool(db_config);
-
 exports.pool = pool;
 
 
@@ -35,8 +52,7 @@ exports.pool = pool;
 pool.connect(function(err, client, done) {
     if(err) {
         console.error(err);
-        console.error(colors.red("Could not connect to Database! Invalid Credentials or Postgres Database is not running."));
-
+        console.error(colors.red("Could not connect to Database! Invalid Credentials or Postgres is not running"));
     } else {
         client.query("SELECT true;", function(err, result) {
             done();
@@ -99,7 +115,7 @@ app.use(express.static(__dirname + '/public', {
 
 // Authentication
 exports.isAuthenticated = function isAuthenticated(req, res, next) {
-    if (req.headers.authorization) {
+    if(req.headers.authorization) {
         var token = req.headers.authorization.substring(7);
 
         // Verify token
@@ -107,6 +123,7 @@ exports.isAuthenticated = function isAuthenticated(req, res, next) {
             if(err){
                 res.status(401).send("Authentication failed!");
             } else {
+                console.log(decoded);
                 // Authorization
                 if(decoded.username === account.username && decoded.iss === server_url){
                     return next();
@@ -119,6 +136,9 @@ exports.isAuthenticated = function isAuthenticated(req, res, next) {
         res.status(401).send("Authentication failed!");
     }
 };
+
+// Security headers
+app.use(helmet());
 
 // API endpoint
 var prefix = '/api';
@@ -133,10 +153,6 @@ app.use(prefix, require ('./routes/descriptions'));
 app.use(prefix, require ('./routes/concerns'));
 app.use(prefix, require ('./routes/reviews'));
 app.use(prefix, require ('./routes/recovery'));
-
-
-// Security best practices.
-app.use(helmet());
 
 
 // Resolve path after refreshing inside app
@@ -155,7 +171,7 @@ httpServer.listen(config.httpPort, function() {
 });
 if(config.environment === "production") {
     var httpsServer = https.createServer(credentials, app);
-  
+
     httpsServer.listen(config.httpsPort, function() {
         console.log(colors.green(new Date() + "HTTPS-Server is listening at port " + config.httpsPort));
     });
