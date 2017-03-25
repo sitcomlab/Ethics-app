@@ -8,5 +8,5 @@ SELECT
     status,
     course_id
 FROM Documents
-WHERE user_id=$1::INTEGER
+WHERE course_id=$1::INTEGER
 ORDER BY created DESC;

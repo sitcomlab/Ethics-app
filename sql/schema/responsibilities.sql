@@ -1,10 +1,10 @@
-DROP TABLE IF EXISTS Persons_In_Charge CASCADE;
+DROP TABLE IF EXISTS Responsibilities CASCADE;
 
 -- SCHEMA
-CREATE TABLE Persons_In_Charge (
+CREATE TABLE Responsibilities (
 
     -- General
-    person_in_charge_id SERIAL PRIMARY KEY,
+    responsibility_id SERIAL PRIMARY KEY,
     created TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
     updated TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
 
