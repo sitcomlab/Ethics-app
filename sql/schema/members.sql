@@ -14,14 +14,14 @@ CREATE TABLE Members (
     title CHARACTER VARYING(255) DEFAULT NULL,
     first_name CHARACTER VARYING(255) NOT NULL,
     last_name CHARACTER VARYING(255) NOT NULL,
-    institute CHARACTER VARYING(255) DEFAULT NULL,
-    research_lab CHARACTER VARYING(255) DEFAULT NULL,
+    institute_id INTEGER DEFAULT NULL,
+    research_group_id INTEGER DEFAULT NULL,
     office_room_number CHARACTER VARYING(255) DEFAULT NULL,
     office_phone_number CHARACTER VARYING(255) DEFAULT NULL,
     office_email_address CHARACTER VARYING(255) DEFAULT NULL,
     admin BOOLEAN DEFAULT false NOT NULL,
     subscribed BOOLEAN DEFAULT true NOT NULL,
     fails SMALLINT DEFAULT 0 NOT NULL,
-    deleted BOOLEAN DEFAULT false
+    deleted BOOLEAN DEFAULT false NOT NULL
 
 );

@@ -13,6 +13,7 @@ CREATE TABLE Users (
     title CHARACTER VARYING(255) DEFAULT NULL,
     first_name CHARACTER VARYING(255) NOT NULL,
     last_name CHARACTER VARYING(255) NOT NULL,
-    deleted BOOLEAN DEFAULT false
+    institute_id INTEGER DEFAULT 1,
+    deleted BOOLEAN DEFAULT false NOT NULL
 
 );
