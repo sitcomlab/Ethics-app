@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<div class="card">
+    <div class="card-header" style="font-size: 20pt;">
+        <div class="row">
+            <div class="col">{{ 'COMMITTEE_MEMBER' | translate }}</div>
+            <div class="col right">
+                <button class="btn btn-primary" role="button" ng-click="redirect('/members')">
+                    {{ 'CLOSE' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="card" style="background-color: #f7f7f9; ">
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-1 right">
+                        <h4 class="card-title">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </h4>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h4 class="card-title">
+                                    <span ng-if="member.title">{{member.title}} </span>{{member.first_name}} {{member.last_name}}
+                                </h4>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <h6 class="card-subtitle mb-2 text-muted" ng-if="member.research_group_name">
+                                    {{member.research_group_name}}
+                                </h6>
+                                <h6 class="card-subtitle mb-2 text-muted" ng-if="member.institute_name">
+                                    {{member.institute_name}}
+                                </h6>
+                                <h6 class="card-subtitle mb-2 text-muted" ng-if="member.university_name">
+                                    {{member.university_name}}
+                                </h6>
+                                <p>
+                                    <b>{{ 'OFFICE' | translate }}</b>: {{member.office_room_number}}
+                                </p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <span ng-if="member.office_phone_number">
+                                    <i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp;&nbsp;
+                                    <a href="tel:{{member.office_phone_number}}">{{member.office_phone_number}}</a>
+                                    <br>
+                                </span>
+                                <span ng-if="member.office_email_address">
+                                    <i class="fa fa-envelope-square" aria-hidden="true"></i>&nbsp;&nbsp;
+                                    <a href="mailto:{{member.office_email_address}}">
+                                        {{member.office_email_address}}
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

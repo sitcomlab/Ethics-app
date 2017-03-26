@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<div class="card" ng-show="tab==1">
+    <form class="form-horizontal" name="createDocumentForm" ng-submit="send()">
+        <div class="card-header" style="font-size: 20pt;">
+            <div class="row">
+                <div class="col">
+                    {{ 'NEW_DOCUMENT' | translate }}
+                </div>
+                <div class="col right">
+                    <button class="btn btn-primary" role="button" ng-click="redirect('/')">
+                        {{ 'CLOSE' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-block">
+            <br>
+            <label>
+                <b>{{ 'EMAIL_ADDRESS' | translate }}*</b>
+            </label>
+            <div class="form-group" ng-class="{'has-danger': createDocumentForm.document_email_address.$invalid && !createDocumentForm.document_email_address.$pristine}">
+                <input
+                    type="email"
+                    class="form-control"
+                    ng-model="new_document.email_address"
+                    name="document_email_address"
+                    id="document_email_address"
+                    placeholder="{{ 'EMAIL_ADDRESS' | translate }}"
+                    aria-describedby="inputEmailAddress"
+                    required
+                    autofocus
+                    autocomplete="on">
+                <span ng-show="createDocumentForm.document_email_address.$error.required && !createDocumentForm.document_email_address.$pristine" class="text-danger">
+                    <small>
+                        {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+            </div>
+
+            <label>
+                <b>{{ 'DOCUMENT_TITLE' | translate }}*</b>
+            </label>
+            <div class="form-group" ng-class="{'has-danger': createDocumentForm.document_title.$invalid && !createDocumentForm.document_title.$pristine}">
+                <div class="input-group">
+                    <input
+                        type="text"
+                        class="form-control"
+                        ng-model="new_document.document_title"
+                        name="document_title"
+                        id="document_title"
+                        placeholder="{{ 'DOCUMENT_TITLE' | translate }}"
+                        aria-describedby="inputTitle"
+                        autofocus
+                        required>
+                    <span class="input-group-addon">
+                        <span class="flag-icon flag-icon-gb"></span>
+                    </span>
+                </div>
+                <span ng-show="createDocumentForm.document_title.$error.required && !createDocumentForm.document_title.$pristine" class="text-danger">
+                    <small>
+                        {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+            </div>
+            <br>
+
+        </div>
+        <div class="card-footer right">
+            <button class="btn btn-success" role="submit">
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SEND' | translate }}
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- New user -->
+<div class="card" ng-show="tab==2">
+    <form class="form-horizontal" name="createUserForm" ng-submit="signup()">
+        <div class="card-header middle" style="font-size: 20pt;">
+            {{ 'NEW_USER' | translate }}
+        </div>
+        <div class="card-block">
+            <br>
+
+            <label>
+                <b>{{ 'EMAIL_ADDRESS' | translate }}</b>
+            </label>
+            <div class="form-group" ng-class="{'has-danger': createUserForm.user_email_address.$invalid && !createUserForm.user_email_address.$pristine}">
+                <input
+                    type="email"
+                    class="form-control"
+                    ng-model="new_user.email_address"
+                    name="user_email_address"
+                    id="user_email_address"
+                    placeholder="{{ 'EMAIL_ADDRESS' | translate }}*"
+                    aria-describedby="inputEmailAddress"
+                    required
+                    autofocus
+                    autocomplete="on">
+                <small class="form-text text-muted">{{ 'PLEASE_USE_A_UNIVERSITY_ADDRESS' | translate }}</small>
+                <span ng-show="createUserForm.user_email_address.$error.required && !createUserForm.user_email_address.$pristine" class="text-danger">
+                    <small>
+                        {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                    <label>
+                        <b>{{ 'TITLE' | translate }}</b>
+                    </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            class="form-control"
+                            ng-model="new_user.title"
+                            name="title"
+                            id="title"
+                            placeholder="{{ 'TITLE' | translate }}"
+                            aria-describedby="inputTitle"
+                            autocomplete="on">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                    <label>
+                        <b>{{ 'FIRST_NAME' | translate }}</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': createUserForm.first_name.$invalid && !createUserForm.first_name.$pristine }">
+                        <input
+                            type="text"
+                            class="form-control"
+                            ng-model="new_user.first_name"
+                            name="first_name"
+                            id="first_name"
+                            placeholder="{{ 'FIRST_NAME' | translate }}*"
+                            aria-describedby="inputFirstName"
+                            required
+                            autocomplete="on">
+                        <span ng-show="createUserForm.email_address.$error.required && !createUserForm.email_address.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                    <label>
+                        <b>{{ 'LAST_NAME' | translate }}</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': createUserForm.last_name.$invalid && !createUserForm.last_name.$pristine }">
+                        <input
+                            type="text"
+                            class="form-control"
+                            ng-model="new_user.last_name"
+                            name="last_name"
+                            id="last_name"
+                            placeholder="{{ 'LAST_NAME' | translate }}*"
+                            aria-describedby="inputLastName"
+                            required
+                            autocomplete="on">
+                        <span ng-show="createUserForm.email_address.$error.required && !createUserForm.email_address.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <p>
+                - I aggree, that all my given information are correct and I'm aware, that my data will be stored by the Institute for Geoinformatics.
+            </p>
+            <p>
+                - I aggree, that as soon as I submit successfully my document request, only the Ethics comittee can delete my account.
+            </p>
+            <br>
+
+        </div>
+        <div class="card-footer right">
+            <button class="btn btn-success" role="submit">
+                <i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SIGN_UP' | translate }}
+            </button>
+        </div>
+    </form>
+</div>
