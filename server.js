@@ -22,13 +22,13 @@ config.postgres_port = process.env.POSTGRES_PORT || config.postgres_port;
 config.postgres_db_name = process.env.POSTGRES_DB_NAME || config.postgres_db_name;
 config.postgres_username = process.env.POSTGRES_USERNAME || config.postgres_username;
 config.postgres_password = process.env.POSTGRES_PASSWORD || config.postgres_password;
-config.postgres_ssl = JSON.parse(process.env.POSTGRES_SSL) || config.postgres_ssl;
+config.postgres_ssl = process.env.POSTGRES_SSL || config.postgres_ssl;
 config.from_email_address = process.env.FROM || config.from_email_address;
 config.smtp_host = process.env.SMTP_HOST || config.smtp_host;
 config.smtp_port = process.env.SMTP_PORT || config.smtp_port;
 config.smtp_ssl = process.env.SMTP_SSL || config.smtp_ssl;
-config.smtp_email_address = process.env.SMTP_EMAIL || config.smtp_email_address;
-config.smtp_password = process.env.SMTP_PW || config.smtp_password;
+config.smtp_email_address = process.env.SMTP_EMAIL_ADDRESS || config.smtp_email_address;
+config.smtp_password = process.env.SMTP_PASSWORD || config.smtp_password;
 config.jwtSecret = process.env.JWTSECRET || config.jwtSecret;
 
 exports.httpPort = config.httpPort;
@@ -36,15 +36,14 @@ exports.server_url = config.server_url;
 exports.jwtSecret = config.jwtSecret;
 
 // DATABASE CONFIGURATION
-var db_config = {
-    user: config.db_user,
-    password: config.db_password,
-    host: config.db_host,
-    port: config.db_port,
-    database: config.db_name,
-    ssl: config.db_ssl
-};
-var pool = new pg.Pool(db_config);
+var pool = new pg.Pool({
+    host: config.postgres_host,
+    port: config.postgres_port,
+    database: config.postgres_db_name,
+    user: config.postgres_username,
+    password: config.postgres_password,
+    ssl: JSON.parse(config.postgres_ssl)
+});
 exports.pool = pool;
 
 
@@ -52,14 +51,14 @@ exports.pool = pool;
 pool.connect(function(err, client, done) {
     if(err) {
         console.error(err);
-        console.error(colors.red("Could not connect to Database! Invalid Credentials or Postgres is not running"));
+        console.error(colors.red(new Date() + " Could not connect to Database! Invalid Credentials or Postgres is not running"));
     } else {
         client.query("SELECT true;", function(err, result) {
             done();
             if (err) {
                 console.error(colors.red(JSON.stringify(err)));
             } else {
-                console.log(colors.green(new Date() + " Postgres is running on port " + config.db_port));
+                console.log(colors.green(new Date() + " Postgres is running on port " + config.postgres_port));
             }
         });
     }
@@ -167,13 +166,13 @@ app.get('/admin/*', function(req, res, next) {
 // Start Webserver
 var httpServer = http.createServer(app);
 httpServer.listen(config.httpPort, function() {
-    console.log(colors.green(new Date() + "HTTP-Server is listening at port " + config.httpPort));
+    console.log(colors.green(new Date() + " HTTP-Server is listening at port " + config.httpPort));
 });
 if(config.environment === "production") {
     var httpsServer = https.createServer(credentials, app);
 
     httpsServer.listen(config.httpsPort, function() {
-        console.log(colors.green(new Date() + "HTTPS-Server is listening at port " + config.httpsPort));
+        console.log(colors.green(new Date() + " HTTPS-Server is listening at port " + config.httpsPort));
     });
 }
 
