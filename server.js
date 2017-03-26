@@ -156,7 +156,10 @@ app.use(prefix, require ('./routes/recovery'));
 
 // Resolve path after refreshing inside app
 app.get('/', function(req, res, next) {
-    res.sendFile(path.resolve('public/index.html'));
+    res.sendFile(path.resolve('public/user/index.html'));
+});
+app.get('/user/*', function(req, res, next) {
+    res.sendFile(path.resolve('public/user/index.html'));
 });
 app.get('/admin/*', function(req, res, next) {
     res.sendFile(path.resolve('public/admin/index.html'));
