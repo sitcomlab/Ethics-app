@@ -9,15 +9,6 @@ app.controller("documentEditTitleController", function($scope, $rootScope, $tran
      *************************************************/
 
     /**
-     * [changeTab description]
-     * @param  {[type]} tab [description]
-     * @return {[type]}     [description]
-     */
-    $scope.changeTab = function(tab){
-        $scope.tab = tab;
-    };
-
-    /**
      * [redirect description]
      * @param  {[type]} path [description]
      * @return {[type]}      [description]
@@ -43,7 +34,7 @@ app.controller("documentEditTitleController", function($scope, $rootScope, $tran
      * @return {[type]} [description]
      */
     $scope.saveDocument = function(){
-        $scope.changeTab(0);
+        $scope.$parent.loading = { status: true, message: "Saving document" };
 
         $documentService.edit($documentService.getId(), $scope.updated_document)
         .then(function onSuccess(response) {
@@ -64,9 +55,9 @@ app.controller("documentEditTitleController", function($scope, $rootScope, $tran
     /*************************************************
         INIT
      *************************************************/
-    $scope.changeTab(0);
+    $scope.$parent.loading = { status: true, message: "Loading document" };
     $scope.document = $documentService.get();
     $scope.updated_document = $documentService.copy();
-    $scope.changeTab(1);
+    $scope.$parent.loading = { status: false, message: "" };
 
 });

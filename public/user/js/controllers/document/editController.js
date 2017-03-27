@@ -59,7 +59,7 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
      * @return {[type]} [description]
      */
     $scope.saveDocument = function(tab){
-        $scope.changeTab(0);
+        $scope.$parent.loading = { status: true, message: "Auto saving" };
 
         var save_description = $q.defer();
         var save_concern = $q.defer();
@@ -214,9 +214,8 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
     /*************************************************
         INIT
      *************************************************/
-    $scope.changeTab(0);
+    $scope.$parent.loading = { status: true, message: "Loading document" };
     $scope.latest_revision = $documentService.getLatestRevision();
-    $scope.changeTab(1);
 
     // Check status
     if($documentService.getStatus()>1 && $documentService.getStatus()!=5){

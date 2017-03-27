@@ -6,7 +6,6 @@ app.config(function($routeProvider, $locationProvider, config) {
 
 		// Home
 		.when("/", {
-			// (entry point)
 			templateUrl: "js/templates/login.html",
 			controller: "loginController"
 		})
@@ -32,7 +31,7 @@ app.config(function($routeProvider, $locationProvider, config) {
 
 		// Document
 		.when("/documents/:document_id", {
-			// (main entry point)
+			// (main entry point to login by document-ID)
 			templateUrl: "js/templates/document/details.html",
 			controller: "documentDetailsController",
 		})
@@ -166,10 +165,11 @@ app.config(function($routeProvider, $locationProvider, config) {
  * @return {[type]}                        [description]
  */
 var checkAuthentication = function ($q, $location, $authenticationService) {
-	if ($authenticationService.authenticated()) {
+	if($authenticationService.isAuthenticated()) {
 		return true;
 	} else {
+		return false;
 		// Redirect
-		$location.url("/");
+		//$location.url("/");
 	}
 };

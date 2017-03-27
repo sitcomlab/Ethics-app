@@ -9,15 +9,6 @@ app.controller("accountEditController", function($scope, $rootScope, $translate,
      *************************************************/
 
     /**
-     * [changeTab description]
-     * @param  {[type]} tab [description]
-     * @return {[type]}     [description]
-     */
-    $scope.changeTab = function(tab){
-        $scope.tab = tab;
-    };
-
-    /**
      * [redirect description]
      * @param  {[type]} path [description]
      * @return {[type]}      [description]
@@ -43,7 +34,7 @@ app.controller("accountEditController", function($scope, $rootScope, $translate,
      * @return {[type]} [description]
      */
     $scope.save = function(){
-        $scope.changeTab(0);
+        $scope.$parent.loading = { status: true, message: "Saving account settings" };
 
         $userService.edit($authenticationService.getId(), $scope.updated_user)
         .then(function onSuccess(response) {
@@ -62,9 +53,9 @@ app.controller("accountEditController", function($scope, $rootScope, $translate,
     /*************************************************
         INIT
      *************************************************/
-    $scope.changeTab(0);
+    $scope.$parent.loading = { status: true, message: "Loading account settings" };
     $scope.authenticated_user = $authenticationService.get();
     $scope.updated_user = $authenticationService.copy();
-    $scope.changeTab(1);
+    $scope.$parent.loading = { status: false, message: "" };
 
 });

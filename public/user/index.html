@@ -35,11 +35,13 @@
         <!-- JavaScript dependecies -->
         <script src="../bower_components/jquery/dist/jquery.min.js"></script>
         <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../bower_components/underscore/underscore.js"></script>
         <script src="../bower_components/moment/min/moment.min.js"></script>
         <script src="../bower_components/angular/angular.min.js"></script>
         <script src="../bower_components/angular-route/angular-route.min.js"></script>
         <script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
         <script src="../bower_components/angular-translate/angular-translate.min.js"></script>
+        <script src="../bower_components/angular-underscore-module/angular-underscore-module.js"></script>
         <script src="../bower_components/angular-momentjs/angular-momentjs.js"></script>
         <script src="../bower_components/bootbox/bootbox.js"></script>
         <script src="../bower_components/ngBootbox/dist/ngBootbox.min.js"></script>
@@ -57,7 +59,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <a class="navbar-brand" href="/">
-                        <!--<img src="/img/ifgi-logo.png" height="40">-->{{config.appName}}
+                        {{config.appName}}
                     </a>
                     <div class="collapse navbar-collapse" id="navbarContent">
                         <div class="navbar-nav mr-auto">
@@ -68,8 +70,7 @@
                                 {{ 'HELP' | translate }}
                             </a>
                         </div>
-                        <!--<ul class="navbar-nav nav-pills" ng-if="authenticated_user">-->
-                        <ul class="navbar-nav nav-pills">
+                        <ul class="navbar-nav nav-pills" ng-if="authenticated_user">
                             <li class="nav-item dropdown">
                                 <a class="nav-link active dropdown-toggle" href="" id="document_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                 style="cursor: pointer; border: 1px solid #0275d8; margin-left:5px;" ng-style="
@@ -81,7 +82,7 @@
                                 document.status===5 && {'background-color':'rgb(240, 173, 78)','border':'1px solid rgb(240, 173, 78)'} ||
                                 document.status===6 && {'background-color':'#5cb85c','border':'1px solid #5cb85c'} ||
                                 document.status===7 && {'background-color':'rgb(217, 83, 79)','border':'1px solid rgb(217, 83, 79)'}">
-                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;{{document.document_title || "test-document" }}
+                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;{{document.document_title}}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="document_dropdown">
                                     <h6 class="dropdown-header">{{ 'DOCUMENT' | translate }}</h6>
@@ -93,7 +94,7 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link active user-pill dropdown-toggle" href="" id="user_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer; background-color:#FFFFFF; border: 1px solid #CCCCCC; color: #292b2c; margin-left:5px;">
-                                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;<span ng-if="authenticated_user.title">{{authenticated_user.title}}&nbsp;</span>{{authenticated_user.first_name || "John"}} {{authenticated_user.last_name || "Doe"}}
+                                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;<span ng-if="authenticated_user.title">{{authenticated_user.title}}&nbsp;</span>{{authenticated_user.first_name}} {{authenticated_user.last_name}}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user_dropdown">
                                     <h6 class="dropdown-header">{{ 'ACCOUNT' | translate }}</h6>
@@ -157,6 +158,9 @@
         <!-- SERVICES -->
         <script src="js/services/authenticationService.js"></script>
         <script src="js/services/userService.js"></script>
+        <script src="js/services/universityService.js"></script>
+        <script src="js/services/instituteService.js"></script>
+        <script src="js/services/courseService.js"></script>
         <script src="js/services/documentService.js"></script>
         <script src="js/services/revisionService.js"></script>
         <script src="js/services/descriptionService.js"></script>
@@ -164,7 +168,7 @@
         <script src="js/services/reviewService.js"></script>
         <script src="js/services/fileService.js"></script>
         <script src="js/services/recoveryService.js"></script>
-        <script src="js/services/membersService.js"></script>
+        <script src="js/services/memberService.js"></script>
 
         <!-- APPLICATION -->
         <script src="js/app.js"></script>

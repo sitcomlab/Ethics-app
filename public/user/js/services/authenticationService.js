@@ -22,6 +22,13 @@ app.factory('$authenticationService', function($http, $log, config) {
                 return authenticated_user.user_id;
             }
         },
+        getToken: function(){
+            if(authenticated_user === undefined){
+                return undefined;
+            } else {
+                return authenticated_user.token;
+            }
+        },
         getEmailAddress: function(){
             if(authenticated_user === undefined){
                 return undefined;
@@ -43,7 +50,7 @@ app.factory('$authenticationService', function($http, $log, config) {
                 email_address: authenticated_user.email_address
             };
         },
-        authenticated: function(){
+        isAuthenticated: function(){
             if(authenticated_user !== undefined){
                 return true;
             } else {

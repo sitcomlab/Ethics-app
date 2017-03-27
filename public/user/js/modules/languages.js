@@ -20,7 +20,7 @@ app.config(function ($translateProvider) {
         FIRST_NAME : 'First name',
         LAST_NAME : 'Last name',
 
-        CREATE_NEW_DOCUMENT: 'Create a new document',
+        NEW_DOCUMENT: 'New document',
         FORGOT_YOUR_DOCUMENT_ID: 'Forgot your document-ID',
 
         LOGIN : 'Login',

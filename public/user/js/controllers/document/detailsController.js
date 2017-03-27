@@ -9,15 +9,6 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
      *************************************************/
 
     /**
-     * [changeTab description]
-     * @param  {[type]} tab [description]
-     * @return {[type]}     [description]
-     */
-    $scope.changeTab = function(tab){
-        $scope.tab = tab;
-    };
-
-    /**
      * [redirect description]
      * @param  {[type]} path [description]
      * @return {[type]}      [description]
@@ -30,128 +21,133 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
     /*************************************************
         INIT
      *************************************************/
-    $scope.changeTab(0);
-    $scope.loading_message = "Loading document";
+    $scope.$parent.loading = { status: true, message: "Logging in" };
 
     $timeout(function(){
         // Authentication
         $authenticationService.loginByDocumentId($routeParams.document_id)
         .then(function onSuccess(response) {
             $authenticationService.set(response.data);
+            $scope.$parent.loading = { status: true, message: "Loading document" };
 
-            // Load document
-            $documentService.retrieve($routeParams.document_id)
-            .then(function onSuccess(response) {
-                $documentService.set(response.data);
-
-                // Load revisions
-                $revisionService.listByDocument($documentService.getId())
+            $timeout(function(){
+                // Load document
+                $documentService.retrieve($routeParams.document_id)
                 .then(function onSuccess(response) {
-                    $documentService.setRevisions(response.data);
+                    $documentService.set(response.data);
+                    $scope.$parent.loading = { status: true, message: "Loading revisions" };
 
-                    // Load descriptions, concerns and reviews for each revision
-                    angular.forEach($documentService.getRevisions(), function(revision, key) {
-
-                        // Prepare promises
-                        var checkout_description = $q.defer();
-                        var checkout_concern = $q.defer();
-                        var checkout_review = $q.defer();
-
-                        // Checkout descriptions
-                        $descriptionService.getByRevision(revision.revision_id)
+                    $timeout(function(){
+                        // Load revisions
+                        $revisionService.listByDocument($documentService.getId())
                         .then(function onSuccess(response) {
-                            $documentService.setDescription(revision.revision_id, response.data);
-                            // Resolve promise
-                            checkout_description.resolve();
-                        })
-                        .catch(function onError(response) {
-                            $window.alert(response.data);
-                        });
+                            $documentService.setRevisions(response.data);
 
-                        // Checkout concerns
-                        $concernService.getByRevision(revision.revision_id)
-                        .then(function onSuccess(response) {
-                            $documentService.setConcern(revision.revision_id, response.data);
-                            // Resolve promise
-                            checkout_concern.resolve();
-                        })
-                        .catch(function onError(response) {
-                            $window.alert(response.data);
-                        });
+                            // Load descriptions, concerns and reviews for each revision
+                            angular.forEach($documentService.getRevisions(), function(revision, key) {
 
-                        // Checkout reviews
-                        $reviewService.getByRevision(revision.revision_id)
-                        .then(function onSuccess(response) {
-                            $documentService.setReview(revision.revision_id, response.data);
-                            // Resolve promise
-                            checkout_review.resolve();
-                        })
-                        .catch(function onError(response) {
-                            $window.alert(response.data);
-                        });
+                                // Prepare promises
+                                var checkout_description = $q.defer();
+                                var checkout_concern = $q.defer();
+                                var checkout_review = $q.defer();
+
+                                // Checkout descriptions
+                                $descriptionService.getByRevision(revision.revision_id)
+                                .then(function onSuccess(response) {
+                                    $documentService.setDescription(revision.revision_id, response.data);
+                                    // Resolve promise
+                                    checkout_description.resolve();
+                                })
+                                .catch(function onError(response) {
+                                    $window.alert(response.data);
+                                });
+
+                                // Checkout concerns
+                                $concernService.getByRevision(revision.revision_id)
+                                .then(function onSuccess(response) {
+                                    $documentService.setConcern(revision.revision_id, response.data);
+                                    // Resolve promise
+                                    checkout_concern.resolve();
+                                })
+                                .catch(function onError(response) {
+                                    $window.alert(response.data);
+                                });
+
+                                // Checkout reviews
+                                $reviewService.getByRevision(revision.revision_id)
+                                .then(function onSuccess(response) {
+                                    $documentService.setReview(revision.revision_id, response.data);
+                                    // Resolve promise
+                                    checkout_review.resolve();
+                                })
+                                .catch(function onError(response) {
+                                    $window.alert(response.data);
+                                });
 
 
-                        // Promises
-                        checkout_description.promise.then(function(){
-                            return;
-                        });
-                        checkout_concern.promise.then(function() {
-                            return;
-                        });
-                        checkout_review.promise.then(function() {
-                            return;
-                        });
+                                // Promises
+                                checkout_description.promise.then(function(){
+                                    return;
+                                });
+                                checkout_concern.promise.then(function() {
+                                    return;
+                                });
+                                checkout_review.promise.then(function() {
+                                    return;
+                                });
 
 
-                        // Start parallel requests
-                        var all = $q.all([
-                            checkout_description.promise,
-                            checkout_concern.promise,
-                            checkout_review.promise
-                        ]);
+                                // Start parallel requests
+                                var all = $q.all([
+                                    checkout_description.promise,
+                                    checkout_concern.promise,
+                                    checkout_review.promise
+                                ]);
 
-                        // Final task after requests
-                        all.then(function(){
-                            // Update navbar
-                            $rootScope.$broadcast('updateNavbar');
+                                // Final task after requests
+                                all.then(function(){
+                                    // Update navbar
+                                    $rootScope.$broadcast('updateNavbar');
 
-                            // Prepare path
-                            var path = "/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus();
+                                    // Prepare path
+                                    var path = "/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus();
 
-                            // Check status
-                            if($documentService.getStatus()===2 || $documentService.getStatus()===6){
+                                    // Check status
+                                    if($documentService.getStatus()===2 || $documentService.getStatus()===6){
 
-                                if($fileService.get()){
-                                    $documentService.setFiles($fileService.get());
-                                    $scope.redirect(path);
-                                } else {
-                                    $scope.loading_message = "Generating files";
+                                        if($fileService.get()){
+                                            $documentService.setFiles($fileService.get());
+                                            $scope.redirect(path);
+                                        } else {
+                                            $scope.loading_message = "Generating files";
 
-                                    $documentService.generateFiles($documentService.getId())
-                                    .then(function onSuccess(response) {
-                                        $fileService.set(response.data);
-                                        $documentService.setFiles($fileService.get());
+                                            $documentService.generateFiles($documentService.getId())
+                                            .then(function onSuccess(response) {
+                                                $fileService.set(response.data);
+                                                $documentService.setFiles($fileService.get());
+                                                $scope.redirect(path);
+                                            })
+                                            .catch(function onError(response) {
+                                                $window.alert(response.data);
+                                            });
+                                        }
+                                    } else {
                                         $scope.redirect(path);
-                                    })
-                                    .catch(function onError(response) {
-                                        $window.alert(response.data);
-                                    });
-                                }
-                            } else {
-                                $scope.redirect(path);
-                            }
+                                    }
+                                });
+                            });
+                        })
+                        .catch(function onError(response) {
+                            $window.alert(response.data);
+                            $scope.redirect("/");
                         });
-                    });
+                    }, 1000);
                 })
                 .catch(function onError(response) {
                     $window.alert(response.data);
                     $scope.redirect("/");
                 });
-            })
-            .catch(function onError(response) {
-                $window.alert(response.data);
-                $scope.redirect("/");
-            });
+            }, 1000);
         })
         .catch(function onError(response) {
             $window.alert(response.data);

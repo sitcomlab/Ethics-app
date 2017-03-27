@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Member list controller
-app.controller("memberListController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService, $membersService) {
+app.controller("memberListController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService, $memberService) {
 
     /*************************************************
         FUNCTIONS
@@ -35,7 +35,7 @@ app.controller("memberListController", function($scope, $rootScope, $translate, 
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading committee members" };
 
-    $membersService.list()
+    $memberService.list()
     .then(function onSuccess(response) {
         $scope.$parent.loading = { status: false, message: "" };
         $scope.members = response.data;

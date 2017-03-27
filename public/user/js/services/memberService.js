@@ -1,8 +1,8 @@
-var app = angular.module("membersService", []);
+var app = angular.module("memberService", []);
 
 
-// Members service
-app.factory('$membersService', function($http, $log, config) {
+// Member service
+app.factory('$memberService', function($http, $log, config) {
 
     return {
         list: function() {

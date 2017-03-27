@@ -9,15 +9,6 @@ app.controller("documentShowIdController", function($scope, $rootScope, $transla
      *************************************************/
 
     /**
-     * [changeTab description]
-     * @param  {[type]} tab [description]
-     * @return {[type]}     [description]
-     */
-    $scope.changeTab = function(tab){
-        $scope.tab = tab;
-    };
-
-    /**
      * [redirect description]
      * @param  {[type]} path [description]
      * @return {[type]}      [description]
@@ -51,7 +42,7 @@ app.controller("documentShowIdController", function($scope, $rootScope, $transla
     /*************************************************
         INIT
      *************************************************/
-    $scope.changeTab(0);
+    $scope.$parent.loading = { status: true, message: "Loading document" };
     $scope.document = $documentService.get();
-    $scope.changeTab(1);
+    $scope.$parent.loading = { status: false, message: "" };
 });

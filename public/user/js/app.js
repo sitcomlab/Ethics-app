@@ -9,6 +9,7 @@ var app = angular.module("ethics-app", [
     "ngBootbox",
     "pascalprecht.translate",
     "angular-momentjs",
+    "underscore",
 
     // Own Modules
     "filters",
@@ -17,6 +18,9 @@ var app = angular.module("ethics-app", [
 
     // Services
     "authenticationService",
+    "universityService",
+    "instituteService",
+    "courseService",
     "documentService",
     "revisionService",
     "descriptionService",
@@ -25,7 +29,7 @@ var app = angular.module("ethics-app", [
     "userService",
     "recoveryService",
     "fileService",
-    "membersService"
+    "memberService"
 
 ]);
 

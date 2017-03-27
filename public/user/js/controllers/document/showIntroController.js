@@ -9,15 +9,6 @@ app.controller("documentShowIntroController", function($scope, $rootScope, $tran
      *************************************************/
 
     /**
-     * [changeTab description]
-     * @param  {[type]} tab [description]
-     * @return {[type]}     [description]
-     */
-    $scope.changeTab = function(tab){
-        $scope.tab = tab;
-    };
-
-    /**
      * [redirect description]
      * @param  {[type]} path [description]
      * @return {[type]}      [description]
@@ -43,7 +34,7 @@ app.controller("documentShowIntroController", function($scope, $rootScope, $tran
      * @return {[type]} [description]
      */
     $scope.send = function(){
-        $scope.changeTab(0);
+        $scope.$parent.loading = { status: true, message: "Auto saving" };
 
         if($documentService.getStatus()===0){
             // Confirm intro
@@ -68,9 +59,9 @@ app.controller("documentShowIntroController", function($scope, $rootScope, $tran
     /*************************************************
         INIT
      *************************************************/
-    $scope.changeTab(0);
+    $scope.$parent.loading = { status: true, message: "Loading document" };
     $scope.document = $documentService.get();
-    $scope.changeTab(1);
+    $scope.$parent.loading = { status: false, message: "" };
 
 
 });

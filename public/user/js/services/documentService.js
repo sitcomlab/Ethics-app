@@ -2,7 +2,7 @@ var app = angular.module("documentService", []);
 
 
 // Document service
-app.factory('$documentService', function($http, $log, config) {
+app.factory('$documentService', function($http, $log, config, $authenticationService) {
 
     var document;
 
@@ -10,7 +10,8 @@ app.factory('$documentService', function($http, $log, config) {
         init: function(){
             return {
                 email_address: "nicho90@live.de",
-                document_title: "test-1"
+                document_title: "test-1",
+                course_id: null
             };
         },
         get: function(){
@@ -108,22 +109,46 @@ app.factory('$documentService', function($http, $log, config) {
             return $http.post(config.apiURL + "/documents", data);
         },
         retrieve: function(document_id) {
-            return $http.get(config.apiURL + "/documents/" + document_id);
+            return $http.get(config.apiURL + "/documents/" + document_id, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
         },
         confirmIntro: function(document_id) {
-            return $http.get(config.apiURL + "/documents/" + document_id + "/intro");
+            return $http.get(config.apiURL + "/documents/" + document_id + "/intro", {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
         },
         submit: function(document_id) {
-            return $http.get(config.apiURL + "/documents/" + document_id + "/submit");
+            return $http.get(config.apiURL + "/documents/" + document_id + "/submit", {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
         },
         generateFiles: function(document_id) {
-            return $http.get(config.apiURL + "/documents/" + document_id + "/files");
+            return $http.get(config.apiURL + "/documents/" + document_id + "/files", {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
         },
         edit: function(document_id, data) {
-            return $http.put(config.apiURL + "/documents/" + document_id, data);
+            return $http.put(config.apiURL + "/documents/" + document_id, data, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
         },
         delete: function(document_id) {
-            return $http.delete(config.apiURL + "/documents/" + document_id);
+            return $http.delete(config.apiURL + "/documents/" + document_id, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
         }
 
     };

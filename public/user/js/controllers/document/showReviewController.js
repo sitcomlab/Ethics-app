@@ -9,15 +9,6 @@ app.controller("documentShowReviewController", function($scope, $rootScope, $rou
      *************************************************/
 
     /**
-     * [changeTab description]
-     * @param  {[type]} tab [description]
-     * @return {[type]}     [description]
-     */
-    $scope.changeTab = function(tab){
-        $scope.tab = tab;
-    };
-
-    /**
      * [redirect description]
      * @param  {[type]} path [description]
      * @return {[type]}      [description]
@@ -120,7 +111,7 @@ app.controller("documentShowReviewController", function($scope, $rootScope, $rou
     /*************************************************
         INIT
      *************************************************/
-    $scope.changeTab(0);
+    $scope.$parent.loading = { status: true, message: "Loading review" };
     $scope.document = $documentService.get();
     $scope.latest_revision = $documentService.getLatestRevision();
     $scope.generalHistory = false;
@@ -130,5 +121,5 @@ app.controller("documentShowReviewController", function($scope, $rootScope, $rou
     $scope.descriptionCommentsDe = false;
     $scope.concernHistory = false;
     $scope.concernComments = false;
-    $scope.changeTab(1);
+    $scope.$parent.loading = { status: false, message: "" };
 });

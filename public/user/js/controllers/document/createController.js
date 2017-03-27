@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document create controller
-app.controller("documentCreateController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService, $userService) {
+app.controller("documentCreateController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService, $userService, $universityService, $instituteService, $courseService) {
 
     /*************************************************
         FUNCTIONS
@@ -49,7 +49,7 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
             $scope.createDocumentForm.document_title.$pristine = false;
             $scope.createDocumentForm.document_email_address.$pristine = false;
         } else {
-            $scope.changeTab(0);
+            $scope.$parent.loading = { status: true, message: "Creating new document" };
 
             $userService.findByEmail($scope.new_document.email_address)
             .then(function onSuccess(response) {
@@ -88,11 +88,11 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
             $scope.createUserForm.first_name.$pristine = false;
             $scope.createUserForm.last_name.$pristine = false;
         } else {
-            $scope.changeTab(0);
+            $scope.$parent.loading = { status: true, message: "Creating new user" };
 
             $userService.create($scope.new_user)
             .then(function onSuccess(response) {
-                $window.alert("You have signed up successfully, you can create now your document!");
+                $window.alert("You have successfully signed up, you can now create your document!");
 
                 // Retry creating new document
                 $scope.new_document.email_address = $scope.new_user.email_address || "";
@@ -106,12 +106,65 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
         }
     };
 
+    /**
+     * [updateInstitutes description]
+     * @return {[type]} [description]
+     */
+    $scope.updateInstitutes = function(){
+        $scope.institute_id = null;
+        $scope.new_document.course_id = null;
+        $scope.institutes = $instituteService.getByUniversity($scope.university_id);
+    };
+
+    /**
+     * [updateCourses description]
+     * @return {[type]} [description]
+     */
+    $scope.updateCourses = function(){
+        $scope.courses = $courseService.getByInstitute($scope.institute_id);
+        $scope.new_document.course_id = null;
+    };
 
     /*************************************************
         INIT
      *************************************************/
-    $scope.changeTab(0);
+    $scope.$parent.loading = { status: true, message: "Initialising new document" };
     $scope.new_document = $documentService.init();
     $scope.new_user = $userService.init();
-    $scope.changeTab(1);
+
+    // Load universities
+    $universityService.list()
+    .then(function onSuccess(response) {
+        $universityService.set(response.data);
+        $scope.universities = $universityService.get();
+
+        // Load institutes
+        $instituteService.list()
+        .then(function onSuccess(response) {
+            $instituteService.set(response.data);
+            $scope.institutes = $instituteService.get();
+
+            // Load courses
+            $courseService.list()
+            .then(function onSuccess(response) {
+                $courseService.set(response.data);
+                $scope.courses = $courseService.get();
+
+                $scope.university_id = $scope.universities[0].university_id;
+                $scope.institute_id = $scope.institutes[0].institute_id;
+
+                $scope.$parent.loading = { status: false, message: "" };
+                $scope.changeTab(1);
+            })
+            .catch(function onError(response) {
+                $window.alert(response.data);
+            });
+        })
+        .catch(function onError(response) {
+            $window.alert(response.data);
+        });
+    })
+    .catch(function onError(response) {
+        $window.alert(response.data);
+    });
 });

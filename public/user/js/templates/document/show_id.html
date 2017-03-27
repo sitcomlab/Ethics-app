@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <div class="card">
     <div class="card-header middle" style="font-size: 20pt;">
-        {{ 'YOUR_DOCUMENT_ID' | translate }}
+        <div class="row">
+            <div class="col">
+                {{ 'YOUR_DOCUMENT_ID' | translate }}
+            </div>
+            <div class="col right">
+                <button class="btn btn-primary" role="button" ng-click="cancel()">
+                    {{ 'CLOSE' | translate }}
+                </button>
+            </div>
+        </div>
     </div>
     <div class="card-block">
         <br>
@@ -14,14 +23,5 @@
             </span>
         </div>
         <br>
-    </div>
-    <div class="card-footer">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <button class="btn btn-primary btn-block" role="button" ng-click="cancel()">
-                    {{ 'CLOSE' | translate }}
-                </button>
-            </div>
-        </div>
     </div>
 </div>

@@ -7,8 +7,8 @@
                     {{ 'NEW_DOCUMENT' | translate }}
                 </div>
                 <div class="col right">
-                    <button class="btn btn-primary" role="button" ng-click="redirect('/')">
-                        {{ 'CLOSE' | translate }}
+                    <button class="btn btn-secondary" role="button" ng-click="cancel()">
+                        <i class="fa fa-times" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
@@ -65,6 +65,52 @@
             </div>
             <br>
 
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'UNIVERSITY' | translate }}*</b>
+                    </label>
+                    <select
+                        class="custom-select form-control"
+                        id="university_id"
+                        name="university_id"
+                        ng-model="university_id"
+                        ng-options="universtity.university_id as universtity.university_name for universtity in universities | orderBy:['default_option', 'university_name']"
+                        ng-change="updateInstitutes()"
+                        required>
+                    </select>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'INSTITUTE' | translate }}*</b>
+                    </label>
+                    <select
+                        class="custom-select form-control"
+                        id="institute_id"
+                        name="institute_id"
+                        ng-model="institute_id"
+                        ng-options="institute.institute_id as institute.institute_name for institute in institutes | orderBy:['institute_name']"
+                        ng-disabled="university_id == null || university_id == '' "
+                        ng-change="updateCourses()"
+                        required>
+                    </select>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'COURSE' | translate }}</b>
+                    </label>
+                    <select
+                        class="custom-select form-control"
+                        id="course_id"
+                        name="course_id"
+                        ng-model="new_document.course_id"
+                        ng-options="course.course_id as course.course_name group by course.term for course in courses | orderBy:['default_option', 'course_name']"
+                        ng-disabled="institute_id == null || institute_id == '' || institute_id == 1 "
+                        required>
+                        <option value="">{{ 'NO_COURSE' | translate }}</option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="card-footer right">
             <button class="btn btn-success" role="submit">

@@ -32,24 +32,6 @@ app.controller("loginController", function($scope, $rootScope, $translate, $loca
     };
 
 
-    /**
-     * [createDoc description]
-     * @return {[type]} [description]
-     */
-    $scope.createDocument = function(){
-        $scope.redirect("/new/document");
-    };
-
-
-    /**
-     * [recovery description]
-     * @return {[type]} [description]
-     */
-    $scope.recovery = function(){
-        $scope.redirect("/recovery");
-    };
-
-
     /*************************************************
         INIT
      *************************************************/
