@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 // Login controller
-app.controller("loginController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $recoveryService, $documentsService, $documentService, $membersService, $memberService, $usersService, $userService) {
+app.controller("loginController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentsService, $documentService, $membersService, $memberService, $usersService, $userService) {
 
     // Reset
     $rootScope.$broadcast('resetNavbar');
@@ -17,7 +17,7 @@ app.controller("loginController", function($scope, $rootScope, $translate, $loca
     // Init
     $scope.tab = 1;
     $scope.login_user = $authenticationService.init();
-    $scope.recovery_user = $recoveryService.init();
+    //$scope.recovery_user = $recoveryService.init();
 
 
     /**
@@ -53,7 +53,7 @@ app.controller("loginController", function($scope, $rootScope, $translate, $loca
      * [recovery description]
      * @return {[type]} [description]
      */
-    $scope.recovery = function(){
+    /*$scope.recovery = function(){
         // Check input
         if($scope.recoveryForm.$invalid) {
             // Update UI
@@ -78,7 +78,7 @@ app.controller("loginController", function($scope, $rootScope, $translate, $loca
                 $scope.tab = 2;
             });
         }
-    };
+    };*/
 
 
 });

@@ -9,24 +9,30 @@ var app = angular.module("ethics-app", [
     "ngBootbox",
     "pascalprecht.translate",
     "angular-momentjs",
+    "underscore",
 
     // Own Modules
-    // "filters",
+    "filters",
     "routes",
     "languages",
 
     // Services
     "authenticationService",
-    "recoveryService",
+    //"universityService",
+    //"instituteService",
+    //"courseService",
     "documentsService",
     "documentService",
+    "revisionService",
+    "descriptionService",
+    "concernService",
+    "reviewService",
     "usersService",
     "userService",
     "membersService",
     "memberService",
-    "revisionService",
-    "descriptionService",
-    "concernService"
+    //"recoveryService",
+    //"fileService"
 
 ]);
 

@@ -15,7 +15,7 @@
         <meta name="format-detection" content="telephone=no">
         <meta http-equiv="x-rim-auto-match" content="none">
 
-        <title>Ethics-App | admin</title>
+        <title>Ethics-App | COMMITTEE</title>
 
         <!-- Bootstrap core CSS -->
         <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
@@ -30,16 +30,18 @@
         <link href="../bower_components/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
 
         <!-- Custom styles -->
-        <link href="../css/styles.css" rel="stylesheet"/>
+        <link href="css/styles.css" rel="stylesheet"/>
 
         <!-- JavaScript dependecies -->
         <script src="../bower_components/jquery/dist/jquery.min.js"></script>
         <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../bower_components/underscore/underscore.js"></script>
         <script src="../bower_components/moment/min/moment.min.js"></script>
         <script src="../bower_components/angular/angular.min.js"></script>
         <script src="../bower_components/angular-route/angular-route.min.js"></script>
         <script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
         <script src="../bower_components/angular-translate/angular-translate.min.js"></script>
+        <script src="../bower_components/angular-underscore-module/angular-underscore-module.js"></script>
         <script src="../bower_components/angular-momentjs/angular-momentjs.js"></script>
         <script src="../bower_components/bootbox/bootbox.js"></script>
         <script src="../bower_components/ngBootbox/dist/ngBootbox.min.js"></script>
@@ -49,6 +51,72 @@
     <body ng-app="ethics-app">
 
         <!-- Header -->
+        <header ng-controller="navController">
+            <nav class="navbar navbar-toggleable-md bg-inverse navbar-inverse fixed-top">
+                <div class="container">
+                    <button class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#navbarContent">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">
+                        {{config.appName}} | {{config.appSubname}}
+                    </a>
+                    <div class="collapse navbar-collapse" id="navbarContent">
+                        <div class="navbar-nav mr-auto" ng-if="authenticated_member">
+                            <a class="nav-link" href="" ng-click="redirect('/members')">
+                                {{ 'MEMBERS' | translate }}
+                            </a>
+                            <a class="nav-link" href="" ng-click="redirect('/users')">
+                                {{ 'USERS' | translate }}
+                            </a>
+                            <a class="nav-link" href="" ng-click="redirect('/documents')">
+                                {{ 'DOCUMENTS' | translate }}
+                            </a>
+                            <a class="nav-link" href="" ng-click="redirect('/help')">
+                                {{ 'HELP' | translate }}
+                            </a>
+                        </div>
+                        <ul class="navbar-nav nav-pills" ng-if="authenticated_member">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link active dropdown-toggle" href="" id="document_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                style="cursor: pointer; border: 1px solid #0275d8; margin-left:5px;" ng-style="
+                                document.status===0 && {'background-color':'#FFFFFF','border':'1px solid #CCCCCC'} ||
+                                document.status===1 && {'background-color':'#FFFFFF','border':'1px solid #CCCCCC'} ||
+                                document.status===2 && {'background-color':'#5cb85c','border':'1px solid #5cb85c'} ||
+                                document.status===3 && {'background-color':'#0275d8','border':'1px solid #0275d8'} ||
+                                document.status===4 && {'background-color':'#5bc0de','border':'1px solid #5bc0de'} ||
+                                document.status===5 && {'background-color':'rgb(240, 173, 78)','border':'1px solid rgb(240, 173, 78)'} ||
+                                document.status===6 && {'background-color':'#5cb85c','border':'1px solid #5cb85c'} ||
+                                document.status===7 && {'background-color':'rgb(217, 83, 79)','border':'1px solid rgb(217, 83, 79)'}">
+                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;{{document.document_title}}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="document_dropdown">
+                                    <h6 class="dropdown-header">{{ 'DOCUMENT' | translate }}</h6>
+                                    <a class="dropdown-item" href="" ng-click="showDocumentIntro(document.document_id)">{{ 'SHOW_DOCUMENT_INTRO' | translate }}</a>
+                                    <a class="dropdown-item" href="" ng-click="showDocumentId(document.document_id)">{{ 'SHOW_DOCUMENT_ID' | translate }}</a>
+                                    <a class="dropdown-item" href="" ng-click="editDocumentTitle(document.document_id)">{{ 'CHANGE_DOCUMENT_TITLE' | translate }}</a>
+                                    <a class="dropdown-item" href="" ng-click="deleteDocument(document.document_id)" ng-if="document.status<=1">{{ 'DELETE_DOCUMENT' | translate }}</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link active user-pill dropdown-toggle" href="" id="user_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer; background-color:#FFFFFF; border: 1px solid #CCCCCC; color: #292b2c; margin-left:5px;">
+                                    <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;&nbsp;<span ng-if="authenticated_member.title">{{authenticated_member.title}}&nbsp;</span>{{authenticated_member.first_name}} {{authenticated_member.last_name}}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user_dropdown">
+                                    <h6 class="dropdown-header">{{ 'ACCOUNT' | translate }}</h6>
+                                    <a class="dropdown-item" href="" ng-click="editAccount()">{{ 'SETTINGS' | translate }}</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="" ng-click="logout()">
+                                        <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LOGOUT' | translate }}
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Header
         <div class="container-fluid">
             <nav class="navbar navbar-dark bg-inverse navbar-fixed-top" ng-controller="navController">
                 <a href="http://ifgi.uni-muenster.de" target="_blank">
@@ -98,39 +166,56 @@
                     </div>
                 </div>
             </nav>
-        </div>
+        </div>-->
 
-        <!-- Main content -->
-        <div class="container-fluid main" ng-view></div>
+
+        <!-- Content -->
+        <main class="container" ng-controller="mainController">
+            <br>
+
+            <!-- Loading screen -->
+            <div class="loading middle" ng-show="loading.status">
+                <br>
+                <br>
+                <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><br>
+                <span class="text-muted" style="font-size:8pt;">
+                    {{loading.message}}
+                </span>
+                <br>
+                <br>
+            </div>
+
+            <!-- Main view -->
+            <div ng-view ng-show="!loading.status"></div>
+
+            <br>
+        </main>
+
 
         <!-- Footer -->
-        <footer class="footer" ng-controller="footerController">
-            <div class="container-fluid middle">
-                <span class="text-muted">
-                    <small>
-                        &copy; {{config.appYear}}
-                        <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a>
-                        &nbsp;&nbsp;|&nbsp;&nbsp;
-                        <a href="/" target="_self" class="link">
-                            <i class="fa fa-home" aria-hidden="true"></i>
-                        </a>
-                        &nbsp;&nbsp;|&nbsp;&nbsp;
-                        <a href="{{config.appGithub}}" target="_blank" class="link">
-                            <i class="fa fa-github" aria-hidden="true"></i>
-                        </a>
-                    </small>
-                </span>
-            </div>
+        <footer ng-controller="footerController" class="bg-inverse middle">
+            <small class="text-muted">
+                &copy; {{config.appYear}}
+                <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="/user/" target="_self" class="link">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="{{config.appGithub}}" target="_blank" class="link">
+                    <i class="fa fa-github" aria-hidden="true"></i>
+                </a>
+            </small>
         </footer>
 
 
-        <!-- Modules -->
+        <!-- MODULES -->
         <script src="js/modules/config.js"></script>
         <script src="js/modules/routes.js"></script>
         <script src="js/modules/languages.js"></script>
-        <!--<script src="js/modules/filters.js"></script>-->
+        <script src="js/modules/filters.js"></script>
 
-        <!-- Services -->
+        <!-- SERVICES -->
         <script src="js/services/authenticationService.js"></script>
         <script src="js/services/documentsService.js"></script>
         <script src="js/services/documentService.js"></script>
@@ -143,24 +228,38 @@
         <script src="js/services/descriptionService.js"></script>
         <script src="js/services/concernService.js"></script>
 
-        <!-- Controllers -->
+        <!-- APPLICATION -->
         <script src="js/app.js"></script>
+
+        <!-- CONTROLLERS -->
+        <!-- Main -->
         <script src="js/controllers/navController.js"></script>
+        <script src="js/controllers/mainController.js"></script>
         <script src="js/controllers/footerController.js"></script>
         <script src="js/controllers/loginController.js"></script>
+        <!--<script src="js/controllers/recoveryController.js"></script>-->
+        <!--<script src="js/controllers/helpController.js"></script>-->
+
+        <!-- Account -->
         <script src="js/controllers/account/editController.js"></script>
         <script src="js/controllers/account/deleteController.js"></script>
+
+        <!-- Documents -->
         <script src="js/controllers/document/listController.js"></script>
         <script src="js/controllers/document/detailsController.js"></script>
         <script src="js/controllers/document/editController.js"></script>
         <script src="js/controllers/document/editIdController.js"></script>
         <script src="js/controllers/document/editTitleController.js"></script>
         <script src="js/controllers/document/deleteController.js"></script>
+
+        <!-- Users -->
         <script src="js/controllers/user/listController.js"></script>
         <script src="js/controllers/user/detailsController.js"></script>
         <script src="js/controllers/user/editController.js"></script>
         <script src="js/controllers/user/createController.js"></script>
         <script src="js/controllers/user/deleteController.js"></script>
+
+        <!-- Members -->
         <script src="js/controllers/member/listController.js"></script>
         <script src="js/controllers/member/detailsController.js"></script>
         <script src="js/controllers/member/createController.js"></script>

@@ -3,7 +3,7 @@ var app = angular.module("config", []);
 // Constants
 app.constant("config", {
     appName: "Ethics-app",
-    appSubname: "Committee board",
+    appSubname: "ADMIN",
     appDevelopers: [{
         name: "Nicholas Schiestel",
         github: "nicho90"
