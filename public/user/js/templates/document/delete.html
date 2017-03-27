@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <div class="card">
-    <div class="card-header middle" style="font-size: 20pt;">
-        {{ 'DELETE_THIS_DOCUMENT' | translate }}?
+    <div class="card-header" style="font-size: 20pt;">
+        <div class="row">
+            <div class="col-9">
+                {{ 'DELETE_THIS_DOCUMENT' | translate }}?
+            </div>
+            <div class="col-3 right">
+                <button class="btn btn-secondary" role="button" ng-click="cancel()">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
     </div>
     <div class="card-block">
         <br>
@@ -12,19 +21,10 @@
         <small class="form-text text-muted">{{ 'PLEASE_TYPE_IN_THE_DOCUMENT_TITLE_TO_CONFIRM' | translate }}</small>
         <br>
     </div>
-    <div class="card-footer">
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <button class="btn btn-secondary btn-block" role="button" ng-click="cancel()">
-                    <i class="fa fa-ban" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'CANCEL' | translate }}
-                </button>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <button class="btn btn-danger btn-block" role="button" ng-click="deleteDocument()" ng-disabled="input != document.document_title">
-                <!--<button class="btn btn-danger btn-block" style="background-color:#d9534f" role="button" ng-click="deleteDocument()" ng-disabled="input != document.document_title">-->
-                    <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'DELETE' | translate }}
-                </button>
-            </div>
-        </div>
+    <div class="card-footer right">
+        <button class="btn btn-danger" role="button" ng-click="deleteDocument()" ng-disabled="input != document.document_title">
+        <!--<button class="btn btn-danger btn-block" style="background-color:#d9534f" role="button" ng-click="deleteDocument()" ng-disabled="input != document.document_title">-->
+            <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'DELETE' | translate }}
+        </button>
     </div>
 </div>

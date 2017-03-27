@@ -47,14 +47,6 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
     };
 
     /**
-     * [closeEditing description]
-     * @return {[type]} [description]
-     */
-    $scope.closeEditing = function(){
-        $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-    };
-
-    /**
      * [saveDocument description]
      * @return {[type]} [description]
      */
@@ -99,6 +91,7 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
         // Final task after requests
         all.then(function(){
             if(tab){
+                $scope.$parent.loading = { status: false, message: ""};
                 $scope.changeTab(tab);
                 $window.scrollTo(0, 0);
             } else {
@@ -135,6 +128,16 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
             $scope.editDocumentForm.de_duration.$pristine = false;
             $scope.editDocumentForm.de_risks.$pristine = false;
             $scope.editDocumentForm.de_benefits.$pristine = false;
+
+            // Descriptions (pt)
+            $scope.editDocumentForm.pt_title.$pristine = false;
+            $scope.editDocumentForm.pt_researcher.$pristine = false;
+            $scope.editDocumentForm.pt_study_time.$pristine = false;
+            $scope.editDocumentForm.pt_purpose.$pristine = false;
+            $scope.editDocumentForm.pt_procedure.$pristine = false;
+            $scope.editDocumentForm.pt_duration.$pristine = false;
+            $scope.editDocumentForm.pt_risks.$pristine = false;
+            $scope.editDocumentForm.pt_benefits.$pristine = false;
 
             // Conerns (values)
             $scope.editDocumentForm.q01_value.$pristine = false;
@@ -198,8 +201,9 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
 
             $window.alert("Your document can not be submitted, please fill out all required fields");
         } else {
-            $scope.changeTab(0);
+            $scope.$parent.loading = { status: true, message: "Submitting document" };
 
+            // Submit document
             $documentService.submit($documentService.getId())
             .then(function onSuccess(response) {
                 $scope.redirect("/documents/" + $documentService.getId());
@@ -214,12 +218,15 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading document" };
+    $scope.$parent.loading.status = true;
     $scope.latest_revision = $documentService.getLatestRevision();
 
     // Check status
     if($documentService.getStatus()>1 && $documentService.getStatus()!=5){
         $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
+    } else {
+        $scope.$parent.loading = { status: false, message: "" };
+        $scope.changeTab(1);
     }
 
 });

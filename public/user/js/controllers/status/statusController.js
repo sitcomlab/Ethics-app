@@ -34,14 +34,6 @@ app.controller("statusController", function($scope, $rootScope, $translate, $loc
         $scope.redirect("/documents/" + $documentService.getId() + "/edit");
     };
 
-    /**
-     * [logout description]
-     * @return {[type]} [description]
-     */
-    $scope.logout = function(){
-        $scope.redirect("/");
-    };
-
 
     /*************************************************
         INIT

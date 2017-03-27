@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <div class="card">
-    <div class="card-header middle" style="font-size: 20pt;">
+    <div class="card-header" style="font-size: 20pt;">
         <div class="row">
             <div class="col">
                 {{ 'INTRO' | translate }}
             </div>
             <div class="col right" ng-if="document.status > 0">
-                <button class="btn btn-primary" role="button" ng-click="cancel()">
-                    {{ 'CLOSE' | translate }}
+                <button class="btn btn-secondary" role="button" ng-click="cancel()">
+                    <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
@@ -19,13 +19,18 @@
             sign and keep a copy. See the example bellow.
         </div>
         <br>
-        <!-- TODO: Insert images -->
-        <br>
-        <br>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <img src="img/page1.png" width="100%" style="border: 1px solid #ccc;">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <img src="img/page2.png" width="100%" style="border: 1px solid #ccc;">
+            </div>
+        </div>
     </div>
     <div class="card-footer right" ng-if="document.status == 0">
         <button class="btn btn-primary" role="button" ng-click="send()">
-            {{ 'NEXT' | translate }}
+            {{ 'NEXT' | translate }}&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
         </button>
     </div>
 </div>

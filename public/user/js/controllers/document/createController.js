@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document create controller
-app.controller("documentCreateController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService, $userService, $universityService, $instituteService, $courseService) {
+app.controller("documentCreateController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService, $userService, $instituteService, $courseService) {
 
     /*************************************************
         FUNCTIONS
@@ -51,9 +51,10 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
         } else {
             $scope.$parent.loading = { status: true, message: "Creating new document" };
 
+            // Check if user exists
             $userService.findByEmail($scope.new_document.email_address)
             .then(function onSuccess(response) {
-                // Check if user exists
+                // Check if user was found
                 if(JSON.parse(response.data)){
                     $documentService.create($scope.new_document)
                     .then(function onSuccess(response) {
@@ -87,6 +88,8 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
             $scope.createUserForm.title.$pristine = false;
             $scope.createUserForm.first_name.$pristine = false;
             $scope.createUserForm.last_name.$pristine = false;
+            $scope.createUserForm.university_id.$pristine = false;
+            $scope.createUserForm.institute_id.$pristine = false;
         } else {
             $scope.$parent.loading = { status: true, message: "Creating new user" };
 
@@ -107,16 +110,6 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
     };
 
     /**
-     * [updateInstitutes description]
-     * @return {[type]} [description]
-     */
-    $scope.updateInstitutes = function(){
-        $scope.institute_id = null;
-        $scope.new_document.course_id = null;
-        $scope.institutes = $instituteService.getByUniversity($scope.university_id);
-    };
-
-    /**
      * [updateCourses description]
      * @return {[type]} [description]
      */
@@ -132,33 +125,22 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
     $scope.new_document = $documentService.init();
     $scope.new_user = $userService.init();
 
-    // Load universities
-    $universityService.list()
+
+    // Load institutes
+    $instituteService.list()
     .then(function onSuccess(response) {
-        $universityService.set(response.data);
-        $scope.universities = $universityService.get();
+        $instituteService.set(response.data);
+        $scope.institutes = $instituteService.get();
 
-        // Load institutes
-        $instituteService.list()
+        // Load courses
+        $courseService.list()
         .then(function onSuccess(response) {
-            $instituteService.set(response.data);
-            $scope.institutes = $instituteService.get();
+            $courseService.set(response.data);
+            $scope.courses = $courseService.get();
+            $scope.institute_id = null;
 
-            // Load courses
-            $courseService.list()
-            .then(function onSuccess(response) {
-                $courseService.set(response.data);
-                $scope.courses = $courseService.get();
-
-                $scope.university_id = $scope.universities[0].university_id;
-                $scope.institute_id = $scope.institutes[0].institute_id;
-
-                $scope.$parent.loading = { status: false, message: "" };
-                $scope.changeTab(1);
-            })
-            .catch(function onError(response) {
-                $window.alert(response.data);
-            });
+            $scope.$parent.loading = { status: false, message: "" };
+            $scope.changeTab(1);
         })
         .catch(function onError(response) {
             $window.alert(response.data);
@@ -167,4 +149,5 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
     .catch(function onError(response) {
         $window.alert(response.data);
     });
+
 });

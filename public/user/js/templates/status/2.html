@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <div class="card">
-    <div class="card-header middle" style="font-size: 20pt;">
-        {{ 'DOWNLOAD_YOUR_FILES' | translate }}
+    <div class="card-header" style="font-size: 20pt;">
+        <div class="row">
+            <div class="col-8">{{ 'DOWNLOAD_YOUR_FILES' | translate }}</div>
+            <div class="col-4 right">
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/')">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LOGOUT' | translate }}
+                </button>
+            </div>
+        </div>
     </div>
     <div class="card-block">
         <br>
-        <div style="text-align: justify;">
+        <div class="justify">
             Your files have been created successfully. Please click on the following icons to download them.
         </div>
         <br>
@@ -65,14 +72,14 @@
     </div>
     <div class="card-footer">
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <button class="btn btn-primary btn-block" role="button" ng-click="showReview()">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 left">
+                <button class="btn btn-primary" role="button" ng-click="showReview()">
                     <i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SHOW_SUBMISSION' | translate }}
                 </button>
                 <div class="hidden-sm-up divider"></div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <button class="btn btn-primary btn-block" role="button" ng-click="logout()">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 right">
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/')">
                     <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LOGOUT' | translate }}
                 </button>
             </div>

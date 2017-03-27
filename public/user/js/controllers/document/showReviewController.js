@@ -68,6 +68,10 @@ app.controller("documentShowReviewController", function($scope, $rootScope, $rou
                 $scope.descriptionHistoryDe = !$scope.descriptionHistoryDe;
                 break;
             }
+            case 'pt': {
+                $scope.descriptionHistoryPt = !$scope.descriptionHistoryPt;
+                break;
+            }
         }
     };
 
@@ -84,6 +88,10 @@ app.controller("documentShowReviewController", function($scope, $rootScope, $rou
             }
             case 'de': {
                 $scope.descriptionCommentsDe = !$scope.descriptionCommentsDe;
+                break;
+            }
+            case 'pt': {
+                $scope.descriptionCommentsPt = !$scope.descriptionCommentsPt;
                 break;
             }
         }
@@ -119,6 +127,8 @@ app.controller("documentShowReviewController", function($scope, $rootScope, $rou
     $scope.descriptionCommentsEn = false;
     $scope.descriptionHistoryDe = false;
     $scope.descriptionCommentsDe = false;
+    $scope.descriptionHistoryPt = false;
+    $scope.descriptionCommentsPt = false;
     $scope.concernHistory = false;
     $scope.concernComments = false;
     $scope.$parent.loading = { status: false, message: "" };
