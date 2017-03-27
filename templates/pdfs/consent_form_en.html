@@ -9,7 +9,7 @@
             <p align="center" style="font-size: medium"><b>Informed Consent Form</b></p>
             <p align="center" style="font-size: x-small">(double-sided: to be stored together)</p>
             <br>
-            <p align="center" style="font-size: medium">Project Title: <b>{{project_name}}</b></p>
+            <p align="center" style="font-size: medium">Project Title: <b>{{document.document_title}}</b></p>
             <br>
             <p>
                 Dear Participant,
@@ -18,22 +18,21 @@
                 Thank you for your involvement in our study.
             </p>
             <p style="text-align: justify">
-                <b>Purpose of the study: </b>{{general.english.q04}}
+                <b>Purpose of the study: </b>{{description.en_purpose}}
             </p>
             <p style="text-align: justify">
-                <b>Procedure: </b>{{general.english.q05}}
+                <b>Procedure: </b>{{description.en_procedure}}
             </p>
             <p style="text-align: justify">
-                <b>Duration: </b>{{general.english.q06}}
+                <b>Duration: </b>{{description.en_duration}}
             </p>
             <p style="text-align: justify">
-                <b>Potential Risks: </b>{{general.english.q07}}
+                <b>Potential Risks: </b>{{description.en_risks}}
             </p>
             <p style="text-align: justify">
                 <b>Privacy: </b>Original data obtained from this study will be anonymised and only processed in aggregate. In such form, it might be published in academic journals, presentations or other media, but never in a way that would allow anyone to
                 identify you individually. One week after the completion of the study it might no longer be possible to retract your data from such aggregated analyses.
             </p>
-            <!-- <b>Benefits: </b>{{general.english.q08}} -->
         </div>
         <div class="secondpage" style="page-break-before:always;">
             <br>
@@ -57,9 +56,9 @@
                 &#9634; I confirm I understand my right to quit the study at any time.
             </p>
             <p>
-                {{#ethics.q11.checkbox_1}}
+                {{#concern.q11.checkbox_1}}
                 &#9634; I agree for an audio/video* recording of the procedure, including my voice/image*. [*cross out irrelevant options]
-                {{/ethics.q11.checkbox_1}}
+                {{/concern.q11.checkbox_1}}
             </p>
             <br>
             <p>

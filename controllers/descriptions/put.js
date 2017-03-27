@@ -68,7 +68,15 @@ exports.request = function(req, res) {
                 de_procedure: req.body.de_procedure,
                 de_duration: req.body.de_duration,
                 de_risks: req.body.de_risks,
-                de_benefits: req.body.de_benefits
+                de_benefits: req.body.de_benefits,
+                pt_title: req.body.pt_title,
+                pt_researcher: req.body.pt_researcher,
+                pt_study_time: req.body.pt_study_time,
+                pt_purpose: req.body.pt_purpose,
+                pt_procedure: req.body.pt_procedure,
+                pt_duration: req.body.pt_duration,
+                pt_risks: req.body.pt_risks,
+                pt_benefits: req.body.pt_benefits
             };
             var params = _.values(object);
             callback(null, client, done, params);

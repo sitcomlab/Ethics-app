@@ -6,7 +6,7 @@ var list_by_document = require('../controllers/revisions/list_by_document');
 
 
 // LIST BY DOCUMENT
-router.get('/documents/:document_id/revisions/', list_by_document.request);
+router.get('/documents/:document_id/revisions', isAuthenticated, list_by_document.request);
 
 
 module.exports = router;

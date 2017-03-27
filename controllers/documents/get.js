@@ -5,6 +5,8 @@ var types = require('pg').types;
 types.setTypeParser(1700, 'text', parseFloat);
 var _ = require('underscore');
 var pool = require('../../server.js').pool;
+var jwtSecret = require('../../server.js').jwtSecret;
+
 
 var fs = require("fs");
 var dir = "/../../sql/queries/documents/";
@@ -26,7 +28,27 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            // TODO: Authentication
+            // TODO: Implement Authorization for members
+
+            /*if(req.headers.authorization) {
+                var token = req.headers.authorization.substring(7);
+
+                // Verify token
+                jwt.verify(token, jwtSecret, function(err, decoded) {
+                    if(err){
+                        res.status(401).send("Authorization failed!");
+                    } else {
+                        if(decoded.username === account.username && decoded.iss === server_url){
+                            callback(null, client, done);
+                        } else {
+                            res.status(401).send("Authorization failed!");
+                        }
+                        callback(null, client, done);
+                    }
+                });
+            } else {
+                callback(null, client, done);
+            }*/
             callback(null, client, done);
         },
         function(client, done, callback) {

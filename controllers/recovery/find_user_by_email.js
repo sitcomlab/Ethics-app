@@ -117,7 +117,7 @@ exports.request = function(req, res) {
 
             // Formatting
             for(var j=0; j<documents.length; j++){
-                documents[j].link = server_url + ":" + httpPort + "/documents/" + documents[j].document_id;
+                documents[j].link = server_url + ":" + httpPort + "/user/documents/" + documents[j].document_id;
             }
 
             // Formatting

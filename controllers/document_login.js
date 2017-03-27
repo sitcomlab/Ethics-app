@@ -68,7 +68,6 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, user, callback){
-
             // Create payload
             payload = {
                 iss: server_url,

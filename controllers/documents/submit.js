@@ -121,6 +121,7 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, document, revision, description, concern, callback) {
+            // Auto-confirmation
             if(concern.q01_value){
                 callback(null, client, done, document, revision, description, concern, 3);
             } else if(concern.q01_value){
@@ -204,6 +205,7 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, document, revision, description, concern, author, members, callback){
+            // Check status to notify members, in case of a review
             if(document.status === 2){
                 callback(null, 204, null);
             } else {
@@ -216,6 +218,7 @@ exports.request = function(req, res) {
                     concern.q01_label = "badge-success";
                     concern.q01_sign = "no";
                 }
+
                 if(concern.q02_value){
                     concern.q02_label = "badge-danger";
                     concern.q02_sign = "yes";
@@ -223,6 +226,7 @@ exports.request = function(req, res) {
                     concern.q02_label = "badge-success";
                     concern.q02_sign = "no";
                 }
+
                 if(concern.q03_value){
                     concern.q03_label = "badge-danger";
                     concern.q03_sign = "yes";
@@ -230,6 +234,7 @@ exports.request = function(req, res) {
                     concern.q03_label = "badge-success";
                     concern.q03_sign = "no";
                 }
+
                 if(concern.q04_value){
                     concern.q04_label = "badge-danger";
                     concern.q04_sign = "yes";
@@ -237,6 +242,7 @@ exports.request = function(req, res) {
                     concern.q04_label = "badge-success";
                     concern.q04_sign = "no";
                 }
+
                 if(concern.q05_value){
                     concern.q05_label = "badge-danger";
                     concern.q05_sign = "yes";
@@ -244,6 +250,7 @@ exports.request = function(req, res) {
                     concern.q05_label = "badge-success";
                     concern.q05_sign = "no";
                 }
+
                 if(concern.q06_value){
                     concern.q06_label = "badge-danger";
                     concern.q06_sign = "yes";
@@ -251,6 +258,7 @@ exports.request = function(req, res) {
                     concern.q06_label = "badge-success";
                     concern.q06_sign = "no";
                 }
+
                 if(concern.q07_value){
                     concern.q07_label = "badge-danger";
                     concern.q07_sign = "yes";
@@ -258,6 +266,7 @@ exports.request = function(req, res) {
                     concern.q07_label = "badge-success";
                     concern.q07_sign = "no";
                 }
+
                 if(concern.q08_value){
                     concern.q08_label = "badge-danger";
                     concern.q08_sign = "yes";
@@ -265,6 +274,7 @@ exports.request = function(req, res) {
                     concern.q08_label = "badge-success";
                     concern.q08_sign = "no";
                 }
+
                 if(concern.q09_value){
                     concern.q09_label = "badge-danger";
                     concern.q09_sign = "yes";
@@ -272,6 +282,7 @@ exports.request = function(req, res) {
                     concern.q09_label = "badge-success";
                     concern.q09_sign = "no";
                 }
+
                 if(concern.q10_value){
                     concern.q10_label = "badge-danger";
                     concern.q10_sign = "yes";
@@ -279,6 +290,7 @@ exports.request = function(req, res) {
                     concern.q10_label = "badge-success";
                     concern.q10_sign = "no";
                 }
+
                 if(concern.q11_1_value){
                     concern.q11_1_label = "badge-danger";
                     concern.q11_1_sign = "yes";
@@ -286,6 +298,7 @@ exports.request = function(req, res) {
                     concern.q11_1_label = "badge-success";
                     concern.q11_1_sign = "no";
                 }
+
                 if(concern.q11_2_value){
                     concern.q11_2_label = "badge-danger";
                     concern.q11_2_sign = "yes";
@@ -293,6 +306,7 @@ exports.request = function(req, res) {
                     concern.q11_2_label = "badge-success";
                     concern.q11_2_sign = "no";
                 }
+
                 if(concern.q12_value){
                     concern.q12_label = "badge-danger";
                     concern.q12_sign = "yes";
@@ -300,6 +314,7 @@ exports.request = function(req, res) {
                     concern.q12_label = "badge-success";
                     concern.q12_sign = "no";
                 }
+
                 if(concern.q13_value){
                     concern.q13_label = "badge-danger";
                     concern.q13_sign = "yes";
@@ -313,7 +328,7 @@ exports.request = function(req, res) {
 
                 var link = server_url + ":" + httpPort + "/admin/";
 
-                // Notify each committee members
+                // Notify each committee member
                 async.eachOfSeries(members, function (member, key, callback) {
 
                     // Render HTML content
