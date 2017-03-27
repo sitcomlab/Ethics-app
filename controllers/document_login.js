@@ -68,6 +68,7 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, user, callback){
+
             // Create payload
             payload = {
                 iss: server_url,
@@ -75,7 +76,7 @@ exports.request = function(req, res) {
                 email_address: user.email_address,
                 committee: false,
                 admin: false,
-                exp: moment().add(1, 'days').format('x')
+                exp: Number(moment().add(1, 'days').format('x'))
             };
             // Create JWT
             user.token = jwt.sign(payload, jwtSecret);

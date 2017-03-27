@@ -86,13 +86,10 @@ exports.mail_options = {
 
 
 // Load certificstes
-if (config.environment === "production") {
-    var privateKey = fs.readFileSync('ssl/server.key', 'utf8');
-    var certificate = fs.readFileSync('ssl/server.crt', 'utf8');
-
+if(config.environment === "production") {
     var credentials = {
-        key: privateKey,
-        cert: certificate
+        key: fs.readFileSync('ssl/server.key', 'utf8'),
+        cert: fs.readFileSync('ssl/server.crt', 'utf8')
     };
 }
 
@@ -118,21 +115,21 @@ exports.isAuthenticated = function isAuthenticated(req, res, next) {
         var token = req.headers.authorization.substring(7);
 
         // Verify token
-        jwt.verify(token, jwtSecret, function(err, decoded) {
+        jwt.verify(token, config.jwtSecret, function(err, decoded) {
             if(err){
                 res.status(401).send("Authentication failed!");
             } else {
-                console.log(decoded);
-                // Authorization
-                if(decoded.username === account.username && decoded.iss === server_url){
+                return next(decoded);
+                // TODO: Move Authorization inside apiControllers
+                /*if(decoded.username === account.username && decoded.iss === server_url){
                     return next();
                 } else {
                     res.status(401).send("Authentication failed!");
-                }
+                }*/
             }
         });
     } else {
-        res.status(401).send("Authentication failed!");
+        res.status(401).send("Authentication failed, request-token missing!");
     }
 };
 
@@ -144,6 +141,10 @@ var prefix = '/api';
 
 // Load API routes
 app.use(prefix, require ('./routes/login'));
+app.use(prefix, require ('./routes/universities'));
+app.use(prefix, require ('./routes/institutes'));
+app.use(prefix, require ('./routes/research_groups'));
+app.use(prefix, require ('./routes/courses'));
 app.use(prefix, require ('./routes/users'));
 app.use(prefix, require ('./routes/members'));
 app.use(prefix, require ('./routes/documents'));

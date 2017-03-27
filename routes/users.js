@@ -26,7 +26,7 @@ router.put('/users/:user_id', isAuthenticated, put.request);
 router.delete('/users/:user_id', isAuthenticated, del.request);
 
 // FIND BY EMAIL
-router.get('/user/:email_address', isAuthenticated, find_by_email.request);
+router.get('/user/:email_address', find_by_email.request);
 
 
 module.exports = router;
