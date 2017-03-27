@@ -11,7 +11,6 @@ CREATE TABLE Reviews (
     -- Attributes
     member_id INTEGER NOT NULL REFERENCES Members(member_id) ON UPDATE CASCADE ON DELETE SET NULL,
     revision_id INTEGER NOT NULL REFERENCES Revisions(revision_id) ON UPDATE CASCADE ON DELETE SET NULL,
-    notes TEXT DEFAULT NULL, -- Working notes for (other) members
     general_comment TEXT DEFAULT NULL,
 
     -- Descriptions

@@ -1,24 +1,24 @@
 SELECT
-    m.member_id,
-    m.title,
-    m.first_name,
-    m.last_name,
-    m.research_group_id,
-    r.research_group_name,
-    m.institute_id,
-    i.institute_name,
-    u.university_id,
-    u.university_name,
-    m.office_room_number,
-    m.office_phone_number,
-    m.office_email_address,
-    m.subscribed
-FROM Members m
-    JOIN Research_Groups r ON r.research_group_id = m.research_group_id
-    JOIN Institutes i ON i.institute_id = m.institute_id
-    JOIN Universities u ON u.university_id = i.university_id
+    member.member_id,
+    member.title,
+    member.first_name,
+    member.last_name,
+    member.research_group_id,
+    research_group.research_group_name,
+    member.institute_id,
+    institute.institute_name,
+    university.university_id,
+    university.university_name,
+    member.office_room_number,
+    member.office_phone_number,
+    member.office_email_address,
+    member.subscribed
+FROM Members member
+    JOIN Research_Groups research_group ON research_group.research_group_id = member.research_group_id
+    JOIN Institutes institute ON institute.institute_id = member.institute_id
+    JOIN Universities university ON university.university_id = institute.university_id
 WHERE
-        admin != true
+        member.admin != true
     AND
-        deleted != true
+        member.deleted != true
 ORDER BY last_name, first_name;

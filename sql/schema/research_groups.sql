@@ -10,6 +10,7 @@ CREATE TABLE Research_Groups (
 
     -- Attributes
     research_group_name CHARACTER VARYING(255) NOT NULL,
-    institute_id INTEGER NOT NULL REFERENCES Institutes(institute_id) ON UPDATE CASCADE ON DELETE CASCADE
+    institute_id INTEGER NOT NULL REFERENCES Institutes(institute_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    deleted BOOLEAN NOT NULL DEFAULT false 
 
 );

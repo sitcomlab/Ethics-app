@@ -1,7 +1,6 @@
 UPDATE Reviews SET (
     updated,
     member_id,
-    notes,
     general_comment,
     en_title_comment,
     en_researcher_comment,
@@ -72,6 +71,5 @@ UPDATE Reviews SET (
     $28::TEXT,
     $29::TEXT,
     $30::TEXT,
-    $31::TEXT,
-    $32::TEXT
+    $31::TEXT
 ) WHERE review_id=$1::INTEGER RETURNING *;

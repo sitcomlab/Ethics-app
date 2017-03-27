@@ -1,3 +1,3 @@
 SELECT *
 FROM Universities
-ORDER BY university_name;
+ORDER BY default_option DESC, university_name ASC;
