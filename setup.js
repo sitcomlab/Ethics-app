@@ -37,6 +37,7 @@ queries.push(fs.readFileSync(__dirname + dir + 'users.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'members.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'responsibilities.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'documents.sql', 'utf8').toString());
+queries.push(fs.readFileSync(__dirname + dir + 'affiliations.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'revisions.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'descriptions.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'concerns.sql', 'utf8').toString());

@@ -18,7 +18,7 @@ FROM Members member
     JOIN Institutes institute ON institute.institute_id = member.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
 WHERE
-        subscribed = true
+        member.subscribed = true
     AND
-        deleted != true
+        member.deleted != true
 ORDER BY last_name, first_name;

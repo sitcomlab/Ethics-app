@@ -16,7 +16,7 @@ INSERT INTO Institutes (
     university_id
 ) VALUES (
     'Institute for Geoinformatics',
-    1
+    2
 ), (
     'Institute for Geography',
     2

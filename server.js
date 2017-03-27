@@ -119,13 +119,7 @@ exports.isAuthenticated = function isAuthenticated(req, res, next) {
             if(err){
                 res.status(401).send("Authentication failed!");
             } else {
-                return next(decoded);
-                // TODO: Move Authorization inside apiControllers
-                /*if(decoded.username === account.username && decoded.iss === server_url){
-                    return next();
-                } else {
-                    res.status(401).send("Authentication failed!");
-                }*/
+                return next();
             }
         });
     } else {

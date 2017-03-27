@@ -5,8 +5,7 @@ SELECT
     updated,
     user_id,
     document_title,
-    status,
-    course_id
+    status
 FROM Documents
 WHERE user_id=$1::INTEGER
 ORDER BY created DESC;

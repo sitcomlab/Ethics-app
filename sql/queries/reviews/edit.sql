@@ -2,6 +2,8 @@ UPDATE Reviews SET (
     updated,
     member_id,
     general_comment,
+
+    -- English
     en_title_comment,
     en_researcher_comment,
     en_study_time_comment,
@@ -10,6 +12,8 @@ UPDATE Reviews SET (
     en_duration_comment,
     en_risks_comment,
     en_benefits_comment,
+
+    -- German
     de_title_comment,
     de_researcher_comment,
     de_study_time_comment,
@@ -18,6 +22,8 @@ UPDATE Reviews SET (
     de_duration_comment,
     de_risks_comment,
     de_benefits_comment,
+
+    -- Portuguese
     pt_title_comment,
     pt_researcher_comment,
     pt_study_time_comment,
@@ -26,6 +32,7 @@ UPDATE Reviews SET (
     pt_duration_comment,
     pt_risks_comment,
     pt_benefits_comment,
+
     q01_comment,
     q02_comment,
     q03_comment,

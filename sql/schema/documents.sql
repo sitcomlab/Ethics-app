@@ -20,6 +20,6 @@ CREATE TABLE Documents (
         -- 5 = reviewed - partly accepted
         -- 6 = reviewed - ok
         -- 7 = reviewed - rejected
-    notes TEXT DEFAULT NULL,
-    course_id INTEGER DEFAULT NULL
+    notes TEXT DEFAULT NULL
+    
 );
