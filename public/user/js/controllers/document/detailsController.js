@@ -25,7 +25,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
 
     $timeout(function(){
         $scope.$parent.loading = { status: true, message: "Check authentication" };
-        
+
         $timeout(function(){
             // Authentication
             $authenticationService.loginByDocumentId($routeParams.document_id)
@@ -115,30 +115,29 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                         // Update navbar
                                         $rootScope.$broadcast('updateNavbar');
 
-                                        // Prepare path
-                                        var path = "/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus();
-
                                         // Check status for files
                                         if($documentService.getStatus()===2 || $documentService.getStatus()===6){
 
+                                            // Check if files were cached
                                             if($fileService.get()){
                                                 $documentService.setFiles($fileService.get());
                                                 $scope.redirect(path);
                                             } else {
-                                                $scope.loading_message = "Generating files";
+                                                $scope.$parent.loading = { status: true, message: "Generating files" };
 
+                                                // Generate files on server
                                                 $documentService.generateFiles($documentService.getId())
                                                 .then(function onSuccess(response) {
                                                     $fileService.set(response.data);
                                                     $documentService.setFiles($fileService.get());
-                                                    $scope.redirect(path);
+                                                    $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
                                                 })
                                                 .catch(function onError(response) {
                                                     $window.alert(response.data);
                                                 });
                                             }
                                         } else {
-                                            $scope.redirect(path);
+                                            $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
                                         }
                                     });
                                 });
