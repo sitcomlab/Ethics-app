@@ -11,22 +11,22 @@ var del = require('../controllers/members/delete');
 
 
 // LIST
-router.get('/members/active', list_active.request);
+router.get('/members/active', isAuthenticated, list_active.request);
 
 // LIST (ONLY MEMBERS)
-router.get('/members/all', list_all.request);
+router.get('/members/all', isAuthenticated, list_all.request);
 
 // POST (ONLY MEMBERS)
-router.post('/members', post.request);
+router.post('/members', isAuthenticated, post.request);
 
 // GET
-router.get('/members/:member_id', get.request);
+router.get('/members/:member_id', isAuthenticated, get.request);
 
 // PUT (ONLY MEMBERS)
-router.put('/members/:member_id', put.request);
+router.put('/members/:member_id', isAuthenticated, put.request);
 
 // DELETE (ONLY MEMBERS)
-router.delete('/members/:member_id', del.request);
+router.delete('/members/:member_id', isAuthenticated, del.request);
 
 
 module.exports = router;
