@@ -108,7 +108,16 @@
 <div class="card" ng-show="tab==2">
     <form class="form-horizontal" name="createUserForm" ng-submit="signup()">
         <div class="card-header" style="font-size: 20pt;">
-            {{ 'NEW_USER' | translate }}
+            <div class="row">
+                <div class="col-xs-9 col-sm-9 col-xs-9 col-md-9 col-lg-9 ">
+                    {{ 'REGISTRATION' | translate }}
+                </div>
+                <div class="col-xs-3 col-sm-3 col-xs-3 col-md-3 col-lg-3 right">
+                    <button class="btn btn-secondary" role="button" ng-click="cancel()">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="card-block">
             <br>
@@ -155,7 +164,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                     <label>
-                        <b>{{ 'FIRST_NAME' | translate }}</b>
+                        <b>{{ 'FIRST_NAME' | translate }}*</b>
                     </label>
                     <div class="form-group" ng-class="{'has-danger': createUserForm.first_name.$invalid && !createUserForm.first_name.$pristine }">
                         <input
@@ -164,7 +173,7 @@
                             ng-model="new_user.first_name"
                             name="first_name"
                             id="first_name"
-                            placeholder="{{ 'FIRST_NAME' | translate }}*"
+                            placeholder="{{ 'FIRST_NAME' | translate }}"
                             aria-describedby="inputFirstName"
                             required
                             autocomplete="on">
@@ -177,7 +186,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                     <label>
-                        <b>{{ 'LAST_NAME' | translate }}</b>
+                        <b>{{ 'LAST_NAME' | translate }}*</b>
                     </label>
                     <div class="form-group" ng-class="{'has-danger': createUserForm.last_name.$invalid && !createUserForm.last_name.$pristine }">
                         <input
@@ -186,7 +195,7 @@
                             ng-model="new_user.last_name"
                             name="last_name"
                             id="last_name"
-                            placeholder="{{ 'LAST_NAME' | translate }}*"
+                            placeholder="{{ 'LAST_NAME' | translate }}"
                             aria-describedby="inputLastName"
                             required
                             autocomplete="on">
@@ -199,18 +208,61 @@
                 </div>
             </div>
             <br>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'UNIVERSITY' | translate }}*</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': createUserForm.university_id.$invalid && !createUserForm.university_id.$pristine }">
+                        <select
+                            class="custom-select form-control"
+                            id="university_id"
+                            name="university_id"
+                            ng-model="university_id"
+                            ng-options="university.university_id as university.university_name for university in universities | orderBy:['university_name']"
+                            ng-change="updateInstitutes()"
+                            required>
+                        </select>
+                    </div>
+                    <span ng-show="createUserForm.university_id.$error.required && !createUserForm.university_id.$pristine" class="text-danger">
+                        <small>
+                            {{ 'REQUIRED' | translate }}
+                        </small>
+                    </span>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'INSTITUTE' | translate }}</b>
+                    </label>
+                    <select
+                        class="custom-select form-control"
+                        id="institute_id_2"
+                        name="institute_id"
+                        ng-model="new_user.institute_id"
+                        ng-options="institute.institute_id as institute.institute_name for institute in institutes | orderBy:['institute_name']"
+                        ng-disabled="university_id == null">
+                        <option value="">{{ 'NO_INSTITUTE' | translate }}</option>
+                    </select>
+                </div>
+            </div>
+            <br>
 
-            <p>
-                - I aggree, that all my given information are correct and I'm aware, that my data will be stored by the Institute for Geoinformatics.
-            </p>
-            <p>
-                - I aggree, that as soon as I submit successfully my document request, only the Ethics comittee can delete my account.
-            </p>
+            <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" ng-model="agreement.data">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">I aggree, that all my given information are correct and I'm aware, that my data will be stored by the Institute for Geoinformatics.</span>
+            </label>
+
+            <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" ng-model="agreement.deletion">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">I aggree, that as soon as I submit successfully my document request, only the Ethics comittee can delete my account.</span>
+            </label>
             <br>
 
         </div>
         <div class="card-footer right">
-            <button class="btn btn-success" role="submit">
+            <button class="btn btn-success" role="submit" ng-disabled="!agreement.data || !agreement.deletion">
                 <i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SIGN_UP' | translate }}
             </button>
         </div>

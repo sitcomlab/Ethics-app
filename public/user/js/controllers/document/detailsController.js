@@ -21,8 +21,6 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
     /*************************************************
         INIT
      *************************************************/
-
-
     $timeout(function(){
         $scope.$parent.loading = { status: true, message: "Check authentication" };
 
@@ -52,7 +50,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                     // Prepare promises
                                     var checkout_description = $q.defer();
                                     var checkout_concern = $q.defer();
-                                    //var checkout_review = $q.defer();
+                                    var checkout_review = $q.defer();
 
                                     // Checkout descriptions
                                     $descriptionService.getByRevision(revision.revision_id)
@@ -76,19 +74,16 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                         $window.alert(response.data);
                                     });
 
-                                    // Check document status for reviews
-                                    /*if($documentService.getStatus()===0 || $documentService.getStatus()===1){
-                                        // Checkout reviews
-                                        $reviewService.getByRevision(revision.revision_id)
-                                        .then(function onSuccess(response) {
-                                            $documentService.setReview(revision.revision_id, response.data);
-                                            // Resolve promise
-                                            checkout_review.resolve();
-                                        })
-                                        .catch(function onError(response) {
-                                            $window.alert(response.data);
-                                        });
-                                    }*/
+                                    // Checkout reviews
+                                    $reviewService.getByRevision(revision.revision_id)
+                                    .then(function onSuccess(response) {
+                                        $documentService.setReview(revision.revision_id, response.data);
+                                        // Resolve promise
+                                        checkout_review.resolve();
+                                    })
+                                    .catch(function onError(response) {
+                                        $window.alert(response.data);
+                                    });
 
 
                                     // Promises
@@ -98,16 +93,16 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                     checkout_concern.promise.then(function() {
                                         return;
                                     });
-                                    /*checkout_review.promise.then(function() {
+                                    checkout_review.promise.then(function() {
                                         return;
-                                    });*/
+                                    });
 
 
                                     // Start parallel requests
                                     var all = $q.all([
                                         checkout_description.promise,
-                                        checkout_concern.promise
-                                        //checkout_review.promise
+                                        checkout_concern.promise,
+                                        checkout_review.promise
                                     ]);
 
                                     // Final task after requests
@@ -121,7 +116,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                             // Check if files were cached
                                             if($fileService.get()){
                                                 $documentService.setFiles($fileService.get());
-                                                $scope.redirect(path);
+                                                $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
                                             } else {
                                                 $scope.$parent.loading = { status: true, message: "Generating files" };
 

@@ -3,73 +3,68 @@
     <div class="card-header" style="font-size: 20pt;">
         <div class="row">
             <div class="col">
-                <span ng-if="document.status <= 1">
-                    {{ 'OVERVIEW' | translate }}
+                <span ng-if="document.status <= 2">
+                    {{ 'SUBMISSION' | translate }}
                 </span>
-                <span ng-if="document.status > 1">
+                <span ng-if="document.status > 2">
                     {{ 'REVIEW' | translate }}
                 </span>
             </div>
             <div class="col right">
-                <button class="btn btn-primary" role="button" ng-click="cancel()">
-                    {{ 'CLOSE' | translate }}
+                <button class="btn btn-secondary" role="button" ng-click="cancel()">
+                    <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
     </div>
     <div class="card-block">
         <br>
-        <div style="text-align: justify;">
 
-        </div>
-        <!--<h6 class="text-muted">{{ 'GENERAL' | translate }}</h6>-->
-
+        <!-- GENERAL -->
         <div class="row inputs">
-            <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <h6 class="text-muted">
                     {{ 'GENERAL' | translate }}
                 </h6>
             </div>
-            <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right">
                 <small>
-                    <a href="" ng-click="toggleGeneralHistory()">
-                        <span ng-if="!generalHistory">
+                    <a href="" ng-click="toggle('general', 'history')">
+                        <span ng-if="!status.general.history">
                             {{ 'SHOW_HISTORY' | translate }}
                         </span>
-                        <span ng-if="generalHistory">
+                        <span ng-if="status.general.history">
                             {{ 'HIDE_HISTORY' | translate }}
                         </span>
                     </a>
                 </small>
             </div>
         </div>
-        <div class="list-group">
-            <div class="list-group-item list-group-item-flexbox" ng-if="!generalHistory">
-                <div class="list-group-item-flexbox-content">
-                    <b>{{ 'LATEST_REVISION' | translate }}</b>
-                </div>
-                <div class="list-group-item-flexbox-content timestamp">
-                    {{latest_revision.created}}
-                </div>
-                <div class="list-group-item-flexbox-content">
-                    <span class="badge badge-primary">
-                        {{ 'REV' | translate}}{{latest_revision.version}}
-                    </span>
-                </div>
-            </div>
-            <div class="list-group-item list-group-item-flexbox" ng-if="generalHistory">
-                <div class="list-group-item-flexbox-content">
-                    <b>{{ 'REVISIONS' | translate }}</b>
-                </div>
-                <div class="list-group-item-flexbox-2">
-                    <div class="list-group-item-flexbox" ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                        <div class="list-group-item-flexbox-content timestamp">
-                            {{revision.created}}
-                        </div>
-                        <div class="list-group-item-flexbox-content right">
-                            <span class="badge badge-primary">
-                                {{ 'REV' | translate}}{{revision.version}}
+        <div class="bs-fix">
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <span ng-if="status.general.history">
+                                <b>{{ 'REVISIONS' | translate }}</b>
                             </span>
+                            <span ng-if="!status.general.history">
+                                <b>{{ 'LATEST_REVISION' | translate }}</b>
+                            </span>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div class="row" ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.general.limit">
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <span class="badge badge-primary">
+                                        {{ 'REV' | translate}}{{revision.version}}
+                                    </span>
+                                </div>
+                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                    <span class="timestamp">
+                                        {{revision.created}}
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -77,7 +72,8 @@
         </div>
         <br>
 
-        <!-- English description -->
+        <!-- DESCRIPTIONS -->
+        <!-- English descriptions -->
         <div class="row inputs">
             <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6">
                 <h6 class="text-muted">
@@ -86,20 +82,29 @@
             </div>
             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
                 <small>
-                    <a href="" ng-click="toggleDescriptionComments('en')">
-                        <span ng-if="!descriptionCommentsEn">
+                    <a href="" ng-click="toggle('descriptions', 'language', 'en')">
+                        <span ng-if="!status.descriptions.language.en" class="link">
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </span>
+                        <span ng-if="status.descriptions.language.en" class="link">
+                            <i class="fa fa-caret-up" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="" ng-click="toggle('descriptions', 'comments', 'en')">
+                        <span ng-if="!status.descriptions.comments.en">
                             {{ 'SHOW_COMMENTS' | translate }}
                         </span>
-                        <span ng-if="descriptionCommentsEn">
+                        <span ng-if="status.descriptions.comments.en">
                             {{ 'HIDE_COMMENTS' | translate }}
                         </span>
                     </a>
                     &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <a href="" ng-click="toggleDescriptionHistory('en')">
-                        <span ng-if="!descriptionHistoryEn">
+                    <a href="" ng-click="toggle('descriptions', 'history', 'en')">
+                        <span ng-if="!status.descriptions.history.en.display">
                             {{ 'SHOW_HISTORY' | translate }}
                         </span>
-                        <span ng-if="descriptionHistoryEn">
+                        <span ng-if="status.descriptions.history.en.display">
                             {{ 'HIDE_HISTORY' | translate }}
                         </span>
                     </a>
@@ -108,620 +113,386 @@
         </div>
 
         <!-- Properties -->
-        <div class="list-group">
-            <div class="list-group-item list-group-item-flexbox" ng-if="!descriptionHistoryEn">
-                <div class="list-group-item-flexbox-content">
-                    <b>{{ 'TITLE' | translate }}</b>
-                </div>
-                <div class="list-group-item-flexbox-content">
-                    <i>{{latest_revision.description.en_title}}</i>
-                </div>
-                <div class="list-group-item-flexbox-content" ng-if="descriptionCommentsEn">
-                    COMMENT
-                </div>
-            </div>
-            <div class="list-group-item list-group-item-flexbox" ng-if="descriptionHistoryEn">
-                <div class="list-group-item-flexbox-content">
-                    <b>{{ 'TITLE' | translate }}</b>
-                </div>
-                <div class="list-group-item-flexbox-content">
-                    <div class="list-group-item-flexbox-2">
-                        <div class="list-group-item-flexbox" ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                            <div class="list-group-item-flexbox-content">
-                                <i>{{revision.description.en_title}}</i>
-                            </div>
-                            <div class="list-group-item-flexbox-content" ng-if="descriptionCommentsEn">
-                                COMMENT
-                            </div>
-                            <div class="list-group-item-flexbox-content right">
-                                <span class="badge badge-primary">
-                                    {{ 'REV' | translate}}{{revision.version}}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="list-group-item list-group-item-flexbox" ng-if="!descriptionHistoryEn">
-                <div class="list-group-item-flexbox-content">
-                    <b>{{ 'RESEARCHER' | translate }}</b>
-                </div>
-                <div class="list-group-item-flexbox-content">
-                    <i>{{latest_revision.description.en_researcher}}</i>
-                </div>
-                <div class="list-group-item-flexbox-content" ng-if="descriptionCommentsEn">
-                    COMMENT
-                </div>
-            </div>
-            <div class="list-group-item list-group-item-flexbox" ng-if="descriptionHistoryEn">
-                <div class="list-group-item-flexbox-content">
-                    <b>{{ 'RESEARCHER' | translate }}</b>
-                </div>
-                <div class="list-group-item-flexbox-content">
-                    <div class="list-group-item-flexbox">
-                        <div class="list-group-item-flexbox-content-2" ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                            <div class="list-group-item-flexbox-content">
-                                <i>{{revision.description.en_researcher}}</i>
-                            </div>
-                            <div class="list-group-item-flexbox-content" ng-if="descriptionCommentsEn">
-                                COMMENT
-                            </div>
-                            <div class="list-group-item-flexbox-content">
-                                <span class="badge badge-primary">
-                                    {{ 'REV' | translate}}{{revision.version}}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="bs-fix">
+            <div class="list-group" ng-if="status.descriptions.language.en">
 
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-
-
-        <!-- DEPRECATED -->
-        <ul class="list-group">
-            <li class="list-group-item">
-                <div class="row" ng-if="!descriptionHistoryEn">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        <b>{{ 'TITLE' | translate }}</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                <i>{{latest_revision.description.en_title}}</i>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-if="descriptionCommentsEn">
-                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;
-                                <b><span ng-if="revision.review.member_title">{{revision.review.member_title}} </span>{{revision.review.member_first_name}} {{revision.review.member_last_name}}</b>: {{revision.review.comment_en_title}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div ng-if="descriptionHistoryEn">
+                <!-- Title -->
+                <div class="list-group-item">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'TITLE' | translate }}</b>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <div class="row">
-                                    <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
+                                <div class="row" ng-style="!$last && {'border-bottom':'1px dashed rgba(0, 0, 0, .125)', 'padding-bottom':'3px'} || !$first && {'padding-top':'3px'}">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                         <span class="badge badge-primary">
                                             {{ 'REV' | translate}}{{revision.version}}
                                         </span>
                                     </div>
-                                    <div class="col-xs-10 col-sm-10 col-md-11 col-lg-11">
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                                <i>{{revision.description.en_title}}</i>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-if="descriptionCommentsEn">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;
-                                                {{revision.review.comment_en_title}}
-                                            </div>
-                                        </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <i>{{revision.description.en_title}}</i>
+                                        <span ng-if="status.descriptions.comments.en" class="text-muted">
+                                            <p ng-if="revision.review.en_title_comment !== null || revision.review.en_title_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.review.en_title_comment}}
+                                            </p>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row" ng-if="!descriptionHistoryEn">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        <b>{{ 'RESEARCHER' | translate }}</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                        <i>{{latest_revision.description.en_researcher}}</i>
-                    </div>
-                </div>
-                <div ng-if="descriptionHistoryEn">
+
+                <!-- Researcher -->
+                <div class="list-group-item">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'RESEARCHER' | translate }}</b>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-primary">
-                                    {{ 'REV' | translate}}{{revision.version}}
-                                </span>
-                                &nbsp;&nbsp;
-                                <i>{{revision.description.en_researcher}}</i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row" ng-if="!descriptionHistoryEn">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        <b>{{ 'TIME' | translate }}</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                        <i>{{latest_revision.description.en_study_time}}</i>
-                    </div>
-                </div>
-                <div ng-if="descriptionHistoryEn">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                            <b>{{ 'TIME' | translate }}</b>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-primary">
-                                    {{ 'REV' | translate}}{{revision.version}}
-                                </span>
-                                &nbsp;&nbsp;
-                                <i>{{revision.description.en_study_time}}</i>
-
-                                <div class="row">
-                                    <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
+                                <div class="row" ng-style="!$last && {'border-bottom':'1px dashed rgba(0, 0, 0, .125)', 'padding-bottom':'3px'} || !$first && {'padding-top':'3px'}">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                         <span class="badge badge-primary">
                                             {{ 'REV' | translate}}{{revision.version}}
                                         </span>
                                     </div>
-                                    <div class="col-xs-10 col-sm-10 col-md-11 col-lg-11">
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                                <i>{{revision.description.en_study_time}}</i>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-if="descriptionCommentsEn">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;
-                                                {{revision.review.comment_en_study_time}}
-                                            </div>
-                                        </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <i>{{revision.description.en_researcher}}</i>
+                                        <span ng-if="status.descriptions.comments.en" class="text-muted">
+                                            <p ng-if="revision.review.en_researcher_comment !== null || revision.review.en_researcher_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.review.en_researcher_comment}}
+                                            </p>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row" ng-if="!descriptionHistoryEn">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        <b>{{ 'PURPOSE' | translate }}</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                        <i>{{latest_revision.description.en_purpose}}</i>
+
+                <!-- Time -->
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <b>{{ 'TIME' | translate }}</b>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
+                                <div class="row" ng-style="!$last && {'border-bottom':'1px dashed rgba(0, 0, 0, .125)', 'padding-bottom':'3px'} || !$first && {'padding-top':'3px'}">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <span class="badge badge-primary">
+                                            {{ 'REV' | translate}}{{revision.version}}
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <i>{{revision.description.en_study_time}}</i>
+                                        <span ng-if="status.descriptions.comments.en" class="text-muted">
+                                            <p ng-if="revision.review.en_study_time_comment !== null || revision.review.en_study_time_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.review.en_study_time_comment}}
+                                            </p>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div ng-if="descriptionHistoryEn">
+
+                <!-- Purpose -->
+                <div class="list-group-item">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'PURPOSE' | translate }}</b>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-primary">
-                                    {{ 'REV' | translate}}{{revision.version}}
-                                </span>
-                                &nbsp;&nbsp;
-                                <i>{{revision.description.en_purpose}}</i>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
+                                <div class="row" ng-style="!$last && {'border-bottom':'1px dashed rgba(0, 0, 0, .125)', 'padding-bottom':'3px'} || !$first && {'padding-top':'3px'}">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <span class="badge badge-primary">
+                                            {{ 'REV' | translate}}{{revision.version}}
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <i>{{revision.description.en_study_time}}</i>
+                                        <span ng-if="status.descriptions.comments.en" class="text-muted">
+                                            <p ng-if="revision.review.en_study_time_comment !== null || revision.review.en_study_time_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.review.en_study_time_comment}}
+                                            </p>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row" ng-if="!descriptionHistoryEn">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        <b>{{ 'PROCEDURE' | translate }}</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                        <i>{{latest_revision.description.en_procedure}}</i>
-                    </div>
-                </div>
-                <div ng-if="descriptionHistoryEn">
+
+                <!-- Procedure -->
+                <div class="list-group-item">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'PROCEDURE' | translate }}</b>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-primary">
-                                    {{ 'REV' | translate}}{{revision.version}}
-                                </span>
-                                &nbsp;&nbsp;
-                                <i>{{revision.description.en_procedure}}</i>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
+                                <div class="row" ng-style="!$last && {'border-bottom':'1px dashed rgba(0, 0, 0, .125)', 'padding-bottom':'3px'} || !$first && {'padding-top':'3px'}">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <span class="badge badge-primary">
+                                            {{ 'REV' | translate}}{{revision.version}}
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <i>{{revision.description.en_study_time}}</i>
+                                        <span ng-if="status.descriptions.comments.en" class="text-muted">
+                                            <p ng-if="revision.review.en_study_time_comment !== null || revision.review.en_study_time_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.review.en_study_time_comment}}
+                                            </p>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row" ng-if="!descriptionHistoryEn">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        <b>{{ 'DURATION' | translate }}</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                        <i>{{latest_revision.description.en_duration}}</i>
-                    </div>
-                </div>
-                <div ng-if="descriptionHistoryEn">
+
+                <!-- Duration -->
+                <div class="list-group-item">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'DURATION' | translate }}</b>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-primary">
-                                    {{ 'REV' | translate}}{{revision.version}}
-                                </span>
-                                &nbsp;&nbsp;
-                                <i>{{revision.description.en_duration}}</i>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
+                                <div class="row" ng-style="!$last && {'border-bottom':'1px dashed rgba(0, 0, 0, .125)', 'padding-bottom':'3px'} || !$first && {'padding-top':'3px'}">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <span class="badge badge-primary">
+                                            {{ 'REV' | translate}}{{revision.version}}
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <i>{{revision.description.en_study_time}}</i>
+                                        <span ng-if="status.descriptions.comments.en" class="text-muted">
+                                            <p ng-if="revision.review.en_study_time_comment !== null || revision.review.en_study_time_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.review.en_study_time_comment}}
+                                            </p>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row" ng-if="!descriptionHistoryEn">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        <b>{{ 'RISKS' | translate }}</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                        <i>{{latest_revision.description.en_risks}}</i>
-                    </div>
-                </div>
-                <div ng-if="descriptionHistoryEn">
+
+                <!-- Risks -->
+                <div class="list-group-item">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'RISKS' | translate }}</b>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-primary">
-                                    {{ 'REV' | translate}}{{revision.version}}
-                                </span>
-                                &nbsp;&nbsp;
-                                <i>{{revision.description.en_risks}}</i>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
+                                <div class="row" ng-style="!$last && {'border-bottom':'1px dashed rgba(0, 0, 0, .125)', 'padding-bottom':'3px'} || !$first && {'padding-top':'3px'}">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <span class="badge badge-primary">
+                                            {{ 'REV' | translate}}{{revision.version}}
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <i>{{revision.description.en_study_time}}</i>
+                                        <span ng-if="status.descriptions.comments.en" class="text-muted">
+                                            <p ng-if="revision.review.en_study_time_comment !== null || revision.review.en_study_time_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.review.en_study_time_comment}}
+                                            </p>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row" ng-if="!descriptionHistoryEn">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        <b>{{ 'BENEFITS' | translate }}</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                        <i>{{latest_revision.description.en_benefits}}</i>
-                    </div>
-                </div>
-                <div ng-if="descriptionHistoryEn">
+
+                <!-- Benefits -->
+                <div class="list-group-item">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'BENEFITS' | translate }}</b>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-primary">
-                                    {{ 'REV' | translate}}{{revision.version}}
-                                </span>
-                                &nbsp;&nbsp;
-                                <i>{{revision.description.en_benefits}}</i>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
+                                <div class="row" ng-style="!$last && {'border-bottom':'1px dashed rgba(0, 0, 0, .125)', 'padding-bottom':'3px'} || !$first && {'padding-top':'3px'}">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <span class="badge badge-primary">
+                                            {{ 'REV' | translate}}{{revision.version}}
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <i>{{revision.description.en_study_time}}</i>
+                                        <span ng-if="status.descriptions.comments.en" class="text-muted">
+                                            <p ng-if="revision.review.en_study_time_comment !== null || revision.review.en_study_time_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.review.en_study_time_comment}}
+                                            </p>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </li>
-        </ul>
+
+            </div>
+        </div>
         <br>
 
-
-        <!-- German description -->
-        <div ng-if="!latest_revision.description.de_used">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <h6 class="text-muted">
-                        <span class="flag-icon flag-icon-de"></span>&nbsp;&nbsp;
-                        {{ 'STUDY_DESCRIPTION' | translate }}
-                    </h6>
-                </div>
+        <!-- German descriptions -->
+        <div class="row inputs">
+            <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6">
+                <h6 class="text-muted">
+                    <span class="flag-icon flag-icon-de"></span>
+                    &nbsp;&nbsp;
+                    {{ 'STUDY_DESCRIPTION' | translate }}
+                </h6>
             </div>
-            <ul class="list-group">
-                <li class="list-group-item middle">
-                    - {{ 'NOT_USED' | translate }} -
-                </li>
-            </ul>
-            <br>
-        </div>
-        <div ng-if="latest_revision.description.de_used">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                    <h6 class="text-muted">
-                        <span class="flag-icon flag-icon-de"></span>&nbsp;&nbsp;
-                        {{ 'STUDY_DESCRIPTION' | translate }}
-                    </h6>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 right">
-                    <small>
-                        <a href="" ng-click="toggleDescriptionHistory('de')">
-                            <span ng-if="!descriptionHistoryDe">
+            <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
+                <small>
+                    <span ng-if="status.descriptions.language.de">
+                        <a  href="" ng-click="toggle('descriptions', 'comments', 'de')">
+                            <span ng-if="!status.descriptions.comments.de">
+                                {{ 'SHOW_COMMENTS' | translate }}
+                            </span>
+                            <span ng-if="status.descriptions.comments.de">
+                                {{ 'HIDE_COMMENTS' | translate }}
+                            </span>
+                        </a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <a href="" ng-click="toggle('descriptions', 'history', 'de')">
+                            <span ng-if="!status.descriptions.history.de.display">
                                 {{ 'SHOW_HISTORY' | translate }}
                             </span>
-                            <span ng-if="descriptionHistoryDe">
+                            <span ng-if="status.descriptions.history.de.display">
                                 {{ 'HIDE_HISTORY' | translate }}
                             </span>
                         </a>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
-                        <a href="" ng-click="toggleDescriptionComments('de')">
-                            <span ng-if="!descriptionCommentsDe">
+                    </span>
+                    <span ng-if="!status.descriptions.language.de">
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </span>
+                    <span ng-if="status.descriptions.language.de">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                    </span>
+                    <a href="" ng-click="toggle('descriptions', 'language', 'de')">
+                        <span ng-if="status.descriptions.language.de">
+                            {{ 'HIDE' | translate }}
+                        </span>
+                        <span ng-if="!status.descriptions.language.de">
+                            {{ 'SHOW' | translate }}
+                        </span>
+                    </a>
+                </small>
+            </div>
+        </div>
+
+        <!-- Properties -->
+        <div class="bs-fix">
+            <div class="list-group" ng-if="status.descriptions.language.de">
+                <div class="list-group-item middle" ng-if="!latest_revision.description.de_used">
+                    - {{ 'NOT_USED' | translate }} -
+                </div>
+                <div class="list-group-item" ng-if="latest_revision.description.de_used">
+                    <!-- TODO --> {{latest_revision.description}}
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <!-- Portuguese descriptions -->
+        <div class="row inputs">
+            <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6">
+                <h6 class="text-muted">
+                    <span class="flag-icon flag-icon-pt"></span>
+                    &nbsp;&nbsp;
+                    {{ 'STUDY_DESCRIPTION' | translate }}
+                </h6>
+            </div>
+            <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
+                <small>
+                    <span ng-if="status.descriptions.language.pt">
+                        <a  href="" ng-click="toggle('descriptions', 'comments', 'pt')">
+                            <span ng-if="!status.descriptions.comments.pt">
                                 {{ 'SHOW_COMMENTS' | translate }}
                             </span>
-                            <span ng-if="descriptionCommentsDe">
+                            <span ng-if="status.descriptions.comments.pt">
                                 {{ 'HIDE_COMMENTS' | translate }}
                             </span>
                         </a>
-                    </small>
-                </div>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <a href="" ng-click="toggle('descriptions', 'history', 'pt')">
+                            <span ng-if="!status.descriptions.history.pt.display">
+                                {{ 'SHOW_HISTORY' | translate }}
+                            </span>
+                            <span ng-if="status.descriptions.history.pt.display">
+                                {{ 'HIDE_HISTORY' | translate }}
+                            </span>
+                        </a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                    </span>
+                    <span ng-if="!status.descriptions.language.pt">
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </span>
+                    <span ng-if="status.descriptions.language.pt">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                    </span>
+                    <a href="" ng-click="toggle('descriptions', 'language', 'pt')">
+                        <span ng-if="status.descriptions.language.pt">
+                            {{ 'HIDE' | translate }}
+                        </span>
+                        <span ng-if="!status.descriptions.language.pt">
+                            {{ 'SHOW' | translate }}
+                        </span>
+                    </a>
+                </small>
             </div>
-
-            <!-- Properties -->
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <div class="row" ng-if="!descriptionHistoryDe">
-                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            <b>{{ 'TITLE' | translate }}</b>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <i>{{latest_revision.description.de_title}}</i>
-                        </div>
-                    </div>
-                    <div ng-if="descriptionHistoryDe">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                <b>{{ 'TITLE' | translate }}</b>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                                <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.description.de_title}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row" ng-if="!descriptionHistoryDe">
-                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            <b>{{ 'RESEARCHER' | translate }}</b>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <i>{{latest_revision.description.de_researcher}}</i>
-                        </div>
-                    </div>
-                    <div ng-if="descriptionHistoryDe">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                <b>{{ 'RESEARCHER' | translate }}</b>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                                <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.description.de_researcher}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row" ng-if="!descriptionHistoryDe">
-                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            <b>{{ 'TIME' | translate }}</b>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <i>{{latest_revision.description.de_study_time}}</i>
-                        </div>
-                    </div>
-                    <div ng-if="descriptionHistoryDe">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                <b>{{ 'TIME' | translate }}</b>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                                <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.description.de_study_time}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row" ng-if="!descriptionHistoryDe">
-                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            <b>{{ 'PURPOSE' | translate }}</b>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <i>{{latest_revision.description.de_purpose}}</i>
-                        </div>
-                    </div>
-                    <div ng-if="descriptionHistoryDe">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                <b>{{ 'PURPOSE' | translate }}</b>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                                <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.description.de_purpose}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row" ng-if="!descriptionHistoryDe">
-                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            <b>{{ 'PROCEDURE' | translate }}</b>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <i>{{latest_revision.description.de_procedure}}</i>
-                        </div>
-                    </div>
-                    <div ng-if="descriptionHistoryDe">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                <b>{{ 'PROCEDURE' | translate }}</b>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                                <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.description.de_procedure}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row" ng-if="!descriptionHistoryDe">
-                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            <b>{{ 'DURATION' | translate }}</b>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <i>{{latest_revision.description.de_duration}}</i>
-                        </div>
-                    </div>
-                    <div ng-if="descriptionHistoryDe">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                <b>{{ 'DURATION' | translate }}</b>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                                <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.description.de_duration}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row" ng-if="!descriptionHistoryDe">
-                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            <b>{{ 'RISKS' | translate }}</b>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <i>{{latest_revision.description.de_risks}}</i>
-                        </div>
-                    </div>
-                    <div ng-if="descriptionHistoryDe">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                <b>{{ 'RISKS' | translate }}</b>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                                <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.description.de_risks}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row" ng-if="!descriptionHistoryDe">
-                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            <b>{{ 'BENEFITS' | translate }}</b>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <i>{{latest_revision.description.de_benefits}}</i>
-                        </div>
-                    </div>
-                    <div ng-if="descriptionHistoryDe">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                <b>{{ 'BENEFITS' | translate }}</b>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                                <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.description.de_benefits}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <br>
         </div>
 
+        <!-- Properties -->
+        <div class="bs-fix">
+            <div class="list-group" ng-if="status.descriptions.language.pt">
+                <div class="list-group-item middle" ng-if="!latest_revision.description.pt_used">
+                    - {{ 'NOT_USED' | translate }} -
+                </div>
+                <div class="list-group-item" ng-if="latest_revision.description.pt_used">
+                    <!-- TODO --> {{latest_revision.description}}
+                </div>
+            </div>
+        </div>
+        <br>
+
+
+        <!-- CONCERNS -->
         <div class="row inputs">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6">
                 <h6 class="text-muted">
                     {{ 'STUDY_CONCERNS' | translate }}
                 </h6>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 right">
+            <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
                 <small>
-                    <a href="" ng-click="toggleConcernHistory()">
-                        <span ng-if="!concernHistory">
-                            {{ 'SHOW_HISTORY' | translate }}
+                    <a href="" ng-click="toggle('concerns', 'comments', 'pt')">
+                        <span ng-if="!status.concerns.comments.pt">
+                            {{ 'SHOW_COMMENTS' | translate }}
                         </span>
-                        <span ng-if="concernHistory">
-                            {{ 'HIDE_HISTORY' | translate }}
+                        <span ng-if="status.concerns.comments.pt">
+                            {{ 'HIDE_COMMENTS' | translate }}
                         </span>
                     </a>
                     &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <a href="" ng-click="toggleConcernComments()">
-                        <span ng-if="!concernComments">
-                            {{ 'SHOW_COMMENTS' | translate }}
+                    <a href="" ng-click="toggle('concerns', 'history', 'pt')">
+                        <span ng-if="!status.concerns.history.pt.display">
+                            {{ 'SHOW_HISTORY' | translate }}
                         </span>
-                        <span ng-if="concernComments">
-                            {{ 'HIDE_COMMENTS' | translate }}
+                        <span ng-if="status.concerns.history.pt.display">
+                            {{ 'HIDE_HISTORY' | translate }}
                         </span>
                     </a>
                 </small>
@@ -729,540 +500,55 @@
         </div>
 
         <!-- Questions -->
-        <ul class="list-group">
-            <!-- 1st question -->
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
-                        <b>1. {{ 'CONCERN_1' | translate }}?</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div ng-if="!concernHistory">
-                            <span class="badge badge-danger badge-pill float-xs-right" ng-if="latest_revision.concerns.q01_value">
-                                {{ 'YES' | translate }}
-                            </span>
-                            <span class="badge badge-success badge-pill float-xs-right" ng-if="!latest_revision.concerns.q01_value">
-                                {{ 'NO' | translate }}
-                            </span>
-                            <span ng-if="latest_revision.concerns.q01_value">
-                                <i>{{latest_revision.concerns.q01_explanation}}</i>
-                            </span>
+        <div class="bs-fix">
+            <div class="list-group">
+
+                <!-- 1st question -->
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                            <b>1. {{ 'CONCERN_1' | translate }}?</b>
                         </div>
-                        <div ng-if="concernHistory">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-danger badge-pill float-xs-right" ng-if="revision.concerns.q01_value">
-                                    {{ 'YES' | translate }}
-                                </span>
-                                <span class="badge badge-success badge-pill float-xs-right" ng-if="!revision.concerns.q01_value">
-                                    {{ 'NO' | translate }}
-                                </span>
-                                <div>
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.concerns.q01_explanation}}</i>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
+                                <div class="row">
+                                    <div class="col-2" ng-if="status.concerns.limit > 1">
+                                        <span class="badge badge-primary">
+                                            {{ 'REV' | translate}}{{revision.version}}
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <span class="badge badge-pill badge-success " ng-if="revision.concerns.q01_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="badge badge-pill badge-danger " ng-if="!revision.concerns.q01_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <span ng-if="revision.concerns.q01_value">
+                                            <i>{{revision.concerns.q01_explanation}}</i>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </li>
-            <!-- 2nd question -->
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
-                        <b>2. {{ 'CONCERN_2' | translate }}?</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div ng-if="!concernHistory">
-                            <span class="badge badge-danger badge-pill float-xs-right" ng-if="latest_revision.concerns.q02_value">
-                                {{ 'YES' | translate }}
-                            </span>
-                            <span class="badge badge-success badge-pill float-xs-right" ng-if="!latest_revision.concerns.q02_value">
-                                {{ 'NO' | translate }}
-                            </span>
-                            <span ng-if="latest_revision.concerns.q02_value">
-                                <i>{{latest_revision.concerns.q02_explanation}}</i>
-                            </span>
-                        </div>
-                        <div ng-if="concernHistory">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-danger badge-pill float-xs-right" ng-if="revision.concerns.q02_value">
-                                    {{ 'YES' | translate }}
-                                </span>
-                                <span class="badge badge-success badge-pill float-xs-right" ng-if="!revision.concerns.q02_value">
-                                    {{ 'NO' | translate }}
-                                </span>
-                                <div>
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.concerns.q02_explanation}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!-- 3rd question -->
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
-                        <b>3. {{ 'CONCERN_3' | translate }}?</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div ng-if="!concernHistory">
-                            <span class="badge badge-danger badge-pill float-xs-right" ng-if="latest_revision.concerns.q03_value">
-                                {{ 'YES' | translate }}
-                            </span>
-                            <span class="badge badge-success badge-pill float-xs-right" ng-if="!latest_revision.concerns.q03_value">
-                                {{ 'NO' | translate }}
-                            </span>
-                            <span ng-if="latest_revision.concerns.q03_value">
-                                <i>{{latest_revision.concerns.q03_explanation}}</i>
-                            </span>
-                        </div>
-                        <div ng-if="concernHistory">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-danger badge-pill float-xs-right" ng-if="revision.concerns.q03_value">
-                                    {{ 'YES' | translate }}
-                                </span>
-                                <span class="badge badge-success badge-pill float-xs-right" ng-if="!revision.concerns.q03_value">
-                                    {{ 'NO' | translate }}
-                                </span>
-                                <div>
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.concerns.q03_explanation}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!-- 4th question -->
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
-                        <b>4. {{ 'CONCERN_4' | translate }}?</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div ng-if="!concernHistory">
-                            <span class="badge badge-danger badge-pill float-xs-right" ng-if="latest_revision.concerns.q04_value">
-                                {{ 'YES' | translate }}
-                            </span>
-                            <span class="badge badge-success badge-pill float-xs-right" ng-if="!latest_revision.concerns.q04_value">
-                                {{ 'NO' | translate }}
-                            </span>
-                            <span ng-if="latest_revision.concerns.q04_value">
-                                <i>{{latest_revision.concerns.q04_explanation}}</i>
-                            </span>
-                        </div>
-                        <div ng-if="concernHistory">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-danger badge-pill float-xs-right" ng-if="revision.concerns.q04_value">
-                                    {{ 'YES' | translate }}
-                                </span>
-                                <span class="badge badge-success badge-pill float-xs-right" ng-if="!revision.concerns.q04_value">
-                                    {{ 'NO' | translate }}
-                                </span>
-                                <div>
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.concerns.q04_explanation}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!-- 5th question -->
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
-                        <b>5. {{ 'CONCERN_5' | translate }}?</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div ng-if="!concernHistory">
-                            <span class="badge badge-danger badge-pill float-xs-right" ng-if="latest_revision.concerns.q05_value">
-                                {{ 'YES' | translate }}
-                            </span>
-                            <span class="badge badge-success badge-pill float-xs-right" ng-if="!latest_revision.concerns.q05_value">
-                                {{ 'NO' | translate }}
-                            </span>
-                            <span ng-if="latest_revision.concerns.q05_value">
-                                <i>{{latest_revision.concerns.q05_explanation}}</i>
-                            </span>
-                        </div>
-                        <div ng-if="concernHistory">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-danger badge-pill float-xs-right" ng-if="revision.concerns.q05_value">
-                                    {{ 'YES' | translate }}
-                                </span>
-                                <span class="badge badge-success badge-pill float-xs-right" ng-if="!revision.concerns.q05_value">
-                                    {{ 'NO' | translate }}
-                                </span>
-                                <div>
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.concerns.q05_explanation}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!-- 6th question -->
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
-                        <b>6. {{ 'CONCERN_6' | translate }}?</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div ng-if="!concernHistory">
-                            <span class="badge badge-danger badge-pill float-xs-right" ng-if="latest_revision.concerns.q06_value">
-                                {{ 'YES' | translate }}
-                            </span>
-                            <span class="badge badge-success badge-pill float-xs-right" ng-if="!latest_revision.concerns.q06_value">
-                                {{ 'NO' | translate }}
-                            </span>
-                            <span ng-if="latest_revision.concerns.q06_value">
-                                <i>{{latest_revision.concerns.q06_explanation}}</i>
-                            </span>
-                        </div>
-                        <div ng-if="concernHistory">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-danger badge-pill float-xs-right" ng-if="revision.concerns.q06_value">
-                                    {{ 'YES' | translate }}
-                                </span>
-                                <span class="badge badge-success badge-pill float-xs-right" ng-if="!revision.concerns.q06_value">
-                                    {{ 'NO' | translate }}
-                                </span>
-                                <div>
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.concerns.q06_explanation}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!-- 7th question -->
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
-                        <b>7. {{ 'CONCERN_7' | translate }}?</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div ng-if="!concernHistory">
-                            <span class="badge badge-danger badge-pill float-xs-right" ng-if="latest_revision.concerns.q07_value">
-                                {{ 'YES' | translate }}
-                            </span>
-                            <span class="badge badge-success badge-pill float-xs-right" ng-if="!latest_revision.concerns.q07_value">
-                                {{ 'NO' | translate }}
-                            </span>
-                            <span ng-if="latest_revision.concerns.q07_value">
-                                <i>{{latest_revision.concerns.q07_explanation}}</i>
-                            </span>
-                        </div>
-                        <div ng-if="concernHistory">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-danger badge-pill float-xs-right" ng-if="revision.concerns.q07_value">
-                                    {{ 'YES' | translate }}
-                                </span>
-                                <span class="badge badge-success badge-pill float-xs-right" ng-if="!revision.concerns.q07_value">
-                                    {{ 'NO' | translate }}
-                                </span>
-                                <div>
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.concerns.q07_explanation}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!-- 8th question -->
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
-                        <b>8. {{ 'CONCERN_8' | translate }}?</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div ng-if="!concernHistory">
-                            <span class="badge badge-danger badge-pill float-xs-right" ng-if="latest_revision.concerns.q08_value">
-                                {{ 'YES' | translate }}
-                            </span>
-                            <span class="badge badge-success badge-pill float-xs-right" ng-if="!latest_revision.concerns.q08_value">
-                                {{ 'NO' | translate }}
-                            </span>
-                            <span ng-if="latest_revision.concerns.q08_value">
-                                <i>{{latest_revision.concerns.q08_explanation}}</i>
-                            </span>
-                        </div>
-                        <div ng-if="concernHistory">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-danger badge-pill float-xs-right" ng-if="revision.concerns.q08_value">
-                                    {{ 'YES' | translate }}
-                                </span>
-                                <span class="badge badge-success badge-pill float-xs-right" ng-if="!revision.concerns.q08_value">
-                                    {{ 'NO' | translate }}
-                                </span>
-                                <div>
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.concerns.q08_explanation}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!-- 9th question -->
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
-                        <b>9. {{ 'CONCERN_9' | translate }}?</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div ng-if="!concernHistory">
-                            <span class="badge badge-danger badge-pill float-xs-right" ng-if="latest_revision.concerns.q09_value">
-                                {{ 'YES' | translate }}
-                            </span>
-                            <span class="badge badge-success badge-pill float-xs-right" ng-if="!latest_revision.concerns.q09_value">
-                                {{ 'NO' | translate }}
-                            </span>
-                            <span ng-if="latest_revision.concerns.q09_value">
-                                <i>{{latest_revision.concerns.q09_explanation}}</i>
-                            </span>
-                        </div>
-                        <div ng-if="concernHistory">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-danger badge-pill float-xs-right" ng-if="revision.concerns.q09_value">
-                                    {{ 'YES' | translate }}
-                                </span>
-                                <span class="badge badge-success badge-pill float-xs-right" ng-if="!revision.concerns.q09_value">
-                                    {{ 'NO' | translate }}
-                                </span>
-                                <div>
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.concerns.q09_explanation}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!-- 10th question -->
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
-                        <b>10. {{ 'CONCERN_10' | translate }}?</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div ng-if="!concernHistory">
-                            <span class="badge badge-danger badge-pill float-xs-right" ng-if="latest_revision.concerns.q10_value">
-                                {{ 'YES' | translate }}
-                            </span>
-                            <span class="badge badge-success badge-pill float-xs-right" ng-if="!latest_revision.concerns.q10_value">
-                                {{ 'NO' | translate }}
-                            </span>
-                            <span ng-if="latest_revision.concerns.q10_value">
-                                <i>{{latest_revision.concerns.q10_explanation}}</i>
-                            </span>
-                        </div>
-                        <div ng-if="concernHistory">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-danger badge-pill float-xs-right" ng-if="revision.concerns.q10_value">
-                                    {{ 'YES' | translate }}
-                                </span>
-                                <span class="badge badge-success badge-pill float-xs-right" ng-if="!revision.concerns.q10_value">
-                                    {{ 'NO' | translate }}
-                                </span>
-                                <div>
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.concerns.q10_explanation}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!-- 11th 1st question -->
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
-                        <b>11.1. {{ 'CONCERN_11_1' | translate }}?</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div ng-if="!concernHistory">
-                            <span class="badge badge-danger badge-pill float-xs-right" ng-if="latest_revision.concerns.q11_1_value">
-                                {{ 'YES' | translate }}
-                            </span>
-                            <span class="badge badge-success badge-pill float-xs-right" ng-if="!latest_revision.concerns.q11_1_value">
-                                {{ 'NO' | translate }}
-                            </span>
-                            <span ng-if="latest_revision.concerns.q11_1_value">
-                                <i>{{latest_revision.concerns.q11_1_explanation}}</i>
-                            </span>
-                        </div>
-                        <div ng-if="concernHistory">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-danger badge-pill float-xs-right" ng-if="revision.concerns.q11_1_value">
-                                    {{ 'YES' | translate }}
-                                </span>
-                                <span class="badge badge-success badge-pill float-xs-right" ng-if="!revision.concerns.q11_1_value">
-                                    {{ 'NO' | translate }}
-                                </span>
-                                <div>
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.concerns.q11_1_explanation}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!-- 11th 2nd question -->
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
-                        <b>11.2. {{ 'CONCERN_11_2' | translate }}?</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div ng-if="!concernHistory">
-                            <span class="badge badge-danger badge-pill float-xs-right" ng-if="latest_revision.concerns.q11_2_value">
-                                {{ 'YES' | translate }}
-                            </span>
-                            <span class="badge badge-success badge-pill float-xs-right" ng-if="!latest_revision.concerns.q02_value">
-                                {{ 'NO' | translate }}
-                            </span>
-                            <span ng-if="latest_revision.concerns.q11_2_value">
-                                <i>{{latest_revision.concerns.q11_2_explanation}}</i>
-                            </span>
-                        </div>
-                        <div ng-if="concernHistory">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-danger badge-pill float-xs-right" ng-if="revision.concerns.q11_2_value">
-                                    {{ 'YES' | translate }}
-                                </span>
-                                <span class="badge badge-success badge-pill float-xs-right" ng-if="!revision.concerns.q11_2_value">
-                                    {{ 'NO' | translate }}
-                                </span>
-                                <div>
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.concerns.q11_2_explanation}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!-- 12th question -->
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
-                        <b>12. {{ 'CONCERN_12' | translate }}?</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div ng-if="!concernHistory">
-                            <span class="badge badge-danger badge-pill float-xs-right" ng-if="latest_revision.concerns.q12_value">
-                                {{ 'YES' | translate }}
-                            </span>
-                            <span class="badge badge-success badge-pill float-xs-right" ng-if="!latest_revision.concerns.q12_value">
-                                {{ 'NO' | translate }}
-                            </span>
-                            <span ng-if="latest_revision.concerns.q12_value">
-                                <i>{{latest_revision.concerns.q12_explanation}}</i>
-                            </span>
-                        </div>
-                        <div ng-if="concernHistory">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-danger badge-pill float-xs-right" ng-if="revision.concerns.q12_value">
-                                    {{ 'YES' | translate }}
-                                </span>
-                                <span class="badge badge-success badge-pill float-xs-right" ng-if="!revision.concerns.q12_value">
-                                    {{ 'NO' | translate }}
-                                </span>
-                                <div>
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.concerns.q12_explanation}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!-- 13th question -->
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
-                        <b>13. {{ 'CONCERN_13' | translate }}?</b>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div ng-if="!concernHistory">
-                            <span class="badge badge-danger badge-pill float-xs-right" ng-if="latest_revision.concerns.q13_value">
-                                {{ 'YES' | translate }}
-                            </span>
-                            <span class="badge badge-success badge-pill float-xs-right" ng-if="!latest_revision.concerns.q13_value">
-                                {{ 'NO' | translate }}
-                            </span>
-                            <span ng-if="latest_revision.concerns.q13_value">
-                                <i>{{latest_revision.concerns.q1312_explanation}}</i>
-                            </span>
-                        </div>
-                        <div ng-if="concernHistory">
-                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true">
-                                <span class="badge badge-danger badge-pill float-xs-right" ng-if="revision.concerns.q13_value">
-                                    {{ 'YES' | translate }}
-                                </span>
-                                <span class="badge badge-success badge-pill float-xs-right" ng-if="!revision.concerns.q13_value">
-                                    {{ 'NO' | translate }}
-                                </span>
-                                <div>
-                                    <span class="badge badge-primary">
-                                        {{ 'REV' | translate}}{{revision.version}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <i>{{revision.concerns.q13_explanation}}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
+
+                <!-- 2nd question -->
+
+                <!-- 3rd question -->
+
+                <!-- 4th question -->
+
+                <!-- 5th question -->
+
+                <!-- 6th question -->
+
+
+            </div>
+        </div>
         <br>
 
     </div>

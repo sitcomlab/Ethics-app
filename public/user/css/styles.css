@@ -41,11 +41,17 @@ footer {
     padding-bottom: 3px;
 }
 
+.timestamp {
+    font-size: 8pt;
+    font-style: italic;
+}
+
 .link:hover {
     text-decoration: none;
 }
 
-.timestamp {
-    font-size: 8pt;
-    font-style: italic;
+
+/* https://github.com/twbs/bootstrap/issues/21610 */
+.bs-fix > .list-group, .list-group-item {
+    display:block;
 }

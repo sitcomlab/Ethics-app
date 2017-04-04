@@ -46,90 +46,161 @@ app.controller("documentShowReviewController", function($scope, $rootScope, $rou
     };
 
     /**
-     * [toggleGeneralHistory description]
-     * @return {[type]} [description]
-     */
-    $scope.toggleGeneralHistory = function(){
-        $scope.generalHistory = !$scope.generalHistory;
-    };
-
-    /**
-     * [toggleDescriptionHistory description]
-     * @param  {[type]} language [description]
-     * @return {[type]}          [description]
-     */
-    $scope.toggleDescriptionHistory = function(language){
-        switch (language) {
-            case 'en': {
-                $scope.descriptionHistoryEn = !$scope.descriptionHistoryEn;
-                break;
-            }
-            case 'de': {
-                $scope.descriptionHistoryDe = !$scope.descriptionHistoryDe;
-                break;
-            }
-            case 'pt': {
-                $scope.descriptionHistoryPt = !$scope.descriptionHistoryPt;
-                break;
-            }
-        }
-    };
-
-    /**
-     * [toggleDescriptionComments description]
-     * @param  {[type]} language [description]
-     * @return {[type]}          [description]
-     */
-    $scope.toggleDescriptionComments = function(language){
-        switch (language) {
-            case 'en': {
-                $scope.descriptionCommentsEn= !$scope.descriptionCommentsEn;
-                break;
-            }
-            case 'de': {
-                $scope.descriptionCommentsDe = !$scope.descriptionCommentsDe;
-                break;
-            }
-            case 'pt': {
-                $scope.descriptionCommentsPt = !$scope.descriptionCommentsPt;
-                break;
-            }
-        }
-    };
-
-    /**
      * [toggleConcernHistory description]
      * @param  {[type]} language [description]
      * @return {[type]}          [description]
      */
-    $scope.toggleConcernHistory = function(language){
-        $scope.concernHistory = !$scope.concernHistory;
-    };
+    $scope.toggle = function(category, property, language){
+        switch (category) {
+            case 'general': {
+                $scope.status.general.history = !$scope.status.general.history;
+                if($scope.status.general.history){
+                    $scope.status.general.limit = $scope.document.revisions.length;
+                } else {
+                    $scope.status.general.limit = 1;
+                }
+                break;
+            }
+            case 'descriptions': {
+                switch (property) {
+                    case 'language': {
+                        switch (language) {
+                            case 'en': {
+                                $scope.status.descriptions.language.en = !$scope.status.descriptions.language.en;
+                                break;
+                            }
+                            case 'de': {
+                                $scope.status.descriptions.language.de = !$scope.status.descriptions.language.de;
+                                break;
+                            }
+                            case 'pt': {
+                                $scope.status.descriptions.language.pt = !$scope.status.descriptions.language.pt;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                    case 'history': {
+                        switch (language) {
+                            case 'en': {
+                                $scope.status.descriptions.history.en.display = !$scope.status.descriptions.history.en.display;
 
-    /**
-     * [toggleConcernComments description]
-     * @param  {[type]} language [description]
-     * @return {[type]}          [description]
-     */
-    $scope.toggleConcernComments = function(language){
-        $scope.concernComments = !$scope.concernComments;
-    };
+                                if($scope.status.descriptions.history.en.display){
+                                    $scope.status.descriptions.history.en.limit = $scope.document.revisions.length;
+                                } else {
+                                    $scope.status.descriptions.history.en.limit = 1;
+                                }
+                                break;
+                            }
+                            case 'de': {
+                                $scope.status.descriptions.history.de.display = !$scope.status.descriptions.history.de.display;
 
+                                if($scope.status.descriptions.history.de.display){
+                                    $scope.status.descriptions.history.de.limit = $scope.document.revisions.length;
+                                } else {
+                                    $scope.status.descriptions.history.de.limit = 1;
+                                }
+                                break;
+                            }
+                            case 'pt': {
+                                $scope.status.descriptions.history.pt.display = !$scope.status.descriptions.history.pt.display;
+
+                                if($scope.status.descriptions.history.pt.display){
+                                    $scope.status.descriptions.limit = $scope.document.revisions.length;
+                                } else {
+                                    $scope.status.descriptions.limit = 1;
+                                }
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                    case 'comments': {
+                        switch (language) {
+                            case 'en': {
+                                $scope.status.descriptions.comments.en = !$scope.status.descriptions.comments.en;
+                                break;
+                            }
+                            case 'de': {
+                                $scope.status.descriptions.comments.de = !$scope.status.descriptions.comments.de;
+                                break;
+                            }
+                            case 'pt': {
+                                $scope.status.descriptions.comments.pt = !$scope.status.descriptions.comments.pt;
+                                break;
+                            }
+                        }
+                    }
+                }
+                break;
+            }
+            case 'concerns': {
+                switch (property) {
+                    case 'history': {
+                        $scope.status.concerns.history = !$scope.status.concerns.history;
+
+                        if($scope.status.concerns.history){
+                            $scope.status.concerns.limit = $scope.document.revisions.length;
+                        } else {
+                            $scope.status.concerns.limit = 1;
+                        }
+
+                        break;
+                    }
+                    case 'comments': {
+                        $scope.status.concerns.comments = !$scope.status.concerns.comments;
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    };
 
     /*************************************************
         INIT
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading review" };
     $scope.document = $documentService.get();
+    console.log($scope.document);
     $scope.latest_revision = $documentService.getLatestRevision();
-    $scope.generalHistory = false;
-    $scope.descriptionHistoryEn = false;
-    $scope.descriptionCommentsEn = false;
-    $scope.descriptionHistoryDe = false;
-    $scope.descriptionCommentsDe = false;
-    $scope.descriptionHistoryPt = false;
-    $scope.descriptionCommentsPt = false;
-    $scope.concernHistory = false;
-    $scope.concernComments = false;
+
+    $scope.status = {
+        general: {
+            history: false,
+            limit: 1
+        },
+        descriptions: {
+            language: {
+                en: true,
+                de: $scope.latest_revision.description.de_used,
+                pt: $scope.latest_revision.description.pt_used
+            },
+            history: {
+                en: {
+                    display: false,
+                    limit: 1
+                },
+                de: {
+                    display: false,
+                    limit: 1
+                },
+                pt: {
+                    display: false,
+                    limit: 1
+                }
+            },
+            comments: {
+                en: false,
+                de: false,
+                pt: false
+            }
+        },
+        concerns: {
+            history: false,
+            limit: 1,
+            comments: false
+        }
+    };
     $scope.$parent.loading = { status: false, message: "" };
 });

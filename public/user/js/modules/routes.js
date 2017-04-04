@@ -42,9 +42,9 @@ app.config(function($routeProvider, $locationProvider, config) {
                 factory: checkAuthentication
             }
 		})
-		.when("/documents/:document_id/title", {
-			templateUrl: "js/templates/document/edit_title.html",
-			controller: "documentEditTitleController",
+		.when("/documents/:document_id/settings", {
+			templateUrl: "js/templates/document/edit_settings.html",
+			controller: "documentEditSettingsController",
 			resolve: {
                 factory: checkAuthentication
             }
@@ -132,11 +132,17 @@ app.config(function($routeProvider, $locationProvider, config) {
 		// Committee members
 		.when("/members", {
 			templateUrl: "js/templates/member/list.html",
-			controller: "memberListController"
+			controller: "memberListController",
+			resolve: {
+                factory: checkAuthentication
+            }
 		})
 		.when("/members/:member_id", {
 			templateUrl: "js/templates/member/details.html",
-			controller: "memberDetailsController"
+			controller: "memberDetailsController",
+			resolve: {
+                factory: checkAuthentication
+            }
 		})
 
 		// Help
@@ -168,8 +174,6 @@ var checkAuthentication = function ($q, $location, $authenticationService) {
 	if($authenticationService.isAuthenticated()) {
 		return true;
 	} else {
-		return false;
-		// Redirect
-		//$location.url("/");
+		return $location.url("/");
 	}
 };

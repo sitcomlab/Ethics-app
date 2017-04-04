@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document create controller
-app.controller("documentCreateController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService, $userService, $instituteService, $courseService) {
+app.controller("documentCreateController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService, $userService, $universityService, $instituteService, $courseService) {
 
     /*************************************************
         FUNCTIONS
@@ -118,6 +118,15 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
         $scope.new_document.course_id = null;
     };
 
+    /**
+     * [updateInstitutes description]
+     * @return {[type]} [description]
+     */
+    $scope.updateInstitutes = function(){
+        $scope.new_user.institute_id = null;
+        $scope.institutes = $instituteService.getByUniversity($scope.university_id);
+    };
+
     /*************************************************
         INIT
      *************************************************/
@@ -125,22 +134,37 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
     $scope.new_document = $documentService.init();
     $scope.new_user = $userService.init();
 
+    // App agreement
+    $scope.agreement = {
+        data: false,
+        deletion: false
+    };
 
-    // Load institutes
-    $instituteService.list()
+    // Load universities
+    $universityService.list()
     .then(function onSuccess(response) {
-        $instituteService.set(response.data);
-        $scope.institutes = $instituteService.get();
+        $universityService.set(response.data);
+        $scope.universities = $universityService.get();
 
-        // Load courses
-        $courseService.list()
+        // Load institutes
+        $instituteService.list()
         .then(function onSuccess(response) {
-            $courseService.set(response.data);
-            $scope.courses = $courseService.get();
-            $scope.institute_id = null;
+            $instituteService.set(response.data);
+            $scope.institutes = $instituteService.get();
 
-            $scope.$parent.loading = { status: false, message: "" };
-            $scope.changeTab(1);
+            // Load courses
+            $courseService.list()
+            .then(function onSuccess(response) {
+                $courseService.set(response.data);
+                $scope.courses = $courseService.get();
+                $scope.institute_id = null;
+
+                $scope.$parent.loading = { status: false, message: "" };
+                $scope.changeTab(2);
+            })
+            .catch(function onError(response) {
+                $window.alert(response.data);
+            });
         })
         .catch(function onError(response) {
             $window.alert(response.data);

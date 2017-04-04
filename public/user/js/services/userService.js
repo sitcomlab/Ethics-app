@@ -11,7 +11,9 @@ app.factory('$userService', function($http, $log, config, $authenticationService
             return {
                 title: "",
                 first_name: "",
-                last_name: ""
+                last_name: "",
+                university_id: null,
+                institute_id: null
             };
         },
         get: function(){

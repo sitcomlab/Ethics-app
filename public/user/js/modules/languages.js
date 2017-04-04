@@ -41,7 +41,7 @@ app.config(function ($translateProvider) {
         LOGOUT: 'Logout',
         SHOW_DOCUMENT_ID: 'Show document-ID',
         SHOW_INTRO: 'Show intro',
-        CHANGE_DOCUMENT_TITLE: 'Change document title',
+        CHANGE_DOCUMENT_SETTINGS: 'Change document settings',
         YOUR_DOCUMENT_TITLE: 'Your document title',
         SAVE_DOCUMENT: 'Save document',
         DELETE_DOCUMENT: 'Delete document',

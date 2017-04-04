@@ -1,8 +1,8 @@
 var app = angular.module("ethics-app");
 
 
-// Document edit title controller
-app.controller("documentEditTitleController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService) {
+// Document edit settings controller
+app.controller("documentEditSettingsController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService, $instituteService, $courseService) {
 
     /*************************************************
         FUNCTIONS
@@ -51,6 +51,15 @@ app.controller("documentEditTitleController", function($scope, $rootScope, $tran
         });
     };
 
+    /**
+     * [updateCourses description]
+     * @return {[type]} [description]
+     */
+    $scope.updateCourses = function(){
+        $scope.courses = $courseService.getByInstitute($scope.institute_id);
+        $scope.updated_document.course_id = null;
+    };
+
 
     /*************************************************
         INIT
@@ -58,6 +67,27 @@ app.controller("documentEditTitleController", function($scope, $rootScope, $tran
     $scope.$parent.loading = { status: true, message: "Loading document" };
     $scope.document = $documentService.get();
     $scope.updated_document = $documentService.copy();
-    $scope.$parent.loading = { status: false, message: "" };
+
+    // Load institutes
+    $instituteService.list()
+    .then(function onSuccess(response) {
+        $instituteService.set(response.data);
+        $scope.institutes = $instituteService.get();
+
+        // Load courses
+        $courseService.list()
+        .then(function onSuccess(response) {
+            $courseService.set(response.data);
+            $scope.courses = $courseService.get();
+            $scope.institute_id = $courseService.getInstituteId($scope.document.course_id);
+            $scope.$parent.loading = { status: false, message: "" };
+        })
+        .catch(function onError(response) {
+            $window.alert(response.data);
+        });
+    })
+    .catch(function onError(response) {
+        $window.alert(response.data);
+    });
 
 });

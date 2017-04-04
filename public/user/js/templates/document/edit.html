@@ -1557,13 +1557,13 @@
     <div class="card" ng-show="tab==3">
         <div class="card-header" style="font-size: 20pt;">
             <div class="row">
-                <div class="col">
+                <div class="col-8">
                     {{ 'SUBMIT' | translate }}
                 </div>
-                <div class="col right">
-                    <a href="" class="btn btn-primary" ng-click="redirect('/')">
-                        {{ 'CLOSE' | translate }}&nbsp;&nbsp;<i class="fa fa-times" aria-hidden="true"></i>
-                    </a>
+                <div class="col-4 right">
+                    <button class="btn btn-secondary" role="button" ng-click="redirect('/')">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LOGOUT' | translate }}
+                    </button>
                 </div>
             </div>
         </div>

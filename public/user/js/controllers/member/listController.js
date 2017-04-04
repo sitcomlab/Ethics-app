@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Member list controller
-app.controller("memberListController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService, $memberService) {
+app.controller("memberListController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService, $memberService, _) {
 
     /*************************************************
         FUNCTIONS
@@ -35,13 +35,17 @@ app.controller("memberListController", function($scope, $rootScope, $translate, 
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading committee members" };
 
+    // Load members
     $memberService.list()
     .then(function onSuccess(response) {
         $scope.$parent.loading = { status: false, message: "" };
-        $scope.members = response.data;
+        $memberService.set(response.data);
 
-        // TODO: Implement former_members
-        //$scope.former_members = [$scope.members[2]];
+        // Current members
+        $scope.current_members = $memberService.getByStatus(false);
+
+        // Former members
+        $scope.former_members = $memberService.getByStatus(true);
     })
     .catch(function onError(response) {
         $window.alert(response.data);

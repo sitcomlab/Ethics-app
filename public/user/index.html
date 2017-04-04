@@ -63,10 +63,10 @@
                     </a>
                     <div class="collapse navbar-collapse" id="navbarContent">
                         <div class="navbar-nav mr-auto">
-                            <a class="nav-link" href="" ng-click="redirect('/members')">
+                            <a href="" class="nav-link" ng-class="{ active: isActive('/members') }" ng-click="redirect('/members')" ng-if="authenticated_user">
                                 {{ 'COMMITTEE' | translate }}
                             </a>
-                            <a class="nav-link" href="" ng-click="redirect('/help')">
+                            <a  href="" class="nav-link" ng-class="{ active: isActive('/help') }" ng-click="redirect('/help')">
                                 {{ 'HELP' | translate }}
                             </a>
                         </div>
@@ -88,7 +88,7 @@
                                     <h6 class="dropdown-header">{{ 'DOCUMENT' | translate }}</h6>
                                     <a class="dropdown-item" href="" ng-click="showDocumentIntro(document.document_id)">{{ 'SHOW_DOCUMENT_INTRO' | translate }}</a>
                                     <a class="dropdown-item" href="" ng-click="showDocumentId(document.document_id)">{{ 'SHOW_DOCUMENT_ID' | translate }}</a>
-                                    <a class="dropdown-item" href="" ng-click="editDocumentTitle(document.document_id)">{{ 'CHANGE_DOCUMENT_TITLE' | translate }}</a>
+                                    <a class="dropdown-item" href="" ng-click="editDocumentSettings(document.document_id)">{{ 'CHANGE_DOCUMENT_SETTINGS' | translate }}</a>
                                     <a class="dropdown-item" href="" ng-click="deleteDocument(document.document_id)" ng-if="document.status<=1">{{ 'DELETE_DOCUMENT' | translate }}</a>
                                 </div>
                             </li>
@@ -158,6 +158,7 @@
         <!-- SERVICES -->
         <script src="js/services/authenticationService.js"></script>
         <script src="js/services/userService.js"></script>
+        <script src="js/services/universityService.js"></script>
         <script src="js/services/instituteService.js"></script>
         <script src="js/services/courseService.js"></script>
         <script src="js/services/documentService.js"></script>
@@ -193,7 +194,7 @@
         <script src="js/controllers/document/deleteController.js"></script>
         <script src="js/controllers/document/detailsController.js"></script>
         <script src="js/controllers/document/editController.js"></script>
-        <script src="js/controllers/document/editTitleController.js"></script>
+        <script src="js/controllers/document/editSettingsController.js"></script>
         <script src="js/controllers/document/showIdController.js"></script>
         <script src="js/controllers/document/showIntroController.js"></script>
         <script src="js/controllers/document/showReviewController.js"></script>

@@ -8,13 +8,19 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
      *************************************************/
 
     /**
-     * [editUser description]
-     * @param  {[type]} document_id [description]
-     * @return {[type]}             [description]
+     * [isActive description]
+     * @param  {[type]}  viewLocation [description]
+     * @return {Boolean}              [description]
      */
-    $scope.editAccount = function(){
-        $scope.redirect("/account/edit");
+    $scope.isActive = function(viewLocation){
+        var path = $location.path();
+        if(path.indexOf(viewLocation) !== -1){
+            return true;
+        } else {
+            return false;
+        }
     };
+
 
     /**
      * [redirect description]
@@ -24,6 +30,17 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
     $scope.redirect = function(path){
         $location.url(path);
     };
+
+
+    /**
+     * [editUser description]
+     * @param  {[type]} document_id [description]
+     * @return {[type]}             [description]
+     */
+    $scope.editAccount = function(){
+        $scope.redirect("/account/edit");
+    };
+
 
     /**
      * [showDocumentIntro description]
@@ -44,13 +61,14 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
         $scope.redirect("/documents/" + document_id + "/id");
     };
 
+
     /**
      * [editDocumentTitle description]
      * @param  {[type]} document_id [description]
      * @return {[type]}             [description]
      */
-    $scope.editDocumentTitle = function(document_id){
-        $scope.redirect("/documents/" + document_id + "/title");
+    $scope.editDocumentSettings = function(document_id){
+        $scope.redirect("/documents/" + document_id + "/settings");
     };
 
 

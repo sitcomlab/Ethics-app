@@ -15,15 +15,21 @@
         <h6 class="text-muted">
             {{ 'MEMBERS' | translate }}
         </h6>
-        <div class="list-group" ng-if="members && members.length>0">
-            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in members | orderBy: ['last_name', 'first_name']">
+        <div class="list-group" ng-if="current_members && current_members.length>0">
+            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in current_members | orderBy: ['university_name', 'institute_name', 'research_group_name', 'last_name', 'first_name']">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
                         <i class="fa fa-user" aria-hidden="true"></i>
                         &nbsp;&nbsp;
                         <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}} </b>
-                        <span class="text-muted" ng-if="member.research_lab">
-                            <small>&nbsp;({{member.research_lab}})</small>
+                        <span class="text-muted" ng-if="member.research_group_name">
+                            <small>&nbsp;<b>{{member.research_group_name}}</b>&nbsp;|</small>
+                        </span>
+                        <span class="text-muted" ng-if="member.institute_name">
+                            <small>&nbsp;{{member.institute_name}}&nbsp;|</small>
+                        </span>
+                        <span class="text-muted" ng-if="member.university_name">
+                            <small>&nbsp;{{member.university_name}}</small>
                         </span>
                     </div>
                     <div>
@@ -31,22 +37,29 @@
                             <i class="fa fa-check-circle" aria-hidden="true"></i>
                         </span>
                         <span class="text-danger" ng-if="!member.subscribed">
-                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            <i class="fa fa-ban" aria-hidden="true"></i>
                         </span>
                     </div>
                 </div>
             </a>
         </div>
-        <div class="row">
+        <div class="list-group" ng-if="!current_members || current_members.length==0">
+            <div class="list-group-item flex-column align-items-center">
+                <div class="d-flex">
+                    - {{ 'NONE' | translate }} -
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="current_members && current_members.length>0">
             <div class="col text-muted right">
                 <small>
                     <span class="text-success">
                         <i class="fa fa-check-circle" aria-hidden="true"></i>
-                    </span> = {{ 'AVAILABLE' | translate }}
+                    </span> = {{ 'RESPONSIBLE' | translate }}
                     &nbsp;&nbsp;|&nbsp;&nbsp;
                     <span class="text-danger">
-                        <i class="fa fa-times-circle" aria-hidden="true"></i>
-                    </span> = {{ 'CURRENTLY_NOT_AVAILABLE' | translate }}
+                        <i class="fa fa-ban" aria-hidden="true"></i>
+                    </span> = {{ 'CURRENTLY_NOT_RESPONSIBLE' | translate }}
                 </small>
             </div>
         </div>
@@ -56,12 +69,18 @@
             {{ 'FORMER_MEMBERS' | translate }}
         </h6>
         <div class="list-group" ng-if="former_members && former_members.length>0">
-            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action" ng-repeat="member in former_members | orderBy: ['last_name', 'first_name']">
+            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action" ng-repeat="member in former_members | orderBy: ['university_name', 'institute_name', 'research_group_name', 'last_name', 'first_name']">
                 <i class="fa fa-user-times" aria-hidden="true"></i>
                 &nbsp;&nbsp;
                 <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}} </b>
-                <span class="text-muted" ng-if="member.research_lab">
-                    <small>&nbsp;({{member.research_lab}})</small>
+                <span class="text-muted" ng-if="member.research_group_name">
+                    <small>&nbsp;<b>{{member.research_group_name}}</b>&nbsp;|</small>
+                </span>
+                <span class="text-muted" ng-if="member.institute_name">
+                    <small>&nbsp;{{member.institute_name}}&nbsp;|</small>
+                </span>
+                <span class="text-muted" ng-if="member.university_name">
+                    <small>&nbsp;{{member.university_name}}</small>
                 </span>
             </a>
         </div>

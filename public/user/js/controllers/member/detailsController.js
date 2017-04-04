@@ -35,6 +35,7 @@ app.controller("memberDetailsController", function($scope, $rootScope, $routePar
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading committee member" };
 
+    // Load member
     $memberService.retrieve($routeParams.member_id)
     .then(function onSuccess(response) {
         $scope.member = response.data;
