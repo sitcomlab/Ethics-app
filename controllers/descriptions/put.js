@@ -52,7 +52,6 @@ exports.request = function(req, res) {
             // TODO: Add object/schema validation
             var object = {
                 description_id: req.params.description_id,
-                de_used: req.body.de_used,
                 en_title: req.body.en_title,
                 en_researcher: req.body.en_researcher,
                 en_study_time: req.body.en_study_time,
@@ -61,6 +60,7 @@ exports.request = function(req, res) {
                 en_duration: req.body.en_duration,
                 en_risks: req.body.en_risks,
                 en_benefits: req.body.en_benefits,
+                de_used: req.body.de_used,
                 de_title: req.body.de_title,
                 de_researcher: req.body.de_researcher,
                 de_study_time: req.body.de_study_time,
@@ -69,6 +69,7 @@ exports.request = function(req, res) {
                 de_duration: req.body.de_duration,
                 de_risks: req.body.de_risks,
                 de_benefits: req.body.de_benefits,
+                pt_used: req.body.pt_used,
                 pt_title: req.body.pt_title,
                 pt_researcher: req.body.pt_researcher,
                 pt_study_time: req.body.pt_study_time,

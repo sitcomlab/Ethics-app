@@ -14,30 +14,36 @@ CREATE TABLE Reviews (
     general_comment TEXT DEFAULT NULL,
 
     -- Descriptions
-    comment_en_title TEXT DEFAULT NULL,         -- English
-    comment_en_researcher TEXT DEFAULT NULL,
-    comment_en_study_time TEXT DEFAULT NULL,
-    comment_en_purpose TEXT DEFAULT NULL,
-    comment_en_procedure TEXT DEFAULT NULL,
-    comment_en_duration TEXT DEFAULT NULL,
-    comment_en_risks TEXT DEFAULT NULL,
-    comment_en_benefits TEXT DEFAULT NULL,
-    comment_de_title TEXT DEFAULT NULL,         -- German
-    comment_de_researcher TEXT DEFAULT NULL,
-    comment_de_study_time TEXT DEFAULT NULL,
-    comment_de_purpose TEXT DEFAULT NULL,
-    comment_de_procedure TEXT DEFAULT NULL,
-    comment_de_duration TEXT DEFAULT NULL,
-    comment_de_risks TEXT DEFAULT NULL,
-    comment_de_benefits TEXT DEFAULT NULL,
-    comment_pt_title TEXT DEFAULT NULL,         -- Portuguese
-    comment_pt_researcher TEXT DEFAULT NULL,
-    comment_pt_study_time TEXT DEFAULT NULL,
-    comment_pt_purpose TEXT DEFAULT NULL,
-    comment_pt_procedure TEXT DEFAULT NULL,
-    comment_pt_duration TEXT DEFAULT NULL,
-    comment_pt_risks TEXT DEFAULT NULL,
-    comment_pt_benefits TEXT DEFAULT NULL,
+    
+        -- English
+        en_title_comment TEXT DEFAULT NULL,
+        en_researcher_comment TEXT DEFAULT NULL,
+        en_study_time_comment TEXT DEFAULT NULL,
+        en_purpose_comment TEXT DEFAULT NULL,
+        en_procedure_comment TEXT DEFAULT NULL,
+        en_duration_comment TEXT DEFAULT NULL,
+        en_risks_comment TEXT DEFAULT NULL,
+        en_benefits_comment TEXT DEFAULT NULL,
+
+        -- German
+        de_title_comment TEXT DEFAULT NULL,
+        de_researcher_comment TEXT DEFAULT NULL,
+        de_study_time_comment TEXT DEFAULT NULL,
+        de_purpose_comment TEXT DEFAULT NULL,
+        de_procedure_comment TEXT DEFAULT NULL,
+        de_duration_comment TEXT DEFAULT NULL,
+        de_risks_comment TEXT DEFAULT NULL,
+        de_benefits_comment TEXT DEFAULT NULL,
+
+        -- Portuguese
+        pt_title_comment TEXT DEFAULT NULL,
+        pt_researcher_comment TEXT DEFAULT NULL,
+        pt_study_time_comment TEXT DEFAULT NULL,
+        pt_purpose_comment TEXT DEFAULT NULL,
+        pt_procedure_comment TEXT DEFAULT NULL,
+        pt_duration_comment TEXT DEFAULT NULL,
+        pt_risks_comment TEXT DEFAULT NULL,
+        pt_benefits_comment TEXT DEFAULT NULL,
 
     -- Concerns
     q01_comment TEXT DEFAULT NULL,

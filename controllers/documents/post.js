@@ -107,11 +107,11 @@ exports.request = function(req, res) {
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, client, done, user, course, result.rows[0]);
+                    callback(null, client, done, user, result.rows[0], course);
                 }
             });
         },
-        function(client, done, user, course, document, callback){
+        function(client, done, user, document, course, callback){
             if(course){
                 // Database query
                 client.query(query_create_affiliation, [

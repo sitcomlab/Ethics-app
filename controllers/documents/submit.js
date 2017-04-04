@@ -15,19 +15,22 @@ var mail_options = require('../../server.js').mail_options;
 var fs = require("fs");
 var dir_1 = "/../../templates/emails/";
 var dir_2 = "/../../sql/queries/documents/";
-var dir_3 = "/../../sql/queries/revisions/";
-var dir_4 = "/../../sql/queries/descriptions/";
-var dir_5 = "/../../sql/queries/concerns/";
-var dir_6 = "/../../sql/queries/users/";
-var dir_7 = "/../../sql/queries/members/";
+var dir_3 = "/../../sql/queries/courses/";
+var dir_4 = "/../../sql/queries/revisions/";
+var dir_5 = "/../../sql/queries/descriptions/";
+var dir_6 = "/../../sql/queries/concerns/";
+var dir_7 = "/../../sql/queries/users/";
+var dir_8 = "/../../sql/queries/members/";
 var template = fs.readFileSync(__dirname + dir_1 + 'review_required.html', 'utf8').toString();
 var query_get_document = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
 var query_change_status = fs.readFileSync(__dirname + dir_2 + 'change_status.sql', 'utf8').toString();
-var query_get_latest_revision_by_document = fs.readFileSync(__dirname + dir_3 + 'get_latest_by_document.sql', 'utf8').toString();
-var query_get_description_by_revision = fs.readFileSync(__dirname + dir_4 + 'get_by_revision.sql', 'utf8').toString();
-var query_get_concern_by_revision = fs.readFileSync(__dirname + dir_5 + 'get_by_revision.sql', 'utf8').toString();
-var query_get_user = fs.readFileSync(__dirname + dir_6 + 'get.sql', 'utf8').toString();
-var query_list_members_by_subscription = fs.readFileSync(__dirname + dir_7 + 'list_by_subscription.sql', 'utf8').toString();
+var query_get_course_by_document = fs.readFileSync(__dirname + dir_3 + 'get_by_document.sql', 'utf8').toString();
+var query_get_latest_revision_by_document = fs.readFileSync(__dirname + dir_4 + 'get_latest_by_document.sql', 'utf8').toString();
+var query_get_description_by_revision = fs.readFileSync(__dirname + dir_5 + 'get_by_revision.sql', 'utf8').toString();
+var query_get_concern_by_revision = fs.readFileSync(__dirname + dir_6 + 'get_by_revision.sql', 'utf8').toString();
+var query_get_user = fs.readFileSync(__dirname + dir_7 + 'get.sql', 'utf8').toString();
+var query_list_members_by_subscription = fs.readFileSync(__dirname + dir_8 + 'list_by_subscription.sql', 'utf8').toString();
+var query_list_members_by_course = fs.readFileSync(__dirname + dir_8 + 'list_by_course.sql', 'utf8').toString();
 
 
 // SUBMIT
@@ -68,6 +71,24 @@ exports.request = function(req, res) {
         },
         function(client, done, document, callback) {
             // Database query
+            client.query(query_get_course_by_document, [
+                document.document_id
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    // Check if Course exists
+                    if (result.rows.length === 0) {
+                        callback(null, client, done, document, undefined);
+                    } else {
+                        callback(null, client, done, document, result.rows[0]);
+                    }
+                }
+            });
+        },
+        function(client, done, document, course, callback) {
+            // Database query
             client.query(query_get_latest_revision_by_document, [
                 req.params.document_id
             ], function(err, result) {
@@ -79,12 +100,12 @@ exports.request = function(req, res) {
                     if (result.rows.length === 0) {
                         callback(new Error("Revision not found"), 404);
                     } else {
-                        callback(null, client, done, document, result.rows[0]);
+                        callback(null, client, done, document, course, result.rows[0]);
                     }
                 }
             });
         },
-        function(client, done, document, revision, callback){
+        function(client, done, document, course, revision, callback){
             // Database query
             client.query(query_get_description_by_revision, [
                 revision.revision_id
@@ -97,12 +118,12 @@ exports.request = function(req, res) {
                     if (result.rows.length === 0) {
                         callback(new Error("Description not found"), 404);
                     } else {
-                        callback(null, client, done, document, revision, result.rows[0]);
+                        callback(null, client, done, document, course, revision, result.rows[0]);
                     }
                 }
             });
         },
-        function(client, done, document, revision, description, callback) {
+        function(client, done, document, course, revision, description, callback) {
             // Database query
             client.query(query_get_concern_by_revision, [
                 revision.revision_id
@@ -115,67 +136,67 @@ exports.request = function(req, res) {
                     if (result.rows.length === 0) {
                         callback(new Error("Concern not found"), 404);
                     } else {
-                        callback(null, client, done, document, revision, description, result.rows[0]);
+                        callback(null, client, done, document, course, revision, description, result.rows[0]);
                     }
                 }
             });
         },
-        function(client, done, document, revision, description, concern, callback) {
+        function(client, done, document, course, revision, description, concern, callback) {
             // Auto-confirmation
             if(concern.q01_value){
-                callback(null, client, done, document, revision, description, concern, 3);
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q01_value){
-                callback(null, client, done, document, revision, description, concern, 3);
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q02_value){
-                callback(null, client, done, document, revision, description, concern, 3);
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q03_value){
-                callback(null, client, done, document, revision, description, concern, 3);
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q04_value){
-                callback(null, client, done, document, revision, description, concern, 3);
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q05_value){
-                callback(null, client, done, document, revision, description, concern, 3);
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q06_value){
-                callback(null, client, done, document, revision, description, concern, 3);
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q07_value){
-                callback(null, client, done, document, revision, description, concern, 3);
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q08_value){
-                callback(null, client, done, document, revision, description, concern, 3);
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q09_value){
-                callback(null, client, done, document, revision, description, concern, 3);
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q10_value){
-                callback(null, client, done, document, revision, description, concern, 3);
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q11_1_value){
-                callback(null, client, done, document, revision, description, concern, 3);
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q11_2_value){
-                callback(null, client, done, document, revision, description, concern, 3);
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q12_value){
-                callback(null, client, done, document, revision, description, concern, 3);
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q13_value){
-                callback(null, client, done, document, revision, description, concern, 3);
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else {
-                callback(null, client, done, document, revision, description, concern, 2);
+                callback(null, client, done, document, course, revision, description, concern, 2);
             }
         },
-        function(client, done, document, revision, description, concern, status, callback) {
+        function(client, done, document, course, revision, description, concern, status, callback) {
             var object = {
                 document_id: req.params.document_id,
                 status: status
             };
             var params = _.values(object);
-            callback(null, client, done, document, revision, description, concern, params);
+            callback(null, client, done, document, course, revision, description, concern, params);
         },
-        function(client, done, document, revision, description, concern, params, callback){
+        function(client, done, document, course, revision, description, concern, params, callback){
             // Database query
             client.query(query_change_status, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, client, done, result.rows[0], revision, description, concern);
+                    callback(null, client, done, result.rows[0], course, revision, description, concern);
                 }
             });
         },
-        function(client, done, document, revision, description, concern, callback){
+        function(client, done, document, course, revision, description, concern, callback){
             // Database query
             client.query(query_get_user, [
                 document.user_id
@@ -188,23 +209,51 @@ exports.request = function(req, res) {
                     if (result.rows.length === 0) {
                         callback(new Error("User not found"), 404);
                     } else {
-                        callback(null, client, done, document, revision, description, concern, result.rows[0]);
+                        callback(null, client, done, document, course, revision, description, concern, result.rows[0]);
                     }
                 }
             });
         },
-        function(client, done, document, revision, description, concern, author, callback){
-            // Database query
-            client.query(query_list_members_by_subscription, function(err, result) {
-                done();
-                if (err) {
-                    callback(err, 500);
-                } else {
-                    callback(null, client, done, document, revision, description, concern, author, result.rows);
-                }
-            });
+        function(client, done, document, course, revision, description, concern, author, callback) {
+            // Find responsible members, when document was referenced to a course
+            if(course){
+                // Database query
+                client.query(query_list_members_by_course, [
+                    course.course_id
+                ], function(err, result) {
+                    done();
+                    if (err) {
+                        callback(err, 500);
+                    } else {
+                        // Check if Members exists
+                        if (result.rows.length === 0) {
+                            callback(null, client, done, document, course, revision, description, concern, author, []);
+                        } else {
+                            callback(null, client, done, document, course, revision, description, concern, author, result.rows);
+                        }
+                    }
+                });
+            } else {
+                callback(null, client, done, document, course, revision, description, concern, author, []);
+            }
         },
-        function(client, done, document, revision, description, concern, author, members, callback){
+        function(client, done, document, course, revision, description, concern, author, members, callback) {
+            // Find responsible members, when document was not referenced to a course, or course didn't had responsible members
+            if(members.length > 0){
+                callback(null, client, done, document, course, revision, description, concern, author, members);
+            } else {
+                // Database query
+                client.query(query_list_members_by_subscription, function(err, result) {
+                    done();
+                    if (err) {
+                        callback(err, 500);
+                    } else {
+                        callback(null, client, done, document, course, revision, description, concern, author, result.rows);
+                    }
+                });
+            }
+        },
+        function(client, done, document, course, revision, description, concern, author, members, callback){
             // Check status to notify members, in case of a review
             if(document.status === 2){
                 callback(null, 204, null);

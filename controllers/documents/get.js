@@ -9,9 +9,10 @@ var jwtSecret = require('../../server.js').jwtSecret;
 
 
 var fs = require("fs");
-var dir = "/../../sql/queries/documents/";
-var query_get_document = fs.readFileSync(__dirname + dir + 'get.sql', 'utf8').toString();
-
+var dir_1 = "/../../sql/queries/documents/";
+var dir_2 = "/../../sql/queries/courses/";
+var query_get_document = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
+var query_get_course_by_document = fs.readFileSync(__dirname + dir_2 + 'get_by_document.sql', 'utf8').toString();
 
 // GET
 exports.request = function(req, res) {
@@ -64,8 +65,37 @@ exports.request = function(req, res) {
                     if (result.rows.length === 0) {
                         callback(new Error("Document not found"), 404);
                     } else {
-                        callback(null, 200, result.rows[0]);
+                        callback(null, client, done, result.rows[0]);
                     }
+                }
+            });
+        },
+        function(client, done, document, callback) {
+            // Database query
+            client.query(query_get_course_by_document, [
+                req.params.document_id
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    // Check if Course exists
+                    if (result.rows.length === 0) {
+                        document = _.extend(document, {
+                            affiliation_id: null,
+                            course_id: null/*, // Note(nicho): currently not used
+                            course_name: null,
+                            year: null,
+                            term: null,
+                            season: null,
+                            lecturer: null,
+                            lecturer: null,
+                            institute_id: null*/
+                        });
+                    } else {
+                        document = _.extend(document, result.rows[0]);
+                    }
+                    callback(null, 200, document);
                 }
             });
         }
