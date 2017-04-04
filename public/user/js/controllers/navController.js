@@ -14,8 +14,12 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
      */
     $scope.isActive = function(viewLocation){
         var path = $location.path();
-        if(path.indexOf(viewLocation) !== -1){
-            return true;
+        if(path && viewLocation){
+            if(path.indexOf(viewLocation) !== -1){
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
@@ -28,77 +32,10 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
      * @return {[type]}      [description]
      */
     $scope.redirect = function(path){
-        $location.url(path);
-    };
-
-
-    /**
-     * [editUser description]
-     * @param  {[type]} document_id [description]
-     * @return {[type]}             [description]
-     */
-    $scope.editAccount = function(){
-        $scope.redirect("/account/edit");
-    };
-
-
-    /**
-     * [showDocumentIntro description]
-     * @param  {[type]} document_id [description]
-     * @return {[type]}             [description]
-     */
-    $scope.showDocumentIntro = function(document_id){
-        $scope.redirect("/documents/" + document_id + "/intro");
-    };
-
-
-    /**
-     * [showDocumentId description]
-     * @param  {[type]} document_id [description]
-     * @return {[type]}             [description]
-     */
-    $scope.showDocumentId = function(document_id){
-        $scope.redirect("/documents/" + document_id + "/id");
-    };
-
-
-    /**
-     * [editDocumentTitle description]
-     * @param  {[type]} document_id [description]
-     * @return {[type]}             [description]
-     */
-    $scope.editDocumentSettings = function(document_id){
-        $scope.redirect("/documents/" + document_id + "/settings");
-    };
-
-
-    /**
-     * [deleteDocument description]
-     * @param  {[type]} document_id [description]
-     * @return {[type]}             [description]
-     */
-    $scope.deleteDocument = function(document_id){
-        $scope.redirect("/documents/" + document_id + "/delete");
-    };
-
-
-    /**
-     * [showMembers description]
-     * @return {[type]} [description]
-     */
-    $scope.showMembers = function(){
-        $scope.redirect("/members");
-    };
-
-
-    /**
-     * [logout description]
-     * @return {[type]} [description]
-     */
-    $scope.logout = function(){
-        delete $scope.document;
-        delete $scope.authenticated_user;
-        $scope.redirect("/");
+        // Only redirect, when app is not loading
+        if(!$scope.loading){
+            $location.url(path);
+        }
     };
 
 
@@ -115,7 +52,6 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
         $scope.authenticated_user = $authenticationService.get();
     });
 
-
     /**
      *
      */
@@ -124,9 +60,26 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
         delete $scope.authenticated_user;
     });
 
+    /**
+     * [loading description]
+     * @type {Boolean}
+     */
+    $rootScope.$on('loading', function() {
+        $scope.loading = true;
+    });
+
+    /**
+     * [loading description]
+     * @type {Boolean}
+     */
+    $rootScope.$on('finished', function() {
+        $scope.loading = false;
+    });
 
     /*************************************************
         INIT
      *************************************************/
     $scope.config = config;
+    $scope.loading = false;
+
 });

@@ -45,6 +45,7 @@ app.controller("loginController", function($scope, $rootScope, $translate, $loca
 
     // Reset navbar
     $rootScope.$broadcast('resetNavbar');
+    $rootScope.$broadcast('finished');
 
     // Reset login
     $scope.login = $authenticationService.init();

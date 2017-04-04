@@ -62,14 +62,18 @@
                         {{config.appName}}
                     </a>
                     <div class="collapse navbar-collapse" id="navbarContent">
-                        <div class="navbar-nav mr-auto">
-                            <a href="" class="nav-link" ng-class="{ active: isActive('/members') }" ng-click="redirect('/members')" ng-if="authenticated_user">
-                                {{ 'COMMITTEE' | translate }}
-                            </a>
-                            <a  href="" class="nav-link" ng-class="{ active: isActive('/help') }" ng-click="redirect('/help')">
-                                {{ 'HELP' | translate }}
-                            </a>
-                        </div>
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a href="" class="nav-link" ng-class="{ 'active': isActive('/members') }" ng-click="redirect('/members')" ng-if="authenticated_user">
+                                    {{ 'COMMITTEE' | translate }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link" ng-class="{ 'active': isActive('/help') }" ng-click="redirect('/help')">
+                                    {{ 'HELP' | translate }}
+                                </a>
+                            </li>
+                        </ul>
                         <ul class="navbar-nav nav-pills" ng-if="authenticated_user">
                             <li class="nav-item dropdown">
                                 <a class="nav-link active dropdown-toggle" href="" id="document_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -86,21 +90,44 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="document_dropdown">
                                     <h6 class="dropdown-header">{{ 'DOCUMENT' | translate }}</h6>
-                                    <a class="dropdown-item" href="" ng-click="showDocumentIntro(document.document_id)">{{ 'SHOW_DOCUMENT_INTRO' | translate }}</a>
-                                    <a class="dropdown-item" href="" ng-click="showDocumentId(document.document_id)">{{ 'SHOW_DOCUMENT_ID' | translate }}</a>
-                                    <a class="dropdown-item" href="" ng-click="editDocumentSettings(document.document_id)">{{ 'CHANGE_DOCUMENT_SETTINGS' | translate }}</a>
-                                    <a class="dropdown-item" href="" ng-click="deleteDocument(document.document_id)" ng-if="document.status<=1">{{ 'DELETE_DOCUMENT' | translate }}</a>
+                                    <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/intro')">
+                                        {{ 'SHOW_DOCUMENT_INTRO' | translate }}
+                                    </a>
+                                    <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/id')">
+                                        {{ 'SHOW_DOCUMENT_ID' | translate }}
+                                    </a>
+                                    <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/review')" ng-if="document.status > 1">
+                                        <span ng-if="document.status == 2">
+                                            {{ 'SHOW_SUBMISSION' | translate }}
+                                        </span>
+                                        <span ng-if="document.status > 2">
+                                            {{ 'SHOW_REVIEW' | translate }}
+                                        </span>
+                                    </a>
+                                    <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/settings')">
+                                        {{ 'CHANGE_DOCUMENT_SETTINGS' | translate }}
+                                    </a>
+                                    <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/delete')" ng-if="document.status <= 1">
+                                        {{ 'DELETE_DOCUMENT' | translate }}
+                                    </a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link active user-pill dropdown-toggle" href="" id="user_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer; background-color:#FFFFFF; border: 1px solid #CCCCCC; color: #292b2c; margin-left:5px;">
-                                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;<span ng-if="authenticated_user.title">{{authenticated_user.title}}&nbsp;</span>{{authenticated_user.first_name}} {{authenticated_user.last_name}}
+                                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                    &nbsp;&nbsp;
+                                    <span ng-if="authenticated_user.title">
+                                        {{authenticated_user.title}}&nbsp;
+                                    </span>
+                                    {{authenticated_user.first_name}} {{authenticated_user.last_name}}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user_dropdown">
                                     <h6 class="dropdown-header">{{ 'ACCOUNT' | translate }}</h6>
-                                    <a class="dropdown-item" href="" ng-click="editAccount()">{{ 'SETTINGS' | translate }}</a>
+                                    <a class="dropdown-item" href="" ng-click="redirect('/account/edit')">
+                                        {{ 'SETTINGS' | translate }}
+                                    </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="" ng-click="logout()">
+                                    <a class="dropdown-item" href="" ng-click="redirect('/')">
                                         <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LOGOUT' | translate }}
                                     </a>
                                 </div>

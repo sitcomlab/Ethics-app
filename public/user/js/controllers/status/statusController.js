@@ -18,23 +18,6 @@ app.controller("statusController", function($scope, $rootScope, $translate, $loc
         $location.url(path);
     };
 
-    /**
-     * [showReview description]
-     * @return {[type]} [description]
-     */
-    /*$scope.showReview = function(){
-        $scope.redirect("/documents/" + $documentService.getId() + "/review");
-    };*/
-
-    /**
-     * [editDocument description]
-     * @return {[type]} [description]
-     */
-    /*$scope.editDocument = function(){
-        $scope.redirect("/documents/" + $documentService.getId() + "/edit");
-    };*/
-
-
     /*************************************************
         INIT
      *************************************************/

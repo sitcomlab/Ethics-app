@@ -82,30 +82,38 @@
             </div>
             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
                 <small>
+                    <span ng-if="status.descriptions.language.en">
+                        <a  href="" ng-click="toggle('descriptions', 'comments', 'en')">
+                            <span ng-if="!status.descriptions.comments.en">
+                                {{ 'SHOW_COMMENTS' | translate }}
+                            </span>
+                            <span ng-if="status.descriptions.comments.en">
+                                {{ 'HIDE_COMMENTS' | translate }}
+                            </span>
+                        </a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <a href="" ng-click="toggle('descriptions', 'history', 'en')">
+                            <span ng-if="!status.descriptions.history.en.display">
+                                {{ 'SHOW_HISTORY' | translate }}
+                            </span>
+                            <span ng-if="status.descriptions.history.en.display">
+                                {{ 'HIDE_HISTORY' | translate }}
+                            </span>
+                        </a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                    </span>
+                    <span ng-if="!status.descriptions.language.en">
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </span>
+                    <span ng-if="status.descriptions.language.en">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                    </span>
                     <a href="" ng-click="toggle('descriptions', 'language', 'en')">
-                        <span ng-if="!status.descriptions.language.en" class="link">
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        <span ng-if="status.descriptions.language.en">
+                            {{ 'HIDE' | translate }}
                         </span>
-                        <span ng-if="status.descriptions.language.en" class="link">
-                            <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        </span>
-                    </a>
-                    &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <a href="" ng-click="toggle('descriptions', 'comments', 'en')">
-                        <span ng-if="!status.descriptions.comments.en">
-                            {{ 'SHOW_COMMENTS' | translate }}
-                        </span>
-                        <span ng-if="status.descriptions.comments.en">
-                            {{ 'HIDE_COMMENTS' | translate }}
-                        </span>
-                    </a>
-                    &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <a href="" ng-click="toggle('descriptions', 'history', 'en')">
-                        <span ng-if="!status.descriptions.history.en.display">
-                            {{ 'SHOW_HISTORY' | translate }}
-                        </span>
-                        <span ng-if="status.descriptions.history.en.display">
-                            {{ 'HIDE_HISTORY' | translate }}
+                        <span ng-if="!status.descriptions.language.en">
+                            {{ 'SHOW' | translate }}
                         </span>
                     </a>
                 </small>
@@ -132,8 +140,8 @@
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.description.en_title}}</i>
-                                        <span ng-if="status.descriptions.comments.en" class="text-muted">
-                                            <p ng-if="revision.review.en_title_comment !== null || revision.review.en_title_comment !== ''">
+                                        <span ng-if="status.descriptions.comments.en" class="text-warning">
+                                            <p ng-if="revision.review.en_title_comment !== null && revision.review.en_title_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.review.en_title_comment}}
                                             </p>
                                         </span>
@@ -160,8 +168,8 @@
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.description.en_researcher}}</i>
-                                        <span ng-if="status.descriptions.comments.en" class="text-muted">
-                                            <p ng-if="revision.review.en_researcher_comment !== null || revision.review.en_researcher_comment !== ''">
+                                        <span ng-if="status.descriptions.comments.en" class="text-warning">
+                                            <p ng-if="revision.review.en_researcher_comment !== null && revision.review.en_researcher_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.review.en_researcher_comment}}
                                             </p>
                                         </span>
@@ -188,8 +196,8 @@
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.description.en_study_time}}</i>
-                                        <span ng-if="status.descriptions.comments.en" class="text-muted">
-                                            <p ng-if="revision.review.en_study_time_comment !== null || revision.review.en_study_time_comment !== ''">
+                                        <span ng-if="status.descriptions.comments.en" class="text-warning">
+                                            <p ng-if="revision.review.en_study_time_comment !== null && revision.review.en_study_time_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.review.en_study_time_comment}}
                                             </p>
                                         </span>
@@ -216,8 +224,8 @@
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.description.en_study_time}}</i>
-                                        <span ng-if="status.descriptions.comments.en" class="text-muted">
-                                            <p ng-if="revision.review.en_study_time_comment !== null || revision.review.en_study_time_comment !== ''">
+                                        <span ng-if="status.descriptions.comments.en" class="text-warning">
+                                            <p ng-if="revision.review.en_study_time_comment !== null && revision.review.en_study_time_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.review.en_study_time_comment}}
                                             </p>
                                         </span>
@@ -244,8 +252,8 @@
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.description.en_study_time}}</i>
-                                        <span ng-if="status.descriptions.comments.en" class="text-muted">
-                                            <p ng-if="revision.review.en_study_time_comment !== null || revision.review.en_study_time_comment !== ''">
+                                        <span ng-if="status.descriptions.comments.en" class="text-warning">
+                                            <p ng-if="revision.review.en_study_time_comment !== null && revision.review.en_study_time_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.review.en_study_time_comment}}
                                             </p>
                                         </span>
@@ -272,8 +280,8 @@
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.description.en_study_time}}</i>
-                                        <span ng-if="status.descriptions.comments.en" class="text-muted">
-                                            <p ng-if="revision.review.en_study_time_comment !== null || revision.review.en_study_time_comment !== ''">
+                                        <span ng-if="status.descriptions.comments.en" class="text-warning">
+                                            <p ng-if="revision.review.en_study_time_comment !== null && revision.review.en_study_time_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.review.en_study_time_comment}}
                                             </p>
                                         </span>
@@ -300,8 +308,8 @@
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.description.en_study_time}}</i>
-                                        <span ng-if="status.descriptions.comments.en" class="text-muted">
-                                            <p ng-if="revision.review.en_study_time_comment !== null || revision.review.en_study_time_comment !== ''">
+                                        <span ng-if="status.descriptions.comments.en" class="text-warning">
+                                            <p ng-if="revision.review.en_study_time_comment !== null && revision.review.en_study_time_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.review.en_study_time_comment}}
                                             </p>
                                         </span>
@@ -328,8 +336,8 @@
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.description.en_study_time}}</i>
-                                        <span ng-if="status.descriptions.comments.en" class="text-muted">
-                                            <p ng-if="revision.review.en_study_time_comment !== null || revision.review.en_study_time_comment !== ''">
+                                        <span ng-if="status.descriptions.comments.en" class="text-warning">
+                                            <p ng-if="revision.review.en_study_time_comment !== null && revision.review.en_study_time_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.review.en_study_time_comment}}
                                             </p>
                                         </span>
@@ -551,19 +559,5 @@
         </div>
         <br>
 
-    </div>
-    <div class="card-footer">
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <button class="btn btn-secondary btn-block" role="button" ng-click="showIntro()">
-                    {{ 'SHOW_INTRO' | translate }}
-                </button>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <button class="btn btn-primary btn-block" role="button" ng-click="closeReview()">
-                    {{ 'CLOSE' | translate }}
-                </button>
-            </div>
-        </div>
     </div>
 </div>
