@@ -19,8 +19,8 @@ app.config(function ($translateProvider) {
         TITLE : 'Title',
         FIRST_NAME : 'First name',
         LAST_NAME : 'Last name',
-
-        NEW_DOCUMENT: 'New document',
+        HELP: 'Help',
+        CREATE_NEW_DOCUMENT: 'Create a new document',
         FORGOT_YOUR_DOCUMENT_ID: 'Forgot your document-ID',
 
         LOGIN : 'Login',
@@ -32,17 +32,26 @@ app.config(function ($translateProvider) {
         BACK: 'Back',
         SEND_RECOVERY_EMAIL: 'Send recovery email',
 
-        HI: 'Hi',
-        NEW_USER: 'You are a new user, please fill out the following fields',
+        REGISTRATION: 'Registration',
+        NEW_DOCUMENT: 'New document',
+        PLEASE_USE_A_UNIVERSITY_ADDRESS: 'Please use an official university address',
+
+        UNIVERSITY: 'University',
+        INSTITUTE: 'Institute',
+        NO_INSTITUTE: 'No institute',
+        COURSE: 'Course',
+        NO_COURSE: 'No course',
+
+        AGREEMENT_DATA: 'I aggree, that all my given information are correct and I\'m aware, that my data will be stored by the Institute for Geoinformatics',
+        AGREEMENT_DELETION: 'I aggree, that as soon as I submit successfully my document request, only the Ethics comittee can delete my account',
 
         ACCOUNT: 'Account',
         SETTINGS: 'Settings',
         DOCUMENT: 'Document',
         LOGOUT: 'Logout',
         SHOW_DOCUMENT_ID: 'Show document-ID',
-        SHOW_INTRO: 'Show intro',
+        SHOW_DOCUMENT_INTRO: 'Show document intro',
         CHANGE_DOCUMENT_SETTINGS: 'Change document settings',
-        YOUR_DOCUMENT_TITLE: 'Your document title',
         SAVE_DOCUMENT: 'Save document',
         DELETE_DOCUMENT: 'Delete document',
         YOUR_DOCUMENT_ID: 'Your document-ID',
@@ -87,9 +96,6 @@ app.config(function ($translateProvider) {
         ENGLISH: 'ENGLISH',
         GERMAN: 'GERMAN',
 
-        STUDY_DESCRIPTION: 'Study description',
-        STUDY_CONCERNS: 'Study concerns',
-
         DOWNLOAD_YOUR_FILES: 'Download your files',
         DEBRIEFING_INFORMATION: 'Debriefing information',
         STATEMENT_OF_RESEARCHER: 'Statement of researcher',
@@ -99,12 +105,9 @@ app.config(function ($translateProvider) {
         PLEASE_TYPE_IN_THE_DOCUMENT_TITLE_TO_CONFIRM: 'Please type in the document title to confirm',
         DELETE: 'Delete',
 
-        GETTING_STARTED: 'Getting started',
-        OKAY: 'Okay',
-
+        INTRO: 'Intro',
         REQUIRED: 'required',
         OPTIONAL: 'optional',
-
         NAME: 'Name',
         TIME: 'Time',
         RESEARCHER: 'Reseacher(s)',
@@ -114,7 +117,6 @@ app.config(function ($translateProvider) {
         RISKS: 'Risks',
         BENEFITS: 'Benefits',
 
-        CLOSE: 'Close',
         ADMIN: 'admin',
         YOUR_DOCUMENT_NEEDS_TO_BE_REVIEWED: 'Your document needs to be reviewed',
         DOCUMENT_IS_CURRENTLY_UNDER_REVIEW: 'Your document is currently under review',
@@ -122,9 +124,19 @@ app.config(function ($translateProvider) {
         DOCUMENT_PARTLY_ACCEPTED: 'Your document has been partly accepted',
         YOUR_DOCUMENT_HAS_BEEN_REJECTED: 'Your document has been rejected',
 
+        SHOW_SUBMISSION: 'Show submission',
+        SHOW_REVIEW: 'Show review',
+        SUBMISSION: 'Submission',
+        REVIEW: 'Review',
+        GENERAL: 'General',
+        REVISIONS: 'Revisions',
+        STUDY_DESCRIPTION: 'Study description',
+        STUDY_CONCERNS: 'Study concerns',
         YOUR_DOCUMENT: 'Your document',
         LATEST_REVISION: 'Latest revision',
         REV: 'rev',
+        SHOW: 'Show',
+        HIDE: 'Hide',
         SHOW_DOCUMENT: 'Show document',
         SHOW_HISTORY: 'Show history',
         HIDE_HISTORY: 'Hide history',
@@ -132,7 +144,6 @@ app.config(function ($translateProvider) {
         HIDE_COMMENTS: 'Hide comments',
 
         COMMITTEE: 'Committee',
-        SHOW_MEMBERS: 'Show members',
         OFFICE: 'Office',
 
     });

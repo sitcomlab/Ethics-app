@@ -41,6 +41,11 @@ footer {
     padding-bottom: 3px;
 }
 
+.comment {
+    padding-top: 3px;
+    color: #ff4d4d;
+}
+
 .timestamp {
     font-size: 8pt;
     font-style: italic;
@@ -49,7 +54,6 @@ footer {
 .link:hover {
     text-decoration: none;
 }
-
 
 /* https://github.com/twbs/bootstrap/issues/21610 */
 .bs-fix > .list-group, .list-group-item {

@@ -17,19 +17,6 @@ app.controller("recoveryController", function($scope, $rootScope, $translate, $l
     };
 
     /**
-     * [changeTab description]
-     * @param  {[type]} tab [description]
-     * @return {[type]}     [description]
-     */
-    $scope.cancel = function(){
-        if($authenticationService.get()){
-            $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-        } else {
-            $scope.redirect("/");
-        }
-    };
-
-    /**
      * [send description]
      * @return {[type]} [description]
      */

@@ -12,9 +12,8 @@
             </div>
         </div>
         <div class="card-block">
-            <br>
             <label>
-                <b>{{ 'EMAIL_ADDRESS' | translate }}</b>
+                <b>{{ 'EMAIL_ADDRESS' | translate }}*</b>
             </label>
             <div class="form-group" ng-class="{'has-danger': editAccountForm.user_email_address.$invalid && !editAccountForm.user_email_address.$pristine}">
                 <input
@@ -55,7 +54,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                     <label>
-                        <b>{{ 'FIRST_NAME' | translate }}</b>
+                        <b>{{ 'FIRST_NAME' | translate }}*</b>
                     </label>
                     <div class="form-group" ng-class="{'has-danger': editAccountForm.first_name.$invalid && !editAccountForm.first_name.$pristine }">
                         <input
@@ -64,7 +63,7 @@
                             ng-model="updated_user.first_name"
                             name="first_name"
                             id="first_name"
-                            placeholder="{{ 'FIRST_NAME' | translate }}*"
+                            placeholder="{{ 'FIRST_NAME' | translate }}"
                             aria-describedby="inputFirstName"
                             required
                             autocomplete="on">
@@ -77,7 +76,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                     <label>
-                        <b>{{ 'LAST_NAME' | translate }}</b>
+                        <b>{{ 'LAST_NAME' | translate }}*</b>
                     </label>
                     <div class="form-group" ng-class="{'has-danger': editAccountForm.last_name.$invalid && !editAccountForm.last_name.$pristine }">
                         <input
@@ -86,7 +85,7 @@
                             ng-model="updated_user.last_name"
                             name="last_name"
                             id="last_name"
-                            placeholder="{{ 'LAST_NAME' | translate }}*"
+                            placeholder="{{ 'LAST_NAME' | translate }}"
                             aria-describedby="inputLastName"
                             required
                             autocomplete="on">
@@ -98,14 +97,8 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                    
-                </div>
-            </div>
-            <br>
 
+            TODO: Add university & institute fields
         </div>
         <div class="card-footer right">
             <button class="btn btn-success" role="submit">

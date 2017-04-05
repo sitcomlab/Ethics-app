@@ -22,11 +22,7 @@ app.controller("documentShowIntroController", function($scope, $rootScope, $tran
      * @return {[type]} [description]
      */
     $scope.cancel = function(){
-        if($authenticationService.get()){
-            $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-        } else {
-            $scope.redirect("/");
-        }
+        $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
     };
 
     /**

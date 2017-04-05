@@ -17,18 +17,6 @@ app.controller("memberDetailsController", function($scope, $rootScope, $routePar
         $location.url(path);
     };
 
-    /**
-     * [cancel description]
-     * @return {[type]} [description]
-     */
-    $scope.cancel = function(){
-        if($authenticationService.get()){
-            $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-        } else {
-            $scope.redirect("/");
-        }
-    };
-
 
     /*************************************************
         INIT

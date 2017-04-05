@@ -15,7 +15,6 @@
         </div>
 
         <div class="card-block">
-            <br>
             <label>
                 <b>{{ 'EMAIL_ADDRESS' | translate }}*</b>
             </label>
@@ -120,10 +119,8 @@
             </div>
         </div>
         <div class="card-block">
-            <br>
-
             <label>
-                <b>{{ 'EMAIL_ADDRESS' | translate }}</b>
+                <b>{{ 'EMAIL_ADDRESS' | translate }}*</b>
             </label>
             <div class="form-group" ng-class="{'has-danger': createUserForm.user_email_address.$invalid && !createUserForm.user_email_address.$pristine}">
                 <input
@@ -132,7 +129,7 @@
                     ng-model="new_user.email_address"
                     name="user_email_address"
                     id="user_email_address"
-                    placeholder="{{ 'EMAIL_ADDRESS' | translate }}*"
+                    placeholder="{{ 'EMAIL_ADDRESS' | translate }}"
                     aria-describedby="inputEmailAddress"
                     required
                     autofocus
@@ -250,13 +247,13 @@
             <label class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" ng-model="agreement.data">
                 <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">I aggree, that all my given information are correct and I'm aware, that my data will be stored by the Institute for Geoinformatics.</span>
+                <span class="custom-control-description">{{ 'AGREEMENT_DATA' | translate }}.</span>
             </label>
 
             <label class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" ng-model="agreement.deletion">
                 <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">I aggree, that as soon as I submit successfully my document request, only the Ethics comittee can delete my account.</span>
+                <span class="custom-control-description">{{ 'AGREEMENT_DELETION' | translate }}.</span>
             </label>
             <br>
 

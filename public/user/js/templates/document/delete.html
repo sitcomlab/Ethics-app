@@ -13,17 +13,14 @@
         </div>
     </div>
     <div class="card-block">
-        <br>
         <label>
             <b>{{ 'DOCUMENT_TITLE' | translate }}</b>
         </label>
         <input type="text" class="form-control" ng-model="input" id="documentTitle" placeholder="{{ 'TITLE' | translate }}" autofocus>
         <small class="form-text text-muted">{{ 'PLEASE_TYPE_IN_THE_DOCUMENT_TITLE_TO_CONFIRM' | translate }}</small>
-        <br>
     </div>
     <div class="card-footer right">
         <button class="btn btn-danger" role="button" ng-click="deleteDocument()" ng-disabled="input != document.document_title">
-        <!--<button class="btn btn-danger btn-block" style="background-color:#d9534f" role="button" ng-click="deleteDocument()" ng-disabled="input != document.document_title">-->
             <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'DELETE' | translate }}
         </button>
     </div>

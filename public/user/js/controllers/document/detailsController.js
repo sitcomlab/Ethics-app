@@ -22,9 +22,6 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
         INIT
      *************************************************/
 
-    // Update Navbar
-    $rootScope.$broadcast('loading');
-
     $timeout(function(){
         $scope.$parent.loading = { status: true, message: "Check authentication" };
 
@@ -130,13 +127,8 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                                     $fileService.set(response.data);
                                                     $documentService.setFiles($fileService.get());
 
-                                                    // Update Navbar
-                                                    $rootScope.$broadcast('finished');
-
                                                     // Redirect
-                                                    $timeout(function(){
-                                                        $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-                                                    }, 100);
+                                                    $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
 
                                                 })
                                                 .catch(function onError(response) {
@@ -145,13 +137,8 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                             }
                                         } else {
 
-                                            // Update Navbar
-                                            $rootScope.$broadcast('finished');
-
                                             // Redirect
-                                            $timeout(function(){
-                                                $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-                                            }, 100);
+                                            $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
                                         }
                                     });
                                 });

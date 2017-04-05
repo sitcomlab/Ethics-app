@@ -22,11 +22,7 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $t
      * @return {[type]} [description]
      */
     $scope.cancel = function(){
-        if($authenticationService.get()){
-            $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-        } else {
-            $scope.redirectl("/");
-        }
+        $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
     };
 
     /**

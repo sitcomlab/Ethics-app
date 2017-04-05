@@ -22,11 +22,7 @@ app.controller("documentShowReviewController", function($scope, $rootScope, $rou
      * @return {[type]} [description]
      */
     $scope.cancel = function(){
-        if($authenticationService.get()){
-            $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-        } else {
-            $scope.redirect("/");
-        }
+        $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
     };
 
     /**
@@ -53,11 +49,20 @@ app.controller("documentShowReviewController", function($scope, $rootScope, $rou
     $scope.toggle = function(category, property, language){
         switch (category) {
             case 'general': {
-                $scope.status.general.history = !$scope.status.general.history;
-                if($scope.status.general.history){
-                    $scope.status.general.limit = $scope.document.revisions.length;
-                } else {
-                    $scope.status.general.limit = 1;
+                switch (property){
+                    case 'display': {
+                        $scope.status.general.display = !$scope.status.general.display;
+                        break;
+                    }
+                    case 'history': {
+                        $scope.status.general.history = !$scope.status.general.history;
+                        if($scope.status.general.history){
+                            $scope.status.general.limit = $scope.document.revisions.length;
+                        } else {
+                            $scope.status.general.limit = 1;
+                        }
+                        break;
+                    }
                 }
                 break;
             }
@@ -136,6 +141,10 @@ app.controller("documentShowReviewController", function($scope, $rootScope, $rou
             }
             case 'concerns': {
                 switch (property) {
+                    case 'display': {
+                        $scope.status.concerns.display = !$scope.status.concerns.display;
+                        break;
+                    }
                     case 'history': {
                         $scope.status.concerns.history = !$scope.status.concerns.history;
 
@@ -167,6 +176,7 @@ app.controller("documentShowReviewController", function($scope, $rootScope, $rou
 
     $scope.status = {
         general: {
+            display: true,
             history: false,
             limit: 1
         },
@@ -191,15 +201,16 @@ app.controller("documentShowReviewController", function($scope, $rootScope, $rou
                 }
             },
             comments: {
-                en: false,
-                de: false,
-                pt: false
+                en: true,
+                de: $scope.latest_revision.description.de_used,
+                pt: $scope.latest_revision.description.pt_used
             }
         },
         concerns: {
+            display: true,
             history: false,
             limit: 1,
-            comments: false
+            comments: true
         }
     };
     $scope.$parent.loading = { status: false, message: "" };

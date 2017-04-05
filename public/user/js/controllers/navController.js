@@ -32,10 +32,7 @@ app.controller("navController", function($scope, $rootScope, $ngBootbox, $transl
      * @return {[type]}      [description]
      */
     $scope.redirect = function(path){
-        // Only redirect, when app is not loading
-        if(!$scope.loading){
-            $location.url(path);
-        }
+        $location.url(path);
     };
 
 
