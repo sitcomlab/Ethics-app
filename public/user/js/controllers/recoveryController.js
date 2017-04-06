@@ -46,6 +46,10 @@ app.controller("recoveryController", function($scope, $rootScope, $translate, $l
             })
             .catch(function onError(response) {
                 $window.alert("This email-address could not be found!");
+
+                // Reset
+                $scope.recoveryForm.email_address.$pristine = false;
+                $scope.$parent.loading = { status: false, message: "" };
             });
         }
     };

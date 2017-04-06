@@ -32,6 +32,7 @@ app.config(function ($translateProvider) {
         BACK: 'Back',
         SEND_RECOVERY_EMAIL: 'Send recovery email',
 
+        RECOVERY: 'Recovery',
         REGISTRATION: 'Registration',
         NEW_DOCUMENT: 'New document',
         PLEASE_USE_A_UNIVERSITY_ADDRESS: 'Please use an official university address',

@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <div class="card">
-    <form class="form-horizontal" name="recoveryForm" ng-submit="send()">
-        <div class="card-header" style="font-size: 20pt;">
-            <div class="row">
-                <div class="col">
-                    {{ 'RECOVERY' | translate }}
-                </div>
-                <div class="col right">
-                    <button class="btn btn-secondary" role="button" ng-click="cancel()">
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                    </button>
-                </div>
+    <div class="card-header" style="font-size: 20pt;">
+        <div class="row">
+            <div class="col">
+                {{ 'RECOVERY' | translate }}
+            </div>
+            <div class="col right">
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/')">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
-        <div class="card-block">
+    </div>
+    <div class="card-block">
+        <form class="form-horizontal" name="recoveryForm" ng-submit="send()">
+
             <label>
                 <b>{{ 'EMAIL_ADDRESS' | translate }}*</b>
             </label>
@@ -44,6 +45,6 @@
                     </button>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
