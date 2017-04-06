@@ -146,7 +146,7 @@ app.use(prefix, require ('./routes/revisions'));
 app.use(prefix, require ('./routes/descriptions'));
 app.use(prefix, require ('./routes/concerns'));
 app.use(prefix, require ('./routes/comments'));
-//app.use(prefix, require ('./routes/reviews'));
+app.use(prefix, require ('./routes/reviewers'));
 app.use(prefix, require ('./routes/recovery'));
 
 
