@@ -88,12 +88,17 @@ exports.request = function(req, res) {
                         // Create payload
                         payload = {
                             iss: server_url,
-                            name: member.title + ' ' + member.first_name + ' ' + member.last_name,
+                            sub: 'Login by email-address and password',
+                            title: member.title,
+                            first_name: member.first_name,
+                            last_name: member.last_name,
                             email_address: member.email_address,
+                            user: false,
                             committee: true,
                             admin: member.admin,
-                            exp: moment().add(1, 'days').format('x')
+                            exp: Number(moment().add(1, 'days').format('x'))
                         };
+
                         // Create JWT
                         member.token = jwt.sign(payload, jwtSecret);
                         callback(null, 200, member);

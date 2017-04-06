@@ -22,6 +22,7 @@ var dir_5 = "/../../sql/queries/affiliations/";
 var dir_6 = "/../../sql/queries/revisions/";
 var dir_7 = "/../../sql/queries/descriptions/";
 var dir_8 = "/../../sql/queries/concerns/";
+var dir_9 = "/../../sql/queries/comments/";
 var template = fs.readFileSync(__dirname + dir_1 + 'document_created.html', 'utf8').toString();
 var query_find_user_by_email = fs.readFileSync(__dirname + dir_2 + 'find_by_email.sql', 'utf8').toString();
 var query_create_document = fs.readFileSync(__dirname + dir_3 + 'create.sql', 'utf8').toString();
@@ -30,6 +31,7 @@ var query_create_affiliation = fs.readFileSync(__dirname + dir_5 + 'create.sql',
 var query_create_revision = fs.readFileSync(__dirname + dir_6 + 'create.sql', 'utf8').toString();
 var query_create_description = fs.readFileSync(__dirname + dir_7 + 'create.sql', 'utf8').toString();
 var query_create_concern = fs.readFileSync(__dirname + dir_8 + 'create.sql', 'utf8').toString();
+var query_create_comment = fs.readFileSync(__dirname + dir_9 + 'create.sql', 'utf8').toString();
 
 
 // POST
@@ -169,6 +171,19 @@ exports.request = function(req, res) {
                 }
             });
         },
+        function(client, done, user, document, revision, callback){
+            // Database query
+            client.query(query_create_comment, [
+                revision.revision_id
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    callback(null, client, done, user, document);
+                }
+            });
+        },
         function(client, done, user, document, callback){
             var _document = document;
 
@@ -217,7 +232,7 @@ exports.request = function(req, res) {
             }
 
             // Formatting
-            _document.link = server_url + ":" + httpPort + "/user/documents/" + _document.document_id;
+            _document.link = server_url + ":" + httpPort + "/user-client/documents/" + _document.document_id;
 
             // Render HTML content
             var output = mustache.render(template, {

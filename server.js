@@ -145,19 +145,20 @@ app.use(prefix, require ('./routes/documents'));
 app.use(prefix, require ('./routes/revisions'));
 app.use(prefix, require ('./routes/descriptions'));
 app.use(prefix, require ('./routes/concerns'));
-app.use(prefix, require ('./routes/reviews'));
+app.use(prefix, require ('./routes/comments'));
+//app.use(prefix, require ('./routes/reviews'));
 app.use(prefix, require ('./routes/recovery'));
 
 
 // Resolve path after refreshing inside app
 app.get('/', function(req, res, next) {
-    res.sendFile(path.resolve('public/user/index.html'));
+    res.sendFile(path.resolve('public/user/index.html')); // TODO: Rename user-client
 });
 app.get('/user/*', function(req, res, next) {
-    res.sendFile(path.resolve('public/user/index.html'));
+    res.sendFile(path.resolve('public/user/index.html')); // TODO: Rename user-client
 });
-app.get('/admin/*', function(req, res, next) {
-    res.sendFile(path.resolve('public/admin/index.html'));
+app.get('/member-client/*', function(req, res, next) {
+    res.sendFile(path.resolve('public/member-client/index.html'));
 });
 
 

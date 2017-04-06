@@ -71,8 +71,12 @@ exports.request = function(req, res) {
             // Create payload
             payload = {
                 iss: server_url,
-                name: user.title + ' ' + user.first_name + ' ' + user.last_name,
+                sub: 'Login by document-ID',
+                title: user.title,
+                first_name: user.first_name,
+                last_name: user.last_name,
                 email_address: user.email_address,
+                user: true,
                 committee: false,
                 admin: false,
                 exp: Number(moment().add(1, 'days').format('x'))

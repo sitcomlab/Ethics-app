@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <!-- Base -->
-        <base href="/user/index.html"/> <!-- TODO: Rename user-client -->
+        <base href="/member-client/index.html"/>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -64,7 +64,7 @@
                     <div class="collapse navbar-collapse" id="navbarContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <a href="" class="nav-link" ng-class="{ 'active': isActive('/members') }" ng-click="redirect('/members')" ng-if="authenticated_user">
+                                <a href="" class="nav-link" ng-class="{ 'active': isActive('/members') }" ng-click="redirect('/members')" ng-if="authenticated_member">
                                     {{ 'COMMITTEE' | translate }}
                                 </a>
                             </li>
@@ -74,7 +74,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav nav-pills" ng-if="authenticated_user">
+                        <ul class="navbar-nav nav-pills" ng-if="authenticated_member">
                             <li class="nav-item dropdown">
                                 <a class="nav-link active dropdown-toggle" href="" id="document_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                 style="cursor: pointer; color: #FFFFFF; border: 1px solid #0275d8; margin-left:5px;" ng-style="
@@ -161,8 +161,8 @@
                 &copy; {{config.appYear}}
                 <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="/committee/" target="_self" class="link">
-                    <i class="fa fa-users" aria-hidden="true"></i>
+                <a href="/user/" target="_self" class="link">
+
                 </a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
                 <a href="{{config.appGithub}}" target="_blank" class="link">

@@ -70,9 +70,9 @@ app.config(function($routeProvider, $locationProvider, config) {
                 factory: checkAuthentication
             }
 		})
-		.when("/documents/:document_id/review", {
-			templateUrl: "js/templates/document/review.html",
-			controller: "documentShowReviewController",
+		.when("/documents/:document_id/submission", {
+			templateUrl: "js/templates/document/submission.html",
+			controller: "documentShowSubmissionController",
 			resolve: {
                 factory: checkAuthentication
             }

@@ -2,14 +2,14 @@ var express = require('express');
 var router = express.Router();
 
 var member_login = require('../controllers/member_login');
-var document_login = require('../controllers/document_login');
+var user_login = require('../controllers/user_login');
 
 
-// LOGIN
+// LOGIN BY EMAIL-ADDRESS & PASSWORD (COMMITTEE-CLIENT)
 router.post('/login', member_login.request);
 
-// LOGIN BY DOCUMENT-ID
-router.get('/login/:document_id', document_login.request);
+// LOGIN BY DOCUMENT-ID (USER-CLIENT)
+router.get('/login/:document_id', user_login.request);
 
 
 module.exports = router;

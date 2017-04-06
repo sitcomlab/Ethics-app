@@ -8,9 +8,9 @@ var pool = require('../../server.js').pool;
 
 var fs = require("fs");
 var dir_1 = "/../../sql/queries/revisions/";
-var dir_2 = "/../../sql/queries/reviews/";
+var dir_2 = "/../../sql/queries/comments/";
 var query_get_revision = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
-var query_get_review_by_revision = fs.readFileSync(__dirname + dir_2 + 'get_by_revision.sql', 'utf8').toString();
+var query_get_comment_by_revision = fs.readFileSync(__dirname + dir_2 + 'get_by_revision.sql', 'utf8').toString();
 
 
 // GET BY REVISION
@@ -51,16 +51,16 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_get_review_by_revision, [
+            client.query(query_get_comment_by_revision, [
                 req.params.revision_id
             ], function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    // Check if Review exists
+                    // Check if Comment exists
                     if (result.rows.length === 0) {
-                        callback(new Error("Review not found"), 404);
+                        callback(new Error("Comment not found"), 404);
                     } else {
                         callback(null, 200, result.rows[0]);
                     }
