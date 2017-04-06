@@ -69,7 +69,7 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
         setRevisions: function(data){
             document.revisions = data;
         },
-        setDescription: function(revision_id, data){
+        setDescriptions: function(revision_id, data){
             for(var i=0; i<document.revisions.length;i++){
                 // Find revision
                 if(document.revisions[i].revision_id === revision_id){
@@ -78,7 +78,7 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
                 }
             }
         },
-        setConcern: function(revision_id, data){
+        setConcerns: function(revision_id, data){
             for(var i=0; i<document.revisions.length;i++){
                 // Find revision
                 if(document.revisions[i].revision_id === revision_id){
@@ -87,12 +87,12 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
                 }
             }
         },
-        setReview: function(revision_id, data){
+        setComments: function(revision_id, data){
             for(var i=0; i<document.revisions.length;i++){
                 // Find revision
                 if(document.revisions[i].revision_id === revision_id){
                     // Attach review
-                    document.revisions[i].review = data;
+                    document.revisions[i].comment = data;
                 }
             }
         },

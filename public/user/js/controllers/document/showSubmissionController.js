@@ -1,8 +1,8 @@
 var app = angular.module("ethics-app");
 
 
-// Document review controller
-app.controller("documentShowReviewController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $documentService) {
+// Document submission controller
+app.controller("documentShowSubmissionController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $documentService) {
 
     /*************************************************
         FUNCTIONS
@@ -22,22 +22,6 @@ app.controller("documentShowReviewController", function($scope, $rootScope, $rou
      * @return {[type]} [description]
      */
     $scope.cancel = function(){
-        $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-    };
-
-    /**
-     * [showIntro description]
-     * @return {[type]} [description]
-     */
-    $scope.showIntro = function(){
-        $scope.redirect("/documents/" + $documentService.getId() + "/intro");
-    };
-
-    /**
-     * [closeReview description]
-     * @return {[type]} [description]
-     */
-    $scope.closeReview = function(){
         $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
     };
 
@@ -169,7 +153,7 @@ app.controller("documentShowReviewController", function($scope, $rootScope, $rou
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading review" };
+    $scope.$parent.loading = { status: true, message: "Loading submission" };
     $scope.document = $documentService.get();
     console.log($scope.document);
     $scope.latest_revision = $documentService.getLatestRevision();

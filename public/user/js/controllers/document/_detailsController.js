@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document details controller
-app.controller("documentDetailsController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $q, $timeout, $authenticationService, $documentService, $revisionService, $descriptionService, $concernService, $commentService, $fileService) {
+app.controller("documentDetailsController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $q, $timeout, $authenticationService, $documentService, $revisionService, $descriptionService, $concernService, $reviewService, $fileService) {
 
     /*************************************************
         FUNCTIONS
@@ -45,13 +45,13 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                             .then(function onSuccess(response) {
                                 $documentService.setRevisions(response.data);
 
-                                // Load descriptions, concerns and comments for each revision
+                                // Load descriptions, concerns and reviews for each revision
                                 angular.forEach($documentService.getRevisions(), function(revision, key) {
 
                                     // Prepare promises
                                     var checkout_description = $q.defer();
                                     var checkout_concern = $q.defer();
-                                    var checkout_comment = $q.defer();
+                                    var checkout_review = $q.defer();
 
                                     // Checkout descriptions
                                     $descriptionService.getByRevision(revision.revision_id)
@@ -75,12 +75,12 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                         $window.alert(response.data);
                                     });
 
-                                    // Checkout comments
-                                    $commentService.getByRevision(revision.revision_id)
+                                    // Checkout reviews
+                                    $reviewService.getByRevision(revision.revision_id)
                                     .then(function onSuccess(response) {
-                                        $documentService.setComments(revision.revision_id, response.data);
+                                        $documentService.setReviews(revision.revision_id, response.data);
                                         // Resolve promise
-                                        checkout_comment.resolve();
+                                        checkout_review.resolve();
                                     })
                                     .catch(function onError(response) {
                                         $window.alert(response.data);
@@ -93,7 +93,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                     checkout_concern.promise.then(function() {
                                         return;
                                     });
-                                    checkout_comment.promise.then(function() {
+                                    checkout_review.promise.then(function() {
                                         return;
                                     });
 
@@ -102,7 +102,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                     var all = $q.all([
                                         checkout_description.promise,
                                         checkout_concern.promise,
-                                        checkout_comment.promise
+                                        checkout_review.promise
                                     ]);
 
                                     // Final task after requests

@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <!-- Base -->
-        <base href="/user/index.html"/>
+        <base href="/user/index.html"/> <!-- TODO: Rename user-client -->
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -96,7 +96,7 @@
                                     <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/id')">
                                         {{ 'SHOW_DOCUMENT_ID' | translate }}
                                     </a>
-                                    <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/review')" ng-if="document.status > 1">
+                                    <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/submission')" ng-if="document.status > 1">
                                         <span ng-if="document.status == 2">
                                             {{ 'SHOW_SUBMISSION' | translate }}
                                         </span>
@@ -161,7 +161,7 @@
                 &copy; {{config.appYear}}
                 <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="/admin/" target="_self" class="link">
+                <a href="/committee/" target="_self" class="link">
                     <i class="fa fa-users" aria-hidden="true"></i>
                 </a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
@@ -187,7 +187,8 @@
         <script src="js/services/revisionService.js"></script>
         <script src="js/services/descriptionService.js"></script>
         <script src="js/services/concernService.js"></script>
-        <script src="js/services/reviewService.js"></script>
+        <script src="js/services/commentService.js"></script>
+        <!--<script src="js/services/reviewService.js"></script>-->
         <script src="js/services/fileService.js"></script>
         <script src="js/services/recoveryService.js"></script>
         <script src="js/services/memberService.js"></script>
@@ -219,7 +220,7 @@
         <script src="js/controllers/document/editSettingsController.js"></script>
         <script src="js/controllers/document/showIdController.js"></script>
         <script src="js/controllers/document/showIntroController.js"></script>
-        <script src="js/controllers/document/showReviewController.js"></script>
+        <script src="js/controllers/document/showSubmissionController.js"></script>
 
         <!-- Status -->
         <script src="js/controllers/status/statusController.js"></script>

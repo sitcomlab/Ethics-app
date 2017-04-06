@@ -6,7 +6,7 @@ app.factory('$descriptionService', function($http, $log, config, $authentication
 
     return {
         getByRevision: function(revision_id) {
-            return $http.get(config.apiURL + "/revisions/" + revision_id + "/description", {
+            return $http.get(config.apiURL + "/revisions/" + revision_id + "/descriptions", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
