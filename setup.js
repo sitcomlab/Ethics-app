@@ -2,25 +2,26 @@ var colors = require('colors');
 var async = require('async');
 var pg = require('pg');
 var fs = require('fs');
+var config = require('./config');
 
 // ENVIRONMENT VARIABLES
-var postgres_host = process.env.POSTGRES_HOST || 'localhost';
-var postgres_port = process.env.POSTGRES_PORT || 5432;
-var postgres_db_name = process.env.POSTGRES_DB_NAME || 'ethics-app';
-var postgres_username = process.env.POSTGRES_USERNAME || 'Nicho';
-var postgres_password = process.env.POSTGRES_PASSWORD || undefined;
-var postgres_ssl = process.env.POSTGRES_SSL || false;
-
+config.postgres_host = process.env.POSTGRES_HOST || config.postgres_host;
+config.postgres_port = process.env.POSTGRES_PORT || config.postgres_port;
+config.postgres_db_name = process.env.POSTGRES_DB_NAME || config.postgres_db_name;
+config.postgres_username = process.env.POSTGRES_USERNAME || config.postgres_username;
+config.postgres_password = process.env.POSTGRES_PASSWORD || config.postgres_password;
+config.postgres_ssl = process.env.POSTGRES_SSL || config.postgres_ssl;
 
 // DATABASE CONFIGURATION
 var pool = new pg.Pool({
-    user: postgres_username,
-    password: postgres_password,
-    host: postgres_host,
-    port: postgres_port,
-    database: postgres_db_name,
-    ssl: JSON.parse(postgres_ssl)
+    host: config.postgres_host,
+    port: config.postgres_port,
+    database: config.postgres_db_name,
+    user: config.postgres_username,
+    password: config.postgres_password,
+    ssl: JSON.parse(config.postgres_ssl)
 });
+exports.pool = pool;
 
 // Load files
 var dir = "/sql/schema/";
