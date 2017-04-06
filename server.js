@@ -152,10 +152,10 @@ app.use(prefix, require ('./routes/recovery'));
 
 // Resolve path after refreshing inside app
 app.get('/', function(req, res, next) {
-    res.sendFile(path.resolve('public/user/index.html')); // TODO: Rename user-client
+    res.sendFile(path.resolve('public/user-client/index.html'));
 });
-app.get('/user/*', function(req, res, next) {
-    res.sendFile(path.resolve('public/user/index.html')); // TODO: Rename user-client
+app.get('/user-client/*', function(req, res, next) {
+    res.sendFile(path.resolve('public/user-client/index.html'));
 });
 app.get('/member-client/*', function(req, res, next) {
     res.sendFile(path.resolve('public/member-client/index.html'));
