@@ -167,8 +167,8 @@ app.controller("documentShowSubmissionController", function($scope, $rootScope, 
         descriptions: {
             language: {
                 en: true,
-                de: $scope.latest_revision.description.de_used,
-                pt: $scope.latest_revision.description.pt_used
+                de: $scope.latest_revision.descriptions.de_used,
+                pt: $scope.latest_revision.descriptions.pt_used
             },
             history: {
                 en: {
@@ -186,8 +186,8 @@ app.controller("documentShowSubmissionController", function($scope, $rootScope, 
             },
             comments: {
                 en: true,
-                de: $scope.latest_revision.description.de_used,
-                pt: $scope.latest_revision.description.pt_used
+                de: $scope.latest_revision.descriptions.de_used,
+                pt: $scope.latest_revision.descriptions.pt_used
             }
         },
         concerns: {

@@ -46,7 +46,7 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
         var save_concern = $q.defer();
 
         // Save description
-        $descriptionService.save($scope.latest_revision.description.description_id, $scope.latest_revision.description)
+        $descriptionService.save($scope.latest_revision.descriptions.description_id, $scope.latest_revision.description)
         .then(function onSuccess(response) {
             save_description.resolve();
         })
@@ -55,7 +55,7 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
         });
 
         // Save concern
-        $concernService.save($scope.latest_revision.concern.concern_id, $scope.latest_revision.concern)
+        $concernService.save($scope.latest_revision.concerns.concern_id, $scope.latest_revision.concern)
         .then(function onSuccess(response) {
             save_concern.resolve();
         })

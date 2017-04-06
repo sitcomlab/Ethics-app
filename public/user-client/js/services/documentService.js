@@ -9,8 +9,8 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
     return {
         init: function(){
             return {
-                email_address: "nicho90@live.de",
-                document_title: "test-1",
+                email_address: "",
+                document_title: "",
                 course_id: null
             };
         },
@@ -74,7 +74,7 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
                 // Find revision
                 if(document.revisions[i].revision_id === revision_id){
                     // Attach descriptions
-                    document.revisions[i].description = data;
+                    document.revisions[i].descriptions = data;
                 }
             }
         },
@@ -83,7 +83,7 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
                 // Find revision
                 if(document.revisions[i].revision_id === revision_id){
                     // Attach concerns
-                    document.revisions[i].concern = data;
+                    document.revisions[i].concerns = data;
                 }
             }
         },
@@ -92,7 +92,16 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
                 // Find revision
                 if(document.revisions[i].revision_id === revision_id){
                     // Attach review
-                    document.revisions[i].comment = data;
+                    document.revisions[i].comments = data;
+                }
+            }
+        },
+        setReviewers: function(revision_id, data){
+            for(var i=0; i<document.revisions.length;i++){
+                // Find revision
+                if(document.revisions[i].revision_id === revision_id){
+                    // Attach review
+                    document.revisions[i].reviewer = data;
                 }
             }
         },

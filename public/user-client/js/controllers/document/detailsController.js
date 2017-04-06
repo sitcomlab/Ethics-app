@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document details controller
-app.controller("documentDetailsController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $q, $timeout, $authenticationService, $documentService, $revisionService, $descriptionService, $concernService, $commentService, $fileService) {
+app.controller("documentDetailsController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $q, $timeout, $authenticationService, $documentService, $revisionService, $descriptionService, $concernService, $commentService, $reviewerService, $fileService) {
 
     /*************************************************
         FUNCTIONS
@@ -49,16 +49,17 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                 angular.forEach($documentService.getRevisions(), function(revision, key) {
 
                                     // Prepare promises
-                                    var checkout_description = $q.defer();
-                                    var checkout_concern = $q.defer();
-                                    var checkout_comment = $q.defer();
+                                    var checkout_descriptions = $q.defer();
+                                    var checkout_concerns = $q.defer();
+                                    var checkout_comments = $q.defer();
+                                    var checkout_reviewers = $q.defer();
 
                                     // Checkout descriptions
                                     $descriptionService.getByRevision(revision.revision_id)
                                     .then(function onSuccess(response) {
                                         $documentService.setDescriptions(revision.revision_id, response.data);
                                         // Resolve promise
-                                        checkout_description.resolve();
+                                        checkout_descriptions.resolve();
                                     })
                                     .catch(function onError(response) {
                                         $window.alert(response.data);
@@ -69,7 +70,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                     .then(function onSuccess(response) {
                                         $documentService.setConcerns(revision.revision_id, response.data);
                                         // Resolve promise
-                                        checkout_concern.resolve();
+                                        checkout_concerns.resolve();
                                     })
                                     .catch(function onError(response) {
                                         $window.alert(response.data);
@@ -80,29 +81,45 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                     .then(function onSuccess(response) {
                                         $documentService.setComments(revision.revision_id, response.data);
                                         // Resolve promise
-                                        checkout_comment.resolve();
+                                        checkout_comments.resolve();
                                     })
                                     .catch(function onError(response) {
                                         $window.alert(response.data);
                                     });
 
+                                    // Checkout reviewers
+                                    $reviewerService.getByRevision(revision.revision_id)
+                                    .then(function onSuccess(response) {
+                                        $documentService.setReviewers(revision.revision_id, response.data);
+                                        // Resolve promise
+                                        checkout_reviewers.resolve();
+                                    })
+                                    .catch(function onError(response) {
+                                        $window.alert(response.data);
+                                    });
+
+
                                     // Promises
-                                    checkout_description.promise.then(function(){
+                                    checkout_descriptions.promise.then(function(){
                                         return;
                                     });
-                                    checkout_concern.promise.then(function() {
+                                    checkout_concerns.promise.then(function() {
                                         return;
                                     });
-                                    checkout_comment.promise.then(function() {
+                                    checkout_comments.promise.then(function() {
+                                        return;
+                                    });
+                                    checkout_reviewers.promise.then(function() {
                                         return;
                                     });
 
 
                                     // Start parallel requests
                                     var all = $q.all([
-                                        checkout_description.promise,
-                                        checkout_concern.promise,
-                                        checkout_comment.promise
+                                        checkout_descriptions.promise,
+                                        checkout_concerns.promise,
+                                        checkout_comments.promise,
+                                        checkout_reviewers.promise
                                     ]);
 
                                     // Final task after requests

@@ -1,10 +1,10 @@
 var app = angular.module("filters", []);
 
 /**
- * time filter
+ * timestamp filter
  */
-app.filter('timeFilter', function() {
-    return function(time) {
-        return time.substr(0, 5);
+app.filter('timestamp', function() {
+    return function(timestamp) {
+        return new Date(timestamp);
     };
 });

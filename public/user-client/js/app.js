@@ -26,7 +26,7 @@ var app = angular.module("ethics-app", [
     "descriptionService",
     "concernService",
     "commentService",
-    //"reviewService",
+    "reviewerService",
     "userService",
     "recoveryService",
     "fileService",
