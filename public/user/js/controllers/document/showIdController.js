@@ -30,8 +30,17 @@ app.controller("documentShowIdController", function($scope, $rootScope, $transla
      * @return {[type]} [description]
      */
     $scope.copyToClipboard = function(){
-        // TODO: implement function
-        $window.alert("Document-ID copied to clipboard");
+      var copyTextarea = document.getElementById("documentId");
+      copyTextarea.select();
+      try {
+        var successful = document.execCommand('copy');
+        if(!successful){
+         throw err;
+        }
+      } catch (err) {
+        $window.alert('Unable to copy to Clipboard');
+      }
+      window.getSelection().removeAllRanges();
     };
 
 
