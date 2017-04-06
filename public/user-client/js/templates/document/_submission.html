@@ -21,12 +21,7 @@
         <div class="row inputs">
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <h6 class="text-muted">
-                    <span ng-if="status.general.history">
-                        {{ 'ALL_REVISIONS' | translate }}
-                    </span>
-                    <span ng-if="!status.general.history">
-                        {{ 'LATEST_REVISION' | translate }}
-                    </span>
+                    {{ 'GENERAL' | translate }}
                 </h6>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right">
@@ -40,13 +35,13 @@
                                 {{ 'HIDE_HISTORY' | translate }}
                             </span>
                         </a>
-                        <span ng-if="!status.general.history">
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                        </span>
-                        <span ng-if="status.general.history">
-                            <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        </span>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
+                    </span>
+                    <span ng-if="!status.general.display">
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </span>
+                    <span ng-if="status.general.display">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
                     </span>
                     <a href="" ng-click="toggle('general', 'display')">
                         <span ng-if="status.general.display">
@@ -56,17 +51,29 @@
                             {{ 'SHOW' | translate }}
                         </span>
                     </a>
-                    <span ng-if="!status.general.display">
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </span>
-                    <span ng-if="status.general.display">
-                        <i class="fa fa-caret-up" aria-hidden="true"></i>
-                    </span>
                 </small>
             </div>
         </div>
         <div class="bs-fix">
             <div class="list-group" ng-if="status.general.display">
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <span ng-if="status.general.history">
+                                <b>{{ 'REVISIONS' | translate }}</b>
+                            </span>
+                            <span ng-if="!status.general.history">
+                                <b>{{ 'LATEST_REVISION' | translate }}</b>
+                            </span>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <span ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.general.limit">
+                                <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                <span ng-if="!$last"><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -161,32 +168,39 @@
             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
                 <small>
                     <span ng-if="status.descriptions.language.en">
-                        <a href="" ng-click="toggle('descriptions', 'comments', 'en')" ng-if="!status.descriptions.comments.en">{{ 'SHOW_COMMENTS' | translate }}</a>
-                        <a href="" ng-click="toggle('descriptions', 'comments', 'en')" ng-if="status.descriptions.comments.en">{{ 'HIDE_COMMENTS' | translate }}</a>
-                        <span ng-if="!status.descriptions.comments.en">
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                        </span>
-                        <span ng-if="status.descriptions.comments.en">
-                            <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        </span>
+                        <a  href="" ng-click="toggle('descriptions', 'comments', 'en')">
+                            <span ng-if="!status.descriptions.comments.en">
+                                {{ 'SHOW_COMMENTS' | translate }}
+                            </span>
+                            <span ng-if="status.descriptions.comments.en">
+                                {{ 'HIDE_COMMENTS' | translate }}
+                            </span>
+                        </a>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
-                        <a href="" ng-click="toggle('descriptions', 'history', 'en')" ng-if="!status.descriptions.history.en.display">{{ 'SHOW_HISTORY' | translate }}</a>
-                        <a href="" ng-click="toggle('descriptions', 'history', 'en')" ng-if="status.descriptions.history.en.display">{{ 'HIDE_HISTORY' | translate }}</a>
-                        <span ng-if="!status.descriptions.history.en.display">
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                        </span>
-                        <span ng-if="status.descriptions.history.en.display">
-                            <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        </span>
+                        <a href="" ng-click="toggle('descriptions', 'history', 'en')">
+                            <span ng-if="!status.descriptions.history.en.display">
+                                {{ 'SHOW_HISTORY' | translate }}
+                            </span>
+                            <span ng-if="status.descriptions.history.en.display">
+                                {{ 'HIDE_HISTORY' | translate }}
+                            </span>
+                        </a>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
                     </span>
-                    <a href="" ng-click="toggle('descriptions', 'language', 'en')" ng-if="status.descriptions.language.en">{{ 'HIDE' | translate }}</a>
-                    <a href="" ng-click="toggle('descriptions', 'language', 'en')" ng-if="!status.descriptions.language.en">{{ 'SHOW' | translate }}</a>
                     <span ng-if="!status.descriptions.language.en">
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </span><span ng-if="status.descriptions.language.en">
+                    </span>
+                    <span ng-if="status.descriptions.language.en">
                         <i class="fa fa-caret-up" aria-hidden="true"></i>
                     </span>
+                    <a href="" ng-click="toggle('descriptions', 'language', 'en')">
+                        <span ng-if="status.descriptions.language.en">
+                            {{ 'HIDE' | translate }}
+                        </span>
+                        <span ng-if="!status.descriptions.language.en">
+                            {{ 'SHOW' | translate }}
+                        </span>
+                    </a>
                 </small>
             </div>
         </div>
@@ -417,32 +431,39 @@
             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
                 <small>
                     <span ng-if="status.descriptions.language.de">
-                        <a href="" ng-click="toggle('descriptions', 'comments', 'de')" ng-if="!status.descriptions.comments.de">{{ 'SHOW_COMMENTS' | translate }}</a>
-                        <a href="" ng-click="toggle('descriptions', 'comments', 'de')" ng-if="status.descriptions.comments.de">{{ 'HIDE_COMMENTS' | translate }}</a>
-                        <span ng-if="!status.descriptions.comments.de">
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                        </span>
-                        <span ng-if="status.descriptions.comments.de">
-                            <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        </span>
+                        <a  href="" ng-click="toggle('descriptions', 'comments', 'de')">
+                            <span ng-if="!status.descriptions.comments.de">
+                                {{ 'SHOW_COMMENTS' | translate }}
+                            </span>
+                            <span ng-if="status.descriptions.comments.de">
+                                {{ 'HIDE_COMMENTS' | translate }}
+                            </span>
+                        </a>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
-                        <a href="" ng-click="toggle('descriptions', 'history', 'de')" ng-if="!status.descriptions.history.de.display">{{ 'SHOW_HISTORY' | translate }}</a>
-                        <a href="" ng-click="toggle('descriptions', 'history', 'de')" ng-if="status.descriptions.history.de.display">{{ 'HIDE_HISTORY' | translate }}</a>
-                        <span ng-if="!status.descriptions.history.de.display">
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                        </span>
-                        <span ng-if="status.descriptions.history.de.display">
-                            <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        </span>
+                        <a href="" ng-click="toggle('descriptions', 'history', 'de')">
+                            <span ng-if="!status.descriptions.history.de.display">
+                                {{ 'SHOW_HISTORY' | translate }}
+                            </span>
+                            <span ng-if="status.descriptions.history.de.display">
+                                {{ 'HIDE_HISTORY' | translate }}
+                            </span>
+                        </a>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
                     </span>
-                    <a href="" ng-click="toggle('descriptions', 'language', 'de')" ng-if="status.descriptions.language.de">{{ 'HIDE' | translate }}</a>
-                    <a href="" ng-click="toggle('descriptions', 'language', 'de')" ng-if="!status.descriptions.language.de">{{ 'SHOW' | translate }}</a>
                     <span ng-if="!status.descriptions.language.de">
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </span><span ng-if="status.descriptions.language.de">
+                    </span>
+                    <span ng-if="status.descriptions.language.de">
                         <i class="fa fa-caret-up" aria-hidden="true"></i>
                     </span>
+                    <a href="" ng-click="toggle('descriptions', 'language', 'de')">
+                        <span ng-if="status.descriptions.language.de">
+                            {{ 'HIDE' | translate }}
+                        </span>
+                        <span ng-if="!status.descriptions.language.de">
+                            {{ 'SHOW' | translate }}
+                        </span>
+                    </a>
                 </small>
             </div>
         </div>
@@ -675,32 +696,39 @@
             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
                 <small>
                     <span ng-if="status.descriptions.language.pt">
-                        <a href="" ng-click="toggle('descriptions', 'comments', 'pt')" ng-if="!status.descriptions.comments.pt">{{ 'SHOW_COMMENTS' | translate }}</a>
-                        <a href="" ng-click="toggle('descriptions', 'comments', 'pt')" ng-if="status.descriptions.comments.pt">{{ 'HIDE_COMMENTS' | translate }}</a>
-                        <span ng-if="!status.descriptions.comments.pt">
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                        </span>
-                        <span ng-if="status.descriptions.comments.pt">
-                            <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        </span>
+                        <a  href="" ng-click="toggle('descriptions', 'comments', 'pt')">
+                            <span ng-if="!status.descriptions.comments.pt">
+                                {{ 'SHOW_COMMENTS' | translate }}
+                            </span>
+                            <span ng-if="status.descriptions.comments.pt">
+                                {{ 'HIDE_COMMENTS' | translate }}
+                            </span>
+                        </a>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
-                        <a href="" ng-click="toggle('descriptions', 'history', 'pt')" ng-if="!status.descriptions.history.pt.display">{{ 'SHOW_HISTORY' | translate }}</a>
-                        <a href="" ng-click="toggle('descriptions', 'history', 'pt')" ng-if="status.descriptions.history.pt.display">{{ 'HIDE_HISTORY' | translate }}</a>
-                        <span ng-if="!status.descriptions.history.pt.display">
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                        </span>
-                        <span ng-if="status.descriptions.history.pt.display">
-                            <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        </span>
+                        <a href="" ng-click="toggle('descriptions', 'history', 'pt')">
+                            <span ng-if="!status.descriptions.history.pt.display">
+                                {{ 'SHOW_HISTORY' | translate }}
+                            </span>
+                            <span ng-if="status.descriptions.history.pt.display">
+                                {{ 'HIDE_HISTORY' | translate }}
+                            </span>
+                        </a>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
                     </span>
-                    <a href="" ng-click="toggle('descriptions', 'language', 'pt')" ng-if="status.descriptions.language.pt">{{ 'HIDE' | translate }}</a>
-                    <a href="" ng-click="toggle('descriptions', 'language', 'pt')" ng-if="!status.descriptions.language.pt">{{ 'SHOW' | translate }}</a>
                     <span ng-if="!status.descriptions.language.pt">
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </span><span ng-if="status.descriptions.language.pt">
+                    </span>
+                    <span ng-if="status.descriptions.language.pt">
                         <i class="fa fa-caret-up" aria-hidden="true"></i>
                     </span>
+                    <a href="" ng-click="toggle('descriptions', 'language', 'pt')">
+                        <span ng-if="status.descriptions.language.pt">
+                            {{ 'HIDE' | translate }}
+                        </span>
+                        <span ng-if="!status.descriptions.language.pt">
+                            {{ 'SHOW' | translate }}
+                        </span>
+                    </a>
                 </small>
             </div>
         </div>
@@ -934,31 +962,39 @@
             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
                 <small>
                     <span ng-if="status.concerns.display">
-                        <a href="" ng-click="toggle('concerns', 'history')" ng-if="!status.concerns.history">{{ 'SHOW_HISTORY' | translate }}</a>
-                        <a href="" ng-click="toggle('concerns', 'history')" ng-if="status.concerns.history">{{ 'HIDE_HISTORY' | translate }}</a>
-                        <span ng-if="!status.concerns.history">
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                        </span><span ng-if="status.concerns.history">
-                            <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        </span>
+                        <a href="" ng-click="toggle('concerns', 'history')">
+                            <span ng-if="!status.concerns.history">
+                                {{ 'SHOW_HISTORY' | translate }}
+                            </span>
+                            <span ng-if="status.concerns.history">
+                                {{ 'HIDE_HISTORY' | translate }}
+                            </span>
+                        </a>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
-                        <a href="" ng-click="toggle('concerns', 'comments')" ng-if="!status.concerns.comments">{{ 'SHOW_COMMENTS' | translate }}</a>
-                        <a href="" ng-click="toggle('concerns', 'comments')" ng-if="status.concerns.comments">{{ 'HIDE_COMMENTS' | translate }}</a>
-                        <span ng-if="!status.concerns.comments">
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                        </span><span ng-if="status.concerns.comments">
-                            <i class="fa fa-caret-up" aria-hidden="true"></i>
-                        </span>
+                        <a href="" ng-click="toggle('concerns', 'comments')">
+                            <span ng-if="!status.concerns.comments">
+                                {{ 'SHOW_COMMENTS' | translate }}
+                            </span>
+                            <span ng-if="status.concerns.comments">
+                                {{ 'HIDE_COMMENTS' | translate }}
+                            </span>
+                        </a>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
                     </span>
-                    <a href="" ng-click="toggle('concerns', 'display')" ng-if="status.concerns.display">{{ 'HIDE' | translate }}</a>
-                    <a href="" ng-click="toggle('concerns', 'display')" ng-if="!status.concerns.display">{{ 'SHOW' | translate }}</a>
                     <span ng-if="!status.concerns.display">
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </span>
                     <span ng-if="status.concerns.display">
                         <i class="fa fa-caret-up" aria-hidden="true"></i>
                     </span>
+                    <a href="" ng-click="toggle('concerns', 'display')">
+                        <span ng-if="status.concerns.display">
+                            {{ 'HIDE' | translate }}
+                        </span>
+                        <span ng-if="!status.concerns.display">
+                            {{ 'SHOW' | translate }}
+                        </span>
+                    </a>
                 </small>
             </div>
         </div>
