@@ -13,7 +13,7 @@
     <div class="card-footer">
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <button class="btn btn-primary btn-block" role="button" ng-click="showReview()">
+                <button class="btn btn-primary btn-block" role="button" ng-click="redirect('/documents/' + document.document_id + '/review')">
                     <i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;
                     <span ng-if="document.status===3">
                         {{ 'SHOW_SUBMISSION' | translate }}
@@ -24,7 +24,7 @@
                 </button>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <button class="btn btn-primary btn-block" role="button" ng-click="logout()">
+                <button class="btn btn-primary btn-block" role="button" ng-click="redirect('/')">
                     <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LOGOUT' | translate }}
                 </button>
             </div>

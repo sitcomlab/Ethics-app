@@ -86,7 +86,6 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                         $window.alert(response.data);
                                     });
 
-
                                     // Promises
                                     checkout_description.promise.then(function(){
                                         return;
