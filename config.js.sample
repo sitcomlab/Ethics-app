@@ -19,5 +19,5 @@ module.exports = {
     smtp_ssl: true,
     smtp_email_address: 'example@gmail.com',
     smtp_password: 'password',
-    jwtSecret: 'superSecretKey'
+    jwtSecret: 'secret'
 }
