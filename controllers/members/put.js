@@ -45,7 +45,7 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, member, callback) {
-            // TODO: Authentication
+            // TODO: Authorization
             callback(null, client, done, member);
         },
         function(client, done, member, callback) {
@@ -56,8 +56,9 @@ exports.request = function(req, res) {
                 title: req.body.title,
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
-                institute: req.body.institute,
-                research_lab: req.body.research_lab,
+                university_id: req.body.university_id,
+                institute_id: req.body.institute_id,
+                research_group_id: req.body.research_group_id,
                 office_room_number: req.body.office_room_number,
                 office_phone_number: req.body.office_phone_number,
                 office_email_address: req.body.office_email_address,
@@ -72,7 +73,7 @@ exports.request = function(req, res) {
                 done();
                 if (err) {
                     callback(err, 500);
-                } else {                    
+                } else {
                     callback(null, 200, result.rows[0]);
                 }
             });

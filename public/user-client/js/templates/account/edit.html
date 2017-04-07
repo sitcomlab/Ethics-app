@@ -97,8 +97,47 @@
                     </div>
                 </div>
             </div>
+            <br>
 
-            TODO: Add university & institute fields
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'UNIVERSITY' | translate }}*</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': editAccountForm.university_id.$invalid && !editAccountForm.university_id.$pristine }">
+                        <select
+                            class="custom-select form-control"
+                            id="university_id"
+                            name="university_id"
+                            ng-model="updated_user.university_id"
+                            ng-options="university.university_id as university.university_name for university in universities | orderBy:['university_name']"
+                            ng-change="updateInstitutes()"
+                            required>
+                        </select>
+                    </div>
+                    <span ng-show="editAccountForm.university_id.$error.required && !editAccountForm.university_id.$pristine" class="text-danger">
+                        <small>
+                            {{ 'REQUIRED' | translate }}
+                        </small>
+                    </span>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'INSTITUTE' | translate }}</b>
+                    </label>
+                    <select
+                        class="custom-select form-control"
+                        id="institute_id"
+                        name="institute_id"
+                        ng-model="updated_user.institute_id"
+                        ng-options="institute.institute_id as institute.institute_name for institute in institutes | orderBy:['institute_name']"
+                        ng-disabled="updated_user.university_id == null">
+                        <option value="">{{ 'NO_INSTITUTE' | translate }}</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+
         </div>
         <div class="card-footer right">
             <button class="btn btn-success" role="submit">

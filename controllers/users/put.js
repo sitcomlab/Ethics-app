@@ -35,7 +35,7 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            // TODO: Authentication
+            // TODO: Authorization
             callback(null, client, done);
         },
         function(client, done, callback) {
@@ -63,7 +63,9 @@ exports.request = function(req, res) {
                 email_address: req.body.email_address,
                 title: req.body.title,
                 first_name: req.body.first_name,
-                last_name: req.body.last_name
+                last_name: req.body.last_name,
+                university_id: req.body.university_id,
+                institute_id: req.body.institute_id
             };
             var params = _.values(object);
             callback(null, client, done, user, params);
@@ -75,18 +77,36 @@ exports.request = function(req, res) {
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, client, done, user, result.rows[0]);
+                    callback(null, client, done, user);
                 }
             });
         },
-        function(client, done, user, new_user, callback) {
+        function(client, done, user, callback) {
+            // Database query
+            client.query(query_get_user, [
+                req.params.user_id
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    // Check if User exists
+                    if (result.rows.length === 0) {
+                        callback(new Error("User not found"), 404);
+                    } else {
+                        callback(null, client, done, user, result.rows[0]);
+                    }
+                }
+            });
+        },
+        function(client, done, user, updated_user, callback) {
             if(user.email_address === req.body.email_address){
-                callback(null, 200, new_user);
+                callback(null, 200, updated_user);
             } else {
                 // Render HTML content
                 var output = mustache.render(template, {
                     user: user,
-                    new_user: new_user,
+                    updated_user: updated_user,
                     year: moment().format("YYYY")
                 });
 
@@ -104,7 +124,7 @@ exports.request = function(req, res) {
                     if (err) {
                         callback(err);
                     } else {
-                        callback(null, 200, new_user);
+                        callback(null, 200, updated_user);
                     }
                 });
             }

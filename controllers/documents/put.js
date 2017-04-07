@@ -12,6 +12,7 @@ var dir_2 = "/../../sql/queries/courses/";
 var dir_3 = "/../../sql/queries/affiliations/";
 var query_get_document = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
 var query_edit_document = fs.readFileSync(__dirname + dir_1 + 'edit.sql', 'utf8').toString();
+var query_get_course = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
 var query_get_course_by_document = fs.readFileSync(__dirname + dir_2 + 'get_by_document.sql', 'utf8').toString();
 var query_get_affiliation = fs.readFileSync(__dirname + dir_3 + 'get.sql', 'utf8').toString();
 var query_delete_affiliation = fs.readFileSync(__dirname + dir_3 + 'delete.sql', 'utf8').toString();

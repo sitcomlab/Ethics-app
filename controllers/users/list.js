@@ -26,7 +26,7 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            // TODO: Authentication
+            // TODO: Authorization
             callback(null, client, done);
         },
         function(client, done, callback) {

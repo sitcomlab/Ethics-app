@@ -42,13 +42,13 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
     $scope.saveDocument = function(tab){
         $scope.$parent.loading = { status: true, message: "Auto saving" };
 
-        var save_description = $q.defer();
-        var save_concern = $q.defer();
+        var save_descriptions = $q.defer();
+        var save_concerns = $q.defer();
 
         // Save description
         $descriptionService.save($scope.latest_revision.descriptions.description_id, $scope.latest_revision.description)
         .then(function onSuccess(response) {
-            save_description.resolve();
+            save_descriptions.resolve();
         })
         .catch(function onError(response) {
             $window.alert(response.data);
@@ -57,24 +57,24 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
         // Save concern
         $concernService.save($scope.latest_revision.concerns.concern_id, $scope.latest_revision.concern)
         .then(function onSuccess(response) {
-            save_concern.resolve();
+            save_concerns.resolve();
         })
         .catch(function onError(response) {
             $window.alert(response.data);
         });
 
         // Promises
-        save_description.promise.then(function(){
+        save_descriptions.promise.then(function(){
             return;
         });
-        save_concern.promise.then(function() {
+        save_concerns.promise.then(function() {
             return;
         });
 
         // Start parallel requests
         var all = $q.all([
-            save_description.promise,
-            save_concern.promise
+            save_descriptions.promise,
+            save_concerns.promise
         ]);
 
         // Final task after requests

@@ -47,7 +47,9 @@ app.factory('$authenticationService', function($http, $log, config) {
                 title: authenticated_user.title,
                 first_name: authenticated_user.first_name,
                 last_name: authenticated_user.last_name,
-                email_address: authenticated_user.email_address
+                email_address: authenticated_user.email_address,
+                university_id: authenticated_user.university_id,
+                institute_id: authenticated_user.institute_id
             };
         },
         isAuthenticated: function(){
