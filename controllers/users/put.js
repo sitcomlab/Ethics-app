@@ -35,10 +35,6 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            // TODO: Authorization
-            callback(null, client, done);
-        },
-        function(client, done, callback) {
             // Database query
             client.query(query_get_user, [
                 req.params.user_id

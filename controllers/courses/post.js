@@ -10,8 +10,8 @@ var server_url = require('../../server.js').server_url;
 var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/members/";
-var query_create_member = fs.readFileSync(__dirname + dir + 'create.sql', 'utf8').toString();
+var dir = "/../../sql/queries/courses/";
+var query_create_course = fs.readFileSync(__dirname + dir + 'create.sql', 'utf8').toString();
 
 
 // POST
@@ -52,25 +52,15 @@ exports.request = function(req, res) {
         function(client, done, callback) {
             // TODO: Add object/schema validation
             var object = {
-                email_address: req.body.email_address,
-                password: req.body.password,
-                title: req.body.title,
-                first_name: req.body.first_name,
-                last_name: req.body.last_name,
-                university_id: req.body.university_id,
-                institute_id: req.body.institute_id,
-                research_group_id: req.body.research_group_id,
-                office_room_number: req.body.office_room_number,
-                office_phone_number: req.body.office_phone_number,
-                office_email_address: req.body.office_email_address,
-                subscribed: req.body.subscribed
+                course_name: req.body.course_name,
+                institute_id: req.body.institute_id
             };
             var params = _.values(object);
             callback(null, client, done, params);
         },
         function(client, done, params, callback){
             // Database query
-            client.query(query_create_member, params, function(err, result) {
+            client.query(query_create_course, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

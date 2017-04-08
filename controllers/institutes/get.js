@@ -7,7 +7,7 @@ var _ = require('underscore');
 var pool = require('../../server.js').pool;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/institute/";
+var dir = "/../../sql/queries/institutes/";
 var query_get_institute = fs.readFileSync(__dirname + dir + 'get.sql', 'utf8').toString();
 
 
@@ -24,10 +24,6 @@ exports.request = function(req, res) {
                     callback(null, client, done);
                 }
             });
-        },
-        function(client, done, callback) {
-            // TODO: Implement Authorization for members
-            callback(null, client, done);
         },
         function(client, done, callback) {
             // Database query

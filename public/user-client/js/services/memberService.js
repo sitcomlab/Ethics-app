@@ -17,7 +17,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             members = data;
         },
         list: function() {
-            return $http.get(config.apiURL + "/members/active", {
+            return $http.get(config.apiURL + "/members", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

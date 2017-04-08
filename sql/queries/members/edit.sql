@@ -3,6 +3,7 @@ UPDATE Members SET (
     title,
     first_name,
     last_name,
+    university_id,
     institute_id,
     research_group_id,
     office_room_number,
@@ -16,10 +17,11 @@ UPDATE Members SET (
     $5::TEXT,
     $6::INTEGER,
     $7::INTEGER,
-    $8::TEXT,
+    $8::INTEGER,
     $9::TEXT,
     $10::TEXT,
-    $11::BOOLEAN
+    $11::TEXT,
+    $12::BOOLEAN
 ) WHERE member_id=$1::INTEGER
 RETURNING
     member_id,
@@ -29,6 +31,7 @@ RETURNING
     title,
     first_name,
     last_name,
+    university_id,
     institute_id,
     research_group_id,
     office_room_number,

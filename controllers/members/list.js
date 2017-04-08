@@ -11,10 +11,11 @@ var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
 var dir = "/../../sql/queries/members/";
-var query_create_member = fs.readFileSync(__dirname + dir + 'create.sql', 'utf8').toString();
+var query_list_all_members = fs.readFileSync(__dirname + dir + 'list.sql', 'utf8').toString();
+var query_list_public_members = fs.readFileSync(__dirname + dir + 'list_public.sql', 'utf8').toString();
 
 
-// POST
+// LIST
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -39,9 +40,9 @@ exports.request = function(req, res) {
                         res.status(401).send("Authorization failed!");
                     } else {
                         if(decoded.member){
-                            callback(null, client, done);
+                            callback(null, client, done, query_list_all_members);
                         } else {
-                            res.status(401).send("Authorization failed!");
+                            callback(null, client, done, query_list_public_members);
                         }
                     }
                 });
@@ -49,33 +50,14 @@ exports.request = function(req, res) {
                 res.status(401).send("Authorization failed!");
             }
         },
-        function(client, done, callback) {
-            // TODO: Add object/schema validation
-            var object = {
-                email_address: req.body.email_address,
-                password: req.body.password,
-                title: req.body.title,
-                first_name: req.body.first_name,
-                last_name: req.body.last_name,
-                university_id: req.body.university_id,
-                institute_id: req.body.institute_id,
-                research_group_id: req.body.research_group_id,
-                office_room_number: req.body.office_room_number,
-                office_phone_number: req.body.office_phone_number,
-                office_email_address: req.body.office_email_address,
-                subscribed: req.body.subscribed
-            };
-            var params = _.values(object);
-            callback(null, client, done, params);
-        },
-        function(client, done, params, callback){
+        function(client, done, query, callback) {
             // Database query
-            client.query(query_create_member, params, function(err, result) {
+            client.query(query, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, 201, result.rows[0]);
+                    callback(null, 200, result.rows);
                 }
             });
         }

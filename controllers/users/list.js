@@ -26,8 +26,25 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            // TODO: Authorization
-            callback(null, client, done);
+            // Authorization
+            if(req.headers.authorization) {
+                var token = req.headers.authorization.substring(7);
+
+                // Verify token
+                jwt.verify(token, jwtSecret, function(err, decoded) {
+                    if(err){
+                        res.status(401).send("Authorization failed!");
+                    } else {
+                        if(decoded.member){
+                            callback(null, client, done);
+                        } else {
+                            res.status(401).send("Authorization failed!");
+                        }
+                    }
+                });
+            } else {
+                res.status(401).send("Authorization failed!");
+            }
         },
         function(client, done, callback) {
             // Database query

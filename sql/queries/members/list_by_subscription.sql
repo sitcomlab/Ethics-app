@@ -1,5 +1,5 @@
 SELECT
-    --  member.member_id,
+    member.member_id,
     member.title,
     member.first_name,
     member.last_name,

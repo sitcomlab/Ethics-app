@@ -5,7 +5,7 @@ var member_login = require('../controllers/member_login');
 var user_login = require('../controllers/user_login');
 
 
-// LOGIN BY EMAIL-ADDRESS & PASSWORD (COMMITTEE-CLIENT)
+// LOGIN BY EMAIL-ADDRESS & PASSWORD (MEMBER-CLIENT)
 router.post('/login', member_login.request);
 
 // LOGIN BY DOCUMENT-ID (USER-CLIENT)
