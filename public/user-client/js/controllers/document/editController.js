@@ -46,7 +46,7 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
         var save_concerns = $q.defer();
 
         // Save description
-        $descriptionService.save($scope.latest_revision.descriptions.description_id, $scope.latest_revision.description)
+        $descriptionService.save($scope.latest_revision.descriptions.description_id, $scope.latest_revision.descriptions)
         .then(function onSuccess(response) {
             save_descriptions.resolve();
         })
@@ -55,7 +55,7 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
         });
 
         // Save concern
-        $concernService.save($scope.latest_revision.concerns.concern_id, $scope.latest_revision.concern)
+        $concernService.save($scope.latest_revision.concerns.concern_id, $scope.latest_revision.concerns)
         .then(function onSuccess(response) {
             save_concerns.resolve();
         })
@@ -72,13 +72,10 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
         });
 
         // Start parallel requests
-        var all = $q.all([
+        $q.all([
             save_descriptions.promise,
             save_concerns.promise
-        ]);
-
-        // Final task after requests
-        all.then(function(){
+        ]).then(function(){
             if(tab){
                 $scope.$parent.loading = { status: false, message: ""};
                 $scope.changeTab(tab);
@@ -94,6 +91,7 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
      * @return {[type]} [description]
      */
     $scope.submit = function() {
+
         // Validate input
         if($scope.editDocumentForm.$invalid) {
             // Update UI
@@ -207,11 +205,12 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading.status = true;
+    $scope.$parent.loading = { status: true, message: $scope.$parent.loading.message };
     $scope.latest_revision = $documentService.getLatestRevision();
 
     // Check status
     if($documentService.getStatus()>1 && $documentService.getStatus()!=5){
+        // Redirect
         $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
     } else {
         $scope.$parent.loading = { status: false, message: "" };

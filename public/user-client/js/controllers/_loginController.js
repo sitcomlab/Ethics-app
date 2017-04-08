@@ -44,8 +44,8 @@ app.controller("loginController", function($scope, $rootScope, $translate, $loca
     $fileService.set();
 
     // Reset navbar
-    $scope.$parent.authenticated_user = $documentService.get();
-    $scope.$parent.document = $authenticationService.get();
+    $scope.$parent.loading = { status: true, message: "Loading application" };
+    $scope.$parent.loading = { status: true, message: "Loading application" };
 
     // Reset login
     $scope.login = $authenticationService.init();

@@ -45,25 +45,21 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                             .then(function onSuccess(response) {
                                 $documentService.setRevisions(response.data);
 
-                                // Prepare main-promises
-                                var checkout_revisions_deferred = $q.defer();
-                                var revision_promises = [];
+                                // Load descriptions, concerns and comments for each revision
+                                angular.forEach($documentService.getRevisions(), function(revision, key) {
 
-                                // Checkout description, concerns, comments and reviewers for each revision
-                                angular.forEach($documentService.getRevisions(), function(revision, key){
-
-                                    // Prepare sub-promises
-                                    var checkout_descriptions_deferred = $q.defer();
-                                    var checkout_concerns_deferred = $q.defer();
-                                    var checkout_comments_deferred = $q.defer();
-                                    var checkout_reviewers_deferred = $q.defer();
+                                    // Prepare promises
+                                    var checkout_descriptions = $q.defer();
+                                    var checkout_concerns = $q.defer();
+                                    var checkout_comments = $q.defer();
+                                    var checkout_reviewers = $q.defer();
 
                                     // Checkout descriptions
                                     $descriptionService.getByRevision(revision.revision_id)
                                     .then(function onSuccess(response) {
                                         $documentService.setDescriptions(revision.revision_id, response.data);
-                                        // Resolve sub-promise
-                                        checkout_descriptions_deferred.resolve();
+                                        // Resolve promise
+                                        checkout_descriptions.resolve();
                                     })
                                     .catch(function onError(response) {
                                         $window.alert(response.data);
@@ -73,8 +69,8 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                     $concernService.getByRevision(revision.revision_id)
                                     .then(function onSuccess(response) {
                                         $documentService.setConcerns(revision.revision_id, response.data);
-                                        // Resolve sub-promise
-                                        checkout_concerns_deferred.resolve();
+                                        // Resolve promise
+                                        checkout_concerns.resolve();
                                     })
                                     .catch(function onError(response) {
                                         $window.alert(response.data);
@@ -84,8 +80,8 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                     $commentService.getByRevision(revision.revision_id)
                                     .then(function onSuccess(response) {
                                         $documentService.setComments(revision.revision_id, response.data);
-                                        // Resolve sub-promise
-                                        checkout_comments_deferred.resolve();
+                                        // Resolve promise
+                                        checkout_comments.resolve();
                                     })
                                     .catch(function onError(response) {
                                         $window.alert(response.data);
@@ -95,79 +91,72 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                     $reviewerService.getByRevision(revision.revision_id)
                                     .then(function onSuccess(response) {
                                         $documentService.setReviewers(revision.revision_id, response.data);
-                                        // Resolve sub-promise
-                                        checkout_reviewers_deferred.resolve();
+                                        // Resolve promise
+                                        checkout_reviewers.resolve();
                                     })
                                     .catch(function onError(response) {
                                         $window.alert(response.data);
                                     });
 
-                                    // Sub-promises
-                                    checkout_descriptions_deferred.promise.then(function(){
+
+                                    // Promises
+                                    checkout_descriptions.promise.then(function(){
                                         return;
                                     });
-                                    checkout_concerns_deferred.promise.then(function() {
+                                    checkout_concerns.promise.then(function() {
                                         return;
                                     });
-                                    checkout_comments_deferred.promise.then(function() {
+                                    checkout_comments.promise.then(function() {
                                         return;
                                     });
-                                    checkout_reviewers_deferred.promise.then(function() {
+                                    checkout_reviewers.promise.then(function() {
                                         return;
                                     });
 
-                                    // Start parallel sub-requests
-                                    $q.all([
-                                        checkout_descriptions_deferred.promise,
-                                        checkout_concerns_deferred.promise,
-                                        checkout_comments_deferred.promise,
-                                        checkout_reviewers_deferred.promise
-                                    ]).then(function(){
-                                        // Resolve main-promises
-                                        revision_promises.push(checkout_revisions_deferred.resolve());
-                                    });
 
-                                });
+                                    // Start parallel requests
+                                    var all = $q.all([
+                                        checkout_descriptions.promise,
+                                        checkout_concerns.promise,
+                                        checkout_comments.promise,
+                                        checkout_reviewers.promise
+                                    ]);
 
-                                // Start parallel requests for each revision
-                                $q.all(revision_promises).then(function(){
+                                    // Final task after requests
+                                    all.then(function(){
+                                        // Update navbar
+                                        $rootScope.$broadcast('updateNavbar');
 
-                                    // Update navbar
-                                    $scope.$parent.authenticated_user = $authenticationService.get();
-                                    $scope.$parent.document = $documentService.get();
-                                    $scope.$parent.loading = { status: true, message: "Generating files" };
+                                        // Check status for files
+                                        if($documentService.getStatus()===2 || $documentService.getStatus()===6){
 
-                                    // Check status of document to generate files
-                                    if($documentService.getStatus()===2 || $documentService.getStatus()===6){
+                                            // Check if files were cached
+                                            if($fileService.get()){
+                                                $documentService.setFiles($fileService.get());
+                                                $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
+                                            } else {
+                                                $scope.$parent.loading = { status: true, message: "Generating files" };
 
-                                        // Check if files were already created and cached
-                                        if($fileService.get()){
-                                            $documentService.setFiles($fileService.get());
-                                            $scope.$parent.loading = { status: false, message: "" };
+                                                // Generate files on server
+                                                $documentService.generateFiles($documentService.getId())
+                                                .then(function onSuccess(response) {
+                                                    $fileService.set(response.data);
+                                                    $documentService.setFiles($fileService.get());
+
+                                                    // Redirect
+                                                    $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
+
+                                                })
+                                                .catch(function onError(response) {
+                                                    $window.alert(response.data);
+                                                });
+                                            }
+                                        } else {
 
                                             // Redirect
                                             $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-                                        } else {
-                                            // Generate files on server
-                                            $documentService.generateFiles($documentService.getId())
-                                            .then(function onSuccess(response) {
-                                                $fileService.set(response.data);
-                                                $documentService.setFiles($fileService.get());
-                                                $scope.$parent.loading = { status: false, message: "" };
-
-                                                // Redirect
-                                                $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-                                            })
-                                            .catch(function onError(response) {
-                                                $window.alert(response.data);
-                                            });
                                         }
-                                    } else {
-                                        $scope.$parent.loading = { status: false, message: "" };
-
-                                        // Redirect
-                                        $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-                                    }
+                                    });
                                 });
                             })
                             .catch(function onError(response) {

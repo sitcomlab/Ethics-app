@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<form class="form-horizontal" name="editDocumentForm" ng-submit="submit()">
+<form class="form-horizontal" name="editDocumentForm" novalidate>
 
     <!-- Descriptions -->
     <div class="card" ng-show="tab==1">
@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 middle">
                     <label class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" ng-model="latest_revision.description.de_used">
+                        <input type="checkbox" class="custom-control-input" ng-model="latest_revision.descriptions.de_used">
                         <span class="custom-control-indicator"></span>
                         <span class="custom-control-description">
                             <span class="flag-icon flag-icon-de"></span>&nbsp;&nbsp;<b>{{ 'GERMAN' | translate }}</b>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 middle">
                     <label class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" ng-model="latest_revision.description.pt_used">
+                        <input type="checkbox" class="custom-control-input" ng-model="latest_revision.descriptions.pt_used">
                         <span class="custom-control-indicator"></span>
                         <span class="custom-control-description">
                             <span class="flag-icon flag-icon-pt"></span>&nbsp;&nbsp;<b>{{ 'PORTUGESE' | translate }}</b>
@@ -81,7 +81,7 @@
                             <input
                                 type="text"
                                 class="form-control"
-                                ng-model="latest_revision.description.en_title"
+                                ng-model="latest_revision.descriptions.en_title"
                                 name="en_title"
                                 id="en_title"
                                 placeholder="{{ 'TITLE' | translate }}*" aria-describedby="descriptionTitle"
@@ -98,17 +98,17 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.description.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_title.$invalid && !editDocumentForm.de_title.$pristine }">
                         <div class="input-group">
                             <input
                                 type="text"
                                 class="form-control"
-                                ng-model="latest_revision.description.de_title"
+                                ng-model="latest_revision.descriptions.de_title"
                                 name="de_title"
                                 id="de_title"
                                 placeholder="{{ 'TITLE' | translate }}*" aria-describedby="descriptionTitle"
-                                ng-required="latest_revision.description.de_used">
+                                ng-required="latest_revision.descriptions.de_used">
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-de"></span>
                             </span>
@@ -120,17 +120,17 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.description.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_title.$invalid && !editDocumentForm.pt_title.$pristine }">
                         <div class="input-group">
                             <input
                                 type="text"
                                 class="form-control"
-                                ng-model="latest_revision.description.pt_title"
+                                ng-model="latest_revision.descriptions.pt_title"
                                 name="pt_title"
                                 id="pt_title"
                                 placeholder="{{ 'TITLE' | translate }}*" aria-describedby="descriptionTitle"
-                                ng-required="latest_revision.description.pt_used">
+                                ng-required="latest_revision.descriptions.pt_used">
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-pt"></span>
                             </span>
@@ -160,7 +160,7 @@
                             <input
                                 type="text"
                                 class="form-control"
-                                ng-model="latest_revision.description.en_researcher"
+                                ng-model="latest_revision.descriptions.en_researcher"
                                 name="en_researcher"
                                 id="en_researcher"
                                 placeholder="{{ 'NAME' | translate }}*" aria-describedby="descriptionResearcher"
@@ -176,17 +176,17 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.description.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_researcher.$invalid && !editDocumentForm.de_researcher.$pristine }">
                         <div class="input-group">
                             <input
                                 type="text"
                                 class="form-control"
-                                ng-model="latest_revision.description.de_researcher"
+                                ng-model="latest_revision.descriptions.de_researcher"
                                 name="de_researcher"
                                 id="de_researcher"
                                 placeholder="{{ 'NAME' | translate }}*" aria-describedby="descriptionResearcher"
-                                ng-required="latest_revision.description.de_used">
+                                ng-required="latest_revision.descriptions.de_used">
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-de"></span>
                             </span>
@@ -198,17 +198,17 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.description.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_researcher.$invalid && !editDocumentForm.pt_researcher.$pristine }">
                         <div class="input-group">
                             <input
                                 type="text"
                                 class="form-control"
-                                ng-model="latest_revision.description.pt_researcher"
+                                ng-model="latest_revision.descriptions.pt_researcher"
                                 name="pt_researcher"
                                 id="pt_researcher"
                                 placeholder="{{ 'NAME' | translate }}*" aria-describedby="descriptionResearcher"
-                                ng-required="latest_revision.description.pt_used">
+                                ng-required="latest_revision.descriptions.pt_used">
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-pt"></span>
                             </span>
@@ -238,7 +238,7 @@
                             <input
                                 type="text"
                                 class="form-control"
-                                ng-model="latest_revision.description.en_study_time"
+                                ng-model="latest_revision.descriptions.en_study_time"
                                 name="en_study_time"
                                 id="en_study_time"
                                 placeholder="{{ 'TIME' | translate }}*"
@@ -255,17 +255,17 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.description.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_study_time.$invalid && !editDocumentForm.de_study_time.$pristine }">
                         <div class="input-group">
                             <input
                                 type="text"
                                 class="form-control"
-                                ng-model="latest_revision.description.de_study_time"
+                                ng-model="latest_revision.descriptions.de_study_time"
                                 name="de_study_time"
                                 id="de_study_time"
                                 placeholder="{{ 'TIME' | translate }}*" aria-describedby="descriptionTime"
-                                ng-required="latest_revision.description.de_used">
+                                ng-required="latest_revision.descriptions.de_used">
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-de"></span>
                             </span>
@@ -277,17 +277,17 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.description.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_study_time.$invalid && !editDocumentForm.pt_study_time.$pristine }">
                         <div class="input-group">
                             <input
                                 type="text"
                                 class="form-control"
-                                ng-model="latest_revision.description.pt_study_time"
+                                ng-model="latest_revision.descriptions.pt_study_time"
                                 name="pt_study_time"
                                 id="pt_study_time"
                                 placeholder="{{ 'TIME' | translate }}*" aria-describedby="descriptionTime"
-                                ng-required="latest_revision.description.pt_used">
+                                ng-required="latest_revision.descriptions.pt_used">
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-pt"></span>
                             </span>
@@ -316,7 +316,7 @@
                         <div class="input-group">
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'PURPOSE' | translate }}*" ng-model="latest_revision.description.en_purpose"
+                                placeholder="{{ 'PURPOSE' | translate }}*" ng-model="latest_revision.descriptions.en_purpose"
                                 name="en_purpose"
                                 id="en_purpose"
                                 required></textarea>
@@ -331,15 +331,15 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.description.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_purpose.$invalid && !editDocumentForm.de_purpose.$pristine }">
                         <div class="input-group">
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'PURPOSE' | translate }}*" ng-model="latest_revision.description.de_purpose"
+                                placeholder="{{ 'PURPOSE' | translate }}*" ng-model="latest_revision.descriptions.de_purpose"
                                 name="de_purpose"
                                 id="de_purpose"
-                                ng-required="latest_revision.description.de_used"></textarea>
+                                ng-required="latest_revision.descriptions.de_used"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-de"></span>
                             </span>
@@ -351,15 +351,15 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.description.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_purpose.$invalid && !editDocumentForm.pt_purpose.$pristine }">
                         <div class="input-group">
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'PURPOSE' | translate }}*" ng-model="latest_revision.description.pt_purpose"
+                                placeholder="{{ 'PURPOSE' | translate }}*" ng-model="latest_revision.descriptions.pt_purpose"
                                 name="pt_purpose"
                                 id="pt_purpose"
-                                ng-required="latest_revision.description.pt_used"></textarea>
+                                ng-required="latest_revision.descriptions.pt_used"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-pt"></span>
                             </span>
@@ -388,7 +388,7 @@
                         <div class="input-group">
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'PROCEDURE' | translate }}*" ng-model="latest_revision.description.en_procedure"
+                                placeholder="{{ 'PROCEDURE' | translate }}*" ng-model="latest_revision.descriptions.en_procedure"
                                 name="en_procedure"
                                 id="en_procedure"
                                 required></textarea>
@@ -403,15 +403,15 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.description.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_procedure.$invalid && !editDocumentForm.de_procedure.$pristine }">
                         <div class="input-group">
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'PROCEDURE' | translate }}*" ng-model="latest_revision.description.de_procedure"
+                                placeholder="{{ 'PROCEDURE' | translate }}*" ng-model="latest_revision.descriptions.de_procedure"
                                 name="de_procedure"
                                 id="de_procedure"
-                                ng-required="latest_revision.description.de_used"></textarea>
+                                ng-required="latest_revision.descriptions.de_used"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-de"></span>
                             </span>
@@ -423,15 +423,15 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.description.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_procedure.$invalid && !editDocumentForm.pt_procedure.$pristine }">
                         <div class="input-group">
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'PROCEDURE' | translate }}*" ng-model="latest_revision.description.pt_procedure"
+                                placeholder="{{ 'PROCEDURE' | translate }}*" ng-model="latest_revision.descriptions.pt_procedure"
                                 name="pt_procedure"
                                 id="pt_procedure"
-                                ng-required="latest_revision.description.pt_used"></textarea>
+                                ng-required="latest_revision.descriptions.pt_used"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-pt"></span>
                             </span>
@@ -460,7 +460,7 @@
                         <div class="input-group">
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'DURATION' | translate }}*" ng-model="latest_revision.description.en_duration"
+                                placeholder="{{ 'DURATION' | translate }}*" ng-model="latest_revision.descriptions.en_duration"
                                 name="en_duration"
                                 id="en_duration"
                                 required></textarea>
@@ -475,15 +475,15 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.description.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_duration.$invalid && !editDocumentForm.de_duration.$pristine }">
                         <div class="input-group">
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'DURATION' | translate }}*" ng-model="latest_revision.description.de_duration"
+                                placeholder="{{ 'DURATION' | translate }}*" ng-model="latest_revision.descriptions.de_duration"
                                 name="de_duration"
                                 id="de_duration"
-                                ng-required="latest_revision.description.de_used"></textarea>
+                                ng-required="latest_revision.descriptions.de_used"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-de"></span>
                             </span>
@@ -495,15 +495,15 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.description.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_duration.$invalid && !editDocumentForm.pt_duration.$pristine }">
                         <div class="input-group">
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'DURATION' | translate }}*" ng-model="latest_revision.description.pt_duration"
+                                placeholder="{{ 'DURATION' | translate }}*" ng-model="latest_revision.descriptions.pt_duration"
                                 name="pt_duration"
                                 id="pt_duration"
-                                ng-required="latest_revision.description.pt_used"></textarea>
+                                ng-required="latest_revision.descriptions.pt_used"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-pt"></span>
                             </span>
@@ -532,7 +532,7 @@
                         <div class="input-group">
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'RISKS' | translate }}*" ng-model="latest_revision.description.en_risks"
+                                placeholder="{{ 'RISKS' | translate }}*" ng-model="latest_revision.descriptions.en_risks"
                                 name="en_risks"
                                 id="en_risks"
                                 required></textarea>
@@ -547,15 +547,15 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.description.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_risks.$invalid && !editDocumentForm.de_risks.$pristine }">
                         <div class="input-group">
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'RISKS' | translate }}*" ng-model="latest_revision.description.de_risks"
+                                placeholder="{{ 'RISKS' | translate }}*" ng-model="latest_revision.descriptions.de_risks"
                                 name="de_risks"
                                 id="de_risks"
-                                ng-required="latest_revision.description.de_used"></textarea>
+                                ng-required="latest_revision.descriptions.de_used"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-de"></span>
                             </span>
@@ -567,15 +567,15 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.description.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_risks.$invalid && !editDocumentForm.pt_risks.$pristine }">
                         <div class="input-group">
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'RISKS' | translate }}*" ng-model="latest_revision.description.pt_risks"
+                                placeholder="{{ 'RISKS' | translate }}*" ng-model="latest_revision.descriptions.pt_risks"
                                 name="pt_risks"
                                 id="pt_risks"
-                                ng-required="latest_revision.description.pt_used"></textarea>
+                                ng-required="latest_revision.descriptions.pt_used"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-pt"></span>
                             </span>
@@ -604,7 +604,7 @@
                         <div class="input-group">
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'BENEFITS' | translate }}*" ng-model="latest_revision.description.en_benefits"
+                                placeholder="{{ 'BENEFITS' | translate }}*" ng-model="latest_revision.descriptions.en_benefits"
                                 name="en_benefits"
                                 id="en_benefits"
                                 required></textarea>
@@ -619,15 +619,15 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.description.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_benefits.$invalid && !editDocumentForm.de_benefits.$pristine }">
                         <div class="input-group">
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'BENEFITS' | translate }}*" ng-model="latest_revision.description.de_benefits"
+                                placeholder="{{ 'BENEFITS' | translate }}*" ng-model="latest_revision.descriptions.de_benefits"
                                 name="de_benefits"
                                 id="de_benefits"
-                                ng-required="latest_revision.description.de_used"></textarea>
+                                ng-required="latest_revision.descriptions.de_used"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-de"></span>
                             </span>
@@ -639,15 +639,15 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.description.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_benefits.$invalid && !editDocumentForm.pt_benefits.$pristine }">
                         <div class="input-group">
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'BENEFITS' | translate }}*" ng-model="latest_revision.description.pt_benefits"
+                                placeholder="{{ 'BENEFITS' | translate }}*" ng-model="latest_revision.descriptions.pt_benefits"
                                 name="pt_benefits"
                                 id="pt_benefits"
-                                ng-required="latest_revision.description.pt_used"></textarea>
+                                ng-required="latest_revision.descriptions.pt_used"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-pt"></span>
                             </span>
@@ -716,7 +716,7 @@
                                             type="radio"
                                             name="q01_value"
                                             id="q01_value_1"
-                                            ng-model="latest_revision.concern.q01_value"
+                                            ng-model="latest_revision.concerns.q01_value"
                                             ng-value="false"
                                             required>
                                         {{ 'NO' | translate }}
@@ -726,7 +726,7 @@
                                             type="radio"
                                             name="q01_value"
                                             id="q01_value_2"
-                                            ng-model="latest_revision.concern.q01_value"
+                                            ng-model="latest_revision.concerns.q01_value"
                                             ng-value="true"
                                             required>
                                         {{ 'YES' | translate }}
@@ -741,16 +741,15 @@
                         </div>
                     </div>
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q01_explanation.$invalid && !editDocumentForm.q01_explanation.$pristine }">
-                        <div class="input-group" ng-if="latest_revision.concern.q01_value">
+                        <div class="input-group" ng-if="latest_revision.concerns.q01_value">
                             <textarea
                                 class="form-control"
                                 rows="5"
                                 placeholder="{{ 'EXPLANATION' | translate }}*"
                                 name="q01_explanation"
                                 id="q01_explanation"
-                                ng-model="latest_revision.concern.q01_explanation"
-                                ng-required="latest_revision.concern.q01_value"
-                                autofocus></textarea>
+                                ng-model="latest_revision.concerns.q01_explanation"
+                                ng-required="latest_revision.concerns.q01_value"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-gb"></span>
                             </span>
@@ -777,7 +776,7 @@
                                     type="radio"
                                     name="q02_value"
                                     id="q02_value_1"
-                                    ng-model="latest_revision.concern.q02_value"
+                                    ng-model="latest_revision.concerns.q02_value"
                                     ng-value="false"
                                     required>
                                 {{ 'NO' | translate }}
@@ -787,7 +786,7 @@
                                     type="radio"
                                     name="q02_value"
                                     id="q02_value_2"
-                                    ng-model="latest_revision.concern.q02_value"
+                                    ng-model="latest_revision.concerns.q02_value"
                                     ng-value="true"
                                     required>
                                 {{ 'YES' | translate }}
@@ -800,16 +799,15 @@
                         </span>
                     </div>
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q02_explanation.$invalid && !editDocumentForm.q02_explanation.$pristine }">
-                        <div class="input-group" ng-if="latest_revision.concern.q02_value">
+                        <div class="input-group" ng-if="latest_revision.concerns.q02_value">
                             <textarea
                                 class="form-control"
                                 rows="5"
                                 placeholder="{{ 'EXPLANATION' | translate }}*"
                                 name="q02_explanation"
                                 id="q02_explanation"
-                                ng-model="latest_revision.concern.q02_explanation"
-                                ng-required="latest_revision.concern.q02_value"
-                                autofocus></textarea>
+                                ng-model="latest_revision.concerns.q02_explanation"
+                                ng-required="latest_revision.concerns.q02_value"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-gb"></span>
                             </span>
@@ -836,7 +834,7 @@
                                     type="radio"
                                     name="q03_value"
                                     id="q03_value_1"
-                                    ng-model="latest_revision.concern.q03_value"
+                                    ng-model="latest_revision.concerns.q03_value"
                                     ng-value="false"
                                     required>
                                 {{ 'NO' | translate }}
@@ -846,7 +844,7 @@
                                     type="radio"
                                     name="q03_value"
                                     id="q03_value_2"
-                                    ng-model="latest_revision.concern.q03_value"
+                                    ng-model="latest_revision.concerns.q03_value"
                                     ng-value="true"
                                     required>
                                 {{ 'YES' | translate }}
@@ -859,16 +857,15 @@
                         </span>
                     </div>
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q03_explanation.$invalid && !editDocumentForm.q03_explanation.$pristine }">
-                        <div class="input-group" ng-if="latest_revision.concern.q03_value">
+                        <div class="input-group" ng-if="latest_revision.concerns.q03_value">
                             <textarea
                                 class="form-control"
                                 rows="5"
                                 placeholder="{{ 'EXPLANATION' | translate }}*"
                                 name="q03_explanation"
                                 id="q03_explanation"
-                                ng-model="latest_revision.concern.q03_explanation"
-                                ng-required="latest_revision.concern.q03_value"
-                                autofocus></textarea>
+                                ng-model="latest_revision.concerns.q03_explanation"
+                                ng-required="latest_revision.concerns.q03_value"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-gb"></span>
                             </span>
@@ -895,7 +892,7 @@
                                     type="radio"
                                     name="q04_value"
                                     id="q04_value_1"
-                                    ng-model="latest_revision.concern.q04_value"
+                                    ng-model="latest_revision.concerns.q04_value"
                                     ng-value="false"
                                     required>
                                 {{ 'NO' | translate }}
@@ -905,7 +902,7 @@
                                     type="radio"
                                     name="q04_value"
                                     id="q04_value_2"
-                                    ng-model="latest_revision.concern.q04_value"
+                                    ng-model="latest_revision.concerns.q04_value"
                                     ng-value="true"
                                     required>
                                 {{ 'YES' | translate }}
@@ -918,16 +915,15 @@
                         </span>
                     </div>
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q04_explanation.$invalid && !editDocumentForm.q04_explanation.$pristine }">
-                        <div class="input-group" ng-if="latest_revision.concern.q04_value">
+                        <div class="input-group" ng-if="latest_revision.concerns.q04_value">
                             <textarea
                                 class="form-control"
                                 rows="5"
                                 placeholder="{{ 'EXPLANATION' | translate }}*"
                                 name="q04_explanation"
                                 id="q04_explanation"
-                                ng-model="latest_revision.concern.q04_explanation"
-                                ng-required="latest_revision.concern.q04_value"
-                                autofocus></textarea>
+                                ng-model="latest_revision.concerns.q04_explanation"
+                                ng-required="latest_revision.concerns.q04_value"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-gb"></span>
                             </span>
@@ -954,7 +950,7 @@
                                     type="radio"
                                     name="q05_value"
                                     id="q05_value_1"
-                                    ng-model="latest_revision.concern.q05_value"
+                                    ng-model="latest_revision.concerns.q05_value"
                                     ng-value="false"
                                     required>
                                 {{ 'NO' | translate }}
@@ -964,7 +960,7 @@
                                     type="radio"
                                     name="q05_value"
                                     id="q05_value_2"
-                                    ng-model="latest_revision.concern.q05_value"
+                                    ng-model="latest_revision.concerns.q05_value"
                                     ng-value="true"
                                     required>
                                 {{ 'YES' | translate }}
@@ -977,16 +973,15 @@
                         </span>
                     </div>
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q05_explanation.$invalid && !editDocumentForm.q05_explanation.$pristine }">
-                        <div class="input-group" ng-if="latest_revision.concern.q05_value">
+                        <div class="input-group" ng-if="latest_revision.concerns.q05_value">
                             <textarea
                                 class="form-control"
                                 rows="5"
                                 placeholder="{{ 'EXPLANATION' | translate }}*"
                                 name="q05_explanation"
                                 id="q05_explanation"
-                                ng-model="latest_revision.concern.q05_explanation"
-                                ng-required="latest_revision.concern.q05_value"
-                                autofocus></textarea>
+                                ng-model="latest_revision.concerns.q05_explanation"
+                                ng-required="latest_revision.concerns.q05_value"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-gb"></span>
                             </span>
@@ -1013,7 +1008,7 @@
                                     type="radio"
                                     name="q06_value"
                                     id="q06_value_1"
-                                    ng-model="latest_revision.concern.q06_value"
+                                    ng-model="latest_revision.concerns.q06_value"
                                     ng-value="false"
                                     required>
                                 {{ 'NO' | translate }}
@@ -1023,7 +1018,7 @@
                                     type="radio"
                                     name="q06_value"
                                     id="q06_value_2"
-                                    ng-model="latest_revision.concern.q06_value"
+                                    ng-model="latest_revision.concerns.q06_value"
                                     ng-value="true"
                                     required>
                                 {{ 'YES' | translate }}
@@ -1036,16 +1031,15 @@
                         </span>
                     </div>
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q06_explanation.$invalid && !editDocumentForm.q06_explanation.$pristine }">
-                        <div class="input-group" ng-if="latest_revision.concern.q06_value">
+                        <div class="input-group" ng-if="latest_revision.concerns.q06_value">
                             <textarea
                                 class="form-control"
                                 rows="5"
                                 placeholder="{{ 'EXPLANATION' | translate }}*"
                                 name="q06_explanation"
                                 id="q06_explanation"
-                                ng-model="latest_revision.concern.q06_explanation"
-                                ng-required="latest_revision.concern.q06_value"
-                                autofocus></textarea>
+                                ng-model="latest_revision.concerns.q06_explanation"
+                                ng-required="latest_revision.concerns.q06_value"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-gb"></span>
                             </span>
@@ -1072,7 +1066,7 @@
                                     type="radio"
                                     name="q07_value"
                                     id="q07_value_1"
-                                    ng-model="latest_revision.concern.q07_value"
+                                    ng-model="latest_revision.concerns.q07_value"
                                     ng-value="false"
                                     required>
                                 {{ 'NO' | translate }}
@@ -1082,7 +1076,7 @@
                                     type="radio"
                                     name="q07_value"
                                     id="q07_value_2"
-                                    ng-model="latest_revision.concern.q07_value"
+                                    ng-model="latest_revision.concerns.q07_value"
                                     ng-value="true"
                                     required>
                                 {{ 'YES' | translate }}
@@ -1095,16 +1089,15 @@
                         </span>
                     </div>
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q07_explanation.$invalid && !editDocumentForm.q07_explanation.$pristine }">
-                        <div class="input-group" ng-if="latest_revision.concern.q07_value">
+                        <div class="input-group" ng-if="latest_revision.concerns.q07_value">
                             <textarea
                                 class="form-control"
                                 rows="5"
                                 placeholder="{{ 'EXPLANATION' | translate }}*"
                                 name="q07_explanation"
                                 id="q07_explanation"
-                                ng-model="latest_revision.concern.q07_explanation"
-                                ng-required="latest_revision.concern.q07_value"
-                                autofocus></textarea>
+                                ng-model="latest_revision.concerns.q07_explanation"
+                                ng-required="latest_revision.concerns.q07_value"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-gb"></span>
                             </span>
@@ -1131,7 +1124,7 @@
                                     type="radio"
                                     name="q08_value"
                                     id="q08_value_1"
-                                    ng-model="latest_revision.concern.q08_value"
+                                    ng-model="latest_revision.concerns.q08_value"
                                     ng-value="false"
                                     required>
                                 {{ 'NO' | translate }}
@@ -1141,7 +1134,7 @@
                                     type="radio"
                                     name="q08_value"
                                     id="q08_value_2"
-                                    ng-model="latest_revision.concern.q08_value"
+                                    ng-model="latest_revision.concerns.q08_value"
                                     ng-value="true"
                                     required>
                                 {{ 'YES' | translate }}
@@ -1154,16 +1147,15 @@
                         </span>
                     </div>
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q08_explanation.$invalid && !editDocumentForm.q08_explanation.$pristine }">
-                        <div class="input-group" ng-if="latest_revision.concern.q08_value">
+                        <div class="input-group" ng-if="latest_revision.concerns.q08_value">
                             <textarea
                                 class="form-control"
                                 rows="5"
                                 placeholder="{{ 'EXPLANATION' | translate }}*"
                                 name="q08_explanation"
                                 id="q08_explanation"
-                                ng-model="latest_revision.concern.q08_explanation"
-                                ng-required="latest_revision.concern.q08_value"
-                                autofocus></textarea>
+                                ng-model="latest_revision.concerns.q08_explanation"
+                                ng-required="latest_revision.concerns.q08_value"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-gb"></span>
                             </span>
@@ -1190,7 +1182,7 @@
                                     type="radio"
                                     name="q09_value"
                                     id="q09_value_1"
-                                    ng-model="latest_revision.concern.q09_value"
+                                    ng-model="latest_revision.concerns.q09_value"
                                     ng-value="false"
                                     required>
                                 {{ 'NO' | translate }}
@@ -1200,7 +1192,7 @@
                                     type="radio"
                                     name="q09_value"
                                     id="q09_value_2"
-                                    ng-model="latest_revision.concern.q09_value"
+                                    ng-model="latest_revision.concerns.q09_value"
                                     ng-value="true"
                                     required>
                                 {{ 'YES' | translate }}
@@ -1213,16 +1205,15 @@
                         </span>
                     </div>
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q09_explanation.$invalid && !editDocumentForm.q09_explanation.$pristine }">
-                        <div class="input-group" ng-if="latest_revision.concern.q09_value">
+                        <div class="input-group" ng-if="latest_revision.concerns.q09_value">
                             <textarea
                                 class="form-control"
                                 rows="5"
                                 placeholder="{{ 'EXPLANATION' | translate }}*"
                                 name="q09_explanation"
                                 id="q09_explanation"
-                                ng-model="latest_revision.concern.q09_explanation"
-                                ng-required="latest_revision.concern.q09_value"
-                                autofocus></textarea>
+                                ng-model="latest_revision.concerns.q09_explanation"
+                                ng-required="latest_revision.concerns.q09_value"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-gb"></span>
                             </span>
@@ -1249,7 +1240,7 @@
                                     type="radio"
                                     name="q10_value"
                                     id="q10_value_1"
-                                    ng-model="latest_revision.concern.q10_value"
+                                    ng-model="latest_revision.concerns.q10_value"
                                     ng-value="false"
                                     required>
                                 {{ 'NO' | translate }}
@@ -1259,7 +1250,7 @@
                                     type="radio"
                                     name="q10_value"
                                     id="q10_value_2"
-                                    ng-model="latest_revision.concern.q10_value"
+                                    ng-model="latest_revision.concerns.q10_value"
                                     ng-value="true"
                                     required>
                                 {{ 'YES' | translate }}
@@ -1272,16 +1263,15 @@
                         </span>
                     </div>
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q10_explanation.$invalid && !editDocumentForm.q10_explanation.$pristine }">
-                        <div class="input-group" ng-if="latest_revision.concern.q10_value">
+                        <div class="input-group" ng-if="latest_revision.concerns.q10_value">
                             <textarea
                                 class="form-control"
                                 rows="5"
                                 placeholder="{{ 'EXPLANATION' | translate }}*"
                                 name="q10_explanation"
                                 id="q10_explanation"
-                                ng-model="latest_revision.concern.q10_explanation"
-                                ng-required="latest_revision.concern.q10_value"
-                                autofocus></textarea>
+                                ng-model="latest_revision.concerns.q10_explanation"
+                                ng-required="latest_revision.concerns.q10_value"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-gb"></span>
                             </span>
@@ -1308,7 +1298,7 @@
                                     type="radio"
                                     name="q11_1_value"
                                     id="q11_1_value_1"
-                                    ng-model="latest_revision.concern.q11_1_value"
+                                    ng-model="latest_revision.concerns.q11_1_value"
                                     ng-value="false"
                                     required>
                                 {{ 'NO' | translate }}
@@ -1318,7 +1308,7 @@
                                     type="radio"
                                     name="q11_1_value"
                                     id="q11_1_value_2"
-                                    ng-model="latest_revision.concern.q11_1_value"
+                                    ng-model="latest_revision.concerns.q11_1_value"
                                     ng-value="true"
                                     required>
                                 {{ 'YES' | translate }}
@@ -1331,16 +1321,15 @@
                         </span>
                     </div>
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q11_1_explanation.$invalid && !editDocumentForm.q11_1_explanation.$pristine }">
-                        <div class="input-group" ng-if="latest_revision.concern.q11_1_value">
+                        <div class="input-group" ng-if="latest_revision.concerns.q11_1_value">
                             <textarea
                                 class="form-control"
                                 rows="5"
                                 placeholder="{{ 'EXPLANATION' | translate }}*"
                                 name="q11_1_explanation"
                                 id="q11_1_explanation"
-                                ng-model="latest_revision.concern.q11_1_explanation"
-                                ng-required="latest_revision.concern.q11_1_value"
-                                autofocus></textarea>
+                                ng-model="latest_revision.concerns.q11_1_explanation"
+                                ng-required="latest_revision.concerns.q11_1_value"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-gb"></span>
                             </span>
@@ -1367,7 +1356,7 @@
                                     type="radio"
                                     name="q11_2_value"
                                     id="q11_2_value_1"
-                                    ng-model="latest_revision.concern.q11_2_value"
+                                    ng-model="latest_revision.concerns.q11_2_value"
                                     ng-value="false"
                                     required>
                                 {{ 'NO' | translate }}
@@ -1377,7 +1366,7 @@
                                     type="radio"
                                     name="q11_2_value"
                                     id="q11_2_value_2"
-                                    ng-model="latest_revision.concern.q11_2_value"
+                                    ng-model="latest_revision.concerns.q11_2_value"
                                     ng-value="true"
                                     required>
                                 {{ 'YES' | translate }}
@@ -1390,16 +1379,15 @@
                         </span>
                     </div>
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q11_2_explanation.$invalid && !editDocumentForm.q11_2_explanation.$pristine }">
-                        <div class="input-group" ng-if="latest_revision.concern.q11_2_value">
+                        <div class="input-group" ng-if="latest_revision.concerns.q11_2_value">
                             <textarea
                                 class="form-control"
                                 rows="5"
                                 placeholder="{{ 'EXPLANATION' | translate }}*"
                                 name="q11_2_explanation"
                                 id="q11_2_explanation"
-                                ng-model="latest_revision.concern.q11_2_explanation"
-                                ng-required="latest_revision.concern.q11_2_value"
-                                autofocus></textarea>
+                                ng-model="latest_revision.concerns.q11_2_explanation"
+                                ng-required="latest_revision.concerns.q11_2_value"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-gb"></span>
                             </span>
@@ -1426,7 +1414,7 @@
                                     type="radio"
                                     name="q12_value"
                                     id="q12_value_1"
-                                    ng-model="latest_revision.concern.q12_value"
+                                    ng-model="latest_revision.concerns.q12_value"
                                     ng-value="false"
                                     required>
                                 {{ 'NO' | translate }}
@@ -1436,7 +1424,7 @@
                                     type="radio"
                                     name="q12_value"
                                     id="q12_value_2"
-                                    ng-model="latest_revision.concern.q12_value"
+                                    ng-model="latest_revision.concerns.q12_value"
                                     ng-value="true"
                                     required>
                                 {{ 'YES' | translate }}
@@ -1449,16 +1437,15 @@
                         </span>
                     </div>
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q12_explanation.$invalid && !editDocumentForm.q12_explanation.$pristine }">
-                        <div class="input-group" ng-if="latest_revision.concern.q12_value">
+                        <div class="input-group" ng-if="latest_revision.concerns.q12_value">
                             <textarea
                                 class="form-control"
                                 rows="5"
                                 placeholder="{{ 'EXPLANATION' | translate }}*"
                                 name="q12_explanation"
                                 id="q12_explanation"
-                                ng-model="latest_revision.concern.q12_explanation"
-                                ng-required="latest_revision.concern.q12_value"
-                                autofocus></textarea>
+                                ng-model="latest_revision.concerns.q12_explanation"
+                                ng-required="latest_revision.concerns.q12_value"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-gb"></span>
                             </span>
@@ -1485,7 +1472,7 @@
                                     type="radio"
                                     name="q13_value"
                                     id="q13_value_1"
-                                    ng-model="latest_revision.concern.q13_value"
+                                    ng-model="latest_revision.concerns.q13_value"
                                     ng-value="false"
                                     required>
                                 {{ 'NO' | translate }}
@@ -1495,7 +1482,7 @@
                                     type="radio"
                                     name="q13_value"
                                     id="q13_value_2"
-                                    ng-model="latest_revision.concern.q13_value"
+                                    ng-model="latest_revision.concerns.q13_value"
                                     ng-value="true"
                                     required>
                                 {{ 'YES' | translate }}
@@ -1508,16 +1495,15 @@
                         </span>
                     </div>
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q13_explanation.$invalid && !editDocumentForm.q13_explanation.$pristine }">
-                        <div class="input-group" ng-if="latest_revision.concern.q13_value">
+                        <div class="input-group" ng-if="latest_revision.concerns.q13_value">
                             <textarea
                                 class="form-control"
                                 rows="5"
                                 placeholder="{{ 'EXPLANATION' | translate }}*"
                                 name="q13_explanation"
                                 id="q13_explanation"
-                                ng-model="latest_revision.concern.q13_explanation"
-                                ng-required="latest_revision.concern.q13_value"
-                                autofocus></textarea>
+                                ng-model="latest_revision.concerns.q13_explanation"
+                                ng-required="latest_revision.concerns.q13_value"></textarea>
                             <span class="input-group-addon">
                                 <span class="flag-icon flag-icon-gb"></span>
                             </span>
@@ -1576,7 +1562,7 @@
                     </a>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 right">
-                    <button class="btn btn-success" type="submit">
+                    <button class="btn btn-success" ng-click="submit()">
                         <i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SUBMIT' | translate }}
                     </button>
                 </div>
