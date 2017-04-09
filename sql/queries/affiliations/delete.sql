@@ -1,2 +1,2 @@
 DELETE FROM Affiliations
-WHERE affiliation_id=$1::INTEGER;
+WHERE document_id=$1::TEXT;

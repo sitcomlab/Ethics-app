@@ -33,7 +33,7 @@ app.controller("accountEditController", function($scope, $rootScope, $translate,
         // Validate input
         if($scope.editAccountForm.$invalid) {
             // Update UI
-            $scope.editAccountForm.user_email_address.$pristine = false;
+            //$scope.editAccountForm.user_email_address.$pristine = false;
             $scope.editAccountForm.title.$pristine = false;
             $scope.editAccountForm.first_name.$pristine = false;
             $scope.editAccountForm.last_name.$pristine = false;
@@ -50,8 +50,9 @@ app.controller("accountEditController", function($scope, $rootScope, $translate,
                 $authenticationService.set(updated_user);
 
                 // Update navbar
-                $rootScope.$broadcast('updateNavbar');
+                $scope.$parent.authenticated_user = $authenticationService.get();
 
+                // Redirect
                 $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
             })
             .catch(function onError(response) {

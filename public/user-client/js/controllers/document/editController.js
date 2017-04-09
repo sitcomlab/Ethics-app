@@ -91,7 +91,6 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
      * @return {[type]} [description]
      */
     $scope.submit = function() {
-
         // Validate input
         if($scope.editDocumentForm.$invalid) {
             // Update UI

@@ -14,7 +14,6 @@ var query_get_document = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').
 var query_edit_document = fs.readFileSync(__dirname + dir_1 + 'edit.sql', 'utf8').toString();
 var query_get_course = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
 var query_get_course_by_document = fs.readFileSync(__dirname + dir_2 + 'get_by_document.sql', 'utf8').toString();
-var query_get_affiliation = fs.readFileSync(__dirname + dir_3 + 'get.sql', 'utf8').toString();
 var query_delete_affiliation = fs.readFileSync(__dirname + dir_3 + 'delete.sql', 'utf8').toString();
 var query_create_affiliation = fs.readFileSync(__dirname + dir_3 + 'create.sql', 'utf8').toString();
 
@@ -34,7 +33,25 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            // TODO: Authentication
+            // TODO: Authorization
+            /*if(req.headers.authorization) {
+                var token = req.headers.authorization.substring(7);
+
+                // Verify token
+                jwt.verify(token, jwtSecret, function(err, decoded) {
+                    if(err){
+                        res.status(401).send("Authorization failed!");
+                    } else {
+                        if(decoded.member){
+                            callback(null, client, done);
+                        } else {
+                            res.status(401).send("Authorization failed!");
+                        }
+                    }
+                });
+            } else {
+                res.status(401).send("Authorization failed!");
+            }*/
             callback(null, client, done);
         },
         function(client, done, callback) {
@@ -56,10 +73,10 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            if(req.params.course_id !== null){
+            if(req.body.course_id !== null){
                 // Database query
                 client.query(query_get_course, [
-                    req.params.course_id
+                    req.body.course_id
                 ], function(err, result) {
                     done();
                     if (err) {
@@ -69,7 +86,7 @@ exports.request = function(req, res) {
                         if (result.rows.length === 0) {
                             callback(new Error("Course not found"), 404);
                         } else {
-                            callback(null, client, done, course);
+                            callback(null, client, done, result.rows[0]);
                         }
                     }
                 });
@@ -78,54 +95,27 @@ exports.request = function(req, res) {
             }
         },
         function(client, done, course, callback) {
-            if(course){
-                // Database query
-                client.query(query_get_affiliation, [
-                    req.params.course_id
-                ], function(err, result) {
-                    done();
-                    if (err) {
-                        callback(err, 500);
-                    } else {
-                        // Check if Affiliation exists
-                        if (result.rows.length === 0) {
-                            callback(new Error("Affiliation not found"), 404);
-                        } else {
-                            callback(null, client, done, course, result.rows[0]);
-                        }
-                    }
-                });
-            } else {
-                callback(null, client, done, course, undefined);
-            }
-        },
-        function(client, done, course, affiliation, callback) {
             // Clean-up database for a new or updated affiliation
-            if(affiliation){
-                // Database query
-                client.query(query_delete_affiliation, [
-                    affiliation.affiliation_id
-                ], function(err, result) {
-                    done();
-                    if (err) {
-                        callback(err, 500);
-                    } else {
-                        callback(null, client, done, course);
-                    }
-                });
-            } else {
-                callback(null, client, done, course);
-            }
+            client.query(query_delete_affiliation, [
+                req.body.document_id
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    callback(null, client, done, course);
+                }
+            });
         },
         function(client, done, course, callback) {
             // TODO: Add object/schema validation
             var object = {
                 document_id: req.params.document_id,
-                document_title: req.body.document_title,
+                document_title: req.body.document_title
                 // TODO: notes: req.body.notes
             };
             var params = _.values(object);
-            callback(null, client, done, params);
+            callback(null, client, done, course, params);
         },
         function(client, done, course, params, callback){
             // Database query
@@ -149,6 +139,7 @@ exports.request = function(req, res) {
                     if (err) {
                         callback(err, 500);
                     } else {
+                        var affiliation = result.rows[0];
                         document = _.extend(document, {
                             affiliation_id: affiliation.affiliation_id,
                             course_id: affiliation.course_id

@@ -29,17 +29,18 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $t
      * [saveDocument description]
      * @return {[type]} [description]
      */
-    $scope.saveDocument = function(){
+    $scope.save = function(){
         $scope.$parent.loading = { status: true, message: "Saving document" };
 
         $documentService.edit($documentService.getId(), $scope.updated_document)
         .then(function onSuccess(response) {
             $documentService.set(response.data);
-            $scope.updated_document = $documentService.copy();
 
             // Update navbar
-            $rootScope.$broadcast('updateNavbar');
+            $scope.$parent.document = $documentService.get();
+            $scope.$parent.loading = { status: false, message: "" };
 
+            // Redirect
             $scope.redirect("/documents/" + $documentService.getId());
         })
         .catch(function onError(response) {

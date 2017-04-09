@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <div class="card">
-    <form class="form-horizontal" name="documentEditTitleForm" ng-submit="saveDocument()">
+    <form class="form-horizontal" name="documentEditTitleForm" ng-submit="save()">
         <div class="card-header" style="font-size: 20pt;">
             <div class="row">
                 <div class="col">
@@ -63,7 +63,7 @@
                         class="custom-select form-control"
                         id="course_id"
                         name="course_id"
-                        ng-model="document.course_id"
+                        ng-model="updated_document.course_id"
                         ng-options="course.course_id as course.course_name group by course.season for course in courses | orderBy:[-'year', 'course_name']"
                         ng-disabled="institute_id == null || institute_id == '' ">
                         <option value="">{{ 'NO_COURSE' | translate }}</option>

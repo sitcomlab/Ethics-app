@@ -111,7 +111,8 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
         copy: function(){
             return {
                 document_id: document.document_id,
-                document_title: document.document_title
+                document_title: document.document_title,
+                course_id: document.course_id
             };
         },
         create: function(data) {

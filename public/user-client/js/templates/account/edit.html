@@ -26,7 +26,8 @@
                     aria-describedby="inputEmailAddress"
                     required
                     autofocus
-                    autocomplete="on">
+                    autocomplete="on"
+                    disabled>
                 <small class="form-text text-muted">{{ 'PLEASE_USE_A_UNIVERSITY_ADDRESS' | translate }}</small>
                 <span ng-show="editAccountForm.user_email_address.$error.required && !editAccountForm.user_email_address.$pristine" class="text-danger">
                     <small>

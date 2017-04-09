@@ -157,23 +157,25 @@
 
                 <br>
             </div>
+
+            <!-- Footer -->
+            <footer class="bg-inverse middle">
+                <small class="text-muted">
+                    &copy; {{config.appYear}}
+                    <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="/member-client/" target="_self" class="link">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                    </a>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="{{config.appGithub}}" target="_blank" class="link">
+                        <i class="fa fa-github" aria-hidden="true"></i>
+                    </a>
+                </small>
+            </footer>
+
         </main>
 
-        <!-- Footer -->
-        <footer ng-controller="footerController" class="bg-inverse middle">
-            <small class="text-muted">
-                &copy; {{config.appYear}}
-                <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a>
-                &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="/member-client/" target="_self" class="link">
-                    <i class="fa fa-users" aria-hidden="true"></i>
-                </a>
-                &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="{{config.appGithub}}" target="_blank" class="link">
-                    <i class="fa fa-github" aria-hidden="true"></i>
-                </a>
-            </small>
-        </footer>
 
         <!-- MODULES -->
         <script src="js/modules/config.js"></script>
@@ -202,7 +204,6 @@
 
         <!-- CONTROLLERS -->
         <script src="js/controllers/mainController.js"></script>
-        <script src="js/controllers/footerController.js"></script>
         <script src="js/controllers/loginController.js"></script>
         <script src="js/controllers/recoveryController.js"></script>
         <script src="js/controllers/helpController.js"></script>
