@@ -3,6 +3,10 @@ var app = angular.module("ethics-app");
 // Main controller
 app.controller("mainController", function($scope, $rootScope, $location, config, $documentService, $authenticationService) {
 
+	/*************************************************
+        FUNCTIONS
+     *************************************************/
+	 
 	/**
      * [isActive description]
      * @param  {[type]}  viewLocation [description]

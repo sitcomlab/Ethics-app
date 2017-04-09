@@ -6,7 +6,6 @@ var app = angular.module("ethics-app", [
     // External Modules
     "ngRoute",
     "ngSanitize",
-    "ngBootbox",
     "pascalprecht.translate",
     "angular-momentjs",
     "underscore",
