@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<div class="card">
+    <div class="card-header" style="font-size: 20pt;">
+        <div class="row">
+            <div class="col">{{ 'DOCUMENTS' | translate }}</div>
+            <!--<div class="col right">
+                <button class="btn btn-secondary" role="button" ng-click="cancel()">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>-->
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="list-group" ng-if="documents && documents.length>0">
+            <a href="" ng-click="redirect('/documents/' + document.document_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="document in documents | orderBy: ['document_id']">
+                <div class="d-flex w-100 justify-content-between">
+                    <div>
+                        {{document}}
+                        <!--<i class="fa fa-user" aria-hidden="true"></i>
+                        &nbsp;&nbsp;
+                        <b><span ng-if="author.title">{{author.title}}&nbsp;</span>{{author.first_name}} {{author.last_name}} </b>
+                        <span class="text-muted" ng-if="author.research_group_name">
+                            <small>&nbsp;<b>{{author.research_group_name}}</b>&nbsp;|</small>
+                        </span>
+                        <span class="text-muted" ng-if="author.institute_name">
+                            <small>&nbsp;{{author.institute_name}}&nbsp;|</small>
+                        </span>
+                        <span class="text-muted" ng-if="author.university_name">
+                            <small>&nbsp;{{author.university_name}}</small>
+                        </span>-->
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="list-group" ng-if="!documents || documents.length==0">
+            <div class="list-group-item flex-column align-items-center">
+                <div class="d-flex">
+                    - {{ 'NONE' | translate }} -
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

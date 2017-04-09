@@ -15,7 +15,7 @@
         <meta name="format-detection" content="telephone=no">
         <meta http-equiv="x-rim-auto-match" content="none">
 
-        <title>Ethics-App</title>
+        <title>Ethics-App | COMMITTEE</title>
 
         <!-- Bootstrap core CSS -->
         <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
@@ -43,133 +43,167 @@
         <script src="../bower_components/angular-translate/angular-translate.min.js"></script>
         <script src="../bower_components/angular-underscore-module/angular-underscore-module.js"></script>
         <script src="../bower_components/angular-momentjs/angular-momentjs.js"></script>
-        <script src="../bower_components/bootbox/bootbox.js"></script>
-        <script src="../bower_components/ngBootbox/dist/ngBootbox.min.js"></script>
 
     </head>
 
     <body ng-app="ethics-app">
 
 
-        <!-- Header -->
-        <header ng-controller="navController">
-            <nav class="navbar navbar-toggleable-md bg-inverse navbar-inverse fixed-top">
-                <div class="container">
-                    <button class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#navbarContent">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">
-                        {{config.appName}}
-                    </a>
-                    <div class="collapse navbar-collapse" id="navbarContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a href="" class="nav-link" ng-class="{ 'active': isActive('/members') }" ng-click="redirect('/members')" ng-if="authenticated_member">
-                                    {{ 'COMMITTEE' | translate }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link" ng-class="{ 'active': isActive('/help') }" ng-click="redirect('/help')">
-                                    {{ 'HELP' | translate }}
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav nav-pills" ng-if="authenticated_member">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link active dropdown-toggle" href="" id="document_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                style="cursor: pointer; color: #FFFFFF; border: 1px solid #0275d8; margin-left:5px;" ng-style="
-                                document.status===0 && {'background-color':'#FFFFFF','border':'1px solid #CCCCCC', 'color': '#292b2c'} ||
-                                document.status===1 && {'background-color':'#FFFFFF','border':'1px solid #CCCCCC', 'color': '#292b2c'} ||
-                                document.status===2 && {'background-color':'#5cb85c','border':'1px solid #5cb85c', 'color': '#FFFFFF'} ||
-                                document.status===3 && {'background-color':'#0275d8','border':'1px solid #0275d8', 'color': '#FFFFFF'} ||
-                                document.status===4 && {'background-color':'#5bc0de','border':'1px solid #5bc0de', 'color': '#FFFFFF'} ||
-                                document.status===5 && {'background-color':'rgb(240, 173, 78)','border':'1px solid rgb(240, 173, 78)', 'color': '#FFFFFF'} ||
-                                document.status===6 && {'background-color':'#5cb85c','border':'1px solid #5cb85c', 'color': '#FFFFFF'} ||
-                                document.status===7 && {'background-color':'rgb(217, 83, 79)','border':'1px solid rgb(217, 83, 79)', 'color': '#FFFFFF'}">
-                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;{{document.document_title}}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="document_dropdown">
-                                    <h6 class="dropdown-header">{{ 'DOCUMENT' | translate }}</h6>
-                                    <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/intro')">
-                                        {{ 'SHOW_DOCUMENT_INTRO' | translate }}
+        <!-- Main -->
+        <main ng-controller="mainController">
+
+            <!-- Header -->
+            <header>
+                <nav class="navbar navbar-toggleable-md bg-inverse navbar-inverse fixed-top">
+                    <div class="container">
+                        <button class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#navbarContent">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">
+                            {{config.appName}}
+                        </a>
+                        <div class="collapse navbar-collapse" id="navbarContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/documents') }" ng-click="redirect('/documents')" ng-if="authenticated_member && !loading.status">
+                                        {{ 'DOCUMENTS' | translate }}
                                     </a>
-                                    <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/id')">
-                                        {{ 'SHOW_DOCUMENT_ID' | translate }}
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/members') }" ng-click="redirect('/members')" ng-if="authenticated_member && !loading.status">
+                                        {{ 'MEMBERS' | translate }}
                                     </a>
-                                    <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/submission')" ng-if="document.status > 1">
-                                        <span ng-if="document.status == 2">
-                                            {{ 'SHOW_SUBMISSION' | translate }}
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/users') }" ng-click="redirect('/users')" ng-if="authenticated_member && !loading.status">
+                                        {{ 'USERS' | translate }}
+                                    </a>
+                                </li>
+                                <li class="nav-item" ng-if="authenticated_member.admin">
+                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/universitites') }" ng-click="redirect('/universitites')" ng-if="authenticated_member && !loading.status">
+                                        {{ 'UNIVERSITIES' | translate }}
+                                    </a>
+                                </li>
+                                <li class="nav-item" ng-if="authenticated_member.admin">
+                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/institutes') }" ng-click="redirect('/institutes')" ng-if="authenticated_member && !loading.status">
+                                        {{ 'INSTITUTES' | translate }}
+                                    </a>
+                                </li>
+                                <li class="nav-item" ng-if="authenticated_member.admin">
+                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/research_groups') }" ng-click="redirect('/research_groups')" ng-if="authenticated_member && !loading.status">
+                                        {{ 'RESEARCH_GROUPS' | translate }}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/courses') }" ng-click="redirect('/courses')" ng-if="authenticated_member && !loading.status">
+                                        {{ 'COURSES' | translate }}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/help') }" ng-click="redirect('/help')" ng-if="!loading.status">
+                                        {{ 'HELP' | translate }}
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav nav-pills" ng-if="authenticated_member && !loading.status">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link active dropdown-toggle" href="" id="document_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    style="cursor: pointer; color: #FFFFFF; border: 1px solid #0275d8; margin-left:5px;" ng-style="
+                                    document.status===0 && {'background-color':'#FFFFFF','border':'1px solid #CCCCCC', 'color': '#292b2c'} ||
+                                    document.status===1 && {'background-color':'#FFFFFF','border':'1px solid #CCCCCC', 'color': '#292b2c'} ||
+                                    document.status===2 && {'background-color':'#5cb85c','border':'1px solid #5cb85c', 'color': '#FFFFFF'} ||
+                                    document.status===3 && {'background-color':'#0275d8','border':'1px solid #0275d8', 'color': '#FFFFFF'} ||
+                                    document.status===4 && {'background-color':'#5bc0de','border':'1px solid #5bc0de', 'color': '#FFFFFF'} ||
+                                    document.status===5 && {'background-color':'rgb(240, 173, 78)','border':'1px solid rgb(240, 173, 78)', 'color': '#FFFFFF'} ||
+                                    document.status===6 && {'background-color':'#5cb85c','border':'1px solid #5cb85c', 'color': '#FFFFFF'} ||
+                                    document.status===7 && {'background-color':'rgb(217, 83, 79)','border':'1px solid rgb(217, 83, 79)', 'color': '#FFFFFF'}">
+                                        <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;{{document.document_title}}
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="document_dropdown">
+                                        <h6 class="dropdown-header">{{ 'DOCUMENT' | translate }}</h6>
+                                        <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/id')">
+                                            {{ 'SHOW_DOCUMENT_ID' | translate }}
+                                        </a>
+                                        <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/submission')" ng-if="document.status > 1">
+                                            <span ng-if="document.status == 2">
+                                                {{ 'SHOW_SUBMISSION' | translate }}
+                                            </span>
+                                            <span ng-if="document.status > 2">
+                                                {{ 'SHOW_REVIEW' | translate }}
+                                            </span>
+                                        </a>
+                                        <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/settings')">
+                                            {{ 'CHANGE_DOCUMENT_SETTINGS' | translate }}
+                                        </a>
+                                        <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/delete')">
+                                            {{ 'DELETE_DOCUMENT' | translate }}
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link active user-pill dropdown-toggle" href="" id="member_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer; background-color:#FFFFFF; border: 1px solid #CCCCCC; color: #292b2c; margin-left:5px;" ng-if="!loading.status">
+                                        <span>
+
                                         </span>
-                                        <span ng-if="document.status > 2">
-                                            {{ 'SHOW_REVIEW' | translate }}
-                                        </span>
+                                        <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp;<span ng-if="authenticated_member.title">{{authenticated_member.title}}&nbsp;</span>{{authenticated_member.first_name}} {{authenticated_member.last_name}}
                                     </a>
-                                    <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/settings')">
-                                        {{ 'CHANGE_DOCUMENT_SETTINGS' | translate }}
-                                    </a>
-                                    <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/delete')" ng-if="document.status <= 1">
-                                        {{ 'DELETE_DOCUMENT' | translate }}
-                                    </a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link active user-pill dropdown-toggle" href="" id="user_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer; background-color:#FFFFFF; border: 1px solid #CCCCCC; color: #292b2c; margin-left:5px;">
-                                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;<span ng-if="authenticated_user.title">{{authenticated_user.title}}&nbsp;</span>{{authenticated_user.first_name}} {{authenticated_user.last_name}}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user_dropdown">
-                                    <h6 class="dropdown-header">{{ 'ACCOUNT' | translate }}</h6>
-                                    <a class="dropdown-item" href="" ng-click="redirect('/account/edit')">
-                                        {{ 'SETTINGS' | translate }}
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="" ng-click="redirect('/')">
-                                        <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LOGOUT' | translate }}
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="member_dropdown">
+                                        <h6 class="dropdown-header">{{ 'ACCOUNT' | translate }}</h6>
+                                        <a class="dropdown-item" href="" ng-click="redirect('/account/edit')">
+                                            {{ 'SETTINGS' | translate }}
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="" ng-click="redirect('/')">
+                                            <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LOGOUT' | translate }}
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                </nav>
+            </header>
+
+            <!-- Content -->
+            <div class="content container">
+                <br>
+
+                <!-- Loading screen -->
+                <div class="loading middle" ng-show="loading.status">
+                    <br>
+                    <br>
+                    <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><br>
+                    <span class="text-muted" style="font-size:8pt;">
+                        {{loading.message}}
+                    </span>
+                    <br>
+                    <br>
                 </div>
-            </nav>
-        </header>
 
-        <!-- Content -->
-        <main class="container" ng-controller="mainController">
-            <br>
+                <!-- Main view -->
+                <div ng-view ng-show="!loading.status"></div>
 
-            <!-- Loading screen -->
-            <div class="loading middle" ng-show="loading.status">
-                <br>
-                <br>
-                <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><br>
-                <span class="text-muted" style="font-size:8pt;">
-                    {{loading.message}}
-                </span>
-                <br>
                 <br>
             </div>
 
-            <!-- Main view -->
-            <div ng-view ng-show="!loading.status"></div>
+            <!-- Footer -->
+            <footer class="bg-inverse middle">
+                <small class="text-muted">
+                    &copy; {{config.appYear}}
+                    <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="/user-client/" target="_self" class="link">
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                    </a>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="{{config.appGithub}}" target="_blank" class="link">
+                        <i class="fa fa-github" aria-hidden="true"></i>
+                    </a>
+                </small>
+            </footer>
 
-            <br>
         </main>
 
-        <!-- Footer -->
-        <footer ng-controller="footerController" class="bg-inverse middle">
-            <small class="text-muted">
-                &copy; {{config.appYear}}
-                <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a>
-                &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="/user-client/" target="_self" class="link">
-                    <i class="fa fa-home" aria-hidden="true"></i>
-                </a>
-                &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="{{config.appGithub}}" target="_blank" class="link">
-                    <i class="fa fa-github" aria-hidden="true"></i>
-                </a>
-            </small>
-        </footer>
 
         <!-- MODULES -->
         <script src="js/modules/config.js"></script>
@@ -179,7 +213,8 @@
 
         <!-- SERVICES -->
         <script src="js/services/authenticationService.js"></script>
-        <script src="js/services/userService.js"></script>
+        <script src="js/services/documentsService.js"></script>
+        <!-- <script src="js/services/userService.js"></script>
         <script src="js/services/universityService.js"></script>
         <script src="js/services/instituteService.js"></script>
         <script src="js/services/courseService.js"></script>
@@ -188,42 +223,40 @@
         <script src="js/services/descriptionService.js"></script>
         <script src="js/services/concernService.js"></script>
         <script src="js/services/commentService.js"></script>
-        <!--<script src="js/services/reviewService.js"></script>-->
+        <script src="js/services/reviewerService.js"></script>
         <script src="js/services/fileService.js"></script>
         <script src="js/services/recoveryService.js"></script>
-        <script src="js/services/memberService.js"></script>
+        <script src="js/services/memberService.js"></script>-->
 
         <!-- APPLICATION -->
         <script src="js/app.js"></script>
 
         <!-- CONTROLLERS -->
-        <!-- Main -->
-        <script src="js/controllers/navController.js"></script>
         <script src="js/controllers/mainController.js"></script>
-        <script src="js/controllers/footerController.js"></script>
         <script src="js/controllers/loginController.js"></script>
-        <script src="js/controllers/recoveryController.js"></script>
+        <!--<script src="js/controllers/recoveryController.js"></script>-->
         <script src="js/controllers/helpController.js"></script>
 
-        <!-- Members -->
+        <!-- Members
         <script src="js/controllers/member/listController.js"></script>
-        <script src="js/controllers/member/detailsController.js"></script>
+        <script src="js/controllers/member/detailsController.js"></script>-->
 
-        <!-- Account -->
-        <script src="js/controllers/account/editController.js"></script>
+        <!-- Account
+        <script src="js/controllers/account/editController.js"></script>-->
 
-        <!-- Document -->
-        <script src="js/controllers/document/createController.js"></script>
+        <!-- Documents -->
+        <script src="js/controllers/document/listController.js"></script>
+        <!--<script src="js/controllers/document/createController.js"></script>
         <script src="js/controllers/document/deleteController.js"></script>
         <script src="js/controllers/document/detailsController.js"></script>
         <script src="js/controllers/document/editController.js"></script>
         <script src="js/controllers/document/editSettingsController.js"></script>
         <script src="js/controllers/document/showIdController.js"></script>
         <script src="js/controllers/document/showIntroController.js"></script>
-        <script src="js/controllers/document/showSubmissionController.js"></script>
+        <script src="js/controllers/document/showSubmissionController.js"></script>-->
 
-        <!-- Status -->
-        <script src="js/controllers/status/statusController.js"></script>
+        <!-- Status
+        <script src="js/controllers/status/statusController.js"></script>-->
 
     </body>
 </html>
