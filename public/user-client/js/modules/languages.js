@@ -165,8 +165,9 @@ app.config(function ($translateProvider) {
         NONE: 'none',
         COMMITTEE: 'Committee',
         COMMITTEE_MEMBER:'Committee member',
+        CURRENT_MEMBERS: 'Current members',
         FORMER_MEMBERS: 'Former members',
-        MEMBERS: 'Current members',
+        MEMBERS: 'Members',
         OFFICE: 'Office',
         RESPONSIBLE: 'responsible ',
         CURRENTLY_NOT_RESPONSIBLE: 'Currently not responsible'
