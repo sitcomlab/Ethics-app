@@ -59,7 +59,7 @@
                         <button class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#navbarContent">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <a class="navbar-brand" href="/">
+                        <a class="navbar-brand" href="/member-client/">
                             {{config.appName}}
                         </a>
                         <div class="collapse navbar-collapse" id="navbarContent">
@@ -77,21 +77,6 @@
                                 <li class="nav-item">
                                     <a href="" class="nav-link" ng-class="{ 'active': isActive('/users') }" ng-click="redirect('/users')" ng-if="authenticated_member && !loading.status">
                                         {{ 'USERS' | translate }}
-                                    </a>
-                                </li>
-                                <li class="nav-item" ng-if="authenticated_member.admin">
-                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/universitites') }" ng-click="redirect('/universitites')" ng-if="authenticated_member && !loading.status">
-                                        {{ 'UNIVERSITIES' | translate }}
-                                    </a>
-                                </li>
-                                <li class="nav-item" ng-if="authenticated_member.admin">
-                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/institutes') }" ng-click="redirect('/institutes')" ng-if="authenticated_member && !loading.status">
-                                        {{ 'INSTITUTES' | translate }}
-                                    </a>
-                                </li>
-                                <li class="nav-item" ng-if="authenticated_member.admin">
-                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/research_groups') }" ng-click="redirect('/research_groups')" ng-if="authenticated_member && !loading.status">
-                                        {{ 'RESEARCH_GROUPS' | translate }}
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -142,15 +127,34 @@
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link active user-pill dropdown-toggle" href="" id="member_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer; background-color:#FFFFFF; border: 1px solid #CCCCCC; color: #292b2c; margin-left:5px;" ng-if="!loading.status">
-                                        <span>
-
+                                        <span ng-if="authenticated_member.admin">
+                                            <i class="fa fa-user-secret" aria-hidden="true"></i>
                                         </span>
-                                        <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp;<span ng-if="authenticated_member.title">{{authenticated_member.title}}&nbsp;</span>{{authenticated_member.first_name}} {{authenticated_member.last_name}}
+                                        <span ng-if="!authenticated_member.admin">
+                                            <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                        </span>
+                                        &nbsp;
+                                        <span ng-if="authenticated_member.title">{{authenticated_member.title}}&nbsp;</span>{{authenticated_member.first_name}} {{authenticated_member.last_name}}
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="member_dropdown">
-                                        <h6 class="dropdown-header">{{ 'ACCOUNT' | translate }}</h6>
+                                        <h6 class="dropdown-header">
+                                            {{ 'ACCOUNT' | translate }}
+                                        </h6>
                                         <a class="dropdown-item" href="" ng-click="redirect('/account/edit')">
                                             {{ 'SETTINGS' | translate }}
+                                        </a>
+                                        <div class="dropdown-divider" ng-if="authenticated_member.admin"></div>
+                                        <h6 class="dropdown-header" ng-if="authenticated_member.admin">
+                                            {{ 'ADMINISTRATION' | translate }}
+                                        </h6>
+                                        <a href="" class="dropdown-item" ng-click="redirect('/universities')" ng-if="authenticated_member.admin">
+                                            {{ 'UNIVERSITIES' | translate }}
+                                        </a>
+                                        <a href="" class="dropdown-item" ng-click="redirect('/institutes')" ng-if="authenticated_member.admin">
+                                            {{ 'INSTITUTES' | translate }}
+                                        </a>
+                                        <a href="" class="dropdown-item" ng-click="redirect('/research_groups')" ng-if="authenticated_member.admin">
+                                            {{ 'RESEARCH_GROUPS' | translate }}
                                         </a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="" ng-click="redirect('/')">
@@ -214,10 +218,11 @@
         <!-- SERVICES -->
         <script src="js/services/authenticationService.js"></script>
         <script src="js/services/documentsService.js"></script>
-        <!-- <script src="js/services/userService.js"></script>
+        <script src="js/services/userService.js"></script>
         <script src="js/services/universityService.js"></script>
         <script src="js/services/instituteService.js"></script>
-        <script src="js/services/courseService.js"></script>
+        <script src="js/services/researchGroupService.js"></script>
+        <!-- <script src="js/services/courseService.js"></script>
         <script src="js/services/documentService.js"></script>
         <script src="js/services/revisionService.js"></script>
         <script src="js/services/descriptionService.js"></script>
@@ -225,8 +230,8 @@
         <script src="js/services/commentService.js"></script>
         <script src="js/services/reviewerService.js"></script>
         <script src="js/services/fileService.js"></script>
-        <script src="js/services/recoveryService.js"></script>
-        <script src="js/services/memberService.js"></script>-->
+        <script src="js/services/recoveryService.js"></script>-->
+        <script src="js/services/memberService.js"></script>
 
         <!-- APPLICATION -->
         <script src="js/app.js"></script>
@@ -237,9 +242,28 @@
         <!--<script src="js/controllers/recoveryController.js"></script>-->
         <script src="js/controllers/helpController.js"></script>
 
-        <!-- Members
+        <!-- Members -->
         <script src="js/controllers/member/listController.js"></script>
-        <script src="js/controllers/member/detailsController.js"></script>-->
+        <script src="js/controllers/member/detailsController.js"></script>
+
+        <!-- Users -->
+        <script src="js/controllers/user/listController.js"></script>
+        <script src="js/controllers/user/detailsController.js"></script>
+
+        <!-- Universities -->
+        <script src="js/controllers/university/listController.js"></script>
+        <script src="js/controllers/university/detailsController.js"></script>
+
+        <!-- Inistitutes -->
+        <script src="js/controllers/institute/listController.js"></script>
+        <script src="js/controllers/institute/detailsController.js"></script>
+
+        <!-- Resarch groups -->
+        <script src="js/controllers/research_group/listController.js"></script>
+        <script src="js/controllers/research_group/detailsController.js"></script>
+
+        <!-- Courses -->
+
 
         <!-- Account
         <script src="js/controllers/account/editController.js"></script>-->
@@ -252,11 +276,7 @@
         <script src="js/controllers/document/editController.js"></script>
         <script src="js/controllers/document/editSettingsController.js"></script>
         <script src="js/controllers/document/showIdController.js"></script>
-        <script src="js/controllers/document/showIntroController.js"></script>
         <script src="js/controllers/document/showSubmissionController.js"></script>-->
-
-        <!-- Status
-        <script src="js/controllers/status/statusController.js"></script>-->
 
     </body>
 </html>

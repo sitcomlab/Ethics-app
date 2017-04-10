@@ -42,6 +42,10 @@ app.controller("loginController", function($scope, $rootScope, $translate, $loca
             })
             .catch(function onError(response) {
                 $window.alert(response.data);
+
+                // Reset
+                $scope.login_member = $authenticationService.init();
+                $scope.$parent.loading = { status: false, message: "" };
             });
         }
     };

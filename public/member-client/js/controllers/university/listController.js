@@ -1,7 +1,8 @@
 var app = angular.module("ethics-app");
 
-// Document list controller
-app.controller("documentListController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentsService) {
+
+// University list controller
+app.controller("universityListController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $universityService, _) {
 
     /*************************************************
         FUNCTIONS
@@ -16,18 +17,22 @@ app.controller("documentListController", function($scope, $rootScope, $translate
         $location.url(path);
     };
 
+
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading documents" };
-    $documentsService.list()
+    $scope.$parent.loading = { status: true, message: "Loading universities" };
+
+    // Load universities
+    $universityService.list()
     .then(function onSuccess(response) {
-        $documentsService.set(response.data);
-        $scope.documents = $documentsService.get();
+        $universityService.set(response.data);
+        $scope.universities = $universityService.get();
         $scope.$parent.loading = { status: false, message: "" };
     })
     .catch(function onError(response) {
         $window.alert(response.data);
     });
+
 
 });
