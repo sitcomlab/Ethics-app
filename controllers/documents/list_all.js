@@ -11,7 +11,7 @@ var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
 var dir = "/../../sql/queries/documents/";
-var query_list_documents_with_author = fs.readFileSync(__dirname + dir + 'list_with_author.sql', 'utf8').toString();
+var query_list_documents_with_user = fs.readFileSync(__dirname + dir + 'list_with_user.sql', 'utf8').toString();
 var query_list_documents_filter_by_status = fs.readFileSync(__dirname + dir + 'list_filter_by_status.sql', 'utf8').toString();
 
 
@@ -96,7 +96,7 @@ exports.request = function(req, res) {
                     break;
                 }
                 default: {
-                    query = query_list_documents_with_author;
+                    query = query_list_documents_with_user;
                 }
             }
             callback(null, client, done, query, params);

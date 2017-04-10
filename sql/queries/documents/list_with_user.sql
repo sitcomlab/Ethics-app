@@ -30,5 +30,4 @@ FROM Documents document
         )
     ) revision ON document.document_id = revision.document_id
     INNER JOIN Users _user ON document.user_id = _user.user_id
-WHERE document.status=$1
 ORDER BY _user.last_name, _user.first_name, document.created;

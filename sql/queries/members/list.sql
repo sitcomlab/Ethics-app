@@ -12,6 +12,7 @@ SELECT
     member.office_room_number,
     member.office_phone_number,
     member.office_email_address,
+    member.admin,
     member.subscribed,
     member.deleted
 FROM Members member
