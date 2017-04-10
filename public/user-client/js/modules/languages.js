@@ -145,6 +145,7 @@ app.config(function ($translateProvider) {
         STUDY_DESCRIPTION: 'Study description',
         STUDY_CONCERNS: 'Study concerns',
         YOUR_DOCUMENT: 'Your document',
+        ALL_REVISIONS: 'All revisions',
         LATEST_REVISION: 'Latest revision',
         REV: 'rev',
         SHOW: 'Show',
@@ -155,19 +156,20 @@ app.config(function ($translateProvider) {
         SHOW_COMMENTS: 'Show comments',
         HIDE_COMMENTS: 'Hide comments',
 
-        CREATED:'Created',
-        SUBMITTED_LARGE_S:'Submitted',
-        REVIEWERS:'Reviewers',
-        LATEST_REVIEWER:'Latest reviewer',
-        GENERAL_COMMENT:'Comment',
+        CREATED: 'Created',
+        SUBMITTED_LARGE_S: 'Submitted',
+        REVIEWERS: 'Reviewers',
+        LATEST_REVIEWER: 'Latest reviewer',
+        GENERAL_COMMENT: 'Comment',
 
+        NONE: 'none',
         COMMITTEE: 'Committee',
         COMMITTEE_MEMBER:'Committee member',
-        FORMER_MEMBERS:'Former members',
-        MEMBERS:'Current members',
+        FORMER_MEMBERS: 'Former members',
+        MEMBERS: 'Current members',
         OFFICE: 'Office',
-        RESPONSIBLE: 'Available ',
-        CURRENTLY_NOT_RESPONSIBLE: 'Currently unavailable'
+        RESPONSIBLE: 'responsible ',
+        CURRENTLY_NOT_RESPONSIBLE: 'Currently not responsible'
     });
 
     // Default Language (English)
