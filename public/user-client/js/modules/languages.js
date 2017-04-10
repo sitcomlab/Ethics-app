@@ -49,12 +49,12 @@ app.config(function ($translateProvider) {
         INTRODUCTION_TEXT: 'You will be asked a series of questions, based on which the EthicsApp will auto-generate 3 documents. You are required to use these documents in your experiment. The key document is the Informed Consent Form - both you and your participant should sign and keep a copy. See the example below.',
         STUDY_DESCRIPTION_FORM_TEXT: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally the German version. Depending on the language(s), you will receive the informed consent forms for your experiment.',
         CHOOSE_LANGUAGE:'Please select the language, in which you want to generate the informed consent forms:',
-        STUDY_CONCERNS_FORM_TEXT: 'Complete the checklist below. If you have answered "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the Institutes Ethics Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. <br> Make sure you discuss any concerns with the members of the Intitutes\'s Ethics Committee.',  
-      
+        STUDY_CONCERNS_FORM_TEXT: 'Complete the checklist below. If you have answered "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the Institutes Ethics Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. <br> Make sure you discuss any concerns with the members of the Intitutes\'s Ethics Committee.',
+
         AGREEMENT_DATA: 'I agree that all given information is correct, and I am aware that my data will be stored by the Institute responsible for the study and its partners',
         AGREEMENT_DELETION: 'I agree that as soon as I submit my document request, only Members of the Ethics comittee can delete my account',
 
-      
+
         ACCOUNT: 'Account',
         SETTINGS: 'Settings',
         DOCUMENT: 'Document',
@@ -137,7 +137,9 @@ app.config(function ($translateProvider) {
         SHOW_SUBMISSION: 'Show submission',
         SHOW_REVIEW: 'Show review',
         SUBMISSION: 'Submission',
+        AND: 'and',
         REVIEW: 'Review',
+        _REVIEW: 'review',
         GENERAL: 'General',
         REVISIONS: 'Revisions',
         STUDY_DESCRIPTION: 'Study description',
@@ -158,9 +160,9 @@ app.config(function ($translateProvider) {
         REVIEWERS:'Reviewers',
         LATEST_REVIEWER:'Latest Reviewer',
         GENERAL_COMMENT:'Comment',
-      
+
         COMMITTEE: 'Committee',
-        COMMITTEE_MEMBER:'Comittee Member',
+        COMMITTEE_MEMBER:'Committee member',
         FORMER_MEMBERS:'Former Members',
         MEMBERS:'Current Members',
         OFFICE: 'Office',
