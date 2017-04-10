@@ -76,12 +76,12 @@ app.controller("documentEditController", function($scope, $rootScope, $translate
             save_descriptions.promise,
             save_concerns.promise
         ]).then(function(){
-            if(tab){
+            if(tab > 0){
                 $scope.$parent.loading = { status: false, message: ""};
                 $scope.changeTab(tab);
                 $window.scrollTo(0, 0);
             } else {
-                $scope.showIntro();
+                $scope.redirect("/documents/" + $scope.document.document_id + "/intro");
             }
         });
     };

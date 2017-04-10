@@ -50,7 +50,6 @@
                         id="document_title"
                         placeholder="{{ 'DOCUMENT_TITLE' | translate }}"
                         aria-describedby="inputTitle"
-                        autofocus
                         required>
                     <span class="input-group-addon">
                         <span class="flag-icon flag-icon-gb"></span>
@@ -71,8 +70,8 @@
                     </label>
                     <select
                         class="custom-select form-control"
-                        id="institute_id"
-                        name="institute_id"
+                        id="_institute_id"
+                        name="_institute_id"
                         ng-model="institute_id"
                         ng-options="institute.institute_id as institute.institute_name group by institute.university_name for institute in institutes | orderBy:['institute_name']"
                         ng-change="updateCourses()">

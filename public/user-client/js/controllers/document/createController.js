@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document create controller
-app.controller("documentCreateController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService, $userService, $universityService, $instituteService, $courseService) {
+app.controller("documentCreateController", function($scope, $rootScope, $translate, $location, config, $window, $timeout, $authenticationService, $documentService, $userService, $universityService, $instituteService, $courseService) {
 
     /*************************************************
         FUNCTIONS
@@ -44,30 +44,43 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
             // Update UI
             $scope.createDocumentForm.document_title.$pristine = false;
             $scope.createDocumentForm.document_email_address.$pristine = false;
+            $scope.createDocumentForm.course_id.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Creating new document" };
+            $scope.$parent.loading = { status: true, message: "Searching for user" };
 
-            // Check if user exists
-            $userService.findByEmail($scope.new_document.email_address)
-            .then(function onSuccess(response) {
-                // Check if user was found
-                if(JSON.parse(response.data)){
-                    $documentService.create($scope.new_document)
-                    .then(function onSuccess(response) {
-                        $window.alert("Your new document has been created and an email with the document-ID has been sent to you!");
-                        $scope.redirect("/");
-                    })
-                    .catch(function onError(response) {
-                        $window.alert(response.data);
-                    });
-                } else {
-                    $scope.new_user.email_address = $scope.new_document.email_address || "";
-                    $scope.changeTab(2);
-                }
-            })
-            .catch(function onError(response) {
-                $window.alert(response.data);
-            });
+            $timeout(function () {
+                // Check if user exists
+                $userService.findByEmail($scope.new_document.email_address)
+                .then(function onSuccess(response) {
+                    // Check if user was found
+                    if(JSON.parse(response.data)){
+                        $timeout(function() {
+                            $scope.$parent.loading = { status: true, message: "Creating new document" };
+
+                            // Create new document
+                            $documentService.create($scope.new_document)
+                            .then(function onSuccess(response) {
+                                $window.alert("Your new document has been created and an email with the document-ID has been sent to you!");
+
+                                // Redirect
+                                $scope.redirect("/");
+                            })
+                            .catch(function onError(response) {
+                                $window.alert(response.data);
+                            });
+                        }, 1000);
+                    } else {
+                        $scope.new_user.email_address = $scope.new_document.email_address || "";
+                        $scope.$parent.loading = { status: false, message: "" };
+
+                        // Change tab for registration
+                        $scope.changeTab(2);
+                    }
+                })
+                .catch(function onError(response) {
+                    $window.alert(response.data);
+                });
+            }, 1000);
         }
     };
 
@@ -88,21 +101,21 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
             $scope.createUserForm.institute_id.$pristine = false;
         } else {
             $scope.$parent.loading = { status: true, message: "Creating new user" };
-            
-          
-            //TODO: mapping NULL -> 0
-          
+
+            // Create new user
             $userService.create($scope.new_user)
             .then(function onSuccess(response) {
                 $window.alert("You have successfully signed up, you can now create your document!");
 
-                // Retry creating new document
+                // Change tab to send the new document again
                 $scope.new_document.email_address = $scope.new_user.email_address || "";
-                $scope.changeTab(1);
                 $scope.$parent.loading = { status: false, message: "" };
+                $scope.changeTab(1);
             })
             .catch(function onError(response) {
                 $window.alert(response.data);
+
+                // Redirect
                 $scope.redirect("/");
             });
         }
@@ -158,8 +171,9 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
                 $scope.courses = $courseService.get();
                 $scope.institute_id = null;
 
+                // Change tab to create a new document
                 $scope.$parent.loading = { status: false, message: "" };
-                $scope.changeTab(2);
+                $scope.changeTab(1);
             })
             .catch(function onError(response) {
                 $window.alert(response.data);
