@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<div class="card" ng-show="tab==1">
+<div class="card" ng-show="tab == 1">
     <form class="form-horizontal" name="createDocumentForm" ng-submit="send()">
         <div class="card-header" style="font-size: 20pt;">
             <div class="row">
@@ -215,7 +215,7 @@
                             class="custom-select form-control"
                             id="university_id"
                             name="university_id"
-                            ng-model="university_id"
+                            ng-model="new_user.university_id"
                             ng-options="university.university_id as university.university_name for university in universities | orderBy:['university_name']"
                             ng-change="updateInstitutes()"
                             required>
@@ -233,11 +233,11 @@
                     </label>
                     <select
                         class="custom-select form-control"
-                        id="institute_id_2"
+                        id="institute_id"
                         name="institute_id"
                         ng-model="new_user.institute_id"
                         ng-options="institute.institute_id as institute.institute_name for institute in institutes | orderBy:['institute_name']"
-                        ng-disabled="university_id == null">
+                        ng-disabled="new_user.university_id == null">
                         <option value="">{{ 'NO_INSTITUTE' | translate }}</option>
                     </select>
                 </div>

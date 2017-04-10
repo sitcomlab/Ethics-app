@@ -14,7 +14,7 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
      * @return {[type]}     [description]
      */
     $scope.changeTab = function(tab){
-        $scope.tab = tab;
+      $scope.tab = tab;
     };
 
     /**
@@ -88,15 +88,18 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
             $scope.createUserForm.institute_id.$pristine = false;
         } else {
             $scope.$parent.loading = { status: true, message: "Creating new user" };
-
+            
+          
+            //TODO: mapping NULL -> 0
+          
             $userService.create($scope.new_user)
             .then(function onSuccess(response) {
                 $window.alert("You have successfully signed up, you can now create your document!");
 
                 // Retry creating new document
                 $scope.new_document.email_address = $scope.new_user.email_address || "";
-
                 $scope.changeTab(1);
+                console.log($scope.tab);
             })
             .catch(function onError(response) {
                 $window.alert(response.data);
@@ -120,7 +123,7 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
      */
     $scope.updateInstitutes = function(){
         $scope.new_user.institute_id = null;
-        $scope.institutes = $instituteService.getByUniversity($scope.university_id);
+        $scope.institutes = $instituteService.getByUniversity($scope.new_user.university_id);
     };
 
     /*************************************************
