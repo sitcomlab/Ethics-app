@@ -12,7 +12,9 @@ SELECT
     member.office_room_number,
     member.office_phone_number,
     member.office_email_address,
-    member.subscribed
+    member.admin,
+    member.subscribed,
+    member.deleted
 FROM Members member
     JOIN Research_Groups research_group ON research_group.research_group_id = member.research_group_id
     JOIN Institutes institute ON institute.institute_id = member.institute_id

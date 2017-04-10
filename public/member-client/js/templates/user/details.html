@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<div class="card">
+    <div class="card-header" style="font-size: 20pt;">
+        <div class="row">
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">{{ 'USER' | translate }}</div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right">
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/users')">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="card" style="background-color: #f7f7f9;">
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-1 right">
+                        <h4 class="card-title">
+                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                        </h4>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h4 class="card-title">
+                                    <span ng-if="user.title">{{user.title}} </span>{{user.first_name}} {{user.last_name}}
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="text-muted" ng-if="user.institute_name">
+                                    {{user.institute_name}}<br>
+                                </div>
+                                <div class="text-muted" ng-if="user.university_name">
+                                    {{user.university_name}}<br>
+                                </div>
+                                <br>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <i class="fa fa-envelope-square" aria-hidden="true"></i>&nbsp;&nbsp;
+                                <a href="mailto:{{user.email_address}}">
+                                    {{user.email_address}}
+                                </a>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <h6 class="text-muted">
+                    {{ 'DOCUMENTS' | translate }}
+                </h6>
+                <div class="list-group" ng-if="user.documents && user.documents.length>0">
+                    <a href="" ng-click="redirect('/documents/' + document.document_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="document in user.documents | orderBy: ['document_title']">
+                        <div class="d-flex w-100 justify-content-between">
+                            {{user.document}}
+                        </div>
+                    </a>
+                </div>
+                <div class="list-group" ng-if="!user.documents || user.documents.length==0">
+                    <div class="list-group-item flex-column align-items-center">
+                        <div class="d-flex">
+                            - {{ 'NONE' | translate }} -
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,6 +10,9 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
         get: function() {
             return documents;
         },
+        getByUser: function(){ // ALTERNATIVE
+            return _.where(documents, { user_id: user_id });
+        },
         set: function(data) {
             documents = data;
         },
@@ -19,8 +22,14 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
             } else {
                 query = "";
             }
-            console.log($authenticationService.getToken());
             return $http.get(config.apiURL + "/documents" + query, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        listByUser: function(user_id){
+            return $http.get(config.apiURL + "/users/" + user_id + "/documents", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

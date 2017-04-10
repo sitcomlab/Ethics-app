@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Help controller
-app.controller("helpController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService) {
+app.controller("helpController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService) {
 
     /*************************************************
         FUNCTIONS
@@ -23,7 +23,7 @@ app.controller("helpController", function($scope, $rootScope, $translate, $locat
      */
     $scope.cancel = function(){
         if($authenticationService.get()){
-            $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
+            $scope.redirect("/documents/");
         } else {
             $scope.redirect("/");
         }
