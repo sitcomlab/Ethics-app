@@ -69,7 +69,7 @@ app.config(function ($translateProvider) {
 
         INITIALISED: 'initialised',
         UNSUBMITTED: 'unsubmitted',
-        SUBMITTED: 'submitted',
+        _SUBMITTED: 'submitted',
         REVIEW_PENDING: 'review pending',
         UNDER_REVIEW: 'under review',
         PARTLY_ACCEPTED: 'partly accepted',
@@ -157,7 +157,7 @@ app.config(function ($translateProvider) {
         HIDE_COMMENTS: 'Hide comments',
 
         CREATED: 'Created',
-        SUBMITTED_LARGE_S: 'Submitted',
+        SUBMITTED: 'Submitted',
         REVIEWERS: 'Reviewers',
         LATEST_REVIEWER: 'Latest reviewer',
         GENERAL_COMMENT: 'Comment',
