@@ -167,7 +167,7 @@ exports.request = function(req, res) {
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, client, done, user, document);
+                    callback(null, client, done, user, document, revision);
                 }
             });
         },

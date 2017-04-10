@@ -99,7 +99,7 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
                 // Retry creating new document
                 $scope.new_document.email_address = $scope.new_user.email_address || "";
                 $scope.changeTab(1);
-                console.log($scope.tab);
+                $scope.$parent.loading = { status: false, message: "" };
             })
             .catch(function onError(response) {
                 $window.alert(response.data);
