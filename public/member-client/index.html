@@ -90,8 +90,8 @@
                                     </a>
                                 </li>
                             </ul>
-                            <ul class="navbar-nav nav-pills" ng-if="authenticated_member && !loading.status">
-                                <li class="nav-item dropdown">
+                            <ul class="navbar-nav nav-pills">
+                                <li class="nav-item dropdown" ng-if="document && !loading.status">
                                     <a class="nav-link active dropdown-toggle" href="" id="document_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     style="cursor: pointer; color: #FFFFFF; border: 1px solid #0275d8; margin-left:5px;" ng-style="
                                     document.status===0 && {'background-color':'#FFFFFF','border':'1px solid #CCCCCC', 'color': '#292b2c'} ||
@@ -125,7 +125,7 @@
                                         </a>
                                     </div>
                                 </li>
-                                <li class="nav-item dropdown">
+                                <li class="nav-item dropdown" ng-if="authenticated_member && !loading.status">
                                     <a class="nav-link active user-pill dropdown-toggle" href="" id="member_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer; background-color:#FFFFFF; border: 1px solid #CCCCCC; color: #292b2c; margin-left:5px;" ng-if="!loading.status">
                                         <span ng-if="authenticated_member.admin">
                                             <i class="fa fa-user-secret" aria-hidden="true"></i>
@@ -218,20 +218,21 @@
         <!-- SERVICES -->
         <script src="js/services/authenticationService.js"></script>
         <script src="js/services/documentsService.js"></script>
+        <script src="js/services/memberService.js"></script>
         <script src="js/services/userService.js"></script>
         <script src="js/services/universityService.js"></script>
         <script src="js/services/instituteService.js"></script>
         <script src="js/services/researchGroupService.js"></script>
-        <!-- <script src="js/services/courseService.js"></script>
+        <script src="js/services/courseService.js"></script>
         <script src="js/services/documentService.js"></script>
         <script src="js/services/revisionService.js"></script>
         <script src="js/services/descriptionService.js"></script>
         <script src="js/services/concernService.js"></script>
         <script src="js/services/commentService.js"></script>
         <script src="js/services/reviewerService.js"></script>
+        <!-- <script src="js/services/reviewService.js"></script> -->
         <script src="js/services/fileService.js"></script>
-        <script src="js/services/recoveryService.js"></script>-->
-        <script src="js/services/memberService.js"></script>
+        <!-- <script src="js/services/recoveryService.js"></script> -->
 
         <!-- APPLICATION -->
         <script src="js/app.js"></script>
@@ -263,7 +264,8 @@
         <script src="js/controllers/research_group/detailsController.js"></script>
 
         <!-- Courses -->
-
+        <script src="js/controllers/course/listController.js"></script>
+        <script src="js/controllers/course/detailsController.js"></script>
 
         <!-- Account
         <script src="js/controllers/account/editController.js"></script>-->
@@ -271,9 +273,10 @@
         <!-- Documents -->
         <script src="js/controllers/document/listController.js"></script>
         <!--<script src="js/controllers/document/createController.js"></script>
-        <script src="js/controllers/document/deleteController.js"></script>
+        <script src="js/controllers/document/deleteController.js"></script>-->
         <script src="js/controllers/document/detailsController.js"></script>
-        <script src="js/controllers/document/editController.js"></script>
+        <script src="js/controllers/document/overviewController.js"></script>
+        <!-- <script src="js/controllers/document/editController.js"></script>
         <script src="js/controllers/document/editSettingsController.js"></script>
         <script src="js/controllers/document/showIdController.js"></script>
         <script src="js/controllers/document/showSubmissionController.js"></script>-->

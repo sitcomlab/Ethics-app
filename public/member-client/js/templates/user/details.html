@@ -50,20 +50,34 @@
                 <br>
 
                 <h6 class="text-muted">
-                    {{ 'DOCUMENTS' | translate }}
+                    {{ 'RELATED_DOCUMENTS' | translate }}
                 </h6>
                 <div class="list-group" ng-if="user.documents && user.documents.length>0">
-                    <a href="" ng-click="redirect('/documents/' + document.document_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="document in user.documents | orderBy: ['document_title']">
+                    <a href="" ng-click="redirect('/documents/' + document.document_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="document in user.documents | orderBy: ['status', 'document_title']">
                         <div class="d-flex w-100 justify-content-between">
-                            {{user.document}}
+                            <div>
+                                <i class="fa fa-file-text" aria-hidden="true"></i>
+                                &nbsp;&nbsp;
+                                <b>{{document.document_title}}</b>
+                            </div>
+                            <div>
+                                <span class="badge" ng-class="{'badge-default': document.status==0 || document.status==1, 'badge-success': document.status==2 || document.status==6, 'badge-primary': document.status==3, 'badge-info': document.status==4, 'badge-warning': document.status=='5', 'badge-danger': document.status==7}">
+                                    <span ng-if="document.status==0">{{ 'INITIALISED' | translate }}</span>
+                                    <span ng-if="document.status==1">{{ 'UNSUBMITTED' | translate }}</span>
+                                    <span ng-if="document.status==2">{{ 'SUBMITTED' | translate }}</span>
+                                    <span ng-if="document.status==3">{{ 'REVIEW_REQUIRED' | translate }}</span>
+                                    <span ng-if="document.status==4">{{ 'UNDER_REVIEW' | translate }}</span>
+                                    <span ng-if="document.status==5">{{ 'PARTLY_ACCEPTED' | translate }}</span>
+                                    <span ng-if="document.status==6">{{ 'REVIEWED' | translate }}</span>
+                                    <span ng-if="document.status==7">{{ 'REJECTED' | translate }}</span>
+                                </span>
+                            </div>
                         </div>
                     </a>
                 </div>
                 <div class="list-group" ng-if="!user.documents || user.documents.length==0">
-                    <div class="list-group-item flex-column align-items-center">
-                        <div class="d-flex">
-                            - {{ 'NONE' | translate }} -
-                        </div>
+                    <div class="list-group-item middle">
+                        - {{ 'NONE' | translate }} -
                     </div>
                 </div>
             </div>

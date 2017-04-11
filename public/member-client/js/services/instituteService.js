@@ -10,6 +10,9 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
         get: function(){
             return institutes;
         },
+        getByUniversity: function(university_id){
+            return _.where(institutes, {university_id: university_id});
+        },
         set: function(data){
             institutes = data;
         },

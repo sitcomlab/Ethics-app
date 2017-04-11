@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 // Login controller
-app.controller("loginController", function($scope, $rootScope, $translate, $location, config, $authenticationService, $window) {
+app.controller("loginController", function($scope, $rootScope, $translate, $location, config, $authenticationService, $documentService, $window) {
 
     /*************************************************
         FUNCTIONS
@@ -57,11 +57,11 @@ app.controller("loginController", function($scope, $rootScope, $translate, $loca
 
     // Reset all services
     $authenticationService.set();
-    //$documentService.set();
+    $documentService.set();
 
     // Reset navbar
     $scope.$parent.authenticated_member = $authenticationService.get();
-    //$scope.$parent.document = $documentService.get();
+    $scope.$parent.document = $documentService.get();
 
     // Reset login
     $scope.login_member = $authenticationService.init();

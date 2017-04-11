@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<div class="card">
+    <div class="card-header" style="font-size: 20pt;">
+        <div class="row">
+            <div class="col">{{ 'COURSES' | translate }}</div>
+            <div class="col right">
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/documents')">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="list-group" ng-if="courses && courses.length>0">
+            <a href="" ng-click="redirect('/courses/' + course.course_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="course in courses | orderBy: ['university_name', 'institute_name', 'year', 'course_name']">
+                <div class="d-flex w-100 justify-content-between">
+                    <div>
+                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                        &nbsp;&nbsp;
+                        <b>{{course.course_name}}</b>
+                        &nbsp;
+                        <span class="text-muted">
+                            <small>{{course.season}}&nbsp;|</small>
+                        </span>
+                        <span class="text-muted">
+                            <small>{{course.institute_name}}&nbsp;|</small>
+                        </span>
+                        <span class="text-muted">
+                            <small>{{course.university_name}}</small>
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="list-group" ng-if="!courses || courses.length==0">
+            <div class="list-group-item flex-column align-items-center">
+                <div class="d-flex">
+                    - {{ 'NONE' | translate }} -
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

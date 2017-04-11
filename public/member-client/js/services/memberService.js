@@ -23,6 +23,13 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
                 }
             });
         },
+        listByCourse: function(course_id) {
+            return $http.get(config.apiURL + "/courses/" + course_id + "/members", {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
         create: function(data){
             return $http.post(config.apiURL + "/members" , data, {
                 headers: {

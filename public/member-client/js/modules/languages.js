@@ -155,7 +155,8 @@ app.config(function ($translateProvider) {
         HIDE_HISTORY: 'Hide history',
         SHOW_COMMENTS: 'Show comments',
         HIDE_COMMENTS: 'Hide comments',
-
+        NOT_USED: 'not used',
+        
         CREATED: 'Created',
         SUBMITTED: 'Submitted',
         REVIEWERS: 'Reviewers',

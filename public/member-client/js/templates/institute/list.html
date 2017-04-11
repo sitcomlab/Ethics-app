@@ -49,10 +49,8 @@
             </a>
         </div>
         <div class="list-group" ng-if="!current_members || current_members.length==0">
-            <div class="list-group-item flex-column align-items-center">
-                <div class="d-flex">
-                    - {{ 'NONE' | translate }} -
-                </div>
+            <div class="list-group-item middle">
+                - {{ 'NONE' | translate }} -
             </div>
         </div>
         <div class="row" ng-if="current_members && current_members.length>0">

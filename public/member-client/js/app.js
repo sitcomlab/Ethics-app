@@ -18,20 +18,21 @@ var app = angular.module("ethics-app", [
     // Services
     "authenticationService",
     "documentsService",
+    "documentService",
     "memberService",
     "userService",
     "universityService",
     "instituteService",
     "researchGroupService",
-    /*"courseService",
-    "documentService",
+    "courseService",
     "revisionService",
     "descriptionService",
     "concernService",
     "commentService",
-    "reviewService",
-    "recoveryService",
-    "fileService",*/
+    "reviewerService",
+    //"reviewService",
+    //"recoveryService",
+    "fileService"
 
 ]);
 

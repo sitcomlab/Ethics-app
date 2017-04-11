@@ -28,7 +28,7 @@
                         <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}</b>
                         &nbsp;
                         <span class="text-muted" ng-if="member.research_group_name">
-                            <small><b>{{member.research_group_name}}</b>&nbsp;|</small>
+                            <small>{{member.research_group_name}}&nbsp;|</small>
                         </span>
                         <span class="text-muted" ng-if="member.institute_name">
                             <small>{{member.institute_name}}&nbsp;|</small>
@@ -49,10 +49,8 @@
             </a>
         </div>
         <div class="list-group" ng-if="!current_members || current_members.length==0">
-            <div class="list-group-item flex-column align-items-center">
-                <div class="d-flex">
-                    - {{ 'NONE' | translate }} -
-                </div>
+            <div class="list-group-item middle">
+                - {{ 'NONE' | translate }} -
             </div>
         </div>
         <div class="row" ng-if="current_members && current_members.length>0">
@@ -90,10 +88,8 @@
             </a>
         </div>
         <div class="list-group" ng-if="!former_members || former_members.length==0">
-            <div class="list-group-item flex-column align-items-center">
-                <div class="d-flex">
-                    - {{ 'NONE' | translate }} -
-                </div>
+            <div class="list-group-item middle">
+                - {{ 'NONE' | translate }} -
             </div>
         </div>
     </div>

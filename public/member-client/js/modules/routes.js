@@ -37,14 +37,21 @@ app.config(function($routeProvider, $locationProvider, config) {
                 factory: checkAuthentication
             }
 		})
-		/*.when("/documents/:document_id", {
+		.when("/documents/:document_id", {
 			templateUrl: "js/templates/document/details.html",
 			controller: "documentDetailsController",
 			resolve: {
                 factory: checkAuthentication
             }
 		})
-		.when("/documents/:document_id/settings", {
+		.when("/documents/:document_id/overview", {
+			templateUrl: "js/templates/document/overview.html",
+			controller: "documentOverviewController",
+			resolve: {
+                factory: checkAuthentication
+            }
+		})
+		/*.when("/documents/:document_id/settings", {
 			templateUrl: "js/templates/document/edit_settings.html",
 			controller: "documentEditSettingsController",
 			resolve: {
@@ -61,13 +68,6 @@ app.config(function($routeProvider, $locationProvider, config) {
 		.when("/documents/:document_id/id", {
 			templateUrl: "js/templates/document/show_id.html",
 			controller: "documentShowIdController",
-			resolve: {
-                factory: checkAuthentication
-            }
-		})
-		.when("/documents/:document_id/submission", {
-			templateUrl: "js/templates/document/submission.html",
-			controller: "documentShowSubmissionController",
 			resolve: {
                 factory: checkAuthentication
             }
@@ -241,6 +241,45 @@ app.config(function($routeProvider, $locationProvider, config) {
 		.when("/research_groups/:research_group_id/delete", {
 			templateUrl: "js/templates/research_group/delete.html",
 			controller: "researchGroupDeleteController",
+			resolve: {
+				factory: checkAuthentication
+			}
+		})*/
+
+		// New research group
+		/*.when("/new/research_group", {
+			templateUrl: "js/templates/research_group/create.html",
+			controller: "researchGroupCreateController",
+			resolve: {
+				factory: checkAuthentication
+			}
+		})*/
+
+		// Courses
+		.when("/courses", {
+			templateUrl: "js/templates/course/list.html",
+			controller: "courseListController",
+			resolve: {
+				factory: checkAuthentication
+			}
+		})
+		.when("/courses/:course_id", {
+			templateUrl: "js/templates/course/details.html",
+			controller: "courseDetailsController",
+			resolve: {
+				factory: checkAuthentication
+			}
+		})
+		/*.when("/courses/:course_id/edit", {
+			templateUrl: "js/templates/course/edit.html",
+			controller: "courseEditController",
+			resolve: {
+				factory: checkAuthentication
+			}
+		})
+		.when("/courses/:course_id/delete", {
+			templateUrl: "js/templates/course/delete.html",
+			controller: "courseDeleteController",
 			resolve: {
 				factory: checkAuthentication
 			}
