@@ -12,9 +12,13 @@ SELECT
     _user.email_address,
     _user.title,
     _user.first_name,
-    _user.last_name
+    _user.last_name,
+    _user.institute_id,
+    institute.institute_name,
+    institute.university_id,
+    university.university_name
 FROM Documents document
-    INNER JOIN (
+    JOIN (
     	SELECT
     		revision_id AS revision_id,
     		created AS revision_created,
@@ -29,5 +33,7 @@ FROM Documents document
             GROUP BY document_id
         )
     ) revision ON document.document_id = revision.document_id
-    INNER JOIN Users _user ON document.user_id = _user.user_id
-ORDER BY _user.last_name, _user.first_name, document.created;
+    JOIN Users _user ON document.user_id = _user.user_id
+    JOIN Institutes institute ON institute.institute_id = _user.institute_id
+    JOIN Universities university ON university.university_id = institute.university_id
+ORDER BY document.created;

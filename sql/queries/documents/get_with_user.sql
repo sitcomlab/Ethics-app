@@ -5,9 +5,6 @@ SELECT
     document.document_title,
     document.status,
     document.notes,
-    revision.revision_id,
-    revision.revision_created,
-    revision.revision_version,
     _user.user_id,
     _user.email_address,
     _user.title,
@@ -18,23 +15,7 @@ SELECT
     institute.university_id,
     university.university_name
 FROM Documents document
-    JOIN (
-    	SELECT
-    		revision_id AS revision_id,
-    		created AS revision_created,
-    		document_id AS document_id,
-    		version AS revision_version
-    	FROM Revisions
-        WHERE (document_id, version) IN (
-            SELECT
-                document_id,
-                MAX(version)
-            FROM Revisions
-            GROUP BY document_id
-        )
-    ) revision ON document.document_id = revision.document_id
     JOIN Users _user ON document.user_id = _user.user_id
     JOIN Institutes institute ON institute.institute_id = _user.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
-WHERE document.user_id=$1::INTEGER
-ORDER BY document.created;
+WHERE document_id=$1::TEXT;

@@ -13,6 +13,7 @@ var fs = require("fs");
 var dir_1 = "/../../sql/queries/documents/";
 var dir_2 = "/../../sql/queries/courses/";
 var query_get_document = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
+var query_get_document_with_user = fs.readFileSync(__dirname + dir_1 + 'get_with_user.sql', 'utf8').toString();
 var query_get_course_by_document = fs.readFileSync(__dirname + dir_2 + 'get_by_document.sql', 'utf8').toString();
 
 // GET
@@ -30,9 +31,8 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            // TODO: Implement Authorization for members
-
-            /*if(req.headers.authorization) {
+            // Authorization
+            if(req.headers.authorization) {
                 var token = req.headers.authorization.substring(7);
 
                 // Verify token
@@ -40,22 +40,20 @@ exports.request = function(req, res) {
                     if(err){
                         res.status(401).send("Authorization failed!");
                     } else {
-                        if(decoded.username === account.username && decoded.iss === server_url){
-                            callback(null, client, done);
+                        if(decoded.member){
+                            callback(null, client, done, query_get_document_with_user);
                         } else {
-                            res.status(401).send("Authorization failed!");
+                            callback(null, client, done, query_get_document);
                         }
-                        callback(null, client, done);
                     }
                 });
             } else {
-                callback(null, client, done);
-            }*/
-            callback(null, client, done);
+                res.status(401).send("Authorization failed!");
+            }
         },
-        function(client, done, callback) {
+        function(client, done, query, callback) {
             // Database query
-            client.query(query_get_document, [
+            client.query(query, [
                 req.params.document_id
             ], function(err, result) {
                 done();
