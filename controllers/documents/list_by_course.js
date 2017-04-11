@@ -10,11 +10,13 @@ var server_url = require('../../server.js').server_url;
 var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/members/";
-var query_get_member = fs.readFileSync(__dirname + dir + 'get.sql', 'utf8').toString();
+var dir_1 = "/../../sql/queries/courses/";
+var dir_2 = "/../../sql/queries/documents/";
+var query_get_course = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
+var query_list_documents_by_course = fs.readFileSync(__dirname + dir_2 + 'list_by_course.sql', 'utf8').toString();
 
 
-// GET
+// LIST BY COURSE
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -39,34 +41,44 @@ exports.request = function(req, res) {
                         res.status(401).send("Authorization failed!");
                     } else {
                         if(decoded.member){
-                            // TODO: Change query for members
                             callback(null, client, done);
                         } else {
-                            // TODO: Change query for users
-                            callback(null, client, done);
+                            res.status(401).send("Authorization failed!");
                         }
                     }
                 });
             } else {
-                // TODO: Change query for users
-                callback(null, client, done);
+                res.status(401).send("Authorization failed!");
             }
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_get_member, [
-                req.params.member_id
+            client.query(query_get_course, [
+                req.params.course_id
             ], function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    // Check if Member exists
+                    // Check if Course exists
                     if (result.rows.length === 0) {
-                        callback(new Error("Member not found"), 404);
+                        callback(new Error("Course not found"), 404);
                     } else {
-                        callback(null, 200, result.rows[0]);
+                        callback(null, client, done, result.rows[0]);
                     }
+                }
+            });
+        },
+        function(client, done, course, callback) {
+            // Database query
+            client.query(query_list_documents_by_course, [
+                course.course_id
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    callback(null, 200, result.rows);
                 }
             });
         }

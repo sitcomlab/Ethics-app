@@ -31,7 +31,7 @@ var query_get_concern_by_revision = fs.readFileSync(__dirname + dir_6 + 'get_by_
 //var query_create_review = fs.readFileSync(__dirname + dir_7 + 'create.sql', 'utf8').toString();
 var query_get_user = fs.readFileSync(__dirname + dir_7 + 'get.sql', 'utf8').toString();
 var query_list_members_by_subscription = fs.readFileSync(__dirname + dir_8 + 'list_by_subscription.sql', 'utf8').toString();
-var query_list_members_by_course = fs.readFileSync(__dirname + dir_8 + 'list_by_course.sql', 'utf8').toString();
+var query_list_members_by_course = fs.readFileSync(__dirname + dir_8 + 'list_by_course_internal.sql', 'utf8').toString();
 
 
 // SUBMIT

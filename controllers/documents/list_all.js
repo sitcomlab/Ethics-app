@@ -108,9 +108,24 @@ exports.request = function(req, res) {
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, 200, result.rows);
+                    callback(null, result.rows);
                 }
             });
+        },
+        function(documents, callback){
+            // Apply final filters
+            if(req.query.university_id){
+                documents = _.where(documents, {university_id: Number(req.query.university_id)});
+                callback(null, 200, documents);
+            } else if(req.query.institute_id){
+                documents = _.where(documents, {institute_id: Number(req.query.institute_id)});
+                callback(null, 200, documents);
+            } else if(req.query.course_id){
+                documents = _.where(documents, {course_id: Number(req.query.course_id)});
+                callback(null, 200, documents);
+            } else {
+                callback(null, 200, documents);
+            }
         }
     ], function(err, code, result) {
         if(err){
