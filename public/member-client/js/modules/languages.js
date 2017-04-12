@@ -44,13 +44,13 @@ app.config(function ($translateProvider) {
         NEW_DOCUMENT: 'New document',
         PLEASE_USE_A_UNIVERSITY_ADDRESS: 'Please use an official university address',
         SEARCH_FOR_DOCUMENT_TITLES_AND_AUTHORS: 'Document Title/Author',
-      
+
         NO_FILTER:'No filter',
         FILTER_BY_UNIVERSITY:'University',
         FILTER_BY_INSTITUTE:'Institute',
         FILTER_BY_COURSE:'Course',
         FILTER_BY_STATUS_ETC:'Status',
-      
+
         UNIVERSITY: 'University',
         INSTITUTE: 'Institute',
         NO_INSTITUTE: 'No institute',
@@ -68,6 +68,7 @@ app.config(function ($translateProvider) {
 
         ACCOUNT: 'Account',
         SETTINGS: 'Settings',
+        ADMINISTRATION: 'Administration',
         DOCUMENT: 'Document',
         DOCUMENTS: 'Documents',
         LOGOUT: 'Logout',
@@ -84,7 +85,7 @@ app.config(function ($translateProvider) {
         ALL:'All',
         INITIALISED: 'initialised',
         UNSUBMITTED: 'unsubmitted',
-        SUBMITTED: 'submitted',
+        _SUBMITTED: 'submitted',
         SUBMITTED_OKAY: 'submitted (okay)',
         REVIEW_REQUIRED: 'review required',
         SUBMITTED_REVIEW_REQUIRED: 'submitted (review required)',
@@ -159,8 +160,8 @@ app.config(function ($translateProvider) {
         SUBMISSION: 'Submission',
         AND: 'and',
         REVIEW: 'Review',
-        OVERVIEW: 'Overview',
         _REVIEW: 'review',
+        OVERVIEW: 'Overview',
         GENERAL: 'General',
         REVISIONS: 'Revisions',
         STUDY_DESCRIPTION: 'Study description',
@@ -177,7 +178,7 @@ app.config(function ($translateProvider) {
         SHOW_COMMENTS: 'Show comments',
         HIDE_COMMENTS: 'Hide comments',
         NOT_USED: 'not used',
-        
+
         CREATED: 'Created',
         SUBMITTED: 'Submitted',
         REVIEWERS: 'Reviewers',
@@ -188,7 +189,7 @@ app.config(function ($translateProvider) {
         MEMBERS: 'Members',
         USERS: 'Users',
         COURSES: 'Courses',
-      
+
         NONE: 'none',
         COMMITTEE: 'Committee',
         COMMITTEE_MEMBER:'Committee member',
