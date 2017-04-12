@@ -32,7 +32,6 @@ exports.request = function(req, res) {
                 title: req.body.title,
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
-                university_id: req.body.university_id,
                 institute_id: req.body.institute_id
             };
             var params = _.values(object);
@@ -44,7 +43,7 @@ exports.request = function(req, res) {
                 done();
                 if (err) {
                     callback(err, 500);
-                } else {    
+                } else {
                     callback(null, 201, result.rows[0]);
                 }
             });

@@ -17,7 +17,9 @@ var dir_1 = "/../../templates/emails/";
 var dir_2 = "/../../sql/queries/users/";
 var template = fs.readFileSync(__dirname + dir_1 + 'email_address_changed.html', 'utf8').toString();
 var query_get_user = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
+// TODO: Update query to support blocking of a user by members
 var query_edit_user = fs.readFileSync(__dirname + dir_2 + 'edit.sql', 'utf8').toString();
+var query_edit_user_public = fs.readFileSync(__dirname + dir_2 + 'edit.sql', 'utf8').toString();
 
 
 // PUT
@@ -33,6 +35,27 @@ exports.request = function(req, res) {
                     callback(null, client, done);
                 }
             });
+        },
+        function(client, done, callback) {
+            // Authorization
+            if(req.headers.authorization) {
+                var token = req.headers.authorization.substring(7);
+
+                // Verify token
+                jwt.verify(token, jwtSecret, function(err, decoded) {
+                    if(err){
+                        res.status(401).send("Authorization failed!");
+                    } else {
+                        if(decoded.member){
+                            callback(null, client, done, query_edit_user);
+                        } else {
+                            callback(null, client, done, query_edit_user_public);
+                        }
+                    }
+                });
+            } else {
+                res.status(401).send("Authorization failed!");
+            }
         },
         function(client, done, callback) {
             // Database query
@@ -60,7 +83,6 @@ exports.request = function(req, res) {
                 title: req.body.title,
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
-                university_id: req.body.university_id,
                 institute_id: req.body.institute_id
             };
             var params = _.values(object);

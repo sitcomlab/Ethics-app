@@ -57,8 +57,6 @@ exports.request = function(req, res) {
                 title: req.body.title,
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
-                university_id: req.body.university_id,
-                institute_id: req.body.institute_id,
                 working_group_id: req.body.working_group_id,
                 office_room_number: req.body.office_room_number,
                 office_phone_number: req.body.office_phone_number,

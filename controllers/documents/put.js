@@ -34,7 +34,7 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // TODO: Authorization
-            /*if(req.headers.authorization) {
+            if(req.headers.authorization) {
                 var token = req.headers.authorization.substring(7);
 
                 // Verify token
@@ -43,16 +43,19 @@ exports.request = function(req, res) {
                         res.status(401).send("Authorization failed!");
                     } else {
                         if(decoded.member){
+                            // TODO: Update edit query for notes
+                            //callback(null, client, done, query);
                             callback(null, client, done);
                         } else {
-                            res.status(401).send("Authorization failed!");
+                            // TODO: Update edit query for notes
+                            //callback(null, client, done, query);
+                            callback(null, client, done);
                         }
                     }
                 });
             } else {
                 res.status(401).send("Authorization failed!");
-            }*/
-            callback(null, client, done);
+            }
         },
         function(client, done, callback) {
             // Database query

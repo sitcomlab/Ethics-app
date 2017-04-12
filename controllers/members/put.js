@@ -44,6 +44,13 @@ exports.request = function(req, res) {
                         } else {
                             res.status(401).send("Authorization failed!");
                         }
+
+                        // TODO: Update query to support former members for admins
+                        if(decoded.admin){
+                            // callback(null, client, done, query);
+                        } else {
+                            // callback(null, client, done, query);
+                        }
                     }
                 });
             } else {
@@ -76,13 +83,12 @@ exports.request = function(req, res) {
                 title: req.body.title,
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
-                university_id: req.body.university_id,
-                institute_id: req.body.institute_id,
                 working_group_id: req.body.working_group_id,
                 office_room_number: req.body.office_room_number,
                 office_phone_number: req.body.office_phone_number,
                 office_email_address: req.body.office_email_address,
-                subscribed: req.body.subscribed
+                subscribed: req.body.subscribed,
+                former: req.body.former
             };
             var params = _.values(object);
             callback(null, client, done, member, params);

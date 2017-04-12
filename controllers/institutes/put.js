@@ -73,7 +73,8 @@ exports.request = function(req, res) {
             var object = {
                 institutes_id: req.params.institutes_id,
                 institute_name: req.params.institutes_name,
-                university_id: req.params.university_id
+                university_id: req.params.university_id,
+                former: req.params.former
             };
             var params = _.values(object);
             callback(null, client, done, params);

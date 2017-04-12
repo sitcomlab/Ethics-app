@@ -73,7 +73,8 @@ exports.request = function(req, res) {
             var object = {
                 working_group_id: req.body.working_group_id,
                 working_group_name: req.body.working_group_name,
-                institute_id: req.body.institute_id
+                institute_id: req.body.institute_id,
+                former: req.body.former
             };
             var params = _.values(object);
             callback(null, client, done, params);
