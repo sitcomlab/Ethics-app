@@ -43,19 +43,13 @@ app.config(function ($translateProvider) {
         REGISTRATION: 'Registration',
         NEW_DOCUMENT: 'New document',
         PLEASE_USE_A_UNIVERSITY_ADDRESS: 'Please use an official university address',
-        SEARCH_FOR_DOCUMENT_TITLES_AND_AUTHORS: 'Document Title/Author',
+        SEARCH_FOR_DOCUMENT_TITLES_AND_AUTHORS: 'Search for documents, titles & authors',
 
         NO_FILTER:'No filter',
-        FILTER_BY_UNIVERSITY:'University',
-        FILTER_BY_INSTITUTE:'Institute',
-        FILTER_BY_COURSE:'Course',
-        FILTER_BY_STATUS_ETC:'Status',
-
-        UNIVERSITY: 'University',
-        INSTITUTE: 'Institute',
-        NO_INSTITUTE: 'No institute',
-        COURSE: 'Course',
-        NO_COURSE: 'No course',
+        FILTER_BY_UNIVERSITY:'Filter by university',
+        FILTER_BY_INSTITUTE:'Filter by institute',
+        FILTER_BY_COURSE:'Filter by course',
+        FILTER_BY_STATUS_ETC:'Filter by status',
 
         INTRODUCTION_TEXT: 'You will be asked a series of questions, based on which the EthicsApp will auto-generate 3 documents. You are required to use these documents in your experiment. The key document is the Informed Consent Form - both you and your participant should sign and keep a copy. See the example below.',
         STUDY_DESCRIPTION_FORM_TEXT: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally the German version. Depending on the language(s), you will receive the informed consent forms for your experiment.',
@@ -187,8 +181,22 @@ app.config(function ($translateProvider) {
         AUTHOR: 'Author',
         NOTES: 'Notes',
         MEMBERS: 'Members',
+        MEMBER: 'Member',
         USERS: 'Users',
+        USER: 'User',
+        UNIVERSITIES: 'University',
+        UNIVERSITY: 'University',
+        INSTITUTES: 'Institutes',
+        INSTITUTE: 'Institute',
+        NO_INSTITUTE: 'No institute',
         COURSES: 'Courses',
+        COURSE: 'Course',
+        NO_COURSE: 'No course',
+        RELATED_DOCUMENTS: 'Related documents',
+        RESPONSIBLE_MEMBERS: 'Responsible members',
+
+        SEASON: 'Season',
+        LECTURERS: 'Lecturer(s)',
 
         NONE: 'none',
         COMMITTEE: 'Committee',
@@ -196,8 +204,10 @@ app.config(function ($translateProvider) {
         CURRENT_MEMBERS: 'Current members',
         FORMER_MEMBERS: 'Former members',
         OFFICE: 'Office',
-        RESPONSIBLE: 'responsible ',
-        CURRENTLY_NOT_RESPONSIBLE: 'Currently not responsible'
+        RESPONSIBLE: 'Responsible ',
+        CURRENTLY_NOT_RESPONSIBLE: 'Currently not responsible',
+        SUBSCRIBED: 'Subscribed ',
+        CURRENTLY_NOT_SUBSCRIBED: 'Currently not subscribed'
     });
 
     // Default Language (English)
