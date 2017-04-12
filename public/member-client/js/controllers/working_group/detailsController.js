@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 
-// Reseach group details controller
+// Working group details controller
 app.controller("workingGroupDetailsController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $workingGroupService) {
 
     /*************************************************
