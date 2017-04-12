@@ -13,7 +13,8 @@ CREATE TABLE Users (
     title CHARACTER VARYING(255) DEFAULT NULL,
     first_name CHARACTER VARYING(255) NOT NULL,
     last_name CHARACTER VARYING(255) NOT NULL,
-    university_id INTEGER NOT NULL DEFAULT 0,
-    institute_id INTEGER NOT NULL DEFAULT 0,
-    deleted BOOLEAN NOT NULL DEFAULT false 
+    university_id INTEGER NOT NULL REFERENCES Universities(university_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    institute_id INTEGER NOT NULL REFERENCES Institutes(institute_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    blocked BOOLEAN NOT NULL DEFAULT false
+    
 );

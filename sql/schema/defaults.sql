@@ -26,9 +26,9 @@ INSERT INTO Institutes (
 );
 
 
--- Resarch groups
-INSERT INTO Research_Groups (
-    research_group_name,
+-- Working groups, e.g. Research groups
+INSERT INTO Working_Groups (
+    working_group_name,
     institute_id
 ) VALUES (
     'Geosimulation modelling lab',
@@ -50,5 +50,8 @@ INSERT INTO Research_Groups (
     1
 ), (
     'Spatio-temporal modelling lab',
+    1
+), (
+    'Webteam',
     1
 );

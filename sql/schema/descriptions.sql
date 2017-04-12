@@ -10,7 +10,7 @@ CREATE TABLE Descriptions (
 
     -- Attributes
     revision_id INTEGER NOT NULL REFERENCES Revisions(revision_id) ON UPDATE CASCADE ON DELETE CASCADE,
-    
+
         -- English
         en_title TEXT DEFAULT NULL,
         en_researcher TEXT DEFAULT NULL,
@@ -42,4 +42,5 @@ CREATE TABLE Descriptions (
         pt_duration TEXT DEFAULT NULL,
         pt_risks TEXT DEFAULT NULL,
         pt_benefits TEXT DEFAULT NULL
+        
 );

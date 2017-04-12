@@ -10,4 +10,5 @@ CREATE TABLE Universities (
 
     -- Attributes
     university_name CHARACTER VARYING(255) NOT NULL
+    
 );

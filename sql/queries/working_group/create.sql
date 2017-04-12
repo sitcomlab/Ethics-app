@@ -1,5 +1,5 @@
-INSERT INTO Research_Groups (
-    research_group_name,
+INSERT INTO Working_Groups (
+    working_group_name,
     institute_id
 ) VALUES (
     $1::TEXT,
