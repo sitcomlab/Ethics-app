@@ -9,8 +9,8 @@ app.factory('$authenticationService', function($http, $log, config) {
     return {
         init: function(){
             return {
-                username: "n.schiestel@uni-muenster.de", // TEST
-                password: "123456" // TEST
+                username: "",
+                password: ""
             };
         },
         get: function(){
