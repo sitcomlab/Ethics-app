@@ -4,8 +4,8 @@ SELECT
     _user.title,
     _user.first_name,
     _user.last_name,
+    _user.blocked,
     _user.institute_id,
-    _user.deleted,
     institute.institute_name,
     university.university_id,
     university.university_name

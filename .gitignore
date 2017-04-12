@@ -6,3 +6,4 @@ public/files/temp/*
 /config.js
 sql/schema/examples.sql
 sql/schema/examples.sql.bak
+sql/schema/_defaults.sql

@@ -11,7 +11,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             return members;
         },
         getByStatus: function(status){
-            return _.where(members, { deleted: status });
+            return _.where(members, { former: status });
         },
         set: function(data){
             members = data;

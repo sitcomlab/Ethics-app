@@ -12,7 +12,8 @@ SELECT
     member.office_room_number,
     member.office_phone_number,
     member.office_email_address,
-    member.subscribed
+    member.subscribed,
+    member.former
 FROM Members member
     JOIN Responsibilities responsibility ON member.member_id = responsibility.member_id
     JOIN Working_Groups working_group ON working_group.working_group_id = member.working_group_id

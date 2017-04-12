@@ -2,8 +2,6 @@
 INSERT INTO Universities (
     university_name
 ) VALUES (
-    'Other'
-), (
     'University of Münster'
 ), (
     'Portuguese University'
@@ -13,45 +11,58 @@ INSERT INTO Universities (
 -- Institutes
 INSERT INTO Institutes (
     institute_name,
-    university_id
+    university_id,
+    former
 ) VALUES (
     'Institute for Geoinformatics',
-    2
+    2,
+    false
 ), (
     'Institute for Geography',
-    2
+    2,
+    false
 ), (
     'Institute for Landscape Ecology',
-    2
+    2,
+    false
 );
 
 
 -- Working groups, e.g. Research groups
 INSERT INTO Working_Groups (
     working_group_name,
-    institute_id
-) VALUES (
+    institute_id,
+    former
+) VALUES  (
+    'Webteam',
+    1,
+    false
+), (
     'Geosimulation modelling lab',
-    1
+    1,
+    false
 ), (
     'GI@School',
-    1
+    1,
+    false
 ), (
     'Ifgicopter',
-    1
+    1,
+    false
 ), (
     'Open lab on spatial information infrastructures',
-    1
+    1,
+    false
 ), (
     'Spatial intelligence lab',
-    1
+    1,
+    false
 ), (
     'Situated computing and interaction lab',
-    1
+    1,
+    false
 ), (
     'Spatio-temporal modelling lab',
-    1
-), (
-    'Webteam',
-    1
+    1,
+    false
 );

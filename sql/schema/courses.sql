@@ -13,6 +13,6 @@ CREATE TABLE Courses (
     year INTEGER NOT NULL DEFAULT 0,
     term BOOLEAN NOT NULL DEFAULT true, -- true = winter term, false = summer term
     lecturer CHARACTER VARYING(255) DEFAULT NULL,
-    institute_id INTEGER NOT NULL REFERENCES Institutes(institute_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    institute_id INTEGER NOT NULL REFERENCES Institutes(institute_id) ON UPDATE CASCADE ON DELETE CASCADE
 
 );

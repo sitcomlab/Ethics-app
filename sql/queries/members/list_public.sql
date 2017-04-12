@@ -13,7 +13,7 @@ SELECT
     member.office_phone_number,
     member.office_email_address,
     member.subscribed,
-    member.deleted
+    member.former
 FROM Members member
     JOIN Working_Groups working_group ON working_group.working_group_id = member.working_group_id
     JOIN Institutes institute ON institute.institute_id = member.institute_id

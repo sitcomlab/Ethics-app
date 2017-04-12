@@ -4,6 +4,7 @@ UPDATE Users SET (
     title,
     first_name,
     last_name,
+    blocked,
     university_id,
     institute_id
 ) = (
@@ -12,6 +13,7 @@ UPDATE Users SET (
     $3::TEXT,
     $4::TEXT,
     $5::TEXT,
-    $6::INTEGER,
-    $7::INTEGER
+    $6::BOOLEAN,
+    $7::INTEGER,
+    $8::INTEGER
 ) WHERE user_id=$1::INTEGER RETURNING *;

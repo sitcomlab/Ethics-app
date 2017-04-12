@@ -14,7 +14,7 @@ SELECT
     member.office_email_address,
     member.admin,
     member.subscribed,
-    member.deleted
+    member.former
 FROM Members member
     JOIN Working_Groups working_group ON working_group.working_group_id = member.working_group_id
     JOIN Institutes institute ON institute.institute_id = member.institute_id
@@ -22,5 +22,5 @@ FROM Members member
 WHERE
         member.subscribed = true
     AND
-        member.deleted != true
+        member.former != true
 ORDER BY last_name, first_name;

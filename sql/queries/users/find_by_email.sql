@@ -4,6 +4,7 @@ SELECT
     _user.title,
     _user.first_name,
     _user.last_name,
+    _user.blocked,
     _user.institute_id,
     institute.institute_name,
     university.university_id,
@@ -11,4 +12,7 @@ SELECT
 FROM Users _user
     JOIN Institutes institute ON institute.institute_id = _user.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
-WHERE _user.email_address=$1::TEXT;
+WHERE
+        _user.email_address=$1::TEXT
+    AND
+        _user.blocked != true;
