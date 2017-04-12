@@ -7,7 +7,8 @@ UPDATE Members SET (
     office_room_number,
     office_phone_number,
     office_email_address,
-    subscribed
+    subscribed,
+    former
 ) = (
     $2::TEXT,
     $3::TEXT,
@@ -17,7 +18,8 @@ UPDATE Members SET (
     $7::TEXT,
     $8::TEXT,
     $9::TEXT,
-    $10::BOOLEAN
+    $10::BOOLEAN,
+    $11::BOOLEAN
 ) WHERE member_id=$1::INTEGER
 RETURNING
     member_id,

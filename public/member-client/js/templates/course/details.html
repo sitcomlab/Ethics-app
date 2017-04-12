@@ -88,6 +88,19 @@
                         - {{ 'NONE' | translate }} -
                     </div>
                 </div>
+                <div class="row" ng-if="course.members && course.members.length>0">
+                    <div class="col text-muted right">
+                        <small>
+                            <span class="text-success">
+                                <i class="fa fa-rss-square" aria-hidden="true"></i>
+                            </span> = {{ 'SUBSCRIBED' | translate }}
+                            &nbsp;&nbsp;|&nbsp;&nbsp;
+                            <span class="text-danger">
+                                <i class="fa fa-ban" aria-hidden="true"></i>
+                            </span> = {{ 'CURRENTLY_NOT_SUBSCRIBED' | translate }}
+                        </small>
+                    </div>
+                </div>
                 <br>
                 <br>
 

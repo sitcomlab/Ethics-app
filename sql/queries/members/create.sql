@@ -4,8 +4,6 @@ INSERT INTO Members (
     title,
     first_name,
     last_name,
-    university_id,
-    institute_id,
     working_group_id,
     office_room_number,
     office_phone_number,
@@ -18,12 +16,10 @@ INSERT INTO Members (
     $4::TEXT,
     $5::TEXT,
     $6::INTEGER,
-    $7::INTEGER,
-    $8::INTEGER,
+    $7::TEXT,
+    $8::TEXT,
     $9::TEXT,
-    $10::TEXT,
-    $11::TEXT,
-    $12::BOOLEAN
+    $10::BOOLEAN
 ) RETURNING
     member_id,
     created,
@@ -32,8 +28,6 @@ INSERT INTO Members (
     title,
     first_name,
     last_name,
-    university_id,
-    institute_id,
     working_group_id,
     office_room_number,
     office_phone_number,

@@ -15,15 +15,15 @@ INSERT INTO Institutes (
     former
 ) VALUES (
     'Institute for Geoinformatics',
-    2,
+    1,
     false
 ), (
     'Institute for Geography',
-    2,
+    1,
     false
 ), (
     'Institute for Landscape Ecology',
-    2,
+    1,
     false
 );
 

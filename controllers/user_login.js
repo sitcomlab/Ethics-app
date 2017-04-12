@@ -77,7 +77,7 @@ exports.request = function(req, res) {
                 last_name: user.last_name,
                 email_address: user.email_address,
                 user: true,
-                committee: false,
+                member: false,
                 admin: false,
                 exp: Number(moment().add(1, 'days').format('x'))
             };
