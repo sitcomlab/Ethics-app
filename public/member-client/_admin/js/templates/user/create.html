@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!-- LOADING -->
+<div class="loading" ng-show="tab==0">
+    <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+</div>
+
+<!-- MAIN -->
+<div class="row" ng-show="tab>0">
+    <!-- Left padding -->
+    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-2"></div>
+
+    <!-- Content -->
+    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-8" ng-show="tab==1">
+
+        <form class="form-horizontal" name="userCreateForm" ng-submit="createUser()">
+            <div class="card" ng-show="tab==1">
+                <div class="card-header middle" style="font-size: 20pt;">
+                    {{ 'NEW_USER' | translate }}
+                </div>
+                <div class="card-block">
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="emailAddress">
+                                <b>{{ 'EMAIL_ADDRESS' | translate }}</b>
+                            </label>
+                            <input type="email" class="form-control" ng-model="new_user.email_address" id="emailAddress" name="emailAddress" placeholder="{{ 'EMAIL_ADDRESS' | translate }}*" required autofocus>
+                            <br>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                            <label for="title">
+                                <b>{{ 'TITLE' | translate }}</b>
+                            </label>
+                            <input type="text" class="form-control" ng-model="new_user.title" id="title" name="title" placeholder="{{ 'TITLE' | translate }}">
+                            <br>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                            <label for="first_name">
+                                <b>{{ 'FIRST_NAME' | translate }}</b>
+                            </label>
+                            <input type="text" class="form-control" ng-model="new_user.first_name" id="firstName" name="firstName" placeholder="{{ 'FIRST_NAME' | translate }}*" required>
+                            <br>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                            <label for="last_name">
+                                <b>{{ 'LAST_NAME' | translate }}</b>
+                            </label>
+                            <input type="text" class="form-control" ng-model="new_user.last_name" id="lastName" name="lastName" placeholder="{{ 'LAST_NAME' | translate }}*" required>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <button class="form-control btn btn-secondary" role="button" ng-click="cancel()">
+                                {{ 'CANCEL' | translate }}
+                            </button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button class="form-control btn btn-success" role="submit">
+                                {{ 'SAVE' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- Right padding -->
+    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-2"></div>
+</div>
+<br>

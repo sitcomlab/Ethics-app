@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!-- LOADING -->
+<div class="loading" ng-show="tab==0">
+    <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+</div>
+
+<!-- MAIN -->
+<div class="row" ng-show="tab>0">
+    <!-- Left padding -->
+    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-2"></div>
+
+    <!-- Content -->
+    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-8" ng-show="tab==1">
+
+        <form class="form-horizontal" name="memberEditForm" ng-submit="saveAccount()">
+            <div class="card" ng-show="tab==1">
+                <div class="card-header middle" style="font-size: 20pt;">
+                    {{ 'YOUR_ACCOUNT' | translate }}
+                </div>
+                <div class="card-block">
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="emailAddress">
+                                <b>{{ 'EMAIL_ADDRESS' | translate }}</b>
+                            </label>
+                            <input type="email" class="form-control" ng-model="updated_authenticated_member.email_address" id="emailAddress" name="emailAddress" placeholder="{{ 'EMAIL_ADDRESS' | translate }}*" required autofocus>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <label for="password">
+                                <b>{{ 'PASSWORD' | translate }}</b>
+                            </label>
+                            <input type="password" class="form-control" ng-model="updated_authenticated_member.password" id="password" name="password" placeholder="{{ 'PASSWORD' | translate }}*" required>
+                            <br>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <label for="passwordRepeat">
+                                <b>{{ 'PASSWORD' | translate }}</b>
+                            </label>
+                            <input type="password" class="form-control" ng-model="passwordRepeat" id="passwordRepeat" name="passwordRepeat" placeholder="{{ 'PASSWORD' | translate }}*" required>
+                            <small class="form-text text-muted">{{ 'PLEASE_REPEAT_YOUR_PASSWORD' | translate }}</small>
+                            <br>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                            <label for="title">
+                                <b>{{ 'TITLE' | translate }}</b>
+                            </label>
+                            <input type="text" class="form-control" ng-model="updated_authenticated_member.title" id="title" name="title" placeholder="{{ 'TITLE' | translate }}">
+                            <br>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                            <label for="first_name">
+                                <b>{{ 'FIRST_NAME' | translate }}</b>
+                            </label>
+                            <input type="text" class="form-control" ng-model="updated_authenticated_member.first_name" id="firstName" name="firstName" placeholder="{{ 'FIRST_NAME' | translate }}*" required>
+                            <br>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                            <label for="last_name">
+                                <b>{{ 'LAST_NAME' | translate }}</b>
+                            </label>
+                            <input type="text" class="form-control" ng-model="updated_authenticated_member.last_name" id="lastName" name="lastName" placeholder="{{ 'LAST_NAME' | translate }}*" required>
+                            <br>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label for="institute">
+                                <b>{{ 'INSTITUTE' | translate }}</b>
+                            </label>
+                            <select class="form-control custom-select" ng-model="updated_authenticated_member.institute"  id="institute" name="institute">
+                                <option value="">{{ 'OTHER' | translate }}</option>
+                                <optgroup label="{{ 'WWU' | translate }}">
+                                    <option value="Institute for Geoinformatics" selected>{{ 'IFGI' | translate }}</option>
+                                </optgroup>
+                            </select>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label for="institute">
+                                <b>{{ 'RESEARCH_LAB' | translate }}</b>
+                            </label>
+                            <select class="form-control custom-select" ng-model="updated_authenticated_member.research_lab"  id="researchLab" name="researchLab">
+                                <option value="" selected>{{ 'OTHER' | translate }}</option>
+                                <optgroup label="{{ 'IFGI' | translate }}">
+                                    <option value="Geosimulation modelling lab">{{ 'GeoSim' | translate }}</option>
+                                    <option value="GI@School">{{ 'GI@School' | translate }}</option>
+                                    <option value="Ifgicopter">{{ 'Ifgicopter' | translate }}</option>
+                                    <option value="Open lab on spatial information infrastructures">{{ 'SII' | translate }}</option>
+                                    <option value="Spatial intelligence lab">{{ 'SIL' | translate }}</option>
+                                    <option value="Situated computing and interaction lab">{{ 'SitcomLab' | translate }}</option>
+                                    <option value="Spatio-temporal modelling lab ">{{ 'STML' | translate }}</option>
+                                </optgroup>
+                            </select>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label for="institute">
+                                <b>{{ 'OFFICE_ROOM_NUMBER' | translate }}</b>
+                            </label>
+                            <input type="text" class="form-control" ng-model="updated_authenticated_member.office_room_number" id="officeRoomNumber" name="officeRoomNumber" placeholder="{{ 'ROOM_NUMBER' | translate }}">
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <label for="institute">
+                                <b>{{ 'OFFICE_PHONE_NUMBER' | translate }}</b>
+                            </label>
+                            <input type="tel" class="form-control" ng-model="updated_authenticated_member.office_phone_number" id="officePhoneNumber" name="officePhoneNumber" placeholder="{{ 'PHONE_NUMBER' | translate }}">
+                            <br>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <label for="institute">
+                                <b>{{ 'OFFICE_EMAIL_ADDRESS' | translate }}</b>
+                            </label>
+                            <input type="email" class="form-control" ng-model="updated_authenticated_member.office_email_address" id="officeEmailAddress" name="officeEmailAddress" placeholder="{{ 'EMAIL_ADDRESS' | translate }}">
+                            <small class="form-text text-muted">{{ 'PUBLIC_EMAIL_ADDRESS_FOR_USERS' | translate }}</small>
+                            <br>
+                        </div>
+                    </div>
+                    <br>
+
+                    <label for="subscribed">
+                        <b><i class="fa fa-rss-square" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SUBSCRIPTION' | translate }}</b>
+                    </label>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                            <label class="custom-control custom-radio">
+                                <input id="subscribed1" name="subscribed" type="radio" class="custom-control-input" ng-value="true" ng-model="updated_authenticated_member.subscribed">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">
+                                    {{ 'YES' | translate }}
+                                </span>
+                            </label>
+                        </div>
+                        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                            <label class="custom-control custom-radio">
+                                <input id="subscribed2" name="subscribed" type="radio" class="custom-control-input" ng-value="false" ng-model="updated_authenticated_member.subscribed">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">
+                                    {{ 'NO' | translate }}
+                                </span>
+                            </label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <small class="form-text text-muted">
+                                {{ 'IF' | translate }} <b>{{ 'NO' | translate }}</b> {{ 'YOU_WILL_NO_LONGER_RECEIVE_REVIEW_REQUESTS' | translate }}
+                            </small>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <button class="form-control btn btn-secondary" role="button" ng-click="cancel()">
+                                {{ 'CANCEL' | translate }}
+                            </button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button class="form-control btn btn-success" role="submit">
+                                {{ 'SAVE' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- Right padding -->
+    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-2"></div>
+</div>
+<br>
