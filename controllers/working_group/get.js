@@ -7,7 +7,7 @@ var _ = require('underscore');
 var pool = require('../../server.js').pool;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/research_groups/";
+var dir = "/../../sql/queries/working_groups/";
 var query_get_group = fs.readFileSync(__dirname + dir + 'get.sql', 'utf8').toString();
 
 

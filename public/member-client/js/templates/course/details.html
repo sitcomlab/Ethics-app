@@ -50,7 +50,7 @@
                     {{ 'RESPONSIBLE_MEMBERS' | translate }}
                 </h6>
                 <div class="list-group" ng-if="course.members && course.members.length>0">
-                    <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in course.members | orderBy: ['admin', 'university_name', 'institute_name', 'research_group_name', 'last_name', 'first_name']">
+                    <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in course.members | orderBy: ['admin', 'university_name', 'institute_name', 'working_group_name', 'last_name', 'first_name']">
                         <div class="d-flex w-100 justify-content-between">
                             <div>
                                 <span ng-if="member.admin">
@@ -62,8 +62,8 @@
                                 &nbsp;&nbsp;
                                 <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}</b>
                                 &nbsp;
-                                <span class="text-muted" ng-if="member.research_group_name">
-                                    <small>{{member.research_group_name}}&nbsp;|</small>
+                                <span class="text-muted" ng-if="member.working_group_name">
+                                    <small>{{member.working_group_name}}&nbsp;|</small>
                                 </span>
                                 <span class="text-muted" ng-if="member.institute_name">
                                     <small>{{member.institute_name}}&nbsp;|</small>

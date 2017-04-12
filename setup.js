@@ -31,7 +31,7 @@ var queries = [];
 queries.push(fs.readFileSync(__dirname + dir + 'reset.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'universities.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'institutes.sql', 'utf8').toString());
-queries.push(fs.readFileSync(__dirname + dir + 'research_groups.sql', 'utf8').toString());
+queries.push(fs.readFileSync(__dirname + dir + 'working_groups.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'defaults.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'courses.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'users.sql', 'utf8').toString());

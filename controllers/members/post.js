@@ -59,7 +59,7 @@ exports.request = function(req, res) {
                 last_name: req.body.last_name,
                 university_id: req.body.university_id,
                 institute_id: req.body.institute_id,
-                research_group_id: req.body.research_group_id,
+                working_group_id: req.body.working_group_id,
                 office_room_number: req.body.office_room_number,
                 office_phone_number: req.body.office_phone_number,
                 office_email_address: req.body.office_email_address,

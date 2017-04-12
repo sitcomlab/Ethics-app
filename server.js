@@ -137,7 +137,7 @@ var prefix = '/api';
 app.use(prefix, require ('./routes/login'));
 app.use(prefix, require ('./routes/universities'));
 app.use(prefix, require ('./routes/institutes'));
-app.use(prefix, require ('./routes/research_groups'));
+app.use(prefix, require ('./routes/working_groups'));
 app.use(prefix, require ('./routes/courses'));
 app.use(prefix, require ('./routes/users'));
 app.use(prefix, require ('./routes/members'));

@@ -10,12 +10,11 @@ var server_url = require('../../server.js').server_url;
 var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/research_groups/";
-var query_get_group = fs.readFileSync(__dirname + dir + 'get.sql', 'utf8').toString();
-var query_edit_group = fs.readFileSync(__dirname + dir + 'edit.sql', 'utf8').toString();
+var dir = "/../../sql/queries/working_groups/";
+var query_create_group = fs.readFileSync(__dirname + dir + 'create.sql', 'utf8').toString();
 
 
-// EDIT
+// POST
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -51,28 +50,9 @@ exports.request = function(req, res) {
             }
         },
         function(client, done, callback) {
-            // Database query
-            client.query(query_get_group, [
-                req.params.research_group_id
-            ], function(err, result) {
-                done();
-                if (err) {
-                    callback(err, 500);
-                } else {
-                    // Check if Description exists
-                    if (result.rows.length === 0) {
-                        callback(new Error("Research Group not found"), 404);
-                    } else {
-                        callback(null, client, done);
-                    }
-                }
-            });
-        },
-        function(client, done, callback) {
             // TODO: Add object/schema validation
             var object = {
-                research_group_id: req.body.research_group_id,
-                research_group_name: req.body.research_group_name,
+                working_group_name: req.body.working_group_name,
                 institute_id: req.body.institute_id
             };
             var params = _.values(object);
@@ -80,12 +60,12 @@ exports.request = function(req, res) {
         },
         function(client, done, params, callback){
             // Database query
-            client.query(query_edit_group, params, function(err, result) {
+            client.query(query_create_group, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, 200, result.rows[0]);
+                    callback(null, 201, result.rows[0]);
                 }
             });
         }

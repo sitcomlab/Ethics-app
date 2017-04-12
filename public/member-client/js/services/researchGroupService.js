@@ -1,48 +1,48 @@
-var app = angular.module("researchGroupService", []);
+var app = angular.module("workingGroupService", []);
 
 
-// Research group service
-app.factory('$researchGroupService', function($http, $log, config, $authenticationService) {
+// Working group service
+app.factory('$workingGroupService', function($http, $log, config, $authenticationService) {
 
-    var research_groups;
+    var working_groups;
 
     return {
         get: function(){
-            return research_groups;
+            return working_groups;
         },
         set: function(data){
-            research_groups = data;
+            working_groups = data;
         },
         list: function(){
-            return $http.get(config.apiURL + "/research_groups", {
+            return $http.get(config.apiURL + "/working_groups", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         create: function(data){
-            return $http.post(config.apiURL + "/research_groups" , data, {
+            return $http.post(config.apiURL + "/working_groups" , data, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
-        retrieve: function(research_group_id){
-            return $http.get(config.apiURL + "/research_groups/" + research_group_id, {
+        retrieve: function(working_group_id){
+            return $http.get(config.apiURL + "/working_groups/" + working_group_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
-        edit: function(research_group_id, data){
-            return $http.put(config.apiURL + "/research_groups/" + research_group_id, data, {
+        edit: function(working_group_id, data){
+            return $http.put(config.apiURL + "/working_groups/" + working_group_id, data, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         remove: function(){
-            return $http.delete(config.apiURL + "/research_groups/" + research_group_id, {
+            return $http.delete(config.apiURL + "/working_groups/" + working_group_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

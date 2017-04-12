@@ -42,7 +42,7 @@ app.factory('$authenticationService', function($http, $log, config) {
                 email_address: authenticated_member.email_address,
                 university_id: authenticated_member.university_id,
                 institute_id: authenticated_member.institute_id,
-                research_group_id: authenticated_member.research_group_id
+                working_group_id: authenticated_member.working_group_id
             };
         },
         isAuthenticated: function(){

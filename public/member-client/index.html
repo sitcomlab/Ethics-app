@@ -153,8 +153,8 @@
                                         <a href="" class="dropdown-item" ng-click="redirect('/institutes')" ng-if="authenticated_member.admin">
                                             {{ 'INSTITUTES' | translate }}
                                         </a>
-                                        <a href="" class="dropdown-item" ng-click="redirect('/research_groups')" ng-if="authenticated_member.admin">
-                                            {{ 'RESEARCH_GROUPS' | translate }}
+                                        <a href="" class="dropdown-item" ng-click="redirect('/working_groups')" ng-if="authenticated_member.admin">
+                                            {{ 'WORKING_GROUPS' | translate }}
                                         </a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="" ng-click="redirect('/')">
@@ -222,7 +222,7 @@
         <script src="js/services/userService.js"></script>
         <script src="js/services/universityService.js"></script>
         <script src="js/services/instituteService.js"></script>
-        <script src="js/services/researchGroupService.js"></script>
+        <script src="js/services/workingGroupService.js"></script>
         <script src="js/services/courseService.js"></script>
         <script src="js/services/documentService.js"></script>
         <script src="js/services/revisionService.js"></script>
@@ -259,9 +259,9 @@
         <script src="js/controllers/institute/listController.js"></script>
         <script src="js/controllers/institute/detailsController.js"></script>
 
-        <!-- Resarch groups -->
-        <script src="js/controllers/research_group/listController.js"></script>
-        <script src="js/controllers/research_group/detailsController.js"></script>
+        <!-- Working groups -->
+        <script src="js/controllers/working_group/listController.js"></script>
+        <script src="js/controllers/working_group/detailsController.js"></script>
 
         <!-- Courses -->
         <script src="js/controllers/course/listController.js"></script>

@@ -208,48 +208,48 @@ app.config(function($routeProvider, $locationProvider, config) {
 		})*/
 
 		// New research group
-		/*.when("/new/research_group", {
-			templateUrl: "js/templates/research_group/create.html",
-			controller: "researchGroupCreateController",
+		/*.when("/new/working_group", {
+			templateUrl: "js/templates/working_group/create.html",
+			controller: "workingGroupCreateController",
 			resolve: {
 				factory: checkAuthentication
 			}
 		})*/
 
-		// Research groups
-		.when("/research_groups", {
-			templateUrl: "js/templates/research_group/list.html",
-			controller: "researchGroupListController",
+		// Working groups
+		.when("/working_groups", {
+			templateUrl: "js/templates/working_group/list.html",
+			controller: "workingGroupListController",
 			resolve: {
 				factory: checkAuthentication
 			}
 		})
-		.when("/research_groups/:research_group_id", {
-			templateUrl: "js/templates/research_group/details.html",
-			controller: "researchGroupDetailsController",
+		.when("/working_groups/:working_group_id", {
+			templateUrl: "js/templates/working_group/details.html",
+			controller: "workingGroupDetailsController",
 			resolve: {
 				factory: checkAuthentication
 			}
 		})
-		/*.when("/research_groups/:research_group_id/edit", {
-			templateUrl: "js/templates/research_group/edit.html",
-			controller: "researchGroupEditController",
+		/*.when("/working_groups/:working_group_id/edit", {
+			templateUrl: "js/templates/working_group/edit.html",
+			controller: "workingGroupEditController",
 			resolve: {
 				factory: checkAuthentication
 			}
 		})
-		.when("/research_groups/:research_group_id/delete", {
-			templateUrl: "js/templates/research_group/delete.html",
-			controller: "researchGroupDeleteController",
+		.when("/working_groups/:working_group_id/delete", {
+			templateUrl: "js/templates/working_group/delete.html",
+			controller: "workingGroupDeleteController",
 			resolve: {
 				factory: checkAuthentication
 			}
 		})*/
 
 		// New research group
-		/*.when("/new/research_group", {
-			templateUrl: "js/templates/research_group/create.html",
-			controller: "researchGroupCreateController",
+		/*.when("/new/working_group", {
+			templateUrl: "js/templates/working_group/create.html",
+			controller: "workingGroupCreateController",
 			resolve: {
 				factory: checkAuthentication
 			}

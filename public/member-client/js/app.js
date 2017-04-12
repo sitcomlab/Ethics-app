@@ -23,7 +23,7 @@ var app = angular.module("ethics-app", [
     "userService",
     "universityService",
     "instituteService",
-    "researchGroupService",
+    "workingGroupService",
     "courseService",
     "revisionService",
     "descriptionService",

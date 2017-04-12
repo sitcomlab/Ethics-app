@@ -10,7 +10,7 @@ var server_url = require('../../server.js').server_url;
 var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/research_groups/";
+var dir = "/../../sql/queries/working_groups/";
 var query_get_group = fs.readFileSync(__dirname + dir + 'get.sql', 'utf8').toString();
 var query_delete_group = fs.readFileSync(__dirname + dir + 'delete.sql', 'utf8').toString();
 

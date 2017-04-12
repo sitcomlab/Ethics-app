@@ -1,8 +1,8 @@
 var app = angular.module("ethics-app");
 
 
-// Research group list controller
-app.controller("researchGroupListController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $researchGroupService, _) {
+// Reseach group details controller
+app.controller("workingGroupDetailsController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $workingGroupService) {
 
     /*************************************************
         FUNCTIONS
@@ -21,13 +21,12 @@ app.controller("researchGroupListController", function($scope, $rootScope, $tran
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading research groups" };
+    $scope.$parent.loading = { status: true, message: "Loading research group" };
 
-    // Load research groups
-    $researchGroupService.list()
+    // Load research group
+    $workingGroupService.retrieve($routeParams.working_group_id)
     .then(function onSuccess(response) {
-        $researchGroupService.set(response.data);
-        $scope.research_groups = $researchGroupService.get();
+        $scope.working_group = response.data;
         $scope.$parent.loading = { status: false, message: "" };
     })
     .catch(function onError(response) {
