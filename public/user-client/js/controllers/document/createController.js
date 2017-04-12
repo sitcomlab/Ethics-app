@@ -126,8 +126,8 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
      * @return {[type]} [description]
      */
     $scope.updateCourses = function(){
-        $scope.courses = $courseService.getByInstitute($scope.institute_id);
         $scope.new_document.course_id = null;
+        $scope.courses = $courseService.getByInstitute($scope._institute_id);
     };
 
     /**
@@ -136,7 +136,7 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
      */
     $scope.updateInstitutes = function(){
         $scope.new_user.institute_id = null;
-        $scope.institutes = $instituteService.getByUniversity($scope.new_user.university_id);
+        $scope.institutes = $instituteService.getByUniversity($scope.university_id);
     };
 
     /*************************************************
@@ -169,7 +169,7 @@ app.controller("documentCreateController", function($scope, $rootScope, $transla
             .then(function onSuccess(response) {
                 $courseService.set(response.data);
                 $scope.courses = $courseService.get();
-                $scope.institute_id = null;
+                $scope._institute_id = null;
 
                 // Change tab to create a new document
                 $scope.$parent.loading = { status: false, message: "" };

@@ -37,7 +37,6 @@ app.controller("accountEditController", function($scope, $rootScope, $translate,
             $scope.editAccountForm.title.$pristine = false;
             $scope.editAccountForm.first_name.$pristine = false;
             $scope.editAccountForm.last_name.$pristine = false;
-            $scope.editAccountForm.university_id.$pristine = false;
             $scope.editAccountForm.institute_id.$pristine = false;
         } else {
             $scope.$parent.loading = { status: true, message: "Saving account settings" };
@@ -67,7 +66,7 @@ app.controller("accountEditController", function($scope, $rootScope, $translate,
      */
     $scope.updateInstitutes = function(){
         $scope.updated_user.institute_id = null;
-        $scope.institutes = $instituteService.getByUniversity($scope.updated_user.university_id);
+        $scope.institutes = $instituteService.getByUniversity($scope.university_id);
     };
 
     /*************************************************
@@ -82,14 +81,15 @@ app.controller("accountEditController", function($scope, $rootScope, $translate,
     .then(function onSuccess(response) {
         $universityService.set(response.data);
         $scope.universities = $universityService.get();
+        $scope.university_id = $scope.updated_user.university_id;
 
         // Load institutes
         $instituteService.list()
         .then(function onSuccess(response) {
             $instituteService.set(response.data);
             $scope.institutes = $instituteService.get();
-
             $scope.institute_id = $scope.updated_user.institute_id;
+
             $scope.$parent.loading = { status: false, message: "" };
         })
         .catch(function onError(response) {

@@ -84,6 +84,7 @@ app.config(function ($translateProvider) {
         REVIEW_REQUIRED: 'review required',
         SUBMITTED_REVIEW_REQUIRED: 'submitted (review required)',
         REVIEW_IN_PROGRESS: 'review in progress',
+        UNDER_REVIEW: 'under review',
         PARTLY_ACCEPTED: 'partly accepted',
         REVIEWED_PARTLY_ACCEPTED: 'reviewed (partly accepted)',
         REVIEWED: 'reviewed',

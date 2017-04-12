@@ -66,13 +66,13 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <label>
-                        <b>{{ 'INSTITUTE' | translate }}</b>
+                        <b>{{ 'INSTITUTE' | translate }} <small>({{ 'OPTIONAL' | translate }})</small></b>
                     </label>
                     <select
                         class="custom-select form-control"
                         id="_institute_id"
                         name="_institute_id"
-                        ng-model="institute_id"
+                        ng-model="_institute_id"
                         ng-options="institute.institute_id as institute.institute_name group by institute.university_name for institute in institutes | orderBy:['institute_name']"
                         ng-change="updateCourses()">
                         <option value="">{{ 'NO_INSTITUTE' | translate }}</option>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <label>
-                        <b>{{ 'COURSE' | translate }}</b>
+                        <b>{{ 'COURSE' | translate }} <small>({{ 'OPTIONAL' | translate }})</small></b>
                     </label>
                     <select
                         class="custom-select form-control"
@@ -88,7 +88,7 @@
                         name="course_id"
                         ng-model="new_document.course_id"
                         ng-options="course.course_id as course.course_name group by course.season for course in courses | orderBy:[-'year', 'course_name']"
-                        ng-disabled="institute_id == null || institute_id == '' ">
+                        ng-disabled="_institute_id == null || _institute_id == '' ">
                         <option value="">{{ 'NO_COURSE' | translate }}</option>
                     </select>
                 </div>
@@ -214,17 +214,13 @@
                             class="custom-select form-control"
                             id="university_id"
                             name="university_id"
-                            ng-model="new_user.university_id"
+                            ng-model="university_id"
                             ng-options="university.university_id as university.university_name for university in universities | orderBy:['university_name']"
                             ng-change="updateInstitutes()"
-                            required>
+                        >
+                            <option value="">{{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}</option>
                         </select>
                     </div>
-                    <span ng-show="createUserForm.university_id.$error.required && !createUserForm.university_id.$pristine" class="text-danger">
-                        <small>
-                            {{ 'REQUIRED' | translate }}
-                        </small>
-                    </span>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <label>
@@ -236,9 +232,16 @@
                         name="institute_id"
                         ng-model="new_user.institute_id"
                         ng-options="institute.institute_id as institute.institute_name for institute in institutes | orderBy:['institute_name']"
-                        ng-disabled="new_user.university_id == null">
-                        <option value="">{{ 'NO_INSTITUTE' | translate }}</option>
+                        ng-disabled="university_id == null"
+                        required
+                    >
+                        <option value="">{{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}</option>
                     </select>
+                    <span ng-show="createUserForm.institute_id.$error.required && !createUserForm.institute_id.$pristine" class="text-danger">
+                        <small>
+                            {{ 'REQUIRED' | translate }}
+                        </small>
+                    </span>
                 </div>
             </div>
             <br>

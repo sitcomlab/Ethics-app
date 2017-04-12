@@ -7,8 +7,10 @@ var _ = require('underscore');
 var mustache = require('mustache');
 var moment = require('moment');
 var httpPort = require('../../server.js').httpPort;
-var server_url = require('../../server.js').server_url;
+var jwt = require('jsonwebtoken');
 var pool = require('../../server.js').pool;
+var server_url = require('../../server.js').server_url;
+var jwtSecret = require('../../server.js').jwtSecret;
 var transporter = require('../../server.js').transporter;
 var mail_options = require('../../server.js').mail_options;
 
@@ -17,9 +19,8 @@ var dir_1 = "/../../templates/emails/";
 var dir_2 = "/../../sql/queries/users/";
 var template = fs.readFileSync(__dirname + dir_1 + 'email_address_changed.html', 'utf8').toString();
 var query_get_user = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
-// TODO: Update query to support blocking of a user by members
 var query_edit_user = fs.readFileSync(__dirname + dir_2 + 'edit.sql', 'utf8').toString();
-var query_edit_user_public = fs.readFileSync(__dirname + dir_2 + 'edit.sql', 'utf8').toString();
+var query_edit_user_public = fs.readFileSync(__dirname + dir_2 + 'edit_public.sql', 'utf8').toString();
 
 
 // PUT
@@ -57,7 +58,7 @@ exports.request = function(req, res) {
                 res.status(401).send("Authorization failed!");
             }
         },
-        function(client, done, callback) {
+        function(client, done, query, callback) {
             // Database query
             client.query(query_get_user, [
                 req.params.user_id
@@ -70,12 +71,12 @@ exports.request = function(req, res) {
                     if (result.rows.length === 0) {
                         callback(new Error("User not found"), 404);
                     } else {
-                        callback(null, client, done, result.rows[0]);
+                        callback(null, client, done, result.rows[0], query);
                     }
                 }
             });
         },
-        function(client, done, user, callback) {
+        function(client, done, user, query, callback) {
             // TODO: Add object/schema validation
             var object = {
                 user_id: req.params.user_id,
@@ -86,11 +87,11 @@ exports.request = function(req, res) {
                 institute_id: req.body.institute_id
             };
             var params = _.values(object);
-            callback(null, client, done, user, params);
+            callback(null, client, done, user, query, params);
         },
-        function(client, done, user, params, callback){
+        function(client, done, user, query, params, callback){
             // Database query
-            client.query(query_edit_user, params, function(err, result) {
+            client.query(query, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
