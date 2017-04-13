@@ -151,6 +151,7 @@ app.config(function ($translateProvider) {
         RISKS: 'Risks',
         BENEFITS: 'Benefits',
 
+        YOU: 'You',
         ADMIN: 'admin',
         YOUR_DOCUMENT_NEEDS_TO_BE_REVIEWED: 'Your document needs to be reviewed',
         DOCUMENT_IS_CURRENTLY_UNDER_REVIEW: 'Your document is currently under review',
@@ -216,7 +217,15 @@ app.config(function ($translateProvider) {
         RESPONSIBLE: 'Responsible ',
         CURRENTLY_NOT_RESPONSIBLE: 'Currently not responsible',
         SUBSCRIBED: 'Subscribed ',
-        CURRENTLY_NOT_SUBSCRIBED: 'Currently not subscribed'
+        CURRENTLY_NOT_SUBSCRIBED: 'Currently not subscribed',
+
+        START_REVIEWING: 'Start reviewing',
+        OPEN_REVIEW: 'Open review',
+        SAVE_AND_CLOSE: 'Save & close',
+        PUBLISH_REVIEW: 'Publish review',
+        PARTLY_ACCEPT: 'Partly accept',
+        ACCEPT: 'Accept',
+        REJECT: 'Reject'
     });
 
     // Default Language (English)
