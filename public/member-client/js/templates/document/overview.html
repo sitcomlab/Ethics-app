@@ -6,9 +6,6 @@
                 {{ 'OVERVIEW' | translate }}
             </div>
             <div class="col right">
-                <button class="btn btn-secondary" role="button" ng-click="redirect('/documents/' + document.document_id + '/review')" ng-if="document.status == 3 || document.status == 4">
-                    <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'REVIEW' | translate }}
-                </button>
                 <button class="btn btn-secondary" role="button" ng-click="redirect('/documents')">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
@@ -16,11 +13,12 @@
         </div>
     </div>
     <div class="card-block">
+
         <!-- GENERAL 1 -->
         <div class="row inputs">
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <h6 class="text-muted">
-                    {{ 'GENERAL' | translate }}
+                <h6>
+                    <i class="fa fa-info" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'GENERAL' | translate }}
                 </h6>
             </div>
         </div>
@@ -29,17 +27,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            <b>{{ 'DOCUMENT_ID' | translate }}</b>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <code>{{document.document_id}}</code>
-                        </div>
-                    </div>
-                </div>
-                <div class="list-group-item">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            <b>{{ 'AUTHOR' | translate }}</b>
+                            <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'AUTHOR' | translate }}</b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <a href="" ng-click="redirect('/users/' + document.user_id)">
@@ -51,10 +39,15 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            <b>{{ 'NOTES' | translate }}</b>
+                            <i class="fa fa-sticky-note-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'NOTES' | translate }}</b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            {{document.notes}}
+                            <span ng-if="document.notes != null || document.notes != ''">
+                                {{document.notes}}
+                            </span>
+                            <span ng-if="document.notes == null || document.notes == ''">
+                                -
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -65,12 +58,12 @@
         <!-- GENERAL 2 -->
         <div class="row inputs">
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <h6 class="text-muted">
+                <h6>
                     <span ng-if="status.general.history">
-                        {{ 'ALL_REVISIONS' | translate }}
+                        <i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'ALL_REVISIONS' | translate }}
                     </span>
                     <span ng-if="!status.general.history">
-                        {{ 'LATEST_REVISION' | translate }}
+                        <i class="fa fa-tag" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LATEST_REVISION' | translate }}
                     </span>
                 </h6>
             </div>
@@ -115,7 +108,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            <b>{{ 'CREATED' | translate }}</b>
+                            <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'CREATED' | translate }}</b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div class="row" ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.general.limit" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
@@ -132,7 +125,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            <b>{{ 'SUBMITTED' | translate }}</b>
+                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'SUBMITTED' | translate }}</b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div class="row" ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.general.limit" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
@@ -150,10 +143,10 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <span ng-if="status.general.history">
-                                <b>{{ 'REVIEWERS' | translate }}</b>
+                                <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'REVIEWERS' | translate }}</b>
                             </span>
                             <span ng-if="!status.general.history">
-                                <b>{{ 'LATEST_REVIEWER' | translate }}</b>
+                                <i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'LATEST_REVIEWER' | translate }}</b>
                             </span>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -175,7 +168,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            <b>{{ 'GENERAL_COMMENT' | translate }}</b>
+                            <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'GENERAL_COMMENT' | translate }}</b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div class="row" ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.general.limit" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
@@ -184,7 +177,7 @@
                                 </div>
                                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                     <span class="comment" ng-if="revision.comments.published && revision.comments.general_comment !== null && revision.comments.general_comment !== ''">
-                                        <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.general_comment}}
+                                        <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.general_comment}}
                                     </span>
                                 </div>
                             </div>
@@ -199,8 +192,8 @@
         <!-- English descriptions -->
         <div class="row inputs">
             <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6">
-                <h6 class="text-muted">
-                    {{ 'STUDY_DESCRIPTION' | translate }}&nbsp;&nbsp;<span class="flag-icon flag-icon-gb"></span>
+                <h6>
+                    <span class="flag-icon flag-icon-gb"></span>&nbsp;&nbsp;{{ 'STUDY_DESCRIPTION' | translate }}
                 </h6>
             </div>
             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
@@ -256,7 +249,7 @@
                                         <i>{{revision.descriptions.en_title}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.published && revision.comments.en_title_comment !== null && revision.comments.en_title_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_title_comment}}
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_title_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -282,7 +275,7 @@
                                         <i>{{revision.descriptions.en_researcher}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.published && revision.comments.en_researcher_comment !== null && revision.comments.en_researcher_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_researcher_comment}}
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_researcher_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -308,7 +301,7 @@
                                         <i>{{revision.descriptions.en_study_time}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.published && revision.comments.en_study_time_comment !== null && revision.comments.en_study_time_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_study_time_comment}}
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_study_time_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -334,7 +327,7 @@
                                         <i>{{revision.descriptions.en_purpose}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.published && revision.comments.en_purpose_comment !== null && revision.comments.en_purpose_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_purpose_comment}}
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_purpose_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -360,7 +353,7 @@
                                         <i>{{revision.descriptions.en_procedure}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.published && revision.comments.en_procedure_comment !== null && revision.comments.en_procedure_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_procedure_comment}}
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_procedure_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -386,7 +379,7 @@
                                         <i>{{revision.descriptions.en_duration}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.published && revision.comments.en_duration_comment !== null && revision.comments.en_duration_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_duration_comment}}
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_duration_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -412,7 +405,7 @@
                                         <i>{{revision.descriptions.en_risks}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.published && revision.comments.en_risks_comment !== null && revision.comments.en_risks_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_risks_comment}}
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_risks_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -438,7 +431,7 @@
                                         <i>{{revision.descriptions.en_benefits}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.published && revision.comments.en_benefits_comment !== null && revision.comments.en_benefits_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_benefits_comment}}
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_benefits_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -455,8 +448,8 @@
         <!-- German descriptions -->
         <div class="row inputs">
             <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6">
-                <h6 class="text-muted">
-                    {{ 'STUDY_DESCRIPTION' | translate }}&nbsp;&nbsp;<span class="flag-icon flag-icon-de"></span>
+                <h6>
+                    <span class="flag-icon flag-icon-de"></span>&nbsp;&nbsp;{{ 'STUDY_DESCRIPTION' | translate }}
                 </h6>
             </div>
             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
@@ -515,7 +508,7 @@
                                         <i>{{revision.descriptions.de_title}}</i><br>
                                         <span ng-if="status.descriptions.comments.de">
                                             <span class="comment" ng-if="revision.comments.published && revision.comments.de_title_comment !== null && revision.comments.de_title_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.de_title_comment}}
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_title_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -541,7 +534,7 @@
                                         <i>{{revision.descriptions.de_researcher}}</i><br>
                                         <span ng-if="status.descriptions.comments.de">
                                             <span class="comment" ng-if="revision.comments.published && revision.comments.de_researcher_comment !== null && revision.comments.de_researcher_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.de_researcher_comment}}
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_researcher_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -567,7 +560,7 @@
                                         <i>{{revision.descriptions.de_study_time}}</i><br>
                                         <span ng-if="status.descriptions.comments.de">
                                             <span class="comment" ng-if="revision.comments.published && revision.comments.de_study_time_comment !== null && revision.comments.de_study_time_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.de_study_time_comment}}
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_study_time_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -593,7 +586,7 @@
                                         <i>{{revision.descriptions.de_purpose}}</i><br>
                                         <span ng-if="status.descriptions.comments.de">
                                             <span class="comment" ng-if="revision.comments.published && revision.comments.de_purpose_comment !== null && revision.comments.de_purpose_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.de_purpose_comment}}
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_purpose_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -619,7 +612,7 @@
                                         <i>{{revision.descriptions.de_procedure}}</i><br>
                                         <span ng-if="status.descriptions.comments.de">
                                             <span class="comment" ng-if="revision.comments.published && revision.comments.de_procedure_comment !== null && revision.comments.de_procedure_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.de_procedure_comment}}
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_procedure_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -645,7 +638,7 @@
                                         <i>{{revision.descriptions.de_duration}}</i><br>
                                         <span ng-if="status.descriptions.comments.de">
                                             <span class="comment" ng-if="revision.comments.published && revision.comments.de_duration_comment !== null && revision.comments.de_duration_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.de_duration_comment}}
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_duration_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -671,7 +664,7 @@
                                         <i>{{revision.descriptions.de_risks}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.published && revision.comments.de_risks_comment !== null && revision.comments.de_risks_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.de_risks_comment}}
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_risks_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -697,7 +690,7 @@
                                         <i>{{revision.descriptions.de_benefits}}</i><br>
                                         <span ng-if="status.descriptions.comments.de">
                                             <span class="comment" ng-if="revision.comments.published && revision.comments.de_benefits_comment !== null && revision.comments.de_benefits_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.de_benefits_comment}}
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_benefits_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -713,8 +706,8 @@
         <!-- Portuguese descriptions -->
         <div class="row inputs">
             <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6">
-                <h6 class="text-muted">
-                    {{ 'STUDY_DESCRIPTION' | translate }}&nbsp;&nbsp;<span class="flag-icon flag-icon-pt"></span>
+                <h6>
+                    <span class="flag-icon flag-icon-pt"></span>&nbsp;&nbsp;{{ 'STUDY_DESCRIPTION' | translate }}
                 </h6>
             </div>
             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
@@ -972,8 +965,8 @@
         <!-- CONCERNS -->
         <div class="row inputs">
             <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6">
-                <h6 class="text-muted">
-                    {{ 'STUDY_CONCERNS' | translate }}
+                <h6>
+                    <i class="fa fa-gavel" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'STUDY_CONCERNS' | translate }}
                 </h6>
             </div>
             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
@@ -1007,7 +1000,7 @@
                 </small>
             </div>
         </div>
-        <br>
+
 
         <!-- Questions -->
         <div class="bs-fix">
@@ -1152,6 +1145,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- 5th question -->
                 <div class="list-group-item">
                     <div class="row">
@@ -1503,6 +1497,10 @@
                 </div>
             </div>
         </div>
-
+    </div>
+    <div class="card-footer right">
+        <button class="btn btn-primary" role="button" ng-click="redirect('/documents/' + document.document_id + '/review')" ng-if="document.status == 3 || document.status == 4">
+            <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'REVIEW' | translate }}&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+        </button>
     </div>
 </div>

@@ -49,7 +49,7 @@ app.config(function ($translateProvider) {
         FILTER_BY_UNIVERSITY:'Filter by university',
         FILTER_BY_INSTITUTE:'Filter by institute',
         FILTER_BY_COURSE:'Filter by course',
-        FILTER_BY_STATUS_ETC:'Filter by status',
+        FILTER_BY_STATUS:'Filter by status',
 
         INTRODUCTION_TEXT: 'You will be asked a series of questions, based on which the EthicsApp will auto-generate 3 documents. You are required to use these documents in your experiment. The key document is the Informed Consent Form - both you and your participant should sign and keep a copy. See the example below.',
         STUDY_DESCRIPTION_FORM_TEXT: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally the German version. Depending on the language(s), you will receive the informed consent forms for your experiment.',
@@ -80,7 +80,7 @@ app.config(function ($translateProvider) {
         INITIALISED: 'initialised',
         UNSUBMITTED: 'unsubmitted',
         _SUBMITTED: 'submitted',
-        SUBMITTED_OKAY: 'submitted (okay)',
+        SUBMITTED_AUTO_ACCEPTED: 'submitted (auto-accepted)',
         REVIEW_REQUIRED: 'review required',
         SUBMITTED_REVIEW_REQUIRED: 'submitted (review required)',
         REVIEW_IN_PROGRESS: 'review in progress',
@@ -88,6 +88,7 @@ app.config(function ($translateProvider) {
         PARTLY_ACCEPTED: 'partly accepted',
         REVIEWED_PARTLY_ACCEPTED: 'reviewed (partly accepted)',
         REVIEWED: 'reviewed',
+        REVIEWED_ACCEPTED: 'reviewed (accepted)',
         REVIEWED_OKAY: 'reviewed (okay)',
         REJECTED: 'rejected',
         REVIEWED_REJECTED: 'reviewed (rejected)',
@@ -178,7 +179,8 @@ app.config(function ($translateProvider) {
         SUBMITTED: 'Submitted',
         REVIEWERS: 'Reviewers',
         LATEST_REVIEWER: 'Latest reviewer',
-        GENERAL_COMMENT: 'Comment',
+        GENERAL_COMMENT: 'General comment',
+        COMMENT: 'Comment',
         AUTHOR: 'Author',
         NOTES: 'Notes',
         MEMBERS: 'Members',
@@ -208,7 +210,14 @@ app.config(function ($translateProvider) {
         RESPONSIBLE: 'Responsible ',
         CURRENTLY_NOT_RESPONSIBLE: 'Currently not responsible',
         SUBSCRIBED: 'Subscribed ',
-        CURRENTLY_NOT_SUBSCRIBED: 'Currently not subscribed'
+        CURRENTLY_NOT_SUBSCRIBED: 'Currently not subscribed',
+
+        PARTLY_ACCEPT: 'Partly accept',
+        ACCEPT: 'Accept',
+        REJECT: 'Reject',
+        SAVE_AND_CLOSE: 'Save & close',
+        PUBLISH_REVIEW: 'Publish review'
+
     });
 
     // Default Language (English)

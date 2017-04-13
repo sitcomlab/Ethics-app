@@ -75,21 +75,17 @@
             <!-- FILTER DOCUMENTS BY STATUS -->
             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
                 <select class="form-control custom-select" ng-model="filter.document_status" ng-change="filterDocuments()">
-                    <optgroup label="{{ 'DEFAULT' | translate }}">
-                        <option value="">{{ 'ALL' | translate }}</option>
-                    </optgroup>
-                    <optgroup label="{{ 'STATUS' | translate }}">
-                        <option value="0">{{ 'INITIALISED' | translate }}</option>
-                        <option value="1">{{ 'UNSUBMITTED' | translate }}</option>
-                        <option value="2">{{ 'SUBMITTED_OKAY' | translate }}</option>
-                        <option value="3">{{ 'SUBMITTED_REVIEW_REQUIRED' | translate }}</option>
-                        <option value="4">{{ 'REVIEW_IN_PROGRESS' | translate }}</option>
-                        <option value="5">{{ 'REVIEWED_PARTLY_ACCEPTED' | translate }}</option>
-                        <option value="6">{{ 'REVIEWED_OKAY' | translate }}</option>
-                        <option value="7">{{ 'REJECTED' | translate }}</option>
-                    </optgroup>
+                    <option value="">{{ 'NO_FILTER' | translate }}</option>
+                    <option value="0">(0) {{ 'INITIALISED' | translate }}</option>
+                    <option value="1">(1) {{ 'UNSUBMITTED' | translate }}</option>
+                    <option value="2">(2) {{ 'SUBMITTED_AUTO_ACCEPTED' | translate }}</option>
+                    <option value="3">(3) {{ 'SUBMITTED_REVIEW_REQUIRED' | translate }} [{{ 'DEFAULT' | translate }}]</option>
+                    <option value="4">(4) {{ 'REVIEW_IN_PROGRESS' | translate }}</option>
+                    <option value="5">(5) {{ 'REVIEWED_PARTLY_ACCEPTED' | translate }}</option>
+                    <option value="6">(6) {{ 'REVIEWED_ACCEPTED' | translate }}</option>
+                    <option value="7">(7) {{ 'REJECTED' | translate }}</option>
                 </select>
-                <small class="form-text text-muted">{{ 'FILTER_BY_STATUS_ETC' | translate }}</small>
+                <small class="form-text text-muted">{{ 'FILTER_BY_STATUS' | translate }}</small>
                 <br>
             </div>
         </div>

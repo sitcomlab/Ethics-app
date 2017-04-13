@@ -51,6 +51,13 @@ app.config(function($routeProvider, $locationProvider, config) {
                 factory: checkAuthentication
             }
 		})
+		.when("/documents/:document_id/review", {
+			templateUrl: "js/templates/document/review.html",
+			controller: "documentReviewController",
+			resolve: {
+                factory: checkAuthentication
+            }
+		})
 		/*.when("/documents/:document_id/settings", {
 			templateUrl: "js/templates/document/edit_settings.html",
 			controller: "documentEditSettingsController",
@@ -72,13 +79,7 @@ app.config(function($routeProvider, $locationProvider, config) {
                 factory: checkAuthentication
             }
 		})
-		.when("/documents/:document_id/review", {
-			templateUrl: "js/templates/document/edit.html",
-			controller: "documentEditController",
-			resolve: {
-                factory: checkAuthentication
-            }
-		})*/
+		*/
 
 
 		// Committee members
