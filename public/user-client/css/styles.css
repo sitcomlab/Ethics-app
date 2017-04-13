@@ -55,7 +55,33 @@ footer {
     text-decoration: none;
 }
 
+
+.card-footer > .btn-block-xs-only, .btn-block-xs-only {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+
+.bs-fix > .list-group > .list-group-item {
+    background-color: #f7f7f9;
+}
+
 /* https://github.com/twbs/bootstrap/issues/21610 */
 .bs-fix > .list-group, .list-group-item {
-    display:block;
+    display: block;
+}
+
+
+/* http://stackoverflow.com/questions/28191573/change-buttons-to-btn-block-on-mobile-screen-size */
+@media (max-width: 575px) {
+    .btn-block-xs-only {
+        display: block;
+        width: 100%;
+    }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+    .btn-block-sm-only {
+        display: block;
+        width: 100%;
+    }
 }

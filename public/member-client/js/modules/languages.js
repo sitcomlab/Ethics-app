@@ -59,6 +59,12 @@ app.config(function ($translateProvider) {
         AGREEMENT_DATA: 'I agree that all given information is correct, and I am aware that my data will be stored by the Institute responsible for the study and its partners',
         AGREEMENT_DELETION: 'I agree that as soon as I submit my document request, only Members of the Ethics comittee can delete my account',
 
+        STATUS_2: 'Your files have been created successfully. Please click on the following icons to download them.',
+        STATUS_3: 'Your document was submitted successfully, but has one or more ethical concerns. You will get an email as soon as the committee start to review it.',
+        STATUS_4: 'Your document was submitted successfully, but has one or more ethical concerns. The committee has started to review it. You will get an email as soon as the committee has reviewed it completely.',
+        STATUS_5: 'Your document has been partly accepted by the committee. Please read the comments and revise your document.',
+        STATUS_6: 'Your files have been created successfully. Please click on the following icons to download them.',
+        STATUS_7: 'Unfortunatly your document has been rejected by the Ethics committee. Please get in contact with the corresponding reviewers.',
 
         ACCOUNT: 'Account',
         SETTINGS: 'Settings',
@@ -128,6 +134,7 @@ app.config(function ($translateProvider) {
         STATEMENT_OF_RESEARCHER: 'Statement of researcher',
         INFORMED_CONSENT_FORM: 'Informed consent form',
 
+        REVISE_DOCUMENT: 'Revise document',
         DELETE_THIS_DOCUMENT: 'Are you sure you want to delete this document',
         PLEASE_TYPE_IN_THE_DOCUMENT_TITLE_TO_CONFIRM: 'Please type in the document title to confirm',
         DELETE: 'Delete',
@@ -179,8 +186,7 @@ app.config(function ($translateProvider) {
         SUBMITTED: 'Submitted',
         REVIEWERS: 'Reviewers',
         LATEST_REVIEWER: 'Latest reviewer',
-        GENERAL_COMMENT: 'General comment',
-        COMMENT: 'Comment',
+        GENERAL_COMMENT: 'Comment',
         AUTHOR: 'Author',
         NOTES: 'Notes',
         MEMBERS: 'Members',
@@ -210,14 +216,7 @@ app.config(function ($translateProvider) {
         RESPONSIBLE: 'Responsible ',
         CURRENTLY_NOT_RESPONSIBLE: 'Currently not responsible',
         SUBSCRIBED: 'Subscribed ',
-        CURRENTLY_NOT_SUBSCRIBED: 'Currently not subscribed',
-
-        PARTLY_ACCEPT: 'Partly accept',
-        ACCEPT: 'Accept',
-        REJECT: 'Reject',
-        SAVE_AND_CLOSE: 'Save & close',
-        PUBLISH_REVIEW: 'Publish review'
-
+        CURRENTLY_NOT_SUBSCRIBED: 'Currently not subscribed'
     });
 
     // Default Language (English)

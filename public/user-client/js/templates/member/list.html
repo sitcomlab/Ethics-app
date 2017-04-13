@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col">{{ 'COMMITTEE' | translate }}</div>
             <div class="col right">
-                <button class="btn btn-secondary" role="button" ng-click="cancel()">
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/documents')">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
             </div>
@@ -12,28 +12,34 @@
     </div>
     <div class="card-block">
         <h6 class="text-muted">
-            {{ 'CURRENT_MEMBERS' | translate }}:
+            {{ 'CURRENT_MEMBERS' | translate }}
         </h6>
         <div class="list-group" ng-if="current_members && current_members.length>0">
-            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in current_members | orderBy: ['university_name', 'institute_name', 'working_group_name', 'last_name', 'first_name']">
+            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in current_members | orderBy: ['admin', 'university_name', 'institute_name', 'working_group_name', 'last_name', 'first_name']">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
-                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <span ng-if="member.admin">
+                            <i class="fa fa-user-secret" aria-hidden="true"></i>
+                        </span>
+                        <span ng-if="!member.admin">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
                         &nbsp;&nbsp;
                         <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}</b>
+                        &nbsp;
                         <span class="text-muted" ng-if="member.working_group_name">
-                            <small>&nbsp;<b>{{member.working_group_name}}</b>&nbsp;|</small>
+                            <small>{{member.working_group_name}}&nbsp;|</small>
                         </span>
                         <span class="text-muted" ng-if="member.institute_name">
-                            <small>&nbsp;{{member.institute_name}}&nbsp;|</small>
+                            <small>{{member.institute_name}}&nbsp;|</small>
                         </span>
                         <span class="text-muted" ng-if="member.university_name">
-                            <small>&nbsp;{{member.university_name}}</small>
+                            <small>{{member.university_name}}</small>
                         </span>
                     </div>
                     <div>
                         <span class="text-success" ng-if="member.subscribed">
-                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            <i class="fa fa-rss-square" aria-hidden="true"></i>
                         </span>
                         <span class="text-danger" ng-if="!member.subscribed">
                             <i class="fa fa-ban" aria-hidden="true"></i>
@@ -43,17 +49,15 @@
             </a>
         </div>
         <div class="list-group" ng-if="!current_members || current_members.length==0">
-            <div class="list-group-item flex-column align-items-center">
-                <div class="d-flex">
-                    - {{ 'NONE' | translate }} -
-                </div>
+            <div class="list-group-item middle">
+                - {{ 'NONE' | translate }} -
             </div>
         </div>
         <div class="row" ng-if="current_members && current_members.length>0">
             <div class="col text-muted right">
                 <small>
                     <span class="text-success">
-                        <i class="fa fa-check-circle" aria-hidden="true"></i>
+                        <i class="fa fa-rss-square" aria-hidden="true"></i>
                     </span> = {{ 'RESPONSIBLE' | translate }}
                     &nbsp;&nbsp;|&nbsp;&nbsp;
                     <span class="text-danger">
@@ -65,7 +69,7 @@
         <br>
 
         <h6 class="text-muted">
-            {{ 'FORMER_MEMBERS' | translate }}:
+            {{ 'FORMER_MEMBERS' | translate }}
         </h6>
         <div class="list-group" ng-if="former_members && former_members.length>0">
             <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action" ng-repeat="member in former_members | orderBy: ['university_name', 'institute_name', 'working_group_name', 'last_name', 'first_name']">
@@ -84,10 +88,8 @@
             </a>
         </div>
         <div class="list-group" ng-if="!former_members || former_members.length==0">
-            <div class="list-group-item flex-column align-items-center">
-                <div class="d-flex">
-                    - {{ 'NONE' | translate }} -
-                </div>
+            <div class="list-group-item middle">
+                - {{ 'NONE' | translate }} -
             </div>
         </div>
     </div>
