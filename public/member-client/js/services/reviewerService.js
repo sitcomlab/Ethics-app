@@ -11,6 +11,13 @@ app.factory('$reviewerService', function($http, $log, config, $authenticationSer
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
+        },
+        editByRevision: function(revision_id, data) {
+            return $http.put(config.apiURL + "/revisions/" + revision_id + "/reviewer", data, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
         }
     };
 

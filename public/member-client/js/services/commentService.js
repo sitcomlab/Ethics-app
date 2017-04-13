@@ -11,6 +11,13 @@ app.factory('$commentService', function($http, $log, config, $authenticationServ
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
+        },
+        edit: function(comment_id, data) {
+            return $http.put(config.apiURL + "/comments/" + comment_id, data, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
         }
     };
 

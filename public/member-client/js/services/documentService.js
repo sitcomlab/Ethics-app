@@ -107,6 +107,13 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
+        },
+        changeStatus: function(document_id, data){
+            return $http.put(config.apiURL + "/documents/" + document_id + "/status", data, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
         }
     };
 

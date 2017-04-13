@@ -155,9 +155,14 @@
                                     <code>{{ 'REV' | translate}}{{revision.version}}</code>
                                 </div>
                                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                    <span ng-if="revision.comments.published && revision.reviewer != null">
+                                    <span ng-if="revision.reviewer != null">
                                         <a href="" ng-click="redirect('/members/' + revision.reviewer.member_id)">
-                                            <span ng-if="revision.reviewer.title != null">{{revision.reviewer.title}}&nbsp;</span>{{revision.reviewer.first_name}} {{revision.reviewer.last_name}}
+                                            <span ng-if="revision.reviewer.member_id == authenticated_member.member_id">
+                                                {{ 'YOU' | translate }}
+                                            </span>
+                                            <span ng-if="revision.reviewer.member_id != authenticated_member.member_id">
+                                                <span ng-if="revision.reviewer.title != null">{{revision.reviewer.title}}&nbsp;</span>{{revision.reviewer.first_name}} {{revision.reviewer.last_name}}
+                                            </span>
                                         </a>
                                     </span>
                                 </div>
@@ -176,7 +181,7 @@
                                     <code>{{ 'REV' | translate}}{{revision.version}}</code>
                                 </div>
                                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                    <span class="comment" ng-if="revision.comments.published && revision.comments.general_comment !== null && revision.comments.general_comment !== ''">
+                                    <span class="comment" ng-if="revision.comments.general_comment !== null && revision.comments.general_comment !== ''">
                                         <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.general_comment}}
                                     </span>
                                 </div>
@@ -248,7 +253,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.en_title}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.en_title_comment !== null && revision.comments.en_title_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.en_title_comment !== null && revision.comments.en_title_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_title_comment}}
                                             </span>
                                         </span>
@@ -274,7 +279,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.en_researcher}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.en_researcher_comment !== null && revision.comments.en_researcher_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.en_researcher_comment !== null && revision.comments.en_researcher_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_researcher_comment}}
                                             </span>
                                         </span>
@@ -300,7 +305,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.en_study_time}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.en_study_time_comment !== null && revision.comments.en_study_time_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.en_study_time_comment !== null && revision.comments.en_study_time_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_study_time_comment}}
                                             </span>
                                         </span>
@@ -326,7 +331,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.en_purpose}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.en_purpose_comment !== null && revision.comments.en_purpose_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.en_purpose_comment !== null && revision.comments.en_purpose_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_purpose_comment}}
                                             </span>
                                         </span>
@@ -352,7 +357,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.en_procedure}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.en_procedure_comment !== null && revision.comments.en_procedure_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.en_procedure_comment !== null && revision.comments.en_procedure_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_procedure_comment}}
                                             </span>
                                         </span>
@@ -378,7 +383,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.en_duration}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.en_duration_comment !== null && revision.comments.en_duration_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.en_duration_comment !== null && revision.comments.en_duration_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_duration_comment}}
                                             </span>
                                         </span>
@@ -404,7 +409,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.en_risks}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.en_risks_comment !== null && revision.comments.en_risks_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.en_risks_comment !== null && revision.comments.en_risks_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_risks_comment}}
                                             </span>
                                         </span>
@@ -430,7 +435,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.en_benefits}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.en_benefits_comment !== null && revision.comments.en_benefits_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.en_benefits_comment !== null && revision.comments.en_benefits_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_benefits_comment}}
                                             </span>
                                         </span>
@@ -507,7 +512,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.de_title}}</i><br>
                                         <span ng-if="status.descriptions.comments.de">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.de_title_comment !== null && revision.comments.de_title_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.de_title_comment !== null && revision.comments.de_title_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_title_comment}}
                                             </span>
                                         </span>
@@ -533,7 +538,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.de_researcher}}</i><br>
                                         <span ng-if="status.descriptions.comments.de">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.de_researcher_comment !== null && revision.comments.de_researcher_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.de_researcher_comment !== null && revision.comments.de_researcher_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_researcher_comment}}
                                             </span>
                                         </span>
@@ -559,7 +564,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.de_study_time}}</i><br>
                                         <span ng-if="status.descriptions.comments.de">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.de_study_time_comment !== null && revision.comments.de_study_time_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.de_study_time_comment !== null && revision.comments.de_study_time_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_study_time_comment}}
                                             </span>
                                         </span>
@@ -585,7 +590,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.de_purpose}}</i><br>
                                         <span ng-if="status.descriptions.comments.de">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.de_purpose_comment !== null && revision.comments.de_purpose_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.de_purpose_comment !== null && revision.comments.de_purpose_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_purpose_comment}}
                                             </span>
                                         </span>
@@ -611,7 +616,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.de_procedure}}</i><br>
                                         <span ng-if="status.descriptions.comments.de">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.de_procedure_comment !== null && revision.comments.de_procedure_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.de_procedure_comment !== null && revision.comments.de_procedure_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_procedure_comment}}
                                             </span>
                                         </span>
@@ -637,7 +642,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.de_duration}}</i><br>
                                         <span ng-if="status.descriptions.comments.de">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.de_duration_comment !== null && revision.comments.de_duration_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.de_duration_comment !== null && revision.comments.de_duration_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_duration_comment}}
                                             </span>
                                         </span>
@@ -663,7 +668,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.de_risks}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.de_risks_comment !== null && revision.comments.de_risks_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.de_risks_comment !== null && revision.comments.de_risks_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_risks_comment}}
                                             </span>
                                         </span>
@@ -689,7 +694,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.de_benefits}}</i><br>
                                         <span ng-if="status.descriptions.comments.de">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.de_benefits_comment !== null && revision.comments.de_benefits_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.de_benefits_comment !== null && revision.comments.de_benefits_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_benefits_comment}}
                                             </span>
                                         </span>
@@ -765,7 +770,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_title}}</i><br>
                                         <span ng-if="status.descriptions.comments.pt">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.pt_title_comment !== null && revision.comments.pt_title_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.pt_title_comment !== null && revision.comments.pt_title_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_title_comment}}
                                             </span>
                                         </span>
@@ -791,7 +796,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_researcher}}</i><br>
                                         <span ng-if="status.descriptions.comments.pt">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.pt_researcher_comment !== null && revision.comments.pt_researcher_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.pt_researcher_comment !== null && revision.comments.pt_researcher_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_researcher_comment}}
                                             </span>
                                         </span>
@@ -817,7 +822,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_study_time}}</i><br>
                                         <span ng-if="status.descriptions.comments.pt">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.pt_study_time_comment !== null && revision.comments.pt_study_time_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.pt_study_time_comment !== null && revision.comments.pt_study_time_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_study_time_comment}}
                                             </span>
                                         </span>
@@ -843,7 +848,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_purpose}}</i><br>
                                         <span ng-if="status.descriptions.comments.pt">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.de_purpose_comment !== null && revision.comments.pt_purpose_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.de_purpose_comment !== null && revision.comments.pt_purpose_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_purpose_comment}}
                                             </span>
                                         </span>
@@ -869,7 +874,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_procedure}}</i><br>
                                         <span ng-if="status.descriptions.comments.pt">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.pt_procedure_comment !== null && revision.comments.pt_procedure_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.pt_procedure_comment !== null && revision.comments.pt_procedure_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_procedure_comment}}
                                             </span>
                                         </span>
@@ -895,7 +900,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_duration}}</i><br>
                                         <span ng-if="status.descriptions.comments.pt">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.pt_duration_comment !== null && revision.comments.pt_duration_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.pt_duration_comment !== null && revision.comments.pt_duration_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_duration_comment}}
                                             </span>
                                         </span>
@@ -921,7 +926,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_risks}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.pt_risks_comment !== null && revision.comments.pt_risks_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.pt_risks_comment !== null && revision.comments.pt_risks_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_risks_comment}}
                                             </span>
                                         </span>
@@ -947,7 +952,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_benefits}}</i><br>
                                         <span ng-if="status.descriptions.comments.pt">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.pt_benefits_comment !== null && revision.comments.pt_benefits_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.pt_benefits_comment !== null && revision.comments.pt_benefits_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_benefits_comment}}
                                             </span>
                                         </span>
@@ -1031,7 +1036,7 @@
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q01_comment !== null && revision.comments.q01_comment !== ''">
+                                        <span class="comment" ng-if="revision.comments.q01_comment !== null && revision.comments.q01_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q01_comment}}
                                         </span>
                                     </div>
@@ -1066,7 +1071,7 @@
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q02_comment !== null && revision.comments.q02_comment !== ''">
+                                        <span class="comment" ng-if="revision.comments.q02_comment !== null && revision.comments.q02_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q02_comment}}
                                         </span>
                                     </div>
@@ -1101,7 +1106,7 @@
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q03_comment !== null && revision.comments.q03_comment !== ''">
+                                        <span class="comment" ng-if="revision.comments.q03_comment !== null && revision.comments.q03_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q03_comment}}
                                         </span>
                                     </div>
@@ -1136,7 +1141,7 @@
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q04_comment !== null && revision.comments.q04_comment !== ''">
+                                        <span class="comment" ng-if="revision.comments.q04_comment !== null && revision.comments.q04_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q04_comment}}
                                         </span>
                                     </div>
@@ -1171,7 +1176,7 @@
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q05_comment !== null && revision.comments.q05_comment !== ''">
+                                        <span class="comment" ng-if="revision.comments.q05_comment !== null && revision.comments.q05_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q05_comment}}
                                         </span>
                                     </div>
@@ -1206,7 +1211,7 @@
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q06_comment !== null && revision.comments.q06_comment !== ''">
+                                        <span class="comment" ng-if="revision.comments.q06_comment !== null && revision.comments.q06_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q06_comment}}
                                         </span>
                                     </div>
@@ -1241,7 +1246,7 @@
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q07_comment !== null && revision.comments.q07_comment !== ''">
+                                        <span class="comment" ng-if="revision.comments.q07_comment !== null && revision.comments.q07_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q07_comment}}
                                         </span>
                                     </div>
@@ -1276,7 +1281,7 @@
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q08_comment !== null && revision.comments.q08_comment !== ''">
+                                        <span class="comment" ng-if="revision.comments.q08_comment !== null && revision.comments.q08_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q08_comment}}
                                         </span>
                                     </div>
@@ -1311,7 +1316,7 @@
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q09_comment !== null && revision.comments.q09_comment !== ''">
+                                        <span class="comment" ng-if="revision.comments.q09_comment !== null && revision.comments.q09_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q09_comment}}
                                         </span>
                                     </div>
@@ -1346,7 +1351,7 @@
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q10_comment !== null && revision.comments.q10_comment !== ''">
+                                        <span class="comment" ng-if="revision.comments.q10_comment !== null && revision.comments.q10_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q10_comment}}
                                         </span>
                                     </div>
@@ -1381,7 +1386,7 @@
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q11_1_comment !== null && revision.comments.q11_1_comment !== ''">
+                                        <span class="comment" ng-if="revision.comments.q11_1_comment !== null && revision.comments.q11_1_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q11_1_comment}}
                                         </span>
                                     </div>
@@ -1416,7 +1421,7 @@
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q11_2_comment !== null && revision.comments.q11_2_comment !== ''">
+                                        <span class="comment" ng-if="revision.comments.q11_2_comment !== null && revision.comments.q11_2_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q11_2_comment}}
                                         </span>
                                     </div>
@@ -1451,7 +1456,7 @@
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q12_comment !== null && revision.comments.q12_comment !== ''">
+                                        <span class="comment" ng-if="revision.comments.q12_comment !== null && revision.comments.q12_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q12_comment}}
                                         </span>
                                     </div>
@@ -1486,7 +1491,7 @@
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q13_comment !== null && revision.comments.q13_comment !== ''">
+                                        <span class="comment" ng-if="revision.comments.q13_comment !== null && revision.comments.q13_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q13_comment}}
                                         </span>
                                     </div>
@@ -1499,8 +1504,17 @@
         </div>
     </div>
     <div class="card-footer right">
-        <button class="btn btn-primary" role="button" ng-click="redirect('/documents/' + document.document_id + '/review')" ng-if="document.status == 3 || document.status == 4">
-            <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'REVIEW' | translate }}&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+        <button class="btn btn-primary" role="button" ng-click="reviewDocument()" ng-if="document.status == 3 || document.status == 4">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            &nbsp;&nbsp;
+            <span ng-if="document.status == 3">
+                {{ 'START_REVIEWING' | translate }}
+            </span>
+            <span ng-if="document.status == 4">
+                {{ 'OPEN_REVIEW' | translate }}
+            </span>
+            &nbsp;&nbsp;
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
         </button>
     </div>
 </div>

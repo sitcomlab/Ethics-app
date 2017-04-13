@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document review controller
-app.controller("documentReviewController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $q, $timeout, $authenticationService, $documentService) {
+app.controller("documentReviewController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $q, $timeout, $authenticationService, $documentService, $reviewService, $commentService) {
 
     /*************************************************
         FUNCTIONS
@@ -142,14 +142,54 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
         }
     };
 
+    /**
+     * [submitReview description]
+     * @return {[type]} [description]
+     */
+    $scope.saveReview = function(){
+        $scope.$parent.loading = { status: true, message: "Saving review" };
+
+        // Save comments
+        $commentService.edit($scope.latest_revision.comments.comment_id, $scope.latest_revision.comments)
+        .then(function onSuccess(response) {
+            $scope.$parent.loading = { status: false, message: "" };
+
+            // Redirect
+            $scope.redirect("/documents/" + $scope.document.document_id);
+        })
+        .catch(function onError(response) {
+            $window.alert(response.data);
+        });
+    };
+
+    /**
+     * [submitReview description]
+     * @return {[type]} [description]
+     */
+    $scope.publish = function(){
+        $scope.$parent.loading = { status: true, message: "Saving review" };
+
+        // Save comments
+        $commentService.edit($scope.latest_revision.comments.comment_id, $scope.latest_revision.comments)
+        .then(function onSuccess(response) {
+            $scope.$parent.loading = { status: true, message: "Publishing review" };
+
+            // Submit review
+            // TODO:
+        })
+        .catch(function onError(response) {
+            $window.alert(response.data);
+        });
+    };
 
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading document overview" };
+    $scope.$parent.loading = { status: true, message: "Loading review" };
+    $scope.$parent.review = true;
     $scope.document = $documentService.get();
+    $scope.authenticated_member = $authenticationService.get();
     $scope.latest_revision = $documentService.getLatestRevision();
-    console.log($scope.latest_revision);
 
     // Show/hide comments and history
     $scope.status = {

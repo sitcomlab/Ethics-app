@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 // Main controller
-app.controller("mainController", function($scope, $rootScope, $location, config, $authenticationService, $documentService) {
+app.controller("mainController", function($scope, $rootScope, $location, config, $authenticationService, $documentService, $reviewService) {
 	/*************************************************
         FUNCTIONS
      *************************************************/
@@ -41,6 +41,7 @@ app.controller("mainController", function($scope, $rootScope, $location, config,
 	$scope.config = config;
 	$scope.authenticated_member = $authenticationService.get();
 	$scope.document = $documentService.get();
+	$scope.review = $reviewService.get();
 	$scope.loading = {
 		status: false,
 		message: ""

@@ -129,39 +129,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
 
                         // Redirect
                         $scope.redirect("/documents/" + $documentService.getId() + "/overview");
-
-                        // Check status of document to generate files
-                        /*if($documentService.getStatus()===2 || $documentService.getStatus()===6){
-                            $scope.$parent.loading = { status: true, message: "Generating files" };
-
-                            // Check if files were already created and cached
-                            if($fileService.get()){
-                                $documentService.setFiles($fileService.get());
-                                $scope.$parent.loading = { status: false, message: "" };
-
-                                // Redirect
-                                $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-                            } else {
-                                // Generate files on server
-                                $documentService.generateFiles($documentService.getId())
-                                .then(function onSuccess(response) {
-                                    $fileService.set(response.data);
-                                    $documentService.setFiles($fileService.get());
-                                    $scope.$parent.loading = { status: false, message: "" };
-
-                                    // Redirect
-                                    $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-                                })
-                                .catch(function onError(response) {
-                                    $window.alert(response.data);
-                                });
-                            }
-                        } else {
-                            $scope.$parent.loading = { status: false, message: "" };
-
-                            // Redirect
-                            $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-                        }*/
+                        
                     });
                 })
                 .catch(function onError(response) {

@@ -105,7 +105,19 @@
                                         <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;{{document.document_title}}
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="document_dropdown">
-                                        <h6 class="dropdown-header">{{ 'DOCUMENT' | translate }}</h6>
+                                        <h6 class="dropdown-header">
+                                            {{ 'DOCUMENT' | translate }}
+                                            <span class="badge" ng-class="{'badge-default': document.status==0 || document.status==1, 'badge-success': document.status==2 || document.status==6, 'badge-primary': document.status==3, 'badge-info': document.status==4, 'badge-warning': document.status=='5', 'badge-danger': document.status==7}">
+                                                <span ng-if="document.status==0">{{ 'INITIALISED' | translate }}</span>
+                                                <span ng-if="document.status==1">{{ 'UNSUBMITTED' | translate }}</span>
+                                                <span ng-if="document.status==2">{{ 'SUBMITTED' | translate }}</span>
+                                                <span ng-if="document.status==3">{{ 'REVIEW_REQUIRED' | translate }}</span>
+                                                <span ng-if="document.status==4">{{ 'UNDER_REVIEW' | translate }}</span>
+                                                <span ng-if="document.status==5">{{ 'PARTLY_ACCEPTED' | translate }}</span>
+                                                <span ng-if="document.status==6">{{ 'REVIEWED' | translate }}</span>
+                                                <span ng-if="document.status==7">{{ 'REJECTED' | translate }}</span>
+                                            </span>
+                                        </h6>
                                         <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/id')">
                                             {{ 'SHOW_DOCUMENT_ID' | translate }}
                                         </a>
@@ -114,14 +126,22 @@
                                                 {{ 'SHOW_SUBMISSION' | translate }}
                                             </span>
                                             <span ng-if="document.status > 2">
-                                                {{ 'SHOW_REVIEW' | translate }}
+                                                {{ 'SHOW_OVERVIEW' | translate }}
                                             </span>
                                         </a>
                                         <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/settings')">
                                             {{ 'CHANGE_DOCUMENT_SETTINGS' | translate }}
                                         </a>
+                                        <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/status')">
+                                            {{ 'CHANGE_DOCUMENT_STATUS' | translate }}
+                                        </a>
                                         <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/delete')">
                                             {{ 'DELETE_DOCUMENT' | translate }}
+                                        </a>
+                                        <div class="dropdown-divider" ng-if="review"></div>
+                                        <h6 class="dropdown-header"  ng-if="review">{{ 'REVIEW' | translate }}</h6>
+                                        <a class="dropdown-item" href="" ng-click="closeReview()"  ng-if="review">
+                                            {{ 'SAVE_AND_CLOSE_REVIEW' | translate }}
                                         </a>
                                     </div>
                                 </li>
@@ -230,7 +250,7 @@
         <script src="js/services/concernService.js"></script>
         <script src="js/services/commentService.js"></script>
         <script src="js/services/reviewerService.js"></script>
-        <!-- <script src="js/services/reviewService.js"></script> -->
+        <script src="js/services/reviewService.js"></script>
         <script src="js/services/fileService.js"></script>
         <!-- <script src="js/services/recoveryService.js"></script> -->
 
