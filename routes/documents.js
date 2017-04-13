@@ -11,6 +11,7 @@ var put = require('../controllers/documents/put');
 var del = require('../controllers/documents/delete');
 var confirm_intro = require('../controllers/documents/confirm_intro');
 var submit = require('../controllers/documents/submit');
+var change_status = require('../controllers/documents/change_status');
 var generate_files = require('../controllers/documents/generate_files');
 
 
@@ -31,6 +32,9 @@ router.get('/documents/:document_id', isAuthenticated, get.request);
 
 // PUT
 router.put('/documents/:document_id', isAuthenticated, put.request);
+
+// CHANGE STATUS
+router.put('/documents/:document_id/status', isAuthenticated, change_status.request);
 
 // DELETE
 router.delete('/documents/:document_id', isAuthenticated, del.request);

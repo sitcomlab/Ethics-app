@@ -1,6 +1,6 @@
 INSERT INTO Reviewers (
-    member_id,
-    revision_id
+    revision_id,
+    member_id
 ) VALUES (
     $1::INTEGER,
     $2::INTEGER

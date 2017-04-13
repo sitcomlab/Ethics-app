@@ -4,15 +4,18 @@ var pg = require('pg');
 var types = require('pg').types;
 types.setTypeParser(1700, 'text', parseFloat);
 var _ = require('underscore');
+var jwt = require('jsonwebtoken');
 var pool = require('../../server.js').pool;
+var server_url = require('../../server.js').server_url;
+var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/concerns/";
-var query_get_concern = fs.readFileSync(__dirname + dir + 'get.sql', 'utf8').toString();
-var query_edit_concern = fs.readFileSync(__dirname + dir + 'edit.sql', 'utf8').toString();
+var dir = "/../../sql/queries/comments/";
+var query_get_comment = fs.readFileSync(__dirname + dir + 'get.sql', 'utf8').toString();
+var query_edit_comment = fs.readFileSync(__dirname + dir + 'edit.sql', 'utf8').toString();
 
 
-// EDIT
+// PUT
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -27,21 +30,38 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            // TODO: Authentication
-            callback(null, client, done);
+            // Authorization
+            if(req.headers.authorization) {
+                var token = req.headers.authorization.substring(7);
+
+                // Verify token
+                jwt.verify(token, jwtSecret, function(err, decoded) {
+                    if(err){
+                        res.status(401).send("Authorization failed!");
+                    } else {
+                        if(decoded.member){
+                            callback(null, client, done);
+                        } else {
+                            res.status(401).send("Authorization failed!");
+                        }
+                    }
+                });
+            } else {
+                res.status(401).send("Authorization failed!");
+            }
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_get_concern, [
-                req.params.concern_id
+            client.query(query_get_comment, [
+                req.params.comment_id
             ], function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    // Check if Concern exists
+                    // Check if Comment exists
                     if (result.rows.length === 0) {
-                        callback(new Error("Concern not found"), 404);
+                        callback(new Error("Comment not found"), 404);
                     } else {
                         callback(null, client, done);
                     }
@@ -49,49 +69,63 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            // TODO: Add object/schema validation
-            var object = {
-                concern_id: req.params.concern_id,
-                q01_value: req.body.q01_value,
-                q01_explanation: req.body.q01_explanation,
-                q02_value: req.body.q02_value,
-                q02_explanation: req.body.q02_explanation,
-                q03_value: req.body.q03_value,
-                q03_explanation: req.body.q03_explanation,
-                q04_value: req.body.q04_value,
-                q04_explanation: req.body.q04_explanation,
-                q05_value: req.body.q05_value,
-                q05_explanation: req.body.q05_explanation,
-                q06_value: req.body.q06_value,
-                q06_explanation: req.body.q06_explanation,
-                q07_value: req.body.q07_value,
-                q07_explanation: req.body.q07_explanation,
-                q08_value: req.body.q08_value,
-                q08_explanation: req.body.q08_explanation,
-                q09_value: req.body.q09_value,
-                q09_explanation: req.body.q09_explanation,
-                q10_value: req.body.q10_value,
-                q10_explanation: req.body.q10_explanation,
-                q11_1_value: req.body.q11_1_value,
-                q11_1_explanation: req.body.q11_1_explanation,
-                q11_2_value: req.body.q11_2_value,
-                q11_2_explanation: req.body.q11_2_explanation,
-                q12_value: req.body.q12_value,
-                q12_explanation: req.body.q12_explanation,
-                q13_value: req.body.q13_value,
-                q13_explanation: req.body.q13_explanation
-            };
-            var params = _.values(object);
-            callback(null, client, done, params);
-        },
-        function(client, done, params, callback){
             // Database query
-            client.query(query_edit_concern, params, function(err, result) {
+            client.query(query_edit_comment, [
+                req.params.comment_id,
+                req.body.general_comment,
+                
+                req.body.en_title_comment,
+                req.body.en_researcher_comment,
+                req.body.en_study_time_comment,
+                req.body.en_purpose_comment,
+                req.body.en_procedure_comment,
+                req.body.en_duration_comment,
+                req.body.en_risks_comment,
+                req.body.en_benefits_comment,
+
+                req.body.de_title_comment,
+                req.body.de_researcher_comment,
+                req.body.de_study_time_comment,
+                req.body.de_purpose_comment,
+                req.body.de_procedure_comment,
+                req.body.de_duration_comment,
+                req.body.de_risks_comment,
+                req.body.de_benefits_comment,
+
+                req.body.pt_title_comment,
+                req.body.pt_researcher_comment,
+                req.body.pt_study_time_comment,
+                req.body.pt_purpose_comment,
+                req.body.pt_procedure_comment,
+                req.body.pt_duration_comment,
+                req.body.pt_risks_comment,
+                req.body.pt_benefits_comment,
+
+                req.body.q01_comment,
+                req.body.q02_comment,
+                req.body.q03_comment,
+                req.body.q04_comment,
+                req.body.q05_comment,
+                req.body.q06_comment,
+                req.body.q07_comment,
+                req.body.q08_comment,
+                req.body.q09_comment,
+                req.body.q10_comment,
+                req.body.q11_1_comment,
+                req.body.q11_2_comment,
+                req.body.q12_comment,
+                req.body.q13_comment
+            ], function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, 200, result.rows[0]);
+                    // Check if Comment exists
+                    if (result.rows.length === 0) {
+                        callback(new Error("Comment not found"), 404);
+                    } else {
+                        callback(null, 200, result.rows[0]);
+                    }
                 }
             });
         }
