@@ -23,7 +23,9 @@ var dir_6 = "/../../sql/queries/revisions/";
 var dir_7 = "/../../sql/queries/descriptions/";
 var dir_8 = "/../../sql/queries/concerns/";
 var dir_9 = "/../../sql/queries/comments/";
+
 var template = fs.readFileSync(__dirname + dir_1 + 'document_created.html', 'utf8').toString();
+
 var query_find_user_by_email = fs.readFileSync(__dirname + dir_2 + 'find_by_email.sql', 'utf8').toString();
 var query_create_document = fs.readFileSync(__dirname + dir_3 + 'create.sql', 'utf8').toString();
 var query_get_course = fs.readFileSync(__dirname + dir_4 + 'get.sql', 'utf8').toString();
@@ -47,10 +49,6 @@ exports.request = function(req, res) {
                     callback(null, client, done);
                 }
             });
-        },
-        function(client, done, callback) {
-            // TODO: Authentication
-            callback(null, client, done);
         },
         function(client, done, callback) {
             // Database query
@@ -148,7 +146,33 @@ exports.request = function(req, res) {
         function(client, done, user, document, revision, callback){
             // Database query
             client.query(query_create_description, [
-                revision.revision_id
+                revision.revision_id,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
             ], function(err, result) {
                 done();
                 if (err) {
@@ -161,7 +185,35 @@ exports.request = function(req, res) {
         function(client, done, user, document, revision, callback){
             // Database query
             client.query(query_create_concern, [
-                revision.revision_id
+                revision.revision_id,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
             ], function(err, result) {
                 done();
                 if (err) {

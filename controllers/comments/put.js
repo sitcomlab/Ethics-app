@@ -72,8 +72,9 @@ exports.request = function(req, res) {
             // Database query
             client.query(query_edit_comment, [
                 req.params.comment_id,
+                req.body.published,
                 req.body.general_comment,
-                
+
                 req.body.en_title_comment,
                 req.body.en_researcher_comment,
                 req.body.en_study_time_comment,

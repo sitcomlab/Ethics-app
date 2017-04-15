@@ -1862,7 +1862,7 @@
                         type="radio"
                         name="document_status"
                         id="document_status_1"
-                        ng-model="updated_document.status"
+                        ng-model="review_status"
                         ng-value="5"
                         required>
                         <span class="badge badge-warning">
@@ -1875,7 +1875,7 @@
                             type="radio"
                             name="document_status"
                             id="document_status_2"
-                            ng-model="updated_document.status"
+                            ng-model="review_status"
                             ng-value="6"
                             required>
                         <span class="badge badge-success">
@@ -1888,7 +1888,7 @@
                             type="radio"
                             name="document_status"
                             id="document_status_3"
-                            ng-model="updated_document.status"
+                            ng-model="review_status"
                             ng-value="7"
                             required>
                         <span class="badge badge-danger">
@@ -1902,7 +1902,7 @@
                     </a>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 flex-first flex-sm-unordered right">
-                    <button class="btn btn-success btn-block-xs-only btn-block-sm-only" role="submit" ng-disabled="updated_document.status == null">
+                    <button class="btn btn-success btn-block-xs-only btn-block-sm-only" role="submit" ng-disabled="review_status == null">
                         <i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'PUBLISH_REVIEW' | translate }}
                     </button>
                 </div>

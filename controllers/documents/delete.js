@@ -30,24 +30,6 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            // Database query
-            client.query(query_get_document, [
-                req.params.document_id
-            ], function(err, result) {
-                done();
-                if (err) {
-                    callback(err, 500);
-                } else {
-                    // Check if Document exists
-                    if (result.rows.length === 0) {
-                        callback(new Error("Document not found"), 404);
-                    } else {
-                        callback(null, client, done, result.rows[0]);
-                    }
-                }
-            });
-        },
-        function(client, done, callback) {
             // Authorization
             if(req.headers.authorization) {
                 var token = req.headers.authorization.substring(7);
@@ -71,6 +53,24 @@ exports.request = function(req, res) {
             } else {
                 res.status(401).send("Authorization failed!");
             }
+        },
+        function(client, done, callback) {
+            // Database query
+            client.query(query_get_document, [
+                req.params.document_id
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    // Check if Document exists
+                    if (result.rows.length === 0) {
+                        callback(new Error("Document not found"), 404);
+                    } else {
+                        callback(null, client, done, result.rows[0]);
+                    }
+                }
+            });
         },
         function(client, done, document, callback) {
             // Database query

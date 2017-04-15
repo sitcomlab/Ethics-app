@@ -167,19 +167,35 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
      * @return {[type]} [description]
      */
     $scope.publish = function(){
-        $scope.$parent.loading = { status: true, message: "Saving review" };
+        if($scope.review_status !== null){
+            $scope.$parent.loading = { status: true, message: "Saving review" };
 
-        // Save comments
-        $commentService.edit($scope.latest_revision.comments.comment_id, $scope.latest_revision.comments)
-        .then(function onSuccess(response) {
-            $scope.$parent.loading = { status: true, message: "Publishing review" };
+            // Publish comments for user
+            $scope.latest_revision.comments.published = true;
 
-            // Submit review
-            // TODO:
-        })
-        .catch(function onError(response) {
-            $window.alert(response.data);
-        });
+            // Save comments
+            $commentService.edit($scope.latest_revision.comments.comment_id, $scope.latest_revision.comments)
+            .then(function onSuccess(response) {
+                $scope.$parent.loading = { status: true, message: "Publishing review" };
+
+                // Change status of document
+                $documentService.changeStatus($scope.document.document_id, {
+                    status: $scope.review_status
+                })
+                .then(function onSuccess(response) {
+                    $scope.$parent.loading = { status: false, message: "" };
+
+                    // Redirect
+                    $scope.redirect("/documents/" + $scope.document.document_id);
+                })
+                .catch(function onError(response) {
+                    $window.alert(response.data);
+                });
+            })
+            .catch(function onError(response) {
+                $window.alert(response.data);
+            });
+        }
     };
 
     /*************************************************
@@ -187,6 +203,7 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading review" };
     $scope.$parent.review = true;
+    $scope.review_status = null;
     $scope.document = $documentService.get();
     $scope.authenticated_member = $authenticationService.get();
     $scope.latest_revision = $documentService.getLatestRevision();

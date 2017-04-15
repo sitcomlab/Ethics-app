@@ -82,14 +82,7 @@ exports.request = function(req, res) {
                     if (result.rows.length === 0) {
                         document = _.extend(document, {
                             affiliation_id: null,
-                            course_id: null/*, // Note(nicho): currently not used
-                            course_name: null,
-                            year: null,
-                            term: null,
-                            season: null,
-                            lecturer: null,
-                            lecturer: null,
-                            institute_id: null*/
+                            course_id: null
                         });
                     } else {
                         document = _.extend(document, result.rows[0]);

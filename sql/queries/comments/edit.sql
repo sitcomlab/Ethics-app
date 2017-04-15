@@ -1,5 +1,6 @@
 UPDATE Comments SET (
     updated,
+    published,
     general_comment,
 
     -- English
@@ -49,10 +50,10 @@ UPDATE Comments SET (
     q13_comment
 ) = (
     now(),
-    $2::TEXT,
+    $2::BOOLEAN,
+    $3::TEXT,
 
     -- English
-    $3::TEXT,
     $4::TEXT,
     $5::TEXT,
     $6::TEXT,
@@ -60,9 +61,9 @@ UPDATE Comments SET (
     $8::TEXT,
     $9::TEXT,
     $10::TEXT,
+    $11::TEXT,
 
     -- German
-    $11::TEXT,
     $12::TEXT,
     $13::TEXT,
     $14::TEXT,
@@ -70,9 +71,9 @@ UPDATE Comments SET (
     $16::TEXT,
     $17::TEXT,
     $18::TEXT,
+    $19::TEXT,
 
     -- Portuguese
-    $19::TEXT,
     $20::TEXT,
     $21::TEXT,
     $22::TEXT,
@@ -80,9 +81,9 @@ UPDATE Comments SET (
     $24::TEXT,
     $25::TEXT,
     $26::TEXT,
+    $27::TEXT,
 
     -- Concerns
-    $27::TEXT,
     $28::TEXT,
     $29::TEXT,
     $30::TEXT,
@@ -95,5 +96,6 @@ UPDATE Comments SET (
     $37::TEXT,
     $38::TEXT,
     $39::TEXT,
-    $40::TEXT
+    $40::TEXT,
+    $41::TEXT
 ) WHERE comment_id=$1::INTEGER RETURNING *;
