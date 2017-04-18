@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Course delete controller
-app.controller("courseDeleteController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $courseService, $memberService, $documentsService) {
+app.controller("courseDeleteController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $courseService) {
 
     /*************************************************
         FUNCTIONS
@@ -22,31 +22,13 @@ app.controller("courseDeleteController", function($scope, $rootScope, $routePara
         INIT
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading course" };
+    $scope.input = "";
 
     // Load course
     $courseService.retrieve($routeParams.course_id)
     .then(function onSuccess(response) {
         $scope.course = response.data;
-
-        // Load responsible members
-        $memberService.listByCourse($routeParams.course_id)
-        .then(function onSuccess(response) {
-            $scope.course.members = response.data;
-
-            // Load related documents
-            $documentsService.listByCourse($routeParams.course_id)
-            .then(function onSuccess(response) {
-                $scope.course.documents = response.data;
-
-                $scope.$parent.loading = { status: false, message: "" };
-            })
-            .catch(function onError(response) {
-                $window.alert(response.data);
-            });
-        })
-        .catch(function onError(response) {
-            $window.alert(response.data);
-        });
+        $scope.$parent.loading = { status: false, message: "" };
     })
     .catch(function onError(response) {
         $window.alert(response.data);

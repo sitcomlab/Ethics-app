@@ -2,7 +2,7 @@ var app = angular.module("courseService", []);
 
 
 // Course service
-app.factory('$courseService', function($http, $log, config, _) {
+app.factory('$courseService', function($http, $log, config, $authenticationService, _) {
 
     var courses;
 
@@ -10,7 +10,7 @@ app.factory('$courseService', function($http, $log, config, _) {
         init: function(){
             return {
                 course_name: "",
-                year: moment().format("YYYY"),
+                year: Number(moment().format("YYYY")),
                 term: true,
                 lecturer: "",
                 institute_id: null
