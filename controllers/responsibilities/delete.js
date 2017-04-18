@@ -11,10 +11,11 @@ var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
 var dir = "/../../sql/queries/courses/";
-var query_create_course = fs.readFileSync(__dirname + dir + 'create.sql', 'utf8').toString();
+var query_get_course = fs.readFileSync(__dirname + dir + 'get.sql', 'utf8').toString();
+var query_delete_course = fs.readFileSync(__dirname + dir + 'delete.sql', 'utf8').toString();
 
 
-// POST
+// DELETE
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -50,25 +51,33 @@ exports.request = function(req, res) {
             }
         },
         function(client, done, callback) {
-            // TODO: Add object/schema validation
-            var object = {
-                course_name: req.body.course_name,
-                year: req.body.year,
-                term: req.body.term,
-                lecturer: req.body.lecturer,
-                institute_id: req.body.institute_id
-            };
-            var params = _.values(object);
-            callback(null, client, done, params);
-        },
-        function(client, done, params, callback){
             // Database query
-            client.query(query_create_course, params, function(err, result) {
+            client.query(query_get_course, [
+                req.params.course_id
+            ], function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, 201, result.rows[0]);
+                    // Check if Course exists
+                    if (result.rows.length === 0) {
+                        callback(new Error("Course not found"), 404);
+                    } else {
+                        callback(null, client, done, result.rows[0]);
+                    }
+                }
+            });
+        },
+        function(client, done, course, callback) {
+            // Database query
+            client.query(query_delete_course, [
+                req.params.course_id
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    callback(null, 204, null);
                 }
             });
         }
@@ -77,7 +86,7 @@ exports.request = function(req, res) {
             console.error(colors.red(err));
             res.status(code).send(err.message);
         } else {
-            res.status(code).send(result);
+            res.status(code).send();
         }
     });
 };
