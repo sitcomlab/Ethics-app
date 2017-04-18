@@ -11,8 +11,26 @@
         </div>
     </div>
     <div class="card-block">
+        <div class="row">
+            <!-- SEARCH -->
+            <div class="col-xs-12 col-sm col-md col-lg">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </span>
+                    <input type="text" class="form-control" placeholder="{{ 'SEARCH' | translate }}" ng-model="searchText">
+                    <span class="input-group-btn" ng-if="searchText">
+                        <a href="" class="btn btn-secondary" ng-click="resetSearch()">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </a>
+                    </span>
+                </div>
+                <small class="form-text text-muted">{{ 'SEARCH_FOR_USERS' | translate }}</small>
+                <br>
+            </div>
+        </div>
         <div class="list-group" ng-if="users && users.length>0">
-            <a href="" ng-click="redirect('/users/' + user.user_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="user in users | orderBy: ['university_name', 'institute_name', 'last_name', 'first_name']">
+            <a href="" ng-click="redirect('/users/' + user.user_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="user in users | filter: searchText | orderBy: ['university_name', 'institute_name', 'last_name', 'first_name']">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
                         <i class="fa fa-user-o" aria-hidden="true"></i>

@@ -41,7 +41,7 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
                 }
             });
         },
-        remove: function(){
+        remove: function(working_group_id){
             return $http.delete(config.apiURL + "/working_groups/" + working_group_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()

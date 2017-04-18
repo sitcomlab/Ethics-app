@@ -41,7 +41,7 @@ app.factory('$userService', function($http, $log, config, $authenticationService
                 }
             });
         },
-        remove: function(){
+        remove: function(user_id){
             return $http.delete(config.apiURL + "/users/" + user_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()

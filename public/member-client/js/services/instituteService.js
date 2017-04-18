@@ -44,7 +44,7 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
                 }
             });
         },
-        remove: function(){
+        remove: function(institute_id){
             return $http.delete(config.apiURL + "/institutes/" + institute_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()

@@ -114,6 +114,13 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
+        },
+        remove: function(document_id){
+            return $http.delete(config.apiURL + "/documents/" + document_id, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
         }
     };
 

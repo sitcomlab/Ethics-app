@@ -11,8 +11,31 @@
         </div>
     </div>
     <div class="card-block">
+        <div class="row">
+            <!-- SEARCH -->
+            <div class="col-xs-12 col-sm col-md col-lg">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </span>
+                    <input type="text" class="form-control" placeholder="{{ 'SEARCH' | translate }}" ng-model="searchText">
+                    <span class="input-group-btn" ng-if="searchText">
+                        <a href="" class="btn btn-secondary" ng-click="resetSearch()">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </a>
+                    </span>
+                </div>
+                <small class="form-text text-muted">{{ 'SEARCH_FOR_COURSES' | translate }}</small>
+                <br>
+            </div>
+            <div class="col-xs-12 right">
+                <a href="" class="btn btn-secondary" ng-click="redirect('/new/course')">
+                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'CREATE' | translate }}
+                </a>
+            </div>
+        </div>
         <div class="list-group" ng-if="courses && courses.length>0">
-            <a href="" ng-click="redirect('/courses/' + course.course_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="course in courses | orderBy: ['university_name', 'institute_name', 'year', 'course_name']">
+            <a href="" ng-click="redirect('/courses/' + course.course_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="course in courses | orderBy: ['university_name', 'institute_name', 'year', 'course_name'] | filter: searchText">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
                         <i class="fa fa-graduation-cap" aria-hidden="true"></i>

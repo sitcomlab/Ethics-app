@@ -14,6 +14,7 @@ app.config(function($routeProvider, $locationProvider, config) {
 			controller: "recoveryController"
 		})
 
+
 		// Account
 		.when("/account/edit", {
 			templateUrl: "js/templates/account/edit.html",
@@ -21,13 +22,8 @@ app.config(function($routeProvider, $locationProvider, config) {
 			resolve: {
                 factory: checkAuthentication
             }
-		})
-
-		// New Document
-		.when("/new/document", {
-			templateUrl: "js/templates/document/create.html",
-			controller: "documentCreateController"
 		})*/
+
 
 		// Documents
 		.when("/documents", {
@@ -98,6 +94,7 @@ app.config(function($routeProvider, $locationProvider, config) {
             }
 		})
 
+
 		// Users
 		.when("/users", {
 			templateUrl: "js/templates/user/list.html",
@@ -130,6 +127,7 @@ app.config(function($routeProvider, $locationProvider, config) {
             }
 		})
 		*/
+
 
 		// New university
 		/*.when("/new/university", {
@@ -168,6 +166,7 @@ app.config(function($routeProvider, $locationProvider, config) {
                 factory: checkAuthentication
             }
 		})*/
+
 
 		// New institute
 		/*.when("/new/institute", {
@@ -208,7 +207,8 @@ app.config(function($routeProvider, $locationProvider, config) {
 			}
 		})*/
 
-		// New research group
+
+		// New working group
 		/*.when("/new/working_group", {
 			templateUrl: "js/templates/working_group/create.html",
 			controller: "workingGroupCreateController",
@@ -247,14 +247,15 @@ app.config(function($routeProvider, $locationProvider, config) {
 			}
 		})*/
 
-		// New research group
-		/*.when("/new/working_group", {
-			templateUrl: "js/templates/working_group/create.html",
-			controller: "workingGroupCreateController",
+
+		// New course
+		.when("/new/course", {
+			templateUrl: "js/templates/course/create.html",
+			controller: "courseCreateController",
 			resolve: {
 				factory: checkAuthentication
 			}
-		})*/
+		})
 
 		// Courses
 		.when("/courses", {
@@ -271,7 +272,7 @@ app.config(function($routeProvider, $locationProvider, config) {
 				factory: checkAuthentication
 			}
 		})
-		/*.when("/courses/:course_id/edit", {
+		.when("/courses/:course_id/edit", {
 			templateUrl: "js/templates/course/edit.html",
 			controller: "courseEditController",
 			resolve: {
@@ -284,7 +285,7 @@ app.config(function($routeProvider, $locationProvider, config) {
 			resolve: {
 				factory: checkAuthentication
 			}
-		})*/
+		})
 
 		// Help
 		.when("/help", {

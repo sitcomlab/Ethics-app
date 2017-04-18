@@ -2,7 +2,7 @@
 <div class="card">
     <div class="card-header" style="font-size: 20pt;">
         <div class="row">
-            <div class="col">{{ 'COMMITTEE' | translate }}</div>
+            <div class="col">{{ 'USERS' | translate }}</div>
             <div class="col right">
                 <button class="btn btn-secondary" role="button" ng-click="redirect('/documents')">
                     <i class="fa fa-times" aria-hidden="true"></i>
@@ -11,85 +11,43 @@
         </div>
     </div>
     <div class="card-block">
-        <h6 class="text-muted">
-            {{ 'MEMBERS' | translate }}
-        </h6>
-        <div class="list-group" ng-if="current_members && current_members.length>0">
-            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in current_members | orderBy: ['admin', 'university_name', 'institute_name', 'working_group_name', 'last_name', 'first_name']">
+        <div class="row">
+            <!-- SEARCH -->
+            <div class="col-xs-12 col-sm col-md col-lg">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </span>
+                    <input type="text" class="form-control" placeholder="{{ 'SEARCH' | translate }}" ng-model="searchText">
+                    <span class="input-group-btn" ng-if="searchText">
+                        <a href="" class="btn btn-secondary" ng-click="resetSearch()">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </a>
+                    </span>
+                </div>
+                <small class="form-text text-muted">{{ 'SEARCH_FOR_USERS' | translate }}</small>
+                <br>
+            </div>
+        </div>
+        <div class="list-group" ng-if="users && users.length>0">
+            <a href="" ng-click="redirect('/users/' + user.user_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="user in users | filter: searchText | orderBy: ['university_name', 'institute_name', 'last_name', 'first_name']">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
-                        <span ng-if="member.admin">
-                            <i class="fa fa-user-secret" aria-hidden="true"></i>
-                        </span>
-                        <span ng-if="!member.admin">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                        </span>
+                        <i class="fa fa-user-o" aria-hidden="true"></i>
                         &nbsp;&nbsp;
-                        <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}</b>
+                        <b><span ng-if="user.title">{{user.title}}&nbsp;</span>{{user.first_name}} {{user.last_name}}</b>
                         &nbsp;
-                        <span class="text-muted" ng-if="member.working_group_name">
-                            <small><b>{{member.working_group_name}}</b>&nbsp;|</small>
+                        <span class="text-muted" ng-if="user.institute_name">
+                            <small>{{user.institute_name}}&nbsp;|</small>
                         </span>
-                        <span class="text-muted" ng-if="member.institute_name">
-                            <small>{{member.institute_name}}&nbsp;|</small>
-                        </span>
-                        <span class="text-muted" ng-if="member.university_name">
-                            <small>{{member.university_name}}</small>
-                        </span>
-                    </div>
-                    <div>
-                        <span class="text-success" ng-if="member.subscribed">
-                            <i class="fa fa-rss-square" aria-hidden="true"></i>
-                        </span>
-                        <span class="text-danger" ng-if="!member.subscribed">
-                            <i class="fa fa-ban" aria-hidden="true"></i>
+                        <span class="text-muted" ng-if="user.university_name">
+                            <small>{{user.university_name}}</small>
                         </span>
                     </div>
                 </div>
             </a>
         </div>
-        <div class="list-group" ng-if="!current_members || current_members.length==0">
-            <div class="list-group-item flex-column align-items-center">
-                <div class="d-flex">
-                    - {{ 'NONE' | translate }} -
-                </div>
-            </div>
-        </div>
-        <div class="row" ng-if="current_members && current_members.length>0">
-            <div class="col text-muted right">
-                <small>
-                    <span class="text-success">
-                        <i class="fa fa-rss-square" aria-hidden="true"></i>
-                    </span> = {{ 'SUBSCRIBED' | translate }}
-                    &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <span class="text-danger">
-                        <i class="fa fa-ban" aria-hidden="true"></i>
-                    </span> = {{ 'CURRENTLY_NOT_SUBSCRIBED' | translate }}
-                </small>
-            </div>
-        </div>
-        <br>
-
-        <h6 class="text-muted">
-            {{ 'FORMER_MEMBERS' | translate }}
-        </h6>
-        <div class="list-group" ng-if="former_members && former_members.length>0">
-            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action" ng-repeat="member in former_members | orderBy: ['university_name', 'institute_name', 'working_group_name', 'last_name', 'first_name']">
-                <i class="fa fa-user-times" aria-hidden="true"></i>
-                &nbsp;&nbsp;
-                <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}} </b>
-                <span class="text-muted" ng-if="member.working_group_name">
-                    <small>&nbsp;<b>{{member.working_group_name}}</b>&nbsp;|</small>
-                </span>
-                <span class="text-muted" ng-if="member.institute_name">
-                    <small>&nbsp;{{member.institute_name}}&nbsp;|</small>
-                </span>
-                <span class="text-muted" ng-if="member.university_name">
-                    <small>&nbsp;{{member.university_name}}</small>
-                </span>
-            </a>
-        </div>
-        <div class="list-group" ng-if="!former_members || former_members.length==0">
+        <div class="list-group" ng-if="!users || users.length==0">
             <div class="list-group-item flex-column align-items-center">
                 <div class="d-flex">
                     - {{ 'NONE' | translate }} -
