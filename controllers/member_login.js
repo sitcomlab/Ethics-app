@@ -51,6 +51,13 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, member, callback) {
+            if(member.former){
+                callback(new Error("You are requesting with an inactive account"), 403);
+            } else {
+                callback(null, client, done, member);
+            }
+        },
+        function(client, done, member, callback) {
             // Database query
             client.query(query_login, [
                 member.member_id,

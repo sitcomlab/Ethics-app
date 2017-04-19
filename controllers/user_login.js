@@ -68,6 +68,14 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, user, callback){
+            // Check if user has been blocked
+            if(user.blocked){
+                callback(new Error("Your user account has been blocked"), 403);
+            } else {
+                callback(null, client, done, user);
+            }
+        },
+        function(client, done, user, callback){
             // Create payload
             payload = {
                 iss: server_url,

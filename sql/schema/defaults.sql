@@ -25,6 +25,18 @@ INSERT INTO Institutes (
     'Institute for Landscape Ecology',
     1,
     false
+), (
+    'WWU Institute TEST (former)',
+    1,
+    true
+), (
+    'PTU Institute TEST',
+    2,
+    false
+), (
+    'PTU Institute TEST (former)',
+    2,
+    false
 );
 
 
@@ -65,4 +77,16 @@ INSERT INTO Working_Groups (
     'Spatio-temporal modelling lab',
     1,
     false
+), (
+    'IFGI working group TEST (former)',
+    1,
+    true
+), (
+    'PTUI working group TEST',
+    5,
+    false
+), (
+    'PTUI working group TEST (former)',
+    5,
+    true
 );

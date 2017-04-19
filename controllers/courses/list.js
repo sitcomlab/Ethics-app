@@ -4,11 +4,17 @@ var pg = require('pg');
 var types = require('pg').types;
 types.setTypeParser(1700, 'text', parseFloat);
 var _ = require('underscore');
+var jwt = require('jsonwebtoken');
 var pool = require('../../server.js').pool;
+var server_url = require('../../server.js').server_url;
+var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/courses/";
-var query_list_courses = fs.readFileSync(__dirname + dir + 'list.sql', 'utf8').toString();
+var dir_1 = "/../../sql/queries/members/";
+var dir_2 = "/../../sql/queries/courses/";
+var query_get_member = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
+var query_list_courses = fs.readFileSync(__dirname + dir_2 + 'list.sql', 'utf8').toString();
+var query_list_public_courses = fs.readFileSync(__dirname + dir_2 + 'list_public.sql', 'utf8').toString();
 
 
 // LIST
@@ -26,8 +32,52 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
+            // Authorization
+            if(req.headers.authorization) {
+                var token = req.headers.authorization.substring(7);
+
+                // Verify token
+                jwt.verify(token, jwtSecret, function(err, decoded) {
+                    if(err){
+                        res.status(401).send("Authorization failed!");
+                    } else {
+                        if(decoded.member){
+                            // Database query
+                            client.query(query_get_member, [
+                                decoded.member_id
+                            ], function(err, result) {
+                                done();
+                                if (err) {
+                                    callback(err, 500);
+                                } else {
+                                    // Check if Member exists
+                                    if (result.rows.length === 0) {
+                                        callback(new Error("Member not found"), 404);
+                                    } else {
+                                        callback(null, client, done, result.rows[0], query_list_courses);
+                                    }
+                                }
+                            });
+                        } else {
+                            callback(null, client, done, undefined, query_list_public_courses);
+                        }
+                    }
+                });
+            } else {
+                callback(null, client, done, undefined, query_list_public_courses);
+            }
+        },
+        function(client, done, member, query, callback) {
+            // Prepare params, if filtering by insitute is required
+            var params = [];
+            if(member){
+                params.push(member.institute_id);
+            }
+            callback(null, client, done, query, params);
+        },
+        function(client, done, query, params, callback) {
             // Database query
-            client.query(query_list_courses, function(err, result) {
+            client.query(query, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
