@@ -7,6 +7,7 @@ var app = angular.module("ethics-app", [
     "ngRoute",
     "ngSanitize",
     "pascalprecht.translate",
+    "angucomplete-alt",
     "angular-momentjs",
     "underscore",
 

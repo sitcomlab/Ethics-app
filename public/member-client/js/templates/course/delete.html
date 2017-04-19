@@ -24,7 +24,7 @@
         <small class="form-text text-muted">{{ 'PLEASE_TYPE_IN_THE_COURSE_NAME_TO_CONFIRM' | translate }}</small>
     </div>
     <div class="card-footer right">
-        <button class="btn btn-danger" role="button" ng-click="deleteCourse()" ng-disabled="input != course.course_name">
+        <button class="btn btn-danger" role="button" ng-click="delete()" ng-disabled="input != course.course_name">
             <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'DELETE' | translate }}
         </button>
     </div>
