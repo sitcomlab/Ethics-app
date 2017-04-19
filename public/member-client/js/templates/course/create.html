@@ -74,7 +74,7 @@
                         ng-value="true"
                         required>
                         <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">{{ 'WINTER_TERM' | translate }}</span>
+                        <span class="custom-control-description">{{ 'WINTER_TERM' | translate }} <small>({{new_course.year}} - {{new_course.year+1}})</small></span>
                     </label>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -88,7 +88,7 @@
                         ng-value="false"
                         required>
                         <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">{{ 'SUMMER_TERM' | translate }}</span>
+                        <span class="custom-control-description">{{ 'SUMMER_TERM' | translate }} <small>({{new_course.year}})</small></span>
                     </label>
                 </div>
             </div>

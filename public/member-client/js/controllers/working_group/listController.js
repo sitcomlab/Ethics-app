@@ -21,13 +21,19 @@ app.controller("workingGroupListController", function($scope, $rootScope, $trans
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading research groups" };
+    $scope.$parent.loading = { status: true, message: "Loading working groups" };
 
-    // Load research groups
+    // Load working groups
     $workingGroupService.list()
     .then(function onSuccess(response) {
         $workingGroupService.set(response.data);
-        $scope.working_groups = $workingGroupService.get();
+
+        // Current working groups
+        $scope.current_working_groups = $workingGroupService.getByStatus(false);
+
+        // Former working groups
+        $scope.former_working_groups = $workingGroupService.getByStatus(true);
+
         $scope.$parent.loading = { status: false, message: "" };
     })
     .catch(function onError(response) {

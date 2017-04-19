@@ -52,7 +52,7 @@
                 <br>
 
                 <h6 class="text-muted">
-                    {{ 'RESPONSIBLE_MEMBERS' | translate }}
+                    {{ 'RELATED_MEMBERS' | translate }}
                 </h6>
                 <div class="list-group" ng-if="course.members && course.members.length>0">
                     <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in course.members | orderBy: ['admin', 'university_name', 'institute_name', 'working_group_name', 'last_name', 'first_name']">
