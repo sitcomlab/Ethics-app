@@ -89,6 +89,7 @@ exports.request = function(req, res) {
                         payload = {
                             iss: server_url,
                             sub: 'Login by email-address and password',
+                            member_id: member.member_id,
                             title: member.title,
                             first_name: member.first_name,
                             last_name: member.last_name,

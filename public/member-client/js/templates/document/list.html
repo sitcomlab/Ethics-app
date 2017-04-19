@@ -13,7 +13,7 @@
     <div class="card-block">
         <div class="row">
             <!-- SEARCH -->
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                 <div class="input-group">
                     <span class="input-group-addon">
                         <i class="fa fa-search" aria-hidden="true"></i>
@@ -57,7 +57,7 @@
                 <small class="form-text text-muted">{{ 'FILTER_BY_INSTITUTE' | translate }}</small>
                 <br>
             </div> -->
-            <!-- FILTER DOCUMENTS BY COURSE -->
+            <!-- FILTER DOCUMENTS BY COURSE
             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                 <select
                     class="custom-select form-control"
@@ -66,14 +66,15 @@
                     ng-model="filter.course_id"
                     ng-options="course.course_id as course.course_name for course in courses | orderBy: ['course_name']"
                     ng-change="filterDocuments()"
-                    ng-disabled="filter.institute_id == null">
+                    ng-disabled="filter.institute_id == null"
+                >
                     <option value="">{{ 'NO_FILTER' | translate }}</option>
                 </select>
                 <small class="form-text text-muted">{{ 'FILTER_BY_COURSE' | translate }}</small>
                 <br>
-            </div>
+            </div> -->
             <!-- FILTER DOCUMENTS BY STATUS -->
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <select class="form-control custom-select" ng-model="filter.document_status" ng-change="filterDocuments()">
                     <option value="">{{ 'NO_FILTER' | translate }}</option>
                     <option value="0">(0) {{ 'INITIALISED' | translate }}</option>

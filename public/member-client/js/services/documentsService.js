@@ -25,7 +25,7 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
                 query = query + "";
             }
 
-            if(filter.university_id !== null){
+            /*if(filter.university_id !== null){
                 if(query === ""){
                     query = query + "?university_id=" + filter.university_id + "&";
                 } else {
@@ -43,9 +43,9 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
                 }
             } else {
                 query = query + "";
-            }
+            }*/
 
-            if(filter.course_id !== null){
+            /*if(filter.course_id !== null){
                 if(query === ""){
                     query = query + "?course_id=" + filter.course_id + "&";
                 } else {
@@ -53,7 +53,7 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
                 }
             } else {
                 query = query + "";
-            }
+            }*/
 
             if(query !== ""){
                 query = query.slice(0, -1);

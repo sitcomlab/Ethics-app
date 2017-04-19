@@ -72,6 +72,7 @@ exports.request = function(req, res) {
             payload = {
                 iss: server_url,
                 sub: 'Login by document-ID',
+                user_id: user.user_id,
                 title: user.title,
                 first_name: user.first_name,
                 last_name: user.last_name,

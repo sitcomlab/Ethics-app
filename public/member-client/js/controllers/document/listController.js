@@ -55,21 +55,21 @@ app.controller("documentListController", function($scope, $rootScope, $translate
      * [updateInstitutes description]
      * @return {[type]} [description]
      */
-    $scope.updateInstitutes = function(){
+    /*$scope.updateInstitutes = function(){
         $scope.filter.institute_id = null;
         $scope.institutes = $instituteService.getByUniversity($scope.filter.university_id);
         $scope.filterDocuments();
-    };
+    };*/
 
     /**
      * [updateCourses description]
      * @return {[type]} [description]
      */
-    $scope.updateCourses = function(){
+    /*$scope.updateCourses = function(){
         $scope.filter.course_id = null;
         $scope.courses = $courseService.getByInstitute($scope.filter.institute_id);
         $scope.filterDocuments();
-    };
+    };*/
 
 
     /*************************************************
@@ -77,18 +77,18 @@ app.controller("documentListController", function($scope, $rootScope, $translate
      *************************************************/
 
     // Load member
-    $scope.member = $authenticationService.get();
+    $scope.authenticated_member = $authenticationService.get();
 
     // Filter
     $scope.filter = {
         document_status: "3",
-        university_id: $scope.member.university_id || null,
-        institute_id: $scope.member.institute_id || null,
+        //university_id: $scope.authenticated_member.university_id || null,
+        //institute_id: $scope.authenticated_member.institute_id || null,
         course_id: null
     };
 
     // Load universities
-    $universityService.list()
+    /*$universityService.list()
     .then(function onSuccess(response) {
         $universityService.set(response.data);
         $scope.universities = $universityService.get();
@@ -97,7 +97,7 @@ app.controller("documentListController", function($scope, $rootScope, $translate
         $instituteService.list()
         .then(function onSuccess(response) {
             $instituteService.set(response.data);
-            $scope.institutes = $instituteService.get();
+            $scope.institutes = $instituteService.get();*/
 
             // Load courses
             $courseService.list()
@@ -111,13 +111,13 @@ app.controller("documentListController", function($scope, $rootScope, $translate
             .catch(function onError(response) {
                 $window.alert(response.data);
             });
-        })
+        /*})
         .catch(function onError(response) {
             $window.alert(response.data);
         });
     })
     .catch(function onError(response) {
         $window.alert(response.data);
-    });
+    });*/
 
 });

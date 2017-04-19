@@ -10,9 +10,11 @@ var server_url = require('../../server.js').server_url;
 var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/documents/";
-var query_list_documents_with_user = fs.readFileSync(__dirname + dir + 'list_with_user.sql', 'utf8').toString();
-var query_list_documents_filter_by_status = fs.readFileSync(__dirname + dir + 'list_filter_by_status.sql', 'utf8').toString();
+var dir_1 = "/../../sql/queries/members/";
+var dir_2 = "/../../sql/queries/documents/";
+var query_get_member = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
+var query_list_documents_with_user = fs.readFileSync(__dirname + dir_2 + 'list_with_user.sql', 'utf8').toString();
+var query_list_documents_filter_by_status = fs.readFileSync(__dirname + dir_2 + 'list_filter_by_status.sql', 'utf8').toString();
 
 
 // LIST ALL
@@ -40,7 +42,22 @@ exports.request = function(req, res) {
                         res.status(401).send("Authorization failed!");
                     } else {
                         if(decoded.member){
-                            callback(null, client, done);
+                            // Database query
+                            client.query(query_get_member, [
+                                decoded.member_id
+                            ], function(err, result) {
+                                done();
+                                if (err) {
+                                    callback(err, 500);
+                                } else {
+                                    // Check if Member exists
+                                    if (result.rows.length === 0) {
+                                        callback(new Error("Member not found"), 404);
+                                    } else {
+                                        callback(null, client, done, result.rows[0]);
+                                    }
+                                }
+                            });
                         } else {
                             res.status(401).send("Authorization failed!");
                         }
@@ -50,9 +67,12 @@ exports.request = function(req, res) {
                 res.status(401).send("Authorization failed!");
             }
         },
-        function(client, done, callback) {
+        function(client, done, member, callback) {
+
             var query;
             var params = [];
+            params.push(member.institute_id);
+
             // Check filters
             switch(req.query.status){
                 case '0': {
@@ -99,6 +119,8 @@ exports.request = function(req, res) {
                     query = query_list_documents_with_user;
                 }
             }
+            console.log(params);
+
             callback(null, client, done, query, params);
         },
         function(client, done, query, params, callback) {
@@ -108,24 +130,9 @@ exports.request = function(req, res) {
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, result.rows);
+                    callback(null, 200, result.rows);
                 }
             });
-        },
-        function(documents, callback){
-            // Apply final filters
-            if(req.query.university_id){
-                documents = _.where(documents, {university_id: Number(req.query.university_id)});
-                callback(null, 200, documents);
-            } else if(req.query.institute_id){
-                documents = _.where(documents, {institute_id: Number(req.query.institute_id)});
-                callback(null, 200, documents);
-            } else if(req.query.course_id){
-                documents = _.where(documents, {course_id: Number(req.query.course_id)});
-                callback(null, 200, documents);
-            } else {
-                callback(null, 200, documents);
-            }
         }
     ], function(err, code, result) {
         if(err){
