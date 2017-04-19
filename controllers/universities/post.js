@@ -38,7 +38,7 @@ exports.request = function(req, res) {
                     if(err){
                         res.status(401).send("Authorization failed!");
                     } else {
-                        if(decoded.member){
+                        if(decoded.member && decoded.admin){
                             callback(null, client, done);
                         } else {
                             res.status(401).send("Authorization failed!");
