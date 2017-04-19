@@ -10,6 +10,9 @@ app.factory('$userService', function($http, $log, config, $authenticationService
         get: function(){
             return users;
         },
+        getByStatus: function(status){
+            return _.where(users, { blocked: status });
+        },
         set: function(data){
             users = data;
         },

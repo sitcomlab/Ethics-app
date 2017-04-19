@@ -27,6 +27,20 @@ app.controller("universityDetailsController", function($scope, $rootScope, $rout
     $universityService.retrieve($routeParams.university_id)
     .then(function onSuccess(response) {
         $scope.university = response.data;
+
+        $scope.$parent.loading = { status: true, message: "Loading related institutes" };
+
+        // Load institutes
+        $instituteService.list()
+        .then(function onSuccess(response) {
+            $instituteService.set(response.data);
+            $scope.institutes = $instituteService.getByStatus(false);
+
+            $scope.$parent.loading = { status: false, message: "" };
+        })
+        .catch(function onError(response) {
+            $window.alert(response.data);
+        });
         $scope.$parent.loading = { status: false, message: "" };
     })
     .catch(function onError(response) {

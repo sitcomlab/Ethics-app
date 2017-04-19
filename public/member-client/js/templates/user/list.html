@@ -29,8 +29,12 @@
                 <br>
             </div>
         </div>
-        <div class="list-group" ng-if="users && users.length>0">
-            <a href="" ng-click="redirect('/users/' + user.user_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="user in users | filter: searchText | orderBy: ['university_name', 'institute_name', 'last_name', 'first_name']">
+
+        <h6 class="text-muted">
+            {{ 'USERS' | translate }}
+        </h6>
+        <div class="list-group" ng-if="unblocked_users && unblocked_users.length>0">
+            <a href="" ng-click="redirect('/users/' + user.user_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="user in unblocked_users | filter: searchText | orderBy: ['university_name', 'institute_name', 'last_name', 'first_name']">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
                         <i class="fa fa-user-o" aria-hidden="true"></i>
@@ -47,7 +51,37 @@
                 </div>
             </a>
         </div>
-        <div class="list-group" ng-if="!users || users.length==0">
+        <div class="list-group" ng-if="!unblocked_users || unblocked_users.length==0">
+            <div class="list-group-item flex-column align-items-center">
+                <div class="d-flex">
+                    - {{ 'NONE' | translate }} -
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <h6 class="text-muted">
+            {{ 'BLOCKED_USERS' | translate }}
+        </h6>
+        <div class="list-group" ng-if="blocked_users && blocked_users.length>0">
+            <a href="" ng-click="redirect('/users/' + user.user_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="user in blocked_users | filter: searchText | orderBy: ['university_name', 'institute_name', 'last_name', 'first_name']">
+                <div class="d-flex w-100 justify-content-between">
+                    <div>
+                        <i class="fa fa-user-o" aria-hidden="true"></i>
+                        &nbsp;&nbsp;
+                        <b><span ng-if="user.title">{{user.title}}&nbsp;</span>{{user.first_name}} {{user.last_name}}</b>
+                        &nbsp;
+                        <span class="text-muted" ng-if="user.institute_name">
+                            <small>{{user.institute_name}}&nbsp;|</small>
+                        </span>
+                        <span class="text-muted" ng-if="user.university_name">
+                            <small>{{user.university_name}}</small>
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="list-group" ng-if="!blocked_users || blocked_users.length==0">
             <div class="list-group-item flex-column align-items-center">
                 <div class="d-flex">
                     - {{ 'NONE' | translate }} -

@@ -4,10 +4,10 @@
         <div class="card-header" style="font-size: 20pt;">
             <div class="row">
                 <div class="col">
-                    {{ 'NEW_COURSE' | translate }}
+                    {{ 'EDIT_COURSE' | translate }}
                 </div>
                 <div class="col right">
-                    <button class="btn btn-secondary" role="button" ng-click="redirect('/courses')">
+                    <button class="btn btn-secondary" role="button" ng-click="redirect('/courses/' + course.course_id)">
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -50,7 +50,7 @@
                     aria-describedby="inputYear"
                     required
                     autofocus
-                    min="2000">
+                    min="2000"
                     max="2100">
                 <span ng-show="createCourseForm.year.$error.required && !createCourseForm.year.$pristine" class="text-danger">
                     <small>

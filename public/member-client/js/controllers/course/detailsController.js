@@ -22,7 +22,8 @@ app.controller("courseDetailsController", function($scope, $rootScope, $routePar
         INIT
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading course" };
-
+    $scope.authenticated_member = $authenticationService.get();
+    
     // Load course
     $courseService.retrieve($routeParams.course_id)
     .then(function onSuccess(response) {

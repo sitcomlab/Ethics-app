@@ -38,7 +38,7 @@
             {{ 'CURRENT_MEMBERS' | translate }}
         </h6>
         <div class="list-group" ng-if="current_members && current_members.length>0">
-            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in current_members | filter: searchText | orderBy: ['admin', 'university_name', 'institute_name', 'working_group_name', 'last_name', 'first_name']">
+            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-class="{ 'list-group-item-info': member.member_id == authenticated_member.member_id }" ng-repeat="member in current_members | filter: searchText | orderBy: ['admin', 'university_name', 'institute_name', 'working_group_name', 'last_name', 'first_name']">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
                         <span ng-if="member.admin">
