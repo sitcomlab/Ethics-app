@@ -69,13 +69,6 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, group, callback) {
-            if(document.status === 0 || document.status === 1){
-                callback(null, client, done, document);
-            } else {
-                callback(new Error("Research Group cannot be deleted", 423));
-            }
-        },
-        function(client, done, group, callback) {
             // Database query
             client.query(query_delete_group, [
                 req.params.group_id

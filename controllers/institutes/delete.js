@@ -69,13 +69,6 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, institute, callback) {
-            if(document.status === 0 || document.status === 1){
-                callback(null, client, done, document);
-            } else {
-                callback(new Error("Institute cannot be deleted", 423));
-            }
-        },
-        function(client, done, institute, callback) {
             // Database query
             client.query(query_delete_institute, [
                 req.params.institute_id

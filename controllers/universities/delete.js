@@ -69,13 +69,6 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, university, callback) {
-            if(document.status === 0 || document.status === 1){
-                callback(null, client, done, document);
-            } else {
-                callback(new Error("University cannot be deleted", 423));
-            }
-        },
-        function(client, done, university, callback) {
             // Database query
             client.query(query_delete_university, [
                 req.params.university_id
