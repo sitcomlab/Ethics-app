@@ -27,7 +27,13 @@ app.controller("instituteListController", function($scope, $rootScope, $translat
     $instituteService.list()
     .then(function onSuccess(response) {
         $instituteService.set(response.data);
-        $scope.institutes = $instituteService.get();
+
+        // Current institutes
+        $scope.current_institutes = $instituteService.getByStatus(false);
+
+        // Former institutes
+        $scope.former_institutes = $instituteService.getByStatus(true);
+
         $scope.$parent.loading = { status: false, message: "" };
     })
     .catch(function onError(response) {

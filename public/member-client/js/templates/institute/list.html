@@ -2,9 +2,9 @@
 <div class="card">
     <div class="card-header" style="font-size: 20pt;">
         <div class="row">
-            <div class="col">{{ 'USERS' | translate }}</div>
+            <div class="col">{{ 'INSTITUTES' | translate }}</div>
             <div class="col right">
-                <button class="btn btn-secondary" role="button" ng-click="redirect('/documents')">
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/')">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
             </div>
@@ -25,29 +25,56 @@
                         </a>
                     </span>
                 </div>
-                <small class="form-text text-muted">{{ 'SEARCH_FOR_USERS' | translate }}</small>
+                <small class="form-text text-muted">{{ 'SEARCH_FOR_INSTITUTES' | translate }}</small>
                 <br>
             </div>
         </div>
-        <div class="list-group" ng-if="users && users.length>0">
-            <a href="" ng-click="redirect('/users/' + user.user_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="user in users | filter: searchText | orderBy: ['university_name', 'institute_name', 'last_name', 'first_name']">
+        <h6 class="text-muted">
+            {{ 'CURRENT_INSTITUTES' | translate }}
+        </h6>
+        <div class="list-group" ng-if="current_institutes && current_institutes.length>0">
+            <a href="" ng-click="redirect('/institutes/' + institute.institute_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="institute in current_institutes | filter: searchText | orderBy: ['institute_name']">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
-                        <i class="fa fa-user-o" aria-hidden="true"></i>
+                        <i class="fa fa-building" aria-hidden="true"></i>
                         &nbsp;&nbsp;
-                        <b><span ng-if="user.title">{{user.title}}&nbsp;</span>{{user.first_name}} {{user.last_name}}</b>
+                        <b>{{institute.institute_name}}</b>
                         &nbsp;
-                        <span class="text-muted" ng-if="user.institute_name">
-                            <small>{{user.institute_name}}&nbsp;|</small>
-                        </span>
-                        <span class="text-muted" ng-if="user.university_name">
-                            <small>{{user.university_name}}</small>
+                        <span class="text-muted" ng-if="institute.university_name">
+                            <small>{{institute.university_name}}</small>
                         </span>
                     </div>
                 </div>
             </a>
         </div>
-        <div class="list-group" ng-if="!users || users.length==0">
+        <div class="list-group" ng-if="!current_institutes || current_institutes.length==0">
+            <div class="list-group-item flex-column align-items-center">
+                <div class="d-flex">
+                    - {{ 'NONE' | translate }} -
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <h6 class="text-muted">
+            {{ 'FORMER_INSTITUTES' | translate }}
+        </h6>
+        <div class="list-group" ng-if="former_institutes && former_institutes.length>0">
+            <a href="" ng-click="redirect('/institutes/' + institute.institute_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="institute in former_institutes | filter: searchText | orderBy: ['institute_name']">
+                <div class="d-flex w-100 justify-content-between">
+                    <div>
+                        <i class="fa fa-building" aria-hidden="true"></i>
+                        &nbsp;&nbsp;
+                        <b>{{institute.institute_name}}</b>
+                        &nbsp;
+                        <span class="text-muted" ng-if="institute.university_name">
+                            <small>{{institute.university_name}}</small>
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="list-group" ng-if="!former_institutes || former_institutes.length==0">
             <div class="list-group-item flex-column align-items-center">
                 <div class="d-flex">
                     - {{ 'NONE' | translate }} -
