@@ -119,8 +119,6 @@ exports.request = function(req, res) {
                     query = query_list_documents_with_user;
                 }
             }
-            console.log(params);
-
             callback(null, client, done, query, params);
         },
         function(client, done, query, params, callback) {

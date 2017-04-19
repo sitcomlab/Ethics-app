@@ -59,9 +59,9 @@ exports.request = function(req, res) {
                 if (err) {
                     callback(err, 500);
                 } else {
-                    // Check if group exists
+                    // Check if Working group exists
                     if (result.rows.length === 0) {
-                        callback(new Error("Research Group not found"), 404);
+                        callback(new Error("Working group not found"), 404);
                     } else {
                         callback(null, client, done, result.rows[0]);
                     }
