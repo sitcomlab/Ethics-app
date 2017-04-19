@@ -5,16 +5,23 @@ var app = angular.module("documentsService", []);
 app.factory('$documentsService', function($http, $log, config, $authenticationService) {
 
     var documents;
+    var filter = {
+        document_status: "3",
+        course_id: null
+    };
 
     return {
         get: function() {
             return documents;
         },
-        getByUser: function() { // ALTERNATIVE
-            return _.where(documents, { user_id: user_id });
+        getFilter: function(){
+            return filter;
         },
         set: function(data) {
             documents = data;
+        },
+        setFilter: function(data) {
+            filter = data;
         },
         list: function(filter) {
             var query = "";

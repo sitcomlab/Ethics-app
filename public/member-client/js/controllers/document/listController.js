@@ -47,6 +47,7 @@ app.controller("documentListController", function($scope, $rootScope, $translate
      */
     $scope.filterDocuments = function(){
         $documentsService.set();
+        $documentsService.setFilter($scope.filter);
         $scope.documents = $documentsService.get();
         $scope.load();
     };
@@ -58,10 +59,7 @@ app.controller("documentListController", function($scope, $rootScope, $translate
     $scope.authenticated_member = $authenticationService.get();
 
     // Filter all documents, which need to be reviewed
-    $scope.filter = {
-        document_status: "3",
-        course_id: null
-    };
+    $scope.filter = $documentsService.getFilter();
 
     // Load courses
     $courseService.list()
