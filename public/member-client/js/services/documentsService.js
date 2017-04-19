@@ -6,8 +6,7 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
 
     var documents;
     var filter = {
-        document_status: "3",
-        course_id: null
+        document_status: "3"
     };
 
     return {
