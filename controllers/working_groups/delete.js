@@ -53,7 +53,7 @@ exports.request = function(req, res) {
         function(client, done, callback) {
             // Database query
             client.query(query_get_group, [
-                req.params.group_id
+                req.params.working_group_id
             ], function(err, result) {
                 done();
                 if (err) {
@@ -71,7 +71,7 @@ exports.request = function(req, res) {
         function(client, done, group, callback) {
             // Database query
             client.query(query_delete_group, [
-                req.params.group_id
+                req.params.working_group_id
             ], function(err, result) {
                 done();
                 if (err) {
