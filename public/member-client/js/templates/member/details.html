@@ -7,7 +7,7 @@
             </div>
             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 right">
                 <div class="btn-group">
-                    <button class="btn btn-info" role="button" ng-click="redirect('/members/' + member.member_id + '/edit')" ng-if="authenticated_member.admin || authenticated_member.member_id == member.member_id">
+                    <button class="btn btn-info" role="button" ng-click="editMember()" ng-if="authenticated_member.admin || authenticated_member.member_id == member.member_id">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </button>
                     <button class="btn btn-danger" role="button" ng-click="redirect('/members/' + member.member_id + '/delete')" ng-if="authenticated_member.admin">

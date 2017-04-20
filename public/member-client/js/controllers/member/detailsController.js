@@ -17,11 +17,23 @@ app.controller("memberDetailsController", function($scope, $rootScope, $routePar
         $location.url(path);
     };
 
+    /**
+     * [description]
+     * @return {[type]} [description]
+     */
+    $scope.editMember = function(){
+        if($scope.authenticated_member.admin && $scope.authenticated_member.member_id !== $scope.member.member_id){
+            $scope.redirect("/members/" + $scope.member.member_id + "/edit");
+        } else {
+            $scope.redirect("/account/edit");
+        }
+    };
 
     /*************************************************
         INIT
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading committee member" };
+    $scope.authenticated_member = $authenticationService.get();
 
     // Load member
     $memberService.retrieve($routeParams.member_id)

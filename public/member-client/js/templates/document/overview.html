@@ -1506,14 +1506,14 @@
     <div class="card-footer right" ng-if="document.status == 3 || document.status == 4">
         <button class="btn btn-primary" role="button" ng-click="reviewDocument()">
             <i class="fa fa-eye" aria-hidden="true"></i>
-            &nbsp;&nbsp;
+            &nbsp;
             <span ng-if="document.status == 3">
                 {{ 'START_REVIEWING' | translate }}
             </span>
             <span ng-if="document.status == 4">
                 {{ 'OPEN_REVIEW' | translate }}
             </span>
-            &nbsp;&nbsp;
+            &nbsp;
             <i class="fa fa-angle-right" aria-hidden="true"></i>
         </button>
     </div>

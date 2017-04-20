@@ -7,6 +7,11 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
     var members;
 
     return {
+        init: function(){
+            return {
+                
+            };
+        },
         get: function(){
             return members;
         },

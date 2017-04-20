@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<div class="card">
+    <div class="card-header" style="font-size: 20pt;">
+        <div class="row">
+            <div class="col">
+                {{ 'DOCUMENT_ID' | translate }}
+            </div>
+            <div class="col right">
+                <button class="btn btn-secondary" role="button" ng-click="cancel()">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <br>
+        <div class="input-group">
+            <input type="text" class="form-control form-control-lg" ng-model="document.document_id" id="documentId" placeholder="{{ 'DOCUMENT_ID' | translate }}" autofocus readonly>
+            <span class="input-group-btn">
+                <button class="btn btn-lg btn-secondary" role="button" ng-click="copyToClipboard()">
+                    <i class="fa fa-clipboard" aria-hidden="true"></i>
+                </button>
+            </span>
+        </div>
+        <br>
+    </div>
+</div>
