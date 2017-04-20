@@ -85,7 +85,7 @@
                                     <i class="fa fa-rss-square" aria-hidden="true"></i>
                                 </span>
                                 <span class="text-danger" ng-if="!member.subscribed">
-                                    <i class="fa fa-ban" aria-hidden="true"></i>
+                                    <i class="fa fa-rss-square" aria-hidden="true"></i>
                                 </span>
                             </div>
                         </div>
@@ -101,11 +101,11 @@
                         <small>
                             <span class="text-success">
                                 <i class="fa fa-rss-square" aria-hidden="true"></i>
-                            </span> = {{ 'SUBSCRIBED' | translate }}
+                            </span> {{ 'SUBSCRIBED' | translate }}
                             &nbsp;&nbsp;|&nbsp;&nbsp;
                             <span class="text-danger">
-                                <i class="fa fa-ban" aria-hidden="true"></i>
-                            </span> = {{ 'CURRENTLY_NOT_SUBSCRIBED' | translate }}
+                                <i class="fa fa-rss-square" aria-hidden="true"></i>
+                            </span> {{ 'CURRENTLY_NOT_SUBSCRIBED' | translate }}
                         </small>
                     </div>
                 </div>

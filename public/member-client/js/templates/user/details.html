@@ -3,7 +3,8 @@
     <div class="card-header" style="font-size: 20pt;">
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-                <span ng-if="user.blocked">{{ 'BLOCKED' | translate }} </span>{{ 'USER' | translate }}</div>
+                <span ng-if="user.blocked">{{ 'BLOCKED' | translate }} </span>{{ 'USER' | translate }}
+            </div>
             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 right">
                 <div class="btn-group">
                     <button class="btn btn-info" role="button" ng-click="redirect('/users/' + user.user_id + '/edit')">
@@ -25,7 +26,7 @@
                 <div class="row">
                     <div class="col-1 right">
                         <h4 class="card-title">
-                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                            <i class="fa fa-user-o" aria-hidden="true" ng-class="{ 'text-danger': user.blocked }"></i>
                         </h4>
                     </div>
                     <div class="col">

@@ -66,13 +66,16 @@
             <a href="" ng-click="redirect('/institutes/' + institute.institute_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="institute in former_institutes | filter: searchText | orderBy: ['institute_name']">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
-                        <i class="fa fa-building" aria-hidden="true"></i>
+                        <i class="fa fa-building-o" aria-hidden="true"></i>
                         &nbsp;&nbsp;
                         <b>{{institute.institute_name}}</b>
                         &nbsp;
                         <span class="text-muted" ng-if="institute.university_name">
                             <small>{{institute.university_name}}</small>
                         </span>
+                    </div>
+                    <div>
+                        <i class="fa fa-ban text-danger" aria-hidden="true"></i>
                     </div>
                 </div>
             </a>

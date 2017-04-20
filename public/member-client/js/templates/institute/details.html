@@ -26,7 +26,8 @@
                 <div class="row">
                     <div class="col-1 right">
                         <h4 class="card-title">
-                            <i class="fa fa-building" aria-hidden="true"></i>
+                            <i class="fa fa-building" aria-hidden="true" ng-if="!institute.former"></i>
+                            <i class="fa fa-building-o" aria-hidden="true" ng-if="institute.former"></i>
                         </h4>
                     </div>
                     <div class="col">
@@ -38,10 +39,11 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                <div class="text-muted">
-                                    {{institute.institute_name}}<br>
-                                </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+
                             </div>
                         </div>
                     </div>
@@ -52,14 +54,31 @@
                 <h6 class="text-muted">
                     {{ 'RELATED_WORKING_GROUPS' | translate }}
                 </h6>
-                <div class="list-group" ng-if="institute.working_groups && institute.working_groups.length>0">
-                    <a href="" ng-click="redirect('/working_groups/' + working_group.working_group_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="working_group in institute.working_groups | orderBy: ['working_group_name']">
-                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                <div class="list-group" ng-if="institute.current_working_groups && institute.current_working_groups.length>0">
+                    <a href="" ng-click="redirect('/working_groups/' + working_group.working_group_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="working_group in institute.current_working_groups | orderBy: ['working_group_name']">
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>
                         &nbsp;&nbsp;
                         <b>{{working_group.working_group_name}}</b>
                     </a>
                 </div>
-                <div class="list-group" ng-if="!institute.working_groups || institute.working_groups.length==0">
+                <div class="list-group" ng-if="!institute.current_working_groups || institute.current_working_groups.length==0">
+                    <div class="list-group-item middle">
+                        - {{ 'NONE' | translate }} -
+                    </div>
+                </div>
+                <br>
+
+                <h6 class="text-muted">
+                    {{ 'RELATED_FORMER_WORKING_GROUPS' | translate }}
+                </h6>
+                <div class="list-group" ng-if="institute.former_working_groups && institute.former_working_groups.length>0">
+                    <a href="" ng-click="redirect('/working_groups/' + working_group.working_group_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="working_group in institute.former_working_groups | orderBy: ['working_group_name']">
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                        &nbsp;&nbsp;
+                        <b>{{working_group.working_group_name}}</b>
+                    </a>
+                </div>
+                <div class="list-group" ng-if="!institute.former_working_groups || institute.former_working_groups.length==0">
                     <div class="list-group-item middle">
                         - {{ 'NONE' | translate }} -
                     </div>

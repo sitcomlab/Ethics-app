@@ -57,7 +57,7 @@
                             <i class="fa fa-rss-square" aria-hidden="true"></i>
                         </span>
                         <span class="text-danger" ng-if="!member.subscribed">
-                            <i class="fa fa-ban" aria-hidden="true"></i>
+                            <i class="fa fa-rss-square" aria-hidden="true"></i>
                         </span>
                     </div>
                 </div>
@@ -73,11 +73,11 @@
                 <small>
                     <span class="text-success">
                         <i class="fa fa-rss-square" aria-hidden="true"></i>
-                    </span> = {{ 'SUBSCRIBED' | translate }}
+                    </span> {{ 'SUBSCRIBED' | translate }}
                     &nbsp;&nbsp;|&nbsp;&nbsp;
                     <span class="text-danger">
-                        <i class="fa fa-ban" aria-hidden="true"></i>
-                    </span> = {{ 'CURRENTLY_NOT_SUBSCRIBED' | translate }}
+                        <i class="fa fa-rss-square" aria-hidden="true"></i>
+                    </span> {{ 'CURRENTLY_NOT_SUBSCRIBED' | translate }}
                 </small>
             </div>
         </div>
@@ -88,13 +88,20 @@
         </h6>
         <div class="list-group" ng-if="former_members && former_members.length>0">
             <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action" ng-repeat="member in former_members | filter: searchText | orderBy: ['last_name', 'first_name']">
-                <i class="fa fa-user-times" aria-hidden="true"></i>
-                &nbsp;&nbsp;
-                <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}</b>
-                &nbsp;
-                <small class="text-muted">
-                    {{member.working_group_name}} | {{member.institute_name}} | {{member.university_name}}
-                </small>
+                <div class="d-flex w-100 justify-content-between">
+                    <div>
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        &nbsp;&nbsp;
+                        <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}</b>
+                        &nbsp;
+                        <small class="text-muted">
+                            {{member.working_group_name}} | {{member.institute_name}} | {{member.university_name}}
+                        </small>
+                    </div>
+                    <div>
+                        <i class="fa fa-ban text-danger" aria-hidden="true"></i>
+                    </div>
+                </div>
             </a>
         </div>
         <div class="list-group" ng-if="!former_members || former_members.length==0">

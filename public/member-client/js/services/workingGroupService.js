@@ -10,6 +10,9 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
         get: function(){
             return working_groups;
         },
+        getByInstitute: function(institute_id){
+            return _.where(working_groups, {institute_id: institute_id});
+        },
         getByStatus: function(status){
             return _.where(working_groups, { former: status });
         },

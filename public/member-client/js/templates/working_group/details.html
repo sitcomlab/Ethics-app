@@ -25,29 +25,23 @@
                 <div class="row">
                     <div class="col-1 right">
                         <h4 class="card-title">
-                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                            <i class="fa fa-briefcase" aria-hidden="true"></i>
                         </h4>
                     </div>
                     <div class="col">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <h4 class="card-title">
-                                    {{course.course_name}}
+                                    {{working_group.working_group_name}}
                                 </h4>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <div class="text-muted">
-                                    {{course.institute_name}}<br>
-                                </div>
-                                <div class="text-muted">
-                                    {{course.university_name}}<br>
-                                </div>
+                                
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <b>{{'SEASON' | translate}}</b>: {{course.season}}<br>
-                                <b>{{'LECTURERS' | translate}}</b>: {{course.lecturer}}<br>
+
                             </div>
                         </div>
                     </div>
@@ -86,7 +80,7 @@
                                     <i class="fa fa-rss-square" aria-hidden="true"></i>
                                 </span>
                                 <span class="text-danger" ng-if="!member.subscribed">
-                                    <i class="fa fa-ban" aria-hidden="true"></i>
+                                    <i class="fa fa-rss-square" aria-hidden="true"></i>
                                 </span>
                             </div>
                         </div>
@@ -102,11 +96,11 @@
                         <small>
                             <span class="text-success">
                                 <i class="fa fa-rss-square" aria-hidden="true"></i>
-                            </span> = {{ 'SUBSCRIBED' | translate }}
+                            </span> {{ 'SUBSCRIBED' | translate }}
                             &nbsp;&nbsp;|&nbsp;&nbsp;
                             <span class="text-danger">
-                                <i class="fa fa-ban" aria-hidden="true"></i>
-                            </span> = {{ 'CURRENTLY_NOT_SUBSCRIBED' | translate }}
+                                <i class="fa fa-rss-square" aria-hidden="true"></i>
+                            </span> {{ 'CURRENTLY_NOT_SUBSCRIBED' | translate }}
                         </small>
                     </div>
                 </div>
