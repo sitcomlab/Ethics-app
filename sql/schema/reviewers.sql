@@ -9,7 +9,7 @@ CREATE TABLE Reviewers (
     updated TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
 
     -- Attributes
-    member_id INTEGER NOT NULL REFERENCES Members(member_id) ON UPDATE CASCADE ON DELETE SET NULL,
-    revision_id INTEGER NOT NULL REFERENCES Revisions(revision_id) ON UPDATE CASCADE ON DELETE SET NULL
+    member_id INTEGER REFERENCES Members(member_id) ON UPDATE CASCADE ON DELETE SET NULL,
+    revision_id INTEGER REFERENCES Revisions(revision_id) ON UPDATE CASCADE ON DELETE SET NULL
     
 );

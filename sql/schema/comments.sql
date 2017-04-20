@@ -9,7 +9,7 @@ CREATE TABLE Comments (
     updated TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
 
     -- Attributes
-    revision_id INTEGER NOT NULL REFERENCES Revisions(revision_id) ON UPDATE CASCADE ON DELETE SET NULL,
+    revision_id INTEGER NOT NULL REFERENCES Revisions(revision_id) ON UPDATE CASCADE ON DELETE CASCADE,
     published BOOLEAN NOT NULL DEFAULT false,
     general_comment TEXT DEFAULT NULL,
 
