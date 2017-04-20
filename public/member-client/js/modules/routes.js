@@ -78,6 +78,13 @@ app.config(function($routeProvider, $locationProvider, config) {
 
 
 		// Members
+		.when("/new/member", {
+			templateUrl: "js/templates/member/create.html",
+			controller: "memberCreateController",
+			resolve: {
+                factory: checkAuthentication
+            }
+		})
 		.when("/members", {
 			templateUrl: "js/templates/member/list.html",
 			controller: "memberListController",
@@ -109,6 +116,13 @@ app.config(function($routeProvider, $locationProvider, config) {
 
 
 		// Users
+		.when("/new/user", {
+			templateUrl: "js/templates/user/create.html",
+			controller: "userCreateController",
+			resolve: {
+                factory: checkAuthentication
+            }
+		})
 		.when("/users", {
 			templateUrl: "js/templates/user/list.html",
 			controller: "userListController",

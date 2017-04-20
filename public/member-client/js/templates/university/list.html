@@ -28,6 +28,13 @@
                 <small class="form-text text-muted">{{ 'SEARCH_FOR_UNIVERSITIES' | translate }}</small>
                 <br>
             </div>
+            <div class="col-12 col-sm-auto col-md-auto col-lg-auto right">
+                <a href="" class="btn btn-secondary" ng-click="redirect('/new/university')">
+                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'CREATE' | translate }}
+                </a>
+                <br>
+                <br>
+            </div>
         </div>
         <div class="list-group" ng-if="universities && universities.length>0">
             <a href="" ng-click="redirect('/universities/' + university.university_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="university in universities | filter: searchText | orderBy: ['university_name']">

@@ -71,17 +71,17 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/members') }" ng-click="redirect('/members')" ng-if="authenticated_member && !loading.status">
+                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/members') || isActive('/new/member') }" ng-click="redirect('/members')" ng-if="authenticated_member && !loading.status">
                                         {{ 'MEMBERS' | translate }}
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/users') }" ng-click="redirect('/users')" ng-if="authenticated_member && !loading.status">
+                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/users') || isActive('/new/user') }" ng-click="redirect('/users')" ng-if="authenticated_member && !loading.status">
                                         {{ 'USERS' | translate }}
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/courses') }" ng-click="redirect('/courses')" ng-if="authenticated_member && !loading.status">
+                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/courses') || isActive('/new/course') }" ng-click="redirect('/courses')" ng-if="authenticated_member && !loading.status">
                                         {{ 'COURSES' | translate }}
                                     </a>
                                 </li>
@@ -260,14 +260,14 @@
 
         <!-- Members -->
         <script src="js/controllers/member/listController.js"></script>
-        <!-- <script src="js/controllers/member/createController.js"></script> -->
+        <script src="js/controllers/member/createController.js"></script>
         <script src="js/controllers/member/detailsController.js"></script>
         <script src="js/controllers/member/editController.js"></script>
         <script src="js/controllers/member/deleteController.js"></script>
 
         <!-- Users -->
         <script src="js/controllers/user/listController.js"></script>
-        <!-- <script src="js/controllers/user/createController.js"></script> -->
+        <script src="js/controllers/user/createController.js"></script>
         <script src="js/controllers/user/detailsController.js"></script>
         <script src="js/controllers/user/editController.js"></script>
         <script src="js/controllers/user/deleteController.js"></script>

@@ -138,7 +138,7 @@
                 <b>{{ 'RESPONSIBLE_MEMBERS' | translate }}</b>
             </label>
             <div class="list-group">
-                <div class="list-group-item flex-column align-items-start" ng-repeat="member in responsible_members | orderBy: ['admin', 'university_name', 'institute_name', 'working_group_name', 'last_name', 'first_name']" ng-if="responsible_members && responsible_members.length>0">
+                <div class="list-group-item flex-column align-items-start" ng-repeat="member in responsible_members" ng-if="responsible_members && responsible_members.length>0">
                     <div class="d-flex w-100 justify-content-between">
                         <div>
                             <span ng-if="member.admin">
@@ -187,7 +187,7 @@
                                 match-class="highlight">
                             </div>
                         </div>
-                        <div class="col-xs-auto col-sm-auto col-md-auto col-lg-auto">
+                        <div class="col-2 col-xs-auto col-sm-auto col-md-auto col-lg-auto">
                             <button class="btn btn-primary" type="button" ng-click="addMember()" ng-disabled="!selectedMember.originalObject">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
