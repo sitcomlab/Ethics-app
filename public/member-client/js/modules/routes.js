@@ -181,13 +181,14 @@ app.config(function($routeProvider, $locationProvider, config) {
 			resolve: {
                 factory: checkAuthentication
             }
-		}).when("/universities/:university_id/delete", {
-			templateUrl: "js/templates/university/delete.html",
-			controller: "universityDeleteController",
-			resolve: {
+		})*/
+        .when("/universities/:university_id/delete", {
+            templateUrl: "js/templates/university/delete.html",
+            controller: "universityDeleteController",
+            resolve: {
                 factory: checkAuthentication
             }
-		})*/
+        })
 
 
 		// Institutes
@@ -218,14 +219,14 @@ app.config(function($routeProvider, $locationProvider, config) {
 			resolve: {
 				factory: checkAuthentication
 			}
-		})
+		})*/
 		.when("/institutes/:institute_id/delete", {
 			templateUrl: "js/templates/institute/delete.html",
 			controller: "instituteDeleteController",
 			resolve: {
 				factory: checkAuthentication
 			}
-		})*/
+		})
 
 
 		// Working groups
@@ -256,14 +257,14 @@ app.config(function($routeProvider, $locationProvider, config) {
 			resolve: {
 				factory: checkAuthentication
 			}
-		})
+		})*/
 		.when("/working_groups/:working_group_id/delete", {
 			templateUrl: "js/templates/working_group/delete.html",
 			controller: "workingGroupDeleteController",
 			resolve: {
 				factory: checkAuthentication
 			}
-		})*/
+		})
 
 
 		// Courses
