@@ -9,7 +9,7 @@ SELECT
             ELSE CONCAT('ST', course.year)
         END AS season,
     course.lecturer,
-    course.institute_id,
+    institute.institute_id,
     institute.institute_name,
     university.university_id,
     university.university_name

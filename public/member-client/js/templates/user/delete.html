@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<div class="card">
+    <div class="card-header" style="font-size: 20pt;">
+        <div class="row">
+            <div class="col-9">
+                {{ 'USER' | translate }}
+            </div>
+            <div class="col-3 right">
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/users/' + user.user_id)">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <h6>
+            {{ 'DELETE_THIS_USER' | translate }} <kbd>{{user.fullname}}</kbd>?
+        </h6>
+        <br>
+        <label>
+            <b>{{ 'USER_NAME' | translate }}*</b>
+        </label>
+        <input type="text" class="form-control" ng-model="input" id="memberFullName" placeholder="{{ 'USER_NAME' | translate }}" autofocus>
+        <small class="form-text text-muted">{{ 'PLEASE_TYPE_IN_THE_USER_NAME_TO_CONFIRM' | translate }}</small>
+    </div>
+    <div class="card-footer right">
+        <button class="btn btn-danger" role="button" ng-click="delete()" ng-disabled="input != user.fullname">
+            <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'DELETE' | translate }}
+        </button>
+    </div>
+</div>

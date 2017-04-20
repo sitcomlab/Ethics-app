@@ -17,6 +17,7 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
         $location.url(path);
     };
 
+    
 
     /*************************************************
         INIT

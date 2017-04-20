@@ -36,5 +36,8 @@ FROM Documents document
     JOIN Users _user ON document.user_id = _user.user_id
     JOIN Institutes institute ON institute.institute_id = _user.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
-WHERE document.status=$1::INTEGER
+WHERE
+        _user.institute_id=$1::INTEGER
+    AND
+        document.status=$2::INTEGER
 ORDER BY document.created;

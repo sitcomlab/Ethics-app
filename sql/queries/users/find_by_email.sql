@@ -12,7 +12,4 @@ SELECT
 FROM Users _user
     JOIN Institutes institute ON institute.institute_id = _user.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
-WHERE
-        _user.email_address=$1::TEXT
-    AND
-        _user.blocked != true;
+WHERE _user.email_address=$1::TEXT;

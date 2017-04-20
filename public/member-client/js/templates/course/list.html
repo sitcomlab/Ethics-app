@@ -2,8 +2,11 @@
 <div class="card">
     <div class="card-header" style="font-size: 20pt;">
         <div class="row">
-            <div class="col">{{ 'COURSES' | translate }}</div>
-            <div class="col right">
+            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">{{ 'COURSES' | translate }}</div>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 right">
+                <button class="btn btn-primary" role="button" ng-click="redirect('/new/course')">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                </button>
                 <button class="btn btn-secondary" role="button" ng-click="redirect('/documents')">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
@@ -28,14 +31,9 @@
                 <small class="form-text text-muted">{{ 'SEARCH_FOR_COURSES' | translate }}</small>
                 <br>
             </div>
-            <div class="col-xs-12 right">
-                <a href="" class="btn btn-secondary" ng-click="redirect('/new/course')">
-                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'CREATE' | translate }}
-                </a>
-            </div>
         </div>
         <div class="list-group" ng-if="courses && courses.length>0">
-            <a href="" ng-click="redirect('/courses/' + course.course_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="course in courses | orderBy: ['university_name', 'institute_name', 'year', 'course_name'] | filter: searchText">
+            <a href="" ng-click="redirect('/courses/' + course.course_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="course in courses | orderBy: ['-year', 'course_name'] | filter: searchText">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
                         <i class="fa fa-graduation-cap" aria-hidden="true"></i>

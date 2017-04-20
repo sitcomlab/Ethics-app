@@ -27,7 +27,13 @@ app.controller("userListController", function($scope, $rootScope, $translate, $l
     $userService.list()
     .then(function onSuccess(response) {
         $userService.set(response.data);
-        $scope.users = $userService.get();
+
+        // Unblocked users
+        $scope.unblocked_users = $userService.getByStatus(false);
+
+        // Blocked users
+        $scope.blocked_users = $userService.getByStatus(true);
+
         $scope.$parent.loading = { status: false, message: "" };
     })
     .catch(function onError(response) {

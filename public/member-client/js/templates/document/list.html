@@ -13,7 +13,7 @@
     <div class="card-block">
         <div class="row">
             <!-- SEARCH -->
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                 <div class="input-group">
                     <span class="input-group-addon">
                         <i class="fa fa-search" aria-hidden="true"></i>
@@ -28,52 +28,8 @@
                 <small class="form-text text-muted">{{ 'SEARCH_FOR_DOCUMENT_TITLES_AND_AUTHORS' | translate }}</small>
                 <br>
             </div>
-            <!-- FILTER DOCUMENTS BY UNIVERSITY -->
-            <!--<div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
-                <select
-                    class="custom-select form-control"
-                    id="university_id"
-                    name="university_id"
-                    ng-model="filter.university_id"
-                    ng-options="university.university_id as university.university_name for university in universities | orderBy:['university_name']"
-                    ng-change="updateInstitutes()">
-                    <option value="">{{ 'NO_FILTER' | translate }}</option>
-                </select>
-                <small class="form-text text-muted">{{ 'FILTER_BY_UNIVERSITY' | translate }}</small>
-                <br>
-            </div> -->
-            <!-- FILTER DOCUMENTS BY INSTITUTE
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
-                <select
-                    class="custom-select form-control"
-                    id="institute_id"
-                    name="institute_id"
-                    ng-model="filter.institute_id"
-                    ng-options="institute.institute_id as institute.institute_name for institute in institutes | orderBy:['institute_name']"
-                    ng-change="updateCourses()"
-                    ng-disabled="filter.university_id == null">
-                    <option value="">{{ 'NO_FILTER' | translate }}</option>
-                </select>
-                <small class="form-text text-muted">{{ 'FILTER_BY_INSTITUTE' | translate }}</small>
-                <br>
-            </div> -->
-            <!-- FILTER DOCUMENTS BY COURSE -->
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <select
-                    class="custom-select form-control"
-                    id="course_id"
-                    name="course_id"
-                    ng-model="filter.course_id"
-                    ng-options="course.course_id as course.course_name for course in courses | orderBy: ['course_name']"
-                    ng-change="filterDocuments()"
-                    ng-disabled="filter.institute_id == null">
-                    <option value="">{{ 'NO_FILTER' | translate }}</option>
-                </select>
-                <small class="form-text text-muted">{{ 'FILTER_BY_COURSE' | translate }}</small>
-                <br>
-            </div>
             <!-- FILTER DOCUMENTS BY STATUS -->
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <select class="form-control custom-select" ng-model="filter.document_status" ng-change="filterDocuments()">
                     <option value="">{{ 'NO_FILTER' | translate }}</option>
                     <option value="0">(0) {{ 'INITIALISED' | translate }}</option>
@@ -97,17 +53,6 @@
                         <i class="fa fa-file-text" aria-hidden="true"></i>
                         &nbsp;&nbsp;
                         <b>{{document.document_title}}</b>
-                        <!--&nbsp;&nbsp;
-                        <small>
-                            <i class="fa fa-user-o" aria-hidden="true"></i>
-                            <b>&nbsp;<span ng-if="document.title">{{document.title}}&nbsp;</span>{{document.first_name}} {{document.last_name}}</b>&nbsp;
-                            <span class="text-muted" ng-if="document.institute_name">
-                                {{document.institute_name}}&nbsp;|
-                            </span>
-                            <span class="text-muted" ng-if="document.university_name">
-                                {{document.university_name}}
-                            </span>
-                        </small>-->
                     </div>
                     <div>
                         <span class="badge" ng-class="{'badge-default': document.status==0 || document.status==1, 'badge-success': document.status==2 || document.status==6, 'badge-primary': document.status==3, 'badge-info': document.status==4, 'badge-warning': document.status=='5', 'badge-danger': document.status==7}">

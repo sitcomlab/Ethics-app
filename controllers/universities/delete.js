@@ -39,7 +39,7 @@ exports.request = function(req, res) {
                     if(err){
                         res.status(401).send("Authorization failed!");
                     } else {
-                        if(decoded.member){
+                        if(decoded.member && decoded.admin){
                             callback(null, client, done);
                         } else {
                             res.status(401).send("Authorization failed!");
@@ -67,13 +67,6 @@ exports.request = function(req, res) {
                     }
                 }
             });
-        },
-        function(client, done, university, callback) {
-            if(document.status === 0 || document.status === 1){
-                callback(null, client, done, document);
-            } else {
-                callback(new Error("University cannot be deleted", 423));
-            }
         },
         function(client, done, university, callback) {
             // Database query

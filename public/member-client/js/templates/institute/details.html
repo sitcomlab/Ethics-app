@@ -2,9 +2,19 @@
 <div class="card">
     <div class="card-header" style="font-size: 20pt;">
         <div class="row">
-            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"><span ng-if="member.former">{{ 'FORMER' | translate }} </span>{{ 'COMMITTEE_MEMBER' | translate }}</div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right">
-                <button class="btn btn-secondary" role="button" ng-click="redirect('/members')">
+            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+                <span ng-if="institute.former">{{ 'FORMER' | translate }} </span>{{ 'INSTITUTE' | translate }}
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 right">
+                <div class="btn-group">
+                    <button class="btn btn-info" role="button" ng-click="redirect('/institutes/' + insititute.insititute_id + '/edit')">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-danger" role="button" ng-click="redirect('/institutes/' + insititute.insititute_id + '/delete')">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/institutes')">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
             </div>
@@ -16,63 +26,42 @@
                 <div class="row">
                     <div class="col-1 right">
                         <h4 class="card-title">
-                            <span ng-if="member.admin">
-                                <i class="fa fa-user-secret" aria-hidden="true"></i>
-                            </span>
-                            <span ng-if="!member.admin">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                            </span>
+                            <i class="fa fa-building" aria-hidden="true"></i>
                         </h4>
                     </div>
                     <div class="col">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <h4 class="card-title">
-                                    <span ng-if="member.title">{{member.title}} </span>{{member.first_name}} {{member.last_name}}
+                                    {{institute.institute_name}}
                                 </h4>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <div class="text-muted" ng-if="member.working_group_name">
-                                    <b>{{member.working_group_name}}</b><br>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="text-muted">
+                                    {{institute.institute_name}}<br>
                                 </div>
-                                <div class="text-muted" ng-if="member.institute_name">
-                                    {{member.institute_name}}<br>
-                                </div>
-                                <div class="text-muted" ng-if="member.university_name">
-                                    {{member.university_name}}<br>
-                                </div>
-                                <br>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <span ng-if="member.office_phone_number">
-                                    <i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp;&nbsp;
-                                    <a href="tel:{{member.office_phone_number}}">{{member.office_phone_number}}</a>
-                                    <br>
-                                </span>
-                                <span ng-if="member.office_email_address">
-                                    <i class="fa fa-envelope-square" aria-hidden="true"></i>&nbsp;&nbsp;
-                                    <a href="mailto:{{member.office_email_address}}">
-                                        {{member.office_email_address}}
-                                    </a>
-                                    <br>
-                                </span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <b>{{ 'OFFICE' | translate }}</b>: {{member.office_room_number}}
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <span class="text-success" ng-if="member.subscribed">
-                                    <i class="fa fa-rss-square" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SUBSCRIBED' | translate }}
-                                </span>
-                                <span class="text-danger" ng-if="!member.subscribed">
-                                    <i class="fa fa-ban" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'CURRENTLY_NOT_SUBSCRIBED' | translate }}
-                                </span>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+
+                <h6 class="text-muted">
+                    {{ 'RELATED_WORKING_GROUPS' | translate }}
+                </h6>
+                <div class="list-group" ng-if="institute.working_groups && institute.working_groups.length>0">
+                    <a href="" ng-click="redirect('/working_groups/' + working_group.working_group_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="working_group in institute.working_groups | orderBy: ['working_group_name']">
+                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                        &nbsp;&nbsp;
+                        <b>{{working_group.working_group_name}}</b>
+                    </a>
+                </div>
+                <div class="list-group" ng-if="!institute.working_groups || institute.working_groups.length==0">
+                    <div class="list-group-item middle">
+                        - {{ 'NONE' | translate }} -
                     </div>
                 </div>
             </div>

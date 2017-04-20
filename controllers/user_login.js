@@ -68,10 +68,19 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, user, callback){
+            // Check if user has been blocked
+            if(user.blocked){
+                callback(new Error("Your user account has been blocked"), 403);
+            } else {
+                callback(null, client, done, user);
+            }
+        },
+        function(client, done, user, callback){
             // Create payload
             payload = {
                 iss: server_url,
                 sub: 'Login by document-ID',
+                user_id: user.user_id,
                 title: user.title,
                 first_name: user.first_name,
                 last_name: user.last_name,

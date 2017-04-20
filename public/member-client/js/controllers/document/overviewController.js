@@ -147,15 +147,12 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
      * @return {[type]} [description]
      */
     $scope.reviewDocument = function(){
-
-        var revision = $documentService.getLatestRevision();
-        var authenticated_member = $authenticationService.get();
-
         $scope.$parent.loading = { status: true, message: "Updating reviewer" };
 
         // Update reviewer
+        var revision = $documentService.getLatestRevision();
         $reviewerService.editByRevision(revision.revision_id, {
-            member_id: authenticated_member.member_id
+            member_id: $scope.authenticated_member.member_id
         })
         .then(function onSuccess(response) {
 
@@ -203,6 +200,7 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
                                     })
                                     .catch(function onError(response) {
                                         $window.alert(response.data);
+                                        $scope.redirect("/documents");
                                     });
 
                                     // Checkout concerns
@@ -214,6 +212,7 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
                                     })
                                     .catch(function onError(response) {
                                         $window.alert(response.data);
+                                        $scope.redirect("/documents");
                                     });
 
                                     // Checkout comments
@@ -225,6 +224,7 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
                                     })
                                     .catch(function onError(response) {
                                         $window.alert(response.data);
+                                        $scope.redirect("/documents");
                                     });
 
                                     // Checkout reviewers
@@ -236,6 +236,7 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
                                     })
                                     .catch(function onError(response) {
                                         $window.alert(response.data);
+                                        $scope.redirect("/documents");
                                     });
 
                                     // Sub-promises
@@ -279,24 +280,34 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
                             })
                             .catch(function onError(response) {
                                 $window.alert(response.data);
-                                $scope.redirect("/");
+                                $scope.redirect("/documents");
                             });
                         }, 400);
                     })
                     .catch(function onError(response) {
                         $window.alert(response.data);
-                        $scope.redirect("/");
+                        $scope.redirect("/documents");
                     });
                 }, 400);
             })
             .catch(function onError(response) {
-                $scope.redirect("/documents/" + document.document_id);
+                $scope.redirect("/documents");
             });
         })
         .catch(function onError(response) {
-            $scope.redirect("/documents/" + document.document_id);
+            $scope.redirect("/documents");
         });
     };
+
+
+    /*************************************************
+        EVENTS
+     *************************************************/
+    $scope.$on("$destroy", function() {
+        // Reset navbar
+        delete $scope.document;
+        delete $scope.$parent.document;
+    });
 
 
     /*************************************************
@@ -305,6 +316,9 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
     $scope.$parent.loading = { status: true, message: "Loading document overview" };
     $scope.document = $documentService.get();
     $scope.authenticated_member = $authenticationService.get();
+
+    // Update navbar
+    $scope.$parent.document = $documentService.get();
 
     // Show/hide comments and history
     $scope.status = {
@@ -348,4 +362,5 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
     };
 
     $scope.$parent.loading = { status: false, message: "" };
+
 });

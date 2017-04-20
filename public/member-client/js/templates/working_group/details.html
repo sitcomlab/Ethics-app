@@ -2,9 +2,18 @@
 <div class="card">
     <div class="card-header" style="font-size: 20pt;">
         <div class="row">
-            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"><span ng-if="member.former">{{ 'FORMER' | translate }} </span>{{ 'COMMITTEE_MEMBER' | translate }}</div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right">
-                <button class="btn btn-secondary" role="button" ng-click="redirect('/members')">
+            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+                <span ng-if="working_group.former">{{ 'FORMER' | translate }} </span>{{ 'WORKING_GROUP' | translate }}</div>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 right">
+                <div class="btn-group">
+                    <button class="btn btn-info" role="button" ng-click="redirect('/working_groups/' + working_group.working_group_id + '/edit')">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-danger" role="button" ng-click="redirect('/working_groups/' + working_group.working_group_id + '/delete')">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/working_groups')">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
             </div>
@@ -16,63 +25,89 @@
                 <div class="row">
                     <div class="col-1 right">
                         <h4 class="card-title">
-                            <span ng-if="member.admin">
-                                <i class="fa fa-user-secret" aria-hidden="true"></i>
-                            </span>
-                            <span ng-if="!member.admin">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                            </span>
+                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                         </h4>
                     </div>
                     <div class="col">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <h4 class="card-title">
-                                    <span ng-if="member.title">{{member.title}} </span>{{member.first_name}} {{member.last_name}}
+                                    {{course.course_name}}
                                 </h4>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <div class="text-muted" ng-if="member.working_group_name">
-                                    <b>{{member.working_group_name}}</b><br>
+                                <div class="text-muted">
+                                    {{course.institute_name}}<br>
                                 </div>
-                                <div class="text-muted" ng-if="member.institute_name">
-                                    {{member.institute_name}}<br>
+                                <div class="text-muted">
+                                    {{course.university_name}}<br>
                                 </div>
-                                <div class="text-muted" ng-if="member.university_name">
-                                    {{member.university_name}}<br>
-                                </div>
-                                <br>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <span ng-if="member.office_phone_number">
-                                    <i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp;&nbsp;
-                                    <a href="tel:{{member.office_phone_number}}">{{member.office_phone_number}}</a>
-                                    <br>
-                                </span>
-                                <span ng-if="member.office_email_address">
-                                    <i class="fa fa-envelope-square" aria-hidden="true"></i>&nbsp;&nbsp;
-                                    <a href="mailto:{{member.office_email_address}}">
-                                        {{member.office_email_address}}
-                                    </a>
-                                    <br>
-                                </span>
+                                <b>{{'SEASON' | translate}}</b>: {{course.season}}<br>
+                                <b>{{'LECTURERS' | translate}}</b>: {{course.lecturer}}<br>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                <b>{{ 'OFFICE' | translate }}</b>: {{member.office_room_number}}
+                    </div>
+                </div>
+                <br>
+                <br>
+
+                <h6 class="text-muted">
+                    {{ 'RELATED_MEMBERS' | translate }}
+                </h6>
+                <div class="list-group" ng-if="course.members && course.members.length>0">
+                    <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in course.members | orderBy: ['admin', 'university_name', 'institute_name', 'working_group_name', 'last_name', 'first_name']">
+                        <div class="d-flex w-100 justify-content-between">
+                            <div>
+                                <span ng-if="member.admin">
+                                    <i class="fa fa-user-secret" aria-hidden="true"></i>
+                                </span>
+                                <span ng-if="!member.admin">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </span>
+                                &nbsp;&nbsp;
+                                <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}</b>
+                                &nbsp;
+                                <span class="text-muted" ng-if="member.working_group_name">
+                                    <small>{{member.working_group_name}}&nbsp;|</small>
+                                </span>
+                                <span class="text-muted" ng-if="member.institute_name">
+                                    <small>{{member.institute_name}}&nbsp;|</small>
+                                </span>
+                                <span class="text-muted" ng-if="member.university_name">
+                                    <small>{{member.university_name}}</small>
+                                </span>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div>
                                 <span class="text-success" ng-if="member.subscribed">
-                                    <i class="fa fa-rss-square" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SUBSCRIBED' | translate }}
+                                    <i class="fa fa-rss-square" aria-hidden="true"></i>
                                 </span>
                                 <span class="text-danger" ng-if="!member.subscribed">
-                                    <i class="fa fa-ban" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'CURRENTLY_NOT_SUBSCRIBED' | translate }}
+                                    <i class="fa fa-ban" aria-hidden="true"></i>
                                 </span>
                             </div>
                         </div>
+                    </a>
+                </div>
+                <div class="list-group" ng-if="!course.members || course.members.length==0">
+                    <div class="list-group-item middle">
+                        - {{ 'NONE' | translate }} -
+                    </div>
+                </div>
+                <div class="row" ng-if="course.members && course.members.length>0">
+                    <div class="col text-muted right">
+                        <small>
+                            <span class="text-success">
+                                <i class="fa fa-rss-square" aria-hidden="true"></i>
+                            </span> = {{ 'SUBSCRIBED' | translate }}
+                            &nbsp;&nbsp;|&nbsp;&nbsp;
+                            <span class="text-danger">
+                                <i class="fa fa-ban" aria-hidden="true"></i>
+                            </span> = {{ 'CURRENTLY_NOT_SUBSCRIBED' | translate }}
+                        </small>
                     </div>
                 </div>
             </div>

@@ -21,9 +21,9 @@ app.controller("workingGroupDetailsController", function($scope, $rootScope, $ro
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading research group" };
+    $scope.$parent.loading = { status: true, message: "Loading working group" };
 
-    // Load research group
+    // Load working group
     $workingGroupService.retrieve($routeParams.working_group_id)
     .then(function onSuccess(response) {
         $scope.working_group = response.data;

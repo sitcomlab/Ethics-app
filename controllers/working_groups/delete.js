@@ -39,7 +39,7 @@ exports.request = function(req, res) {
                     if(err){
                         res.status(401).send("Authorization failed!");
                     } else {
-                        if(decoded.member){
+                        if(decoded.member && decoded.admin){
                             callback(null, client, done);
                         } else {
                             res.status(401).send("Authorization failed!");
@@ -59,21 +59,14 @@ exports.request = function(req, res) {
                 if (err) {
                     callback(err, 500);
                 } else {
-                    // Check if group exists
+                    // Check if Working group exists
                     if (result.rows.length === 0) {
-                        callback(new Error("Research Group not found"), 404);
+                        callback(new Error("Working group not found"), 404);
                     } else {
                         callback(null, client, done, result.rows[0]);
                     }
                 }
             });
-        },
-        function(client, done, group, callback) {
-            if(document.status === 0 || document.status === 1){
-                callback(null, client, done, document);
-            } else {
-                callback(new Error("Research Group cannot be deleted", 423));
-            }
         },
         function(client, done, group, callback) {
             // Database query

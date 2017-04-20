@@ -39,7 +39,7 @@ exports.request = function(req, res) {
                     if(err){
                         res.status(401).send("Authorization failed!");
                     } else {
-                        if(decoded.member){
+                        if(decoded.member && decoded.admin){
                             callback(null, client, done);
                         } else {
                             res.status(401).send("Authorization failed!");
@@ -59,9 +59,9 @@ exports.request = function(req, res) {
                 if (err) {
                     callback(err, 500);
                 } else {
-                    // Check if Description exists
+                    // Check if Working group exists
                     if (result.rows.length === 0) {
-                        callback(new Error("Research Group not found"), 404);
+                        callback(new Error("Working group not found"), 404);
                     } else {
                         callback(null, client, done);
                     }

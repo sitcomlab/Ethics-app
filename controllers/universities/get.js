@@ -26,10 +26,6 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            // TODO: Implement Authorization for members
-            callback(null, client, done);
-        },
-        function(client, done, callback) {
             // Database query
             client.query(query_get_university, [
                 req.params.university_id

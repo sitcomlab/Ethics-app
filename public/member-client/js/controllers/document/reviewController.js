@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document review controller
-app.controller("documentReviewController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $q, $timeout, $authenticationService, $documentService, $reviewService, $commentService) {
+app.controller("documentReviewController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $q, $timeout, $authenticationService, $documentService, $commentService) {
 
     /*************************************************
         FUNCTIONS
@@ -154,11 +154,20 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
         .then(function onSuccess(response) {
             $scope.$parent.loading = { status: false, message: "" };
 
+            // Reset navbar
+            $scope.$parent.document = false;
+
             // Redirect
             $scope.redirect("/documents/" + $scope.document.document_id);
         })
         .catch(function onError(response) {
             $window.alert(response.data);
+
+            // Reset navbar
+            $scope.$parent.document = false;
+
+            // Redirect
+            $scope.redirect("/documents");
         });
     };
 
@@ -190,23 +199,48 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
                 })
                 .catch(function onError(response) {
                     $window.alert(response.data);
+
+                    // Reset navbar
+                    $scope.$parent.document = false;
+
+                    // Redirect
+                    $scope.redirect("/documents");
                 });
             })
             .catch(function onError(response) {
                 $window.alert(response.data);
+
+                // Reset navbar
+                $scope.$parent.document = false;
+
+                // Redirect
+                $scope.redirect("/documents");
             });
         }
     };
+
+
+    /*************************************************
+        EVENTS
+     *************************************************/
+    $scope.$on("$destroy", function() {
+        // Reset navbar
+        delete $scope.document;
+        delete $scope.$parent.document;
+    });
+
 
     /*************************************************
         INIT
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading review" };
-    $scope.$parent.review = true;
     $scope.review_status = null;
-    $scope.document = $documentService.get();
     $scope.authenticated_member = $authenticationService.get();
+    $scope.document = $documentService.get();
     $scope.latest_revision = $documentService.getLatestRevision();
+
+    // Update navbar
+    $scope.$parent.document = $documentService.get();
 
     // Show/hide comments and history
     $scope.status = {

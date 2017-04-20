@@ -23,6 +23,12 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading document" };
 
+    // Reset
+    $documentService.set();
+
+    // Reset navbar
+    $scope.$parent.document = false;
+
     $timeout(function(){
         // Load document
         $documentService.retrieve($routeParams.document_id)
@@ -58,6 +64,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                         })
                         .catch(function onError(response) {
                             $window.alert(response.data);
+                            $scope.redirect("/documents");
                         });
 
                         // Checkout concerns
@@ -69,6 +76,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                         })
                         .catch(function onError(response) {
                             $window.alert(response.data);
+                            $scope.redirect("/documents");
                         });
 
                         // Checkout comments
@@ -80,6 +88,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                         })
                         .catch(function onError(response) {
                             $window.alert(response.data);
+                            $scope.redirect("/documents");
                         });
 
                         // Checkout reviewers
@@ -91,6 +100,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                         })
                         .catch(function onError(response) {
                             $window.alert(response.data);
+                            $scope.redirect("/documents");
                         });
 
                         // Sub-promises
@@ -122,25 +132,22 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
 
                     // Start parallel requests for each revision
                     $q.all(revision_promises).then(function(){
-
-                        // Update navbar
-                        $scope.$parent.document = $documentService.get();
                         $scope.$parent.loading = { status: false, message: "" };
 
                         // Redirect
                         $scope.redirect("/documents/" + $documentService.getId() + "/overview");
-                        
+
                     });
                 })
                 .catch(function onError(response) {
                     $window.alert(response.data);
-                    $scope.redirect("/");
+                    $scope.redirect("/documents");
                 });
             }, 400);
         })
         .catch(function onError(response) {
             $window.alert(response.data);
-            $scope.redirect("/");
+            $scope.redirect("/documents");
         });
     }, 400);
 

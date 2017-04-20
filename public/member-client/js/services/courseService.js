@@ -26,7 +26,11 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
             courses = data;
         },
         list: function() {
-            return $http.get(config.apiURL + "/courses");
+            return $http.get(config.apiURL + "/courses", {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
         },
         create: function(data){
             return $http.post(config.apiURL + "/courses", data, {

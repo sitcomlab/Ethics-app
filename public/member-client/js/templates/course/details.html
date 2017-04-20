@@ -2,16 +2,19 @@
 <div class="card">
     <div class="card-header" style="font-size: 20pt;">
         <div class="row">
-            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">{{ 'COURSE' | translate }}</div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right">
+            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">{{ 'COURSE' | translate }}</div>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 right">
                 <div class="btn-group">
+                    <button class="btn btn-info" role="button" ng-click="redirect('/courses/' + course.course_id + '/edit')">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
                     <button class="btn btn-danger" role="button" ng-click="redirect('/courses/' + course.course_id + '/delete')">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
-                    <button class="btn btn-secondary" role="button" ng-click="redirect('/courses')">
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                    </button>
                 </div>
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/courses')">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -55,7 +58,7 @@
                     {{ 'RESPONSIBLE_MEMBERS' | translate }}
                 </h6>
                 <div class="list-group" ng-if="course.members && course.members.length>0">
-                    <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in course.members | orderBy: ['admin', 'university_name', 'institute_name', 'working_group_name', 'last_name', 'first_name']">
+                    <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-style="member.member_id == authenticated_member.member_id && {'background-color': '#f7f7f9'}" ng-repeat="member in course.members | orderBy: ['last_name', 'first_name']">
                         <div class="d-flex w-100 justify-content-between">
                             <div>
                                 <span ng-if="member.admin">

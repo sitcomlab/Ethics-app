@@ -2,8 +2,11 @@
 <div class="card">
     <div class="card-header" style="font-size: 20pt;">
         <div class="row">
-            <div class="col">{{ 'COMMITTEE' | translate }}</div>
-            <div class="col right">
+            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">{{ 'COMMITTEE' | translate }} {{ '_MEMBERS' | translate }}</div>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 right">
+                <button class="btn btn-primary" role="button" ng-click="redirect('/new/member')">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                </button>
                 <button class="btn btn-secondary" role="button" ng-click="redirect('/documents')">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
@@ -28,17 +31,12 @@
                 <small class="form-text text-muted">{{ 'SEARCH_FOR_MEMBERS' | translate }}</small>
                 <br>
             </div>
-            <div class="col-xs-12 right" ng-if="authenticated_member.admin">
-                <a href="" class="btn btn-secondary" ng-click="redirect('/new/member')">
-                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'CREATE' | translate }}
-                </a>
-            </div>
         </div>
         <h6 class="text-muted">
-            {{ 'CURRENT_MEMBERS' | translate }}
+            {{ 'MEMBERS' | translate }}
         </h6>
         <div class="list-group" ng-if="current_members && current_members.length>0">
-            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in current_members | filter: searchText | orderBy: ['admin', 'university_name', 'institute_name', 'working_group_name', 'last_name', 'first_name']">
+            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-style="member.member_id == authenticated_member.member_id && {'background-color': '#f7f7f9'}" ng-repeat="member in current_members | filter: searchText | orderBy: ['last_name', 'first_name']">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
                         <span ng-if="member.admin">
@@ -50,15 +48,9 @@
                         &nbsp;&nbsp;
                         <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}</b>
                         &nbsp;
-                        <span class="text-muted" ng-if="member.working_group_name">
-                            <small>{{member.working_group_name}}&nbsp;|</small>
-                        </span>
-                        <span class="text-muted" ng-if="member.institute_name">
-                            <small>{{member.institute_name}}&nbsp;|</small>
-                        </span>
-                        <span class="text-muted" ng-if="member.university_name">
-                            <small>{{member.university_name}}</small>
-                        </span>
+                        <small class="text-muted">
+                            {{member.working_group_name}} | {{member.institute_name}} | {{member.university_name}}
+                        </small>
                     </div>
                     <div>
                         <span class="text-success" ng-if="member.subscribed">
@@ -95,19 +87,14 @@
             {{ 'FORMER_MEMBERS' | translate }}
         </h6>
         <div class="list-group" ng-if="former_members && former_members.length>0">
-            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action" ng-repeat="member in former_members | filter: searchText | orderBy: ['university_name', 'institute_name', 'working_group_name', 'last_name', 'first_name']">
+            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action" ng-repeat="member in former_members | filter: searchText | orderBy: ['last_name', 'first_name']">
                 <i class="fa fa-user-times" aria-hidden="true"></i>
                 &nbsp;&nbsp;
-                <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}} </b>
-                <span class="text-muted" ng-if="member.working_group_name">
-                    <small>&nbsp;<b>{{member.working_group_name}}</b>&nbsp;|</small>
-                </span>
-                <span class="text-muted" ng-if="member.institute_name">
-                    <small>&nbsp;{{member.institute_name}}&nbsp;|</small>
-                </span>
-                <span class="text-muted" ng-if="member.university_name">
-                    <small>&nbsp;{{member.university_name}}</small>
-                </span>
+                <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}</b>
+                &nbsp;
+                <small class="text-muted">
+                    {{member.working_group_name}} | {{member.institute_name}} | {{member.university_name}}
+                </small>
             </a>
         </div>
         <div class="list-group" ng-if="!former_members || former_members.length==0">

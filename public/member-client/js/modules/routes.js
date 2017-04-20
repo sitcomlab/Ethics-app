@@ -12,7 +12,7 @@ app.config(function($routeProvider, $locationProvider, config) {
 		/*.when("/recovery", {
 			templateUrl: "js/templates/recovery.html",
 			controller: "recoveryController"
-		})
+		})*/
 
 
 		// Account
@@ -22,7 +22,7 @@ app.config(function($routeProvider, $locationProvider, config) {
 			resolve: {
                 factory: checkAuthentication
             }
-		})*/
+		})
 
 
 		// Documents
@@ -54,7 +54,7 @@ app.config(function($routeProvider, $locationProvider, config) {
                 factory: checkAuthentication
             }
 		})
-		/*.when("/documents/:document_id/settings", {
+		.when("/documents/:document_id/settings", {
 			templateUrl: "js/templates/document/edit_settings.html",
 			controller: "documentEditSettingsController",
 			resolve: {
@@ -75,10 +75,16 @@ app.config(function($routeProvider, $locationProvider, config) {
                 factory: checkAuthentication
             }
 		})
-		*/
 
 
-		// Committee members
+		// Members
+		.when("/new/member", {
+			templateUrl: "js/templates/member/create.html",
+			controller: "memberCreateController",
+			resolve: {
+                factory: checkAuthentication
+            }
+		})
 		.when("/members", {
 			templateUrl: "js/templates/member/list.html",
 			controller: "memberListController",
@@ -93,9 +99,30 @@ app.config(function($routeProvider, $locationProvider, config) {
                 factory: checkAuthentication
             }
 		})
+		.when("/members/:member_id/edit", {
+			templateUrl: "js/templates/member/edit.html",
+			controller: "memberEditController",
+			resolve: {
+                factory: checkAuthentication
+            }
+		})
+		.when("/members/:member_id/delete", {
+			templateUrl: "js/templates/member/delete.html",
+			controller: "memberDeleteController",
+			resolve: {
+                factory: checkAuthentication
+            }
+		})
 
 
 		// Users
+		.when("/new/user", {
+			templateUrl: "js/templates/user/create.html",
+			controller: "userCreateController",
+			resolve: {
+                factory: checkAuthentication
+            }
+		})
 		.when("/users", {
 			templateUrl: "js/templates/user/list.html",
 			controller: "userListController",
@@ -110,35 +137,30 @@ app.config(function($routeProvider, $locationProvider, config) {
                 factory: checkAuthentication
             }
 		})
-		// TODO:
-		/*.when("/users/:user_id/edit", {
+		.when("/users/:user_id/edit", {
 			templateUrl: "js/templates/user/edit.html",
 			controller: "userEditController",
 			resolve: {
                 factory: checkAuthentication
             }
 		})
-		// TODO:
-		/*.when("/users/:user_id/delete", {
+		.when("/users/:user_id/delete", {
 			templateUrl: "js/templates/user/delete.html",
 			controller: "userDeleteController",
 			resolve: {
                 factory: checkAuthentication
             }
 		})
-		*/
 
 
-		// New university
-		/*.when("/new/university", {
+		// Universities
+		.when("/new/university", {
 			templateUrl: "js/templates/university/create.html",
 			controller: "universityCreateController",
 			resolve: {
 				factory: checkAuthentication
 			}
-		})*/
-
-		// Universities
+		})
 		.when("/universities", {
 			templateUrl: "js/templates/university/list.html",
 			controller: "universityListController",
@@ -168,7 +190,7 @@ app.config(function($routeProvider, $locationProvider, config) {
 		})*/
 
 
-		// New institute
+		// Institutes
 		/*.when("/new/institute", {
 			templateUrl: "js/templates/institute/create.html",
 			controller: "instituteCreateController",
@@ -176,8 +198,6 @@ app.config(function($routeProvider, $locationProvider, config) {
 				factory: checkAuthentication
 			}
 		})*/
-
-		// Institutes
 		.when("/institutes", {
 			templateUrl: "js/templates/institute/list.html",
 			controller: "instituteListController",
@@ -208,7 +228,7 @@ app.config(function($routeProvider, $locationProvider, config) {
 		})*/
 
 
-		// New working group
+		// Working groups
 		/*.when("/new/working_group", {
 			templateUrl: "js/templates/working_group/create.html",
 			controller: "workingGroupCreateController",
@@ -216,8 +236,6 @@ app.config(function($routeProvider, $locationProvider, config) {
 				factory: checkAuthentication
 			}
 		})*/
-
-		// Working groups
 		.when("/working_groups", {
 			templateUrl: "js/templates/working_group/list.html",
 			controller: "workingGroupListController",
@@ -248,7 +266,7 @@ app.config(function($routeProvider, $locationProvider, config) {
 		})*/
 
 
-		// New course
+		// Courses
 		.when("/new/course", {
 			templateUrl: "js/templates/course/create.html",
 			controller: "courseCreateController",
@@ -256,8 +274,6 @@ app.config(function($routeProvider, $locationProvider, config) {
 				factory: checkAuthentication
 			}
 		})
-
-		// Courses
 		.when("/courses", {
 			templateUrl: "js/templates/course/list.html",
 			controller: "courseListController",
@@ -286,6 +302,7 @@ app.config(function($routeProvider, $locationProvider, config) {
 				factory: checkAuthentication
 			}
 		})
+
 
 		// Help
 		.when("/help", {

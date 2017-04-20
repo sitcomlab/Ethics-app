@@ -129,7 +129,7 @@ app.config(function($routeProvider, $locationProvider, config) {
             }
 		})
 
-		// Committee members
+		// Members
 		.when("/members", {
 			templateUrl: "js/templates/member/list.html",
 			controller: "memberListController",

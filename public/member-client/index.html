@@ -43,6 +43,7 @@
         <script src="../bower_components/angular-translate/angular-translate.min.js"></script>
         <script src="../bower_components/angular-underscore-module/angular-underscore-module.js"></script>
         <script src="../bower_components/angular-momentjs/angular-momentjs.js"></script>
+        <script src="../bower_components/angucomplete-alt/dist/angucomplete-alt.min.js"></script>
 
     </head>
 
@@ -70,17 +71,17 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/members') }" ng-click="redirect('/members')" ng-if="authenticated_member && !loading.status">
+                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/members') || isActive('/new/member') }" ng-click="redirect('/members')" ng-if="authenticated_member && !loading.status">
                                         {{ 'MEMBERS' | translate }}
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/users') }" ng-click="redirect('/users')" ng-if="authenticated_member && !loading.status">
+                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/users') || isActive('/new/user') }" ng-click="redirect('/users')" ng-if="authenticated_member && !loading.status">
                                         {{ 'USERS' | translate }}
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/courses') }" ng-click="redirect('/courses')" ng-if="authenticated_member && !loading.status">
+                                    <a href="" class="nav-link" ng-class="{ 'active': isActive('/courses') || isActive('/new/course') }" ng-click="redirect('/courses')" ng-if="authenticated_member && !loading.status">
                                         {{ 'COURSES' | translate }}
                                     </a>
                                 </li>
@@ -121,7 +122,7 @@
                                         <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/id')">
                                             {{ 'SHOW_DOCUMENT_ID' | translate }}
                                         </a>
-                                        <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/submission')" ng-if="document.status > 1">
+                                        <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/overview')" ng-if="document.status > 1">
                                             <span ng-if="document.status == 2">
                                                 {{ 'SHOW_SUBMISSION' | translate }}
                                             </span>
@@ -137,11 +138,6 @@
                                         </a>
                                         <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/delete')">
                                             {{ 'DELETE_DOCUMENT' | translate }}
-                                        </a>
-                                        <div class="dropdown-divider" ng-if="review"></div>
-                                        <h6 class="dropdown-header"  ng-if="review">{{ 'REVIEW' | translate }}</h6>
-                                        <a class="dropdown-item" href="" ng-click="closeReview()"  ng-if="review">
-                                            {{ 'SAVE_AND_CLOSE_REVIEW' | translate }}
                                         </a>
                                     </div>
                                 </li>
@@ -250,7 +246,6 @@
         <script src="js/services/concernService.js"></script>
         <script src="js/services/commentService.js"></script>
         <script src="js/services/reviewerService.js"></script>
-        <script src="js/services/reviewService.js"></script>
         <script src="js/services/fileService.js"></script>
         <!-- <script src="js/services/recoveryService.js"></script> -->
 
@@ -265,13 +260,17 @@
 
         <!-- Members -->
         <script src="js/controllers/member/listController.js"></script>
+        <script src="js/controllers/member/createController.js"></script>
         <script src="js/controllers/member/detailsController.js"></script>
+        <script src="js/controllers/member/editController.js"></script>
+        <script src="js/controllers/member/deleteController.js"></script>
 
         <!-- Users -->
         <script src="js/controllers/user/listController.js"></script>
+        <script src="js/controllers/user/createController.js"></script>
         <script src="js/controllers/user/detailsController.js"></script>
-        <!--<script src="js/controllers/user/editController.js"></script>-->
-        <!--<script src="js/controllers/user/deleteController.js"></script>-->
+        <script src="js/controllers/user/editController.js"></script>
+        <script src="js/controllers/user/deleteController.js"></script>
 
         <!-- Universities -->
         <script src="js/controllers/university/listController.js"></script>
@@ -302,19 +301,19 @@
         <script src="js/controllers/course/editController.js"></script>
         <script src="js/controllers/course/deleteController.js"></script>
 
-        <!-- Account
-        <script src="js/controllers/account/editController.js"></script>-->
+        <!-- Account -->
+        <script src="js/controllers/account/editController.js"></script>
 
         <!-- Documents -->
         <script src="js/controllers/document/listController.js"></script>
         <!--<script src="js/controllers/document/createController.js"></script>-->
-        <!--<script src="js/controllers/document/deleteController.js"></script>-->
+        <script src="js/controllers/document/deleteController.js"></script>
         <script src="js/controllers/document/detailsController.js"></script>
         <script src="js/controllers/document/overviewController.js"></script>
         <script src="js/controllers/document/reviewController.js"></script>
         <!--<script src="js/controllers/document/fileController.js"></script>-->
-        <!--<script src="js/controllers/document/editSettingsController.js"></script>-->
-        <!--<script src="js/controllers/document/showIdController.js"></script>-->
+        <script src="js/controllers/document/editSettingsController.js"></script>
+        <script src="js/controllers/document/showIdController.js"></script>
 
     </body>
 </html>

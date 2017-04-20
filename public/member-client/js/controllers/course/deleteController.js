@@ -17,6 +17,22 @@ app.controller("courseDeleteController", function($scope, $rootScope, $routePara
         $location.url(path);
     };
 
+    /**
+     * [delete description]
+     * @return {[type]} [description]
+     */
+    $scope.delete = function(){
+        $scope.$parent.loading = { status: true, message: "Deleting course" };
+
+        // Delete course
+        $courseService.remove($scope.course.course_id)
+        .then(function onSuccess(response) {
+            $scope.redirect("/courses");
+        })
+        .catch(function onError(response) {
+            $window.alert(response.data);
+        });
+    };
 
     /*************************************************
         INIT

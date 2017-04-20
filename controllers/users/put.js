@@ -17,7 +17,7 @@ var mail_options = require('../../server.js').mail_options;
 var fs = require("fs");
 var dir_1 = "/../../templates/emails/";
 var dir_2 = "/../../sql/queries/users/";
-var template = fs.readFileSync(__dirname + dir_1 + 'email_address_changed.html', 'utf8').toString();
+var template_user_account_blocked = fs.readFileSync(__dirname + dir_1 + 'user_account_blocked.html', 'utf8').toString();
 var query_get_user = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
 var query_edit_user = fs.readFileSync(__dirname + dir_2 + 'edit.sql', 'utf8').toString();
 var query_edit_user_public = fs.readFileSync(__dirname + dir_2 + 'edit_public.sql', 'utf8').toString();
@@ -48,9 +48,9 @@ exports.request = function(req, res) {
                         res.status(401).send("Authorization failed!");
                     } else {
                         if(decoded.member){
-                            callback(null, client, done, query_edit_user);
+                            callback(null, client, done, true, query_edit_user);
                         } else {
-                            callback(null, client, done, query_edit_user_public);
+                            callback(null, client, done, false, query_edit_user_public);
                         }
                     }
                 });
@@ -58,7 +58,7 @@ exports.request = function(req, res) {
                 res.status(401).send("Authorization failed!");
             }
         },
-        function(client, done, query, callback) {
+        function(client, done, member_status, query, callback) {
             // Database query
             client.query(query_get_user, [
                 req.params.user_id
@@ -71,12 +71,12 @@ exports.request = function(req, res) {
                     if (result.rows.length === 0) {
                         callback(new Error("User not found"), 404);
                     } else {
-                        callback(null, client, done, result.rows[0], query);
+                        callback(null, client, done, member_status, result.rows[0], query);
                     }
                 }
             });
         },
-        function(client, done, user, query, callback) {
+        function(client, done, member_status, user, query, callback) {
             // TODO: Add object/schema validation
             var object = {
                 user_id: req.params.user_id,
@@ -86,10 +86,15 @@ exports.request = function(req, res) {
                 last_name: req.body.last_name,
                 institute_id: req.body.institute_id
             };
+
+            if(member_status){
+                object.blocked = req.body.blocked;
+            }
+
             var params = _.values(object);
-            callback(null, client, done, user, query, params);
+            callback(null, client, done, member_status, user, query, params);
         },
-        function(client, done, user, query, params, callback){
+        function(client, done, member_status, user, query, params, callback){
             // Database query
             client.query(query, params, function(err, result) {
                 done();
@@ -119,11 +124,11 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, user, updated_user, callback) {
-            if(user.email_address === req.body.email_address){
+            if(user.blocked === req.body.blocked){
                 callback(null, 200, updated_user);
             } else {
                 // Render HTML content
-                var output = mustache.render(template, {
+                var output = mustache.render(template_user_account_blocked, {
                     user: user,
                     updated_user: updated_user,
                     year: moment().format("YYYY")
@@ -136,7 +141,7 @@ exports.request = function(req, res) {
                 transporter.sendMail({
                     from: mail_options,
                     to: user.email_address,
-                    subject: 'Your email-address has been changed',
+                    subject: 'Your account has been blocked',
                     text: '',
                     html: output
                 }, function(err, info) {

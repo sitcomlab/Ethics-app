@@ -22,7 +22,8 @@ app.controller("memberListController", function($scope, $rootScope, $translate, 
         INIT
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading committee members" };
-
+    $scope.authenticated_member = $authenticationService.get();
+    
     // Load members
     $memberService.list()
     .then(function onSuccess(response) {

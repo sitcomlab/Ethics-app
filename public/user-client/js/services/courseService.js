@@ -2,7 +2,7 @@ var app = angular.module("courseService", []);
 
 
 // Course service
-app.factory('$courseService', function($http, $log, config, _) {
+app.factory('$courseService', function($http, $log, config, $authenticationService, _) {
 
     var courses;
 
@@ -25,7 +25,15 @@ app.factory('$courseService', function($http, $log, config, _) {
             courses = data;
         },
         list: function() {
-            return $http.get(config.apiURL + "/courses");
+            if($authenticationService.getToken()){
+                return $http.get(config.apiURL + "/courses", {
+                    headers: {
+                        'Authorization': 'Bearer ' + $authenticationService.getToken()
+                    }
+                });
+            } else {
+                return $http.get(config.apiURL + "/courses");
+            }
         },
         retrieve: function(course_id) {
             return $http.get(config.apiURL + "/courses/" + course_id);
