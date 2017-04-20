@@ -51,9 +51,19 @@ app.config(function ($translateProvider) {
         FILTER_BY_COURSE:'Filter by course',
         FILTER_BY_STATUS:'Filter by status',
 
-        INTRODUCTION_TEXT: 'You will be asked a series of questions, based on which the EthicsApp will auto-generate 3 documents. You are required to use these documents in your experiment. The key document is the Informed Consent Form - both you and your participant should sign and keep a copy. See the example below.',
-        STUDY_DESCRIPTION_FORM_TEXT: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally the German version. Depending on the language(s), you will receive the informed consent forms for your experiment.',
-        CHOOSE_LANGUAGE:'Please select the language, in which you want to generate the informed consent forms:',
+        INTRODUCTION_TEXT_FRAGMENT_1: 'This Web-App will guide you in creating the necessary forms for your user study. You will be asked a series of questions, based on which the Ethics-App will auto-generate three documents.',
+        INTRODUCTION_TEXT_FRAGMENT_2: 'The Informed Consent form',
+        INTRODUCTION_TEXT_FRAGMENT_3: 'This is the most important document. It assures that the Participant gave his consent prior to participating in the study. Both you and your participant must sign the document, and you need to store your copy safely. Conducting a study without the written consent of the participant is not advised and can lead to various legal issues.',
+        INTRODUCTION_TEXT_FRAGMENT_4: 'The Statement of the Researcher',
+        INTRODUCTION_TEXT_FRAGMENT_5: 'The Statement of the Researcher provides guidelines for carrying out the study itself. You need to sign the Statement and store it savely together with the Informed Consent forms. This form is only for yourself and should not be handed to the participant.',
+        INTRODUCTION_TEXT_FRAGMENT_6: 'Debriefing Information',
+        INTRODUCTION_TEXT_FRAGMENT_7: 'The Debriefing Information provides a checklist for the debriefing after the experiment. It does not need to be signed as it only serves as a reminder of the most important points that should be mentioned during the debriefing. This list is not complete and needs to be extended based on the specific circumstances of the individual study.',
+        INTRODUCTION_TEXT_FRAGMENT_8: 'You are ',
+        INTRODUCTION_TEXT_FRAGMENT_9: 'required',
+        INTRODUCTION_TEXT_FRAGMENT_10: ' to use these Documents in your experiment.',
+        
+        STUDY_DESCRIPTION_FORM_TEXT: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally versions in other languages. Depending on the language(s) filled out, you will receive the informed consent forms in the chosen languages to be used during your experiment.',
+        CHOOSE_LANGUAGE:'Please select the language(s), in which you want to generate the informed consent forms:',
         STUDY_CONCERNS_FORM_TEXT: 'Complete the checklist below. If you have answered "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the Institutes Ethics Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. <br> Make sure you discuss any concerns with the members of the Intitutes\'s Ethics Committee.',
 
         AGREEMENT_DATA: 'I agree that all given information is correct, and I am aware that my data will be stored by the Institute responsible for the study and its partners',
@@ -139,7 +149,7 @@ app.config(function ($translateProvider) {
         PLEASE_TYPE_IN_THE_DOCUMENT_TITLE_TO_CONFIRM: 'Please type in the document title to confirm',
         DELETE: 'Delete',
 
-        INTRO: 'Intro',
+        INTRO: 'Introduction',
         REQUIRED: 'required',
         OPTIONAL: 'optional',
         NAME: 'Name',
@@ -230,4 +240,6 @@ app.config(function ($translateProvider) {
 
     // Default Language (English)
     $translateProvider.preferredLanguage('en_US');
+    $translateProvider.useSanitizeValueStrategy('sanitize');
+
 });
