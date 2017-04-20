@@ -2,7 +2,8 @@
 <div class="card">
     <div class="card-header" style="font-size: 20pt;">
         <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">{{ 'WORKING_GROUP' | translate }}</div>
+            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+                <span ng-if="working_group.former">{{ 'FORMER' | translate }} </span>{{ 'WORKING_GROUP' | translate }}</div>
             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 right">
                 <div class="btn-group">
                     <button class="btn btn-info" role="button" ng-click="redirect('/working_groups/' + working_group.working_group_id + '/edit')">
@@ -11,10 +12,10 @@
                     <button class="btn btn-danger" role="button" ng-click="redirect('/working_groups/' + working_group.working_group_id + '/delete')">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
-                    <button class="btn btn-secondary" role="button" ng-click="redirect('/working_groups')">
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                    </button>
                 </div>
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/working_groups')">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
     </div>

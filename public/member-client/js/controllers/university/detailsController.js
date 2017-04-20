@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // University details controller
-app.controller("universityDetailsController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $universityService) {
+app.controller("universityDetailsController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $universityService, $instituteService) {
 
     /*************************************************
         FUNCTIONS
@@ -34,7 +34,15 @@ app.controller("universityDetailsController", function($scope, $rootScope, $rout
         $instituteService.list()
         .then(function onSuccess(response) {
             $instituteService.set(response.data);
-            $scope.institutes = $instituteService.getByStatus(false);
+
+            // Filter by university
+            $instituteService.set($instituteService.getByUniversity($scope.university.university_id));
+
+            // Current institutes
+            $scope.university.current_institutes = $instituteService.getByStatus(false);
+
+            // Former institutes
+            $scope.university.former_institutes = $instituteService.getByStatus(true);
 
             $scope.$parent.loading = { status: false, message: "" };
         })

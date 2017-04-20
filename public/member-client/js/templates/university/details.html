@@ -11,10 +11,10 @@
                     <button class="btn btn-danger" role="button" ng-click="redirect('/universities/' + university.university_id + '/delete')">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
-                    <button class="btn btn-secondary" role="button" ng-click="redirect('/universities')">
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                    </button>
                 </div>
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/universities')">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -51,14 +51,31 @@
                 <h6 class="text-muted">
                     {{ 'RELATED_INSTITUTES' | translate }}
                 </h6>
-                <div class="list-group" ng-if="institute.working_groups && institute.working_groups.length>0">
-                    <a href="" ng-click="redirect('/working_groups/' + working_group.working_group_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="working_group in institute.working_groups | orderBy: ['working_group_name']">
-                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                <div class="list-group" ng-if="university.current_institutes && university.current_institutes.length>0">
+                    <a href="" ng-click="redirect('/institutes/' + institute.working_group_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="institute in university.current_institutes | orderBy: ['institute_name']">
+                        <i class="fa fa-building" aria-hidden="true"></i>
                         &nbsp;&nbsp;
-                        <b>{{working_group.working_group_name}}</b>
+                        <b>{{institute.institute_name}}</b>
                     </a>
                 </div>
-                <div class="list-group" ng-if="!institute.working_groups || institute.working_groups.length==0">
+                <div class="list-group" ng-if="!university.current_institutes || university.current_institutes.length==0">
+                    <div class="list-group-item middle">
+                        - {{ 'NONE' | translate }} -
+                    </div>
+                </div>
+                <br>
+
+                <h6 class="text-muted">
+                    {{ 'RELATED_FORMER_INSTITUTES' | translate }}
+                </h6>
+                <div class="list-group" ng-if="university.former_institutes && university.former_institutes.length>0">
+                    <a href="" ng-click="redirect('/institutes/' + institute.working_group_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="institute in university.former_institutes | orderBy: ['institute_name']">
+                        <i class="fa fa-building-o" aria-hidden="true"></i>
+                        &nbsp;&nbsp;
+                        <b>{{institute.institute_name}}</b>
+                    </a>
+                </div>
+                <div class="list-group" ng-if="!university.former_institutes || university.former_institutes.length==0">
                     <div class="list-group-item middle">
                         - {{ 'NONE' | translate }} -
                     </div>

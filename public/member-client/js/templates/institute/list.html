@@ -2,8 +2,11 @@
 <div class="card">
     <div class="card-header" style="font-size: 20pt;">
         <div class="row">
-            <div class="col">{{ 'INSTITUTES' | translate }}</div>
-            <div class="col right">
+            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">{{ 'INSTITUTES' | translate }}</div>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 right">
+                <button class="btn btn-primary" role="button" ng-click="redirect('/new/institute')">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                </button>
                 <button class="btn btn-secondary" role="button" ng-click="redirect('/documents')">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
@@ -26,13 +29,6 @@
                     </span>
                 </div>
                 <small class="form-text text-muted">{{ 'SEARCH_FOR_INSTITUTES' | translate }}</small>
-                <br>
-            </div>
-            <div class="col-12 col-sm-auto col-md-auto col-lg-auto right">
-                <a href="" class="btn btn-secondary" ng-click="redirect('/new/institute')">
-                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'CREATE' | translate }}
-                </a>
-                <br>
                 <br>
             </div>
         </div>
