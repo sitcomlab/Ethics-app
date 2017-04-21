@@ -23,7 +23,7 @@
                 {{ 'EXPLANATION_OF_DELETING_A_USER' | translate }}
             </p>
             <p>
-                {{ 'ALTERNATIVE_USER' | translate }}
+                {{ 'ALTERNATIVE_USER' | translate }}: <a href="" ng-click="redirect('/users/' + user.user_id + '/edit')">{{ 'EDIT_USER' | translate }}</a>
             </p>
         </div>
         <br>
