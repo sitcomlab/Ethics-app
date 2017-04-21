@@ -3,11 +3,6 @@
     <div class="card-header" style="font-size: 20pt;">
         <div class="row">
             <div class="col">{{ 'DOCUMENTS' | translate }}</div>
-            <!--<div class="col right">
-                <button class="btn btn-secondary" role="button" ng-click="cancel()">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </button>
-            </div>-->
         </div>
     </div>
     <div class="card-block">
@@ -74,5 +69,38 @@
                 - {{ 'NONE' | translate }} -
             </div>
         </div>
+        <br>
+
+        <!--Pagination -->
+        <nav aria-label="pagination" ng-if="documents && documents.length>0">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
+                    <a href="" class="page-link" ng-click="changeOffset(0)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
+                    <a href="" class="page-link" ng-click="changeOffset(filter.offset - filter.limit)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="page-item" ng-class="{'active': filter.offset == page.offset}" ng-repeat="page in pages">
+                    <a href="" class="page-link" ng-click="changeOffset(page.offset)">
+                        {{$index+1}}
+                    </a>
+                </li>
+                <li class="page-item" ng-class="{ 'disabled': filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit }">
+                    <a href="" class="page-link" ng-click="changeOffset(filter.offset + filter.limit)" ng-style="filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit && {'background-color':'#f7f7f9'}">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="page-item" ng-class="{ 'disabled': filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit }">
+                    <a href="" class="page-link" ng-click="changeOffset(pages[pages.length - 1].offset)" ng-style="filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit && {'background-color':'#f7f7f9'}">
+                        <b><i class="fa fa-angle-double-right" aria-hidden="true"></i></b>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
     </div>
 </div>

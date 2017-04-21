@@ -27,6 +27,28 @@ app.controller("documentListController", function($scope, $rootScope, $translate
         .then(function onSuccess(response) {
             $documentsService.set(response.data);
             $scope.documents = $documentsService.get();
+
+            // Prepare pagination
+            if($scope.documents.length > 0){
+                // Set count
+                $documentsService.setCount($scope.documents[0].full_count);
+            } else {
+                // Reset count
+                $documentsService.setCount(0);
+
+                // Reset pagination
+                $scope.pages = [];
+                $scope.filter.offset = 0;
+            }
+
+            // Set pagination
+            $scope.pages = [];
+            for(var i=0; i<Math.ceil($documentsService.getCount() / $scope.filter.limit); i++){
+                $scope.pages.push({
+                    offset: i * $scope.filter.limit
+                });
+            }
+
             $scope.$parent.loading = { status: false, message: "" };
         })
         .catch(function onError(response) {
@@ -52,6 +74,18 @@ app.controller("documentListController", function($scope, $rootScope, $translate
         $scope.load();
     };
 
+    /**
+     * [authenticated_member description]
+     * @type {[type]}
+     */
+    $scope.changeOffset = function(offset){
+        $scope.filter.offset = offset;
+        $documentsService.set();
+        $documentsService.setFilter($scope.filter);
+        $scope.documents = $documentsService.get();
+        $scope.load();
+    };
+
 
     /*************************************************
         INIT
@@ -61,17 +95,7 @@ app.controller("documentListController", function($scope, $rootScope, $translate
     // Filter all documents, which need to be reviewed
     $scope.filter = $documentsService.getFilter();
 
-    // Load courses
-    $courseService.list()
-    .then(function onSuccess(response) {
-        $courseService.set(response.data);
-        $scope.courses = $courseService.get();
-
-        // Load documents with applied filter
-        $scope.load();
-    })
-    .catch(function onError(response) {
-        $window.alert(response.data);
-    });
+    // Load documents with applied filter
+    $scope.load();
 
 });

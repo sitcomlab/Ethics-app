@@ -71,9 +71,17 @@ exports.request = function(req, res) {
 
             var query;
             var params = [];
+            // Pagination parameters
+            params.push(Number(req.query.offset));
+            params.push(Number(req.query.limit));
+
+            // TODO: Add orderBy: document.created ASC DESC, etc.
+            //params.push(req.query.orderby);
+
+            // Filter by institute
             params.push(member.institute_id);
 
-            // Check filters
+            // Filter by status
             switch(req.query.status){
                 case '0': {
                     query = query_list_documents_filter_by_status;
@@ -119,6 +127,7 @@ exports.request = function(req, res) {
                     query = query_list_documents_with_user;
                 }
             }
+
             callback(null, client, done, query, params);
         },
         function(client, done, query, params, callback) {

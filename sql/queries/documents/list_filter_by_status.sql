@@ -1,4 +1,5 @@
 SELECT
+    COUNT(*) OVER()::NUMERIC AS full_count,
     document.document_id,
     document.created,
     document.updated,
@@ -37,7 +38,9 @@ FROM Documents document
     JOIN Institutes institute ON institute.institute_id = _user.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
 WHERE
-        _user.institute_id=$1::INTEGER
+        _user.institute_id=$3::INTEGER
     AND
-        document.status=$2::INTEGER
-ORDER BY document.created;
+        document.status=$4::INTEGER
+ORDER BY document.created
+OFFSET $1::INTEGER
+LIMIT $2::INTEGER;

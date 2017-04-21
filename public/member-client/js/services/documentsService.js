@@ -6,8 +6,14 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
 
     var documents;
     var filter = {
-        document_status: "3"
+        offset: 0,
+        limit: 2, // TEST // TODO: Change to 10, 20, 50, 100
+        // TODO: orderby: "created", // or "updated", "title", "status"
+        // TODO: order: "desc", // or "asc"
+        //document_status: "3"
+        document_status: null
     };
+    var full_count = 0;
 
     return {
         get: function() {
@@ -16,18 +22,35 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
         getFilter: function(){
             return filter;
         },
+        getCount: function(){
+            return full_count;
+        },
         set: function(data) {
             documents = data;
         },
         setFilter: function(data) {
             filter = data;
         },
+        setCount: function(data) {
+            full_count = data;
+        },
         list: function(filter) {
-            var query = "";
+            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&";
+
+            /* TODO: Add orderby:
+                - document.created ASC DESC
+                - document.updated ASC DESC
+                - status ASC DESC
+                - title ASC DESC
+            */
 
             if(filter.document_status !== null){
-                query = query + "?status=" + filter.document_status;
+                query = query + "status=" + filter.document_status + "&";
+            } else {
+                query = query + "";
             }
+
+            query = query.slice(0, -1);
 
             return $http.get(config.apiURL + "/documents" + query, {
                 headers: {
