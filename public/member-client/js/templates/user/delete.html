@@ -17,6 +17,16 @@
             {{ 'DELETE_THIS_USER' | translate }} <kbd>{{user.fullname}}</kbd>?
         </h6>
         <br>
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'ATTENTION' | translate }}</h4>
+            <p>
+                {{ 'EXPLANATION_OF_DELETING_A_USER' | translate }}
+            </p>
+            <p>
+                {{ 'ALTERNATIVE_USER' | translate }}
+            </p>
+        </div>
+        <br>
         <label>
             <b>{{ 'USER_NAME' | translate }}*</b>
         </label>
