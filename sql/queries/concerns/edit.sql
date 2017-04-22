@@ -58,4 +58,7 @@ UPDATE Concerns SET (
     $27::TEXT,
     $28::BOOLEAN,
     $29::TEXT
-) WHERE concern_id=$1::INTEGER RETURNING *;
+)
+WHERE
+    concern_id=$1::INTEGER
+RETURNING *;

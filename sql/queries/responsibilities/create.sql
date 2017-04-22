@@ -4,4 +4,5 @@ INSERT INTO Responsibilities (
 ) VALUES (
     $1::INTEGER,
     $2::INTEGER
-) RETURNING *;
+)
+RETURNING *;

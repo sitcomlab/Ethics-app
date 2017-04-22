@@ -6,4 +6,7 @@ UPDATE Responsibilities SET (
     now(),
     $2::INTEGER,
     $3::INTEGER
-) WHERE responsibility_id=$1::INTEGER RETURNING *;
+)
+WHERE
+    responsibility_id=$1::INTEGER
+RETURNING *;

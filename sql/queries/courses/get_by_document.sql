@@ -13,4 +13,5 @@ SELECT
     course.institute_id
 FROM Affiliations affiliation
     JOIN Courses course ON affiliation.course_id = course.course_id
-WHERE affiliation.document_id=$1::TEXT;
+WHERE
+    affiliation.document_id=$1::TEXT;

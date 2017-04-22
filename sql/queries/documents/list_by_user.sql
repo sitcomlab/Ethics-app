@@ -7,5 +7,7 @@ SELECT
     document_title,
     status
 FROM Documents
-WHERE user_id=$1::INTEGER
-ORDER BY created DESC;
+WHERE
+    user_id=$1::INTEGER
+ORDER BY
+    created DESC;

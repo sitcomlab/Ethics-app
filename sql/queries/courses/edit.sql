@@ -12,4 +12,7 @@ UPDATE Courses SET (
     $4::BOOLEAN,
     $5::TEXT,
     $6::INTEGER
-) WHERE course_id=$1::INTEGER RETURNING *;
+)
+WHERE
+    course_id=$1::INTEGER
+RETURNING *;

@@ -10,4 +10,5 @@ INSERT INTO Users (
     $3::TEXT,
     $4::TEXT,
     $5::INTEGER
-) RETURNING *;
+)
+RETURNING *;

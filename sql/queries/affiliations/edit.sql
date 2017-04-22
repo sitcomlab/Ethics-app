@@ -6,4 +6,7 @@ UPDATE Affiliations SET (
     now(),
     $2::TEXT,
     $3::INTEGER
-) WHERE affiliation_id=$1::INTEGER RETURNING *;
+)
+WHERE
+    affiliation_id=$1::INTEGER
+RETURNING *;

@@ -1,3 +1,4 @@
 SELECT *
 FROM Affiliations
-WHERE affiliation_id=$1::INTEGER;
+WHERE
+    affiliation_id=$1::INTEGER;

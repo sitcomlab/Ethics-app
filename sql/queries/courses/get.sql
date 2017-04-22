@@ -16,4 +16,5 @@ SELECT
 FROM Courses course
     JOIN Institutes institute ON institute.institute_id = course.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
-WHERE course_id=$1::INTEGER;
+WHERE
+    course_id=$1::INTEGER;

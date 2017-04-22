@@ -54,4 +54,7 @@ UPDATE Descriptions SET (
     $25::TEXT,
     $26::TEXT,
     $27::TEXT
-) WHERE description_id=$1::INTEGER RETURNING *;
+)
+WHERE
+    description_id=$1::INTEGER
+RETURNING *;

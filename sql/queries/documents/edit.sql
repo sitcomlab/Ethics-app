@@ -4,4 +4,7 @@ UPDATE Documents SET (
 ) = (
     now(),
     $2::TEXT
-) WHERE document_id=$1::TEXT RETURNING *;
+)
+WHERE
+    document_id=$1::TEXT
+RETURNING *;

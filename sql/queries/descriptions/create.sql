@@ -54,4 +54,5 @@ INSERT INTO Descriptions (
     $25::TEXT,
     $26::TEXT,
     $27::TEXT
-) RETURNING *;
+)
+RETURNING *;

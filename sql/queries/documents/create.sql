@@ -6,4 +6,5 @@ INSERT INTO Documents (
     $1::TEXT,
     $2::TEXT,
     $3::INTEGER
-) RETURNING *;
+)
+RETURNING *;

@@ -1,4 +1,5 @@
 SELECT
+    COUNT(*) OVER()::NUMERIC AS full_count,
     course.course_id,
     course.course_name,
     course.year,
@@ -17,5 +18,9 @@ FROM Courses course
     JOIN Institutes institute ON institute.institute_id = course.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
 WHERE
-    course.institute_id=$1::INTEGER
-ORDER BY year DESC, course_name ASC;
+    course.institute_id=$3::INTEGER
+ORDER BY
+    year DESC,
+    course_name ASC
+OFFSET $1::INTEGER
+LIMIT $2::INTEGER;

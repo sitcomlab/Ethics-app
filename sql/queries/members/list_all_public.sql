@@ -20,4 +20,6 @@ FROM Members member
     JOIN Universities university ON university.university_id = institute.university_id
 WHERE
     member.admin != true
-ORDER BY last_name, first_name;
+ORDER BY
+    last_name,
+    first_name;

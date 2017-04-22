@@ -20,7 +20,9 @@ UPDATE Members SET (
     $9::TEXT,
     $10::BOOLEAN,
     $11::BOOLEAN
-) WHERE member_id=$1::INTEGER
+)
+WHERE
+    member_id=$1::INTEGER
 RETURNING
     member_id,
     created,

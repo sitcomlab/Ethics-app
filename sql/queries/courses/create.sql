@@ -10,4 +10,5 @@ INSERT INTO Courses (
     $3::BOOLEAN,
     $4::TEXT,
     $5::INTEGER
-) RETURNING *;
+)
+RETURNING *;

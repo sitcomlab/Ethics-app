@@ -58,4 +58,5 @@ INSERT INTO Concerns (
     $27::TEXT,
     $28::BOOLEAN,
     $29::TEXT
-) RETURNING *;
+)
+RETURNING *;

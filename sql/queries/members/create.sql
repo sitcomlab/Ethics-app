@@ -20,7 +20,8 @@ INSERT INTO Members (
     $8::TEXT,
     $9::TEXT,
     $10::BOOLEAN
-) RETURNING
+)
+RETURNING
     member_id,
     created,
     updated,

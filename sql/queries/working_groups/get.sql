@@ -9,4 +9,5 @@ SELECT
 FROM Working_Groups working_group
     JOIN Institutes institute ON institute.institute_id = working_group.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
-WHERE working_group_id=$1::INTEGER;
+WHERE
+    working_group_id=$1::INTEGER;

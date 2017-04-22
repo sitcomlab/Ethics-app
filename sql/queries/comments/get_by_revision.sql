@@ -52,4 +52,5 @@ SELECT
     q12_comment,
     q13_comment
 FROM Comments
-WHERE revision_id=$1::INTEGER;
+WHERE
+    revision_id=$1::INTEGER;

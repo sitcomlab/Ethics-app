@@ -8,4 +8,7 @@ UPDATE Institutes SET (
     $2::TEXT,
     $3::INTEGER,
     $4::BOOLEAN
-) WHERE institute_id=$1::INTEGER RETURNING *;
+)
+WHERE
+    institute_id=$1::INTEGER
+RETURNING *;

@@ -25,4 +25,6 @@ WHERE
         member.former != true
     AND
         responsibility.course_id=$1::INTEGER
-ORDER BY last_name, first_name;
+ORDER BY
+    last_name,
+    first_name;

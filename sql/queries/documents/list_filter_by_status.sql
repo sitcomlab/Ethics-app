@@ -41,6 +41,7 @@ WHERE
         _user.institute_id=$3::INTEGER
     AND
         document.status=$4::INTEGER
-ORDER BY document.created
+ORDER BY
+    document.created
 OFFSET $1::INTEGER
 LIMIT $2::INTEGER;

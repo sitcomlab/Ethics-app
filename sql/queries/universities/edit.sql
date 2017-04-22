@@ -4,4 +4,7 @@ UPDATE Universities SET (
 ) = (
     now(),
     $2::TEXT
-) WHERE university_id=$1::INTEGER RETURNING *;
+)
+WHERE
+    university_id=$1::INTEGER
+RETURNING *;

@@ -21,4 +21,6 @@ FROM Members member
     JOIN Universities university ON university.university_id = institute.university_id
 WHERE
     responsibility.course_id=$1::INTEGER
-ORDER BY last_name, first_name;
+ORDER BY
+    last_name,
+    first_name;

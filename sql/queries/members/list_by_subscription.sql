@@ -23,4 +23,6 @@ WHERE
         member.subscribed = true
     AND
         member.former != true
-ORDER BY last_name, first_name;
+ORDER BY
+    last_name,
+    first_name;

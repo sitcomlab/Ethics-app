@@ -98,4 +98,7 @@ UPDATE Comments SET (
     $39::TEXT,
     $40::TEXT,
     $41::TEXT
-) WHERE comment_id=$1::INTEGER RETURNING *;
+)
+WHERE
+    comment_id=$1::INTEGER
+RETURNING *;

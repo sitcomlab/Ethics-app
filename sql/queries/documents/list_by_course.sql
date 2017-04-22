@@ -32,5 +32,7 @@ FROM Documents document
     JOIN Courses course ON course.course_id = affiliation.course_id
     JOIN Institutes institute ON institute.institute_id = course.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
-WHERE course.course_id=$1
-ORDER BY document.created;
+WHERE
+    course.course_id=$1
+ORDER BY
+    document.created;

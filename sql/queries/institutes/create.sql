@@ -4,4 +4,5 @@ INSERT INTO Institutes (
 ) VALUES (
     $1::TEXT,
     $2::INTEGER
-) RETURNING *;
+)
+RETURNING *;

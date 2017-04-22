@@ -1,3 +1,9 @@
-SELECT *
+SELECT
+    COUNT(*) OVER()::NUMERIC AS full_count,
+    university_id,
+    university_name
 FROM Universities
-ORDER BY university_name ASC;
+ORDER BY
+    university_name ASC
+OFFSET $1::INTEGER
+LIMIT $2::INTEGER;

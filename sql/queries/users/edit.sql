@@ -14,4 +14,7 @@ UPDATE Users SET (
     $5::TEXT,
     $6::INTEGER,
     $7::BOOLEAN
-) WHERE user_id=$1::INTEGER RETURNING *;
+)
+WHERE
+    user_id=$1::INTEGER
+RETURNING *;

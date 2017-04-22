@@ -22,4 +22,6 @@ WHERE
         institute.institute_id=$1::INTEGER
     AND
         member.admin != true
-ORDER BY last_name, first_name;
+ORDER BY
+    last_name,
+    first_name;

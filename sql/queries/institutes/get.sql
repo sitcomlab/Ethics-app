@@ -6,4 +6,5 @@ SELECT
     university.university_name
 FROM Institutes institute
     JOIN Universities university ON university.university_id = institute.university_id
-WHERE institute_id=$1::INTEGER;
+WHERE
+    institute_id=$1::INTEGER;

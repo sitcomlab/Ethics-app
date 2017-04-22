@@ -8,4 +8,6 @@ UPDATE Working_Groups SET (
     $2::TEXT,
     $3::INTEGER,
     $4::BOOLEAN
-) WHERE working_group_id=$1::INTEGER RETURNING *;
+)
+WHERE
+    working_group_id=$1::INTEGER RETURNING *;
