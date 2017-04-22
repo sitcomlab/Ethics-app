@@ -82,7 +82,7 @@ exports.request = function(req, res) {
                 year: req.body.year,
                 term: req.body.term,
                 lecturer: req.body.lecturer,
-                institutes_id: req.body.institutes_id
+                institute_id: req.body.institute_id
             };
             var params = _.values(object);
             callback(null, client, done, params);
@@ -101,7 +101,7 @@ exports.request = function(req, res) {
         function(client, done, course, callback){
             // Database query
             client.query(query_delete_responsibilities_by_course, [
-                course.course_id,
+                course.course_id
             ], function(err, result) {
                 done();
                 if (err) {

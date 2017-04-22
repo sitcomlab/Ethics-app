@@ -54,7 +54,7 @@ exports.request = function(req, res) {
                 if (err) {
                     callback(err, 500);
                 } else {
-                    course.responsibilites = result.rows;
+                    course.responsibilities = result.rows;
                     callback(null, 200, course);
                 }
             });
