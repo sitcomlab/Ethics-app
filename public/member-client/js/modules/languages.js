@@ -11,7 +11,7 @@ app.config(function ($translateProvider) {
 
         WELCOME: 'Welcome',
         WELCOME_MESSAGE: 'This Web-App provides a way to create the necessary forms for your user study. Please login or create a new document.',
-        WELCOME_MESSAGE_MEMBER: 'This is the Login for Members of the Ethics Comittee. If you are not a member of the Ethics-Comitte, please login here', // TODO LINK
+        WELCOME_MESSAGE_MEMBER: 'This is the Login for Members of the Ethics-Comittee. If you are not a member of the Ethics-Comittee, please login',
 
         DOCUMENT_ID: 'Document-ID',
         DOCUMENT_TITLE: 'Document title',
