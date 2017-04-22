@@ -13,7 +13,19 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
                 year: Number(moment().format("YYYY")),
                 term: true,
                 lecturer: "",
-                institute_id: null
+                institute_id: null,
+                responsibilities: []
+            };
+        },
+        copy: function(course){
+            return {
+                course_id: course.course_id,
+                course_name: course.course_name,
+                year: course.year,
+                term: course.term,
+                lecturer: course.lecturer,
+                institute_id: course.institute_id,
+                responsibilities: course.responsibilities
             };
         },
         get: function(){

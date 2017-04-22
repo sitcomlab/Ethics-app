@@ -52,14 +52,13 @@ app.controller("courseCreateController", function($scope, $rootScope, $routePara
      */
     $scope.addMember = function(){
         if($scope.selectedMember.originalObject){
-            $scope.responsibilities.push({
-                member_id: $scope.selectedMember.originalObject.member_id,
-                course_id: null
+            $scope.new_course.responsibilities.push({
+                member_id: $scope.selectedMember.originalObject.member_id
             });
             $scope.$broadcast('angucomplete-alt:clearInput', 'members');
             $scope.selectedMember = {};
         }
-        $scope.responsibilities = _.uniq($scope.responsibilities, 'member_id');
+        $scope.new_course.responsibilities = _.uniq($scope.new_course.responsibilities, 'member_id');
         $scope.updateMemberList();
     };
 
@@ -69,7 +68,7 @@ app.controller("courseCreateController", function($scope, $rootScope, $routePara
      * @return {[type]}       [description]
      */
     $scope.deleteMember = function(index){
-        $scope.responsibilities.splice(index, 1);
+        $scope.new_course.responsibilities.splice(index, 1);
         $scope.updateMemberList();
     };
 
@@ -81,8 +80,8 @@ app.controller("courseCreateController", function($scope, $rootScope, $routePara
         $scope.responsible_members = [];
 
         // Load amount of members
-        angular.forEach($scope.responsibilities, function(member , key){
-            var result = _.findWhere($scope.members, { member_id: member.member_id });
+        angular.forEach($scope.new_course.responsibilities, function(responsibility , key){
+            var result = _.findWhere($scope.members, { member_id: responsibility.member_id });
             if(result){
                 $scope.responsible_members.push(result);
             }
@@ -97,7 +96,6 @@ app.controller("courseCreateController", function($scope, $rootScope, $routePara
     $scope.$parent.loading = { status: true, message: "Loading institutes" };
     $scope.new_course = $courseService.init();
     $scope.selectedMember = {};
-    $scope.responsibilities = [];
     $scope.responsible_members = [];
     $scope.authenticated_member = $authenticationService.get();
 
