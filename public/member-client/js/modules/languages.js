@@ -43,7 +43,7 @@ app.config(function ($translateProvider) {
         REGISTRATION: 'Registration',
         NEW_DOCUMENT: 'New document',
         PLEASE_USE_A_UNIVERSITY_ADDRESS: 'Please use an official university address',
-        SEARCH_FOR_DOCUMENT_TITLES_AND_AUTHORS: 'Search for documents, titles & authors',
+        SEARCH_FOR_DOCUMENT_TITLES_AND_AUTHORS: 'Search for documents, titles and authors',
 
         NO_FILTER:'No filter',
         FILTER_BY_UNIVERSITY:'Filter by university',

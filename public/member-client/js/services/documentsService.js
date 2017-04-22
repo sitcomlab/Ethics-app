@@ -7,11 +7,10 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
     var documents;
     var filter = {
         offset: 0,
-        limit: 2, // TEST // TODO: Change to 10, 20, 50, 100
+        limit: 50, // TEST // TODO: Change to 10, 20, 50, 100
         // TODO: orderby: "created", // or "updated", "title", "status"
         // TODO: order: "desc", // or "asc"
-        //document_status: "3"
-        document_status: null
+        document_status: "3"
     };
     var full_count = 0;
 

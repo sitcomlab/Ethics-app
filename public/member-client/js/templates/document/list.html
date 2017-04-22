@@ -69,10 +69,12 @@
                 - {{ 'NONE' | translate }} -
             </div>
         </div>
-        <br>
+    </div>
 
-        <!--Pagination -->
-        <nav aria-label="pagination" ng-if="documents && documents.length>0">
+    <div class="card-footer right">
+
+        <!-- Pagination -->
+        <nav aria-label="pagination" id="pagination" ng-if="documents.length > 0">
             <ul class="pagination justify-content-center">
                 <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
                     <a href="" class="page-link" ng-click="changeOffset(0)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
@@ -100,6 +102,10 @@
                     </a>
                 </li>
             </ul>
+        </nav>
+
+        <nav ng-if="documents.length == 0">
+            <ul>&nbsp;</ul>
         </nav>
 
     </div>

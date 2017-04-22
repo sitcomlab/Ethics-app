@@ -43,7 +43,7 @@ app.config(function ($translateProvider) {
         REGISTRATION: 'Registration',
         NEW_DOCUMENT: 'New document',
         PLEASE_USE_A_UNIVERSITY_ADDRESS: 'Please use an official university address',
-        SEARCH_FOR_DOCUMENT_TITLES_AND_AUTHORS: 'Search for documents, titles & authors',
+        SEARCH_FOR_DOCUMENT_TITLES_AND_AUTHORS: 'Search for documents, titles and authors',
 
         NO_FILTER:'No filter',
         FILTER_BY_UNIVERSITY:'Filter by university',
@@ -61,7 +61,7 @@ app.config(function ($translateProvider) {
         INTRODUCTION_TEXT_FRAGMENT_8: 'You are ',
         INTRODUCTION_TEXT_FRAGMENT_9: 'required',
         INTRODUCTION_TEXT_FRAGMENT_10: ' to use these Documents in your experiment.',
-        
+
         STUDY_DESCRIPTION_FORM_TEXT: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally versions in other languages. Depending on the language(s) filled out, you will receive the informed consent forms in the chosen languages to be used during your experiment.',
         CHOOSE_LANGUAGE:'Please select the language(s), in which you want to generate the informed consent forms:',
         STUDY_CONCERNS_FORM_TEXT: 'Complete the checklist below. If you have answered "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the Institutes Ethics Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. <br> Make sure you discuss any concerns with the members of the Intitutes\'s Ethics Committee.',

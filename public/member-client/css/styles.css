@@ -61,7 +61,7 @@ footer {
     margin-bottom: 1px;
 }
 
-
+/* Boostrap fix */
 .bs-fix > .list-group > .list-group-item {
     background-color: #f7f7f9;
 }
@@ -69,6 +69,11 @@ footer {
 /* https://github.com/twbs/bootstrap/issues/21610 */
 .bs-fix > .list-group, .list-group-item {
     display: block;
+}
+
+/* Boostrap fix for pagination */
+#pagination > ul {
+    margin-bottom: 0;
 }
 
 
