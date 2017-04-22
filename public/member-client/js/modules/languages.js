@@ -43,14 +43,42 @@ app.config(function ($translateProvider) {
         REGISTRATION: 'Registration',
         NEW_DOCUMENT: 'New document',
         PLEASE_USE_A_UNIVERSITY_ADDRESS: 'Please use an official university address',
+        
         SEARCH_FOR_DOCUMENT_TITLES_AND_AUTHORS: 'Search for documents, titles and authors',
-
+        SEARCH_FOR_MEMBERS: 'Search for Members',
+        SEARCH_FOR_USERS:'Search for Users',
+        SEARCH_FOR_COURSES:'Seach for Courses',
+        SEARCH_FOR_UNIVERSITIES:'Seach for Universities',
+        SEARCH_FOR_INSTITUTES:'Seach for Institutes',
+        SEARCH_FOR_WORKING_GROUPS:'Seach for Working Groups',
+        
         NO_FILTER:'No filter',
         FILTER_BY_UNIVERSITY:'Filter by university',
         FILTER_BY_INSTITUTE:'Filter by institute',
         FILTER_BY_COURSE:'Filter by course',
         FILTER_BY_STATUS:'Filter by status',
 
+        DELETE_THIS_UNIVERSITY:'Do you really want to delete this University:',
+        EXPLANATION_OF_DELETING_A_UNIVERSITY:'Deleting an University also deletes ALL ASSOCIATED Institutes, Working Groups, Comittee Members, Users and Documents. PLEASE PROCEED WITH CAUTION!',
+        UNIVERSITY_NAME:'University Name',
+        PLEASE_TYPE_IN_THE_UNIVERSITY_NAME_TO_CONFIRM:'Please type in the University Name to confirm',
+        
+        DELETE_THIS_INSTITUTE:'Do you really want to delete this Institute:',
+        EXPLANATION_OF_DELETING_A_INSTITUTE:'Deleting an Institute also deletes ALL ASSOCIATED Working Groups, Comitte Members, Users and Documents. PLEASE PROCEED WITH CAUTION!',
+        INSTITUTE_NAME:'Institute Name',
+        PLEASE_TYPE_IN_THE_INSTITUTE_NAME_TO_CONFIRM:'Please type in the Institute Name to confirm',
+        ALTERNATIVE_INSTITUTE:'If you dont want to delete EVERYTHING associated with this Institute please refer to the',  
+        EDIT_INSTITUTE:'Institutes Administration Page',
+      
+        DELETE_THIS_WORKING_GROUP:'Do you really want to delete this Working Group:',
+        EXPLANATION_OF_DELETING_A_WORKING_GROUP:'Deleting a Working Group also deletes ALL ASSOCIATED Comittee Members. PLEASE PROCEED WITH CAUTION!',
+        WORKING_GROUP_NAME:'Working Group Name',
+        PLEASE_TYPE_IN_THE_WORKING_GROUP_NAME_TO_CONFIRM:'Please tpe in the Working Group Name to confirm',
+        ALTERNATIVE_WORKING_GROUP:'If you do not want to delete EVERYTHING associated with the Working Group, please proceed to the',
+        EDIT_WORKING_GROUP:'Working Group Administration Page',
+        
+        
+        
         INTRODUCTION_TEXT_FRAGMENT_1: 'This Web-App will guide you in creating the necessary forms for your user study. You will be asked a series of questions, based on which the Ethics-App will auto-generate three documents.',
         INTRODUCTION_TEXT_FRAGMENT_2: 'The Informed Consent form',
         INTRODUCTION_TEXT_FRAGMENT_3: 'This is the most important document. It assures that the Participant gave his consent prior to participating in the study. Both you and your participant must sign the document, and you need to store your copy safely. Conducting a study without the written consent of the participant is not advised and can lead to various legal issues.',
@@ -75,7 +103,7 @@ app.config(function ($translateProvider) {
         STATUS_5: 'Your document has been partly accepted by the committee. Please read the comments and revise your document.',
         STATUS_6: 'Your files have been created successfully. Please click on the following icons to download them.',
         STATUS_7: 'Unfortunatly your document has been rejected by the Ethics committee. Please get in contact with the corresponding reviewers.',
-
+      
         ACCOUNT: 'Account',
         SETTINGS: 'Settings',
         ADMINISTRATION: 'Administration',
@@ -204,11 +232,15 @@ app.config(function ($translateProvider) {
         MEMBER: 'Member',
         USERS: 'Users',
         USER: 'User',
-        UNIVERSITIES: 'University',
+        BLOCKED_USERS: 'Blocked Users',
+        UNIVERSITIES: 'Universities',
         UNIVERSITY: 'University',
         INSTITUTES: 'Institutes',
         INSTITUTE: 'Institute',
         NO_INSTITUTE: 'No institute',
+        WORKING_GROUP: 'Working Group',
+        WORKING_GROUPS: 'Working Groups',
+        
         COURSES: 'Courses',
         COURSE: 'Course',
         NO_COURSE: 'No course',
@@ -229,6 +261,17 @@ app.config(function ($translateProvider) {
         SUBSCRIBED: 'Subscribed ',
         CURRENTLY_NOT_SUBSCRIBED: 'Currently not subscribed',
 
+        CURRENT_INSTITUTES: 'Active Institutes',
+        FORMER_INSTITUTES: 'Former Institutes',
+        CURRENT_WORKING_GROUPS: 'Current Working Groups',
+        FORMER_WORKING_GROUPS: 'Former Working Groups',
+        RELATED_WORKING_GROUPS: 'Related Working Groups',
+        RELATED_FORMER_WORKING_GROUPS: 'Related former Working Groups',
+        RELATED_MEMBERS: 'Related Members',
+        RELATED_FORMER_MEMBERS: 'Related former Members',
+        RELATED_INSTITUTES: 'Related Institutes',
+        RELATED_FORMER_INSTITUTES: 'Related former Institutes',
+      
         START_REVIEWING: 'Start reviewing',
         OPEN_REVIEW: 'Open review',
         SAVE_AND_CLOSE: 'Save & close',
