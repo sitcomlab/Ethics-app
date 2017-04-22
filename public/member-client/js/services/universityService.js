@@ -7,6 +7,16 @@ app.factory('$universityService', function($http, $log, config, $authenticationS
     var universities;
 
     return {
+        init: function(){
+            return {
+                university_name: ""
+            };
+        },
+        copy: function(university){
+            return {
+                university_id: university.university_id
+            };
+        },
         get: function(){
             return universities;
         },

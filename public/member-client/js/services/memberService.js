@@ -9,7 +9,34 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
     return {
         init: function(){
             return {
-                
+                username: "",
+                password: "",
+                title: null,
+                first_name: "",
+                last_name: "",
+                working_group_id: null,
+                office_room_number: null,
+                office_phone_number: null,
+                office_email_address: null,
+                subscribed: true,
+                former: false
+            };
+        },
+        copy: function(member){
+            return {
+                member_id: member.member_id,
+                username: member.username,
+                old_password: "",
+                new_password: "",
+                title: member.title,
+                first_name: member.first_name,
+                last_name: member.last_name,
+                working_group_id: member.working_group_id,
+                office_room_number: member.office_room_number,
+                office_phone_number: member.office_phone_number,
+                office_email_address: member.office_email_address,
+                subscribed: member.subscribed,
+                former: member.former
             };
         },
         get: function(){

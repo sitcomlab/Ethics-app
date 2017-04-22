@@ -14,6 +14,13 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
                 course_id: null
             };
         },
+        copy: function(){
+            return {
+                document_id: document.document_id,
+                document_title: document.document_title,
+                course_id: document.course_id
+            };
+        },
         get: function(){
             return document;
         },
@@ -107,13 +114,6 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
         },
         setFiles: function(data){
             document.files = data;
-        },
-        copy: function(){
-            return {
-                document_id: document.document_id,
-                document_title: document.document_title,
-                course_id: document.course_id
-            };
         },
         create: function(data) {
             return $http.post(config.apiURL + "/documents", data);

@@ -7,6 +7,27 @@ app.factory('$userService', function($http, $log, config, $authenticationService
     var users;
 
     return {
+        init: function(){
+            return {
+                email_address: "",
+                title: null,
+                first_name: "",
+                last_name: "",
+                institute_id: null,
+                blocked: false
+            };
+        },
+        copy: function(user){
+            return {
+                user_id: user.user_id,
+                email_address: user.email_address,
+                title: user.title,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                institute_id: user.institute_id,
+                blocked: user.blocked
+            };
+        },
         get: function(){
             return users;
         },

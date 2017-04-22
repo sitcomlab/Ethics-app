@@ -7,6 +7,21 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
     var working_groups;
 
     return {
+        init: function(){
+            return {
+                working_group_name: "",
+                institute_id: null,
+                former: false
+            };
+        },
+        copy: function(working_group){
+            return {
+                working_group_id: working_group.working_group_id,
+                working_group_name: working_group.working_group_name,
+                institute_id: working_group.institute_id,
+                former: working_group.former
+            };
+        },
         get: function(){
             return working_groups;
         },

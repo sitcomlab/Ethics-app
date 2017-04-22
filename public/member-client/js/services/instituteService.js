@@ -7,6 +7,20 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
     var institutes;
 
     return {
+        init: function(){
+            return {
+                institute_name: "",
+                university_id: null,
+                former: false
+            };
+        },
+        copy: function(institute){
+            return {
+                institute_id: institute.institute_id,
+                institute_name: institute.institute_name,
+                former: institute.former
+            };
+        },
         get: function(){
             return institutes;
         },
