@@ -11,7 +11,7 @@ app.config(function ($translateProvider) {
 
         WELCOME: 'Welcome',
         WELCOME_MESSAGE: 'This Web-App provides a way to create the necessary forms for your user study. Please login or create a new document.',
-        WELCOME_MESSAGE_MEMBER: 'This is the Login for Members of the Ethics-Comittee. If you are not a member of the Ethics-Comittee, please login',
+        WELCOME_MESSAGE_MEMBER: 'This is the Login for Members of the Ethics-Committee. If you are not a member of the Ethics-Committee, please login',
         HERE: 'here',
 
         DOCUMENT_ID: 'Document-ID',
@@ -60,7 +60,7 @@ app.config(function ($translateProvider) {
         FILTER_BY_STATUS:'Filter by status',
 
         DELETE_THIS_UNIVERSITY:'Do you really want to delete this university:',
-        EXPLANATION_OF_DELETING_A_UNIVERSITY:'Deleting an university also deletes ALL ASSOCIATED institutes, working groups, comittee members, users and documents. PLEASE PROCEED WITH CAUTION!',
+        EXPLANATION_OF_DELETING_A_UNIVERSITY:'Deleting an university also deletes ALL ASSOCIATED institutes, working groups, committee members, users and documents. PLEASE PROCEED WITH CAUTION!',
         UNIVERSITY_NAME:'University name',
         PLEASE_TYPE_IN_THE_UNIVERSITY_NAME_TO_CONFIRM:'Please type in the university name to confirm',
 
@@ -72,7 +72,7 @@ app.config(function ($translateProvider) {
         EDIT_INSTITUTE:'Institute administration page',
 
         DELETE_THIS_WORKING_GROUP:'Do you really want to delete this working group:',
-        EXPLANATION_OF_DELETING_A_WORKING_GROUP:'Deleting a working group also deletes ALL ASSOCIATED comittee members. PLEASE PROCEED WITH CAUTION!',
+        EXPLANATION_OF_DELETING_A_WORKING_GROUP:'Deleting a working group also deletes ALL ASSOCIATED committee members. PLEASE PROCEED WITH CAUTION!',
         WORKING_GROUP_NAME:'Working group name',
         PLEASE_TYPE_IN_THE_WORKING_GROUP_NAME_TO_CONFIRM:'Please tpe in the working group name to confirm',
         ALTERNATIVE_WORKING_GROUP:'If you do not want to delete EVERYTHING associated with the working group, please proceed to the',
@@ -96,7 +96,7 @@ app.config(function ($translateProvider) {
         STUDY_CONCERNS_FORM_TEXT: 'Complete the checklist below. If you have answered "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the Institutes Ethics Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. <br> Make sure you discuss any concerns with the members of the Intitutes\'s Ethics Committee.',
 
         AGREEMENT_DATA: 'I agree that all given information is correct, and I am aware that my data will be stored by the Institute responsible for the study and its partners',
-        AGREEMENT_DELETION: 'I agree that as soon as I submit my document request, only Members of the Ethics comittee can delete my account',
+        AGREEMENT_DELETION: 'I agree that as soon as I submit my document request, only Members of the Ethics committee can delete my account',
 
         STATUS_2: 'Your files have been created successfully. Please click on the following icons to download them.',
         STATUS_3: 'Your document was submitted successfully, but has one or more ethical concerns. You will get an email as soon as the committee start to review it.',
