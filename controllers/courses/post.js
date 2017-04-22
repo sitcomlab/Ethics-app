@@ -10,8 +10,13 @@ var server_url = require('../../server.js').server_url;
 var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/courses/";
-var query_create_course = fs.readFileSync(__dirname + dir + 'create.sql', 'utf8').toString();
+var dir_1 = "/../../sql/queries/courses/";
+var dir_2 = "/../../sql/queries/members/";
+var dir_3 = "/../../sql/queries/responsibilities/";
+var query_create_course = fs.readFileSync(__dirname + dir_1 + 'create.sql', 'utf8').toString();
+var query_get_member = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
+var query_create_responsibility = fs.readFileSync(__dirname + dir_3 + 'create.sql', 'utf8').toString();
+var query_get_responsibilities_by_course = fs.readFileSync(__dirname + dir_3 + 'get_by_course.sql', 'utf8').toString();
 
 
 // POST
@@ -68,7 +73,64 @@ exports.request = function(req, res) {
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, 201, result.rows[0]);
+                    callback(null, client, done, result.rows[0]);
+                }
+            });
+        },
+        function(client, done, course, callback){
+
+            // Create responsibilities
+            async.eachOfSeries(req.body.responsibilities, function (responsibility, key, callback) {
+
+                // Database query
+                client.query(query_get_member, [
+                    responsibility.member_id
+                ], function(err, result) {
+                    done();
+                    if (err) {
+                        callback(err, 500);
+                    } else {
+                        // Check if Member exists
+                        if (result.rows.length === 0) {
+                            callback(new Error("Member not found"), 404);
+                        } else {
+
+                            // Database query
+                            client.query(query_create_responsibility, [
+                                course.course_id,
+                                responsibility.member_id
+                            ], function(err, result) {
+                                done();
+                                if (err) {
+                                    callback(err, 500);
+                                } else {
+                                    callback(null);
+                                }
+                            });
+
+                        }
+                    }
+                });
+
+            }, function(err){
+                if(err){
+                    callback(err, 500);
+                } else {
+                    callback(null, client, done, course);
+                }
+            });
+        },
+        function(client, done, course, callback){
+            // Database query
+            client.query(query_get_responsibilities_by_course, [
+                course.course_id
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    course.responsibilities = result.rows;
+                    callback(null, 201, course);
                 }
             });
         }
