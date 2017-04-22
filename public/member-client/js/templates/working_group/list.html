@@ -33,7 +33,7 @@
             </div>
         </div>
         <h6 class="text-muted">
-            {{ 'CURRENT_WORKING_GROUPS' | translate }}
+            {{ 'WORKING_GROUPS' | translate }}
         </h6>
         <div class="list-group" ng-if="current_working_groups && current_working_groups.length>0">
             <a href="" ng-click="redirect('/working_groups/' + working_group.working_group_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="working_group in current_working_groups | filter: searchText | orderBy: ['working_group_name']">

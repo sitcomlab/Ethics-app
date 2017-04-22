@@ -33,7 +33,7 @@
             </div>
         </div>
         <h6 class="text-muted">
-            {{ 'CURRENT_INSTITUTES' | translate }}
+            {{ 'INSTITUTES' | translate }}
         </h6>
         <div class="list-group" ng-if="current_institutes && current_institutes.length>0">
             <a href="" ng-click="redirect('/institutes/' + institute.institute_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="institute in current_institutes | filter: searchText | orderBy: ['institute_name']">

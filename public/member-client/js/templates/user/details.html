@@ -3,7 +3,8 @@
     <div class="card-header" style="font-size: 20pt;">
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-                <span ng-if="user.blocked">{{ 'BLOCKED' | translate }} </span>{{ 'USER' | translate }}
+                <span ng-if="user.blocked">{{ 'BLOCKED' | translate }} {{ '_USER' | translate }}</span>
+                <span ng-if="!user.blocked">{{ 'USER' | translate }} </span>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 right">
                 <div class="btn-group">

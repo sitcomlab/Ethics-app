@@ -12,7 +12,7 @@
     </div>
     <div class="card-block">
         <h6 class="text-muted">
-            {{ 'CURRENT_MEMBERS' | translate }}
+            {{ 'MEMBERS' | translate }}
         </h6>
         <div class="list-group" ng-if="current_members && current_members.length>0">
             <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in current_members | orderBy: ['last_name', 'first_name']">
