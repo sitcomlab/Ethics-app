@@ -27,7 +27,7 @@ app.controller("universityCreateController", function($scope, $rootScope, $route
             // Update UI
             $scope.createCourseForm.university_name.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Creating new University" };
+            $scope.$parent.loading = { status: true, message: "Creating new university" };
 
             // Create new University
             $universityService.create($scope.new_university)

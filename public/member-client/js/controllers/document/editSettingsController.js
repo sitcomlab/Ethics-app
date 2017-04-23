@@ -22,7 +22,7 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $t
      * @return {[type]} [description]
      */
     $scope.cancel = function(){
-        $scope.redirect("/documents/" + $documentService.getId());
+        $scope.redirect("/documents/" + $routeParams.document_id);
     };
 
     /**
@@ -39,7 +39,7 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $t
         } else {
             $scope.$parent.loading = { status: true, message: "Saving document" };
 
-            $documentService.edit(document.document_id, $scope.updated_document)
+            $documentService.edit($routeParams.document_id, $scope.updated_document)
             .then(function onSuccess(response) {
                 $documentService.set(response.data);
 
@@ -48,7 +48,7 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $t
                 $scope.$parent.loading = { status: false, message: "" };
 
                 // Redirect
-                $scope.redirect("/documents/" + $documentService.getId());
+                $scope.redirect("/documents/" + $routeParams.document_id);
             })
             .catch(function onError(response) {
                 $window.alert(response.data);

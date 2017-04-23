@@ -26,14 +26,14 @@ app.controller("universityEditController", function($scope, $rootScope, $routePa
         if($scope.editUniversityForm.$invalid) {
             // Update UI
             $scope.editUniversityForm.university_name.$pristine = false;
-            } else {
-            $scope.$parent.loading = { status: true, message: "Saving University" };
-              
+        } else {
+            $scope.$parent.loading = { status: true, message: "Saving university" };
+
             // Updating University
-            $universityService.edit($scope.university.university_id, $scope.updated_university)
+            $universityService.edit($routeParams.university_id, $scope.updated_university)
             .then(function onSuccess(response) {
                 // Redirect
-                $scope.redirect("/universities/");
+                $scope.redirect("/universities/" + $routeParams.university_id);
             })
             .catch(function onError(response) {
                 $window.alert(response.data);
@@ -44,7 +44,7 @@ app.controller("universityEditController", function($scope, $rootScope, $routePa
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading University" };
+    $scope.$parent.loading = { status: true, message: "Loading university" };
 
     // Load University
     $universityService.retrieve($routeParams.university_id)

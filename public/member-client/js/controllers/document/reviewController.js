@@ -158,7 +158,7 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
             $scope.$parent.document = false;
 
             // Redirect
-            $scope.redirect("/documents/" + $scope.document.document_id);
+            $scope.redirect("/documents/" + $routeParams.document_id);
         })
         .catch(function onError(response) {
             $window.alert(response.data);
@@ -188,14 +188,14 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
                 $scope.$parent.loading = { status: true, message: "Publishing review" };
 
                 // Change status of document
-                $documentService.changeStatus($scope.document.document_id, {
+                $documentService.changeStatus($routeParams.document_id, {
                     status: $scope.review_status
                 })
                 .then(function onSuccess(response) {
                     $scope.$parent.loading = { status: false, message: "" };
 
                     // Redirect
-                    $scope.redirect("/documents/" + $scope.document.document_id);
+                    $scope.redirect("/documents/" + $routeParams.document_id);
                 })
                 .catch(function onError(response) {
                     $window.alert(response.data);

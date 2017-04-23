@@ -38,7 +38,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
 
             $timeout(function(){
                 // Load revisions
-                $revisionService.listByDocument($documentService.getId())
+                $revisionService.listByDocument($routeParams.document_id)
                 .then(function onSuccess(response) {
                     $documentService.setRevisions(response.data);
 
@@ -135,7 +135,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                         $scope.$parent.loading = { status: false, message: "" };
 
                         // Redirect
-                        $scope.redirect("/documents/" + $documentService.getId() + "/overview");
+                        $scope.redirect("/documents/" + $routeParams.document_id + "/overview");
 
                     });
                 })

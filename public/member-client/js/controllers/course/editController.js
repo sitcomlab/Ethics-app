@@ -34,12 +34,10 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
             $scope.$parent.loading = { status: true, message: "Saving course" };
 
             // Updating course
-            $courseService.edit($scope.course.course_id, $scope.updated_course)
+            $courseService.edit($routeParams.course_id, $scope.updated_course)
             .then(function onSuccess(response) {
-                var course = response.data;
-
                 // Redirect
-                $scope.redirect("/courses/" + course.course_id);
+                $scope.redirect("/courses/" + $routeParams.course_id);
             })
             .catch(function onError(response) {
                 $window.alert(response.data);
