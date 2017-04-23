@@ -15,6 +15,6 @@ WHERE
     AND
         working_group.institute_id=$4::INTEGER
 ORDER BY
-    working_group_name;
+    working_group_name
 OFFSET $1
 LIMIT $2;
