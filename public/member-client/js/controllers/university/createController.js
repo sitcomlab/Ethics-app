@@ -35,7 +35,7 @@ app.controller("universityCreateController", function($scope, $rootScope, $route
                 var university = response.data;
 
                 // Redirect
-                $scope.redirect("/universities/");
+                $scope.redirect("/universities/" + university.university_id);
             })
             .catch(function onError(response) {
                 $window.alert(response);
@@ -47,7 +47,6 @@ app.controller("universityCreateController", function($scope, $rootScope, $route
     /*************************************************
         INIT
      *************************************************/
+    $scope.new_university = $universityService.init();
 
-    // Nothing to do here
-  
 });
