@@ -175,13 +175,13 @@ app.config(function($routeProvider, $locationProvider, config) {
                 factory: checkAuthentication
             }
 		})
-		/*.when("/universities/:university_id/edit", {
+		.when("/universities/:university_id/edit", {
 			templateUrl: "js/templates/university/edit.html",
 			controller: "universityEditController",
 			resolve: {
                 factory: checkAuthentication
             }
-		})*/
+		})
         .when("/universities/:university_id/delete", {
             templateUrl: "js/templates/university/delete.html",
             controller: "universityDeleteController",
