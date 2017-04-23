@@ -5,5 +5,5 @@ SELECT
 FROM Universities
 ORDER BY
     university_name ASC
-OFFSET $1::INTEGER
-LIMIT $2::INTEGER;
+OFFSET $1
+LIMIT $2;

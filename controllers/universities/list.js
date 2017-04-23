@@ -31,8 +31,8 @@ exports.request = function(req, res) {
             var params = [];
 
             // Pagination parameters
-            params.push(Number(req.query.offset));
-            params.push(Number(req.query.limit));
+            params.push(Number(req.query.offset) || null);
+            params.push(Number(req.query.limit) || null);
 
             callback(null, client, done, params);
         },

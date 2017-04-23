@@ -7,8 +7,10 @@ var _ = require('underscore');
 var pool = require('../../server.js').pool;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/institutes/";
-var query_list_institutes = fs.readFileSync(__dirname + dir + 'list.sql', 'utf8').toString();
+var dir_1 = "/../../sql/queries/universities/";
+var dir_2 = "/../../sql/queries/institutes/";
+var query_get_university = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
+var query_list_institutes_by_university = fs.readFileSync(__dirname + dir_2 + 'list_by_university.sql', 'utf8').toString();
 
 
 // LIST BY UNIVERSITY
@@ -26,16 +28,37 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
+            // Database query
+            client.query(query_get_university, [
+                req.params.university_id
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    // Check if University exists
+                    if (result.rows.length === 0) {
+                        callback(new Error("University not found"), 404);
+                    } else {
+                        callback(null, client, done);
+                    }
+                }
+            });
+        },
+        function(client, done, callback) {
 
             // Preparing parameters
             var params = [];
 
             // Pagination parameters
-            params.push(Number(req.query.offset));
-            params.push(Number(req.query.limit));
+            params.push(Number(req.query.offset) || null);
+            params.push(Number(req.query.limit) || null);
 
             // Filter by former status
-            params.push(req.query.former);
+            params.push(req.query.former || false );
+
+            // Filter by university_id
+            params.push(req.params.university_id);
 
             callback(null, client, done, params);
         },

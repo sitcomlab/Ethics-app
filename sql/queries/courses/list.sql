@@ -22,5 +22,5 @@ WHERE
 ORDER BY
     year DESC,
     course_name ASC
-OFFSET $1::INTEGER
-LIMIT $2::INTEGER;
+OFFSET $1
+LIMIT $2;
