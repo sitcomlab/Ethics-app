@@ -7,7 +7,7 @@ app.factory('$userService', function($http, $log, config, $authenticationService
     var users;
     var filter = {
         offset: 0,
-        limit: 2, // TEST 50
+        limit: 50,
         blocked: false
     };
     var full_count = 0;

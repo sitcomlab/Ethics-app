@@ -7,7 +7,7 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
     var institutes;
     var filter = {
         offset: 0,
-        limit: 2, // TEST 50
+        limit: 50,
         former: false
     };
     var full_count = 0;

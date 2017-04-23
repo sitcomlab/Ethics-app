@@ -7,7 +7,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
     var members;
     var filter = {
         offset: 0,
-        limit: 2, // TEST 50
+        limit: 50,
         former: false
     };
     var full_count = 0;

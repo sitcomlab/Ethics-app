@@ -7,7 +7,7 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
     var courses;
     var filter = {
         offset: 0,
-        limit: 2 // TEST 50
+        limit: 50
     };
     var full_count = 0;
 

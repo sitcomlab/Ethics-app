@@ -7,7 +7,7 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
     var working_groups;
     var filter = {
         offset: 0,
-        limit: 1, // TEST 50
+        limit: 1, // TODO: Note(nicho): Will be reset after some futher tests
         former: false
     };
     var full_count = 0;
