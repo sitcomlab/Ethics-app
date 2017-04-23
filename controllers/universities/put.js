@@ -71,8 +71,8 @@ exports.request = function(req, res) {
         function(client, done, callback) {
             // TODO: Add object/schema validation
             var object = {
-                university_id: req.params.university_id,
-                university_name: req.params.university_name
+                university_id: req.body.university_id,
+                university_name: req.body.university_name
             };
             var params = _.values(object);
             callback(null, client, done, params);
