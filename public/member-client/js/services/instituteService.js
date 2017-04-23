@@ -58,8 +58,14 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
                 }
             });
         },
-        listByUniversity: function(university_id) {
-            return $http.get(config.apiURL + "/universitites/" + university_id + "/institutes", {
+        listByUniversity: function(university_id, filter) {
+            var query = "?former=" + filter.former + "&";
+
+            // TODO: Add orderby
+
+            query = query.slice(0, -1);
+
+            return $http.get(config.apiURL + "/universities/" + university_id + "/institutes" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

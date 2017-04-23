@@ -17,40 +17,60 @@ app.controller("universityDetailsController", function($scope, $rootScope, $rout
         $location.url(path);
     };
 
+    /**
+     * [description]
+     * @param  {[type]} related_data [description]
+     * @param  {[type]} status       [description]
+     * @return {[type]}              [description]
+     */
+    $scope.changeTab = function(related_data, status){
+        $scope.filter = { former: status };
+        $scope.load(related_data);
+    };
+
+    /**
+     * [description]
+     * @param  {[type]} related_data [description]
+     * @return {[type]}              [description]
+     */
+    $scope.load = function(related_data){
+
+        // Check which kind of related data needs to be requested
+        switch (related_data) {
+            case 'institutes': {
+                $scope.$parent.loading = { status: true, message: "Loading related institutes" };
+
+                // Load related institutes
+                $instituteService.listByUniversity($scope.university.university_id, $scope.filter)
+                .then(function onSuccess(response) {
+                    $scope.university.institutes = response.data;
+                    $scope.$parent.loading = { status: false, message: "" };
+                })
+                .catch(function onError(response) {
+                    $window.alert(response.data);
+                });
+                break;
+            }
+        }
+
+    };
+
 
     /*************************************************
         INIT
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading university" };
 
+    // Filter
+    $scope.filter = { former: false };
+
     // Load university
     $universityService.retrieve($routeParams.university_id)
     .then(function onSuccess(response) {
         $scope.university = response.data;
 
-        /* TODO: Note(nicho): Currently not working, implementation is in progress
-        $scope.$parent.loading = { status: true, message: "Loading related institutes" };
-
-        // Load institutes
-        $instituteService.list()
-        .then(function onSuccess(response) {
-            $instituteService.set(response.data);
-
-            // Filter by university
-            $instituteService.set($instituteService.getByUniversity($scope.university.university_id));
-
-            // Current institutes
-            $scope.university.current_institutes = $instituteService.getByStatus(false);
-
-            // Former institutes
-            $scope.university.former_institutes = $instituteService.getByStatus(true);
-
-            $scope.$parent.loading = { status: false, message: "" };
-        })
-        .catch(function onError(response) {
-            $window.alert(response.data);
-        });*/
-        $scope.$parent.loading = { status: false, message: "" };
+        // Load related institutes
+        $scope.load('institutes');
     })
     .catch(function onError(response) {
         $window.alert(response.data);

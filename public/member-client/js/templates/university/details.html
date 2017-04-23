@@ -48,46 +48,43 @@
                 <br>
                 <br>
 
-                <!-- TODO: Note(nicho): Currently not working, implementation is in progress -->
-                <!-- <h6 class="text-muted">
-                    {{ 'RELATED_INSTITUTES' | translate }}
-                </h6>
-                <div class="list-group" ng-if="university.current_institutes && university.current_institutes.length>0">
-                    <a href="" ng-click="redirect('/institutes/' + institute.institute_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="institute in university.current_institutes | orderBy: ['institute_name']">
-                        <i class="fa fa-building" aria-hidden="true"></i>
-                        &nbsp;&nbsp;
-                        <b>{{institute.institute_name}}</b>
+                <!-- Sub-nav -->
+                <ul class="nav nav-pills justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="" ng-class="{ 'active': !filter.former }" ng-click="changeTab('institutes', false)">
+                            {{ 'RELATED_INSTITUTES' | translate }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="" ng-class="{ 'active': filter.former }" ng-click="changeTab('institutes', true)">
+                            {{ 'RELATED_FORMER_INSTITUTES' | translate }}
+                        </a>
+                    </li>
+                </ul>
+                <br>
+
+                <div class="list-group" ng-if="university.institutes && university.institutes.length>0">
+                    <a href="" ng-click="redirect('/institutes/' + institute.institute_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="institute in university.institutes | orderBy: ['institute_name']">
+                        <div class="d-flex w-100 justify-content-between">
+                            <div>
+                                <i class="fa fa-building" aria-hidden="true" ng-if="!institute.former"></i>
+                                <i class="fa fa-building-o" aria-hidden="true" ng-if="institute.former"></i>
+                                &nbsp;&nbsp;
+                                <b>{{institute.institute_name}}</b>
+                            </div>
+                            <div ng-if="institute.former">
+                                <i class="fa fa-ban text-danger" aria-hidden="true"></i>
+                            </div>
+                        </div>
                     </a>
                 </div>
-                <div class="list-group" ng-if="!university.current_institutes || university.current_institutes.length==0">
+                <div class="list-group" ng-if="!university.institutes || university.institutes.length==0">
                     <div class="list-group-item middle">
                         - {{ 'NONE' | translate }} -
                     </div>
                 </div>
                 <br>
 
-                <h6 class="text-muted">
-                    {{ 'RELATED_FORMER_INSTITUTES' | translate }}
-                </h6>
-                <div class="list-group" ng-if="university.former_institutes && university.former_institutes.length>0">
-                    <a href="" ng-click="redirect('/institutes/' + institute.institute_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="institute in university.former_institutes | orderBy: ['institute_name']">
-                        <div class="d-flex w-100 justify-content-between">
-                            <div>
-                                <i class="fa fa-building-o" aria-hidden="true"></i>
-                                &nbsp;&nbsp;
-                                <b>{{institute.institute_name}}</b>
-                            </div>
-                            <div>
-                                <i class="fa fa-ban text-danger" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="list-group" ng-if="!university.former_institutes || university.former_institutes.length==0">
-                    <div class="list-group-item middle">
-                        - {{ 'NONE' | translate }} -
-                    </div>
-                </div>-->
             </div>
         </div>
     </div>
