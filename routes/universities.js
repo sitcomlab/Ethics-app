@@ -12,16 +12,16 @@ var del = require('../controllers/universities/delete');
 // LIST
 router.get('/universities', list.request);
 
-// POST (ONLY MEMBERS)
+// POST (ONLY ADMINS)
 router.post('/universities', isAuthenticated, post.request);
 
 // GET
 router.get('/universities/:university_id', get.request);
 
-// PUT (ONLY MEMBERS)
+// PUT (ONLY ADMINS)
 router.put('/universities/:university_id', isAuthenticated, put.request);
 
-// DELETE (ONLY MEMBERS)
+// DELETE (ONLY ADMINS)
 router.delete('/universities/:university_id', isAuthenticated, del.request);
 
 

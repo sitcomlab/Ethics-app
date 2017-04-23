@@ -22,7 +22,7 @@ router.get('/users/:user_id', isAuthenticated, get.request);
 // PUT
 router.put('/users/:user_id', isAuthenticated, put.request);
 
-// DELETE (ONLY FOR  MEMBERS)
+// DELETE (ONLY FOR MEMBERS)
 router.delete('/users/:user_id', isAuthenticated, del.request);
 
 // FIND BY EMAIL

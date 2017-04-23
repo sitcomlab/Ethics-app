@@ -7,11 +7,11 @@ var _ = require('underscore');
 var pool = require('../../server.js').pool;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/courses/";
-var query_get_course = fs.readFileSync(__dirname + dir + 'get.sql', 'utf8').toString();
+var dir = "/../../sql/queries/institutes/";
+var query_list_institutes = fs.readFileSync(__dirname + dir + 'list.sql', 'utf8').toString();
 
 
-// GET
+// LIST BY UNIVERSITY
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -26,20 +26,27 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
+
+            // Preparing parameters
+            var params = [];
+
+            // Pagination parameters
+            params.push(Number(req.query.offset));
+            params.push(Number(req.query.limit));
+
+            // Filter by former status
+            params.push(req.query.former);
+
+            callback(null, client, done, params);
+        },
+        function(client, done, params, callback) {
             // Database query
-            client.query(query_get_course, [
-                req.params.course_id
-            ], function(err, result) {
+            client.query(query_list_institutes_by_university, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    // Check if Course exists
-                    if (result.rows.length === 0) {
-                        callback(new Error("Course not found"), 404);
-                    } else {
-                        callback(null, 200, result.rows[0]);
-                    }
+                    callback(null, 200, result.rows);
                 }
             });
         }

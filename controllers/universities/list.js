@@ -26,8 +26,19 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
+
+            // Preparing parameters
+            var params = [];
+
+            // Pagination parameters
+            params.push(Number(req.query.offset));
+            params.push(Number(req.query.limit));
+
+            callback(null, client, done, params);
+        },
+        function(client, done, params, callback) {
             // Database query
-            client.query(query_list_universities, function(err, result) {
+            client.query(query_list_universities, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

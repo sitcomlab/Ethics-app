@@ -87,14 +87,28 @@ exports.request = function(req, res) {
             }
         },
         function(client, done, member, user, query, callback) {
-            // Prepare params, if filtering by insitute is required
+
+            // Preparing parameters
             var params = [];
+
+            // Pagination parameters
+            params.push(Number(req.query.offset));
+            params.push(Number(req.query.limit));
+
+            // Filter by former status
+            params.push(req.query.former);
+
+            // TODO: Add orderBy: document.created ASC DESC, etc.
+            //params.push(req.query.orderby);
+
+            // Filter by institute
             if(member){
                 params.push(member.institute_id);
             }
             if(user){
                 params.push(user.institute_id);
             }
+
             callback(null, client, done, query, params);
         },
         function(client, done, query, params, callback) {

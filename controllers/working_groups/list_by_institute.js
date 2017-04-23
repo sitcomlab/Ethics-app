@@ -7,11 +7,11 @@ var _ = require('underscore');
 var pool = require('../../server.js').pool;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/courses/";
-var query_list_courses = fs.readFileSync(__dirname + dir + 'list.sql', 'utf8').toString();
+var dir = "/../../sql/queries/working_groups/";
+var query_list_working_groups = fs.readFileSync(__dirname + dir + 'list.sql', 'utf8').toString();
 
 
-// LIST
+// LIST BY INSTITUTE
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -26,8 +26,22 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
+
+            // Preparing parameters
+            var params = [];
+
+            // Pagination parameters
+            params.push(Number(req.query.offset));
+            params.push(Number(req.query.limit));
+
+            // Filter by former status
+            params.push(req.query.former);
+
+            callback(null, client, done, params);
+        },
+        function(client, done, params, callback) {
             // Database query
-            client.query(query_list_courses, function(err, result) {
+            client.query(query_list_working_groups, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

@@ -67,10 +67,25 @@ exports.request = function(req, res) {
             }
         },
         function(client, done, member, callback) {
+
+            // Preparing parameters
+            var params = [];
+
+            // Pagination parameters
+            params.push(Number(req.query.offset));
+            params.push(Number(req.query.limit));
+
+            // Filter by blocked status
+            params.push(req.query.blocked);
+
+            // Filter by institute
+            params.push(member.institute_id);
+
+            callback(null, client, done, params);
+        },
+        function(client, done, params, callback) {
             // Database query
-            client.query(query_list_users, [
-                member.institute_id
-            ], function(err, result) {
+            client.query(query_list_users, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

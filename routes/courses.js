@@ -3,6 +3,7 @@ var router = express.Router();
 var isAuthenticated = require('../server.js').isAuthenticated;
 
 var list = require('../controllers/courses/list');
+var list_by_institute = require('../controllers/courses/list_by_institute');
 var post = require('../controllers/courses/post');
 var get = require('../controllers/courses/get');
 var put = require('../controllers/courses/put');
@@ -11,6 +12,9 @@ var del = require('../controllers/courses/delete');
 
 // LIST
 router.get('/courses', list.request);
+
+// LIST BY INSTITUTE
+router.get('/institutes/:institute_id/courses', list_by_institute.request);
 
 // POST (ONLY MEMBERS)
 router.post('/courses', isAuthenticated, post.request);

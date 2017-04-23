@@ -16,16 +16,16 @@ router.get('/members', isAuthenticated, list.request);
 // LIST BY COURSE (PUBLIC AND MEMBERS)
 router.get('/courses/:course_id/members', isAuthenticated, list_by_course.request);
 
-// POST (ONLY MEMBERS)
+// POST (ONLY ADMINS)
 router.post('/members', isAuthenticated, post.request);
 
 // GET
 router.get('/members/:member_id', isAuthenticated, get.request);
 
-// PUT (ONLY MEMBERS)
+// PUT (MEMBERS AND ADMINS)
 router.put('/members/:member_id', isAuthenticated, put.request);
 
-// DELETE (ONLY MEMBERS)
+// DELETE (ONLY ADMINS)
 router.delete('/members/:member_id', isAuthenticated, del.request);
 
 

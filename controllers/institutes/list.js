@@ -26,8 +26,22 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
+
+            // Preparing parameters
+            var params = [];
+
+            // Pagination parameters
+            params.push(Number(req.query.offset));
+            params.push(Number(req.query.limit));
+
+            // Filter by former status
+            params.push(req.query.former);
+
+            callback(null, client, done, params);
+        },
+        function(client, done, params, callback) {
             // Database query
-            client.query(query_list_institutes, function(err, result) {
+            client.query(query_list_institutes, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

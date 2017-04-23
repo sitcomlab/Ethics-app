@@ -17,7 +17,7 @@ var query_list_courses = fs.readFileSync(__dirname + dir_2 + 'list.sql', 'utf8')
 var query_list_public_courses = fs.readFileSync(__dirname + dir_2 + 'list_public.sql', 'utf8').toString();
 
 
-// LIST
+// LIST BY INSTITUTE
 exports.request = function(req, res) {
 
     async.waterfall([
