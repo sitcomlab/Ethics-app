@@ -5,6 +5,11 @@ var app = angular.module("courseService", []);
 app.factory('$courseService', function($http, $log, config, $authenticationService, _) {
 
     var courses;
+    var filter = {
+        offset: 0,
+        limit: 2 // TEST 50
+    };
+    var full_count = 0;
 
     return {
         init: function(){
@@ -31,14 +36,36 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
         get: function(){
             return courses;
         },
-        getByInstitute: function(institute_id){
-            return _.where(courses, {institute_id: institute_id});
+        getFilter: function(){
+            return filter;
+        },
+        getCount: function(){
+            return full_count;
         },
         set: function(data){
             courses = data;
         },
-        list: function() {
-            return $http.get(config.apiURL + "/courses", {
+        setFilter: function(data) {
+            filter = data;
+        },
+        setCount: function(data) {
+            full_count = data;
+        },
+        list: function(filter) {
+            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&";
+
+            // TODO: Add orderby
+
+            query = query.slice(0, -1);
+
+            return $http.get(config.apiURL + "/courses" + query, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        listByInstitute: function(institute_id) {
+            return $http.get(config.apiURL + "/institutes/" + institute_id + "/courses", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

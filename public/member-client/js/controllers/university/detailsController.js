@@ -28,6 +28,7 @@ app.controller("universityDetailsController", function($scope, $rootScope, $rout
     .then(function onSuccess(response) {
         $scope.university = response.data;
 
+        /* TODO: Note(nicho): Currently not working, implementation is in progress
         $scope.$parent.loading = { status: true, message: "Loading related institutes" };
 
         // Load institutes
@@ -48,7 +49,7 @@ app.controller("universityDetailsController", function($scope, $rootScope, $rout
         })
         .catch(function onError(response) {
             $window.alert(response.data);
-        });
+        });*/
         $scope.$parent.loading = { status: false, message: "" };
     })
     .catch(function onError(response) {

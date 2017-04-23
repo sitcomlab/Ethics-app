@@ -5,6 +5,12 @@ var app = angular.module("workingGroupService", []);
 app.factory('$workingGroupService', function($http, $log, config, $authenticationService) {
 
     var working_groups;
+    var filter = {
+        offset: 0,
+        limit: 1, // TEST 50
+        former: false
+    };
+    var full_count = 0;
 
     return {
         init: function(){
@@ -25,17 +31,36 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
         get: function(){
             return working_groups;
         },
-        getByInstitute: function(institute_id){
-            return _.where(working_groups, {institute_id: institute_id});
+        getFilter: function(){
+            return filter;
         },
-        getByStatus: function(status){
-            return _.where(working_groups, { former: status });
+        getCount: function(){
+            return full_count;
         },
         set: function(data){
             working_groups = data;
         },
-        list: function(){
-            return $http.get(config.apiURL + "/working_groups", {
+        setFilter: function(data) {
+            filter = data;
+        },
+        setCount: function(data) {
+            full_count = data;
+        },
+        list: function(filter) {
+            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&former=" + filter.former + "&";
+
+            // TODO: Add orderby
+
+            query = query.slice(0, -1);
+
+            return $http.get(config.apiURL + "/working_groups" + query, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        listByInstitute: function(institute_id) {
+            return $http.get(config.apiURL + "/institutes/" + institute_id + "/working_groups", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

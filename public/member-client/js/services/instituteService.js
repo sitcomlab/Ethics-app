@@ -5,6 +5,12 @@ var app = angular.module("instituteService", []);
 app.factory('$instituteService', function($http, $log, config, $authenticationService) {
 
     var institutes;
+    var filter = {
+        offset: 0,
+        limit: 2, // TEST 50
+        former: false
+    };
+    var full_count = 0;
 
     return {
         init: function(){
@@ -24,17 +30,36 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
         get: function(){
             return institutes;
         },
-        getByUniversity: function(university_id){
-            return _.where(institutes, {university_id: university_id});
+        getFilter: function(){
+            return filter;
         },
-        getByStatus: function(status){
-            return _.where(institutes, { former: status });
+        getCount: function(){
+            return full_count;
         },
         set: function(data){
             institutes = data;
         },
-        list: function(){
-            return $http.get(config.apiURL + "/institutes", {
+        setFilter: function(data) {
+            filter = data;
+        },
+        setCount: function(data) {
+            full_count = data;
+        },
+        list: function(filter) {
+            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&former=" + filter.former + "&";
+
+            // TODO: Add orderby
+
+            query = query.slice(0, -1);
+
+            return $http.get(config.apiURL + "/institutes" + query, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        listByUniversity: function(university_id) {
+            return $http.get(config.apiURL + "/universitites/" + university_id + "/institutes", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

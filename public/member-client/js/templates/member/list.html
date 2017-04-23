@@ -33,11 +33,23 @@
             </div>
         </div>
 
-        <h6 class="text-muted">
-            {{ 'MEMBERS' | translate }}
-        </h6>
-        <div class="list-group" ng-if="current_members && current_members.length>0">
-            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-style="member.member_id == authenticated_member.member_id && {'background-color': '#f7f7f9'}" ng-repeat="member in current_members | filter: searchText | orderBy: ['last_name', 'first_name']">
+        <!-- Sub-nav -->
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="" ng-class="{ 'active': !filter.former }" ng-click="changeTab(false)">
+                    {{ 'MEMBERS' | translate }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="" ng-class="{ 'active': filter.former }" ng-click="changeTab(true)">
+                    {{ 'FORMER_MEMBERS' | translate }}
+                </a>
+            </li>
+        </ul>
+        <br>
+
+        <div class="list-group" ng-if="members && members.length>0">
+            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-style="member.member_id == authenticated_member.member_id && {'background-color': '#f7f7f9'}" ng-repeat="member in members | filter: searchText | orderBy: ['last_name', 'first_name']">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
                         <span ng-if="member.admin">
@@ -53,7 +65,7 @@
                             {{member.working_group_name}} | {{member.institute_name}} | {{member.university_name}}
                         </small>
                     </div>
-                    <div>
+                    <div ng-if="!filter.former">
                         <span class="text-success" ng-if="member.subscribed">
                             <i class="fa fa-rss-square" aria-hidden="true"></i>
                         </span>
@@ -61,15 +73,13 @@
                             <i class="fa fa-rss-square" aria-hidden="true"></i>
                         </span>
                     </div>
+                    <div ng-if="filter.former">
+                        <i class="fa fa-ban text-danger" aria-hidden="true"></i>
+                    </div>
                 </div>
             </a>
         </div>
-        <div class="list-group" ng-if="!current_members || current_members.length==0">
-            <div class="list-group-item middle">
-                - {{ 'NONE' | translate }} -
-            </div>
-        </div>
-        <div class="row" ng-if="current_members && current_members.length>0">
+        <div class="row" ng-if="members && members.length>0 && !filter.former">
             <div class="col text-muted right">
                 <small>
                     <span class="text-success">
@@ -82,33 +92,50 @@
                 </small>
             </div>
         </div>
-        <br>
-
-        <h6 class="text-muted">
-            {{ 'FORMER_MEMBERS' | translate }}
-        </h6>
-        <div class="list-group" ng-if="former_members && former_members.length>0">
-            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action" ng-repeat="member in former_members | filter: searchText | orderBy: ['last_name', 'first_name']">
-                <div class="d-flex w-100 justify-content-between">
-                    <div>
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                        &nbsp;&nbsp;
-                        <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}</b>
-                        &nbsp;
-                        <small class="text-muted">
-                            {{member.working_group_name}} | {{member.institute_name}} | {{member.university_name}}
-                        </small>
-                    </div>
-                    <div>
-                        <i class="fa fa-ban text-danger" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="list-group" ng-if="!former_members || former_members.length==0">
+        <div class="list-group" ng-if="!members || members.length==0">
             <div class="list-group-item middle">
                 - {{ 'NONE' | translate }} -
             </div>
         </div>
+        <br>
+
+    </div>
+    <div class="card-footer right">
+
+        <!-- Pagination -->
+        <nav aria-label="pagination" id="pagination" ng-if="members.length > 0">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
+                    <a href="" class="page-link" ng-click="changeOffset(0)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
+                    <a href="" class="page-link" ng-click="changeOffset(filter.offset - filter.limit)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="page-item" ng-class="{'active': filter.offset == page.offset}" ng-repeat="page in pages">
+                    <a href="" class="page-link" ng-click="changeOffset(page.offset)">
+                        {{$index+1}}
+                    </a>
+                </li>
+                <li class="page-item" ng-class="{ 'disabled': filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit }">
+                    <a href="" class="page-link" ng-click="changeOffset(filter.offset + filter.limit)" ng-style="filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit && {'background-color':'#f7f7f9'}">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="page-item" ng-class="{ 'disabled': filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit }">
+                    <a href="" class="page-link" ng-click="changeOffset(pages[pages.length - 1].offset)" ng-style="filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit && {'background-color':'#f7f7f9'}">
+                        <b><i class="fa fa-angle-double-right" aria-hidden="true"></i></b>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <nav ng-if="members.length == 0">
+            <ul>&nbsp;</ul>
+        </nav>
+
     </div>
 </div>

@@ -33,11 +33,23 @@
             </div>
         </div>
 
-        <h6 class="text-muted">
-            {{ 'USERS' | translate }}
-        </h6>
-        <div class="list-group" ng-if="unblocked_users && unblocked_users.length>0">
-            <a href="" ng-click="redirect('/users/' + user.user_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="user in unblocked_users | filter: searchText | orderBy: ['university_name', 'institute_name', 'last_name', 'first_name']">
+        <!-- Sub-nav -->
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="" ng-class="{ 'active': !filter.blocked }" ng-click="changeTab(false)">
+                    {{ 'USERS' | translate }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="" ng-class="{ 'active': filter.blocked }" ng-click="changeTab(true)">
+                    {{ 'BLOCKED_USERS' | translate }}
+                </a>
+            </li>
+        </ul>
+        <br>
+
+        <div class="list-group" ng-if="users && users.length>0">
+            <a href="" ng-click="redirect('/users/' + user.user_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="user in users | filter: searchText | orderBy: ['university_name', 'institute_name', 'last_name', 'first_name']">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
                         <i class="fa fa-user-o" aria-hidden="true"></i>
@@ -51,10 +63,13 @@
                             <small>{{user.university_name}}</small>
                         </span>
                     </div>
+                    <div ng-if="filter.blocked">
+                        <i class="fa fa-hand-paper-o text-danger" aria-hidden="true"></i>
+                    </div>
                 </div>
             </a>
         </div>
-        <div class="list-group" ng-if="!unblocked_users || unblocked_users.length==0">
+        <div class="list-group" ng-if="!users || users.length==0">
             <div class="list-group-item flex-column align-items-center">
                 <div class="d-flex">
                     - {{ 'NONE' | translate }} -
@@ -63,36 +78,44 @@
         </div>
         <br>
 
-        <h6 class="text-muted">
-            {{ 'BLOCKED_USERS' | translate }}
-        </h6>
-        <div class="list-group" ng-if="blocked_users && blocked_users.length>0">
-            <a href="" ng-click="redirect('/users/' + user.user_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="user in blocked_users | filter: searchText | orderBy: ['university_name', 'institute_name', 'last_name', 'first_name']">
-                <div class="d-flex w-100 justify-content-between">
-                    <div>
-                        <i class="fa fa-user-o" aria-hidden="true"></i>
-                        &nbsp;&nbsp;
-                        <b><span ng-if="user.title">{{user.title}}&nbsp;</span>{{user.first_name}} {{user.last_name}}</b>
-                        &nbsp;
-                        <span class="text-muted" ng-if="user.institute_name">
-                            <small>{{user.institute_name}}&nbsp;|</small>
-                        </span>
-                        <span class="text-muted" ng-if="user.university_name">
-                            <small>{{user.university_name}}</small>
-                        </span>
-                    </div>
-                    <div>
-                        <i class="fa fa-hand-paper-o text-danger" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="list-group" ng-if="!blocked_users || blocked_users.length==0">
-            <div class="list-group-item flex-column align-items-center">
-                <div class="d-flex">
-                    - {{ 'NONE' | translate }} -
-                </div>
-            </div>
-        </div>
+    </div>
+
+    <div class="card-footer right">
+
+        <!-- Pagination -->
+        <nav aria-label="pagination" id="pagination" ng-if="users.length > 0">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
+                    <a href="" class="page-link" ng-click="changeOffset(0)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
+                    <a href="" class="page-link" ng-click="changeOffset(filter.offset - filter.limit)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="page-item" ng-class="{'active': filter.offset == page.offset}" ng-repeat="page in pages">
+                    <a href="" class="page-link" ng-click="changeOffset(page.offset)">
+                        {{$index+1}}
+                    </a>
+                </li>
+                <li class="page-item" ng-class="{ 'disabled': filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit }">
+                    <a href="" class="page-link" ng-click="changeOffset(filter.offset + filter.limit)" ng-style="filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit && {'background-color':'#f7f7f9'}">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="page-item" ng-class="{ 'disabled': filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit }">
+                    <a href="" class="page-link" ng-click="changeOffset(pages[pages.length - 1].offset)" ng-style="filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit && {'background-color':'#f7f7f9'}">
+                        <b><i class="fa fa-angle-double-right" aria-hidden="true"></i></b>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <nav ng-if="users.length == 0">
+            <ul>&nbsp;</ul>
+        </nav>
+
     </div>
 </div>

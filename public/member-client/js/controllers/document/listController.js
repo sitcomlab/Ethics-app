@@ -82,10 +82,10 @@ app.controller("documentListController", function($scope, $rootScope, $translate
     };
 
     /**
-     * [filterDocuments description]
+     * [applyFilter description]
      * @return {[type]} [description]
      */
-    $scope.filterDocuments = function(){
+    $scope.applyFilter = function(){
         $documentsService.set();
         $documentsService.setFilter($scope.filter);
         $scope.documents = $documentsService.get();
@@ -94,8 +94,9 @@ app.controller("documentListController", function($scope, $rootScope, $translate
     };
 
     /**
-     * [authenticated_member description]
-     * @type {[type]}
+     * [description]
+     * @param  {[type]} offset [description]
+     * @return {[type]}        [description]
      */
     $scope.changeOffset = function(offset){
         $scope.filter.offset = offset;
@@ -122,11 +123,8 @@ app.controller("documentListController", function($scope, $rootScope, $translate
      *************************************************/
     $scope.authenticated_member = $authenticationService.get();
 
-    // Filter all documents, which need to be reviewed
+    // Load documents with applied filter (default: documents, which need to be reviewed) and start the interval
     $scope.filter = $documentsService.getFilter();
-
-    // Load documents with applied filter and start interval
-    $scope.load();
-    $scope.run();
+    $scope.applyFilter();
 
 });

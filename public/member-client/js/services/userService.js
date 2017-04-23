@@ -5,6 +5,12 @@ var app = angular.module("userService", []);
 app.factory('$userService', function($http, $log, config, $authenticationService) {
 
     var users;
+    var filter = {
+        offset: 0,
+        limit: 2, // TEST 50
+        blocked: false
+    };
+    var full_count = 0;
 
     return {
         init: function(){
@@ -31,14 +37,29 @@ app.factory('$userService', function($http, $log, config, $authenticationService
         get: function(){
             return users;
         },
-        getByStatus: function(status){
-            return _.where(users, { blocked: status });
+        getFilter: function(){
+            return filter;
+        },
+        getCount: function(){
+            return full_count;
         },
         set: function(data){
             users = data;
         },
-        list: function(){
-            return $http.get(config.apiURL + "/users", {
+        setFilter: function(data) {
+            filter = data;
+        },
+        setCount: function(data) {
+            full_count = data;
+        },
+        list: function(filter) {
+            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&blocked=" + filter.blocked + "&";
+
+            // TODO: Add orderby
+
+            query = query.slice(0, -1);
+
+            return $http.get(config.apiURL + "/users" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

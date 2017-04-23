@@ -25,7 +25,7 @@
             </div>
             <!-- FILTER DOCUMENTS BY STATUS -->
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <select class="form-control custom-select" ng-model="filter.document_status" ng-change="filterDocuments()">
+                <select class="form-control custom-select" ng-model="filter.document_status" ng-change="applyFilter()">
                     <option value="">{{ 'NO_FILTER' | translate }}</option>
                     <option value="0">(0) {{ 'INITIALISED' | translate }}</option>
                     <option value="1">(1) {{ 'UNSUBMITTED' | translate }}</option>
@@ -69,6 +69,8 @@
                 - {{ 'NONE' | translate }} -
             </div>
         </div>
+        <br>
+
     </div>
 
     <div class="card-footer right">
