@@ -22,10 +22,10 @@ app.controller("universityDeleteController", function($scope, $rootScope, $route
      * @return {[type]} [description]
      */
     $scope.delete = function(){
-        $scope.$parent.loading = { status: true, message: "Deleting University" };
+        $scope.$parent.loading = { status: true, message: "Deleting university" };
 
         // Delete university
-        $universityService.remove($scope.universities.university_id)
+        $universityService.remove($scope.university.university_id)
         .then(function onSuccess(response) {
             $scope.redirect("/universities");
         })
@@ -37,13 +37,13 @@ app.controller("universityDeleteController", function($scope, $rootScope, $route
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading University" };
+    $scope.$parent.loading = { status: true, message: "Loading university" };
     $scope.input = "";
 
     // Load university
     $universityService.retrieve($routeParams.university_id)
     .then(function onSuccess(response) {
-        $scope.universities = response.data;
+        $scope.university = response.data;
         $scope.$parent.loading = { status: false, message: "" };
     })
     .catch(function onError(response) {

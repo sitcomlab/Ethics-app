@@ -14,7 +14,7 @@
     </div>
     <div class="card-block">
         <h6>
-            {{ 'DELETE_THIS_UNIVERSITY' | translate }} <kbd>{{universities.university_name}}</kbd>?
+            {{ 'DELETE_THIS_UNIVERSITY' | translate }} <kbd>{{university.university_name}}</kbd>?
         </h6>
         <br>
         <div class="alert alert-danger" role="alert">
@@ -31,7 +31,7 @@
         <small class="form-text text-muted">{{ 'PLEASE_TYPE_IN_THE_UNIVERSITY_NAME_TO_CONFIRM' | translate }}</small>
     </div>
     <div class="card-footer right">
-        <button class="btn btn-danger" role="button" ng-click="delete()" ng-disabled="input != universities.university_name">
+        <button class="btn btn-danger" role="button" ng-click="delete()" ng-disabled="input != university.university_name">
             <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'DELETE' | translate }}
         </button>
     </div>
