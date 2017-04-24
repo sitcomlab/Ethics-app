@@ -22,6 +22,7 @@ app.config(function ($translateProvider) {
         FIRST_NAME : 'First name',
         LAST_NAME : 'Last name',
         HELP: 'Help',
+        MANUAL: 'Manual',
         CREATE_NEW_DOCUMENT: 'Create a new document',
         FORGOT_YOUR_DOCUMENT_ID: 'Forgot your document-ID',
         FORGOT_YOUR_PASSWORD: 'Forgot your password',
@@ -65,18 +66,16 @@ app.config(function ($translateProvider) {
         PLEASE_TYPE_IN_THE_UNIVERSITY_NAME_TO_CONFIRM:'Please type in the university name to confirm',
 
         DELETE_THIS_INSTITUTE:'Do you really want to delete this institute:',
-        EXPLANATION_OF_DELETING_A_INSTITUTE:'Deleting an institute also deletes ALL ASSOCIATED working groups, comitte members, users and documents. PLEASE PROCEED WITH CAUTION!',
+        EXPLANATION_OF_DELETING_A_INSTITUTE:'Deleting an institute also deletes ALL ASSOCIATED working groups, committe members, users and documents. PLEASE PROCEED WITH CAUTION!',
         INSTITUTE_NAME:'Institute name',
         PLEASE_TYPE_IN_THE_INSTITUTE_NAME_TO_CONFIRM:'Please type in the institute name to confirm',
-        ALTERNATIVE_INSTITUTE:'If you dont want to delete EVERYTHING associated with this institute please refer to the',
-        EDIT_INSTITUTE:'Institute administration page',
+        ALTERNATIVE_INSTITUTE:'If you dont want to delete EVERYTHING associated with this institute you can change it to a former institute',
 
         DELETE_THIS_WORKING_GROUP:'Do you really want to delete this working group:',
         EXPLANATION_OF_DELETING_A_WORKING_GROUP:'Deleting a working group also deletes ALL ASSOCIATED committee members. PLEASE PROCEED WITH CAUTION!',
         WORKING_GROUP_NAME:'Working group name',
         PLEASE_TYPE_IN_THE_WORKING_GROUP_NAME_TO_CONFIRM:'Please tpe in the working group name to confirm',
-        ALTERNATIVE_WORKING_GROUP:'If you do not want to delete EVERYTHING associated with the working group, please proceed to the',
-        EDIT_WORKING_GROUP:'Working group administration page',
+        ALTERNATIVE_WORKING_GROUP:'If you do not want to delete EVERYTHING associated with the working group you can change it to a former working group',
 
         INTRODUCTION_TEXT_FRAGMENT_1: 'This Web-App will guide you in creating the necessary forms for your user study. You will be asked a series of questions, based on which the Ethics-App will auto-generate three documents.',
         INTRODUCTION_TEXT_FRAGMENT_2: 'The Informed Consent form',
@@ -91,7 +90,7 @@ app.config(function ($translateProvider) {
 
         STUDY_DESCRIPTION_FORM_TEXT: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally versions in other languages. Depending on the language(s) filled out, you will receive the informed consent forms in the chosen languages to be used during your experiment.',
         CHOOSE_LANGUAGE:'Please select the language(s), in which you want to generate the informed consent forms:',
-        STUDY_CONCERNS_FORM_TEXT: 'Complete the checklist below. If you have answered "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the Institutes Ethics Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. <br> Make sure you discuss any concerns with the members of the Intitutes\'s Ethics Committee.',
+        STUDY_CONCERNS_FORM_TEXT: 'Complete the checklist below. If you have answered "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the Institutes Ethics committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. <br> Make sure you discuss any concerns with the members of the Intitutes\'s Ethics committee.',
 
         AGREEMENT_DATA: 'I agree that all given information is correct, and I am aware that my data will be stored by the Institute responsible for the study and its partners',
         AGREEMENT_DELETION: 'I agree that as soon as I submit my document request, only Members of the Ethics committee can delete my account',
@@ -102,6 +101,7 @@ app.config(function ($translateProvider) {
         STATUS_5: 'Your document has been partly accepted by the committee. Please read the comments and revise your document.',
         STATUS_6: 'Your files have been created successfully. Please click on the following icons to download them.',
         STATUS_7: 'Unfortunatly your document has been rejected by the Ethics committee. Please get in contact with the corresponding reviewers.',
+
 
         ACCOUNT: 'Account',
         SETTINGS: 'Settings',
@@ -283,6 +283,7 @@ app.config(function ($translateProvider) {
         RELATED_BLOCKED_USERS: 'Related blocked users',
         RELATED_INSTITUTES: 'Related institutes',
         RELATED_FORMER_INSTITUTES: 'Related former institutes',
+        RELATED_COURSES: 'Related courses',
 
         START_REVIEWING: 'Start reviewing',
         OPEN_REVIEW: 'Open review',
@@ -300,7 +301,9 @@ app.config(function ($translateProvider) {
         WINTER_TERM: 'Winter term',
         SUMMER_TERM: 'Summer term',
         LECTURER: 'Lecturer(s)',
-        MANUAL: 'Manual'
+
+        EDIT_INSTITUTE: 'Edit institute',
+        EDIT_WORKING_GROUP: 'Edit working group'
 
     });
 
