@@ -71,6 +71,10 @@ footer {
     display: block;
 }
 
+/* Boostrap fix for pagination */
+#pagination > ul {
+    margin-bottom: 0;
+}
 
 /* http://stackoverflow.com/questions/28191573/change-buttons-to-btn-block-on-mobile-screen-size */
 @media (max-width: 575px) {
