@@ -3,7 +3,7 @@
     <div class="card-header" style="font-size: 20pt;">
         <div class="row">
             <div class="col-9">
-                {{ 'DELETE_THIS_DOCUMENT' | translate }}?
+                {{ 'DOCUMENT' | translate }}
             </div>
             <div class="col-3 right">
                 <button class="btn btn-secondary" role="button" ng-click="cancel()">
@@ -13,14 +13,18 @@
         </div>
     </div>
     <div class="card-block">
+        <h6>
+            {{ 'DELETE_THIS_DOCUMENT' | translate }} <kbd>{{document.document_title}}</kbd>?
+        </h6>
+        <br>
         <label>
-            <b>{{ 'DOCUMENT_TITLE' | translate }}</b>
+            <b>{{ 'DOCUMENT_TITLE' | translate }}*</b>
         </label>
-        <input type="text" class="form-control" ng-model="input" id="documentTitle" placeholder="{{ 'TITLE' | translate }}" autofocus>
-        <small class="form-text text-muted">{{ 'PLEASE_TYPE_IN_THE_DOCUMENT_TITLE_TO_CONFIRM' | translate }}</small>
+        <input type="text" class="form-control" ng-model="input" id="documentName" placeholder="{{ 'DOCUMENT_TITLE' | translate }}" autofocus>
+        <small class="form-text text-muted">{{ 'PLEASE_TYPE_IN_THE_TITLE_OF_THE_DOCUMENT_TO_CONFIRM' | translate }}</small>
     </div>
     <div class="card-footer right">
-        <button class="btn btn-danger" role="button" ng-click="deleteDocument()" ng-disabled="input != document.document_title">
+        <button class="btn btn-danger" role="button" ng-click="delete()" ng-disabled="input != document.document_title">
             <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'DELETE' | translate }}
         </button>
     </div>

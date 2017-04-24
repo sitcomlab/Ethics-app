@@ -4,7 +4,7 @@
         <div class="card-header" style="font-size: 20pt;">
             <div class="row">
                 <div class="col">
-                    {{ 'CHANGE_DOCUMENT_SETTINGS' | translate }}
+                    {{ 'DOCUMENT_SETTINGS' | translate }}
                 </div>
                 <div class="col right">
                     <button class="btn btn-secondary" role="button" ng-click="cancel()">
@@ -70,6 +70,63 @@
                     </select>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'CURRENT_STATUS' | translate }}</b>
+                    </label>
+                    <br>
+                    <span class="badge" ng-class="{'badge-default': document.status==0 || document.status==1, 'badge-success': document.status==2 || document.status==6, 'badge-primary': document.status==3, 'badge-info': document.status==4, 'badge-warning': document.status=='5', 'badge-danger': document.status==7}">
+                        <span ng-if="document.status==0">{{ 'INITIALISED' | translate }}</span>
+                        <span ng-if="document.status==1">{{ 'UNSUBMITTED' | translate }}</span>
+                        <span ng-if="document.status==2">{{ 'AUTO_ACCEPTED' | translate }}</span>
+                        <span ng-if="document.status==3">{{ 'REVIEW_REQUIRED' | translate }}</span>
+                        <span ng-if="document.status==4">{{ 'REVIEW_IN_PROGRESS' | translate }}</span>
+                        <span ng-if="document.status==5">{{ 'PARTLY_ACCEPTED' | translate }}</span>
+                        <span ng-if="document.status==6">{{ 'ACCEPTED' | translate }}</span>
+                        <span ng-if="document.status==7">{{ 'REJECTED' | translate }}</span>
+                    </span>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'CHANGE_STATUS_TO' | translate }}</b>
+                    </label>
+                    <select
+                        class="custom-select form-control"
+                        id="status"
+                        name="status"
+                        ng-model="updated_document.status"
+                    >
+                        <option value="5" ng-disabled="document.status!=2 && document.status<5">
+                            (5) {{ 'PARTLY_ACCEPTED' | translate }}
+                        </option>
+                        <option value="6" ng-disabled="document.status!=2 && document.status<5">
+                            (6) {{ 'ACCEPTED' | translate }}
+                        </option>
+                        <option value="7" ng-disabled="document.status!=2 && document.status<5">
+                            (7) {{ 'REJECTED' | translate }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <br>
+
+            <label>
+                <b>{{ 'NOTES' | translate }}</b>
+            </label>
+            <div class="input-group">
+                <textarea class="form-control"
+                    rows="5"
+                    ng-model="updated_document.notes"
+                    name="notes"
+                    id="notes"
+                    ></textarea>
+                <span class="input-group-addon">
+                    <span class="flag-icon flag-icon-gb"></span>
+                </span>
+            </div>
+            <br>
 
         </div>
         <div class="card-footer right">

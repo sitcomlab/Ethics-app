@@ -34,6 +34,7 @@ app.config(function ($translateProvider) {
         SUBMIT : 'Submit',
         SEND: 'Send',
         SAVE: 'Save',
+        DELETE: 'Delete',
         CANCEL: 'Cancel',
         NEXT: 'Next',
         NEXT_PAGE: 'Next page',
@@ -57,6 +58,9 @@ app.config(function ($translateProvider) {
 
         NO_FILTER:'No filter',
         FILTER_BY_STATUS: 'Filter by status',
+
+        DELETE_THIS_DOCUMENT: 'Do you really want to delete this document',
+        PLEASE_TYPE_IN_THE_TITLE_OF_THE_DOCUMENT_TO_CONFIRM: 'Please type in the title of the document to confirm',
 
         DELETE_THIS_COURSE: 'Do you really want to delete this course',
         PLEASE_TYPE_IN_THE_COURSE_NAME_TO_CONFIRM: 'Please type in the name of the course to confirm',
@@ -116,7 +120,6 @@ app.config(function ($translateProvider) {
         STATUS_5: 'Your document has been partly accepted by the committee. Please read the comments and revise your document.',
         STATUS_6: 'Your files have been created successfully. Please click on the following icons to download them.',
         STATUS_7: 'Unfortunatly your document has been rejected by the Ethics committee. Please get in contact with the corresponding reviewers.',
-
 
         ACCOUNT: 'Account',
         SETTINGS: 'Settings',
@@ -189,11 +192,7 @@ app.config(function ($translateProvider) {
         DEBRIEFING_INFORMATION: 'Debriefing information',
         STATEMENT_OF_RESEARCHER: 'Statement of researcher',
         INFORMED_CONSENT_FORM: 'Informed consent form',
-
         REVISE_DOCUMENT: 'Revise document',
-        DELETE_THIS_DOCUMENT: 'Are you sure you want to delete this document',
-        PLEASE_TYPE_IN_THE_DOCUMENT_TITLE_TO_CONFIRM: 'Please type in the title of the document to confirm',
-        DELETE: 'Delete',
 
         INTRO: 'Introduction',
         REQUIRED: 'required',

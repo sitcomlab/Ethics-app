@@ -22,5 +22,8 @@ app.controller("documentDeleteController", function($scope, $rootScope, $routePa
         INIT
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading document" };
-
+    $scope.document = $documentService.get();
+    $scope.authenticated_member = $authenticationService.get();
+    $scope.$parent.loading = { status: false, message: "" };
+    
 });
