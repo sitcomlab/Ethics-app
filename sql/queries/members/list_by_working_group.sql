@@ -27,5 +27,5 @@ WHERE
 ORDER BY
     last_name,
     first_name
-OFFSET $1::INTEGER
-LIMIT $2::INTEGER;
+OFFSET $1
+LIMIT $2;

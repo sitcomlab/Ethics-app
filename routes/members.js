@@ -4,6 +4,7 @@ var isAuthenticated = require('../server.js').isAuthenticated;
 
 var list = require('../controllers/members/list');
 var list_by_course = require('../controllers/members/list_by_course');
+var list_by_university = require('../controllers/members/list_by_university');
 var list_by_institute = require('../controllers/members/list_by_institute');
 var list_by_working_group = require('../controllers/members/list_by_working_group');
 var post = require('../controllers/members/post');
@@ -18,7 +19,10 @@ router.get('/members', isAuthenticated, list.request);
 // LIST BY COURSE (PUBLIC AND MEMBERS)
 router.get('/courses/:course_id/members', isAuthenticated, list_by_course.request);
 
-// LIST BY INSTITUTE (ADMINS)
+// LIST BY UNIVERSITY (ADMINS)
+router.get('/universities/:university_id/members', isAuthenticated, list_by_university.request);
+
+// LIST BY INSTITUTE (MEMBERS AND ADMINS)
 router.get('/institutes/:institute_id/members', isAuthenticated, list_by_institute.request);
 
 // LIST BY WORKING GROUP (ADMINS)

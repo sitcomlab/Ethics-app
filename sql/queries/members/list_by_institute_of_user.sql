@@ -1,4 +1,5 @@
 SELECT
+    COUNT(*) OVER()::NUMERIC AS full_count,
     member.member_id,
     member.title,
     member.first_name,
@@ -19,7 +20,11 @@ FROM Members member
     JOIN Institutes institute ON institute.institute_id = working_group.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
 WHERE
-    member.admin != true
+        institute.institute_id=$3::INTEGER
+    AND
+        member.admin != true
 ORDER BY
     last_name,
-    first_name;
+    first_name
+OFFSET $1
+LIMIT $2;

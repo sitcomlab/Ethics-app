@@ -10,13 +10,13 @@ var server_url = require('../../server.js').server_url;
 var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
-var dir_1 = "/../../sql/queries/members/";
+var dir_1 = "/../../sql/queries/universities/";
 var dir_2 = "/../../sql/queries/users/";
-var query_get_member = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
-var query_list_users_by_institute = fs.readFileSync(__dirname + dir_2 + 'list_by_institute.sql', 'utf8').toString();
+var query_get_university = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
+var query_list_users_by_university = fs.readFileSync(__dirname + dir_2 + 'list_by_university.sql', 'utf8').toString();
 
 
-// LIST
+// LIST BY UNIVERSITY
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -40,23 +40,8 @@ exports.request = function(req, res) {
                     if(err){
                         res.status(401).send("Authorization failed!");
                     } else {
-                        if(decoded.member){
-                            // Database query
-                            client.query(query_get_member, [
-                                decoded.member_id
-                            ], function(err, result) {
-                                done();
-                                if (err) {
-                                    callback(err, 500);
-                                } else {
-                                    // Check if Member exists
-                                    if (result.rows.length === 0) {
-                                        callback(new Error("Member not found"), 404);
-                                    } else {
-                                        callback(null, client, done, result.rows[0]);
-                                    }
-                                }
-                            });
+                        if(decoded.member && decoded.admin){
+                            callback(null, client, done);
                         } else {
                             res.status(401).send("Authorization failed!");
                         }
@@ -66,26 +51,47 @@ exports.request = function(req, res) {
                 res.status(401).send("Authorization failed!");
             }
         },
-        function(client, done, member, callback) {
+        function(client, done, callback) {
+            // Database query
+            client.query(query_get_university, [
+                req.params.university_id
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    // Check if University exists
+                    if (result.rows.length === 0) {
+                        callback(new Error("University not found"), 404);
+                    } else {
+                        callback(null, client, done);
+                    }
+                }
+            });
+        },
+        function(client, done, callback) {
 
             // Preparing parameters
             var params = [];
 
             // Pagination parameters
-            params.push(Number(req.query.offset));
-            params.push(Number(req.query.limit));
+            params.push(Number(req.query.offset) || null );
+            params.push(Number(req.query.limit) || null );
 
             // Filter by blocked status
-            params.push(req.query.blocked);
+            params.push(req.query.blocked || false );
 
-            // Filter by institute
-            params.push(member.institute_id);
+            // TODO: Add orderBy
+            //params.push(req.query.orderby);
+
+            // Filter by university
+            params.push(req.params.university_id);
 
             callback(null, client, done, params);
         },
         function(client, done, params, callback) {
             // Database query
-            client.query(query_list_users_by_institute, params, function(err, result) {
+            client.query(query_list_users_by_university, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

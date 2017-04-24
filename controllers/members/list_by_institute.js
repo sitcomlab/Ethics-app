@@ -13,7 +13,7 @@ var fs = require("fs");
 var dir_1 = "/../../sql/queries/institutes/";
 var dir_2 = "/../../sql/queries/members/";
 var query_get_institute = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
-var query_list_members_by_institute = fs.readFileSync(__dirname + dir_2 + 'list.sql', 'utf8').toString();
+var query_list_members_by_institute = fs.readFileSync(__dirname + dir_2 + 'list_by_institute.sql', 'utf8').toString();
 
 
 // LIST BY INSTITUTE
@@ -81,7 +81,7 @@ exports.request = function(req, res) {
             // Filter by former status
             params.push(req.query.former || false );
 
-            // TODO: Add orderBy: document.created ASC DESC, etc.
+            // TODO: Add orderBy
             //params.push(req.query.orderby);
 
             // Filter by institute

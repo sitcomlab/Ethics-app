@@ -13,7 +13,7 @@ var fs = require("fs");
 var dir_1 = "/../../sql/queries/institutes/";
 var dir_2 = "/../../sql/queries/users/";
 var query_get_institute = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
-var query_list_users_by_institute = fs.readFileSync(__dirname + dir_2 + 'list.sql', 'utf8').toString();
+var query_list_users_by_institute = fs.readFileSync(__dirname + dir_2 + 'list_by_institute.sql', 'utf8').toString();
 
 
 // LIST BY INSTITUTE
@@ -81,7 +81,7 @@ exports.request = function(req, res) {
             // Filter by blocked status
             params.push(req.query.blocked || false );
 
-            // TODO: Add orderBy: document.created ASC DESC, etc.
+            // TODO: Add orderBy
             //params.push(req.query.orderby);
 
             // Filter by institute

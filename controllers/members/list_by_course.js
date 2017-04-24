@@ -64,16 +64,34 @@ exports.request = function(req, res) {
                     if (result.rows.length === 0) {
                         callback(new Error("Course not found"), 404);
                     } else {
-                        callback(null, client, done, result.rows[0]);
+                        callback(null, client, done);
                     }
                 }
             });
         },
-        function(client, done, course, callback) {
+        function(client, done, callback) {
+
+            // Preparing parameters
+            var params = [];
+
+            // Pagination parameters
+            params.push(Number(req.query.offset) || null );
+            params.push(Number(req.query.limit) || null );
+
+            // Filter by former status
+            params.push(req.query.former || false );
+
+            // TODO: Add orderBy
+            //params.push(req.query.orderby);
+            
+            // Filter by course
+            params.push(req.params.course_id);
+
+            callback(null, client, done, params);
+        },
+        function(client, done, params, callback) {
             // Database query
-            client.query(query_list_members_by_course, [
-                course.course_id
-            ] ,function(err, result) {
+            client.query(query_list_members_by_course, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

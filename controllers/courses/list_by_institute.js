@@ -10,11 +10,10 @@ var server_url = require('../../server.js').server_url;
 var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
-var dir_1 = "/../../sql/queries/members/";
+var dir_1 = "/../../sql/queries/institutes/";
 var dir_2 = "/../../sql/queries/courses/";
-var query_get_member = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
-var query_list_courses = fs.readFileSync(__dirname + dir_2 + 'list.sql', 'utf8').toString();
-var query_list_public_courses = fs.readFileSync(__dirname + dir_2 + 'list_public.sql', 'utf8').toString();
+var query_get_institute = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
+var query_list_courses_by_institute = fs.readFileSync(__dirname + dir_2 + 'list_by_institute.sql', 'utf8').toString();
 
 
 // LIST BY INSTITUTE
@@ -41,33 +40,36 @@ exports.request = function(req, res) {
                     if(err){
                         res.status(401).send("Authorization failed!");
                     } else {
-                        if(decoded.member){
-                            // Database query
-                            client.query(query_get_member, [
-                                decoded.member_id
-                            ], function(err, result) {
-                                done();
-                                if (err) {
-                                    callback(err, 500);
-                                } else {
-                                    // Check if Member exists
-                                    if (result.rows.length === 0) {
-                                        callback(new Error("Member not found"), 404);
-                                    } else {
-                                        callback(null, client, done, result.rows[0], query_list_courses);
-                                    }
-                                }
-                            });
+                        if(decoded.member && decoded.admin){
+                            callback(null, client, done);
                         } else {
-                            callback(null, client, done, undefined, query_list_public_courses);
+                            res.status(401).send("Authorization failed!");
                         }
                     }
                 });
             } else {
-                callback(null, client, done, undefined, query_list_public_courses);
+                res.status(401).send("Authorization failed!");
             }
         },
-        function(client, done, member, query, callback) {
+        function(client, done, callback) {
+            // Database query
+            client.query(query_get_institute, [
+                req.params.institute_id
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    // Check if Institute exists
+                    if (result.rows.length === 0) {
+                        callback(new Error("Institute not found"), 404);
+                    } else {
+                        callback(null, client, done);
+                    }
+                }
+            });
+        },
+        function(client, done, callback) {
 
             // Preparing parameters
             var params = [];
@@ -77,15 +79,13 @@ exports.request = function(req, res) {
             params.push(Number(req.query.limit) || null );
 
             // Filter by institute
-            if(member){
-                params.push(member.institute_id);
-            }
+            params.push(req.params.institute_id);
 
-            callback(null, client, done, query, params);
+            callback(null, client, done, params);
         },
-        function(client, done, query, params, callback) {
+        function(client, done, params, callback) {
             // Database query
-            client.query(query, params, function(err, result) {
+            client.query(query_list_courses_by_institute, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

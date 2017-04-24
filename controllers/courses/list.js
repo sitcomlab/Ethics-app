@@ -13,8 +13,8 @@ var fs = require("fs");
 var dir_1 = "/../../sql/queries/members/";
 var dir_2 = "/../../sql/queries/courses/";
 var query_get_member = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
+var query_list_courses_by_institute = fs.readFileSync(__dirname + dir_2 + 'list_by_institute.sql', 'utf8').toString();
 var query_list_courses = fs.readFileSync(__dirname + dir_2 + 'list.sql', 'utf8').toString();
-var query_list_public_courses = fs.readFileSync(__dirname + dir_2 + 'list_public.sql', 'utf8').toString();
 
 
 // LIST
@@ -54,17 +54,17 @@ exports.request = function(req, res) {
                                     if (result.rows.length === 0) {
                                         callback(new Error("Member not found"), 404);
                                     } else {
-                                        callback(null, client, done, result.rows[0], query_list_courses);
+                                        callback(null, client, done, result.rows[0], query_list_courses_by_institute);
                                     }
                                 }
                             });
                         } else {
-                            callback(null, client, done, undefined, query_list_public_courses);
+                            callback(null, client, done, undefined, query_list_courses);
                         }
                     }
                 });
             } else {
-                callback(null, client, done, undefined, query_list_public_courses);
+                callback(null, client, done, undefined, query_list_courses);
             }
         },
         function(client, done, member, query, callback) {
