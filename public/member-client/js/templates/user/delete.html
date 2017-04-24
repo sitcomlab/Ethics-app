@@ -30,8 +30,8 @@
         <label>
             <b>{{ 'USER_NAME' | translate }}*</b>
         </label>
-        <input type="text" class="form-control" ng-model="input" id="memberFullName" placeholder="{{ 'USER_NAME' | translate }}" autofocus>
-        <small class="form-text text-muted">{{ 'PLEASE_TYPE_IN_THE_USER_NAME_TO_CONFIRM' | translate }}</small>
+        <input type="text" class="form-control" ng-model="input" id="memberFullName" placeholder="{{ 'FULL_NAME' | translate }}" autofocus>
+        <small class="form-text text-muted">{{ 'PLEASE_TYPE_IN_THE_FULL_NAME_OF_THE_USER_TO_CONFIRM' | translate }}</small>
     </div>
     <div class="card-footer right">
         <button class="btn btn-danger" role="button" ng-click="delete()" ng-disabled="input != user.fullname">
