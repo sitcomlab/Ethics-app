@@ -53,7 +53,7 @@ exports.request = function(req, res) {
         function(client, done, callback) {
             // Database query
             client.query(query_get_institutes, [
-                req.params.institutes_id
+                req.params.institute_id
             ], function(err, result) {
                 done();
                 if (err) {
@@ -71,17 +71,16 @@ exports.request = function(req, res) {
         function(client, done, callback) {
             // TODO: Add object/schema validation
             var object = {
-                institutes_id: req.params.institutes_id,
-                institute_name: req.params.institutes_name,
-                university_id: req.params.university_id,
-                former: req.params.former
+                institute_id: req.body.institute_id,
+                institute_name: req.body.institute_name,
+                former: req.body.former
             };
             var params = _.values(object);
             callback(null, client, done, params);
         },
         function(client, done, params, callback){
             // Database query
-            client.query(query_edit_university, params, function(err, result) {
+            client.query(query_edit_institutes, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

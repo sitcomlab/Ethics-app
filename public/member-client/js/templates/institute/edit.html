@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<div class="card">
+    <form class="form-horizontal" name="editInstituteForm" ng-submit="save()">
+        <div class="card-header" style="font-size: 20pt;">
+            <div class="row">
+                <div class="col">
+                    {{ 'EDIT_INSTITUTE' | translate }}
+                </div>
+                <div class="col right">
+                    <button class="btn btn-secondary" role="button" ng-click="redirect('/institutes/' + institute.institute_id)">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-block">
+            <label>
+                <b>{{ 'INSTITUTE_NAME' | translate }}*</b>
+            </label>
+            <div class="form-group" ng-class="{'has-danger': editInstituteForm.document_email_address.$invalid && !editInstituteForm.document_email_address.$pristine}">
+                <input
+                    type="text"
+                    class="form-control"
+                    ng-model="updated_institute.institute_name"
+                    name="institute_name"
+                    id="institute_name"
+                    placeholder="{{institute.institute_name}}"
+                    aria-describedby="inputInstituteName"
+                    required
+                    autofocus>
+                <span ng-show="editInstituteForm.institute_name.$error.required && !editInstituteForm.institute_name.$pristine" class="text-danger">
+                    <small>
+                        {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+            </div>
+        </div>
+        
+        <div class="card-footer right">
+            <button class="btn btn-success" role="submit">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SAVE' | translate }}
+            </button>
+        </div>
+    </form>
+</div>
+  

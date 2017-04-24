@@ -213,13 +213,13 @@ app.config(function($routeProvider, $locationProvider, config) {
 				factory: checkAuthentication
 			}
 		})
-		/*.when("/institutes/:institute_id/edit", {
+		.when("/institutes/:institute_id/edit", {
 			templateUrl: "js/templates/institute/edit.html",
 			controller: "instituteEditController",
 			resolve: {
 				factory: checkAuthentication
 			}
-		})*/
+		})
 		.when("/institutes/:institute_id/delete", {
 			templateUrl: "js/templates/institute/delete.html",
 			controller: "instituteDeleteController",
@@ -251,13 +251,13 @@ app.config(function($routeProvider, $locationProvider, config) {
 				factory: checkAuthentication
 			}
 		})
-		/*.when("/working_groups/:working_group_id/edit", {
+		.when("/working_groups/:working_group_id/edit", {
 			templateUrl: "js/templates/working_group/edit.html",
 			controller: "workingGroupEditController",
 			resolve: {
 				factory: checkAuthentication
 			}
-		})*/
+		})
 		.when("/working_groups/:working_group_id/delete", {
 			templateUrl: "js/templates/working_group/delete.html",
 			controller: "workingGroupDeleteController",

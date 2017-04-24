@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<div class="card">
+    <form class="form-horizontal" name="editWorkingGroupForm" ng-submit="save()">
+        <div class="card-header" style="font-size: 20pt;">
+            <div class="row">
+                <div class="col">
+                    {{ 'EDIT_INSTITUTE' | translate }}
+                </div>
+                <div class="col right">
+                    <button class="btn btn-secondary" role="button" ng-click="redirect('/working_groups/' + working_group.working_group_id)">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-block">
+            <label>
+                <b>{{ 'INSTITUTE_NAME' | translate }}*</b>
+            </label>
+            <div class="form-group" ng-class="{'has-danger': editWorkingGroupForm.document_email_address.$invalid && !editWorkingGroupForm.document_email_address.$pristine}">
+                <input
+                    type="text"
+                    class="form-control"
+                    ng-model="updated_working_group.working_group_name"
+                    name="working_group_name"
+                    id="working_group_name"
+                    placeholder="{{working_group.working_group_name}}"
+                    aria-describedby="inputWorkingGroupName"
+                    required
+                    autofocus>
+                <span ng-show="editWorkingGroupForm.working_group_name.$error.required && !editWorkingGroupForm.working_group_name.$pristine" class="text-danger">
+                    <small>
+                        {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+            </div>
+        </div>
+        
+        <div class="card-footer right">
+            <button class="btn btn-success" role="submit">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SAVE' | translate }}
+            </button>
+        </div>
+    </form>
+</div>
