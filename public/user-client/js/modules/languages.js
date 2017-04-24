@@ -303,8 +303,19 @@ app.config(function ($translateProvider) {
         LECTURER: 'Lecturer(s)',
 
         EDIT_INSTITUTE: 'Edit institute',
-        EDIT_WORKING_GROUP: 'Edit working group'
+        EDIT_WORKING_GROUP: 'Edit working group',
+        FORMER_STATUS: 'Former status',
+        TRUE: 'True',
+        FALSE: 'False',
 
+        NEW_MEMBER: 'New member',
+        NEW_USER: 'New user',
+        NEW_UNIVERSITY: 'New university',
+        NEW_INSTITUTE: 'New institute',
+        NEW_WORKING_GROUP: 'New working group',
+        PLEASE_SELECT_AN_UNIVERSITY: 'Please select an university',
+        PLEASE_SELECT_AN_INSTITUTE: 'Please select an institute',
+        PLEASE_SELECT_A_WORKING_GROUP: 'Please select a working group'
     });
 
     // Default Language (English)

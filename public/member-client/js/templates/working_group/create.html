@@ -85,6 +85,42 @@
                 <br>
             </div>
             <br>
+
+            <label>
+                <b>{{ 'FORMER_STATUS' | translate }}*</b>
+            </label>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label class="custom-control custom-radio">
+                        <input
+                        class="custom-control-input"
+                        type="radio"
+                        name="former"
+                        id="former_1"
+                        ng-model="new_working_group.former"
+                        ng-value="true"
+                        required>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">{{ 'TRUE' | translate }}</span>
+                    </label>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label class="custom-control custom-radio">
+                        <input
+                        class="custom-control-input"
+                        type="radio"
+                        name="former"
+                        id="former_2"
+                        ng-model="new_working_group.former"
+                        ng-value="false"
+                        required>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">{{ 'FALSE' | translate }} ({{ 'DEFAULT' | translate }})</span>
+                    </label>
+                </div>
+            </div>
+            <br>
+
         </div>
         <div class="card-footer right">
             <button class="btn btn-success" role="submit">
