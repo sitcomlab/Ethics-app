@@ -12,7 +12,7 @@ var jwtSecret = require('../server.js').jwtSecret;
 
 var fs = require("fs");
 var dir = "/../sql/queries/members/";
-var query_find_by_email = fs.readFileSync(__dirname + dir + 'find_by_email.sql', 'utf8').toString();
+var query_get_member_by_email = fs.readFileSync(__dirname + dir + 'get_by_email.sql', 'utf8').toString();
 var query_login = fs.readFileSync(__dirname + dir + 'login.sql', 'utf8').toString();
 var query_increase_fails = fs.readFileSync(__dirname + dir + 'increase_fails.sql', 'utf8').toString();
 var query_reset_fails = fs.readFileSync(__dirname + dir + 'reset_fails.sql', 'utf8').toString();
@@ -34,7 +34,7 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_find_by_email, [
+            client.query(query_get_member_by_email, [
                 req.body.username
             ], function(err, result) {
                 done();

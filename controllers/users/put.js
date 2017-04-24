@@ -19,8 +19,8 @@ var dir_1 = "/../../templates/emails/";
 var dir_2 = "/../../sql/queries/users/";
 var template_user_account_blocked = fs.readFileSync(__dirname + dir_1 + 'user_account_blocked.html', 'utf8').toString();
 var query_get_user = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
-var query_edit_user = fs.readFileSync(__dirname + dir_2 + 'edit.sql', 'utf8').toString();
-var query_edit_user_public = fs.readFileSync(__dirname + dir_2 + 'edit_public.sql', 'utf8').toString();
+var query_edit_user_by_member = fs.readFileSync(__dirname + dir_2 + 'edit_by_member.sql', 'utf8').toString();
+var query_edit_user_by_user = fs.readFileSync(__dirname + dir_2 + 'edit_by_user.sql', 'utf8').toString();
 
 
 // PUT
@@ -48,9 +48,9 @@ exports.request = function(req, res) {
                         res.status(401).send("Authorization failed!");
                     } else {
                         if(decoded.member){
-                            callback(null, client, done, true, query_edit_user);
+                            callback(null, client, done, true, query_edit_user_by_member);
                         } else {
-                            callback(null, client, done, false, query_edit_user_public);
+                            callback(null, client, done, false, query_edit_user__by_user);
                         }
                     }
                 });
@@ -58,7 +58,7 @@ exports.request = function(req, res) {
                 res.status(401).send("Authorization failed!");
             }
         },
-        function(client, done, member_status, query, callback) {
+        function(client, done, isMember, query, callback) {
             // Database query
             client.query(query_get_user, [
                 req.params.user_id
@@ -71,30 +71,30 @@ exports.request = function(req, res) {
                     if (result.rows.length === 0) {
                         callback(new Error("User not found"), 404);
                     } else {
-                        callback(null, client, done, member_status, result.rows[0], query);
+                        callback(null, client, done, isMember, result.rows[0], query);
                     }
                 }
             });
         },
-        function(client, done, member_status, user, query, callback) {
+        function(client, done, isMember, user, query, callback) {
             // TODO: Add object/schema validation
             var object = {
                 user_id: req.params.user_id,
-                email_address: req.body.email_address,
                 title: req.body.title,
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
                 institute_id: req.body.institute_id
             };
 
-            if(member_status){
+            if(isMember){
+                object.email_address = req.body.email_address;
                 object.blocked = req.body.blocked;
             }
 
             var params = _.values(object);
-            callback(null, client, done, member_status, user, query, params);
+            callback(null, client, done, isMember, user, query, params);
         },
-        function(client, done, member_status, user, query, params, callback){
+        function(client, done, isMember, user, query, params, callback){
             // Database query
             client.query(query, params, function(err, result) {
                 done();

@@ -26,7 +26,7 @@ var dir_9 = "/../../sql/queries/comments/";
 
 var template = fs.readFileSync(__dirname + dir_1 + 'document_created.html', 'utf8').toString();
 
-var query_find_user_by_email = fs.readFileSync(__dirname + dir_2 + 'find_by_email.sql', 'utf8').toString();
+var query_get_user_by_email = fs.readFileSync(__dirname + dir_2 + 'get_by_email.sql', 'utf8').toString();
 var query_create_document = fs.readFileSync(__dirname + dir_3 + 'create.sql', 'utf8').toString();
 var query_get_course = fs.readFileSync(__dirname + dir_4 + 'get.sql', 'utf8').toString();
 var query_create_affiliation = fs.readFileSync(__dirname + dir_5 + 'create.sql', 'utf8').toString();
@@ -52,7 +52,7 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_find_user_by_email, [
+            client.query(query_get_user_by_email, [
                 req.body.email_address
             ], function(err, result) {
                 done();

@@ -32,7 +32,8 @@ exports.request = function(req, res) {
                 title: req.body.title,
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
-                institute_id: req.body.institute_id
+                institute_id: req.body.institute_id,
+                blocked: req.body.blocked || false
             };
             var params = _.values(object);
             callback(null, client, done, params);
