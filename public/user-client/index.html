@@ -98,9 +98,9 @@
                                                 <span ng-if="document.status==2">{{ 'ACCEPTED' | translate }}</span>
                                                 <span ng-if="document.status==3">{{ 'REVIEW_REQESTED' | translate }}</span>
                                                 <span ng-if="document.status==4">{{ 'UNDER_REVIEW' | translate }}</span>
-                                                <span ng-if="document.status==5">{{ 'REVIEWED_PARTLY_ACCEPTED' | translate }}</span>
-                                                <span ng-if="document.status==6">{{ 'REVIEWED_ACCEPTED' | translate }}</span>
-                                                <span ng-if="document.status==7">{{ 'REVIEWED_REJECTED' | translate }}</span>
+                                                <span ng-if="document.status==5">{{ 'PARTLY_ACCEPTED' | translate }}</span>
+                                                <span ng-if="document.status==6">{{ 'ACCEPTED' | translate }}</span>
+                                                <span ng-if="document.status==7">{{ 'REJECTED' | translate }}</span>
                                             </span>
                                         </h6>
                                         <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/intro')">

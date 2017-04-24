@@ -78,8 +78,6 @@ app.config(function ($translateProvider) {
         ALTERNATIVE_WORKING_GROUP:'If you do not want to delete EVERYTHING associated with the working group, please proceed to the',
         EDIT_WORKING_GROUP:'Working group administration page',
 
-
-
         INTRODUCTION_TEXT_FRAGMENT_1: 'This Web-App will guide you in creating the necessary forms for your user study. You will be asked a series of questions, based on which the Ethics-App will auto-generate three documents.',
         INTRODUCTION_TEXT_FRAGMENT_2: 'The Informed Consent form',
         INTRODUCTION_TEXT_FRAGMENT_3: 'This is the most important document. It assures that the Participant gave his consent prior to participating in the study. Both you and your participant must sign the document, and you need to store your copy safely. Conducting a study without the written consent of the participant is not advised and can lead to various legal issues.',
@@ -124,19 +122,23 @@ app.config(function ($translateProvider) {
         ALL:'All',
         INITIALISED: 'initialised',
         UNSUBMITTED: 'unsubmitted',
-        _SUBMITTED: 'submitted',
-        SUBMITTED_AUTO_ACCEPTED: 'submitted (auto-accepted)',
+        UNSUBMITTED_IN_PROGRESS: 'unsubmitted (in progress)',
+        ACCEPTED: 'accepted',
+        AUTO_ACCEPTED: 'auto accepted',
+        PARTLY_ACCEPTED: 'partly accepted',
+        ACCEPTED_AND_AUTO_ACCEPTED: 'accepted and auto accepted',
+        REVIEWED_ACCEPTED: 'reviewed (accepted)',
+        REVIEWED_PARTLY_ACCEPTED: 'reviewed (partly accepted)',
+        REVIEWED_REJECTED: 'reviewed (rejected)',
         REVIEW_REQUIRED: 'review required',
-        SUBMITTED_REVIEW_REQUIRED: 'submitted (review required)',
+        REVIEW_REQUESTED: 'review requested',
+        REJECTED: 'rejected',
         REVIEW_IN_PROGRESS: 'review in progress',
         UNDER_REVIEW: 'under review',
-        PARTLY_ACCEPTED: 'partly accepted',
-        REVIEWED_PARTLY_ACCEPTED: 'reviewed (partly accepted)',
+        UNPUBLISHED: 'unpublished',
+        IN_PROGRESS: 'in progress',
+        _SUBMITTED: 'submitted',
         REVIEWED: 'reviewed',
-        REVIEWED_ACCEPTED: 'reviewed (accepted)',
-        REVIEWED_OKAY: 'reviewed (okay)',
-        REJECTED: 'rejected',
-        REVIEWED_REJECTED: 'reviewed (rejected)',
 
         DESCRIPTION_1: 'Title of the project',
         DESCRIPTION_2: 'Name of the lead researcher, his/her position (and his/her lab)',
@@ -257,6 +259,7 @@ app.config(function ($translateProvider) {
         LECTURERS: 'Lecturer(s)',
 
         NONE: 'none',
+        COMMITTEE: 'Committee',
         COMMITTEE_MEMBERS: 'Committee members',
         COMMITTEE_MEMBER:'Committee member',
         FORMER_COMMITTEE_MEMBER:'Former committee member',
@@ -295,7 +298,8 @@ app.config(function ($translateProvider) {
         TERM: 'Term',
         WINTER_TERM: 'Winter term',
         SUMMER_TERM: 'Summer term',
-        LECTURER: 'Lecturer(s)'
+        LECTURER: 'Lecturer(s)',
+        MANUAL: 'Manual'
 
     });
 
