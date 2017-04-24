@@ -18,6 +18,7 @@ var fs = require("fs");
 var dir_1 = "/../../templates/emails/";
 var dir_2 = "/../../sql/queries/users/";
 var template_user_account_blocked = fs.readFileSync(__dirname + dir_1 + 'user_account_blocked.html', 'utf8').toString();
+var template_user_account_reactivated = fs.readFileSync(__dirname + dir_1 + 'user_account_reactivated.html', 'utf8').toString();
 var query_get_user = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
 var query_edit_user_by_member = fs.readFileSync(__dirname + dir_2 + 'edit_by_member.sql', 'utf8').toString();
 var query_edit_user_by_user = fs.readFileSync(__dirname + dir_2 + 'edit_by_user.sql', 'utf8').toString();
@@ -124,25 +125,41 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, user, updated_user, callback) {
-            if(user.blocked && user.blocked === req.body.blocked){
-                callback(null, 200, updated_user);
-            } else {
-                // Render HTML content
-                var output = mustache.render(template_user_account_blocked, {
-                    user: user,
-                    updated_user: updated_user,
-                    year: moment().format("YYYY")
-                });
+            if(user.blocked !== req.body.blocked){
 
-                // Render text for emails without HTML support
-                var text = '';
+                // Prepare HTML content
+                var output = "";
+
+                // Prepare text for emails without HTML support
+                var text = "";
+
+                // Prepare subject
+                var subject = "";
+
+                if(user.blocked){
+                    text = "Your account has been blocked";
+                    subject = "Your account has been blocked";
+                    output = mustache.render(template_user_account_blocked, {
+                        user: user,
+                        updated_user: updated_user,
+                        year: moment().format("YYYY")
+                    });
+                } else {
+                    text = "Your account has been reactivated";
+                    subject = "Your account has been reactivated";
+                    output = mustache.render(template_user_account_reactivated, {
+                        user: user,
+                        updated_user: updated_user,
+                        year: moment().format("YYYY")
+                    });
+                }
 
                 // Send email
                 transporter.sendMail({
                     from: mail_options,
                     to: user.email_address,
-                    subject: 'Your account has been blocked',
-                    text: '',
+                    subject: subject,
+                    text: text,
                     html: output
                 }, function(err, info) {
                     if (err) {
@@ -151,7 +168,11 @@ exports.request = function(req, res) {
                         callback(null, 200, updated_user);
                     }
                 });
+
+            } else {
+                callback(null, 200, updated_user);
             }
+            
         },
     ], function(err, code, result) {
         if(err){
