@@ -30,39 +30,6 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            // Authorization
-            if(req.headers.authorization) {
-                var token = req.headers.authorization.substring(7);
-
-                // Verify token
-                jwt.verify(token, jwtSecret, function(err, decoded) {
-                    if(err){
-                        callback(new Error("Authorization failed", 401));
-                    } else {
-                        if(decoded.member){
-                            callback(null, client, done);
-                        } else if(decoded.user) {
-                            // Check if user is the same
-                            if(decoded.user_id === req.body.user_id){
-                                // Check if document can be deleted
-                                if(document.status === 0 || document.status === 1){
-                                    callback(null, client, done);
-                                } else {
-                                    callback(new Error("Document can not be deleted", 423));
-                                }
-                            } else {
-                                callback(new Error("Authorization failed", 401));
-                            }
-                        } else {
-                            callback(new Error("Authorization failed", 401));
-                        }
-                    }
-                });
-            } else {
-                callback(new Error("Authorization failed", 401));
-            }
-        },
-        function(client, done, callback) {
             // Database query
             client.query(query_get_document, [
                 req.params.document_id
@@ -81,6 +48,39 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, document, callback) {
+            // Authorization
+            if(req.headers.authorization) {
+                var token = req.headers.authorization.substring(7);
+
+                // Verify token
+                jwt.verify(token, jwtSecret, function(err, decoded) {
+                    if(err){
+                        callback(new Error("Authorization failed"), 401);
+                    } else {
+                        if(decoded.member){
+                            callback(null, client, done);
+                        } else if(decoded.user) {
+                            // Check if user is the same
+                            if(decoded.user_id === document.user_id){
+                                // Check if document can be deleted
+                                if(document.status === 0 || document.status === 1){
+                                    callback(null, client, done);
+                                } else {
+                                    callback(new Error("Document can not be deleted", 423));
+                                }
+                            } else {
+                                callback(new Error("Authorization failed"), 401);
+                            }
+                        } else {
+                            callback(new Error("Authorization failed"), 401);
+                        }
+                    }
+                });
+            } else {
+                callback(new Error("Authorization failed"), 401);
+            }
+        },
+        function(client, done, callback) {
             // Database query
             client.query(query_delete_document, [
                 req.params.document_id

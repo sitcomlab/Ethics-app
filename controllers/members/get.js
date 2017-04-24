@@ -36,7 +36,7 @@ exports.request = function(req, res) {
                 // Verify token
                 jwt.verify(token, jwtSecret, function(err, decoded) {
                     if(err){
-                        callback(new Error("Authorization failed", 401));
+                        callback(new Error("Authorization failed"), 401);
                     } else {
                         if(decoded.member){
                             // TODO: Change query for members

@@ -39,7 +39,7 @@ exports.request = function(req, res) {
                 // Verify token
                 jwt.verify(token, jwtSecret, function(err, decoded) {
                     if(err){
-                        callback(new Error("Authorization failed", 401));
+                        callback(new Error("Authorization failed"), 401);
                     } else {
                         if(decoded.member){
                             // Database query
@@ -59,12 +59,12 @@ exports.request = function(req, res) {
                                 }
                             });
                         } else {
-                            callback(new Error("Authorization failed", 401));
+                            callback(new Error("Authorization failed"), 401);
                         }
                     }
                 });
             } else {
-                callback(new Error("Authorization failed", 401));
+                callback(new Error("Authorization failed"), 401);
             }
         },
         function(client, done, member, callback) {
