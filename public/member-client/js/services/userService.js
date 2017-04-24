@@ -65,6 +65,32 @@ app.factory('$userService', function($http, $log, config, $authenticationService
                 }
             });
         },
+        listByUniversity: function(university_id, filter) {
+            var query = "?blocked=" + filter.blocked + "&";
+
+            // TODO: Add orderby
+
+            query = query.slice(0, -1);
+
+            return $http.get(config.apiURL + "/universities/" + university_id + "/users" + query, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        listByInstitute: function(institute_id, filter) {
+            var query = "?blocked=" + filter.blocked + "&";
+
+            // TODO: Add orderby
+
+            query = query.slice(0, -1);
+
+            return $http.get(config.apiURL + "/institutes/" + institute_id + "/users" + query, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
         create: function(data){
             return $http.post(config.apiURL + "/users" , data, {
                 headers: {

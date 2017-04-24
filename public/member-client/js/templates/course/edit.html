@@ -7,7 +7,7 @@
                     {{ 'EDIT_COURSE' | translate }}
                 </div>
                 <div class="col right">
-                    <button class="btn btn-secondary" role="button" ng-click="redirect('/courses/' + course.course_id)">
+                    <button class="btn btn-secondary" role="button" ng-click="redirect('/courses')">
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -111,86 +111,118 @@
             </span>
             <br>
 
-            <label>
-                <b>{{ 'INSTITUTE' | translate }}*</b>
-            </label>
-            <select
-                class="custom-select form-control"
-                id="institute_id"
-                name="institute_id"
-                ng-model="updated_course.institute_id"
-                ng-options="institute.institute_id as institute.institute_name group by institute.university_name for institute in institutes | orderBy:['institute_name']"
-                ng-disabled="!authenticated_member.admin"
-                required
-            >
-                <option value="">{{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}</option>
-            </select>
-            <span ng-show="editCourseForm.institute_id.$error.required && !editCourseForm.institute_id.$pristine" class="text-danger">
-                <small>
-                    {{ 'REQUIRED' | translate }}
-                </small>
-            </span>
-            <br>
-            <br>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'UNIVERSITY' | translate }}*</b>
+                    </label>
+                    <select
+                        class="custom-select form-control"
+                        id="university_id"
+                        name="university_id"
+                        ng-model="university_id"
+                        ng-options="university.university_id as university.university_name for university in universities | orderBy:['university_name']"
+                        ng-disabled="!authenticated_member.admin"
+                        ng-change="load('institutes')"
+                        required
+                    >
+                        <option value="">{{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}</option>
+                    </select>
+                    <span ng-show="editCourseForm.university_id.$error.required && !editCourseForm.university_id.$pristine" class="text-danger">
+                        <small>
+                            {{ 'REQUIRED' | translate }}
+                        </small>
+                    </span>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'INSTITUTE' | translate }}*</b>
+                    </label>
+                    <select
+                        class="custom-select form-control"
+                        id="institute_id"
+                        name="institute_id"
+                        ng-model="updated_course.institute_id"
+                        ng-options="institute.institute_id as institute.institute_name for institute in institutes | orderBy:['institute_name']"
+                        ng-disabled="university_id == null || !authenticated_member.admin"
+                        ng-change="load('members')"
+                        required
+                    >
+                        <option value="">{{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}</option>
+                    </select>
+                    <span ng-show="editCourseForm.institute_id.$error.required && !editCourseForm.institute_id.$pristine" class="text-danger">
+                        <small>
+                            {{ 'REQUIRED' | translate }}
+                        </small>
+                    </span>
+                </div>
+                <br>
+            </div>
             <br>
 
-            <label>
-                <b>{{ 'RESPONSIBLE_MEMBERS' | translate }}</b>
-            </label>
-            <div class="list-group">
-                <div class="list-group-item flex-column align-items-start" ng-repeat="member in responsible_members" ng-if="responsible_members && responsible_members.length>0">
-                    <div class="d-flex w-100 justify-content-between">
-                        <div>
-                            <span ng-if="member.admin">
-                                <i class="fa fa-user-secret" aria-hidden="true"></i>
-                            </span>
-                            <span ng-if="!member.admin">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                            </span>
-                            &nbsp;&nbsp;
-                            <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}</b>
-                            &nbsp;
-                            <span class="text-muted" ng-if="member.working_group_name">
-                                <small>{{member.working_group_name}}&nbsp;|</small>
-                            </span>
-                            <span class="text-muted" ng-if="member.institute_name">
-                                <small>{{member.institute_name}}&nbsp;|</small>
-                            </span>
-                            <span class="text-muted" ng-if="member.university_name">
-                                <small>{{member.university_name}}</small>
-                            </span>
-                        </div>
-                        <div>
-                            <a href="" class="btn btn-sm btn-danger" ng-click="deleteMember($index)">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="list-group-item middle" ng-if="!responsible_members || responsible_members.length==0">
-                    - {{ 'NONE' | translate }} -
-                </div>
-                <div class="list-group-item" style="background-color: #f7f7f9;">
-                    <div class="row">
-                        <div class="col">
-                            <div angucomplete-alt
-                                id="members"
-                                placeholder="{{ 'SEARCH_FOR_MEMBERS' | translate }}"
-                                maxlength="18"
-                                pause="100"
-                                selected-object="selectedMember"
-                                local-data="members"
-                                search-fields="title,first_name,last_name"
-                                title-field="title,first_name,last_name"
-                                minlength="1"
-                                input-class="form-control"
-                                match-class="highlight">
+            <!-- Responsible members -->
+            <div ng-show="updated_course.institute_id && updated_course.institute_id !== null">
+                <br>
+
+                <label>
+                    <b>{{ 'RESPONSIBLE_MEMBERS' | translate }}</b>
+                </label>
+                <div class="list-group">
+                    <div class="list-group-item flex-column align-items-start" ng-repeat="member in responsible_members" ng-if="responsible_members && responsible_members.length>0">
+                        <div class="d-flex w-100 justify-content-between">
+                            <div>
+                                <span ng-if="member.admin">
+                                    <i class="fa fa-id-badge" aria-hidden="true"></i>
+                                </span>
+                                <span ng-if="!member.admin">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </span>
+                                &nbsp;&nbsp;
+                                <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}</b>
+                                &nbsp;
+                                <span class="text-muted" ng-if="member.working_group_name">
+                                    <small>{{member.working_group_name}}&nbsp;|</small>
+                                </span>
+                                <span class="text-muted" ng-if="member.institute_name">
+                                    <small>{{member.institute_name}}&nbsp;|</small>
+                                </span>
+                                <span class="text-muted" ng-if="member.university_name">
+                                    <small>{{member.university_name}}</small>
+                                </span>
+                            </div>
+                            <div>
+                                <a href="" class="btn btn-sm btn-danger" ng-click="deleteMember($index)">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </div>
-                        <div class="col-2 col-xs-auto col-sm-auto col-md-auto col-lg-auto">
-                            <button class="btn btn-primary" type="button" ng-click="addMember()" ng-disabled="!selectedMember.originalObject">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                            </button>
+                    </div>
+                    <div class="list-group-item middle" ng-if="!responsible_members || responsible_members.length==0">
+                        - {{ 'NONE' | translate }} -
+                    </div>
+                    <div class="list-group-item" style="background-color: #f7f7f9;">
+                        <div class="row">
+                            <div class="col">
+                                <div angucomplete-alt
+                                    id="members"
+                                    placeholder="{{ 'SEARCH_FOR_MEMBERS' | translate }}"
+                                    maxlength="18"
+                                    pause="100"
+                                    selected-object="selectedMember"
+                                    local-data="members"
+                                    search-fields="title,first_name,last_name"
+                                    title-field="title,first_name,last_name"
+                                    minlength="1"
+                                    input-class="form-control"
+                                    match-class="highlight">
+                                </div>
+                            </div>
+                            <div class="col-2 col-xs-auto col-sm-auto col-md-auto col-lg-auto">
+                                <button class="btn btn-primary" type="button" ng-click="addMember()" ng-disabled="!selectedMember.originalObject">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Course create controller
-app.controller("courseCreateController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $courseService, $instituteService, $memberService) {
+app.controller("courseCreateController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $timeout, $authenticationService, $memberService, $courseService, $instituteService, $universityService) {
 
     /*************************************************
         FUNCTIONS
@@ -56,7 +56,6 @@ app.controller("courseCreateController", function($scope, $rootScope, $routePara
                 member_id: $scope.selectedMember.originalObject.member_id
             });
             $scope.$broadcast('angucomplete-alt:clearInput', 'members');
-            $scope.selectedMember = {};
         }
         $scope.new_course.responsibilities = _.uniq($scope.new_course.responsibilities, 'member_id');
         $scope.updateMemberList();
@@ -78,6 +77,7 @@ app.controller("courseCreateController", function($scope, $rootScope, $routePara
      */
     $scope.updateMemberList = function(){
         $scope.responsible_members = [];
+        $scope.selectedMember = {};
 
         // Load amount of members
         angular.forEach($scope.new_course.responsibilities, function(responsibility , key){
@@ -89,39 +89,119 @@ app.controller("courseCreateController", function($scope, $rootScope, $routePara
 
     };
 
+    /**
+     * [description]
+     * @param  {[type]} related_data [description]
+     * @return {[type]}              [description]
+     */
+    $scope.load = function(related_data){
+        // Check which kind of related data needs to be requested
+        switch (related_data) {
+            case 'universities': {
+                $scope.$parent.loading = { status: true, message: "Loading universities" };
+
+                // Load universities
+                $universityService.list($scope.filter)
+                .then(function onSuccess(response) {
+                    $scope.universities = response.data;
+                    $scope.$parent.loading = { status: false, message: "" };
+                })
+                .catch(function onError(response) {
+                    $window.alert(response.data);
+                });
+                break;
+            }
+            case 'institutes': {
+                if($scope.university_id){
+                    if($scope.university_id !== null){
+                        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+
+                        // Load related institutes
+                        $instituteService.listByUniversity($scope.university_id, $scope.filter)
+                        .then(function onSuccess(response) {
+                            $scope.institutes = response.data;
+                            $scope.$parent.loading = { status: false, message: "" };
+                        })
+                        .catch(function onError(response) {
+                            $window.alert(response.data);
+                        });
+                    } else {
+                        // Reset institutes
+                        $scope.institutes = [];
+                        $scope.new_course.institute_id = null;
+
+                        // Reset members
+                        $scope.members = [];
+                        $scope.new_course.responsibilities = [];
+                        $scope.updateMemberList();
+                    }
+                } else {
+                    // Reset institutes
+                    $scope.institutes = [];
+                    $scope.new_course.institute_id = null;
+
+                    // Reset members
+                    $scope.members = [];
+                    $scope.new_course.responsibilities = [];
+                    $scope.updateMemberList();
+                }
+                break;
+            }
+            case 'members': {
+                if($scope.new_course.institute_id){
+                    if($scope.new_course.institute_id !== null){
+                        $scope.$parent.loading = { status: true, message: "Loading members" };
+
+                        // Load related members
+                        $memberService.listByInstitute($scope.new_course.institute_id, $scope.filter)
+                        .then(function onSuccess(response) {
+                            $scope.members = response.data;
+                            $scope.$parent.loading = { status: false, message: "" };
+                        })
+                        .catch(function onError(response) {
+                            $window.alert(response.data);
+                        });
+                    } else {
+                        // Reset members
+                        $scope.members = [];
+                        $scope.new_course.responsibilities = [];
+                        $scope.updateMemberList();
+                    }
+                } else {
+                    // Reset members
+                    $scope.members = [];
+                    $scope.new_course.responsibilities = [];
+                    $scope.updateMemberList();
+                }
+                break;
+            }
+        }
+
+    };
+
 
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading institutes" };
     $scope.new_course = $courseService.init();
     $scope.selectedMember = {};
     $scope.responsible_members = [];
     $scope.authenticated_member = $authenticationService.get();
 
-    // Load institutes
-    $instituteService.list()
-    .then(function onSuccess(response) {
-        $instituteService.set(response.data);
-        $scope.institutes = $instituteService.get();
-        $scope.new_course.institute_id = $scope.authenticated_member.institute_id;
+    // Filter
+    $scope.filter = { former: false };
 
-        $scope.$parent.loading = { status: true, message: "Loading members" };
+    // Load universities
+    $scope.load('universities');
 
-        // Load members
-        $memberService.list()
-        .then(function onSuccess(response) {
-            $memberService.set(response.data);
-            $scope.members = $memberService.getByStatus(false);
-            $scope.$parent.loading = { status: false, message: "" };
-        })
-        .catch(function onError(response) {
-            $window.alert(response.data);
-        });
-    })
-    .catch(function onError(response) {
-        $window.alert(response.data);
-    });
+    // Set default values by member
+    $scope.university_id = $scope.authenticated_member.university_id;
+    $scope.new_course.institute_id = $scope.authenticated_member.institute_id;
 
+    // Load related institutes
+    $scope.load('institutes');
+
+    // Load related members
+    $scope.load('members');
 
 });

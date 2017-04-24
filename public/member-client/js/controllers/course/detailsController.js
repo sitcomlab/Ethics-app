@@ -17,6 +17,62 @@ app.controller("courseDetailsController", function($scope, $rootScope, $routePar
         $location.url(path);
     };
 
+    /**
+     * [description]
+     * @param  {[type]} related_data [description]
+     * @param  {[type]} status       [description]
+     * @return {[type]}              [description]
+     */
+    $scope.changeTab = function(related_data, status){
+        $scope.filter = {
+            tab: related_data,
+            former: status,
+            blocked: status
+        };
+        $scope.load(related_data);
+    };
+
+    /**
+     * [description]
+     * @param  {[type]} related_data [description]
+     * @return {[type]}              [description]
+     */
+    $scope.load = function(related_data){
+
+        // Check which kind of related data needs to be requested
+        switch (related_data) {
+            case 'documents': {
+                $scope.$parent.loading = { status: true, message: "Loading related documents" };
+
+                // Load related documents
+                $documentsService.listByCourse($scope.course.course_id, $scope.filter)
+                .then(function onSuccess(response) {
+                    $scope.course.documents = response.data;
+                    $scope.$parent.loading = { status: false, message: "" };
+                })
+                .catch(function onError(response) {
+                    $window.alert(response.data);
+                });
+                break;
+            }
+            case 'members': {
+                $scope.$parent.loading = { status: true, message: "Loading related members" };
+
+                // Load related members
+                $memberService.listByCourse($scope.course.course_id, $scope.filter)
+                .then(function onSuccess(response) {
+                    $scope.course.members = response.data;
+                    $scope.$parent.loading = { status: false, message: "" };
+                })
+                .catch(function onError(response) {
+                    $window.alert(response.data);
+                });
+                break;
+            }
+        }
+
+    };
+
 
     /*************************************************
         INIT
@@ -24,31 +80,20 @@ app.controller("courseDetailsController", function($scope, $rootScope, $routePar
     $scope.$parent.loading = { status: true, message: "Loading course" };
     $scope.authenticated_member = $authenticationService.get();
 
+    // Filter
+    $scope.filter = {
+        tab: 'documents',
+        former: false,
+        blocked: false
+    };
+
     // Load course
     $courseService.retrieve($routeParams.course_id)
     .then(function onSuccess(response) {
         $scope.course = response.data;
 
-        // Load responsible members
-        $memberService.listByCourse($routeParams.course_id)
-        .then(function onSuccess(response) {
-            $scope.course.members = response.data;
-
-            // Load related documents
-            $documentsService.listByCourse($routeParams.course_id)
-            .then(function onSuccess(response) {
-                $scope.course.documents = response.data;
-
-                $scope.$parent.loading = { status: false, message: "" };
-            })
-            .catch(function onError(response) {
-                $window.alert(response.data);
-            });
-            
-        })
-        .catch(function onError(response) {
-            $window.alert(response.data);
-        });
+        // Load related documents
+        $scope.load('documents');
     })
     .catch(function onError(response) {
         $window.alert(response.data);

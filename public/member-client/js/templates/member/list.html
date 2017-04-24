@@ -2,7 +2,9 @@
 <div class="card">
     <div class="card-header" style="font-size: 20pt;">
         <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">{{ 'COMMITTEE' | translate }} {{ '_MEMBERS' | translate }}</div>
+            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+                {{ 'COMMITTEE_MEMBERS' | translate }}
+            </div>
             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 right">
                 <button class="btn btn-primary" role="button" ng-click="redirect('/new/member')">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
@@ -34,7 +36,7 @@
         </div>
 
         <!-- Sub-nav -->
-        <ul class="nav nav-pills justify-content-center">
+        <ul class="nav nav-pills flex-column flex-sm-row flex-sm-wrap justify-content-start">
             <li class="nav-item">
                 <a class="nav-link" href="" ng-class="{ 'active': !filter.former }" ng-click="changeTab(false)">
                     {{ 'MEMBERS' | translate }}
@@ -53,7 +55,7 @@
                 <div class="d-flex w-100 justify-content-between">
                     <div>
                         <span ng-if="member.admin">
-                            <i class="fa fa-user-secret" aria-hidden="true"></i>
+                            <i class="fa fa-id-badge" aria-hidden="true"></i>
                         </span>
                         <span ng-if="!member.admin">
                             <i class="fa fa-user" aria-hidden="true"></i>
@@ -74,7 +76,7 @@
                         </span>
                     </div>
                     <div ng-if="filter.former">
-                        <i class="fa fa-ban text-danger" aria-hidden="true"></i>
+                        <i class="fa fa-archive text-danger" aria-hidden="true"></i>
                     </div>
                 </div>
             </a>

@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 
-// Course edit controller
+// University edit controller
 app.controller("universityEditController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $universityService) {
 
     /*************************************************

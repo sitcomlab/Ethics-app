@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Course edit controller
-app.controller("courseEditController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $courseService, $instituteService, $memberService) {
+app.controller("courseEditController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $timeout, $authenticationService, $memberService, $courseService, $instituteService, $universityService) {
 
     /*************************************************
         FUNCTIONS
@@ -18,7 +18,7 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
     };
 
     /**
-     * [send description]
+     * [save description]
      * @return {[type]} [description]
      */
     $scope.save = function(){
@@ -36,6 +36,7 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
             // Updating course
             $courseService.edit($routeParams.course_id, $scope.updated_course)
             .then(function onSuccess(response) {
+
                 // Redirect
                 $scope.redirect("/courses/" + $routeParams.course_id);
             })
@@ -54,7 +55,6 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
                 member_id: $scope.selectedMember.originalObject.member_id
             });
             $scope.$broadcast('angucomplete-alt:clearInput', 'members');
-            $scope.selectedMember = {};
         }
         $scope.updated_course.responsibilities = _.uniq($scope.updated_course.responsibilities, 'member_id');
         $scope.updateMemberList();
@@ -76,6 +76,7 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
      */
     $scope.updateMemberList = function(){
         $scope.responsible_members = [];
+        $scope.selectedMember = {};
 
         // Load amount of members
         angular.forEach($scope.updated_course.responsibilities, function(responsibility , key){
@@ -87,15 +88,106 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
 
     };
 
+    /**
+     * [description]
+     * @param  {[type]} related_data [description]
+     * @return {[type]}              [description]
+     */
+    $scope.load = function(related_data){
+        // Check which kind of related data needs to be requested
+        switch (related_data) {
+            case 'universities': {
+                $scope.$parent.loading = { status: true, message: "Loading universities" };
+
+                // Load universities
+                $universityService.list($scope.filter)
+                .then(function onSuccess(response) {
+                    $scope.universities = response.data;
+                    $scope.$parent.loading = { status: false, message: "" };
+                })
+                .catch(function onError(response) {
+                    $window.alert(response.data);
+                });
+                break;
+            }
+            case 'institutes': {
+                if($scope.university_id){
+                    if($scope.university_id !== null){
+                        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+
+                        // Load related institutes
+                        $instituteService.listByUniversity($scope.university_id, $scope.filter)
+                        .then(function onSuccess(response) {
+                            $scope.institutes = response.data;
+                            $scope.$parent.loading = { status: false, message: "" };
+                        })
+                        .catch(function onError(response) {
+                            $window.alert(response.data);
+                        });
+                    } else {
+                        // Reset institutes
+                        $scope.institutes = [];
+                        $scope.updated_course.institute_id = null;
+
+                        // Reset members
+                        $scope.members = [];
+                        $scope.updated_course.responsibilities = [];
+                        $scope.updateMemberList();
+                    }
+                } else {
+                    // Reset institutes
+                    $scope.institutes = [];
+                    $scope.updated_course.institute_id = null;
+
+                    // Reset members
+                    $scope.members = [];
+                    $scope.updated_course.responsibilities = [];
+                    $scope.updateMemberList();
+                }
+                break;
+            }
+            case 'members': {
+                if($scope.updated_course.institute_id){
+                    if($scope.updated_course.institute_id !== null){
+                        $scope.$parent.loading = { status: true, message: "Loading members" };
+
+                        // Load related members
+                        $memberService.listByInstitute($scope.updated_course.institute_id, $scope.filter)
+                        .then(function onSuccess(response) {
+                            $scope.members = response.data;
+                            $scope.$parent.loading = { status: false, message: "" };
+                        })
+                        .catch(function onError(response) {
+                            $window.alert(response.data);
+                        });
+                    } else {
+                        // Reset members
+                        $scope.members = [];
+                        $scope.updated_course.responsibilities = [];
+                        $scope.updateMemberList();
+                    }
+                } else {
+                    // Reset members
+                    $scope.members = [];
+                    $scope.updated_course.responsibilities = [];
+                    $scope.updateMemberList();
+                }
+                break;
+            }
+        }
+
+    };
+
 
     /*************************************************
         INIT
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading course" };
-
     $scope.selectedMember = {};
     $scope.responsible_members = [];
-    $scope.authenticated_member = $authenticationService.get();
+
+    // Filter
+    $scope.filter = { former: false };
 
     // Load course
     $courseService.retrieve($routeParams.course_id)
@@ -103,26 +195,24 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
         $scope.course = response.data;
         $scope.updated_course = $courseService.copy($scope.course);
 
-        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+        // Load universities
+        $scope.university_id = $scope.course.university_id;
+        $scope.load('universities');
 
-        // Load institutes
-        $instituteService.list()
+        // Load related institutes
+        $instituteService.listByUniversity($scope.university_id, $scope.filter)
         .then(function onSuccess(response) {
-            $instituteService.set(response.data);
-            $scope.institutes = $instituteService.get();
+            $scope.institutes = response.data;
+            $scope.$parent.loading = { status: false, message: "" };
 
-            $scope.$parent.loading = { status: true, message: "Loading members" };
-
-            // Load members
-            $memberService.list()
+            // Load related members
+            $memberService.listByInstitute($scope.updated_course.institute_id, $scope.filter)
             .then(function onSuccess(response) {
-                $memberService.set(response.data);
-                $scope.members = $memberService.getByStatus(false);
-
-                // Update responsible members
-                $scope.updateMemberList();
-
+                $scope.members = response.data;
                 $scope.$parent.loading = { status: false, message: "" };
+
+                // Update UI
+                $scope.updateMemberList();
             })
             .catch(function onError(response) {
                 $window.alert(response.data);
@@ -131,9 +221,7 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
         .catch(function onError(response) {
             $window.alert(response.data);
         });
-    })
-    .catch(function onError(response) {
-        $window.alert(response.data);
+
     });
 
 });

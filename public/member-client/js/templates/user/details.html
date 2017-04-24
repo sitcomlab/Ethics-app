@@ -3,8 +3,12 @@
     <div class="card-header" style="font-size: 20pt;">
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-                <span ng-if="user.blocked">{{ 'BLOCKED' | translate }} {{ '_USER' | translate }}</span>
-                <span ng-if="!user.blocked">{{ 'USER' | translate }} </span>
+                <span ng-if="user.blocked">
+                    <i class="fa fa-ban text-danger" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'BLOCKED_USER' | translate }}
+                </span>
+                <span ng-if="!user.blocked">
+                    {{ 'USER' | translate }}
+                </span>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 right">
                 <div class="btn-group">
@@ -27,7 +31,7 @@
                 <div class="row">
                     <div class="col-1 right">
                         <h4 class="card-title">
-                            <i class="fa fa-user-o" aria-hidden="true" ng-class="{ 'text-danger': user.blocked }"></i>
+                            <i class="fa fa-user-o" aria-hidden="true"></i>
                         </h4>
                     </div>
                     <div class="col">
@@ -60,9 +64,17 @@
                 </div>
                 <br>
 
-                <h6 class="text-muted">
-                    {{ 'RELATED_DOCUMENTS' | translate }}
-                </h6>
+                <!-- Sub-nav -->
+                <ul class="nav nav-pills flex-column flex-sm-row flex-sm-wrap justify-content-start">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="">
+                            {{ 'RELATED_DOCUMENTS' | translate }}
+                        </a>
+                    </li>
+                </ul>
+                <br>
+
+                <!-- Related documents -->
                 <div class="list-group" ng-if="user.documents && user.documents.length>0">
                     <a href="" ng-click="redirect('/documents/' + document.document_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="document in user.documents | orderBy: ['status', 'document_title']">
                         <div class="d-flex w-100 justify-content-between">
@@ -86,12 +98,16 @@
                         </div>
                     </a>
                 </div>
-                <div class="list-group" ng-if="!user.documents || user.documents.length==0">
-                    <div class="list-group-item middle">
-                        - {{ 'NONE' | translate }} -
+                <div ng-if="!user.documents || user.documents.length==0">
+                    <div class="list-group">
+                        <div class="list-group-item middle">
+                            - {{ 'NONE' | translate }} -
+                        </div>
                     </div>
+                    <br>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

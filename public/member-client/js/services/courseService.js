@@ -64,8 +64,14 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
                 }
             });
         },
-        listByInstitute: function(institute_id) {
-            return $http.get(config.apiURL + "/institutes/" + institute_id + "/courses", {
+        listByInstitute: function(institute_id, filter) {
+            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&";
+
+            // TODO: Add orderby
+
+            query = query.slice(0, -1);
+
+            return $http.get(config.apiURL + "/institutes/" + institute_id + "/courses" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

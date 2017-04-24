@@ -76,8 +76,53 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
                 }
             });
         },
-        listByCourse: function(course_id) {
-            return $http.get(config.apiURL + "/courses/" + course_id + "/members", {
+        listByUniversity: function(university_id, filter) {
+            var query = "?former=" + filter.former + "&";
+
+            // TODO: Add orderby
+
+            query = query.slice(0, -1);
+
+            return $http.get(config.apiURL + "/universities/" + university_id + "/members" + query, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        listByInstitute: function(institute_id, filter) {
+            var query = "?former=" + filter.former + "&";
+
+            // TODO: Add orderby
+
+            query = query.slice(0, -1);
+
+            return $http.get(config.apiURL + "/institutes/" + institute_id + "/members" + query, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        listByWorkingGroup: function(working_group_id, filter) {
+            var query = "?former=" + filter.former + "&";
+
+            // TODO: Add orderby
+
+            query = query.slice(0, -1);
+
+            return $http.get(config.apiURL + "/working_groups/" + working_group_id + "/members" + query, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        listByCourse: function(course_id, filter) {
+            var query = "?former=" + filter.former + "&";
+
+            // TODO: Add orderby
+
+            query = query.slice(0, -1);
+
+            return $http.get(config.apiURL + "/courses/" + course_id + "/members" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

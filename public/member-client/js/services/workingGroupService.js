@@ -59,8 +59,14 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
                 }
             });
         },
-        listByInstitute: function(institute_id) {
-            return $http.get(config.apiURL + "/institutes/" + institute_id + "/working_groups", {
+        listByInstitute: function(institute_id, filter) {
+            var query = "?former=" + filter.former + "&";
+
+            // TODO: Add orderby
+
+            query = query.slice(0, -1);
+
+            return $http.get(config.apiURL + "/institutes/" + institute_id + "/working_groups" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
