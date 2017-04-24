@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 
-// Course delete controller
+// Working group delete controller
 app.controller("workingGroupDeleteController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $workingGroupService) {
 
     /*************************************************
@@ -24,7 +24,7 @@ app.controller("workingGroupDeleteController", function($scope, $rootScope, $rou
     $scope.delete = function(){
         $scope.$parent.loading = { status: true, message: "Deleting working group" };
 
-        // Deleteworking group
+        // Delete working group
         $workingGroupService.remove($scope.working_group.working_group_id)
         .then(function onSuccess(response) {
             // Redirect

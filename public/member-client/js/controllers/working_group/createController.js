@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 
-// Working Group create controller
+// Working group create controller
 app.controller("workingGroupCreateController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $timeout, $authenticationService, $workingGroupService, $instituteService, $universityService) {
 
     /*************************************************
@@ -31,13 +31,13 @@ app.controller("workingGroupCreateController", function($scope, $rootScope, $rou
         } else {
             $scope.$parent.loading = { status: true, message: "Creating new working group" };
 
-            // Create new WG
+            // Create new working group
             $workingGroupService.create($scope.new_working_group)
             .then(function onSuccess(response) {
-                var wg = response.data;
+                var working_group = response.data;
 
                 // Redirect
-                $scope.redirect("/working_groups/" + wg.working_group_id);
+                $scope.redirect("/working_groups/" + working_group.working_group_id);
             })
             .catch(function onError(response) {
                 $window.alert(response.data);

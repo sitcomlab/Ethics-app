@@ -38,6 +38,7 @@
                 </span>
             </div>
             <br>
+
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                     <label>
@@ -54,6 +55,7 @@
                             aria-describedby="inputTitle"
                             autocomplete="on">
                     </div>
+                    <br>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                     <label>
@@ -76,6 +78,7 @@
                             </small>
                         </span>
                     </div>
+                    <br>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                     <label>
@@ -98,9 +101,10 @@
                             </small>
                         </span>
                     </div>
+                    <br>
                 </div>
             </div>
-            <br>
+
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <label>
@@ -120,10 +124,11 @@
                             <option value="">{{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}</option>
                         </select>
                     </div>
+                    <br>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <label>
-                        <b>{{ 'INSTITUTE' | translate }}</b>
+                        <b>{{ 'INSTITUTE' | translate }}*</b>
                     </label>
                     <select
                         class="custom-select form-control"
@@ -131,7 +136,7 @@
                         name="institute_id"
                         ng-model="new_user.institute_id"
                         ng-options="institute.institute_id as institute.institute_name for institute in institutes | orderBy:['institute_name']"
-                        ng-disabled="university_id == null"
+                        ng-disabled="university_id == null || !authenticated_member.admin"
                         required
                     >
                         <option value="">{{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}</option>
@@ -141,10 +146,46 @@
                             {{ 'REQUIRED' | translate }}
                         </small>
                     </span>
+                    <br>
                 </div>
             </div>
-        </div>
 
+            <label>
+                <b>{{ 'BLOCKING_STATUS' | translate }}*</b>
+            </label>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label class="custom-control custom-radio">
+                        <input
+                        class="custom-control-input"
+                        type="radio"
+                        name="blocked"
+                        id="blocked_1"
+                        ng-model="new_user.blocked"
+                        ng-value="true"
+                        required>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">{{ 'TRUE' | translate }}</span>
+                    </label>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label class="custom-control custom-radio">
+                        <input
+                        class="custom-control-input"
+                        type="radio"
+                        name="blocked"
+                        id="blocked_2"
+                        ng-model="new_user.blocked"
+                        ng-value="false"
+                        required>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">{{ 'FALSE' | translate }} ({{ 'DEFAULT' | translate }})</span>
+                    </label>
+                </div>
+            </div>
+            <br>
+
+        </div>
         <div class="card-footer right">
           <button class="btn btn-success" role="submit">
             <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SEND' | translate }}

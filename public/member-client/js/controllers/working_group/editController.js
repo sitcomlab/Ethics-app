@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 
-// WorkingGroup edit controller
+// Working group edit controller
 app.controller("workingGroupEditController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $workingGroupService) {
 
     /*************************************************
@@ -29,7 +29,7 @@ app.controller("workingGroupEditController", function($scope, $rootScope, $route
         } else {
             $scope.$parent.loading = { status: true, message: "Saving working group" };
 
-            // Updating Working Group
+            // Updating working group
             $workingGroupService.edit($routeParams.working_group_id, $scope.updated_working_group)
             .then(function onSuccess(response) {
                 // Redirect
@@ -46,7 +46,7 @@ app.controller("workingGroupEditController", function($scope, $rootScope, $route
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading working group" };
 
-    // Load WorkingGroup
+    // Load working group
     $workingGroupService.retrieve($routeParams.working_group_id)
     .then(function onSuccess(response) {
         $scope.working_group = response.data;

@@ -50,7 +50,7 @@ exports.request = function(req, res) {
                         if(decoded.member){
                             callback(null, client, done, true, query_edit_user_by_member);
                         } else {
-                            callback(null, client, done, false, query_edit_user__by_user);
+                            callback(null, client, done, false, query_edit_user_by_user);
                         }
                     }
                 });
@@ -124,7 +124,7 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, user, updated_user, callback) {
-            if(user.blocked === req.body.blocked){
+            if(user.blocked && user.blocked === req.body.blocked){
                 callback(null, 200, updated_user);
             } else {
                 // Render HTML content
