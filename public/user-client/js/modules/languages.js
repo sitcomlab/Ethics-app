@@ -268,6 +268,7 @@ app.config(function ($translateProvider) {
         OFFICE: 'Office',
         RESPONSIBLE: 'Responsible ',
         CURRENTLY_NOT_RESPONSIBLE: 'Currently not responsible',
+        NOT_RESPONSIBLE_ANYMORE: 'Not responsible anymore',
         SUBSCRIBED: 'Subscribed ',
         CURRENTLY_NOT_SUBSCRIBED: 'Currently not subscribed',
 

@@ -78,6 +78,9 @@
                                 <span class="text-danger" ng-if="!member.former && !member.subscribed">
                                     <i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'CURRENTLY_NOT_RESPONSIBLE' | translate }}
                                 </span>
+                                <span class="text-danger" ng-if="member.former">
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'NOT_RESPONSIBLE_ANYMORE' | translate }}
+                                </span>
                             </div>
                         </div>
                     </div>
