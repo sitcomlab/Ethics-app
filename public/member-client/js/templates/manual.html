@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<div class="card">
+    <div class="card-header " style="font-size: 20pt;">
+        <div class="row">
+            <div class="col">
+                {{ 'MANUAL' | translate }}
+            </div>
+            <div class="col right">
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/documents')">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+
+        <h4>
+            {{ 'FLOW' | translate }}
+        </h4>
+        <img src="img/flow.png">
+
+        <h4>
+            {{ 'STATUS' | translate }}
+        </h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>{{ 'STATUS' }}</th>
+                    <th>{{ 'MEMBER_CLIENT' }}</th>
+                    <th>{{ 'USER_CLIENT' }}</th>
+                    <th>{{ 'DESCRIPTION' }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>
+                        <span class="badge badge-pill badge-default">0</span>
+                    </th>
+                    <td>
+                        <span class="badge badge-default">
+                            {{ 'INITIALISED' | translate }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge badge-default">
+                            {{ 'INITIALISED' | translate }}
+                        </span>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <span class="badge badge-pill badge-default">1</span>
+                    </th>
+                    <td>
+                        <span class="badge badge-default">
+                            {{ 'UNSUBMITTED' | translate }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge badge-default">
+                            {{ 'UNSUBMITTED' | translate }}
+                        </span>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <span class="badge badge-pill badge-success">2</span>
+                    </th>
+                    <td>
+                        <span class="badge badge-success">
+                            {{ 'AUTO_ACCEPTED' | translate }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge badge-success">
+                            {{ 'REVIEWED_ACCEPTED' | translate }}
+                        </span>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <span class="badge badge-pill badge-primary">3</span>
+                    </th>
+                    <td>
+                        <span class="badge badge-primary">
+                            {{ 'REVIEW_REQUIRED' | translate }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge badge-primary">
+                            {{ 'REVIEW_REQUESTED' | translate }}
+                        </span>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <span class="badge badge-pill badge-info">4</span>
+                    </th>
+                    <td>
+                        <span class="badge badge-info">
+                            {{ 'REVIEW_IN_PROGRESS' | translate }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge badge-info">
+                            {{ 'UNDER_REVIEW' | translate }}
+                        </span>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <span class="badge badge-pill badge-warning">5</span>
+                    </th>
+                    <td>
+                        <span class="badge badge-warning">
+                            {{ 'PARTLY_ACCEPTED' | translate }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge badge-warning">
+                            {{ 'REVIEWED_PARTLY_ACCEPTED' | translate }}
+                        </span>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <span class="badge badge-pill badge-success">6</span>
+                    </th>
+                    <td>
+                        <span class="badge badge-success">
+                            {{ 'ACCEPTED' | translate }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge badge-success">
+                            {{ 'REVIEWED_ACCEPTED' | translate }}
+                        </span>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <span class="badge badge-pill badge-danger">7</span>
+                    </th>
+                    <td>
+                        <span class="badge badge-danger">
+                            {{ 'REJECTED' | translate }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge badge-danger">
+                            {{ 'REVIEWED_REJECTED' | translate }}
+                        </span>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

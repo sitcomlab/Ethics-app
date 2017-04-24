@@ -304,6 +304,14 @@ app.config(function($routeProvider, $locationProvider, config) {
 			}
 		})
 
+		// Manual
+		.when("/manual", {
+			templateUrl: "js/templates/manual.html",
+			controller: "manualController",
+			resolve: {
+				factory: checkAuthentication
+			}
+		})
 
 		// Help
 		.when("/help", {
