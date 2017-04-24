@@ -28,7 +28,7 @@ app.controller("instituteCreateController", function($scope, $rootScope, $routeP
             $scope.createInstituteForm.institute_name.$pristine = false;
             $scope.createInstituteForm.university_id.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Creating new Institute" };
+            $scope.$parent.loading = { status: true, message: "Creating new institute" };
 
             // Create new Institute
             $instituteService.create($scope.new_institute)

@@ -22,7 +22,7 @@ app.controller("instituteDeleteController", function($scope, $rootScope, $routeP
      * @return {[type]} [description]
      */
     $scope.delete = function(){
-        $scope.$parent.loading = { status: true, message: "Deleting Institute" };
+        $scope.$parent.loading = { status: true, message: "Deleting institute" };
 
         // Delete institute
         $instituteService.remove($scope.institute.institute_id)

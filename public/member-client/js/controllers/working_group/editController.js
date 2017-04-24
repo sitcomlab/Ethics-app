@@ -27,7 +27,7 @@ app.controller("workingGroupEditController", function($scope, $rootScope, $route
             // Update UI
             $scope.editWorkingGroupForm.working_group_name.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Saving Working Group" };
+            $scope.$parent.loading = { status: true, message: "Saving working group" };
 
             // Updating Working Group
             $workingGroupService.edit($routeParams.working_group_id, $scope.updated_working_group)
@@ -44,7 +44,7 @@ app.controller("workingGroupEditController", function($scope, $rootScope, $route
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading Working Group" };
+    $scope.$parent.loading = { status: true, message: "Loading working group" };
 
     // Load WorkingGroup
     $workingGroupService.retrieve($routeParams.working_group_id)

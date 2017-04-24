@@ -29,7 +29,7 @@ app.controller("workingGroupCreateController", function($scope, $rootScope, $rou
             $scope.createWorkingGroupForm.institute_id.$pristine = false;
             $scope.createWorkingGroupForm.university_id.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Creating new Working Group" };
+            $scope.$parent.loading = { status: true, message: "Creating new working group" };
 
             // Create new WG
             $workingGroupService.create($scope.new_working_group)

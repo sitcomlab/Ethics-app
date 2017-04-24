@@ -17,13 +17,32 @@ app.controller("documentDeleteController", function($scope, $rootScope, $routePa
         $location.url(path);
     };
 
+    /**
+     * [delete description]
+     * @return {[type]} [description]
+     */
+    $scope.delete = function(){
+        $scope.$parent.loading = { status: true, message: "Deleting document" };
+
+        // Delete document
+        $documentService.remove($scope.document.document_id)
+        .then(function onSuccess(response) {
+            $scope.redirect("/institutes");
+        })
+        .catch(function onError(response) {
+            $window.alert(response.data);
+        });
+    };
 
     /*************************************************
         INIT
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading document" };
+    $scope.input = "";
+
+    // Load document
     $scope.document = $documentService.get();
     $scope.authenticated_member = $authenticationService.get();
     $scope.$parent.loading = { status: false, message: "" };
-    
+
 });
