@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 
-// Course create controller
+// Institute create controller
 app.controller("instituteCreateController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $timeout, $authenticationService, $instituteService, $universityService) {
 
     /*************************************************
@@ -47,7 +47,6 @@ app.controller("instituteCreateController", function($scope, $rootScope, $routeP
 
     /**
      * [description]
-     * @param  {[type]} related_data [description]
      * @return {[type]}              [description]
      */
     $scope.loadUniversities = function(){
@@ -78,6 +77,4 @@ app.controller("instituteCreateController", function($scope, $rootScope, $routeP
     // Load universities
     $scope.loadUniversities();
 
-    // Set default values by member
-    $scope.university_id = $scope.authenticated_member.university_id;
 });
