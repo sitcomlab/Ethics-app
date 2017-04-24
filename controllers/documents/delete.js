@@ -37,21 +37,29 @@ exports.request = function(req, res) {
                 // Verify token
                 jwt.verify(token, jwtSecret, function(err, decoded) {
                     if(err){
-                        res.status(401).send("Authorization failed!");
+                        callback(new Error("Authorization failed", 401));
                     } else {
-                        if(document.status === 0 || document.status === 1){
-                            if(decoded.member){
-                                callback(null, client, done, document);
+                        if(decoded.member){
+                            callback(null, client, done);
+                        } else if(decoded.user) {
+                            // Check if user is the same
+                            if(decoded.user_id === req.body.user_id){
+                                // Check if document can be deleted
+                                if(document.status === 0 || document.status === 1){
+                                    callback(null, client, done);
+                                } else {
+                                    callback(new Error("Document can not be deleted", 423));
+                                }
                             } else {
-                                res.status(401).send("Authorization failed!");
+                                callback(new Error("Authorization failed", 401));
                             }
                         } else {
-                            callback(new Error("Document can not be deleted", 423));
+                            callback(new Error("Authorization failed", 401));
                         }
                     }
                 });
             } else {
-                res.status(401).send("Authorization failed!");
+                callback(new Error("Authorization failed", 401));
             }
         },
         function(client, done, callback) {

@@ -45,7 +45,7 @@ exports.request = function(req, res) {
                 // Verify token
                 jwt.verify(token, jwtSecret, function(err, decoded) {
                     if(err){
-                        res.status(401).send("Authorization failed!");
+                        callback(new Error("Authorization failed", 401));
                     } else {
                         if(decoded.member){
                             callback(null, client, done, true, query_edit_user_by_member);
@@ -55,7 +55,7 @@ exports.request = function(req, res) {
                     }
                 });
             } else {
-                res.status(401).send("Authorization failed!");
+                callback(new Error("Authorization failed", 401));
             }
         },
         function(client, done, isMember, query, callback) {

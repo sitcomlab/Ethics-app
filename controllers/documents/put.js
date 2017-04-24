@@ -14,7 +14,8 @@ var dir_1 = "/../../sql/queries/documents/";
 var dir_2 = "/../../sql/queries/courses/";
 var dir_3 = "/../../sql/queries/affiliations/";
 var query_get_document = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
-var query_edit_document = fs.readFileSync(__dirname + dir_1 + 'edit.sql', 'utf8').toString();
+var query_edit_document_by_user = fs.readFileSync(__dirname + dir_1 + 'edit_by_user.sql', 'utf8').toString();
+var query_edit_document_by_member = fs.readFileSync(__dirname + dir_1 + 'edit_by_member.sql', 'utf8').toString();
 var query_get_course = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
 var query_get_course_by_document = fs.readFileSync(__dirname + dir_2 + 'get_by_document.sql', 'utf8').toString();
 var query_delete_affiliation = fs.readFileSync(__dirname + dir_3 + 'delete.sql', 'utf8').toString();
@@ -36,28 +37,31 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            // TODO: Authorization
+            // Authorization
             if(req.headers.authorization) {
                 var token = req.headers.authorization.substring(7);
 
                 // Verify token
                 jwt.verify(token, jwtSecret, function(err, decoded) {
                     if(err){
-                        res.status(401).send("Authorization failed!");
+                        callback(new Error("Authorization failed", 401));
                     } else {
                         if(decoded.member){
-                            // TODO: Update edit query for notes
-                            //callback(null, client, done, query);
-                            callback(null, client, done);
+                            callback(null, client, done, query_edit_document_by_member);
+                        } else if(decoded.user) {
+                            // Check if user is the same
+                            if(decoded.user_id === req.body.user_id){
+                                callback(null, client, done, query_edit_document_by_user);
+                            } else {
+                                callback(new Error("Authorization failed", 401));
+                            }
                         } else {
-                            // TODO: Update edit query for notes
-                            //callback(null, client, done, query);
-                            callback(null, client, done);
+                            callback(new Error("Authorization failed", 401));
                         }
                     }
                 });
             } else {
-                res.status(401).send("Authorization failed!");
+                callback(new Error("Authorization failed", 401));
             }
         },
         function(client, done, callback) {

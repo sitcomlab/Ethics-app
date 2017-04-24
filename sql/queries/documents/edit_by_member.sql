@@ -1,9 +1,11 @@
 UPDATE Documents SET (
     updated,
-    status
+    document_title,
+    notes
 ) = (
     now(),
-    $2::INTEGER
+    $2::TEXT,
+    $3::TEXT
 )
 WHERE
     document_id=$1::TEXT
