@@ -58,6 +58,9 @@ app.config(function ($translateProvider) {
         NO_FILTER:'No filter',
         FILTER_BY_STATUS: 'Filter by status',
 
+        DELETE_THIS_COURSE: 'Do you really want to delete this course',
+        PLEASE_TYPE_IN_THE_COURSE_NAME_TO_CONFIRM: 'Please type in the name of the course to confirm',
+
         DELETE_THIS_USER: 'Do you really want to delete this user',
         EXPLANATION_OF_DELETING_A_USER: 'Deleting an user also deletes ALL ASSOCIATED documents. PLEASE PROCEED WITH CAUTION!',
         USER_NAME: 'Full name of the user',
@@ -75,18 +78,18 @@ app.config(function ($translateProvider) {
         DELETE_THIS_UNIVERSITY: 'Do you really want to delete this university',
         EXPLANATION_OF_DELETING_A_UNIVERSITY: 'Deleting an university also deletes ALL ASSOCIATED institutes, working groups, committee members, users and documents. PLEASE PROCEED WITH CAUTION!',
         UNIVERSITY_NAME: 'University name',
-        PLEASE_TYPE_IN_THE_UNIVERSITY_NAME_TO_CONFIRM: 'Please type in the university name to confirm',
+        PLEASE_TYPE_IN_THE_UNIVERSITY_NAME_TO_CONFIRM: 'Please type in the name of the university to confirm',
 
         DELETE_THIS_INSTITUTE: 'Do you really want to delete this institute',
         EXPLANATION_OF_DELETING_A_INSTITUTE: 'Deleting an institute also deletes ALL ASSOCIATED working groups, committe members, users and documents. PLEASE PROCEED WITH CAUTION!',
         INSTITUTE_NAME: 'Institute name',
-        PLEASE_TYPE_IN_THE_INSTITUTE_NAME_TO_CONFIRM: 'Please type in the institute name to confirm',
+        PLEASE_TYPE_IN_THE_INSTITUTE_NAME_TO_CONFIRM: 'Please type in the name of the institute to confirm',
         ALTERNATIVE_INSTITUTE: 'If you don\'t want to delete EVERYTHING associated with this institute you can change it to a former institute',
 
         DELETE_THIS_WORKING_GROUP: 'Do you really want to delete this working group',
         EXPLANATION_OF_DELETING_A_WORKING_GROUP: 'Deleting a working group also deletes ALL ASSOCIATED committee members and their reviews. PLEASE PROCEED WITH CAUTION!',
         WORKING_GROUP_NAME: 'Working group name',
-        PLEASE_TYPE_IN_THE_WORKING_GROUP_NAME_TO_CONFIRM: 'Please tpe in the working group name to confirm',
+        PLEASE_TYPE_IN_THE_WORKING_GROUP_NAME_TO_CONFIRM: 'Please tpe in the name of the working group to confirm',
         ALTERNATIVE_WORKING_GROUP: 'If you don\'t want to delete EVERYTHING associated with this working group you can change it to a former working group',
 
         INTRODUCTION_TEXT_FRAGMENT_1: 'This Web-App will guide you in creating the necessary forms for your user study. You will be asked a series of questions, based on which the Ethics-App will auto-generate three documents.',
@@ -189,7 +192,7 @@ app.config(function ($translateProvider) {
 
         REVISE_DOCUMENT: 'Revise document',
         DELETE_THIS_DOCUMENT: 'Are you sure you want to delete this document',
-        PLEASE_TYPE_IN_THE_DOCUMENT_TITLE_TO_CONFIRM: 'Please type in the document title to confirm',
+        PLEASE_TYPE_IN_THE_DOCUMENT_TITLE_TO_CONFIRM: 'Please type in the title of the document to confirm',
         DELETE: 'Delete',
 
         INTRO: 'Introduction',

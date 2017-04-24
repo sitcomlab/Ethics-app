@@ -23,7 +23,12 @@
                 {{ 'EXPLANATION_OF_DELETING_A_WORKING_GROUP' | translate }}
             </p>
             <p>
-                {{ 'ALTERNATIVE_WORKING_GROUP' | translate }}: <a href="" ng-click="redirect('/working_groups/' + working_group.working_group_id + '/edit')">{{ 'EDIT_WORKING_GROUP' | translate }}</a>
+                {{ 'ALTERNATIVE_WORKING_GROUP' | translate }}:
+            </p>
+            <p>
+                <a href="" class="btn btn-sm btn-primary" ng-click="redirect('/working_groups/' + working_group.working_group_id + '/edit')">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EDIT_WORKING_GROUP' | translate }}
+                </a>
             </p>
         </div>
         <br>

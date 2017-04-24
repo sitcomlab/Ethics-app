@@ -28,7 +28,12 @@
                 {{ 'EXPLANATION_OF_DELETING_A_MEMBER' | translate }}
             </p>
             <p>
-                <span ng-if="member.admin"><b>{{ 'ALTERNATIVE_ADMIN' | translate }}</b></span><span ng-if="!member.admin">{{ 'ALTERNATIVE_MEMBER' | translate }}</span>: <a href="" ng-click="redirect('/members/' + member.member_id + '/edit')">{{ 'EDIT_MEMBER' | translate }}</a>
+                <span ng-if="member.admin"><b>{{ 'ALTERNATIVE_ADMIN' | translate }}</b></span><span ng-if="!member.admin">{{ 'ALTERNATIVE_MEMBER' | translate }}</span>:
+            </p>
+            <p>
+                <a href="" class="btn btn-sm btn-primary" ng-click="redirect('/members/' + member.member_id + '/edit')">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EDIT_MEMBER' | translate }}
+                </a>
             </p>
         </div>
         <br>
