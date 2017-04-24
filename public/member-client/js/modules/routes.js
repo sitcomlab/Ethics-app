@@ -192,13 +192,13 @@ app.config(function($routeProvider, $locationProvider, config) {
 
 
 		// Institutes
-		/*.when("/new/institute", {
+		.when("/new/institute", {
 			templateUrl: "js/templates/institute/create.html",
 			controller: "instituteCreateController",
 			resolve: {
 				factory: checkAuthentication
 			}
-		})*/
+		})
 		.when("/institutes", {
 			templateUrl: "js/templates/institute/list.html",
 			controller: "instituteListController",

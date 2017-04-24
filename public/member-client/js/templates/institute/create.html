@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<div class="card">
+    <form class="form-horizontal" name="createInstituteForm" ng-submit="send()">
+        <div class="card-header" style="font-size: 20pt;">
+            <div class="row">
+                <div class="col">
+                    {{ 'NEW_INSTITUTE' | translate }}
+                </div>
+                <div class="col right">
+                    <button class="btn btn-secondary" role="button" ng-click="redirect('/institutes')">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-block">
+            <label>
+                <b>{{ 'INSTITUTE_NAME' | translate }}*</b>
+            </label>
+            <div class="form-group" ng-class="{'has-danger': createInstituteForm.document_email_address.$invalid && !createInstituteForm.document_email_address.$pristine}">
+                <input
+                    type="text"
+                    class="form-control"
+                    ng-model="new_institute.institute_name"
+                    name="institute_name"
+                    id="institute_name"
+                    placeholder="{{ 'NAME' | translate }}"
+                    aria-describedby="inputInstituteName"
+                    required
+                    autofocus>
+                <span ng-show="createInstituteForm.institute_name.$error.required && !createInstituteForm.institute_name.$pristine" class="text-danger">
+                    <small>
+                        {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'UNIVERSITY' | translate }}*</b>
+                    </label>
+                    <select
+                        class="custom-select form-control"
+                        id="university_id"
+                        name="university_id"
+                        ng-model="new_institute.university_id"
+                        ng-options="university.university_id as university.university_name for university in universities | orderBy:['university_name']"
+                        ng-disabled="!authenticated_member.admin"
+                        ng-change="load('institutes')"
+                        required
+                    >
+                        <option value="">{{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}</option>
+                    </select>
+                    <span ng-show="createInstituteForm.university_id.$error.required && !createInstituteForm.university_id.$pristine" class="text-danger">
+                        <small>
+                            {{ 'REQUIRED' | translate }}
+                        </small>
+                    </span>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
+        <div class="card-footer right">
+            <button class="btn btn-success" role="submit">
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SEND' | translate }}
+            </button>
+        </div>
+    </form>
+</div>
