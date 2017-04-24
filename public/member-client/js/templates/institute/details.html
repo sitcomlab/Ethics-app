@@ -121,7 +121,7 @@
                 <!-- Related members -->
                 <div ng-if="filter.tab=='members'">
                     <div class="list-group" ng-if="institute.members && institute.members.length>0">
-                        <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-style="member.member_id == authenticated_member.member_id && {'background-color': '#f7f7f9'}" ng-repeat="member in institute.members | filter: searchText | orderBy: ['last_name', 'first_name']">
+                        <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in institute.members | filter: searchText | orderBy: ['last_name', 'first_name']">
                             <div class="d-flex w-100 justify-content-between">
                                 <div>
                                     <span ng-if="member.admin">
@@ -131,7 +131,7 @@
                                         <i class="fa fa-user" aria-hidden="true"></i>
                                     </span>
                                     &nbsp;&nbsp;
-                                    <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}</b>
+                                    <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}<span ng-if="member.member_id == authenticated_member.member_id">&nbsp;({{ 'YOU' | translate }})</span></b>
                                     &nbsp;
                                     <small class="text-muted">
                                         {{member.working_group_name}} | {{member.institute_name}} | {{member.university_name}}

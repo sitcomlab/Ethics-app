@@ -61,7 +61,7 @@
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
                         &nbsp;&nbsp;
-                        <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}</b>
+                        <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}<span ng-if="member.member_id == authenticated_member.member_id">&nbsp;({{ 'YOU' | translate }})</span></b>
                         &nbsp;
                         <small class="text-muted">
                             {{member.working_group_name}} | {{member.institute_name}} | {{member.university_name}}
