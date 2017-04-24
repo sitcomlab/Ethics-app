@@ -135,6 +135,9 @@
                                                 {{ 'SHOW_OVERVIEW' | translate }}
                                             </span>
                                         </a>
+                                        <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/files')" ng-if="document.status == 2 || document.status == 6">
+                                            {{ 'SHOW_FILES' | translate }}
+                                        </a>
                                         <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/settings')">
                                             {{ 'CHANGE_DOCUMENT_SETTINGS' | translate }}
                                         </a>
@@ -309,14 +312,13 @@
 
         <!-- Documents -->
         <script src="js/controllers/document/listController.js"></script>
-        <!--<script src="js/controllers/document/createController.js"></script>-->
         <script src="js/controllers/document/deleteController.js"></script>
         <script src="js/controllers/document/detailsController.js"></script>
         <script src="js/controllers/document/overviewController.js"></script>
         <script src="js/controllers/document/reviewController.js"></script>
-        <!--<script src="js/controllers/document/fileController.js"></script>-->
         <script src="js/controllers/document/editSettingsController.js"></script>
         <script src="js/controllers/document/showIdController.js"></script>
+        <script src="js/controllers/document/showFilesController.js"></script>
 
     </body>
 </html>

@@ -38,10 +38,24 @@ app.controller("documentShowIdController", function($scope, $rootScope, $transla
 
 
     /*************************************************
+        EVENTS
+     *************************************************/
+    $scope.$on("$destroy", function() {
+        // Reset navbar
+        delete $scope.document;
+        delete $scope.$parent.document;
+    });
+
+
+    /*************************************************
         INIT
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading document" };
     $scope.document = $documentService.get();
+
+    // Update navbar
+    $scope.$parent.document = $documentService.get();
+
     $scope.$parent.loading = { status: false, message: "" };
 
 });

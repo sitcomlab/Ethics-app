@@ -34,11 +34,25 @@ app.controller("documentDeleteController", function($scope, $rootScope, $routePa
         });
     };
 
+
+    /*************************************************
+        EVENTS
+     *************************************************/
+    $scope.$on("$destroy", function() {
+        // Reset navbar
+        delete $scope.document;
+        delete $scope.$parent.document;
+    });
+
+
     /*************************************************
         INIT
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading document" };
     $scope.input = "";
+
+    // Update navbar
+    $scope.$parent.document = $documentService.get();
 
     // Load document
     $scope.document = $documentService.get();
