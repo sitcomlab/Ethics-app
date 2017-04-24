@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<div class="card">
+    <form class="form-horizontal" name="createWorkingGroupForm" ng-submit="send()">
+        <div class="card-header" style="font-size: 20pt;">
+            <div class="row">
+                <div class="col">
+                    {{ 'NEW_WORKING_GROUP' | translate }}
+                </div>
+                <div class="col right">
+                    <button class="btn btn-secondary" role="button" ng-click="redirect('/working_groups')">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-block">
+            <label>
+                <b>{{ 'WORKING_GROUP_NAME' | translate }}*</b>
+            </label>
+            <div class="form-group" ng-class="{'has-danger': createWorkingGroupForm.document_email_address.$invalid && !createWorkingGroupForm.document_email_address.$pristine}">
+                <input
+                    type="text"
+                    class="form-control"
+                    ng-model="new_working_group.working_group_name"
+                    name="working_group_name"
+                    id="working_group_name"
+                    placeholder="{{ 'NAME' | translate }}"
+                    aria-describedby="inputWorkingGroupName"
+                    required
+                    autofocus>
+                <span ng-show="createWorkingGroupForm.course_name.$error.required && !createWorkingGroupForm.course_name.$pristine" class="text-danger">
+                    <small>
+                        {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+            </div>
+
+             <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'UNIVERSITY' | translate }}*</b>
+                    </label>
+                    <select
+                        class="custom-select form-control"
+                        id="university_id"
+                        name="university_id"
+                        ng-model="university_id"
+                        ng-options="university.university_id as university.university_name for university in universities | orderBy:['university_name']"
+                        ng-disabled="!authenticated_member.admin"
+                        ng-change="load('institutes')"
+                        required
+                    >
+                        <option value="">{{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}</option>
+                    </select>
+                    <span ng-show="createWorkingGroupForm.university_id.$error.required && !createWorkingGroupForm.university_id.$pristine" class="text-danger">
+                        <small>
+                            {{ 'REQUIRED' | translate }}
+                        </small>
+                    </span>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'INSTITUTE' | translate }}*</b>
+                    </label>
+                    <select
+                        class="custom-select form-control"
+                        id="institute_id"
+                        name="institute_id"
+                        ng-model="new_working_group.institute_id"
+                        ng-options="institute.institute_id as institute.institute_name for institute in institutes | orderBy:['institute_name']"
+                        ng-disabled="university_id == null || !authenticated_member.admin"
+                        ng-change="load('members')"
+                        required
+                    >
+                        <option value="">{{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}</option>
+                    </select>
+                    <span ng-show="createWorkingGroupForm.institute_id.$error.required && !createWorkingGroupForm.institute_id.$pristine" class="text-danger">
+                        <small>
+                            {{ 'REQUIRED' | translate }}
+                        </small>
+                    </span>
+                </div>
+                <br>
+            </div>
+            <br>
+        <div class="card-footer right">
+            <button class="btn btn-success" role="submit">
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SEND' | translate }}
+            </button>
+        </div>
+    </form>
+</div>

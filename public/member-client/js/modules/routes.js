@@ -230,13 +230,13 @@ app.config(function($routeProvider, $locationProvider, config) {
 
 
 		// Working groups
-		/*.when("/new/working_group", {
+		.when("/new/working_group", {
 			templateUrl: "js/templates/working_group/create.html",
 			controller: "workingGroupCreateController",
 			resolve: {
 				factory: checkAuthentication
 			}
-		})*/
+		})
 		.when("/working_groups", {
 			templateUrl: "js/templates/working_group/list.html",
 			controller: "workingGroupListController",
