@@ -8,6 +8,7 @@ var mustache = require('mustache');
 var moment = require('moment');
 var httpPort = require('../../server.js').httpPort;
 var server_url = require('../../server.js').server_url;
+var domain = server_url + ":" + httpPort;
 var pool = require('../../server.js').pool;
 var transporter = require('../../server.js').transporter;
 var mail_options = require('../../server.js').mail_options;
@@ -21,7 +22,8 @@ var dir_5 = "/../../sql/queries/descriptions/";
 var dir_6 = "/../../sql/queries/concerns/";
 var dir_7 = "/../../sql/queries/users/";
 var dir_8 = "/../../sql/queries/members/";
-var template = fs.readFileSync(__dirname + dir_1 + 'review_required.html', 'utf8').toString();
+var template_status_changed = fs.readFileSync(__dirname + dir_1 + 'document_status_changed.html', 'utf8').toString();
+var template_member_review_required = fs.readFileSync(__dirname + dir_1 + 'member_review_required.html', 'utf8').toString();
 var query_get_document = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
 var query_change_status = fs.readFileSync(__dirname + dir_2 + 'change_status.sql', 'utf8').toString();
 var query_get_course_by_document = fs.readFileSync(__dirname + dir_3 + 'get_by_document.sql', 'utf8').toString();
@@ -81,7 +83,7 @@ exports.request = function(req, res) {
                 } else {
                     // Check if Course exists
                     if (result.rows.length === 0) {
-                        callback(null, client, done, document, undefined);
+                        callback(null, client, done, document, false);
                     } else {
                         callback(null, client, done, document, result.rows[0]);
                     }
@@ -376,32 +378,31 @@ exports.request = function(req, res) {
                 // Formatting
                 document.link = server_url + ":" + httpPort + "/committee/documents/" + document.document_id + "/login"; // TODO: Login by document_id, email_address & password, or by token
 
-                var link = server_url + ":" + httpPort + "/committee/";
-
                 // Notify each committee member
                 async.eachOfSeries(members, function (member, key, callback) {
 
                     // Render HTML content
-                    var output = mustache.render(template, {
-                        user: member,
+                    var output = mustache.render(template_member_review_required, {
+                        member: member,
                         author: author,
                         document: document,
                         revision: revision,
                         description: description,
                         concern: concern,
-                        link: link,
+                        course: course,
+                        domain: domain,
                         year: moment().format("YYYY")
                     });
 
                     // Render text for emails without HTML support
-                    var text = '';
+                    var text = "A document needs your review";
 
                     // Send email
                     transporter.sendMail({
                         from: mail_options,
                         to: member.email_address,
-                        subject: '[Ethics-App] A document needs your review',
-                        text: '',
+                        subject: "[Ethics-App] A document needs your review",
+                        text: text,
                         html: output
                     }, function(err, info) {
                         if (err) {

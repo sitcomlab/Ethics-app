@@ -8,6 +8,7 @@ var mustache = require('mustache');
 var moment = require('moment');
 var httpPort = require('../../server.js').httpPort;
 var server_url = require('../../server.js').server_url;
+var domain = server_url + ":" + httpPort;
 var pool = require('../../server.js').pool;
 var transporter = require('../../server.js').transporter;
 var mail_options = require('../../server.js').mail_options;
@@ -16,9 +17,8 @@ var fs = require("fs");
 var dir_1 = "/../../templates/emails/";
 var dir_2 = "/../../sql/queries/users/";
 var dir_3 = "/../../sql/queries/documents/";
-var template = fs.readFileSync(__dirname + dir_1 + 'recovery.html', 'utf8').toString();
+var template_document_recovery = fs.readFileSync(__dirname + dir_1 + 'document_recovery.html', 'utf8').toString();
 var query_get_user_by_email = fs.readFileSync(__dirname + dir_2 + 'get_by_email.sql', 'utf8').toString();
-var query_list_documents_by_user = fs.readFileSync(__dirname + dir_3 + 'list_by_user.sql', 'utf8').toString();
 var query_list_documents_by_user = fs.readFileSync(__dirname + dir_3 + 'list_by_user.sql', 'utf8').toString();
 
 
@@ -38,7 +38,7 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_find_user_by_email, [
+            client.query(query_get_user_by_email, [
                 req.params.email_address
             ], function(err, result) {
                 done();
@@ -73,81 +73,76 @@ exports.request = function(req, res) {
             for(var i=0; i<documents.length; i++){
                 switch(documents[i].status){
                     case 0: {
-                        documents[i].label = "badge-default";
-                        documents[i].status_description = "initialised";
+                        documents[i]._status_label = "badge-default";
+                        documents[i]._status_description = "initialised";
                         break;
                     }
                     case 1: {
-                        documents[i].label = "badge-default";
-                        documents[i].status_description = "unsubmitted";
+                        documents[i]._status_label = "badge-default";
+                        documents[i]._status_description = "unsubmitted (in progress)";
                         break;
                     }
                     case 2: {
-                        documents[i].label = "badge-success";
-                        documents[i].status_description = "submitted";
+                        documents[i]._status_label = "badge-success";
+                        documents[i]._status_description = "reviewed (accepted)";
                         break;
                     }
                     case 3: {
-                        documents[i].label = "badge-primary";
-                        documents[i].status_description = "review pending";
+                        documents[i]._status_label = "badge-primary";
+                        documents[i]._status_description = "review requested";
                         break;
                     }
                     case 4: {
-                        documents[i].label = "badge-info";
-                        documents[i].status_description = "under review";
+                        documents[i]._status_label = "badge-info";
+                        documents[i]._status_description = "under review";
                         break;
                     }
                     case 5: {
-                        documents[i].label = "badge-warning";
-                        documents[i].status_description = "partly accepted";
+                        documents[i]._status_label = "badge-warning";
+                        documents[i]._status_description = "reviewed (partly accepted)";
                         break;
                     }
                     case 6: {
-                        documents[i].label = "badge-success";
-                        documents[i].status_description = "reviewed";
+                        documents[i]._status_label = "badge-success";
+                        documents[i]._status_description = "reviewed (accepted)";
                         break;
                     }
                     case 7: {
-                        documents[i].label = "badge-danger";
-                        documents[i].status_description = "rejected";
+                        documents[i]._status_label = "badge-danger";
+                        documents[i]._status_description = "reviewed (rejected)";
                         break;
                     }
                 }
             }
 
             // Formatting
-            for(var j=0; j<documents.length; j++){
-                documents[j].link = server_url + ":" + httpPort + "/user-client/documents/" + documents[j].document_id;
-            }
-
-            // Formatting
-            var length;
-            if(documents.length === 0){
-                length = documents.length + " documents were found";
-            } else if(documents.length === 1){
-                length = documents.length + " document was found";
+            var amount = documents.length;
+            var amount_description = "";
+            if(amount === 1){
+                amount_description = "document has been found";
             } else {
-                length = documents.length+ " documents were found";
+                amount_description = "documents have been found";
             }
-
 
             // Render HTML content
-            var output = mustache.render(template, {
+            var output = mustache.render(template_document_recovery, {
                 user: user,
                 documents: documents,
-                length: length,
+                amount: amount,
+                amount_description: amount_description,
+                domain: domain,
                 year: moment().format("YYYY")
             });
 
             // Render text for emails without HTML support
-            var text = '';
+            var text = "You asked for your Document-IDs";
 
             // Send email
             transporter.sendMail({
                 from: mail_options,
                 to: user.email_address,
-                subject: '[Ethics-App] You asked for your Document-IDs',
-                text: '',
+                subject: "[Ethics-App] You asked for your Document-IDs",
+                text: text,
                 html: output
             }, function(err, info) {
                 if (err) {

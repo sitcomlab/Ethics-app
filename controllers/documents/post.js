@@ -9,6 +9,7 @@ var mustache = require('mustache');
 var moment = require('moment');
 var httpPort = require('../../server.js').httpPort;
 var server_url = require('../../server.js').server_url;
+var domain = server_url + ":" + httpPort;
 var pool = require('../../server.js').pool;
 var transporter = require('../../server.js').transporter;
 var mail_options = require('../../server.js').mail_options;
@@ -24,8 +25,7 @@ var dir_7 = "/../../sql/queries/descriptions/";
 var dir_8 = "/../../sql/queries/concerns/";
 var dir_9 = "/../../sql/queries/comments/";
 
-var template = fs.readFileSync(__dirname + dir_1 + 'document_created.html', 'utf8').toString();
-
+var template_document_created = fs.readFileSync(__dirname + dir_1 + 'document_created.html', 'utf8').toString();
 var query_get_user_by_email = fs.readFileSync(__dirname + dir_2 + 'get_by_email.sql', 'utf8').toString();
 var query_create_document = fs.readFileSync(__dirname + dir_3 + 'create.sql', 'utf8').toString();
 var query_get_course = fs.readFileSync(__dirname + dir_4 + 'get.sql', 'utf8').toString();
@@ -237,71 +237,24 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, user, document, callback){
-            var _document = document;
-
-            // Formatting
-            switch(_document.status){
-                case 0: {
-                    _document.label = "badge-default";
-                    _document.status_description = "initialised";
-                    break;
-                }
-                case 1: {
-                    _document.label = "badge-default";
-                    _document.status_description = "unsubmitted";
-                    break;
-                }
-                case 2: {
-                    _document.label = "badge-success";
-                    _document.status_description = "submitted";
-                    break;
-                }
-                case 3: {
-                    _document.label = "badge-primary";
-                    _document.status_description = "review pending";
-                    break;
-                }
-                case 4: {
-                    _document.label = "badge-info";
-                    _document.status_description = "under review";
-                    break;
-                }
-                case 5: {
-                    _document.label = "badge-warning";
-                    _document.status_description = "partly accepted";
-                    break;
-                }
-                case 6: {
-                    _document.label = "badge-success";
-                    _document.status_description = "reviewed";
-                    break;
-                }
-                case 7: {
-                    _document.label = "badge-danger";
-                    _document.status_description = "rejected";
-                    break;
-                }
-            }
-
-            // Formatting
-            _document.link = server_url + ":" + httpPort + "/user-client/documents/" + _document.document_id;
 
             // Render HTML content
-            var output = mustache.render(template, {
+            var output = mustache.render(template_document_created, {
                 user: user,
-                documents: _document,
+                document: document,
+                domain: domain,
                 year: moment().format("YYYY")
             });
 
             // Render text for emails without HTML support
-            var text = '';
+            var text = "Your new document has been created";
 
             // Send email
             transporter.sendMail({
                 from: mail_options,
                 to: user.email_address,
-                subject: '[Ethics-App] Your new document has been created',
-                text: '',
+                subject: "[Ethics-App] Your new document has been created",
+                text: text,
                 html: output
             }, function(err, info) {
                 if (err) {

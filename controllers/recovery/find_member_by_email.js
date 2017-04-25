@@ -60,14 +60,14 @@ exports.request = function(req, res) {
             });
 
             // Render text for emails without HTML support
-            var text = '';
+            var text = "Reset your password";
 
             // Send email
             transporter.sendMail({
                 from: mail_options,
                 to: member.email_address,
-                subject: '[Ethics-App] Reset your password',
-                text: '',
+                subject: "[Ethics-App] Reset your password",
+                text: text,
                 html: output
             }, function(err, info) {
                 if (err) {

@@ -7,9 +7,10 @@ var _ = require('underscore');
 var mustache = require('mustache');
 var moment = require('moment');
 var httpPort = require('../../server.js').httpPort;
+var server_url = require('../../server.js').server_url;
+var domain = server_url + ":" + httpPort;
 var jwt = require('jsonwebtoken');
 var pool = require('../../server.js').pool;
-var server_url = require('../../server.js').server_url;
 var jwtSecret = require('../../server.js').jwtSecret;
 var transporter = require('../../server.js').transporter;
 var mail_options = require('../../server.js').mail_options;
@@ -91,7 +92,7 @@ exports.request = function(req, res) {
                     // Prepare HTML content
                     var output = mustache.render(template_member_account_created, {
                         member: member,
-                        server_url: server_url,
+                        domain: domain || server_url + ":" + httpPort,
                         year: moment().format("YYYY")
                     });
 

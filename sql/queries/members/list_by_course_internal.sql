@@ -1,5 +1,6 @@
 SELECT
     member.member_id,
+    member.email_address,
     member.title,
     member.first_name,
     member.last_name,

@@ -10,6 +10,7 @@ var mustache = require('mustache');
 var moment = require('moment');
 var httpPort = require('../../server.js').httpPort;
 var server_url = require('../../server.js').server_url;
+var domain = server_url + ":" + httpPort;
 var pool = require('../../server.js').pool;
 var transporter = require('../../server.js').transporter;
 var mail_options = require('../../server.js').mail_options;
@@ -23,11 +24,7 @@ var dir_5 = "/../../sql/queries/concerns/";
 var dir_6 = "/../../sql/queries/comments/";
 var dir_7 = "/../../sql/queries/users/";
 
-var template_status_4 = fs.readFileSync(__dirname + dir_1 + 'document_under_review.html', 'utf8').toString();
-var template_status_5 = fs.readFileSync(__dirname + dir_1 + 'document_partly_accepted.html', 'utf8').toString();
-var template_status_6 = fs.readFileSync(__dirname + dir_1 + 'document_accepted.html', 'utf8').toString();
-var template_status_7 = fs.readFileSync(__dirname + dir_1 + 'document_rejected.html', 'utf8').toString();
-
+var template_document_status_changed = fs.readFileSync(__dirname + dir_1 + 'document_status_changed.html', 'utf8').toString();
 var query_get_document = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
 var query_change_status = fs.readFileSync(__dirname + dir_2 + 'change_status.sql', 'utf8').toString();
 var query_get_latest_revision_by_document = fs.readFileSync(__dirname + dir_3 + 'get_latest_by_document.sql', 'utf8').toString();
@@ -335,48 +332,75 @@ exports.request = function(req, res) {
 
             // Notify user, when status has been changed
             if(document.status !== updated_document.status){
+
                 // Formatting
-                document.link = server_url + ":" + httpPort + "/user-client/documents/" + document.document_id + "/login";
+                var icon = "";
+                var icon_label = "";
+                var status_description_1 = "";
+                var status_description_2 = "";
 
-                var link = server_url + ":" + httpPort + "/user-client/";
-
-                var template;
                 switch (updated_document.status) {
                     case 4: {
-                        template = template_status_4;
+                        icon = "fa-eye";
+                        icon_label = "text-info";
+                        status_description_1 = "";
+                        status_description_2 = "";
+                        updated_document._status_label = "badge-info";
+                        updated_document._status_description = "under review";
                         break;
                     }
                     case 5: {
-                        template = template_status_5;
+                        icon = "fa-pencil-square-o";
+                        icon_label = "text-warning";
+                        status_description_1 = "";
+                        status_description_2 = "";
+                        updated_document._status_label = "badge-warning";
+                        updated_document._status_description = "reviewed (partly accepted)";
                         break;
                     }
                     case 6: {
-                        template = template_status_6;
+                        icon = "fa-check-square-o";
+                        icon_label = "text-success";
+                        status_description_1 = "";
+                        status_description_2 = "";
+                        updated_document._status_label = "badge-success";
+                        updated_document._status_description = "reviewed (accepted)";
                         break;
                     }
                     case 7: {
-                        template = template_status_7;
+                        icon = "fa-gavel";
+                        icon_label = "text-danger";
+                        status_description_1 = "";
+                        status_description_2 = "";
+                        updated_document._status_label = "badge-danger";
+                        updated_document._status_description = "reviewed (rejected)";
                         break;
                     }
                 }
 
                 // Render HTML content
-                var output = mustache.render(template, {
+                var output = mustache.render(template_document_status_changed, {
                     user: user,
                     document: updated_document,
-                    link: link,
+                    revision: revision,
+                    new_revision: new_revision,
+                    icon: icon,
+                    icon_label: icon_label,
+                    status_description_1: status_description_1,
+                    status_description_2: status_description_2,
+                    domain: domain,
                     year: moment().format("YYYY")
                 });
 
                 // Render text for emails without HTML support
-                var text = '';
+                var text = "The status of your document has been changed";
 
                 // Send email
                 transporter.sendMail({
                     from: mail_options,
                     to: user.email_address,
-                    subject: '[Ethics-App] The status of your document has been changed',
-                    text: '',
+                    subject: "[Ethics-App] The status of your document has been changed",
+                    text: text,
                     html: output
                 }, function(err, info) {
                     if (err) {
