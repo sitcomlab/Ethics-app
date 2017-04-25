@@ -125,6 +125,7 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, user, updated_user, callback) {
+            // Check if user-account has been blocked or reactivated
             if(user.blocked !== updated_user.blocked){
 
                 // Prepare HTML content
@@ -172,7 +173,6 @@ exports.request = function(req, res) {
             } else {
                 callback(null, 200, updated_user);
             }
-
         },
     ], function(err, code, result) {
         if(err){

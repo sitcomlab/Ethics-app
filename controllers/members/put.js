@@ -4,15 +4,21 @@ var pg = require('pg');
 var types = require('pg').types;
 types.setTypeParser(1700, 'text', parseFloat);
 var _ = require('underscore');
+var mustache = require('mustache');
+var moment = require('moment');
+var httpPort = require('../../server.js').httpPort;
 var jwt = require('jsonwebtoken');
 var pool = require('../../server.js').pool;
 var server_url = require('../../server.js').server_url;
 var jwtSecret = require('../../server.js').jwtSecret;
+var transporter = require('../../server.js').transporter;
+var mail_options = require('../../server.js').mail_options;
 
 var fs = require("fs");
 var dir = "/../../sql/queries/members/";
 var query_get_member = fs.readFileSync(__dirname + dir + 'get.sql', 'utf8').toString();
-var query_edit_member = fs.readFileSync(__dirname + dir + 'edit.sql', 'utf8').toString();
+var query_edit_member_by_admin = fs.readFileSync(__dirname + dir + 'edit_by_admin.sql', 'utf8').toString();
+var query_edit_member_by_member = fs.readFileSync(__dirname + dir + 'edit.sql', 'utf8').toString();
 
 
 // PUT
@@ -40,16 +46,13 @@ exports.request = function(req, res) {
                         callback(new Error("Authorization failed"), 401);
                     } else {
                         if(decoded.member){
-                            callback(null, client, done);
+                            if(decoded.admin){
+                                callback(null, client, done, true, query_edit_member_by_admin);
+                            } else {
+                                callback(null, client, done, false, query_edit_member_by_member);
+                            }
                         } else {
                             callback(new Error("Authorization failed"), 401);
-                        }
-
-                        // TODO: Update query to support former members for admins
-                        if(decoded.admin){
-                            // callback(null, client, done, query);
-                        } else {
-                            // callback(null, client, done, query);
                         }
                     }
                 });
@@ -57,7 +60,7 @@ exports.request = function(req, res) {
                 callback(new Error("Authorization failed"), 401);
             }
         },
-        function(client, done, callback) {
+        function(client, done, isAdmin, query, callback) {
             // Database query
             client.query(query_get_member, [
                 req.params.member_id
@@ -70,12 +73,12 @@ exports.request = function(req, res) {
                     if (result.rows.length === 0) {
                         callback(new Error("Member not found"), 404);
                     } else {
-                        callback(null, client, done, result.rows[0]);
+                        callback(null, client, done, isAdmin, query, result.rows[0]);
                     }
                 }
             });
         },
-        function(client, done, member, callback) {
+        function(client, done, isAdmin, query, member, callback) {
             // TODO: Add object/schema validation
             var object = {
                 member_id: req.params.member_id,
@@ -87,23 +90,78 @@ exports.request = function(req, res) {
                 office_room_number: req.body.office_room_number,
                 office_phone_number: req.body.office_phone_number,
                 office_email_address: req.body.office_email_address,
-                subscribed: req.body.subscribed,
-                former: req.body.former
+                subscribed: req.body.subscribed
             };
+
+            if(isAdmin){
+                object.former = req.body.former;
+                object.admin = req.body.admin;
+            }
+
             var params = _.values(object);
-            callback(null, client, done, member, params);
+            callback(null, client, done, isAdmin, query, params, member);
         },
-        function(client, done, member, params, callback){
+        function(client, done, query, params, member, callback){
             // Database query
-            client.query(query_edit_member, params, function(err, result) {
+            client.query(query, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, 200, result.rows[0]);
+                    callback(null, client, done, member, result.rows[0]);
                 }
             });
-        }
+        },
+        function(client, done, member, updated_member, callback) {
+            // Check if member-account has been deactivated (set to former) or reactivated
+            if(member.former !== updated_member.former){
+
+                // Prepare HTML content
+                var output = "";
+
+                // Prepare text for emails without HTML support
+                var text = "";
+
+                // Prepare subject
+                var subject = "[Ethics-App] ";
+
+                if(updated_member.former){
+                    text = "Your member account has been deactivated";
+                    subject = subject + "Your member account has been deactivated";
+                    output = mustache.render(template_member_account_deactivated, {
+                        member: member,
+                        updated_member: updated_member,
+                        year: moment().format("YYYY")
+                    });
+                } else {
+                    text = "Your member account has been reactivated";
+                    subject = subject + "Your member account has been reactivated";
+                    output = mustache.render(template_member_account_reactivated, {
+                        member: member,
+                        updated_member: updated_member,
+                        year: moment().format("YYYY")
+                    });
+                }
+
+                // Send email
+                transporter.sendMail({
+                    from: mail_options,
+                    to: updated_member.email_address,
+                    subject: subject,
+                    text: text,
+                    html: output
+                }, function(err, info) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, 200, updated_member);
+                    }
+                });
+
+            } else {
+                callback(null, 200, updated_member);
+            }
+        },
     ], function(err, code, result) {
         if(err){
             console.error(colors.red(err));
