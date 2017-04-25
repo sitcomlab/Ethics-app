@@ -6,7 +6,7 @@
                 {{ 'WORKING_GROUP' | translate }}
             </div>
             <div class="col-3 right">
-                <button class="btn btn-secondary" role="button" ng-click="redirect('/working_groups/' + working_groups.working_group_id)">
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/working_groups/' + working_group.working_group_id)">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
             </div>
@@ -14,7 +14,7 @@
     </div>
     <div class="card-block">
         <h6>
-            {{ 'DELETE_THIS_WORKING_GROUP' | translate }} <kbd>{{working_groups.working_group_name}}</kbd>?
+            {{ 'DELETE_THIS_WORKING_GROUP' | translate }} <kbd>{{working_group.working_group_name}}</kbd>?
         </h6>
         <br>
         <div class="alert alert-danger" role="alert">
@@ -23,7 +23,12 @@
                 {{ 'EXPLANATION_OF_DELETING_A_WORKING_GROUP' | translate }}
             </p>
             <p>
-                {{ 'ALTERNATIVE_WORKING_GROUP' | translate }}: <a href="" ng-click="redirect('/working_groups/' + working_group.working_group_id + '/edit')">{{ 'EDIT_WORKING_GROUP' | translate }}</a>
+                {{ 'ALTERNATIVE_WORKING_GROUP' | translate }}:
+            </p>
+            <p>
+                <a href="" class="btn btn-sm btn-primary" ng-click="redirect('/working_groups/' + working_group.working_group_id + '/edit')">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EDIT_WORKING_GROUP' | translate }}
+                </a>
             </p>
         </div>
         <br>
@@ -34,7 +39,7 @@
         <small class="form-text text-muted">{{ 'PLEASE_TYPE_IN_THE_WORKING_GROUP_NAME_TO_CONFIRM' | translate }}</small>
     </div>
     <div class="card-footer right">
-        <button class="btn btn-danger" role="button" ng-click="delete()" ng-disabled="input != working_groups.working_group_name">
+        <button class="btn btn-danger" role="button" ng-click="delete()" ng-disabled="input != working_group.working_group_name">
             <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'DELETE' | translate }}
         </button>
     </div>

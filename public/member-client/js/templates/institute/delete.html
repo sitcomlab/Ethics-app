@@ -23,7 +23,12 @@
                 {{ 'EXPLANATION_OF_DELETING_A_INSTITUTE' | translate }}
             </p>
             <p>
-                {{ 'ALTERNATIVE_INSTITUTE' | translate }}: <a href="" ng-click="redirect('/institutes/' + institute.institute_id + '/edit')">{{ 'EDIT_INSTITUTE' | translate }}</a>
+                {{ 'ALTERNATIVE_INSTITUTE' | translate }}:
+            </p>
+            <p>
+                <a href="" class="btn btn-sm btn-primary" ng-click="redirect('/institutes/' + institute.institute_id + '/edit')">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EDIT_INSTITUTE' | translate }}
+                </a>
             </p>
         </div>
         <br>

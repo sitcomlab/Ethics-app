@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <div class="card">
     <div class="card-header" style="font-size: 20pt;">
-        {{ 'DOWNLOAD_YOUR_FILES' | translate }}
+        <div class="row">
+            <div class="col">
+                {{ 'DOCUMENT_FILES' | translate }}
+            </div>
+            <div class="col right">
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/documents/' + document.document_id + '/overview')">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
     </div>
     <div class="card-block">
-        <br>
-        <div style="text-align: justify;">
-            {{ 'STATUS_6' | translate }}
-        </div>
         <br>
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle">
                 <p>
-                    <a href="{{files.path}}/debriefing_information.pdf" download="debriefing_information.pdf" target="_blank">
+                    <a href="{{document.files.path}}/debriefing_information.pdf" download="debriefing_information.pdf" target="_blank">
                         <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
                     </a>
                 </p>
@@ -25,7 +30,7 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle">
                 <p>
-                    <a href="{{files.path}}/statement_of_researcher.pdf" download="statement_of_researcher.pdf" target="_blank">
+                    <a href="{{document.files.path}}/statement_of_researcher.pdf" download="statement_of_researcher.pdf" target="_blank">
                         <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
                     </a>
                 </p>
@@ -39,7 +44,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle">
                 <p>
-                    <a href="{{files.path}}/consent_form_en.pdf" download="consent_form_en.pdf" target="_blank">
+                    <a href="{{document.files.path}}/consent_form_en.pdf" download="consent_form_en.pdf" target="_blank">
                         <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
                     </a>
                 </p>
@@ -51,7 +56,7 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle" ng-if="latest_revision.descriptions.de_used">
                 <p>
-                    <a href="{{files.path}}/consent_form_de.pdf" download="consent_form_de.pdf" target="_blank">
+                    <a href="{{document.files.path}}/consent_form_de.pdf" download="consent_form_de.pdf" target="_blank">
                         <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
                     </a>
                 </p>
@@ -63,7 +68,7 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle" ng-if="latest_revision.descriptions.pt_used">
                 <p>
-                    <a href="{{files.path}}/consent_form_pt.pdf" download="consent_form_pt.pdf" target="_blank">
+                    <a href="{{document.files.path}}/consent_form_pt.pdf" download="consent_form_pt.pdf" target="_blank">
                         <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
                     </a>
                 </p>
@@ -75,18 +80,5 @@
             </div>
         </div>
     </div>
-    <div class="card-footer">
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <button class="btn btn-secondary btn-block-xs-only btn-block-sm-only" role="button" ng-click="redirect('/documents/' + document.document_id + '/submission')">
-                    <i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SHOW_REVIEW' | translate }}
-                </button>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right">
-                <button class="btn btn-primary btn-block-xs-only btn-block-sm-only" role="button" ng-click="redirect('/')">
-                    <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LOGOUT' | translate }}
-                </button>
-            </div>
-        </div>
-    </div>
+
 </div>

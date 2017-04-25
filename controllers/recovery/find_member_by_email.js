@@ -16,7 +16,7 @@ var fs = require("fs");
 var dir_1 = "/../../templates/emails/";
 var dir_2 = "/../../sql/queries/members/";
 var template = fs.readFileSync(__dirname + dir_1 + 'reset_password.html', 'utf8').toString();
-var query_find_member_by_email = fs.readFileSync(__dirname + dir_2 + 'find_by_email.sql', 'utf8').toString();
+var query_get_member_by_email = fs.readFileSync(__dirname + dir_2 + 'get_by_email.sql', 'utf8').toString();
 
 
 // FIND BY EMAIL
@@ -35,7 +35,7 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_find_member_by_email, [
+            client.query(query_get_member_by_email, [
                 req.params.email_address
             ], function(err, result) {
                 done();
@@ -66,7 +66,7 @@ exports.request = function(req, res) {
             transporter.sendMail({
                 from: mail_options,
                 to: member.email_address,
-                subject: 'Reset your password',
+                subject: '[Ethics-App] Reset your password',
                 text: '',
                 html: output
             }, function(err, info) {

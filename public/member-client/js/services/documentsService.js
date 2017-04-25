@@ -8,8 +8,7 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
     var filter = {
         offset: 0,
         limit: 50,
-        // TODO: orderby: "created", // or "updated", "title", "status"
-        // TODO: order: "desc", // or "asc"
+        // TODO: orderby: "created.desc", // or "created.asc", "updated.desc" "updated.asc", "title.desc", "title.asc", "status.desc", "status.asc"
         document_status: "3"
     };
     var full_count = 0;

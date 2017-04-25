@@ -39,7 +39,7 @@ exports.request = function(req, res) {
                 // Verify token
                 jwt.verify(token, jwtSecret, function(err, decoded) {
                     if(err){
-                        res.status(401).send("Authorization failed!");
+                        callback(new Error("Authorization failed"), 401);
                     } else {
                         if(decoded.member){
                             // Database query

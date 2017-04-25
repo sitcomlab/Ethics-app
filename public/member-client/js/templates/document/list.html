@@ -28,13 +28,16 @@
                 <select class="form-control custom-select" ng-model="filter.document_status" ng-change="applyFilter()">
                     <option value="">{{ 'NO_FILTER' | translate }}</option>
                     <option value="0">(0) {{ 'INITIALISED' | translate }}</option>
-                    <option value="1">(1) {{ 'UNSUBMITTED' | translate }}</option>
-                    <option value="2">(2) {{ 'SUBMITTED_AUTO_ACCEPTED' | translate }}</option>
-                    <option value="3">(3) {{ 'SUBMITTED_REVIEW_REQUIRED' | translate }} [{{ 'DEFAULT' | translate }}]</option>
-                    <option value="4">(4) {{ 'REVIEW_IN_PROGRESS' | translate }}</option>
-                    <option value="5">(5) {{ 'REVIEWED_PARTLY_ACCEPTED' | translate }}</option>
-                    <option value="6">(6) {{ 'REVIEWED_ACCEPTED' | translate }}</option>
-                    <option value="7">(7) {{ 'REJECTED' | translate }}</option>
+                    <option value="1">(1) {{ 'UNSUBMITTED' | translate }} - {{ 'IN_PROGRESS' | translate }}</option>
+                    <option value="2">(2) {{ '_SUBMITTED' | translate}} - {{ 'AUTO_ACCEPTED' | translate }}</option>
+                    <option value="3">(3) {{ '_SUBMITTED' | translate }} - {{ 'REVIEW_REQUIRED' | translate }} [{{ 'DEFAULT' | translate }}]</option>
+                    <option value="4">(4) {{ 'REVIEW_IN_PROGRESS' | translate }} - {{ 'UNPUBLISHED' | translate}}</option>
+                    <option value="5">(5) {{ 'REVIEWED' | translate }} - {{ 'PARTLY_ACCEPTED' | translate }}</option>
+                    <option value="6">(6) {{ 'REVIEWED' | translate }} - {{ 'ACCEPTED' | translate }}</option>
+                    <option value="7">(7) {{ 'REVIEWED' | translate }} - {{ 'REJECTED' | translate }}</option>
+                    <!-- TODO: Add new option
+                    <option value="8">(2&amp;6) {{ 'ACCEPTED_AND_AUTO_ACCEPTED' | translate }}</option>
+                    -->
                 </select>
                 <small class="form-text text-muted">{{ 'FILTER_BY_STATUS' | translate }}</small>
                 <br>
@@ -53,11 +56,11 @@
                         <span class="badge" ng-class="{'badge-default': document.status==0 || document.status==1, 'badge-success': document.status==2 || document.status==6, 'badge-primary': document.status==3, 'badge-info': document.status==4, 'badge-warning': document.status=='5', 'badge-danger': document.status==7}">
                             <span ng-if="document.status==0">{{ 'INITIALISED' | translate }}</span>
                             <span ng-if="document.status==1">{{ 'UNSUBMITTED' | translate }}</span>
-                            <span ng-if="document.status==2">{{ 'SUBMITTED' | translate }}</span>
+                            <span ng-if="document.status==2">{{ 'AUTO_ACCEPTED' | translate }}</span>
                             <span ng-if="document.status==3">{{ 'REVIEW_REQUIRED' | translate }}</span>
-                            <span ng-if="document.status==4">{{ 'UNDER_REVIEW' | translate }}</span>
+                            <span ng-if="document.status==4">{{ 'REVIEW_IN_PROGRESS' | translate }}</span>
                             <span ng-if="document.status==5">{{ 'PARTLY_ACCEPTED' | translate }}</span>
-                            <span ng-if="document.status==6">{{ 'REVIEWED' | translate }}</span>
+                            <span ng-if="document.status==6">{{ 'ACCEPTED' | translate }}</span>
                             <span ng-if="document.status==7">{{ 'REJECTED' | translate }}</span>
                         </span>
                     </div>

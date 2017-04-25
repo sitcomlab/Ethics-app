@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 
-// Course delete controller
+// Working group delete controller
 app.controller("workingGroupDeleteController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $workingGroupService) {
 
     /*************************************************
@@ -22,11 +22,12 @@ app.controller("workingGroupDeleteController", function($scope, $rootScope, $rou
      * @return {[type]} [description]
      */
     $scope.delete = function(){
-        $scope.$parent.loading = { status: true, message: "Deleting Working Group" };
+        $scope.$parent.loading = { status: true, message: "Deleting working group" };
 
-        // Delete workingGroup
-        $workingGroupService.remove($scope.working_groups.working_group_id)
+        // Delete working group
+        $workingGroupService.remove($scope.working_group.working_group_id)
         .then(function onSuccess(response) {
+            // Redirect
             $scope.redirect("/working_groups");
         })
         .catch(function onError(response) {
@@ -37,13 +38,13 @@ app.controller("workingGroupDeleteController", function($scope, $rootScope, $rou
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading Working Group" };
+    $scope.$parent.loading = { status: true, message: "Loading working group" };
     $scope.input = "";
 
     // Load university
     $workingGroupService.retrieve($routeParams.working_group_id)
     .then(function onSuccess(response) {
-        $scope.working_groups = response.data;
+        $scope.working_group = response.data;
         $scope.$parent.loading = { status: false, message: "" };
     })
     .catch(function onError(response) {

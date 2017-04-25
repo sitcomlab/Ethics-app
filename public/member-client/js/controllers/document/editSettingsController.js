@@ -35,6 +35,7 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $t
         if($scope.editDocumentForm.$invalid) {
             // Update UI
             $scope.editDocumentForm.document_title.$pristine = false;
+            $scope.editDocumentForm.status.$pristine = false;
             $scope.editDocumentForm.notes.$pristine = false;
         } else {
             $scope.$parent.loading = { status: true, message: "Saving document" };
@@ -61,10 +62,10 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $t
      * [updateCourses description]
      * @return {[type]} [description]
      */
-    $scope.updateCourses = function(){
+    /*$scope.updateCourses = function(){
         $scope.courses = $courseService.getByInstitute($scope.institute_id);
         $scope.updated_document.course_id = null;
-    };
+    };*/
 
 
     /*************************************************
@@ -73,8 +74,9 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $t
     $scope.$parent.loading = { status: true, message: "Loading document" };
     $scope.document = $documentService.get();
     $scope.updated_document = $documentService.copy();
+    $scope.$parent.loading = { status: false, message: "" };
 
-    // Load institutes
+    /* Load institutes
     $instituteService.list()
     .then(function onSuccess(response) {
         $instituteService.set(response.data);
@@ -95,5 +97,6 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $t
     .catch(function onError(response) {
         $window.alert(response.data);
     });
+    */
 
 });

@@ -20,9 +20,11 @@ FROM Members member
     JOIN Institutes institute ON institute.institute_id = working_group.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
 WHERE
-        institute.institute_id=$3::INTEGER
+        member.admin=false
     AND
-        member.admin != true
+        member.former=$3::BOOLEAN
+    AND
+        institute.institute_id=$4::INTEGER
 ORDER BY
     last_name,
     first_name

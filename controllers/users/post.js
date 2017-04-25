@@ -4,11 +4,21 @@ var pg = require('pg');
 var types = require('pg').types;
 types.setTypeParser(1700, 'text', parseFloat);
 var _ = require('underscore');
+var mustache = require('mustache');
+var moment = require('moment');
+var httpPort = require('../../server.js').httpPort;
+var jwt = require('jsonwebtoken');
 var pool = require('../../server.js').pool;
+var server_url = require('../../server.js').server_url;
+var jwtSecret = require('../../server.js').jwtSecret;
+var transporter = require('../../server.js').transporter;
+var mail_options = require('../../server.js').mail_options;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/users/";
-var query_create_user = fs.readFileSync(__dirname + dir + 'create.sql', 'utf8').toString();
+var dir_1 = "/../../templates/emails/";
+var dir_2 = "/../../sql/queries/users/";
+var template_user_account_created = fs.readFileSync(__dirname + dir_1 + 'user_account_created.html', 'utf8').toString();
+var query_create_user = fs.readFileSync(__dirname + dir_2 + 'create.sql', 'utf8').toString();
 
 
 // POST
@@ -32,7 +42,8 @@ exports.request = function(req, res) {
                 title: req.body.title,
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
-                institute_id: req.body.institute_id
+                institute_id: req.body.institute_id,
+                blocked: req.body.blocked || false
             };
             var params = _.values(object);
             callback(null, client, done, params);
@@ -44,7 +55,31 @@ exports.request = function(req, res) {
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, 201, result.rows[0]);
+                    var user = result.rows[0];
+
+                    // Prepare HTML content
+                    var output = mustache.render(template_user_account_created, {
+                        user: user,
+                        server_url: server_url,
+                        updated_user: updated_user,
+                        year: moment().format("YYYY")
+                    });
+
+                    // Send email
+                    transporter.sendMail({
+                        from: mail_options,
+                        to: user.email_address,
+                        subject: "[Ethics-App] Your account has been created",
+                        text: "Your account has been created",
+                        html: output
+                    }, function(err, info) {
+                        if (err) {
+                            callback(err);
+                        } else {
+                            callback(null, 201, user);
+                        }
+                    });
+
                 }
             });
         }

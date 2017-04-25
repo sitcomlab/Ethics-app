@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var isAuthenticated = require('../server.js').isAuthenticated;
 
-var list_all = require('../controllers/documents/list_all');
+var list = require('../controllers/documents/list');
 var list_by_user = require('../controllers/documents/list_by_user');
 var list_by_course = require('../controllers/documents/list_by_course');
 var post = require('../controllers/documents/post');
@@ -16,7 +16,7 @@ var generate_files = require('../controllers/documents/generate_files');
 
 
 // LIST ALL (ONLY MEMBERS)
-router.get('/documents', isAuthenticated, list_all.request);
+router.get('/documents', isAuthenticated, list.request);
 
 // LIST ALL BY USER (ONLY MEMBERS)
 router.get('/users/:user_id/documents', isAuthenticated, list_by_user.request);

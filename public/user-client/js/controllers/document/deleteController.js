@@ -29,7 +29,7 @@ app.controller("documentDeleteController", function($scope, $rootScope, $transla
      * [deleteDocument description]
      * @return {[type]} [description]
      */
-    $scope.deleteDocument = function(){
+    $scope.delete = function(){
         $scope.$parent.loading = { status: true, message: "Deleting document" };
 
         $documentService.delete($documentService.getId())

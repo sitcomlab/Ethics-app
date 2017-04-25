@@ -2,19 +2,34 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="author" content="IFGI-Ethics-App">
-        <title>New document</title>
+        <meta name="author" content="Ethics-App">
+        <title>Document created</title>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
 
+        <!-- Fontawesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"  crossorigin="anonymous">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+        <!-- Custom styles -->
         <style>
 
             body {
                 background-color: #eeeeee;
+                font-family: 'Open Sans script=all rev=1', sans-serif;
+                font-weight: 300;
             }
 
             hr {
                 width: 80%;
+            }
+
+            h1 {
+                font-family: 'Open Sans script=all rev=3', sans-serif;
+                font-weight: 400;
             }
 
             .header {
@@ -30,6 +45,9 @@
             }
             .right {
                 text-align: right;
+            }
+            .justified {
+                text-align: justify;
             }
 
             .content, .header, .footer {
@@ -65,10 +83,24 @@
                 Your new document has been created
             </p>
         </div>
+        <!-- Main -->
         <div class="content">
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 col-md-2 col-lg-1 middle">
+                        <i class="fa fa-4x fa-key text-primary" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-xs-12 col-sm-9 col-md-10 col-lg-11 justified">
+                        Your new document has been created. Please go back to the application to login with the document-ID below.
+                        <br>
+                        If you have problems with your document, please get in touch with a committee member of your institute.
+                    </div>
+                </div>
+            </div>
+            <br>
             <div class="list-group">
                 {{#documents}}
-                <a href="{{link}}" target="_blank" class="list-group-item list-group-item-action">
+                <a href="{{server_url}}/user-client/{{document_id}}" target="_blank" class="list-group-item list-group-item-action">
                     <div class="row">
                         <div class="col-xs-6 col-md-4">
                             <p>
@@ -91,8 +123,9 @@
                 {{/documents}}
             </div>
         </div>
-        <footer class="footer middle">
-            &copy; {{year}} <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a>
-        </footer>
+        <!-- Footer -->
+        <div class="footer middle">
+            &copy; {{year}} <a href="{{server_url}}/user-client/" target="_blank">Ethics-App</a>
+        </div>
     </body>
 </html>

@@ -47,7 +47,7 @@
 
     </head>
 
-    <body ng-app="ethics-app">
+    <body ng-app="ethics-app" class="ng-cloak">
 
 
         <!-- Main -->
@@ -116,11 +116,11 @@
                                             <span class="badge" ng-class="{'badge-default': document.status==0 || document.status==1, 'badge-success': document.status==2 || document.status==6, 'badge-primary': document.status==3, 'badge-info': document.status==4, 'badge-warning': document.status=='5', 'badge-danger': document.status==7}">
                                                 <span ng-if="document.status==0">{{ 'INITIALISED' | translate }}</span>
                                                 <span ng-if="document.status==1">{{ 'UNSUBMITTED' | translate }}</span>
-                                                <span ng-if="document.status==2">{{ 'SUBMITTED' | translate }}</span>
+                                                <span ng-if="document.status==2">{{ 'AUTO_ACCEPTED' | translate }}</span>
                                                 <span ng-if="document.status==3">{{ 'REVIEW_REQUIRED' | translate }}</span>
-                                                <span ng-if="document.status==4">{{ 'UNDER_REVIEW' | translate }}</span>
+                                                <span ng-if="document.status==4">{{ 'REVIEW_IN_PROGRESS' | translate }}</span>
                                                 <span ng-if="document.status==5">{{ 'PARTLY_ACCEPTED' | translate }}</span>
-                                                <span ng-if="document.status==6">{{ 'REVIEWED' | translate }}</span>
+                                                <span ng-if="document.status==6">{{ 'ACCEPTED' | translate }}</span>
                                                 <span ng-if="document.status==7">{{ 'REJECTED' | translate }}</span>
                                             </span>
                                         </h6>
@@ -135,11 +135,11 @@
                                                 {{ 'SHOW_OVERVIEW' | translate }}
                                             </span>
                                         </a>
+                                        <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/files')" ng-if="document.status == 2 || document.status == 6">
+                                            {{ 'SHOW_FILES' | translate }}
+                                        </a>
                                         <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/settings')">
                                             {{ 'CHANGE_DOCUMENT_SETTINGS' | translate }}
-                                        </a>
-                                        <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/status')">
-                                            {{ 'CHANGE_DOCUMENT_STATUS' | translate }}
                                         </a>
                                         <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/delete')">
                                             {{ 'DELETE_DOCUMENT' | translate }}
@@ -312,14 +312,13 @@
 
         <!-- Documents -->
         <script src="js/controllers/document/listController.js"></script>
-        <!--<script src="js/controllers/document/createController.js"></script>-->
         <script src="js/controllers/document/deleteController.js"></script>
         <script src="js/controllers/document/detailsController.js"></script>
         <script src="js/controllers/document/overviewController.js"></script>
         <script src="js/controllers/document/reviewController.js"></script>
-        <!--<script src="js/controllers/document/fileController.js"></script>-->
         <script src="js/controllers/document/editSettingsController.js"></script>
         <script src="js/controllers/document/showIdController.js"></script>
+        <script src="js/controllers/document/showFilesController.js"></script>
 
     </body>
 </html>

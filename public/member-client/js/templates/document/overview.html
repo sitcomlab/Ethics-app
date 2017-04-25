@@ -1503,8 +1503,8 @@
             </div>
         </div>
     </div>
-    <div class="card-footer right" ng-if="document.status == 3 || document.status == 4">
-        <button class="btn btn-primary" role="button" ng-click="reviewDocument()">
+    <div class="card-footer right" ng-if="document.status == 2 || document.status == 3 || document.status == 4 || document.status == 6">
+        <button class="btn btn-primary" role="button" ng-click="reviewDocument()" ng-if="document.status == 3 || document.status == 4">
             <i class="fa fa-eye" aria-hidden="true"></i>
             &nbsp;
             <span ng-if="document.status == 3">
@@ -1513,6 +1513,13 @@
             <span ng-if="document.status == 4">
                 {{ 'OPEN_REVIEW' | translate }}
             </span>
+            &nbsp;
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </button>
+        <button class="btn btn-primary" role="button" ng-click="redirect('/documents/' + document.document_id + '/files')" ng-if="document.status == 2 || document.status == 6">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            &nbsp;
+            {{ 'DOWNLOAD_FILES' | translate }}
             &nbsp;
             <i class="fa fa-angle-right" aria-hidden="true"></i>
         </button>

@@ -17,7 +17,7 @@ var dir_1 = "/../../templates/emails/";
 var dir_2 = "/../../sql/queries/users/";
 var dir_3 = "/../../sql/queries/documents/";
 var template = fs.readFileSync(__dirname + dir_1 + 'recovery.html', 'utf8').toString();
-var query_find_user_by_email = fs.readFileSync(__dirname + dir_2 + 'find_by_email.sql', 'utf8').toString();
+var query_get_user_by_email = fs.readFileSync(__dirname + dir_2 + 'get_by_email.sql', 'utf8').toString();
 var query_list_documents_by_user = fs.readFileSync(__dirname + dir_3 + 'list_by_user.sql', 'utf8').toString();
 var query_list_documents_by_user = fs.readFileSync(__dirname + dir_3 + 'list_by_user.sql', 'utf8').toString();
 
@@ -146,7 +146,7 @@ exports.request = function(req, res) {
             transporter.sendMail({
                 from: mail_options,
                 to: user.email_address,
-                subject: 'You asked for your Document-IDs',
+                subject: '[Ethics-App] You asked for your Document-IDs',
                 text: '',
                 html: output
             }, function(err, info) {

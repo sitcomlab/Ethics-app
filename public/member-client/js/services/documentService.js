@@ -7,6 +7,15 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
     var document;
 
     return {
+        copy: function(document) {
+            return {
+                document_id: document.institute_id,
+                document_title: document.document_title,
+                user_id: document.user_id,
+                notes: document.notes,
+                status: document.status
+            };
+        },
         get: function() {
             return document;
         },
@@ -108,8 +117,22 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
                 }
             });
         },
+        edit: function(document_id, data) {
+            return $http.put(config.apiURL + "/documents/" + document_id, data, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
         changeStatus: function(document_id, data){
             return $http.put(config.apiURL + "/documents/" + document_id + "/status", data, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        generateFiles: function(document_id) {
+            return $http.get(config.apiURL + "/documents/" + document_id + "/files", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

@@ -8,7 +8,7 @@ var pool = require('../../server.js').pool;
 
 var fs = require("fs");
 var dir = "/../../sql/queries/users/";
-var query_find_user_by_email = fs.readFileSync(__dirname + dir + 'find_by_email.sql', 'utf8').toString();
+var query_get_user_by_email = fs.readFileSync(__dirname + dir + 'get_by_email.sql', 'utf8').toString();
 
 
 // FIND BY EMAIL
@@ -27,7 +27,7 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_find_user_by_email, [
+            client.query(query_get_user_by_email, [
                 req.params.email_address
             ], function(err, result) {
                 done();

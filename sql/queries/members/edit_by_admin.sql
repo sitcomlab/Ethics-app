@@ -8,7 +8,8 @@ UPDATE Members SET (
     office_phone_number,
     office_email_address,
     subscribed,
-    former
+    former,
+    admin
 ) = (
     $2::TEXT,
     $3::TEXT,
@@ -19,7 +20,8 @@ UPDATE Members SET (
     $8::TEXT,
     $9::TEXT,
     $10::BOOLEAN,
-    $11::BOOLEAN
+    $11::BOOLEAN,
+    $12::BOOLEAN
 )
 WHERE
     member_id=$1::INTEGER
@@ -37,5 +39,6 @@ RETURNING
     office_email_address,
     admin,
     subscribed,
-    former
+    former,
+    admin
 ;

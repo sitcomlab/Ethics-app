@@ -9,6 +9,8 @@ app.config(function($routeProvider, $locationProvider, config) {
 			templateUrl: "js/templates/login.html",
 			controller: "loginController"
 		})
+
+		// Recovery
 		/*.when("/recovery", {
 			templateUrl: "js/templates/recovery.html",
 			controller: "recoveryController"
@@ -71,6 +73,13 @@ app.config(function($routeProvider, $locationProvider, config) {
 		.when("/documents/:document_id/id", {
 			templateUrl: "js/templates/document/show_id.html",
 			controller: "documentShowIdController",
+			resolve: {
+                factory: checkAuthentication
+            }
+		})
+		.when("/documents/:document_id/files", {
+			templateUrl: "js/templates/document/show_files.html",
+			controller: "documentShowFilesController",
 			resolve: {
                 factory: checkAuthentication
             }
@@ -303,6 +312,7 @@ app.config(function($routeProvider, $locationProvider, config) {
 				factory: checkAuthentication
 			}
 		})
+
 
 		// Manual
 		.when("/manual", {

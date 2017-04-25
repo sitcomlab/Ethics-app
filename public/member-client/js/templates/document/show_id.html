@@ -6,7 +6,7 @@
                 {{ 'DOCUMENT_ID' | translate }}
             </div>
             <div class="col right">
-                <button class="btn btn-secondary" role="button" ng-click="cancel()">
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/documents/' + document.document_id + '/overview')">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
             </div>
