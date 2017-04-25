@@ -9,7 +9,7 @@ app.factory('$authenticationService', function($http, $log, config) {
     return {
         init: function(){
             return {
-                document_id: "5a311230-d9a7-11e6-84c3-edb4774b1ab7" // TEST
+                // document_id: "5a311230-d9a7-11e6-84c3-edb4774b1ab7" // TEST
             };
         },
         get: function(){

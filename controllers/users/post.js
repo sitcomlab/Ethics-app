@@ -57,12 +57,10 @@ exports.request = function(req, res) {
                     callback(err, 500);
                 } else {
                     var user = result.rows[0];
-
                     // Prepare HTML content
                     var output = mustache.render(template_user_account_created, {
                         user: user,
-                        updated_user: updated_user,
-                        domain: domain || server_url + ":" + httpPort,
+                        domain: domain,
                         year: moment().format("YYYY")
                     });
 
