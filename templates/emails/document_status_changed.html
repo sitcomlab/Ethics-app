@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="author" content="Ethics-App">
-        <title>Member account reactivated</title>
+        <title>Document status changed</title>
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
@@ -80,7 +80,7 @@
             </h1>
             <br>
             <p class="lead">
-                Your member account has been reactivated
+                The status of your document has been changed
             </p>
         </div>
         <!-- Main -->
@@ -89,23 +89,48 @@
                 <div class="card-block">
                     <div class="row">
                         <div class="col-xs-12 col-sm-3 col-md-2 col-lg-1 middle">
-                            <i class="fa fa-4x fa-check-circle text-success" aria-hidden="true"></i>
+                            <i class="fa fa-4x {{icon}}" aria-hidden="true" style="color: #0066ff;"></i>
                         </div>
                         <div class="col-xs-12 col-sm-9 col-md-10 col-lg-11 justified" style="padding-top: 5px">
                             <p>
-                                Your member account has been reactivated, so you are able to login and review documents.
+                                {{status_description_1}}
                             </p>
                             <p>
-                                If you have problems, please get in touch with a corresponding administrator of your institute.
+                                {{status_description_2}}
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
+            <br>
+            <div class="list-group">
+                <a href="{{domain}}/user-client/documents/{{document.document_id}}" target="_blank" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <div>
+                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                            &nbsp;&nbsp;<b>{{document.document_title}}</b>
+                            &nbsp;&nbsp;<code>rev{{revision.version}}</code>&nbsp;&nbsp;
+                        </div>
+                        <div class="right">
+                            <span class="badge {{document._status_label}}">
+                                {{document._status_description}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="d-flex w-100 justify-content-between" style="margin-top:5px;">
+                        <div>
+                            <code>{{document.document_id}}</code>
+                        </div>
+                        <div class="timestamp right">
+                            &nbsp;&nbsp;{{document._updated}}
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
         <!-- Footer -->
         <div class="footer middle">
-            &copy; {{year}} <a href="{{domain}}/member-client/" target="_blank">Ethics-App</a> | COMMITTEE
+            &copy; {{year}} <a href="{{domain}}/user-client/" target="_blank">Ethics-App</a>
         </div>
     </body>
 </html>

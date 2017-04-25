@@ -335,43 +335,38 @@ exports.request = function(req, res) {
 
                 // Formatting
                 var icon = "";
-                var icon_label = "";
                 var status_description_1 = "";
                 var status_description_2 = "";
 
                 switch (updated_document.status) {
                     case 4: {
                         icon = "fa-eye";
-                        icon_label = "text-info";
-                        status_description_1 = "";
-                        status_description_2 = "";
+                        status_description_1 = "Your document is under review now. You will get an email as soon as the committee has reviewed it completely.";
+                        status_description_2 = "If you have problems with your document, please get in touch with a committee member of your institute.";
                         updated_document._status_label = "badge-info";
                         updated_document._status_description = "under review";
                         break;
                     }
                     case 5: {
                         icon = "fa-pencil-square-o";
-                        icon_label = "text-warning";
-                        status_description_1 = "";
-                        status_description_2 = "";
+                        status_description_1 = "Your document has been reviewed and partly accepted. Please read the comments in your review and revise it agian. If you have questions regarding your document, please get in touch with your reviewer.";
+                        status_description_2 = "If you have problems with your document, please get in touch with a committee member of your institute.";
                         updated_document._status_label = "badge-warning";
                         updated_document._status_description = "reviewed (partly accepted)";
                         break;
                     }
                     case 6: {
                         icon = "fa-check-square-o";
-                        icon_label = "text-success";
-                        status_description_1 = "";
-                        status_description_2 = "";
+                        status_description_1 = "Your document has been reviewed and accepted. You can download your files in the application.";
+                        status_description_2 = "If you have problems with your document or PDFs, please get in touch with a committee member of your institute.";
                         updated_document._status_label = "badge-success";
                         updated_document._status_description = "reviewed (accepted)";
                         break;
                     }
                     case 7: {
                         icon = "fa-gavel";
-                        icon_label = "text-danger";
-                        status_description_1 = "";
-                        status_description_2 = "";
+                        status_description_1 = "Your document has been reviewed and rejected.";
+                        status_description_2 = "If you have problems with your document, please get in touch with a committee member of your institute.";
                         updated_document._status_label = "badge-danger";
                         updated_document._status_description = "reviewed (rejected)";
                         break;
@@ -385,7 +380,6 @@ exports.request = function(req, res) {
                     revision: revision,
                     new_revision: new_revision,
                     icon: icon,
-                    icon_label: icon_label,
                     status_description_1: status_description_1,
                     status_description_2: status_description_2,
                     domain: domain,

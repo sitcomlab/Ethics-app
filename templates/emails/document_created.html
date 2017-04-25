@@ -85,47 +85,52 @@
         </div>
         <!-- Main -->
         <div class="content">
-            <div class="card-block">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-3 col-md-2 col-lg-1 middle">
-                        <i class="fa fa-4x fa-key text-primary" aria-hidden="true"></i>
-                    </div>
-                    <div class="col-xs-12 col-sm-9 col-md-10 col-lg-11 justified">
-                        Your new document has been created. Please go back to the application to login with the document-ID below.
-                        <br>
-                        If you have problems with your document, please get in touch with a committee member of your institute.
+            <div class="card">
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3 col-md-2 col-lg-1 middle">
+                            <i class="fa fa-4x fa-key" aria-hidden="true" style="color: #0066ff;"></i>
+                        </div>
+                        <div class="col-xs-12 col-sm-9 col-md-10 col-lg-11 justified" style="padding-top: 5px">
+                            <p>
+                                Your new document has been created. Please go back to the application to login with the document-ID below.
+                            </p>
+                            <p>
+                                If you have problems with your document, please get in touch with a committee member of your institute.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
             <br>
             <div class="list-group">
-                {{#documents}}
-                <a href="{{server_url}}/user-client/{{document_id}}" target="_blank" class="list-group-item list-group-item-action">
-                    <div class="row">
-                        <div class="col-xs-6 col-md-4">
-                            <p>
-                                <b>{{document_title}}</b>
-                            </p>
+                <a href="{{domain}}/user-client/documents/{{document.document_id}}" target="_blank" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <div>
+                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                            &nbsp;&nbsp;<b>{{document.document_title}}</b>
+                            &nbsp;&nbsp;
                         </div>
-                        <div class="col-xs-6 col-md-3 float-xs-right right">
-                            <span class="tag {{label}}">
-                                {{status_description}}
+                        <div class="right">
+                            <span class="badge badge-default">
+                                initialised
                             </span>
                         </div>
-                        <div class="col-xs-12 col-md-5">
-                            <code>{{document_id}}</code>
+                    </div>
+                    <div class="d-flex w-100 justify-content-between" style="margin-top:5px;">
+                        <div>
+                            <code>{{document.document_id}}</code>
                         </div>
-                        <div class="col-xs-12 col-md-12 timestamp right">
-                            {{_created}}
+                        <div class="timestamp right">
+                            &nbsp;&nbsp;{{document._created}}
                         </div>
                     </div>
                 </a>
-                {{/documents}}
             </div>
         </div>
         <!-- Footer -->
         <div class="footer middle">
-            &copy; {{year}} <a href="{{server_url}}/user-client/" target="_blank">Ethics-App</a>
+            &copy; {{year}} <a href="{{domain}}/user-client/" target="_blank">Ethics-App</a>
         </div>
     </body>
 </html>

@@ -91,11 +91,16 @@
                         <div class="col-xs-12 col-sm-3 col-md-2 col-lg-1 middle">
                             <i class="fa fa-4x fa-check-circle text-success" aria-hidden="true"></i>
                         </div>
-                        <div class="col-xs-12 col-sm-9 col-md-10 col-lg-11 justified">
-                            Your new account has been created successfully and you are able to create a new document now referenced with this email-address <kbd>{{user.email_address}}</kbd>. Please reuse it whenever you create a new document.
-                            <br>
-                            In case you forgot your document-IDs, please see the recovery option under the login-fields.
-                            <br>If you want to change your email-address, please get in touch with a committee member of your institute.
+                        <div class="col-xs-12 col-sm-9 col-md-10 col-lg-11 justified" style="padding-top: 5px">
+                            <p>
+                                Your new account has been created successfully and you are able to create a new document now referenced with this email-address <kbd>{{user.email_address}}</kbd>. Please reuse it whenever you create a new document.
+                            </p>
+                            <p>
+                                In case you forgot your document-IDs, please see the recovery option under the login-fields.
+                            </p>
+                            <p>
+                                If you want to change your email-address, please get in touch with a committee member of your institute.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -103,7 +108,7 @@
         </div>
         <!-- Footer -->
         <div class="footer middle">
-            &copy; {{year}} <a href="{{server_url}}/user-client/" target="_blank">Ethics-App</a>
+            &copy; {{year}} <a href="{{domain}}/user-client/" target="_blank">Ethics-App</a>
         </div>
     </body>
 </html>
