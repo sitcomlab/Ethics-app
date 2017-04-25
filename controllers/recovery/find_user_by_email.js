@@ -38,7 +38,7 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_find_user_by_email, [
+            client.query(query_get_user_by_email, [
                 req.params.email_address
             ], function(err, result) {
                 done();
