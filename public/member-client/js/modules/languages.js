@@ -134,7 +134,8 @@ app.config(function ($translateProvider) {
         DELETE_DOCUMENT: 'Delete document',
         YOUR_DOCUMENT_ID: 'Your document-ID',
         YOUR_ACCOUNT: 'Your account',
-
+        BLOCKING_STATUS: 'Blocking Status',
+        
         DEFAULT:'Default',
         STATUS:'Status',
         ALL:'All',

@@ -16,6 +16,7 @@ app.config(function ($translateProvider) {
 
         DOCUMENT_ID: 'Document-ID',
         DOCUMENT_TITLE: 'Document title',
+        DOCUMENT_SETTINGS:'Document Settings',
         EMAIL : 'Email',
         EMAIL_ADDRESS : 'Email-address',
         TITLE : 'Title',
@@ -28,6 +29,7 @@ app.config(function ($translateProvider) {
         FORGOT_YOUR_DOCUMENT_ID: 'Forgot your document-ID',
         FORGOT_YOUR_PASSWORD: 'Forgot your password',
         PASSWORD: 'Password',
+        
 
         LOGIN : 'Login',
         SIGN_UP:'Sign up',
@@ -110,7 +112,8 @@ app.config(function ($translateProvider) {
         STUDY_DESCRIPTION_FORM_TEXT: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally versions in other languages. Depending on the language(s) filled out, you will receive the informed consent forms in the chosen languages to be used during your experiment.',
         CHOOSE_LANGUAGE:'Please select the language(s), in which you want to generate the informed consent forms:',
         STUDY_CONCERNS_FORM_TEXT: 'Complete the checklist below. If you have answered "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the Institutes Ethics committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. <br> Make sure you discuss any concerns with the members of the Intitutes\'s Ethics committee.',
-
+        SUBMIT_WARNING: 'Please confirm your Submission. Remember that once submitted your Document will be permanently stored on the Server. Please be aware of the fact that only Members of the responsible Ethics-Committee can delete your Proposal.',
+        
         AGREEMENT_DATA: 'I agree that all given information is correct, and I am aware that my data will be stored by the Institute responsible for the study and its partners',
         AGREEMENT_DELETION: 'I agree that as soon as I submit my document request, only Members of the Ethics committee can delete my account',
 
