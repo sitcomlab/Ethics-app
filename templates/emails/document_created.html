@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="author" content="Ethics-App">
-        <title>New document created</title>
+        <title>Document created</title>
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
@@ -80,13 +80,27 @@
             </h1>
             <br>
             <p class="lead">
-                Your new document has been created!
+                Your new document has been created
             </p>
         </div>
+        <!-- Main -->
         <div class="content">
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 col-md-2 col-lg-1 middle">
+                        <i class="fa fa-4x fa-key text-primary" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-xs-12 col-sm-9 col-md-10 col-lg-11 justified">
+                        Your new document has been created. Please go back to the application to login with the document-ID below.
+                        <br>
+                        If you have problems with your document, please get in touch with a committee member of your institute.
+                    </div>
+                </div>
+            </div>
+            <br>
             <div class="list-group">
                 {{#documents}}
-                <a href="{{link}}" target="_blank" class="list-group-item list-group-item-action">
+                <a href="{{server_url}}/user-client/{{document_id}}" target="_blank" class="list-group-item list-group-item-action">
                     <div class="row">
                         <div class="col-xs-6 col-md-4">
                             <p>
@@ -109,8 +123,9 @@
                 {{/documents}}
             </div>
         </div>
-        <footer class="footer middle">
-            &copy; {{year}} <b>Ethics-App</b> | <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a>
-        </footer>
+        <!-- Footer -->
+        <div class="footer middle">
+            &copy; {{year}} <a href="{{server_url}}/user-client/" target="_blank">Ethics-App</a>
+        </div>
     </body>
 </html>
