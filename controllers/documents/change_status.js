@@ -375,7 +375,7 @@ exports.request = function(req, res) {
                 transporter.sendMail({
                     from: mail_options,
                     to: user.email_address,
-                    subject: 'The status of your document has been changed',
+                    subject: '[Ethics-App] The status of your document has been changed',
                     text: '',
                     html: output
                 }, function(err, info) {

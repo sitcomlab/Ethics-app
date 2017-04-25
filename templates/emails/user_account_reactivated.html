@@ -2,19 +2,34 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="author" content="IFGI-Ethics-App">
+        <meta name="author" content="Ethics-App">
         <title>Email-address changed</title>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
 
+        <!-- Fontawesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"  crossorigin="anonymous">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+        <!-- Custom styles -->
         <style>
 
             body {
                 background-color: #eeeeee;
+                font-family: 'Open Sans script=all rev=1', sans-serif;
+                font-weight: 300;
             }
 
             hr {
                 width: 80%;
+            }
+
+            h1 {
+                font-family: 'Open Sans script=all rev=3', sans-serif;
+                font-weight: 400;
             }
 
             .header {
@@ -30,6 +45,9 @@
             }
             .right {
                 text-align: right;
+            }
+            .justified {
+                text-align: justify;
             }
 
             .content, .header, .footer {
@@ -66,14 +84,21 @@
             </p>
         </div>
         <div class="content">
-            <div class="card" style="padding: 40px 10px 40px 10px;">
+            <div class="card">
                 <div class="card-block">
-                    You can access your documents again. If you still have questions, please get in touch with a corresponding committee member of your institute.
+                    <div class="row">
+                        <div class="col-2 middle">
+                            <i class="fa fa-5x fa-check-circle text-success" aria-hidden="true"></i>
+                        </div>
+                        <div class="col justified">
+                            You can access your documents again. If you still have questions, please get in touch with a corresponding committee member of your institute.
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <footer class="footer middle">
-            &copy; {{year}} <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a>
+            &copy; {{year}} <b>Ethics-App</b> | <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a>
         </footer>
     </body>
 </html>

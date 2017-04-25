@@ -125,7 +125,7 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, user, updated_user, callback) {
-            if(user.blocked !== req.body.blocked){
+            if(user.blocked !== updated_user.blocked){
 
                 // Prepare HTML content
                 var output = "";
@@ -134,11 +134,11 @@ exports.request = function(req, res) {
                 var text = "";
 
                 // Prepare subject
-                var subject = "";
+                var subject = "[Ethics-App] ";
 
-                if(user.blocked){
+                if(updated_user.blocked){
                     text = "Your account has been blocked";
-                    subject = "Your account has been blocked";
+                    subject = subject + "Your account has been blocked";
                     output = mustache.render(template_user_account_blocked, {
                         user: user,
                         updated_user: updated_user,
@@ -146,7 +146,7 @@ exports.request = function(req, res) {
                     });
                 } else {
                     text = "Your account has been reactivated";
-                    subject = "Your account has been reactivated";
+                    subject = subject + "Your account has been reactivated";
                     output = mustache.render(template_user_account_reactivated, {
                         user: user,
                         updated_user: updated_user,
@@ -157,7 +157,7 @@ exports.request = function(req, res) {
                 // Send email
                 transporter.sendMail({
                     from: mail_options,
-                    to: user.email_address,
+                    to: updated_user.email_address,
                     subject: subject,
                     text: text,
                     html: output
@@ -172,7 +172,7 @@ exports.request = function(req, res) {
             } else {
                 callback(null, 200, updated_user);
             }
-            
+
         },
     ], function(err, code, result) {
         if(err){

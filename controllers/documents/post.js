@@ -300,7 +300,7 @@ exports.request = function(req, res) {
             transporter.sendMail({
                 from: mail_options,
                 to: user.email_address,
-                subject: 'Your new document has been created',
+                subject: '[Ethics-App] Your new document has been created',
                 text: '',
                 html: output
             }, function(err, info) {

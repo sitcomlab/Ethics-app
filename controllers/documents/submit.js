@@ -400,7 +400,7 @@ exports.request = function(req, res) {
                     transporter.sendMail({
                         from: mail_options,
                         to: member.email_address,
-                        subject: 'A document needs your review',
+                        subject: '[Ethics-App] A document needs your review',
                         text: '',
                         html: output
                     }, function(err, info) {

@@ -66,7 +66,7 @@ exports.request = function(req, res) {
             transporter.sendMail({
                 from: mail_options,
                 to: member.email_address,
-                subject: 'Reset your password',
+                subject: '[Ethics-App] Reset your password',
                 text: '',
                 html: output
             }, function(err, info) {

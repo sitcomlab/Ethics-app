@@ -146,7 +146,7 @@ exports.request = function(req, res) {
             transporter.sendMail({
                 from: mail_options,
                 to: user.email_address,
-                subject: 'You asked for your Document-IDs',
+                subject: '[Ethics-App] You asked for your Document-IDs',
                 text: '',
                 html: output
             }, function(err, info) {
