@@ -18,7 +18,7 @@ var mail_options = require('../../server.js').mail_options;
 var fs = require("fs");
 var dir_1 = "/../../templates/emails/";
 var dir_2 = "/../../sql/queries/members/";
-var template_user_account_created = fs.readFileSync(__dirname + dir_1 + 'member_account_created.html', 'utf8').toString();
+var template_member_account_created = fs.readFileSync(__dirname + dir_1 + 'member_account_created.html', 'utf8').toString();
 var query_create_member = fs.readFileSync(__dirname + dir_2 + 'create.sql', 'utf8').toString();
 
 

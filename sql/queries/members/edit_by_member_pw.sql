@@ -1,6 +1,5 @@
-INSERT INTO Members (
+UPDATE Members SET (
     email_address,
-    password,
     title,
     first_name,
     last_name,
@@ -9,11 +8,9 @@ INSERT INTO Members (
     office_phone_number,
     office_email_address,
     subscribed,
-    former,
-    admin
-) VALUES (
-    $1::TEXT,
-    crypt($2::TEXT, gen_salt('md5')),
+    password
+) = (
+    $2::TEXT,
     $3::TEXT,
     $4::TEXT,
     $5::TEXT,
@@ -22,9 +19,10 @@ INSERT INTO Members (
     $8::TEXT,
     $9::TEXT,
     $10::BOOLEAN,
-    $11::BOOLEAN,
-    $12::BOOLEAN
+    crypt($11::TEXT, gen_salt('md5')),
 )
+WHERE
+    member_id=$1::INTEGER
 RETURNING
     member_id,
     created,
@@ -38,6 +36,6 @@ RETURNING
     office_phone_number,
     office_email_address,
     admin,
-    former,
-    subscribed
+    subscribed,
+    former
 ;

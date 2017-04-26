@@ -12,6 +12,7 @@ var jwtSecret = require('../../server.js').jwtSecret;
 var fs = require("fs");
 var dir = "/../../sql/queries/members/";
 var query_get_member = fs.readFileSync(__dirname + dir + 'get.sql', 'utf8').toString();
+var query_get_member_by_member = fs.readFileSync(__dirname + dir + 'get_by_member.sql', 'utf8').toString();
 
 
 // GET
@@ -39,22 +40,23 @@ exports.request = function(req, res) {
                         callback(new Error("Authorization failed"), 401);
                     } else {
                         if(decoded.member){
-                            // TODO: Change query for members
-                            callback(null, client, done);
+                            if(decoded.admin){
+                                callback(null, client, done, query_get_member_by_member);
+                            } else {
+                                callback(null, client, done, query_get_member_by_member);
+                            }
                         } else {
-                            // TODO: Change query for users
-                            callback(null, client, done);
+                            callback(null, client, done, query_get_member);
                         }
                     }
                 });
             } else {
-                // TODO: Change query for users
-                callback(null, client, done);
+                callback(null, client, done, query_get_member);
             }
         },
-        function(client, done, callback) {
+        function(client, done, query, callback) {
             // Database query
-            client.query(query_get_member, [
+            client.query(query, [
                 req.params.member_id
             ], function(err, result) {
                 done();
