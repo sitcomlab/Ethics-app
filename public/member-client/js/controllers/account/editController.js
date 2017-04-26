@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Account edit controller
-app.controller("accountEditController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService, $userService, $universityService, $instituteService, $workingGroupService) {
+app.controller("accountEditController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $memberService, $universityService, $instituteService, $workingGroupService) {
 
     /*************************************************
         FUNCTIONS
@@ -18,87 +18,201 @@ app.controller("accountEditController", function($scope, $rootScope, $translate,
     };
 
     /**
-     * [cancel description]
+     * [description]
      * @return {[type]} [description]
      */
-    $scope.cancel = function(){
-        $scope.redirect("/members/" + $scope.member.member_id);
+    $scope.changePassword = function(){
+        $scope.updated_member.new_password = !$scope.updated_member.new_password;
     };
 
     /**
-     * [saveDocument description]
+     * [save description]
      * @return {[type]} [description]
      */
     $scope.save = function(){
         // Validate input
-        if($scope.editAccountForm.$invalid) {
+        if($scope.editMemberForm.$invalid) {
             // Update UI
-            $scope.editAccountForm.email_address.$pristine = false;
-            $scope.editAccountForm.old_password.$pristine = false;
-            $scope.editAccountForm.new_password.$pristine = false;
-            $scope.editAccountForm.title.$pristine = false;
-            $scope.editAccountForm.first_name.$pristine = false;
-            $scope.editAccountForm.last_name.$pristine = false;
-            $scope.editAccountForm.working_group_id.$pristine = false;
-            $scope.editAccountForm.institute_id.$pristine = false;
-            $scope.editAccountForm.university_id.$pristine = false;
+            $scope.editMemberForm.email_address.$pristine = false;
+            $scope.editMemberForm.old_password.$pristine = false;
+            $scope.editMemberForm.password.$pristine = false;
+            $scope.editMemberForm.repeated_password.$pristine = false;
+            $scope.editMemberForm.title.$pristine = false;
+            $scope.editMemberForm.first_name.$pristine = false;
+            $scope.editMemberForm.last_name.$pristine = false;
+            $scope.editMemberForm.university_id.$pristine = false;
+            $scope.editMemberForm.institute_id.$pristine = false;
+            $scope.editMemberForm.working_group_id.$pristine = false;
+            $scope.editMemberForm.office_room_number.$pristine = false;
+            $scope.editMemberForm.office_phone_number.$pristine = false;
+            $scope.editMemberForm.office_email_address.$pristine = false;
+            $scope.editMemberForm.admin.$pristine = false;
+            $scope.editMemberForm.former.$pristine = false;
+            $scope.editMemberForm.subscribed.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Saving account settings" };
+            // Cache token
+            var token = $authenticationService.getToken();
 
-            $userService.edit($authenticationService.getId(), $scope.updated_user)
-            .then(function onSuccess(response) {
-                // Attach token
-                var updated_user = response.data;
-                updated_user.token = $authenticationService.getToken();
-                $authenticationService.set(updated_user);
+            // Check if passwords are equal, if it has been changed
+            if($scope.updated_member.new_password){
+                if($scope.updated_member.password === $scope.repeated_password){
+                    $scope.$parent.loading = { status: true, message: "Saving member" };
 
-                // Update navbar
-                $scope.$parent.authenticated_user = $authenticationService.get();
+                    // Update member
+                    $memberService.edit($scope.authenticated_member.member_id, $scope.updated_member)
+                    .then(function onSuccess(response) {
+                        var authenticated_member = response.data;
+                        authenticated_member.token = token;
+                        $authenticationService.set(authenticated_member);
 
-                // Redirect
-                $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-            })
-            .catch(function onError(response) {
-                $window.alert(response.data);
-            });
+                        // Reset navbar
+                        $scope.$parent.authenticated_member = $authenticationService.get();
+                        $scope.$parent.loading = { status: false, message: "" };
+
+                        // Redirect
+                        $scope.redirect("/members/" + $scope.authenticated_member.member_id);
+                    })
+                    .catch(function onError(response) {
+                        $window.alert(response.data);
+                    });
+                } else {
+                    $window.alert("Your passwords are not equal!");
+                }
+            } else {
+                $scope.$parent.loading = { status: true, message: "Saving member" };
+
+                // Update member
+                $memberService.edit($scope.authenticated_member.member_id, $scope.updated_member)
+                .then(function onSuccess(response) {
+                    var authenticated_member = response.data;
+                    authenticated_member.token = token;
+                    $authenticationService.set(authenticated_member);
+
+                    // Redirect
+                    $scope.redirect("/members/" + $scope.authenticated_member.member_id);
+                })
+                .catch(function onError(response) {
+                    $window.alert(response.data);
+                });
+            }
         }
     };
 
     /**
-     * [updateInstitutes description]
-     * @return {[type]} [description]
+     * [description]
+     * @param  {[type]} related_data [description]
+     * @return {[type]}              [description]
      */
-    $scope.updateInstitutes = function(){
-        $scope.updated_user.institute_id = null;
-        $scope.institutes = $instituteService.getByUniversity($scope.university_id);
+    $scope.load = function(related_data){
+        // Check which kind of related data needs to be requested
+        switch (related_data) {
+            case 'universities': {
+                $scope.$parent.loading = { status: true, message: "Loading universities" };
+
+                // Load universities
+                $universityService.list($scope.filter)
+                .then(function onSuccess(response) {
+                    $scope.universities = response.data;
+                    $scope.$parent.loading = { status: false, message: "" };
+                })
+                .catch(function onError(response) {
+                    $window.alert(response.data);
+                });
+                break;
+            }
+            case 'institutes': {
+                if($scope.university_id){
+                    if($scope.university_id !== null){
+                        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+
+                        // Load related institutes
+                        $instituteService.listByUniversity($scope.university_id, $scope.filter)
+                        .then(function onSuccess(response) {
+                            $scope.institutes = response.data;
+                            $scope.$parent.loading = { status: false, message: "" };
+                        })
+                        .catch(function onError(response) {
+                            $window.alert(response.data);
+                        });
+                    } else {
+                        // Reset institutes
+                        $scope.institutes = [];
+                        $scope.institute_id = null;
+                        $scope.updated_member.working_group_id = null;
+                    }
+                } else {
+                    // Reset institutes
+                    $scope.institutes = [];
+                    $scope.institute_id = null;
+                    $scope.updated_member.working_group_id = null;
+                }
+                break;
+            }
+            case 'working_groups': {
+                if($scope.institute_id){
+                    if($scope.institute_id !== null){
+                        $scope.$parent.loading = { status: true, message: "Loading working groups" };
+
+                        // Load related working groups
+                        $workingGroupService.listByInstitute($scope.institute_id, $scope.filter)
+                        .then(function onSuccess(response) {
+                            $scope.working_groups = response.data;
+                            $scope.$parent.loading = { status: false, message: "" };
+                        })
+                        .catch(function onError(response) {
+                            $window.alert(response.data);
+                        });
+                    } else {
+                        // Reset working groups
+                        $scope.working_groups = [];
+                        $scope.updated_member.working_group_id = null;
+                    }
+                } else {
+                    // Reset working groups
+                    $scope.working_groups = [];
+                    $scope.updated_member.working_group_id = null;
+                }
+                break;
+            }
+        }
+
     };
+
 
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading account settings" };
-    $scope.authenticated_user = $authenticationService.get();
-    $scope.updated_user = $authenticationService.copy();
+    $scope.authenticated_member = $authenticationService.get();
+    $scope.repeated_password = "";
 
-    // Load universities
-    $universityService.list()
+    // Load member
+    $memberService.retrieve($scope.authenticated_member.member_id)
     .then(function onSuccess(response) {
-        $universityService.set(response.data);
-        $scope.universities = $universityService.get();
-        $scope.university_id = $scope.updated_user.university_id;
+        $scope.member = response.data;
+        $scope.updated_member = $memberService.copy($scope.member);
 
-        // Load institutes
-        $instituteService.list()
-        .then(function onSuccess(response) {
-            $instituteService.set(response.data);
-            $scope.institutes = $instituteService.get();
-            $scope.institute_id = $scope.updated_user.institute_id;
+        // Filter
+        $scope.filter = { former: false };
 
-            $scope.$parent.loading = { status: false, message: "" };
-        })
-        .catch(function onError(response) {
-            $window.alert(response.data);
-        });
+        // Load universities
+        $scope.load('universities');
+
+        // Set default value by member
+        $scope.university_id = $scope.member.university_id;
+
+        // Load related institutes
+        $scope.load('institutes');
+
+        // Set default value by member
+        $scope.institute_id = $scope.member.institute_id;
+
+        // Load related working groups
+        $scope.load('working_groups');
+
+        // Set default by member
+        $scope.working_group_id = $scope.member.working_group_id;
+
+        $scope.$parent.loading = { status: false, message: "" };
     })
     .catch(function onError(response) {
         $window.alert(response.data);
