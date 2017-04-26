@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document shwo files controller
-app.controller("documentShowFilesController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $documentService) {
+app.controller("documentShowFilesController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $authenticationService, $documentService) {
 
     /*************************************************
         FUNCTIONS

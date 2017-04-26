@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 // Document list controller
-app.controller("documentListController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentsService, $universityService, $instituteService, $courseService, $interval) {
+app.controller("documentListController", function($scope, $rootScope, $filter, $translate, $location, config, $window, $authenticationService, $documentsService, $universityService, $instituteService, $courseService, $interval) {
 
     /*************************************************
         FUNCTIONS

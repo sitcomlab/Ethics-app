@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Account edit controller
-app.controller("accountEditController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService, $userService, $universityService, $instituteService) {
+app.controller("accountEditController", function($scope, $rootScope, $filter, $translate, $location, config, $window, $authenticationService, $documentService, $userService, $universityService, $instituteService) {
 
     /*************************************************
         FUNCTIONS

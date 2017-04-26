@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Manual controller
-app.controller("manualController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService) {
+app.controller("manualController", function($scope, $rootScope, $filter, $translate, $location, config, $window, $authenticationService) {
 
     /*************************************************
         FUNCTIONS

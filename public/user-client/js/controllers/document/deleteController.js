@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document delete controller
-app.controller("documentDeleteController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService) {
+app.controller("documentDeleteController", function($scope, $rootScope, $filter, $translate, $location, config, $window, $authenticationService, $documentService) {
 
     /*************************************************
         FUNCTIONS

@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document shwo ID controller
-app.controller("documentShowIdController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService) {
+app.controller("documentShowIdController", function($scope, $rootScope, $filter, $translate, $location, config, $window, $authenticationService, $documentService) {
 
     /*************************************************
         FUNCTIONS

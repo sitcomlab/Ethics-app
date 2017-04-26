@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Working group details controller
-app.controller("workingGroupDetailsController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $memberService, $workingGroupService) {
+app.controller("workingGroupDetailsController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $authenticationService, $memberService, $workingGroupService) {
 
     /*************************************************
         FUNCTIONS

@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Account edit controller
-app.controller("accountEditController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $memberService, $universityService, $instituteService, $workingGroupService) {
+app.controller("accountEditController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $authenticationService, $memberService, $universityService, $instituteService, $workingGroupService) {
 
     /*************************************************
         FUNCTIONS
@@ -56,7 +56,7 @@ app.controller("accountEditController", function($scope, $rootScope, $routeParam
             // Check if passwords are equal, if it has been changed
             if($scope.updated_member.new_password){
                 if($scope.updated_member.password === $scope.repeated_password){
-                    $scope.$parent.loading = { status: true, message: "Saving member" };
+                    $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_MEMBER') };
 
                     // Update member
                     $memberService.edit($scope.authenticated_member.member_id, $scope.updated_member)
@@ -64,10 +64,6 @@ app.controller("accountEditController", function($scope, $rootScope, $routeParam
                         var authenticated_member = response.data;
                         authenticated_member.token = token;
                         $authenticationService.set(authenticated_member);
-
-                        // Reset navbar
-                        $scope.$parent.authenticated_member = $authenticationService.get();
-                        $scope.$parent.loading = { status: false, message: "" };
 
                         // Redirect
                         $scope.redirect("/members/" + $scope.authenticated_member.member_id);
@@ -79,7 +75,7 @@ app.controller("accountEditController", function($scope, $rootScope, $routeParam
                     $window.alert("Your passwords are not equal!");
                 }
             } else {
-                $scope.$parent.loading = { status: true, message: "Saving member" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_MEMBER') };
 
                 // Update member
                 $memberService.edit($scope.authenticated_member.member_id, $scope.updated_member)
@@ -87,6 +83,10 @@ app.controller("accountEditController", function($scope, $rootScope, $routeParam
                     var authenticated_member = response.data;
                     authenticated_member.token = token;
                     $authenticationService.set(authenticated_member);
+
+                    // Reset navbar
+                    $scope.$parent.authenticated_member = $authenticationService.get();
+                    $scope.$parent.loading = { status: false, message: "" };
 
                     // Redirect
                     $scope.redirect("/members/" + $scope.authenticated_member.member_id);

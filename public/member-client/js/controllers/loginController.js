@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 // Login controller
-app.controller("loginController", function($scope, $rootScope, $translate, $location, config, $authenticationService, $documentService, $window) {
+app.controller("loginController", function($scope, $rootScope, $filter, $translate, $location, config, $authenticationService, $documentService, $window) {
 
     /*************************************************
         FUNCTIONS

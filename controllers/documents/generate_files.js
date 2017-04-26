@@ -42,10 +42,6 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            // TODO: Authentication
-            callback(null, client, done);
-        },
-        function(client, done, callback) {
             // Database query
             client.query(query_get_document, [
                 req.params.document_id
@@ -138,6 +134,11 @@ exports.request = function(req, res) {
             var result = {
                 path: '/files/temp/' + folders.dateFolderName + "/" + folders.filesFolderName
             };
+
+            // Create temp folder, if doesn't exist
+            if (!fs.existsSync(process.cwd() + '/public/files/temp/')){
+                fs.mkdirSync(process.cwd() + '/public/files/temp/');
+            }
 
             // Create temporary folders
             if (!fs.existsSync(folders.pathDateFolder)){

@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document show intro controller
-app.controller("documentShowIntroController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService) {
+app.controller("documentShowIntroController", function($scope, $rootScope, $filter, $translate, $location, config, $window, $authenticationService, $documentService) {
 
     /*************************************************
         FUNCTIONS

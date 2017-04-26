@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document status controller
-app.controller("statusController", function($scope, $rootScope, $translate, $location, config, $window, $authenticationService, $documentService, $revisionService, $descriptionService, $concernService, $fileService) {
+app.controller("statusController", function($scope, $rootScope, $filter, $translate, $location, config, $window, $authenticationService, $documentService, $revisionService, $descriptionService, $concernService, $fileService) {
 
 
     /*************************************************

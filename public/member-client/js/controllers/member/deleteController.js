@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Member delete controller
-app.controller("memberDeleteController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $memberService) {
+app.controller("memberDeleteController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $authenticationService, $memberService) {
 
     /*************************************************
         FUNCTIONS

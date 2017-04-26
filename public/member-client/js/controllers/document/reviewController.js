@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document review controller
-app.controller("documentReviewController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $q, $timeout, $authenticationService, $documentService, $commentService) {
+app.controller("documentReviewController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $q, $timeout, $authenticationService, $documentService, $commentService) {
 
     /*************************************************
         FUNCTIONS

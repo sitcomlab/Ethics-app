@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Working group delete controller
-app.controller("workingGroupDeleteController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $workingGroupService) {
+app.controller("workingGroupDeleteController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $authenticationService, $workingGroupService) {
 
     /*************************************************
         FUNCTIONS

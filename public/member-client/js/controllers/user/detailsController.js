@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // User details controller
-app.controller("userDetailsController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $userService, $documentsService) {
+app.controller("userDetailsController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $authenticationService, $userService, $documentsService) {
 
     /*************************************************
         FUNCTIONS

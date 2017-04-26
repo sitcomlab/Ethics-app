@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // University create controller
-app.controller("universityCreateController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $universityService) {
+app.controller("universityCreateController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $authenticationService, $universityService) {
 
     /*************************************************
         FUNCTIONS

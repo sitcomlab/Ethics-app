@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document submission controller
-app.controller("documentShowSubmissionController", function($scope, $rootScope, $routeParams, $translate, $location, config, $window, $authenticationService, $documentService) {
+app.controller("documentShowSubmissionController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $authenticationService, $documentService) {
 
     /*************************************************
         FUNCTIONS
