@@ -167,7 +167,6 @@ app.controller("memberEditController", function($scope, $rootScope, $routeParams
     /*************************************************
         INIT
      *************************************************/
-    $scope.updated_member = $memberService.init();
     $scope.repeated_password = "";
 
     // Load member

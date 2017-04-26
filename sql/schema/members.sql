@@ -10,7 +10,7 @@ CREATE TABLE Members (
 
     -- Attributes
     email_address CHARACTER VARYING(255) UNIQUE NOT NULL,
-    password TEXT NOT NULL,
+    password CHARACTER VARYING(255) NOT NULL,
     title CHARACTER VARYING(255) DEFAULT NULL,
     first_name CHARACTER VARYING(255) NOT NULL,
     last_name CHARACTER VARYING(255) NOT NULL,

@@ -19,7 +19,7 @@ UPDATE Members SET (
     $8::TEXT,
     $9::TEXT,
     $10::BOOLEAN,
-    crypt($11::TEXT, gen_salt('md5')),
+    crypt($11::TEXT, gen_salt('md5'))
 )
 WHERE
     member_id=$1::INTEGER

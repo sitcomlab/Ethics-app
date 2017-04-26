@@ -125,7 +125,7 @@ exports.request = function(req, res) {
                 // Validate old password, if member requested account
                 if(req.body.new_password){
                     // Database query
-                    client.query(query_get_member, [
+                    client.query(query_login_member, [
                         req.params.member_id,
                         req.body.old_password
                     ], function(err, result) {

@@ -20,7 +20,7 @@ app.factory('$authenticationService', function($http, $log, config) {
             if(authenticated_member === undefined){
                 return undefined;
             } else {
-                return authenticated_member.user_id;
+                return authenticated_member.member_id;
             }
         },
         getToken: function(){
