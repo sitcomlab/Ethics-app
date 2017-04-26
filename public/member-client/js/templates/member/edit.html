@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<div class="card">
+    <form class="form-horizontal" name="editMemberForm" ng-submit="save()">
+        <div class="card-header" style="font-size: 20pt;">
+            <div class="row">
+                <div class="col">
+                    {{ 'EDIT_MEMBER' | translate }}
+                </div>
+                <div class="col right">
+                    <button class="btn btn-secondary" role="button" ng-click="redirect('/members/' + member.member_id)">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-block">
+            <label>
+                <b>{{ 'USERNAME' | translate }}*</b>
+            </label>
+            <div class="form-group" ng-class="{'has-danger': editMemberForm.email_address.$invalid && !editMemberForm.email_address.$pristine}">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-at" aria-hidden="true"></i>
+                    </div>
+                    <input
+                        type="email"
+                        class="form-control"
+                        ng-model="updated_member.email_address"
+                        name="email_address"
+                        id="email_address"
+                        placeholder="{{ 'EMAIL_ADDRESS' | translate }}"
+                        aria-describedby="inputEmailAddress"
+                        required
+                        autofocus
+                        autocomplete="on">
+                </div>
+                <small class="form-text text-muted">{{ 'PLEASE_USE_A_UNIVERSITY_ADDRESS' | translate }}</small>
+                <span ng-show="editMemberForm.email_address.$error.required && !editMemberForm.email_address.$pristine" class="text-danger">
+                    <small>
+                        {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+                <span ng-show="editMemberForm.email_address.$error.email && !editMemberForm.email_address.$pristine" class="text-danger">
+                    <small>
+                        {{ 'NO_VALID_EMAIL_ADDRESS' | translate }}
+                    </small>
+                </span>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'PASSWORD' | translate }}*</b>
+                        <small>
+                            <a href="" ng-click="changePassword()">
+                                <span ng-if="!updated_member.new_password">{{ 'CHANGE_PASSWORD' | translate }}</span>
+                                <span ng-if="updated_member.new_password">{{ 'DO_NOT_CHANGE_PASSWORD' | translate }}</span>
+                            </a>
+                        </small>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': editMemberForm.password.$invalid && !editMemberForm.password.$pristine}">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                            </div>
+                            <input
+                                type="password"
+                                class="form-control"
+                                ng-model="updated_member.password"
+                                name="password"
+                                id="password"
+                                placeholder="{{ 'PASSWORD' | translate }}"
+                                aria-describedby="inputPassword"
+                                ng-minlength="14"
+                                ng-required="updated_member.new_password"
+                                ng-disabled="!updated_member.new_password"
+                            >
+                        </div>
+                        <small class="form-text text-muted">{{ 'MIN_LENGTH' | translate }}</small>
+                        <span ng-show="editMemberForm.password.$error.required && !editMemberForm.password.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                        <span ng-show="editMemberForm.password.$error.minlength && !editMemberForm.password.$pristine" class="text-danger">
+                            <small>
+                                {{ 'TOO_SHORT' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'REPEATED_PASSWORD' | translate }}*</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': editMemberForm.repeated_password.$invalid && !editMemberForm.repeated_password.$pristine}">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                            </div>
+                            <input
+                                type="password"
+                                class="form-control"
+                                ng-model="repeated_password"
+                                name="repeated_password"
+                                id="repeated_password"
+                                placeholder="{{ 'PASSWORD' | translate }}"
+                                aria-describedby="inputPassword"
+                                ng-minlength="14"
+                                ng-required="updated_member.new_password"
+                                ng-disabled="!updated_member.new_password"
+                            >
+                        </div>
+                        <small class="form-text text-muted">{{ 'MIN_LENGTH' | translate }}</small>
+                        <span ng-show="editMemberForm.repeated_password.$error.required && !editMemberForm.repeated_password.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                        <span ng-show="editMemberForm.repeated_password.$error.minlength && !editMemberForm.repeated_password.$pristine" class="text-danger">
+                            <small>
+                                {{ 'TOO_SHORT' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                    <label>
+                        <b>{{ 'TITLE' | translate }}</b>
+                    </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            class="form-control"
+                            ng-model="updated_member.title"
+                            name="title"
+                            id="title"
+                            placeholder="{{ 'TITLE' | translate }}"
+                            aria-describedby="inputTitle"
+                            autocomplete="on">
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                    <label>
+                        <b>{{ 'FIRST_NAME' | translate }}*</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': editMemberForm.first_name.$invalid && !editMemberForm.first_name.$pristine }">
+                        <input
+                            type="text"
+                            class="form-control"
+                            ng-model="updated_member.first_name"
+                            name="first_name"
+                            id="first_name"
+                            placeholder="{{ 'FIRST_NAME' | translate }}"
+                            aria-describedby="inputFirstName"
+                            required
+                            autocomplete="on">
+                        <span ng-show="editMemberForm.first_name.$error.required && !editMemberForm.first_name.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                    <label>
+                        <b>{{ 'LAST_NAME' | translate }}*</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': editMemberForm.last_name.$invalid && !editMemberForm.last_name.$pristine }">
+                        <input
+                            type="text"
+                            class="form-control"
+                            ng-model="updated_member.last_name"
+                            name="last_name"
+                            id="last_name"
+                            placeholder="{{ 'LAST_NAME' | translate }}"
+                            aria-describedby="inputLastName"
+                            required
+                            autocomplete="on">
+                        <span ng-show="editMemberForm.last_name.$error.required && !editMemberForm.last_name.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'UNIVERSITY' | translate }}*</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': editMemberForm.university_id.$invalid && !editMemberForm.university_id.$pristine }">
+                        <select
+                            class="custom-select form-control"
+                            id="university_id"
+                            name="university_id"
+                            ng-model="university_id"
+                            ng-options="university.university_id as university.university_name for university in universities | orderBy:['university_name']"
+                            ng-disabled="!authenticated_member.admin"
+                            ng-change="load('institutes')"
+                            required
+                        >
+                            <option value="">{{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}</option>
+                        </select>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'INSTITUTE' | translate }}*</b>
+                    </label>
+                    <select
+                        class="custom-select form-control"
+                        id="institute_id"
+                        name="institute_id"
+                        ng-model="institute_id"
+                        ng-options="institute.institute_id as institute.institute_name for institute in institutes | orderBy:['institute_name']"
+                        ng-disabled="university_id == null"
+                        required
+                    >
+                        <option value="">{{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}</option>
+                    </select>
+                    <span ng-show="editMemberForm.institute_id.$error.required && !editMemberForm.institute_id.$pristine" class="text-danger">
+                        <small>
+                            {{ 'REQUIRED' | translate }}
+                        </small>
+                    </span>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'WORKING_GROUP' | translate }}*</b>
+                    </label>
+                    <select
+                        class="custom-select form-control"
+                        id="working_group_id"
+                        name="working_group_id"
+                        ng-model="updated_member.working_group_id"
+                        ng-options="working_group.working_group_id as working_group.working_group_name for working_group in working_groups | orderBy:['working_group_name']"
+                        ng-disabled="institude_id == null"
+                        required
+                    >
+                        <option value="">{{ 'PLEASE_SELECT_A_WORKING_GROUP' | translate }}</option>
+                    </select>
+                    <span ng-show="editMemberForm.working_group_id.$error.required && !editMemberForm.working_group_id.$pristine" class="text-danger">
+                        <small>
+                            {{ 'REQUIRED' | translate }}
+                        </small>
+                    </span>
+                    <br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'OFFICE_ROOM_NUMBER' | translate }}</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': editMemberForm.office_room_number.$invalid && !editMemberForm.office_room_number.$pristine }">
+                        <input
+                            type="text"
+                            class="form-control"
+                            ng-model="updated_member.office_room_number"
+                            name="office_room_number"
+                            id="office_room_number"
+                            placeholder="{{ 'ROOM_NUMBER' | translate }}"
+                            aria-describedby="inputOfficeRoomNumber"
+                            >
+                        <span ng-show="editMemberForm.office_room_number.$error.required && !editMemberForm.office_room_number.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'OFFICE_PHONE_NUMBER' | translate }}</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': editMemberForm.office_phone_number.$invalid && !editMemberForm.office_phone_number.$pristine }">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-phone-square" aria-hidden="true"></i>
+                            </div>
+                            <input
+                                type="tel"
+                                class="form-control"
+                                ng-model="updated_member.office_phone_number"
+                                name="office_phone_number"
+                                id="office_phone_number"
+                                placeholder="{{ 'PHONE_NUMBER' | translate }}"
+                                aria-describedby="inputOfficePhoneNumber"
+                            >
+                        </div>
+                        <small class="form-text text-muted">{{ 'PLEASE_USE_A_UNIVERSITY_NUMBER' | translate }}</small>
+                        <span ng-show="editMemberForm.office_phone_number.$error.required && !editMemberForm.office_phone_number.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'OFFICE_EMAIL_ADDRESS' | translate }}*</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': editMemberForm.office_email_address.$invalid && !editMemberForm.office_email_address.$pristine }">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-envelope-square" aria-hidden="true"></i>
+                            </div>
+                            <input
+                                type="email"
+                                class="form-control"
+                                ng-model="updated_member.office_email_address"
+                                name="office_email_address"
+                                id="office_email_address"
+                                placeholder="{{ 'EMAIL_ADDRESS' | translate }}"
+                                aria-describedby="inputOfficeEmailAddress"
+                                required
+                                autocomplete="on"
+                            >
+                        </div>
+                        <small class="form-text text-muted">{{ 'PLEASE_USE_A_UNIVERSITY_ADDRESS' | translate }}</small>
+                        <span ng-show="editMemberForm.office_email_address.$error.required && !editMemberForm.office_email_address.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                        <span ng-show="editMemberForm.office_email_address.$error.email && !editMemberForm.office_email_address.$pristine" class="text-danger">
+                            <small>
+                                {{ 'NO_VALID_EMAIL_ADDRESS' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <div class="alert alert-warning" role="alert">
+                <label>
+                    <b>{{ 'ADMIN_ROLE' | translate }}*</b>
+                </label>
+                <p>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EXPLANATION_OF_THE_ADMIN_ROLE' | translate }}
+                </p>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <label class="custom-control custom-radio">
+                            <input
+                            class="custom-control-input"
+                            type="radio"
+                            name="admin"
+                            id="admin_1"
+                            ng-model="updated_member.admin"
+                            ng-value="true"
+                            required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">{{ 'TRUE' | translate }}</span>
+                        </label>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <label class="custom-control custom-radio">
+                            <input
+                            class="custom-control-input"
+                            type="radio"
+                            name="admin"
+                            id="admin_2"
+                            ng-model="updated_member.admin"
+                            ng-value="false"
+                            required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">{{ 'FALSE' | translate }} ({{ 'DEFAULT' | translate }})</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <div class="alert alert-warning" role="alert">
+                <label>
+                    <b>{{ 'FORMER_STATUS' | translate }}*</b>
+                </label>
+                <p>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EXPLANATION_OF_THE_FORMER_STATUS_OF_A_MEMBER' | translate }}
+                </p>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <label class="custom-control custom-radio">
+                            <input
+                            class="custom-control-input"
+                            type="radio"
+                            name="blocked"
+                            id="blocked_1"
+                            ng-model="updated_member.former"
+                            ng-value="true"
+                            required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">{{ 'TRUE' | translate }}</span>
+                        </label>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <label class="custom-control custom-radio">
+                            <input
+                            class="custom-control-input"
+                            type="radio"
+                            name="blocked"
+                            id="blocked_2"
+                            ng-model="updated_member.former"
+                            ng-value="false"
+                            required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">{{ 'FALSE' | translate }} ({{ 'DEFAULT' | translate }})</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <div class="alert alert-warning" role="alert">
+                <label>
+                    <b>{{ 'SUBSCRIBED_STATUS' | translate }}*</b>
+                </label>
+                <p>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EXPLANATION_OF_THE_SUBSCRIBED_STATUS' | translate }}
+                </p>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <label class="custom-control custom-radio">
+                            <input
+                            class="custom-control-input"
+                            type="radio"
+                            name="subscribed"
+                            id="subscribed_1"
+                            ng-model="updated_member.subscribed"
+                            ng-value="true"
+                            required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">{{ 'TRUE' | translate }} ({{ 'DEFAULT' | translate }})</span>
+                        </label>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <label class="custom-control custom-radio">
+                            <input
+                            class="custom-control-input"
+                            type="radio"
+                            name="subscribed"
+                            id="subscribed_2"
+                            ng-model="updated_member.subscribed"
+                            ng-value="false"
+                            required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">{{ 'FALSE' | translate }}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer right">
+          <button class="btn btn-success" role="submit">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SAVE' | translate }}
+          </button>
+        </div>
+    </form>
+</div>

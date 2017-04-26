@@ -6,7 +6,7 @@
                 {{ 'COMMITTEE_MEMBERS' | translate }}
             </div>
             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 right">
-                <button class="btn btn-primary" role="button" ng-click="redirect('/new/member')">
+                <button class="btn btn-primary" role="button" ng-click="redirect('/new/member')" ng-if="authenticated_member.admin">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                 </button>
                 <button class="btn btn-secondary" role="button" ng-click="redirect('/documents')">

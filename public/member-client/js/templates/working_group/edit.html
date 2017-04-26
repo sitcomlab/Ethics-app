@@ -37,40 +37,44 @@
             </div>
             <br>
 
-            <label>
-                <b>{{ 'FORMER_STATUS' | translate }}*</b>
-            </label>
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <label class="custom-control custom-radio">
-                        <input
-                        class="custom-control-input"
-                        type="radio"
-                        name="former"
-                        id="former_1"
-                        ng-model="updated_working_group.former"
-                        ng-value="true"
-                        required>
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">{{ 'TRUE' | translate }}</span>
-                    </label>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <label class="custom-control custom-radio">
-                        <input
-                        class="custom-control-input"
-                        type="radio"
-                        name="former"
-                        id="former_2"
-                        ng-model="updated_working_group.former"
-                        ng-value="false"
-                        required>
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">{{ 'FALSE' | translate }}</span>
-                    </label>
+            <div class="alert alert-warning" role="alert">
+                <label>
+                    <b>{{ 'FORMER_STATUS' | translate }}*</b>
+                </label>
+                <p>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EXPLANATION_OF_THE_FORMER_STATUS_OF_A_WORKING_GROUP' | translate }}
+                </p>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <label class="custom-control custom-radio">
+                            <input
+                            class="custom-control-input"
+                            type="radio"
+                            name="former"
+                            id="former_1"
+                            ng-model="updated_working_group.former"
+                            ng-value="true"
+                            required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">{{ 'TRUE' | translate }}</span>
+                        </label>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <label class="custom-control custom-radio">
+                            <input
+                            class="custom-control-input"
+                            type="radio"
+                            name="former"
+                            id="former_2"
+                            ng-model="updated_working_group.former"
+                            ng-value="false"
+                            required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">{{ 'FALSE' | translate }} ({{ 'DEFAULT' | translate }})</span>
+                        </label>
+                    </div>
                 </div>
             </div>
-            <br>
 
         </div>
 

@@ -112,7 +112,8 @@
                             name="university_id"
                             ng-model="university_id"
                             ng-options="university.university_id as university.university_name for university in universities | orderBy:['university_name']"
-                            ng-change="updateInstitutes()">
+                            ng-change="updateInstitutes()"
+                            disabled>
                         </select>
                     </div>
                     <span ng-show="editAccountForm.university_id.$error.required && !editAccountForm.university_id.$pristine" class="text-danger">
@@ -131,6 +132,7 @@
                         name="institute_id"
                         ng-model="updated_user.institute_id"
                         ng-options="institute.institute_id as institute.institute_name for institute in institutes | orderBy:['institute_name']"
+                        disabled
                         required>
                         <option value="">{{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}</option>
                     </select>

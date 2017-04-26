@@ -19,21 +19,31 @@
                 <b>{{ 'EMAIL_ADDRESS' | translate }}*</b>
             </label>
             <div class="form-group" ng-class="{'has-danger': editUserForm.user_email_address.$invalid && !editUserForm.user_email_address.$pristine}">
-                <input
-                    type="email"
-                    class="form-control"
-                    ng-model="updated_user.email_address"
-                    name="user_email_address"
-                    id="user_email_address"
-                    placeholder="{{ 'EMAIL_ADDRESS' | translate }}"
-                    aria-describedby="inputEmailAddress"
-                    required
-                    autofocus
-                    autocomplete="on">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-at" aria-hidden="true"></i>
+                    </div>
+                    <input
+                        type="email"
+                        class="form-control"
+                        ng-model="updated_user.email_address"
+                        name="user_email_address"
+                        id="user_email_address"
+                        placeholder="{{ 'EMAIL_ADDRESS' | translate }}"
+                        aria-describedby="inputEmailAddress"
+                        required
+                        autofocus
+                        autocomplete="on">
+                </div>
                 <small class="form-text text-muted">{{ 'PLEASE_USE_A_UNIVERSITY_ADDRESS' | translate }}</small>
                 <span ng-show="editUserForm.user_email_address.$error.required && !editUserForm.user_email_address.$pristine" class="text-danger">
                     <small>
                         {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+                <span ng-show="editUserForm.user_email_address.$error.email && !editUserForm.user_email_address.$pristine" class="text-danger">
+                    <small>
+                        {{ 'NO_VALID_EMAIL_ADDRESS' | translate }}
                     </small>
                 </span>
             </div>
@@ -72,7 +82,7 @@
                             aria-describedby="inputFirstName"
                             required
                             autocomplete="on">
-                        <span ng-show="editUserForm.email_address.$error.required && !editUserForm.email_address.$pristine" class="text-danger">
+                        <span ng-show="editUserForm.first_name.$error.required && !editUserForm.first_name.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}
                             </small>
@@ -95,7 +105,7 @@
                             aria-describedby="inputLastName"
                             required
                             autocomplete="on">
-                        <span ng-show="editUserForm.email_address.$error.required && !editUserForm.email_address.$pristine" class="text-danger">
+                        <span ng-show="editUserForm.last_name.$error.required && !editUserForm.last_name.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}
                             </small>
@@ -150,37 +160,42 @@
                 </div>
             </div>
 
-            <label>
-                <b>{{ 'BLOCKING_STATUS' | translate }}*</b>
-            </label>
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <label class="custom-control custom-radio">
-                        <input
-                        class="custom-control-input"
-                        type="radio"
-                        name="blocked"
-                        id="blocked_1"
-                        ng-model="updated_user.blocked"
-                        ng-value="true"
-                        required>
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">{{ 'TRUE' | translate }}</span>
-                    </label>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <label class="custom-control custom-radio">
-                        <input
-                        class="custom-control-input"
-                        type="radio"
-                        name="blocked"
-                        id="blocked_2"
-                        ng-model="updated_user.blocked"
-                        ng-value="false"
-                        required>
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">{{ 'FALSE' | translate }} ({{ 'DEFAULT' | translate }})</span>
-                    </label>
+            <div class="alert alert-warning" role="alert">
+                <label>
+                    <b>{{ 'BLOCKING_STATUS' | translate }}*</b>
+                </label>
+                <p>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EXPLANATION_OF_THE_BLOCKING_STATUS' | translate }}
+                </p>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <label class="custom-control custom-radio">
+                            <input
+                            class="custom-control-input"
+                            type="radio"
+                            name="blocked"
+                            id="blocked_1"
+                            ng-model="updated_user.blocked"
+                            ng-value="true"
+                            required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">{{ 'TRUE' | translate }}</span>
+                        </label>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <label class="custom-control custom-radio">
+                            <input
+                            class="custom-control-input"
+                            type="radio"
+                            name="blocked"
+                            id="blocked_2"
+                            ng-model="updated_user.blocked"
+                            ng-value="false"
+                            required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">{{ 'FALSE' | translate }} ({{ 'DEFAULT' | translate }})</span>
+                        </label>
+                    </div>
                 </div>
             </div>
             <br>

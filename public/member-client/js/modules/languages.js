@@ -134,8 +134,7 @@ app.config(function ($translateProvider) {
         DELETE_DOCUMENT: 'Delete document',
         YOUR_DOCUMENT_ID: 'Your document-ID',
         YOUR_ACCOUNT: 'Your account',
-        BLOCKING_STATUS: 'Blocking Status',
-        
+
         DEFAULT:'Default',
         STATUS:'Status',
         ALL:'All',
@@ -186,8 +185,9 @@ app.config(function ($translateProvider) {
         YES: 'yes',
         NO: 'no',
         EXPLANATION: 'Explanation',
-        ENGLISH: 'ENGLISH',
-        GERMAN: 'GERMAN',
+        ENGLISH: 'English',
+        GERMAN: 'German',
+        PORTUGUESE: 'Portuguese',
 
         DOWNLOAD_YOUR_FILES: 'Download your files',
         DEBRIEFING_INFORMATION: 'Debriefing information',
@@ -319,11 +319,11 @@ app.config(function ($translateProvider) {
 
         EDIT_MEMBER: 'Edit member',
         EDIT_USER: 'Edit user',
+        EDIT_UNIVERSITY: 'Edit university',
         EDIT_INSTITUTE: 'Edit institute',
         EDIT_WORKING_GROUP: 'Edit working group',
-        FORMER_STATUS: 'Former status',
-        TRUE: 'True',
-        FALSE: 'False',
+        TRUE: 'true',
+        FALSE: 'false',
 
         NEW_MEMBER: 'New member',
         NEW_USER: 'New user',
@@ -332,7 +332,36 @@ app.config(function ($translateProvider) {
         NEW_WORKING_GROUP: 'New working group',
         PLEASE_SELECT_AN_UNIVERSITY: 'Please select an university',
         PLEASE_SELECT_AN_INSTITUTE: 'Please select an institute',
-        PLEASE_SELECT_A_WORKING_GROUP: 'Please select a working group'
+        PLEASE_SELECT_A_WORKING_GROUP: 'Please select a working group',
+
+        USERNAME: 'Username',
+        OLD_PASSWORD: 'Old password',
+        NEW_PASSWORD: 'New password',
+        REPEATED_PASSWORD: 'Password repeated',
+        NEW_REPEATED_PASSWORD: 'New password repeated',
+        ROOM_NUMBER: 'Room number',
+        PHONE_NUMBER: 'Phone number',
+        OFFICE_ROOM_NUMBER: 'Office (room number)',
+        OFFICE_PHONE_NUMBER: 'Office (phone number)',
+        OFFICE_EMAIL_ADDRESS: 'Office (email-address)',
+        PLEASE_USE_A_UNIVERSITY_NUMBER: 'Please use an official university number',
+
+        EXPLANATION_OF_THE_ADMIN_ROLE: 'If you give a member admin priviliges, he/she has gets full access to all data in the database and he/she can administrate it. As an administrator you can create new universities, insitutes, working groups, members and update or archive them.',
+        EXPLANATION_OF_THE_FORMER_STATUS_OF_A_MEMBER: 'With this setting you can archive a member, so the member account is no longer accessible. All data is still be stored in the database. It is the recommended way, because deleting a member also, deletes all related reviews.',
+        EXPLANATION_OF_THE_FORMER_STATUS_OF_AN_INSTITUTE: 'With this setting you can archive an insitute, so that the users or members can no longer select it from the lists. All data is still be stored in the database. It is the recommended way, because deleting an institute also, deletes all related working groups, members, users, documents.',
+        EXPLANATION_OF_THE_FORMER_STATUS_OF_A_WORKING_GROUP: 'With this setting you can archive a working group, so that the users or members can no longer select it from the lists. All data is still be stored in the database. It is the recommended way, because deleting a working group also, deletes all related working groups, members, users, documents.',
+        EXPLANATION_OF_THE_SUBSCRIBED_STATUS: 'With this setting you can turn on/off the notifications, if a document needs your review. If you are in holiday, you can turn the subscription off and users and members can see that you are currently not responsible for reviewing.',
+        EXPLANATION_OF_THE_BLOCKING_STATUS: 'With this setting you can block a user, if he/she clearly violated the rules. The user has then no longer access until you reactivate the account again.',
+
+        ADMIN_ROLE: 'Admin role',
+        SUBSCRIBED_STATUS: 'Subscribed status',
+        FORMER_STATUS: 'Former status',
+        BLOCKING_STATUS: 'Blocking status',
+        MIN_LENGTH: 'Please use a password with a minimum of 14 characters',
+        TOO_SHORT: 'Password too short',
+        NO_VALID_EMAIL_ADDRESS: 'No valid email-address',
+        CHANGE_PASSWORD: 'Change password',
+        DO_NOT_CHANGE_PASSWORD: 'Do not change password',
     });
 
     // Default Language (English)

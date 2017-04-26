@@ -15,7 +15,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
     return {
         init: function(){
             return {
-                username: "",
+                email_address: "",
                 password: "",
                 title: null,
                 first_name: "",
@@ -25,15 +25,17 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
                 office_phone_number: null,
                 office_email_address: null,
                 subscribed: true,
-                former: false
+                former: false,
+                admin: false
             };
         },
         copy: function(member){
             return {
                 member_id: member.member_id,
-                username: member.username,
+                email_address: member.email_address,
+                new_password: false,
                 old_password: "",
-                new_password: "",
+                password: "",
                 title: member.title,
                 first_name: member.first_name,
                 last_name: member.last_name,
@@ -42,7 +44,8 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
                 office_phone_number: member.office_phone_number,
                 office_email_address: member.office_email_address,
                 subscribed: member.subscribed,
-                former: member.former
+                former: member.former,
+                admin: member.admin
             };
         },
         get: function(){
