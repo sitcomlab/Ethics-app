@@ -30,5 +30,5 @@ ORDER BY
         WHEN $3::TEXT='name.asc' THEN (_user.first_name, _user.last_name) END ASC,
     CASE
         WHEN $3::TEXT='name.desc' THEN (_user.first_name, _user.last_name) END DESC
-OFFSET $1::INTEGER
-LIMIT $2::INTEGER;
+OFFSET $1
+LIMIT $2;

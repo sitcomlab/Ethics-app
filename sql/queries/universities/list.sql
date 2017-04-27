@@ -16,5 +16,5 @@ ORDER BY
         WHEN $3::TEXT='name.asc' THEN university.university_name END ASC,
     CASE
         WHEN $3::TEXT='name.desc' THEN university.university_name END DESC
-OFFSET $1::INTEGER
-LIMIT $2::INTEGER;
+OFFSET $1
+LIMIT $2;

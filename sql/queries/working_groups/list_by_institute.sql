@@ -27,5 +27,5 @@ ORDER BY
         WHEN $3::TEXT='name.asc' THEN working_group.working_group_name END ASC,
     CASE
         WHEN $3::TEXT='name.desc' THEN working_group.working_group_name END DESC
-OFFSET $1::INTEGER
-LIMIT $2::INTEGER;
+OFFSET $1
+LIMIT $2;
