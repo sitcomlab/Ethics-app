@@ -87,7 +87,6 @@ exports.request = function(req, res) {
             }
         },
         function(client, done, member, user, query, callback) {
-
             // Preparing parameters
             var params = [];
 
@@ -95,11 +94,11 @@ exports.request = function(req, res) {
             params.push(Number(req.query.offset) || null );
             params.push(Number(req.query.limit) || null );
 
+            // Sorting
+            params.push(req.query.orderby || 'name.asc');
+
             // Filter by former status
             params.push(req.query.former || false );
-
-            // TODO: Add orderBy
-            //params.push(req.query.orderby);
 
             // Filter by institute
             if(member){

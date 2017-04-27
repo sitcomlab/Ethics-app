@@ -46,7 +46,6 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-
             // Preparing parameters
             var params = [];
 
@@ -54,10 +53,13 @@ exports.request = function(req, res) {
             params.push(Number(req.query.offset) || null);
             params.push(Number(req.query.limit) || null);
 
+            // Sorting
+            params.push(req.query.orderby || 'name.asc');
+
             // Filter by former status
             params.push(req.query.former || false );
 
-            // Filter by university_id
+            // Filter by university
             params.push(req.params.university_id);
 
             callback(null, client, done, params);

@@ -18,7 +18,17 @@ FROM Courses course
     JOIN Institutes institute ON institute.institute_id = course.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
 ORDER BY
-    year DESC,
-    course_name ASC
+    CASE
+        WHEN $3::TEXT='created.asc' THEN course.created END ASC,
+    CASE
+        WHEN $3::TEXT='created.desc' THEN course.created END DESC,
+    CASE
+        WHEN $3::TEXT='updated.asc' THEN course.updated END ASC,
+    CASE
+        WHEN $3::TEXT='updated.desc' THEN course.updated END DESC,
+    CASE
+        WHEN $3::TEXT='year.asc' THEN (course.year, course.course_name) END ASC,
+    CASE
+        WHEN $3::TEXT='year.desc' THEN (course.year, course.course_name) END DESC
 OFFSET $1
 LIMIT $2;

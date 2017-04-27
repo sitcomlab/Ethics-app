@@ -33,6 +33,23 @@ FROM Documents document
     JOIN Institutes institute ON institute.institute_id = course.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
 WHERE
-    course.course_id=$1
+    course.course_id=$4::INTEGER
 ORDER BY
-    document.created;
+    CASE
+        WHEN $3::TEXT='created.asc' THEN document.created END ASC,
+    CASE
+        WHEN $3::TEXT='created.desc' THEN document.created END DESC,
+    CASE
+        WHEN $3::TEXT='updated.asc' THEN document.updated END ASC,
+    CASE
+        WHEN $3::TEXT='updated.desc' THEN document.updated END DESC,
+    CASE
+        WHEN $3::TEXT='status.asc' THEN document.status END ASC,
+    CASE
+        WHEN $3::TEXT='status.desc' THEN document.status END DESC,
+    CASE
+        WHEN $3::TEXT='title.asc' THEN document.document_title END ASC,
+    CASE
+        WHEN $3::TEXT='title.desc' THEN document.document_title END DESC
+OFFSET $1
+LIMIT $2;

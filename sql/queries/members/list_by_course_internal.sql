@@ -27,5 +27,5 @@ WHERE
     AND
         responsibility.course_id=$1::INTEGER
 ORDER BY
-    last_name,
-    first_name;
+    member.last_name,
+    member.first_name;

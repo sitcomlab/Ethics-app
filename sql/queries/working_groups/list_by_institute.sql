@@ -11,10 +11,21 @@ FROM Working_Groups working_group
     JOIN Institutes institute ON institute.institute_id = working_group.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
 WHERE
-        working_group.former=$3::BOOLEAN
+        working_group.former=$4::BOOLEAN
     AND
-        working_group.institute_id=$4::INTEGER
+        working_group.institute_id=$5::INTEGER
 ORDER BY
-    working_group_name
-OFFSET $1
-LIMIT $2;
+    CASE
+        WHEN $3::TEXT='created.asc' THEN working_group.created END ASC,
+    CASE
+        WHEN $3::TEXT='created.desc' THEN working_group.created END DESC,
+    CASE
+        WHEN $3::TEXT='updated.asc' THEN working_group.updated END ASC,
+    CASE
+        WHEN $3::TEXT='updated.desc' THEN working_group.updated END DESC,
+    CASE
+        WHEN $3::TEXT='name.asc' THEN working_group.working_group_name END ASC,
+    CASE
+        WHEN $3::TEXT='name.desc' THEN working_group.working_group_name END DESC
+OFFSET $1::INTEGER
+LIMIT $2::INTEGER;

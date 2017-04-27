@@ -30,7 +30,6 @@ var query_get_course_by_document = fs.readFileSync(__dirname + dir_3 + 'get_by_d
 var query_get_latest_revision_by_document = fs.readFileSync(__dirname + dir_4 + 'get_latest_by_document.sql', 'utf8').toString();
 var query_get_description_by_revision = fs.readFileSync(__dirname + dir_5 + 'get_by_revision.sql', 'utf8').toString();
 var query_get_concern_by_revision = fs.readFileSync(__dirname + dir_6 + 'get_by_revision.sql', 'utf8').toString();
-//var query_create_review = fs.readFileSync(__dirname + dir_7 + 'create.sql', 'utf8').toString();
 var query_get_user = fs.readFileSync(__dirname + dir_7 + 'get.sql', 'utf8').toString();
 var query_list_members_by_subscription = fs.readFileSync(__dirname + dir_8 + 'list_by_subscription.sql', 'utf8').toString();
 var query_list_members_by_course = fs.readFileSync(__dirname + dir_8 + 'list_by_course_internal.sql', 'utf8').toString();
@@ -49,10 +48,6 @@ exports.request = function(req, res) {
                     callback(null, client, done);
                 }
             });
-        },
-        function(client, done, callback) {
-            // TODO: Authentication
-            callback(null, client, done);
         },
         function(client, done, callback) {
             // Database query

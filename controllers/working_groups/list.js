@@ -26,13 +26,15 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-
             // Preparing parameters
             var params = [];
 
             // Pagination parameters
             params.push(Number(req.query.offset) || null);
             params.push(Number(req.query.limit) || null);
+
+            // Sorting
+            params.push(req.query.orderby || 'name.asc');
 
             // Filter by former status
             params.push(req.query.former || false);

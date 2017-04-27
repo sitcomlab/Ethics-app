@@ -68,15 +68,15 @@ exports.request = function(req, res) {
             }
         },
         function(client, done, member, callback) {
-
             var query;
             var params = [];
+            
             // Pagination parameters
             params.push(Number(req.query.offset));
             params.push(Number(req.query.limit));
 
-            // TODO: Add orderBy: document.created ASC DESC, etc.
-            //params.push(req.query.orderby);
+            // Sorting
+            params.push(req.query.orderby || 'created.desc');
 
             // Filter by institute
             params.push(member.institute_id);

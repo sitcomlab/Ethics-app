@@ -20,11 +20,21 @@ FROM Members member
     JOIN Institutes institute ON institute.institute_id = working_group.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
 WHERE
-        member.former=$3::BOOLEAN
+        member.former=$4::BOOLEAN
     AND
-        responsibility.course_id=$4::INTEGER
+        responsibility.course_id=$5::INTEGER
 ORDER BY
-    last_name,
-    first_name
+    CASE
+        WHEN $3::TEXT='created.asc' THEN member.created END ASC,
+    CASE
+        WHEN $3::TEXT='created.desc' THEN member.created END DESC,
+    CASE
+        WHEN $3::TEXT='updated.asc' THEN member.updated END ASC,
+    CASE
+        WHEN $3::TEXT='updated.desc' THEN member.updated END DESC,
+    CASE
+        WHEN $3::TEXT='name.asc' THEN (member.first_name, member.last_name) ASC END,
+    CASE
+        WHEN $3::TEXT='name.desc' THEN (member.first_name, member.last_name) DESC END
 OFFSET $1
 LIMIT $2;

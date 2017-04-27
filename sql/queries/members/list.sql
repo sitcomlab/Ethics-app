@@ -21,5 +21,15 @@ FROM Members member
 WHERE
     member.admin != true
 ORDER BY
-    last_name,
-    first_name;
+    CASE
+        WHEN $3::TEXT='created.asc' THEN member.created END ASC,
+    CASE
+        WHEN $3::TEXT='created.desc' THEN member.created END DESC,
+    CASE
+        WHEN $3::TEXT='updated.asc' THEN member.updated END ASC,
+    CASE
+        WHEN $3::TEXT='updated.desc' THEN member.updated END DESC,
+    CASE
+        WHEN $3::TEXT='name.asc' THEN (member.first_name, member.last_name) ASC END,
+    CASE
+        WHEN $3::TEXT='name.desc' THEN (member.first_name, member.last_name) DESC END;

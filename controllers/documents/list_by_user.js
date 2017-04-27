@@ -64,16 +64,30 @@ exports.request = function(req, res) {
                     if (result.rows.length === 0) {
                         callback(new Error("User not found"), 404);
                     } else {
-                        callback(null, client, done, result.rows[0]);
+                        callback(null, client, done);
                     }
                 }
             });
         },
-        function(client, done, user, callback) {
+        function(client, done, callback) {
+            // Preparing parameters
+            var params = [];
+
+            // Pagination parameters
+            params.push(Number(req.query.offset));
+            params.push(Number(req.query.limit));
+
+            // Sorting
+            params.push(req.query.orderby || 'created.desc');
+
+            // Filter by user
+            params.push(req.params.user_id);
+
+            callback(null, client, done, params);
+        },
+        function(client, done, params, callback) {
             // Database query
-            client.query(query_list_documents_filter_by_user, [
-                req.params.user_id
-            ], function(err, result) {
+            client.query(query_list_documents_filter_by_user, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
