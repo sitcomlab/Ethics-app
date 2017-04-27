@@ -34,8 +34,6 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
         list: function(filter) {
             var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&former=" + filter.former + "&";
 
-            // TODO: Add orderby
-
             query = query.slice(0, -1);
 
             return $http.get(config.apiURL + "/members" + query, {
@@ -47,8 +45,6 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
         listByUniversity: function(university_id, filter) {
             var query = "?former=" + filter.former + "&";
 
-            // TODO: Add orderby
-
             query = query.slice(0, -1);
 
             return $http.get(config.apiURL + "/universities/" + university_id + "/members" + query, {
@@ -59,8 +55,6 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
         },
         listByInstitute: function(institute_id, filter) {
             var query = "?former=" + filter.former + "&";
-
-            // TODO: Add orderby
 
             query = query.slice(0, -1);
 

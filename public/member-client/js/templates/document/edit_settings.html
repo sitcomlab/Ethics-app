@@ -50,7 +50,7 @@
                         id="institute_id"
                         name="institute_id"
                         ng-model="institute_id"
-                        ng-options="institute.institute_id as institute.institute_name group by institute.university_name for institute in institutes | orderBy:['institute_name']"
+                        ng-options="institute.institute_id as institute.institute_name group by institute.university_name for institute in institutes"
                         ng-change="updateCourses()">
                         <option value="">{{ 'NO_INSTITUTE' | translate }}</option>
                     </select>
@@ -64,7 +64,7 @@
                         id="course_id"
                         name="course_id"
                         ng-model="updated_document.course_id"
-                        ng-options="course.course_id as course.course_name group by course.season for course in courses | orderBy:[-'year', 'course_name']"
+                        ng-options="course.course_id as course.course_name group by course.season for course in courses"
                         ng-disabled="institute_id == null || institute_id == '' ">
                         <option value="">{{ 'NO_COURSE' | translate }}</option>
                     </select>

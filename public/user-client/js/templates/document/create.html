@@ -73,7 +73,7 @@
                         id="_institute_id"
                         name="_institute_id"
                         ng-model="_institute_id"
-                        ng-options="institute.institute_id as institute.institute_name group by institute.university_name for institute in institutes | orderBy:['institute_name']"
+                        ng-options="institute.institute_id as institute.institute_name group by institute.university_name for institute in institutes"
                         ng-change="updateCourses()">
                         <option value="">{{ 'NO_INSTITUTE' | translate }}</option>
                     </select>
@@ -87,7 +87,7 @@
                         id="course_id"
                         name="course_id"
                         ng-model="new_document.course_id"
-                        ng-options="course.course_id as course.course_name group by course.season for course in courses | orderBy:[-'year', 'course_name']"
+                        ng-options="course.course_id as course.course_name group by course.season for course in courses"
                         ng-disabled="_institute_id == null || _institute_id == '' ">
                         <option value="">{{ 'NO_COURSE' | translate }}</option>
                     </select>
@@ -215,7 +215,7 @@
                             id="university_id"
                             name="university_id"
                             ng-model="university_id"
-                            ng-options="university.university_id as university.university_name for university in universities | orderBy:['university_name']"
+                            ng-options="university.university_id as university.university_name for university in universities"
                             ng-change="updateInstitutes()"
                         >
                             <option value="">{{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}</option>
@@ -231,7 +231,7 @@
                         id="institute_id"
                         name="institute_id"
                         ng-model="new_user.institute_id"
-                        ng-options="institute.institute_id as institute.institute_name for institute in institutes | orderBy:['institute_name']"
+                        ng-options="institute.institute_id as institute.institute_name for institute in institutes"
                         ng-disabled="university_id == null"
                         required
                     >

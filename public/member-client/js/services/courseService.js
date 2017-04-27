@@ -7,7 +7,8 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
     var courses;
     var filter = {
         offset: 0,
-        limit: 50
+        limit: 50,
+        orderby: "year.desc"
     };
     var full_count = 0;
 
@@ -52,9 +53,7 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
             full_count = data;
         },
         list: function(filter) {
-            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&";
-
-            // TODO: Add orderby
+            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&orderby=" + filter.orderby + "&";
 
             query = query.slice(0, -1);
 
@@ -65,9 +64,7 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
             });
         },
         listByInstitute: function(institute_id, filter) {
-            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&";
-
-            // TODO: Add orderby
+            var query = "?offset=" + filter.offset + "&limit=" + filter.limit  + "&orderby=" + filter.orderby + "&";
 
             query = query.slice(0, -1);
 

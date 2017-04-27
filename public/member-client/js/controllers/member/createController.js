@@ -18,6 +18,19 @@ app.controller("memberCreateController", function($scope, $rootScope, $routePara
     };
 
     /**
+     * [description]
+     * @return {[type]} [description]
+     */
+    $scope.updateMember = function(){
+        if($scope.new_member.former){
+            $scope.new_member.admin = false;
+            $scope.new_member.subscribed = false;
+        } else {
+            $scope.new_member.subscribed = true;
+        }
+    };
+
+    /**
      * [send description]
      * @return {[type]} [description]
      */

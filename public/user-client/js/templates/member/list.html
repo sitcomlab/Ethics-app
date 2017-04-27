@@ -48,7 +48,7 @@
         <br>
 
         <div class="list-group" ng-if="members && members.length>0">
-            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in members | filter: searchText | orderBy: ['last_name', 'first_name']">
+            <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in members | filter: searchText">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
                         <i class="fa fa-user" aria-hidden="true"></i>

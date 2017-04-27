@@ -27,10 +27,10 @@ app.controller("documentListController", function($scope, $rootScope, $filter, $
             $interval.cancel($scope.interval);
         }
 
-        // Start interval to refresh the documents list every 30 seconds to prevent the select the same document for reviewing; as soon as a member starts to review a document, the document is updated from status 3 to status 4 and removed from the list, when the default filter (status 3) is applied
+        // Start interval to refresh the documents list every 10 seconds to prevent the select the same document for reviewing; as soon as a member starts to review a document, the document is updated from status 3 to status 4 and removed from the list, when the default filter (status 3) is applied
         $scope.interval = $interval(function() {
             $scope.load();
-        }, 30000);
+        }, 10000);
     };
 
 
@@ -39,7 +39,6 @@ app.controller("documentListController", function($scope, $rootScope, $filter, $
      * @return {[type]} [description]
      */
     $scope.load = function(){
-        $scope.$parent.loading = { status: true, message: "Loading documents" };
 
         $documentsService.list($scope.filter)
         .then(function onSuccess(response) {
@@ -121,6 +120,7 @@ app.controller("documentListController", function($scope, $rootScope, $filter, $
     /*************************************************
         INIT
      *************************************************/
+    $scope.$parent.loading = { status: true, message: "Loading documents" };
     $scope.authenticated_member = $authenticationService.get();
 
     // Load documents with applied filter (default: documents, which need to be reviewed) and start the interval

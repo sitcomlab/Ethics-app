@@ -16,7 +16,7 @@
     <div class="card-block">
         <div class="row">
             <!-- SEARCH -->
-            <div class="col-xs-12 col-sm col-md col-lg">
+            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
                 <div class="input-group">
                     <span class="input-group-addon">
                         <i class="fa fa-search" aria-hidden="true"></i>
@@ -31,9 +31,30 @@
                 <small class="form-text text-muted">{{ 'SEARCH_FOR_UNIVERSITIES' | translate }}</small>
                 <br>
             </div>
+            <!-- ORDER DOCUMENTS BY ATTRIBUTE -->
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <div class="input-group">
+                    <span class="input-group-addon" style="background-color: #ffffff;">
+                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'created.asc' || filter.orderby == 'updated.asc'"></i>
+                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'created.desc' || filter.orderby == 'updated.desc'"></i>
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true" ng-if="filter.orderby == 'name.asc'"></i>
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true" ng-if="filter.orderby == 'name.desc'"></i>
+                    </span>
+                    <select class="form-control custom-select" ng-model="filter.orderby" ng-change="applyFilter()">
+                        <option value="created.asc">created.asc</option>
+                        <option value="created.desc">created.desc</option>
+                        <option value="updated.asc">updated.asc</option>
+                        <option value="updated.desc">updated.desc</option>
+                        <option value="name.asc">name.asc [{{ 'DEFAULT' | translate }}]</option>
+                        <option value="name.desc">name.desc</option>
+                    </select>
+                </div>
+                <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
+                <br>
+            </div>
         </div>
         <div class="list-group" ng-if="universities && universities.length>0">
-            <a href="" ng-click="redirect('/universities/' + university.university_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="university in universities | filter: searchText | orderBy: ['university_name']">
+            <a href="" ng-click="redirect('/universities/' + university.university_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="university in universities | filter: searchText">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
                         <i class="fa fa-university" aria-hidden="true"></i>

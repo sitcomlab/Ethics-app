@@ -8,7 +8,8 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
     var filter = {
         offset: 0,
         limit: 50,
-        former: false
+        former: false,
+        orderby: "name.asc"
     };
     var full_count = 0;
 
@@ -67,9 +68,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             full_count = data;
         },
         list: function(filter) {
-            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&former=" + filter.former + "&";
-
-            // TODO: Add orderby
+            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&former=" + filter.former + "&orderby=" + filter.orderby + "&";
 
             query = query.slice(0, -1);
 
@@ -80,9 +79,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             });
         },
         listByUniversity: function(university_id, filter) {
-            var query = "?former=" + filter.former + "&";
-
-            // TODO: Add orderby
+            var query = "?former=" + filter.former + "&orderby=" + filter.orderby + "&";
 
             query = query.slice(0, -1);
 
@@ -93,9 +90,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             });
         },
         listByInstitute: function(institute_id, filter) {
-            var query = "?former=" + filter.former + "&";
-
-            // TODO: Add orderby
+            var query = "?former=" + filter.former + "&orderby=" + filter.orderby + "&";
 
             query = query.slice(0, -1);
 
@@ -106,9 +101,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             });
         },
         listByWorkingGroup: function(working_group_id, filter) {
-            var query = "?former=" + filter.former + "&";
-
-            // TODO: Add orderby
+            var query = "?former=" + filter.former + "&orderby=" + filter.orderby + "&";
 
             query = query.slice(0, -1);
 
@@ -119,9 +112,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             });
         },
         listByCourse: function(course_id, filter) {
-            var query = "?former=" + filter.former + "&";
-
-            // TODO: Add orderby
+            var query = "?former=" + filter.former + "&orderby=" + filter.orderby + "&";
 
             query = query.slice(0, -1);
 

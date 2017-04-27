@@ -121,7 +121,7 @@
                         id="university_id"
                         name="university_id"
                         ng-model="university_id"
-                        ng-options="university.university_id as university.university_name for university in universities | orderBy:['university_name']"
+                        ng-options="university.university_id as university.university_name for university in universities"
                         ng-disabled="!authenticated_member.admin"
                         ng-change="load('institutes')"
                         required
@@ -144,7 +144,7 @@
                         id="institute_id"
                         name="institute_id"
                         ng-model="new_course.institute_id"
-                        ng-options="institute.institute_id as institute.institute_name for institute in institutes | orderBy:['institute_name']"
+                        ng-options="institute.institute_id as institute.institute_name for institute in institutes"
                         ng-disabled="university_id == null || !authenticated_member.admin"
                         ng-change="load('members')"
                         required

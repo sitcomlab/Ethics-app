@@ -46,7 +46,7 @@
                         id="university_id"
                         name="university_id"
                         ng-model="new_institute.university_id"
-                        ng-options="university.university_id as university.university_name for university in universities | orderBy:['university_name']"
+                        ng-options="university.university_id as university.university_name for university in universities"
                         ng-disabled="!authenticated_member.admin"
                         ng-change="load('institutes')"
                         required

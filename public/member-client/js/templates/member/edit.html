@@ -207,7 +207,7 @@
                             id="university_id"
                             name="university_id"
                             ng-model="university_id"
-                            ng-options="university.university_id as university.university_name for university in universities | orderBy:['university_name']"
+                            ng-options="university.university_id as university.university_name for university in universities"
                             ng-disabled="!authenticated_member.admin"
                             ng-change="load('institutes')"
                             required
@@ -226,7 +226,7 @@
                         id="institute_id"
                         name="institute_id"
                         ng-model="institute_id"
-                        ng-options="institute.institute_id as institute.institute_name for institute in institutes | orderBy:['institute_name']"
+                        ng-options="institute.institute_id as institute.institute_name for institute in institutes"
                         ng-disabled="university_id == null"
                         required
                     >
@@ -248,7 +248,7 @@
                         id="working_group_id"
                         name="working_group_id"
                         ng-model="updated_member.working_group_id"
-                        ng-options="working_group.working_group_id as working_group.working_group_name for working_group in working_groups | orderBy:['working_group_name']"
+                        ng-options="working_group.working_group_id as working_group.working_group_name for working_group in working_groups"
                         ng-disabled="institude_id == null"
                         required
                     >
@@ -368,6 +368,7 @@
                             id="admin_1"
                             ng-model="updated_member.admin"
                             ng-value="true"
+                            ng-disabled="updated_member.former"
                             required>
                             <span class="custom-control-indicator"></span>
                             <span class="custom-control-description">{{ 'TRUE' | translate }}</span>
@@ -382,6 +383,7 @@
                             id="admin_2"
                             ng-model="updated_member.admin"
                             ng-value="false"
+                            ng-disabled="updated_member.former"
                             required>
                             <span class="custom-control-indicator"></span>
                             <span class="custom-control-description">{{ 'FALSE' | translate }} ({{ 'DEFAULT' | translate }})</span>
@@ -404,10 +406,11 @@
                             <input
                             class="custom-control-input"
                             type="radio"
-                            name="blocked"
-                            id="blocked_1"
+                            name="former"
+                            id="former_1"
                             ng-model="updated_member.former"
                             ng-value="true"
+                            ng-change="updateMember()"
                             required>
                             <span class="custom-control-indicator"></span>
                             <span class="custom-control-description">{{ 'TRUE' | translate }}</span>
@@ -418,10 +421,11 @@
                             <input
                             class="custom-control-input"
                             type="radio"
-                            name="blocked"
-                            id="blocked_2"
+                            name="former"
+                            id="former_2"
                             ng-model="updated_member.former"
                             ng-value="false"
+                            ng-change="updateMember()"
                             required>
                             <span class="custom-control-indicator"></span>
                             <span class="custom-control-description">{{ 'FALSE' | translate }} ({{ 'DEFAULT' | translate }})</span>
@@ -448,6 +452,7 @@
                             id="subscribed_1"
                             ng-model="updated_member.subscribed"
                             ng-value="true"
+                            ng-disabled="updated_member.former"
                             required>
                             <span class="custom-control-indicator"></span>
                             <span class="custom-control-description">{{ 'TRUE' | translate }} ({{ 'DEFAULT' | translate }})</span>
@@ -462,6 +467,7 @@
                             id="subscribed_2"
                             ng-model="updated_member.subscribed"
                             ng-value="false"
+                            ng-disabled="updated_member.former"
                             required>
                             <span class="custom-control-indicator"></span>
                             <span class="custom-control-description">{{ 'FALSE' | translate }}</span>

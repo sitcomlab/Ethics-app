@@ -18,6 +18,19 @@ app.controller("userCreateController", function($scope, $rootScope, $routeParams
     };
 
     /**
+     * [description]
+     * @param  {[type]} former_status [description]
+     * @return {[type]}               [description]
+     */
+    $scope.getGroupName = function(former_status){
+        if(former_status){
+            return $filter('translate')('FORMER_INSTITUTES');
+        } else {
+            return $filter('translate')('INSTITUTES');
+        }
+    };
+
+    /**
      * [send description]
      * @return {[type]} [description]
      */

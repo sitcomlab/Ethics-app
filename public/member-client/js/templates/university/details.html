@@ -50,44 +50,69 @@
                 <br>
 
                 <!-- Sub-nav -->
-                <ul class="nav nav-pills flex-column flex-sm-row flex-sm-wrap justify-content-start">
-                    <li class="nav-item">
-                        <a class="nav-link" href="" ng-class="{ 'active': !filter.former && filter.tab=='institutes' }" ng-click="changeTab('institutes', false)">
-                            {{ 'RELATED_INSTITUTES' | translate }}
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="" ng-class="{ 'active': filter.former && filter.tab=='institutes' }" ng-click="changeTab('institutes', true)">
-                            {{ 'RELATED_FORMER_INSTITUTES' | translate }}
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="" ng-class="{ 'active': !filter.former && filter.tab=='members' }" ng-click="changeTab('members', false)">
-                            {{ 'RELATED_MEMBERS' | translate }}
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="" ng-class="{ 'active': filter.former && filter.tab=='members' }" ng-click="changeTab('members', true)">
-                            {{ 'RELATED_FORMER_MEMBERS' | translate }}
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="" ng-class="{ 'active': !filter.former && filter.tab=='users' }" ng-click="changeTab('users', false)">
-                            {{ 'RELATED_USERS' | translate }}
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="" ng-class="{ 'active': filter.former && filter.tab=='users' }" ng-click="changeTab('users', true)">
-                            {{ 'RELATED_BLOCKED_USERS' | translate }}
-                        </a>
-                    </li>
-                </ul>
-                <br>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                        <ul class="nav nav-pills flex-column flex-sm-row flex-sm-wrap justify-content-start">
+                            <li class="nav-item">
+                                <a class="nav-link" href="" ng-class="{ 'active': !filter.former && filter.tab=='institutes' }" ng-click="changeTab('institutes', false)">
+                                    {{ 'RELATED_INSTITUTES' | translate }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="" ng-class="{ 'active': filter.former && filter.tab=='institutes' }" ng-click="changeTab('institutes', true)">
+                                    {{ 'RELATED_FORMER_INSTITUTES' | translate }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="" ng-class="{ 'active': !filter.former && filter.tab=='members' }" ng-click="changeTab('members', false)">
+                                    {{ 'RELATED_MEMBERS' | translate }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="" ng-class="{ 'active': filter.former && filter.tab=='members' }" ng-click="changeTab('members', true)">
+                                    {{ 'RELATED_FORMER_MEMBERS' | translate }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="" ng-class="{ 'active': !filter.former && filter.tab=='users' }" ng-click="changeTab('users', false)">
+                                    {{ 'RELATED_USERS' | translate }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="" ng-class="{ 'active': filter.former && filter.tab=='users' }" ng-click="changeTab('users', true)">
+                                    {{ 'RELATED_BLOCKED_USERS' | translate }}
+                                </a>
+                            </li>
+                        </ul>
+                        <br>
+                    </div>
+                    <!-- SORTING -->
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="background-color: #ffffff;">
+                                <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'created.asc' || filter.orderby == 'updated.asc'"></i>
+                                <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'created.desc' || filter.orderby == 'updated.desc'"></i>
+                                <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'year.asc'"></i>
+                                <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'year.desc'"></i>
+                            </span>
+                            <select class="form-control custom-select" ng-model="filter.orderby" ng-change="applyFilter()">
+                                <option value="created.asc">created.asc</option>
+                                <option value="created.desc">created.desc</option>
+                                <option value="updated.asc">updated.asc</option>
+                                <option value="updated.desc">updated.desc</option>
+                                <option value="year.asc">year.asc [{{ 'DEFAULT' | translate }}]</option>
+                                <option value="year.desc">year.desc</option>
+                            </select>
+                        </div>
+                        <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
+                        <br>
+                    </div>
+                </div>
 
                 <!-- Related institutes -->
                 <div ng-if="filter.tab=='institutes'">
                     <div class="list-group" ng-if="university.institutes && university.institutes.length>0">
-                        <a href="" ng-click="redirect('/institutes/' + institute.institute_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="institute in university.institutes | orderBy: ['institute_name']">
+                        <a href="" ng-click="redirect('/institutes/' + institute.institute_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="institute in university.institutes">
                             <div class="d-flex w-100 justify-content-between">
                                 <div>
                                     <i class="fa fa-building" aria-hidden="true" ng-if="!institute.former"></i>
@@ -96,7 +121,9 @@
                                     <b>{{institute.institute_name}}</b>
                                 </div>
                                 <div ng-if="institute.former">
-                                    <i class="fa fa-archive text-danger" aria-hidden="true"></i>
+                                    <span class="badge badge-default">
+                                        <i class="fa fa-archive" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'FORMER' | translate }}
+                                    </span>
                                 </div>
                             </div>
                         </a>
@@ -106,13 +133,26 @@
                             - {{ 'NONE' | translate }} -
                         </div>
                     </div>
-                    <br>
                 </div>
 
                 <!-- Related members -->
                 <div ng-if="filter.tab=='members'">
+                    <div class="row" ng-if="!filter.former && university.members && university.members.length>0">
+                        <div class="col text-muted right">
+                            <small>
+                                <span class="text-success">
+                                    <i class="fa fa-rss-square" aria-hidden="true"></i>
+                                </span> {{ 'SUBSCRIBED' | translate }}
+                                &nbsp;&nbsp;|&nbsp;&nbsp;
+                                <span class="text-danger">
+                                    <i class="fa fa-rss-square" aria-hidden="true"></i>
+                                </span> {{ 'CURRENTLY_NOT_SUBSCRIBED' | translate }}
+                            </small>
+                        </div>
+                        <br>
+                    </div>
                     <div class="list-group" ng-if="university.members && university.members.length>0">
-                        <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in university.members | filter: searchText | orderBy: ['last_name', 'first_name']">
+                        <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in university.members | filter: searchText">
                             <div class="d-flex w-100 justify-content-between">
                                 <div>
                                     <span ng-if="member.admin">
@@ -137,7 +177,9 @@
                                     </span>
                                 </div>
                                 <div ng-if="filter.former">
-                                    <i class="fa fa-archive text-danger" aria-hidden="true"></i>
+                                    <span class="badge badge-default">
+                                        <i class="fa fa-archive" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'FORMER' | translate }}
+                                    </span>
                                 </div>
                             </div>
                         </a>
@@ -152,7 +194,7 @@
                 <!-- Related users -->
                 <div ng-if="filter.tab=='users'">
                     <div class="list-group" ng-if="university.users && university.users.length>0">
-                        <a href="" ng-click="redirect('/users/' + user.user_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="user in university.users | filter: searchText | orderBy: ['university_name', 'institute_name', 'last_name', 'first_name']">
+                        <a href="" ng-click="redirect('/users/' + user.user_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="user in university.users | filter: searchText">
                             <div class="d-flex w-100 justify-content-between">
                                 <div>
                                     <i class="fa fa-user-o" aria-hidden="true"></i>
@@ -167,7 +209,9 @@
                                     </span>
                                 </div>
                                 <div ng-if="filter.blocked">
-                                    <i class="fa fa-ban text-danger" aria-hidden="true"></i>
+                                    <span class="badge badge-danger">
+                                        <i class="fa fa-ban" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'BLOCKED' | translate }}
+                                    </span>
                                 </div>
                             </div>
                         </a>
@@ -180,6 +224,45 @@
                 </div>
 
             </div>
+            <div class="card-footer right">
+
+                <!-- Pagination -->
+                <nav aria-label="pagination" id="pagination" ng-if="institute.working_groups.length > 0">
+                    <ul class="pagination pagination-sm justify-content-center">
+                        <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
+                            <a href="" class="page-link" ng-click="changeOffset(0)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
+                                <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
+                            <a href="" class="page-link" ng-click="changeOffset(filter.offset - filter.limit)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
+                                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="page-item" ng-class="{'active': filter.offset == page.offset}" ng-repeat="page in pages">
+                            <a href="" class="page-link" ng-click="changeOffset(page.offset)">
+                                {{$index+1}}
+                            </a>
+                        </li>
+                        <li class="page-item" ng-class="{ 'disabled': filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit }">
+                            <a href="" class="page-link" ng-click="changeOffset(filter.offset + filter.limit)" ng-style="filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit && {'background-color':'#f7f7f9'}">
+                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="page-item" ng-class="{ 'disabled': filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit }">
+                            <a href="" class="page-link" ng-click="changeOffset(pages[pages.length - 1].offset)" ng-style="filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit && {'background-color':'#f7f7f9'}">
+                                <b><i class="fa fa-angle-double-right" aria-hidden="true"></i></b>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <nav ng-if="institutes.length == 0">
+                    <ul>&nbsp;</ul>
+                </nav>
+
+            </div>
+
         </div>
     </div>
 </div>

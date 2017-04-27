@@ -8,7 +8,8 @@ app.factory('$userService', function($http, $log, config, $authenticationService
     var filter = {
         offset: 0,
         limit: 50,
-        blocked: false
+        blocked: false,
+        orderby: "name.asc"
     };
     var full_count = 0;
 
@@ -53,9 +54,7 @@ app.factory('$userService', function($http, $log, config, $authenticationService
             full_count = data;
         },
         list: function(filter) {
-            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&blocked=" + filter.blocked + "&";
-
-            // TODO: Add orderby
+            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&blocked=" + filter.blocked  + "&orderby=" + filter.orderby + "&";
 
             query = query.slice(0, -1);
 
@@ -66,9 +65,7 @@ app.factory('$userService', function($http, $log, config, $authenticationService
             });
         },
         listByUniversity: function(university_id, filter) {
-            var query = "?blocked=" + filter.blocked + "&";
-
-            // TODO: Add orderby
+            var query = "?blocked=" + filter.blocked  + "&orderby=" + filter.orderby + "&";
 
             query = query.slice(0, -1);
 
@@ -79,9 +76,7 @@ app.factory('$userService', function($http, $log, config, $authenticationService
             });
         },
         listByInstitute: function(institute_id, filter) {
-            var query = "?blocked=" + filter.blocked + "&";
-
-            // TODO: Add orderby
+            var query = "?blocked=" + filter.blocked  + "&orderby=" + filter.orderby + "&";
 
             query = query.slice(0, -1);
 

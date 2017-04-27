@@ -7,8 +7,9 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
     var working_groups;
     var filter = {
         offset: 0,
-        limit: 1, // TODO: Note(nicho): Will be reset after some futher tests
-        former: false
+        limit: 50,
+        former: false,
+        orderby: "name.asc"
     };
     var full_count = 0;
 
@@ -47,9 +48,7 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
             full_count = data;
         },
         list: function(filter) {
-            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&former=" + filter.former + "&";
-
-            // TODO: Add orderby
+            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&former=" + filter.former  + "&orderby=" + filter.orderby + "&";
 
             query = query.slice(0, -1);
 
@@ -60,9 +59,7 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
             });
         },
         listByInstitute: function(institute_id, filter) {
-            var query = "?former=" + filter.former + "&";
-
-            // TODO: Add orderby
+            var query = "?former=" + filter.former  + "&orderby=" + filter.orderby + "&";
 
             query = query.slice(0, -1);
 

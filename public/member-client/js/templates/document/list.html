@@ -8,7 +8,7 @@
     <div class="card-block">
         <div class="row">
             <!-- SEARCH -->
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="input-group">
                     <span class="input-group-addon">
                         <i class="fa fa-search" aria-hidden="true"></i>
@@ -24,28 +24,56 @@
                 <br>
             </div>
             <!-- FILTER DOCUMENTS BY STATUS -->
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <select class="form-control custom-select" ng-model="filter.document_status" ng-change="applyFilter()">
-                    <option value="">{{ 'NO_FILTER' | translate }}</option>
-                    <option value="0">(0) {{ 'INITIALISED' | translate }}</option>
-                    <option value="1">(1) {{ 'UNSUBMITTED' | translate }} - {{ 'IN_PROGRESS' | translate }}</option>
-                    <option value="2">(2) {{ '_SUBMITTED' | translate}} - {{ 'AUTO_ACCEPTED' | translate }}</option>
-                    <option value="3">(3) {{ '_SUBMITTED' | translate }} - {{ 'REVIEW_REQUIRED' | translate }} [{{ 'DEFAULT' | translate }}]</option>
-                    <option value="4">(4) {{ 'REVIEW_IN_PROGRESS' | translate }} - {{ 'UNPUBLISHED' | translate}}</option>
-                    <option value="5">(5) {{ 'REVIEWED' | translate }} - {{ 'PARTLY_ACCEPTED' | translate }}</option>
-                    <option value="6">(6) {{ 'REVIEWED' | translate }} - {{ 'ACCEPTED' | translate }}</option>
-                    <option value="7">(7) {{ 'REVIEWED' | translate }} - {{ 'REJECTED' | translate }}</option>
-                    <!-- TODO: Add new option
-                    <option value="8">(2&amp;6) {{ 'ACCEPTED_AND_AUTO_ACCEPTED' | translate }}</option>
-                    -->
-                </select>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <div class="input-group">
+                    <span class="input-group-addon" style="background-color: #ffffff;">
+                        <i class="fa fa-filter" aria-hidden="true"></i>
+                    </span>
+                    <select class="form-control custom-select" ng-model="filter.document_status" ng-change="applyFilter()">
+                        <option value="">{{ 'NO_FILTER' | translate }}</option>
+                        <option value="0">(0) {{ 'INITIALISED' | translate }}</option>
+                        <option value="1">(1) {{ 'UNSUBMITTED' | translate }} - {{ 'IN_PROGRESS' | translate }}</option>
+                        <option value="2">(2) {{ '_SUBMITTED' | translate}} - {{ 'AUTO_ACCEPTED' | translate }}</option>
+                        <option value="3">(3) {{ '_SUBMITTED' | translate }} - {{ 'REVIEW_REQUIRED' | translate }} [{{ 'DEFAULT' | translate }}]</option>
+                        <option value="4">(4) {{ 'REVIEW_IN_PROGRESS' | translate }} - {{ 'UNPUBLISHED' | translate}}</option>
+                        <option value="5">(5) {{ 'REVIEWED' | translate }} - {{ 'PARTLY_ACCEPTED' | translate }}</option>
+                        <option value="6">(6) {{ 'REVIEWED' | translate }} - {{ 'ACCEPTED' | translate }}</option>
+                        <option value="7">(7) {{ 'REVIEWED' | translate }} - {{ 'REJECTED' | translate }}</option>
+                        <!-- TODO: Add new option
+                        <option value="8">(2&amp;6) {{ 'ACCEPTED_AND_AUTO_ACCEPTED' | translate }}</option>
+                        -->
+                    </select>
+                </div>
                 <small class="form-text text-muted">{{ 'FILTER_BY_STATUS' | translate }}</small>
+                <br>
+            </div>
+            <!-- ORDER DOCUMENTS BY ATTRIBUTE -->
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <div class="input-group">
+                    <span class="input-group-addon" style="background-color: #ffffff;">
+                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'created.asc' || filter.orderby == 'updated.asc' || filter.orderby == 'status.asc'"></i>
+                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'created.desc' || filter.orderby == 'updated.desc' || filter.orderby == 'status.desc'"></i>
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true" ng-if="filter.orderby == 'title.asc'"></i>
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true" ng-if="filter.orderby == 'title.desc'"></i>
+                    </span>
+                    <select class="form-control custom-select" ng-model="filter.orderby" ng-change="applyFilter()">
+                        <option value="created.asc">created.asc</option>
+                        <option value="created.desc">created.desc [{{ 'DEFAULT' | translate }}]</option>
+                        <option value="updated.asc">updated.asc</option>
+                        <option value="updated.desc">updated.desc</option>
+                        <option value="status.asc">status.asc</option>
+                        <option value="status.desc">status.desc</option>
+                        <option value="title.asc">title.asc</option>
+                        <option value="title.desc">title.desc</option>
+                    </select>
+                </div>
+                <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
                 <br>
             </div>
         </div>
 
         <div class="list-group" ng-if="documents && documents.length>0">
-            <a href="" ng-click="redirect('/documents/' + document.document_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="document in documents | filter: searchText | orderBy: ['created']">
+            <a href="" ng-click="redirect('/documents/' + document.document_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="document in documents | filter: searchText">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
                         <i class="fa fa-file-text" aria-hidden="true"></i>

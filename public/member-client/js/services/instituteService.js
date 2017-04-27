@@ -8,7 +8,8 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
     var filter = {
         offset: 0,
         limit: 50,
-        former: false
+        former: false,
+        orderby: "name.asc"
     };
     var full_count = 0;
 
@@ -46,9 +47,7 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
             full_count = data;
         },
         list: function(filter) {
-            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&former=" + filter.former + "&";
-
-            // TODO: Add orderby
+            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&former=" + filter.former + "&orderby=" + filter.orderby + "&";
 
             query = query.slice(0, -1);
 
@@ -59,9 +58,7 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
             });
         },
         listByUniversity: function(university_id, filter) {
-            var query = "?former=" + filter.former + "&";
-
-            // TODO: Add orderby
+            var query = "?former=" + filter.former + "&orderby=" + filter.orderby + "&";
 
             query = query.slice(0, -1);
 

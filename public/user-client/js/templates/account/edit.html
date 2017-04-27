@@ -111,7 +111,7 @@
                             id="university_id"
                             name="university_id"
                             ng-model="university_id"
-                            ng-options="university.university_id as university.university_name for university in universities | orderBy:['university_name']"
+                            ng-options="university.university_id as university.university_name for university in universities"
                             ng-change="updateInstitutes()"
                             disabled>
                         </select>
@@ -131,7 +131,7 @@
                         id="institute_id"
                         name="institute_id"
                         ng-model="updated_user.institute_id"
-                        ng-options="institute.institute_id as institute.institute_name for institute in institutes | orderBy:['institute_name']"
+                        ng-options="institute.institute_id as institute.institute_name for institute in institutes"
                         disabled
                         required>
                         <option value="">{{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}</option>

@@ -7,7 +7,8 @@ app.factory('$universityService', function($http, $log, config, $authenticationS
     var universities;
     var filter = {
         offset: 0,
-        limit: 50
+        limit: 50,
+        orderby: "name.asc"
     };
     var full_count = 0;
 
@@ -41,9 +42,7 @@ app.factory('$universityService', function($http, $log, config, $authenticationS
             full_count = data;
         },
         list: function(filter) {
-            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&";
-
-            // TODO: Add orderby
+            var query = "?offset=" + filter.offset + "&limit=" + filter.limit  + "&orderby=" + filter.orderby + "&";
 
             query = query.slice(0, -1);
 

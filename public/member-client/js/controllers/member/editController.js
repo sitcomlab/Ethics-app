@@ -21,6 +21,19 @@ app.controller("memberEditController", function($scope, $rootScope, $routeParams
      * [description]
      * @return {[type]} [description]
      */
+    $scope.updateMember = function(){
+        if($scope.updated_member.former){
+            $scope.updated_member.admin = false;
+            $scope.updated_member.subscribed = false;
+        } else {
+            $scope.updated_member.subscribed = true;
+        }
+    };
+
+    /**
+     * [description]
+     * @return {[type]} [description]
+     */
     $scope.changePassword = function(){
         $scope.updated_member.new_password = !$scope.updated_member.new_password;
     };
