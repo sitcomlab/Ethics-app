@@ -71,12 +71,12 @@ exports.request = function(req, res) {
             var params = [];
 
             // Pagination parameters
-            params.push(Number(req.query.offset));
-            params.push(Number(req.query.limit));
+            params.push(Number(req.query.offset) || null );
+            params.push(Number(req.query.limit) || null );
 
             // Sorting
             params.push(req.query.orderby || 'name.asc');
-            
+
             // Filter by blocked status
             params.push(req.query.blocked);
 
