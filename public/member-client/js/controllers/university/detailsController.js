@@ -24,11 +24,33 @@ app.controller("universityDetailsController", function($scope, $rootScope, $rout
      * @return {[type]}              [description]
      */
     $scope.changeTab = function(related_data, status){
+        // Set filter
         $scope.filter = {
             tab: related_data,
-            former: status,
-            blocked: status
+            offset: 0,
+            limit: 50
         };
+
+        switch (related_data) {
+            case 'institutes': {
+                $scope.filter.orderby = 'name.asc';
+                $scope.filter.former = status;
+                $scope.filter.blocked = status;
+                break;
+            }
+            case 'members': {
+                $scope.filter.orderby = 'name.asc';
+                $scope.filter.former = status;
+                $scope.filter.blocked = status;
+                break;
+            }
+            case 'users': {
+                $scope.filter.orderby = 'name.asc';
+                $scope.filter.former = status;
+                $scope.filter.blocked = status;
+                break;
+            }
+        }
         $scope.load(related_data);
     };
 
@@ -48,6 +70,28 @@ app.controller("universityDetailsController", function($scope, $rootScope, $rout
                 $instituteService.listByUniversity($scope.university.university_id, $scope.filter)
                 .then(function onSuccess(response) {
                     $scope.university.institutes = response.data;
+
+                    // Prepare pagination
+                    if($scope.university.institutes.length > 0){
+                        // Set count
+                        $scope.full_count = $scope.university.institutes[0].full_count;
+                    } else {
+                        // Reset count
+                        $scope.full_count = 0;
+
+                        // Reset pagination
+                        $scope.pages = [];
+                        $scope.filter.offset = 0;
+                    }
+
+                    // Set pagination
+                    $scope.pages = [];
+                    for(var i=0; i<Math.ceil($scope.full_count / $scope.filter.limit); i++){
+                        $scope.pages.push({
+                            offset: i * $scope.filter.limit
+                        });
+                    }
+
                     $scope.$parent.loading = { status: false, message: "" };
                 })
                 .catch(function onError(response) {
@@ -62,6 +106,28 @@ app.controller("universityDetailsController", function($scope, $rootScope, $rout
                 $memberService.listByInstitute($scope.university.university_id, $scope.filter)
                 .then(function onSuccess(response) {
                     $scope.university.members = response.data;
+
+                    // Prepare pagination
+                    if($scope.university.members.length > 0){
+                        // Set count
+                        $scope.full_count = $scope.university.members[0].full_count;
+                    } else {
+                        // Reset count
+                        $scope.full_count = 0;
+
+                        // Reset pagination
+                        $scope.pages = [];
+                        $scope.filter.offset = 0;
+                    }
+
+                    // Set pagination
+                    $scope.pages = [];
+                    for(var i=0; i<Math.ceil($scope.full_count / $scope.filter.limit); i++){
+                        $scope.pages.push({
+                            offset: i * $scope.filter.limit
+                        });
+                    }
+
                     $scope.$parent.loading = { status: false, message: "" };
                 })
                 .catch(function onError(response) {
@@ -76,6 +142,28 @@ app.controller("universityDetailsController", function($scope, $rootScope, $rout
                 $userService.listByInstitute($scope.university.university_id, $scope.filter)
                 .then(function onSuccess(response) {
                     $scope.university.users = response.data;
+
+                    // Prepare pagination
+                    if($scope.university.users.length > 0){
+                        // Set count
+                        $scope.full_count = $scope.university.users[0].full_count;
+                    } else {
+                        // Reset count
+                        $scope.full_count = 0;
+
+                        // Reset pagination
+                        $scope.pages = [];
+                        $scope.filter.offset = 0;
+                    }
+
+                    // Set pagination
+                    $scope.pages = [];
+                    for(var i=0; i<Math.ceil($scope.full_count / $scope.filter.limit); i++){
+                        $scope.pages.push({
+                            offset: i * $scope.filter.limit
+                        });
+                    }
+
                     $scope.$parent.loading = { status: false, message: "" };
                 })
                 .catch(function onError(response) {
@@ -87,6 +175,16 @@ app.controller("universityDetailsController", function($scope, $rootScope, $rout
 
     };
 
+    /**
+     * [description]
+     * @param  {[type]} offset [description]
+     * @return {[type]}        [description]
+     */
+    $scope.changeOffset = function(offset){
+        $scope.filter.offset = offset;
+        $scope.load($scope.filter.tab);
+    };
+
 
     /*************************************************
         INIT
@@ -96,6 +194,9 @@ app.controller("universityDetailsController", function($scope, $rootScope, $rout
     // Filter
     $scope.filter = {
         tab: 'institutes',
+        offset: 0,
+        limit: 50,
+        orderby: 'name.asc',
         former: false,
         blocked: false
     };

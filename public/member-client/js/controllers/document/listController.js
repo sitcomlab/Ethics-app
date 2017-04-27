@@ -23,6 +23,7 @@ app.controller("documentListController", function($scope, $rootScope, $filter, $
      */
     $scope.run = function(){
 
+        // Stop interval
         if($scope.interval){
             $interval.cancel($scope.interval);
         }

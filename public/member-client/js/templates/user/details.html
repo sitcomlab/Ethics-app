@@ -75,28 +75,29 @@
                         <br>
                     </div>
                     <!-- SORTING -->
-                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="filter.tab == 'documents' ">
                         <div class="input-group">
                             <span class="input-group-addon" style="background-color: #ffffff;">
-                                <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'created.asc' || filter.orderby == 'updated.asc'"></i>
-                                <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'created.desc' || filter.orderby == 'updated.desc'"></i>
-                                <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'year.asc'"></i>
-                                <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'year.desc'"></i>
+                                <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'created.asc' || filter.orderby == 'updated.asc' || filter.orderby == 'status.asc'"></i>
+                                <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'created.desc' || filter.orderby == 'updated.desc' || filter.orderby == 'status.desc'"></i>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true" ng-if="filter.orderby == 'title.asc'"></i>
+                                <i class="fa fa-sort-alpha-desc" aria-hidden="true" ng-if="filter.orderby == 'title.desc'"></i>
                             </span>
-                            <select class="form-control custom-select" ng-model="filter.orderby" ng-change="applyFilter()">
+                            <select class="form-control custom-select" ng-model="filter.orderby" ng-change="load('documents')">
                                 <option value="created.asc">created.asc</option>
-                                <option value="created.desc">created.desc</option>
+                                <option value="created.desc">created.desc [{{ 'DEFAULT' | translate }}]</option>
                                 <option value="updated.asc">updated.asc</option>
                                 <option value="updated.desc">updated.desc</option>
-                                <option value="year.asc">year.asc [{{ 'DEFAULT' | translate }}]</option>
-                                <option value="year.desc">year.desc</option>
+                                <option value="status.asc">status.asc</option>
+                                <option value="status.desc">status.desc</option>
+                                <option value="title.asc">title.asc</option>
+                                <option value="title.desc">title.desc</option>
                             </select>
                         </div>
                         <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
                         <br>
                     </div>
                 </div>
-
 
 
                 <!-- Related documents -->
@@ -133,10 +134,10 @@
                 </div>
             </div>
 
-            <div class="card-footer right">
+            <div class="card-footer right" ng-if="(user.documents.length > 0 && filter.tab == 'documents')">
 
                 <!-- Pagination -->
-                <nav aria-label="pagination" id="pagination" ng-if="institute.working_groups.length > 0">
+                <nav aria-label="pagination" id="pagination">
                     <ul class="pagination pagination-sm justify-content-center">
                         <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
                             <a href="" class="page-link" ng-click="changeOffset(0)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
@@ -164,10 +165,6 @@
                             </a>
                         </li>
                     </ul>
-                </nav>
-
-                <nav ng-if="institutes.length == 0">
-                    <ul>&nbsp;</ul>
                 </nav>
 
             </div>

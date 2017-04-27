@@ -24,9 +24,19 @@ app.controller("userDetailsController", function($scope, $rootScope, $routeParam
      * @return {[type]}              [description]
      */
     $scope.changeTab = function(related_data, status){
+        // Set filter
         $scope.filter = {
-            tab: related_data
+            tab: related_data,
+            offset: 0,
+            limit: 2
         };
+
+        switch (related_data) {
+            case 'documents': {
+                    $scope.filter.orderby ='updated.desc';
+                break;
+            }
+        }
         $scope.load(related_data);
     };
 
@@ -46,6 +56,28 @@ app.controller("userDetailsController", function($scope, $rootScope, $routeParam
                 $documentsService.listByUser($scope.user.user_id, $scope.filter)
                 .then(function onSuccess(response) {
                     $scope.user.documents = response.data;
+
+                    // Prepare pagination
+                    if($scope.user.documents.length > 0){
+                        // Set count
+                        $scope.full_count = $scope.user.documents[0].full_count;
+                    } else {
+                        // Reset count
+                        $scope.full_count = 0;
+
+                        // Reset pagination
+                        $scope.pages = [];
+                        $scope.filter.offset = 0;
+                    }
+
+                    // Set pagination
+                    $scope.pages = [];
+                    for(var i=0; i<Math.ceil($scope.full_count / $scope.filter.limit); i++){
+                        $scope.pages.push({
+                            offset: i * $scope.filter.limit
+                        });
+                    }
+
                     $scope.$parent.loading = { status: false, message: "" };
                 })
                 .catch(function onError(response) {
@@ -56,6 +88,15 @@ app.controller("userDetailsController", function($scope, $rootScope, $routeParam
         }
     };
 
+    /**
+     * [description]
+     * @param  {[type]} offset [description]
+     * @return {[type]}        [description]
+     */
+    $scope.changeOffset = function(offset){
+        $scope.filter.offset = offset;
+        $scope.load($scope.filter.tab);
+    };
 
     /*************************************************
         INIT
@@ -64,7 +105,10 @@ app.controller("userDetailsController", function($scope, $rootScope, $routeParam
 
     // Filter
     $scope.filter = {
-        tab: 'documents'
+        tab: 'documents',
+        offset: 0,
+        limit: 2,
+        orderby: 'updated.desc'
     };
 
     // Load user

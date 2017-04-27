@@ -101,5 +101,4 @@ app.controller("userListController", function($scope, $rootScope, $filter, $tran
     // Load users
     $scope.filter = $userService.getFilter();
     $scope.applyFilter();
-
 });

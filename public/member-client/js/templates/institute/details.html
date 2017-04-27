@@ -96,7 +96,71 @@
                         <br>
                     </div>
                     <!-- SORTING -->
-                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <!-- Sorting working groups -->
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="filter.tab == 'working_groups' ">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="background-color: #ffffff;">
+                                <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'created.asc' || filter.orderby == 'updated.asc'"></i>
+                                <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'created.desc' || filter.orderby == 'updated.desc'"></i>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true" ng-if="filter.orderby == 'name.asc'"></i>
+                                <i class="fa fa-sort-alpha-desc" aria-hidden="true" ng-if="filter.orderby == 'name.desc'"></i>
+                            </span>
+                            <select class="form-control custom-select" ng-model="filter.orderby" ng-change="load('working_groups')">
+                                <option value="created.asc">created.asc</option>
+                                <option value="created.desc">created.desc</option>
+                                <option value="updated.asc">updated.asc</option>
+                                <option value="updated.desc">updated.desc</option>
+                                <option value="name.asc">name.asc [{{ 'DEFAULT' | translate }}]</option>
+                                <option value="name.desc">name.desc</option>
+                            </select>
+                        </div>
+                        <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
+                        <br>
+                    </div>
+                    <!-- Sorting members -->
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="filter.tab == 'members' ">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="background-color: #ffffff;">
+                                <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'created.asc' || filter.orderby == 'updated.asc'"></i>
+                                <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'created.desc' || filter.orderby == 'updated.desc'"></i>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true" ng-if="filter.orderby == 'name.asc'"></i>
+                                <i class="fa fa-sort-alpha-desc" aria-hidden="true" ng-if="filter.orderby == 'name.desc'"></i>
+                            </span>
+                            <select class="form-control custom-select" ng-model="filter.orderby" ng-change="load('members')">
+                                <option value="created.asc">created.asc</option>
+                                <option value="created.desc">created.desc</option>
+                                <option value="updated.asc">updated.asc</option>
+                                <option value="updated.desc">updated.desc</option>
+                                <option value="name.asc">name.asc [{{ 'DEFAULT' | translate }}]</option>
+                                <option value="name.desc">name.desc</option>
+                            </select>
+                        </div>
+                        <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
+                        <br>
+                    </div>
+                    <!-- Sorting users -->
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="filter.tab == 'users' ">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="background-color: #ffffff;">
+                                <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'created.asc' || filter.orderby == 'updated.asc'"></i>
+                                <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'created.desc' || filter.orderby == 'updated.desc'"></i>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true" ng-if="filter.orderby == 'name.asc'"></i>
+                                <i class="fa fa-sort-alpha-desc" aria-hidden="true" ng-if="filter.orderby == 'name.desc'"></i>
+                            </span>
+                            <select class="form-control custom-select" ng-model="filter.orderby" ng-change="load('users')">
+                                <option value="created.asc">created.asc</option>
+                                <option value="created.desc">created.desc</option>
+                                <option value="updated.asc">updated.asc</option>
+                                <option value="updated.desc">updated.desc</option>
+                                <option value="name.asc">name.asc [{{ 'DEFAULT' | translate }}]</option>
+                                <option value="name.desc">name.desc</option>
+                            </select>
+                        </div>
+                        <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
+                        <br>
+                    </div>
+                    <!-- Sorting courses -->
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="filter.tab == 'courses' ">
                         <div class="input-group">
                             <span class="input-group-addon" style="background-color: #ffffff;">
                                 <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'created.asc' || filter.orderby == 'updated.asc'"></i>
@@ -104,13 +168,13 @@
                                 <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'year.asc'"></i>
                                 <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'year.desc'"></i>
                             </span>
-                            <select class="form-control custom-select" ng-model="filter.orderby" ng-change="applyFilter()">
+                            <select class="form-control custom-select" ng-model="filter.orderby" ng-change="load('courses')">
                                 <option value="created.asc">created.asc</option>
                                 <option value="created.desc">created.desc</option>
                                 <option value="updated.asc">updated.asc</option>
                                 <option value="updated.desc">updated.desc</option>
-                                <option value="year.asc">year.asc [{{ 'DEFAULT' | translate }}]</option>
-                                <option value="year.desc">year.desc</option>
+                                <option value="year.asc">year.asc</option>
+                                <option value="year.desc">year.desc [{{ 'DEFAULT' | translate }}]</option>
                             </select>
                         </div>
                         <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
@@ -120,7 +184,7 @@
 
                 <!-- Related working groups -->
                 <div ng-if="filter.tab=='working_groups'">
-                    <div class="list-group" ng-if="institute.working_groups && institute.working_groups.length>0">
+                    <div class="row" ng-if="institute.working_groups && institute.working_groups.length>0">
                         <a href="" ng-click="redirect('/working_groups/' + working_group.working_group_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="working_group in institute.working_groups">
                             <div class="d-flex w-100 justify-content-between">
                                 <div>
@@ -263,10 +327,14 @@
 
             </div>
 
-            <div class="card-footer right">
+            <div class="card-footer right" ng-if="
+                (institute.working_groups.length > 0 && filter.tab == 'working_groups') ||
+                (institute.members.length > 0 && filter.tab == 'members') ||
+                (institute.users.length > 0 && filter.tab == 'users') ||
+                (institute.courses.length > 0 && filter.tab == 'courses')">
 
                 <!-- Pagination -->
-                <nav aria-label="pagination" id="pagination" ng-if="institute.working_groups.length > 0">
+                <nav aria-label="pagination" id="pagination">
                     <ul class="pagination pagination-sm justify-content-center">
                         <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
                             <a href="" class="page-link" ng-click="changeOffset(0)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
@@ -294,10 +362,6 @@
                             </a>
                         </li>
                     </ul>
-                </nav>
-
-                <nav ng-if="institutes.length == 0">
-                    <ul>&nbsp;</ul>
                 </nav>
 
             </div>
