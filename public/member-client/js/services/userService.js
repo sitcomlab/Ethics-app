@@ -54,7 +54,17 @@ app.factory('$userService', function($http, $log, config, $authenticationService
             full_count = data;
         },
         list: function(filter) {
-            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&blocked=" + filter.blocked  + "&orderby=" + filter.orderby + "&";
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset !== null){
+                query = query + "&offset=" + filter.offset + "&";
+            }
+            if(filter.limit !== null){
+                query = query + "&limit=" + filter.limit + "&";
+            }
+            if(filter.blocked !== null){
+                query = query + "&blocked=" + filter.blocked + "&";
+            }
 
             query = query.slice(0, -1);
 
@@ -65,7 +75,17 @@ app.factory('$userService', function($http, $log, config, $authenticationService
             });
         },
         listByUniversity: function(university_id, filter) {
-            var query = "?blocked=" + filter.blocked  + "&orderby=" + filter.orderby + "&";
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "&offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "&limit=" + filter.limit + "&";
+            }
+            if(filter.blocked && filter.blocked !== null){
+                query = query + "&blocked=" + filter.blocked + "&";
+            }
 
             query = query.slice(0, -1);
 
@@ -76,7 +96,18 @@ app.factory('$userService', function($http, $log, config, $authenticationService
             });
         },
         listByInstitute: function(institute_id, filter) {
-            var query = "?blocked=" + filter.blocked  + "&orderby=" + filter.orderby + "&";
+
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "&offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "&limit=" + filter.limit + "&";
+            }
+            if(filter.blocked){
+                query = query + "&blocked=" + filter.blocked + "&";
+            }
 
             query = query.slice(0, -1);
 

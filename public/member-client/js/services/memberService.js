@@ -68,7 +68,17 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             full_count = data;
         },
         list: function(filter) {
-            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&former=" + filter.former + "&orderby=" + filter.orderby + "&";
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "&offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "&limit=" + filter.limit + "&";
+            }
+            if(filter.former && filter.former !== null){
+                query = query + "&former=" + filter.former + "&";
+            }
 
             query = query.slice(0, -1);
 
@@ -79,7 +89,17 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             });
         },
         listByUniversity: function(university_id, filter) {
-            var query = "?former=" + filter.former + "&orderby=" + filter.orderby + "&";
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "&offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "&limit=" + filter.limit + "&";
+            }
+            if(filter.former && filter.former !== null){
+                query = query + "&former=" + filter.former + "&";
+            }
 
             query = query.slice(0, -1);
 
@@ -90,7 +110,19 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             });
         },
         listByInstitute: function(institute_id, filter) {
-            var query = "?former=" + filter.former + "&orderby=" + filter.orderby + "&";
+            console.log(filter);
+
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "&offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "&limit=" + filter.limit + "&";
+            }
+            if(filter.former && filter.former !== null){
+                query = query + "&former=" + filter.former + "&";
+            }
 
             query = query.slice(0, -1);
 
@@ -101,7 +133,17 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             });
         },
         listByWorkingGroup: function(working_group_id, filter) {
-            var query = "?former=" + filter.former + "&orderby=" + filter.orderby + "&";
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "&offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "&limit=" + filter.limit + "&";
+            }
+            if(filter.former && filter.former !== null){
+                query = query + "&former=" + filter.former + "&";
+            }
 
             query = query.slice(0, -1);
 
@@ -112,7 +154,17 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             });
         },
         listByCourse: function(course_id, filter) {
-            var query = "?former=" + filter.former + "&orderby=" + filter.orderby + "&";
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "&offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "&limit=" + filter.limit + "&";
+            }
+            if(filter.former && filter.former !== null){
+                query = query + "&former=" + filter.former + "&";
+            }
 
             query = query.slice(0, -1);
 

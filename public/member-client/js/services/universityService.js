@@ -42,7 +42,14 @@ app.factory('$universityService', function($http, $log, config, $authenticationS
             full_count = data;
         },
         list: function(filter) {
-            var query = "?offset=" + filter.offset + "&limit=" + filter.limit  + "&orderby=" + filter.orderby + "&";
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "&offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "&limit=" + filter.limit + "&";
+            }
 
             query = query.slice(0, -1);
 

@@ -33,9 +33,14 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
             full_count = data;
         },
         list: function(filter) {
-            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&orderby=" + filter.orderby + "&";
+            var query = "?orderby=" + filter.orderby + "&";
 
-            // Filter by status
+            if(filter.offset && filter.offset !== null){
+                query = query + "&offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "&limit=" + filter.limit + "&";
+            }
             if(filter.document_status !== null){
                 query = query + "status=" + filter.document_status + "&";
             } else {
@@ -51,7 +56,14 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
             });
         },
         listByCourse: function(course_id, filter){
-            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&orderby=" + filter.orderby + "&";
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "&offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "&limit=" + filter.limit + "&";
+            }
 
             query = query.slice(0, -1);
 
@@ -62,7 +74,14 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
             });
         },
         listByUser: function(user_id, filter){
-            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&orderby=" + filter.orderby + "&";
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "&offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "&limit=" + filter.limit + "&";
+            }
 
             query = query.slice(0, -1);
 
