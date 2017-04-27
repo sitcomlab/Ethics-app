@@ -354,6 +354,8 @@ app.config(function ($translateProvider) {
         EXPLANATION_OF_THE_SUBSCRIBED_STATUS: 'With this setting you can turn on/off the email notifications, if a document needs your review. If you are in holiday, you can turn the subscription off and users and members can see that you are currently not responsible for reviewing.',
         EXPLANATION_OF_THE_BLOCKING_STATUS: 'With this setting you can block a user, if he/she clearly violated the rules. The user has then no longer access until you reactivate the account again.',
 
+        OVERWRITING_INFORMATION: 'You are not the latest reviewer! If you continue, you are going to overwrite the review. Please make sure, that you asked the latest reviewer, if he/she is currently not reviewing.',
+        OKAY: 'Okay',
         ADMIN_ROLE: 'Admin role',
         SUBSCRIBED_STATUS: 'Subscribed status',
         FORMER_STATUS: 'Former status',

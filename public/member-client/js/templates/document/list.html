@@ -23,6 +23,29 @@
                 <small class="form-text text-muted">{{ 'SEARCH_FOR_DOCUMENT_TITLES_AND_AUTHORS' | translate }}</small>
                 <br>
             </div>
+            <!-- ORDER DOCUMENTS BY ATTRIBUTE -->
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <div class="input-group">
+                    <span class="input-group-addon" style="background-color: #ffffff;">
+                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'created.asc' || filter.orderby == 'updated.asc' || filter.orderby == 'status.asc'"></i>
+                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'created.desc' || filter.orderby == 'updated.desc' || filter.orderby == 'status.desc'"></i>
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true" ng-if="filter.orderby == 'title.asc'"></i>
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true" ng-if="filter.orderby == 'title.desc'"></i>
+                    </span>
+                    <select class="form-control custom-select" ng-model="filter.orderby" ng-change="applyFilter()">
+                        <option value="created.asc">created.asc</option>
+                        <option value="created.desc">created.desc [{{ 'DEFAULT' | translate }}]</option>
+                        <option value="updated.asc">updated.asc</option>
+                        <option value="updated.desc">updated.desc</option>
+                        <option value="status.asc">status.asc</option>
+                        <option value="status.desc">status.desc</option>
+                        <option value="title.asc">title.asc</option>
+                        <option value="title.desc">title.desc</option>
+                    </select>
+                </div>
+                <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
+                <br>
+            </div>
             <!-- FILTER DOCUMENTS BY STATUS -->
             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="input-group">
@@ -45,29 +68,6 @@
                     </select>
                 </div>
                 <small class="form-text text-muted">{{ 'FILTER_BY_STATUS' | translate }}</small>
-                <br>
-            </div>
-            <!-- ORDER DOCUMENTS BY ATTRIBUTE -->
-            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                <div class="input-group">
-                    <span class="input-group-addon" style="background-color: #ffffff;">
-                        <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'created.asc' || filter.orderby == 'updated.asc' || filter.orderby == 'status.asc'"></i>
-                        <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'created.desc' || filter.orderby == 'updated.desc' || filter.orderby == 'status.desc'"></i>
-                        <i class="fa fa-sort-alpha-asc" aria-hidden="true" ng-if="filter.orderby == 'title.asc'"></i>
-                        <i class="fa fa-sort-alpha-desc" aria-hidden="true" ng-if="filter.orderby == 'title.desc'"></i>
-                    </span>
-                    <select class="form-control custom-select" ng-model="filter.orderby" ng-change="applyFilter()">
-                        <option value="created.asc">created.asc</option>
-                        <option value="created.desc">created.desc [{{ 'DEFAULT' | translate }}]</option>
-                        <option value="updated.asc">updated.asc</option>
-                        <option value="updated.desc">updated.desc</option>
-                        <option value="status.asc">status.asc</option>
-                        <option value="status.desc">status.desc</option>
-                        <option value="title.asc">title.asc</option>
-                        <option value="title.desc">title.desc</option>
-                    </select>
-                </div>
-                <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
                 <br>
             </div>
         </div>

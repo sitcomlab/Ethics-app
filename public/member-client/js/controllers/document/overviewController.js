@@ -315,10 +315,14 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading document overview" };
     $scope.document = $documentService.get();
+    $scope.latest_revision =  $documentService.getLatestRevision();
     $scope.authenticated_member = $authenticationService.get();
 
     // Update navbar
     $scope.$parent.document = $documentService.get();
+
+    // Overwrite status
+    $scope.overwrite = false;
 
     // Show/hide comments and history
     $scope.status = {

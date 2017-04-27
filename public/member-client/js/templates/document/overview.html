@@ -1503,25 +1503,60 @@
             </div>
         </div>
     </div>
-    <div class="card-footer right" ng-if="document.status == 2 || document.status == 3 || document.status == 4 || document.status == 6">
-        <button class="btn btn-primary" role="button" ng-click="reviewDocument()" ng-if="document.status == 3 || document.status == 4">
-            <i class="fa fa-eye" aria-hidden="true"></i>
-            &nbsp;
-            <span ng-if="document.status == 3">
-                {{ 'START_REVIEWING' | translate }}
-            </span>
-            <span ng-if="document.status == 4">
-                {{ 'OPEN_REVIEW' | translate }}
-            </span>
-            &nbsp;
-            <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </button>
-        <button class="btn btn-primary" role="button" ng-click="redirect('/documents/' + document.document_id + '/files')" ng-if="document.status == 2 || document.status == 6">
-            <i class="fa fa-download" aria-hidden="true"></i>
-            &nbsp;
-            {{ 'DOWNLOAD_FILES' | translate }}
-            &nbsp;
-            <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </button>
+    <div class="card-footer right">
+        <div class="alert alert-danger" role="alert" ng-if="document.status == 4 && latest_revision.reviewer.member_id != authenticated_member.member_id">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'ATTENTION' | translate }}</b>: {{ 'OVERWRITING_INFORMATION' | translate }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 left">
+                    <label class="custom-control custom-checkbox">
+                        <input
+                        class="custom-control-input"
+                        type="checkbox"
+                        name="overwrite"
+                        id="overwrite"
+                        ng-model="overwrite"
+                        ng-value="true">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">
+                            {{ 'OKAY' | translate }}
+                        </span>
+                    </label>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right">
+                    <button class="btn btn-primary" role="button" ng-click="reviewDocument()" ng-disabled="!overwrite">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        &nbsp;
+                        {{ 'OPEN_REVIEW' | translate }}
+                        &nbsp;
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div ng-if="document.status == 2 || document.status == 3 || (document.status == 4 && latest_revision.reviewer.member_id == authenticated_member.member_id) || document.status == 6">
+            <button class="btn btn-primary" role="button" ng-click="reviewDocument()" ng-if="document.status == 3 || document.status == 4">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+                &nbsp;
+                <span ng-if="document.status == 3">
+                    {{ 'START_REVIEWING' | translate }}
+                </span>
+                <span ng-if="document.status == 4">
+                    {{ 'OPEN_REVIEW' | translate }}
+                </span>
+                &nbsp;
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-primary" role="button" ng-click="redirect('/documents/' + document.document_id + '/files')" ng-if="document.status == 2 || document.status == 6">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                &nbsp;
+                {{ 'DOWNLOAD_FILES' | translate }}
+                &nbsp;
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </button>
+        </div>
     </div>
 </div>
