@@ -1,4 +1,5 @@
 SELECT
+    COUNT(*) OVER()::NUMERIC AS full_count,
     document.document_id,
     document.created,
     to_char(document.created, 'YYYY-MM-DD HH24:mm:ss') AS _created,

@@ -1,4 +1,5 @@
 SELECT
+    COUNT(*) OVER()::NUMERIC AS full_count,
     member.member_id,
     member.title,
     member.first_name,

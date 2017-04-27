@@ -1,4 +1,5 @@
 SELECT
+    COUNT(*) OVER()::NUMERIC AS full_count,
     document.document_id,
     document.created,
     document.updated,
