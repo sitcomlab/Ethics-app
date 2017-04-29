@@ -88,7 +88,8 @@ exports.request = function(req, res) {
                 user: true,
                 member: false,
                 admin: false,
-                exp: Number(moment().add(1, 'days').format('x'))
+                iat: moment().unix(),
+                exp: moment().add(1, 'days').unix()
             };
             // Create JWT
             user.token = jwt.sign(payload, jwtSecret);

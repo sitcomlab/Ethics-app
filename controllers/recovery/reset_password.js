@@ -45,6 +45,7 @@ exports.request = function(req, res) {
                 // Verify token
                 jwt.verify(token, jwtSecret, function(err, decoded) {
                     if(err){
+                        console.error(colors.red(err));
                         callback(new Error("Authorization failed"), 401);
                     } else {
                         if(decoded.member){

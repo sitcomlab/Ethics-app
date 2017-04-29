@@ -104,7 +104,8 @@ exports.request = function(req, res) {
                             user: false,
                             member: true,
                             admin: member.admin,
-                            exp: Number(moment().add(1, 'days').format('x'))
+                            iat: moment().unix(),
+                            exp: moment().add(1, 'days').unix()
                         };
 
                         // Create JWT

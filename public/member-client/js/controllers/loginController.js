@@ -44,7 +44,7 @@ app.controller("loginController", function($scope, $rootScope, $filter, $transla
                 $window.alert(response.data);
 
                 // Reset
-                $scope.login_member = $authenticationService.init();
+                $scope.login_member.password = "";
                 $scope.$parent.loading = { status: false, message: "" };
             });
         }
