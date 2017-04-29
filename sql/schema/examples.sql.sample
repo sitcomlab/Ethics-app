@@ -1,0 +1,182 @@
+/*
+-- Users
+INSERT INTO Users (
+    email_address,
+    title,
+    first_name,
+    last_name,
+    institute_id,
+    blocked
+) VALUES ();
+
+
+-- Members
+INSERT INTO Members (
+    email_address,
+    password,
+    title,
+    first_name,
+    last_name,
+    working_group_id,
+    office_room_number,
+    office_phone_number,
+    office_email_address,
+    subscribed,
+    admin,
+    former
+) VALUES ();
+
+
+-- Courses
+INSERT INTO Courses (
+    course_name,
+    year,
+    term,
+    lecturer,
+    institute_id
+) VALUES ();
+
+
+-- Responsibilities
+INSERT INTO Responsibilities (
+    course_id,
+    member_id
+) VALUES ();
+
+
+-- Documents
+INSERT INTO Documents (
+    user_id,
+    document_id,
+    document_title,
+    status
+) VALUES ();
+
+
+-- Affiliations
+INSERT INTO Affiliations (
+    document_id,
+    course_id
+) VALUES ();
+
+
+-- Revisions
+INSERT INTO Revisions (
+    document_id,
+    version
+) VALUES ();
+
+
+-- Descriptions
+INSERT INTO Descriptions (
+    revision_id,
+
+    en_title,
+    en_researcher,
+    en_study_time,
+    en_purpose,
+    en_procedure,
+    en_duration,
+    en_risks,
+    en_benefits,
+
+    de_used,
+    de_title,
+    de_researcher,
+    de_study_time,
+    de_purpose ,
+    de_procedure,
+    de_duration,
+    de_risks,
+    de_benefits,
+
+    pt_used,
+    pt_title,
+    pt_researcher,
+    pt_study_time,
+    pt_purpose,
+    pt_procedure,
+    pt_duration,
+    pt_risks,
+    pt_benefits
+) VALUES ();
+
+
+-- Concerns
+INSERT INTO Concerns (
+    revision_id,
+    q01_value,
+    q01_explanation,
+    q02_value,
+    q02_explanation,
+    q03_value,
+    q04_value,
+    q05_value,
+    q06_value,
+    q07_value,
+    q08_value,
+    q09_value,
+    q10_value,
+    q11_1_value,
+    q11_2_value,
+    q12_value,
+    q13_value
+) VALUES ();
+
+
+-- Comments
+INSERT INTO Comments (
+    revision_id,
+    published,
+    general_comment,
+
+    en_title_comment,
+    en_researcher_comment,
+    en_study_time_comment,
+    en_purpose_comment,
+    en_procedure_comment,
+    en_duration_comment,
+    en_risks_comment,
+    en_benefits_comment,
+
+    de_title_comment,
+    de_researcher_comment,
+    de_study_time_comment,
+    de_purpose_comment,
+    de_procedure_comment,
+    de_duration_comment,
+    de_risks_comment,
+    de_benefits_comment,
+
+    pt_title_comment,
+    pt_researcher_comment,
+    pt_study_time_comment,
+    pt_purpose_comment,
+    pt_procedure_comment,
+    pt_duration_comment,
+    pt_risks_comment,
+    pt_benefits_comment,
+
+    q01_comment,
+    q02_comment,
+    q03_comment,
+    q04_comment,
+    q05_comment,
+    q06_comment,
+    q07_comment,
+    q08_comment,
+    q09_comment,
+    q10_comment,
+    q11_1_comment,
+    q11_2_comment,
+    q12_comment,
+    q13_comment
+) VALUES ();
+
+
+-- Reviews
+INSERT INTO Reviewers (
+    member_id,
+    revision_id
+) VALUES ();
+*/
