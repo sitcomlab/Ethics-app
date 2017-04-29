@@ -167,6 +167,20 @@ app.config(function ($translateProvider) {
         DESCRIPTION_7: 'List all potential risks and uncomfortable activities which can occur to your participants over the course of the study',
         DESCRIPTION_8: 'List benefits (if applicable)',
 
+        STUDY_DESCRIPTION_INFO: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally the German version. Depending on the language(s), you will receive the informed consent forms for your experiment',
+        LANGUAGE_OPTIONS: 'Please select the language, in which you want to generate the informed consent forms',
+
+        DESCRIPTION_1_INFO: '',
+        DESCRIPTION_2_INFO: '',
+        DESCRIPTION_3_INFO: 'Specify the period during which you will be collecting the data. If you do not know the exact staring and ending dates, specify in "month-year" format.',
+        DESCRIPTION_4_INFO: 'In a few sentences, describe the theme and purpose of the study (do not get very technical - the content of this box should be understandable to your participants).',
+        DESCRIPTION_5_INFO: 'Keep this limited to a few sentences. Do not describe the details of your experimental design, but make sure that you mention all important actions which are required from the participants.',
+        DESCRIPTION_6_INFO: 'Try to give a conservative estimate which will be higher then the average completion time. If you have not used a similar procedure in the past, you can run a simple pilot study to estimate this.',
+        DESCRIPTION_7_INFO: 'Potential risks include (but are not limited to): walking on stairs, nausea (e.g. in Virtual Reality studies), spending time in confined spaces (e.g. lifts), cycling, operating vehicles (including simple ones like sport equipment), navigating in crowded or heavy-traffic areas, observing quickly changing or blinking stimuli (e.g. in computer-based studies), interacting with potentially strong emotional content (e.g. viewing pictures), wearing any additional electronics (eye-tracker, sensors), any activities that might cause physical effort or pain (e.g. attaching movement sensors to the body).',
+        DESCRIPTION_8_INFO: 'For instance a monetary payment, or a lottery voucher.',
+
+        CONCERNS_INFO: 'Complete the checklist below. If you have answered "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the ifgi-Ethics Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the ifgi\'s Ethics Committee.',
+
         CONCERN_1: 'Will the study involve potentially vulnerable groups of participants or people who are unable or unauthorized to give informed consent',
         CONCERN_2: 'Will the study involve deception',
         CONCERN_3: 'Will the study involve discussion, judgment or presentation of strongly emotional or sensitive stimuli or topics',
@@ -181,6 +195,23 @@ app.config(function ($translateProvider) {
         CONCERN_11_2: 'If yes: Will the study involve any recording without prior consent',
         CONCERN_12: 'Is any raw data from the study likely to be passed on to external partners',
         CONCERN_13: 'Does the study involve collection of any information without obtaining an Informed Consent in a situation different from public observations or anonymous street surveys',
+
+        CONCERN_1_INFO: 'For instance: children and youth under 18yo, participants with impairments, patients, people assisted by a carer, people recruited from groups associated with a specific mental or physical condition.',
+        CONCERN_2_INFO: 'That is to say: Will participants be deliberately mislead in such a way that they might show distress or ask to retract their data when debriefed?',
+        CONCERN_3_INFO: 'For instance: viewing images involving emotional content that participants might want to avoid, discussing topics related to sexuality, asking personal questions in a publicly exposed environment.',
+        CONCERN_4_INFO: '',
+        CONCERN_5_INFO: 'That is to say: Does the procedure require you to give orders that participants might hesitate or not wish to perform?',
+        CONCERN_6_INFO: '',
+        CONCERN_7_INFO: 'For instance: attaching anything to participant’s body, requiring participants to perform physically demanding gestures or poses, operating equipment.',
+        CONCERN_8_INFO: '',
+        CONCERN_9_INFO: 'If yes: list those parties, approval to use this data (if applicable) and whether participants will be aware of the data aggregation process.',
+        CONCERN_10_INFO: 'For instance: mobile HCI studies in heavy-traffic areas, navigational tasks in-the-wild without following, Virtual Reality studies.',
+        CONCERN_11_1_INFO: 'For instance: spoken-aloud personal information, video recording of faces.',
+        CONCERN_11_2_INFO: '',
+        CONCERN_12_INFO: 'For instance companies, funding bodies, other universities. If yes: who is responsible for the safety of the passed information?',
+        CONCERN_13_INFO: 'Excluded cases (select "no"): remote sensing data, recordings from public settings allowed by the law, and other situations where the observed individual is expected to be aware of remaining in the public view. Continuous observation of targeted individuals, however, infringes this condition (similarly to how following someone physically in the public is different from observing the same person passing-by).',
+
+        SUBMIT_WARNING: '',
 
         YES: 'yes',
         NO: 'no',
@@ -261,6 +292,10 @@ app.config(function ($translateProvider) {
         WORKING_GROUP: 'Working group',
         WORKING_GROUPS: 'Working groups',
 
+        REVIEW_OPTION_1: 'The user gets access to download the files',
+        REVIEW_OPTION_2: 'The user has to revise the document and submit it again, until it gets finally accepted',
+        REVIEW_OPTION_3: 'The user can no longer access the document. (Attention: Use this option only in extreme situations, for example when your comments have been totally ignored in a revised document. In case of violated rules, you can also block the user). In all other cases, please use the option party accept to give the user the chance to revise the document and submit it again',
+
         COURSES: 'Courses',
         COURSE: 'Course',
         NO_COURSE: 'No course',
@@ -287,6 +322,7 @@ app.config(function ($translateProvider) {
         SUBSCRIBED: 'Subscribed ',
         CURRENTLY_NOT_SUBSCRIBED: 'Currently not subscribed',
 
+        FORMER: 'Former',
         FORMER_INSTITUTES: 'Former institutes',
         FORMER_WORKING_GROUPS: 'Former working groups',
         FORMER_WORKING_GROUP: 'Former working group',
@@ -302,7 +338,7 @@ app.config(function ($translateProvider) {
 
         START_REVIEWING: 'Start reviewing',
         OPEN_REVIEW: 'Open review',
-        SAVE_AND_CLOSE: 'Save & close',
+        CLOSE: 'close',
         PUBLISH_REVIEW: 'Publish review',
         PARTLY_ACCEPT: 'Partly accept',
         ACCEPT: 'Accept',
@@ -353,6 +389,8 @@ app.config(function ($translateProvider) {
         EXPLANATION_OF_THE_SUBSCRIBED_STATUS: 'With this setting you can turn on/off the email notifications, if a document needs your review. If you are in holiday, you can turn the subscription off and users and members can see that you are currently not responsible for reviewing.',
         EXPLANATION_OF_THE_BLOCKING_STATUS: 'With this setting you can block a user, if he/she clearly violated the rules. The user has then no longer access until you reactivate the account again.',
 
+        OVERWRITING_INFORMATION: 'You are not the latest reviewer! If you continue, you are going to overwrite the review. Please make sure, that you asked the latest reviewer, if he/she is currently not reviewing.',
+        OKAY: 'Okay',
         ADMIN_ROLE: 'Admin role',
         SUBSCRIBED_STATUS: 'Subscribed status',
         FORMER_STATUS: 'Former status',
@@ -362,6 +400,7 @@ app.config(function ($translateProvider) {
         NO_VALID_EMAIL_ADDRESS: 'No valid email-address',
         CHANGE_PASSWORD: 'Change password',
         DO_NOT_CHANGE_PASSWORD: 'Do not change password',
+
     });
 
     // Default Language (English)

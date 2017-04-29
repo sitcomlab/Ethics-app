@@ -1855,22 +1855,14 @@
             </div>
         </div>
         <div class="card-footer">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 push-xs-6 flex-first flex-sm-unordered right">
-                    <p>
-                        <input
-                        type="radio"
-                        name="document_status"
-                        id="document_status_1"
-                        ng-model="review_status"
-                        ng-value="5"
-                        required>
-                        <span class="badge badge-warning">
-                            {{ 'PARTLY_ACCEPT' | translate }}
-                        </span>
-                        &nbsp;&nbsp;
-                        |
-                        &nbsp;&nbsp;
+            <div class="alert alert-info" role="alert">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'REVIEW_OPTIONS' | translate }}</b>:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
                         <input
                             type="radio"
                             name="document_status"
@@ -1881,9 +1873,30 @@
                         <span class="badge badge-success">
                             {{ 'ACCEPT' | translate }}
                         </span>
-                        &nbsp;&nbsp;
-                        |
-                        &nbsp;&nbsp;
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 justified">
+                        {{ 'REVIEW_OPTION_1' | translate }}.
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                        <input
+                        type="radio"
+                        name="document_status"
+                        id="document_status_1"
+                        ng-model="review_status"
+                        ng-value="5"
+                        required>
+                        <span class="badge badge-warning">
+                            {{ 'PARTLY_ACCEPT' | translate }}
+                        </span>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 justified">
+                        {{ 'REVIEW_OPTION_2' | translate }}.
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
                         <input
                             type="radio"
                             name="document_status"
@@ -1894,11 +1907,16 @@
                         <span class="badge badge-danger">
                             {{ 'REJECT' | translate }}
                         </span>
-                    </p>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 justified">
+                        {{ 'REVIEW_OPTION_3' | translate }}.
+                    </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 pull-xs-6 left">
                     <a href="" class="btn btn-primary btn-block-xs-only btn-block-sm-only" ng-click="saveReview()">
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SAVE_AND_CLOSE' | translate }}
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SAVE' | translate }} &amp; {{ 'CLOSE' | translate }}
                     </a>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 flex-first flex-sm-unordered right">
