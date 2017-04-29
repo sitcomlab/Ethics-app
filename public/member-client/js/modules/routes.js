@@ -9,6 +9,10 @@ app.config(function($routeProvider, $locationProvider, config) {
 			templateUrl: "js/templates/login.html",
 			controller: "loginController"
 		})
+		.when("/documents/:document_id/login", {
+			templateUrl: "js/templates/login_by_document.html",
+			controller: "loginByDocumentController"
+		})
 
 		// Recovery
 		/*.when("/recovery", {
