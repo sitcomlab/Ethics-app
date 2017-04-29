@@ -114,7 +114,6 @@
                                 ng-disabled="!updated_member.new_password"
                             >
                         </div>
-                        <small class="form-text text-muted">{{ 'MIN_LENGTH' | translate }}</small>
                         <span ng-show="editMemberForm.repeated_password.$error.required && !editMemberForm.repeated_password.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}

@@ -55,10 +55,24 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, user, callback) {
+            // Preparing parameters
+            var params = [];
+
+            // Pagination parameters
+            params.push(Number(req.query.offset) || null );
+            params.push(Number(req.query.limit) || null );
+
+            // Sorting
+            params.push(req.query.orderby || 'created.desc');
+
+            // Filter by user
+            params.push(user.user_id);
+
+            callback(null, client, done, user, params);
+        },
+        function(client, done, user, params, callback) {
             // Database query
-            client.query(query_list_documents_by_user, [
-                user.user_id
-            ], function(err, result) {
+            client.query(query_list_documents_by_user, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

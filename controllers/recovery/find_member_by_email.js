@@ -8,14 +8,17 @@ var mustache = require('mustache');
 var moment = require('moment');
 var httpPort = require('../../server.js').httpPort;
 var server_url = require('../../server.js').server_url;
+var domain = server_url + ":" + httpPort;
 var pool = require('../../server.js').pool;
 var transporter = require('../../server.js').transporter;
 var mail_options = require('../../server.js').mail_options;
+var jwt = require('jsonwebtoken');
+var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
 var dir_1 = "/../../templates/emails/";
 var dir_2 = "/../../sql/queries/members/";
-var template = fs.readFileSync(__dirname + dir_1 + 'reset_password.html', 'utf8').toString();
+var template_member_recovery = fs.readFileSync(__dirname + dir_1 + 'member_recovery.html', 'utf8').toString();
 var query_get_member_by_email = fs.readFileSync(__dirname + dir_2 + 'get_by_email.sql', 'utf8').toString();
 
 
@@ -52,10 +55,32 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, member, callback) {
+            // Attach email-address
+            member.email_address = req.params.email_address;
+
+            // Create payload
+            payload = {
+                iss: server_url,
+                sub: 'Reset member account',
+                member_id: member.member_id,
+                title: member.title,
+                first_name: member.first_name,
+                last_name: member.last_name,
+                email_address: member.email_address,
+                user: false,
+                member: true,
+                admin: member.admin,
+                exp: Number(moment().add(5, 'minutes').format('x'))
+            };
+
+            // Create JWT
+            member.token = jwt.sign(payload, jwtSecret);
+            member.expires = "5 minutes";
 
             // Render HTML content
-            var output = mustache.render(template, {
-                user: member,
+            var output = mustache.render(template_member_recovery, {
+                member: member,
+                domain: domain,
                 year: moment().format("YYYY")
             });
 

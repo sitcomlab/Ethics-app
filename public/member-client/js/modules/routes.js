@@ -4,21 +4,27 @@ var app = angular.module("routes", []);
 app.config(function($routeProvider, $locationProvider, config) {
 	$routeProvider
 
-		// Home
+		// Login
 		.when("/", {
 			templateUrl: "js/templates/login.html",
 			controller: "loginController"
 		})
+		// Login by document
 		.when("/documents/:document_id/login", {
 			templateUrl: "js/templates/login_by_document.html",
 			controller: "loginByDocumentController"
 		})
 
 		// Recovery
-		/*.when("/recovery", {
+		.when("/recovery", {
 			templateUrl: "js/templates/recovery.html",
 			controller: "recoveryController"
-		})*/
+		})
+		// Reset password
+		.when("/reset/:token", {
+			templateUrl: "js/templates/reset.html",
+			controller: "resetController"
+		})
 
 
 		// Account

@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 // Recovery controller
-app.controller("recoveryController", function($scope, $rootScope, $filter, $translate, $location, config, $window, $authenticationService, $recoveryService, $documentService){
+app.controller("recoveryController", function($scope, $rootScope, $filter, $translate, $location, config, $window, $recoveryService){
 
     /*************************************************
         FUNCTIONS
@@ -31,18 +31,13 @@ app.controller("recoveryController", function($scope, $rootScope, $filter, $tran
             $recoveryService.findByEmail($scope.recovery.email_address)
             .then(function onSuccess(response) {
                 // Reset
-                $scope.recovery.email_address = $authenticationService.getEmailAddress() || "";
+                $scope.recovery.email_address = "";
 
                 // Show info
-                $window.alert("An email with your document-IDs was sent!");
+                $window.alert("An email to reset your password was sent to you!");
 
                 // Redirect
-                if($authenticationService.get()){
-                    $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-                } else {
-                    $scope.redirect("/");
-                }
-
+                $scope.redirect("/");
             })
             .catch(function onError(response) {
                 $window.alert("The email-address could not be found!");
@@ -58,9 +53,7 @@ app.controller("recoveryController", function($scope, $rootScope, $filter, $tran
     /*************************************************
         INIT
      *************************************************/
-    $scope.recovery = {
-        email_address: $authenticationService.getEmailAddress() || ""
-    };
+    $scope.recovery = { email_address: "" };
     $scope.$parent.loading = { status: false, message: "" };
 
 });
