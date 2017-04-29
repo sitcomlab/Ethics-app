@@ -8,7 +8,8 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
     var filter = {
         offset: 0,
         limit: 50,
-        former: false
+        former: false,
+        orderby: 'name.asc'
     };
     var full_count = 0;
 
@@ -32,7 +33,17 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             full_count = data;
         },
         list: function(filter) {
-            var query = "?offset=" + filter.offset + "&limit=" + filter.limit + "&former=" + filter.former + "&";
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "&offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "&limit=" + filter.limit + "&";
+            }
+            if(filter.former && filter.former !== null){
+                query = query + "&former=" + filter.former + "&";
+            }
 
             query = query.slice(0, -1);
 
@@ -43,7 +54,17 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             });
         },
         listByUniversity: function(university_id, filter) {
-            var query = "?former=" + filter.former + "&";
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "&offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "&limit=" + filter.limit + "&";
+            }
+            if(filter.former && filter.former !== null){
+                query = query + "&former=" + filter.former + "&";
+            }
 
             query = query.slice(0, -1);
 
@@ -54,7 +75,17 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             });
         },
         listByInstitute: function(institute_id, filter) {
-            var query = "?former=" + filter.former + "&";
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "&offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "&limit=" + filter.limit + "&";
+            }
+            if(filter.former && filter.former !== null){
+                query = query + "&former=" + filter.former + "&";
+            }
 
             query = query.slice(0, -1);
 
