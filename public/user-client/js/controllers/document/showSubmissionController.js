@@ -161,7 +161,7 @@ app.controller("documentShowSubmissionController", function($scope, $rootScope, 
     $scope.status = {
         general: {
             display: true,
-            history: false,
+            history: true,
             limit: 1
         },
         descriptions: {
@@ -172,15 +172,15 @@ app.controller("documentShowSubmissionController", function($scope, $rootScope, 
             },
             history: {
                 en: {
-                    display: false,
+                    display: true,
                     limit: 1
                 },
                 de: {
-                    display: false,
+                    display: true,
                     limit: 1
                 },
                 pt: {
-                    display: false,
+                    display: true,
                     limit: 1
                 }
             },
@@ -192,7 +192,7 @@ app.controller("documentShowSubmissionController", function($scope, $rootScope, 
         },
         concerns: {
             display: true,
-            history: false,
+            history: true,
             limit: 1,
             comments: true
         }
