@@ -56,8 +56,9 @@ app.config(function ($translateProvider) {
         SEARCH_FOR_INSTITUTES: 'Search for institutes',
         SEARCH_FOR_WORKING_GROUPS: 'Search for working groups',
 
-        NO_FILTER:'No filter',
+        NO_FILTER: 'No filter',
         FILTER_BY_STATUS: 'Filter by status',
+        SORT_BY: 'Sort by',
 
         DELETE_THIS_DOCUMENT: 'Do you really want to delete this document',
         PLEASE_TYPE_IN_THE_TITLE_OF_THE_DOCUMENT_TO_CONFIRM: 'Please type in the title of the document to confirm',
@@ -349,8 +350,8 @@ app.config(function ($translateProvider) {
         COURSE_NAME: 'Course name',
         YEAR: 'Year',
         TERM: 'Term',
-        WINTER_TERM: 'Winter term',
-        SUMMER_TERM: 'Summer term',
+        WINTER: 'Winter',
+        SUMMER: 'Summer',
         LECTURER: 'Lecturer(s)',
 
         EDIT_MEMBER: 'Edit member',

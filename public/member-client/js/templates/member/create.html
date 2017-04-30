@@ -195,42 +195,56 @@
                         <b>{{ 'UNIVERSITY' | translate }}*</b>
                     </label>
                     <div class="form-group" ng-class="{'has-danger': createMemberForm.university_id.$invalid && !createMemberForm.university_id.$pristine }">
-                        <select
-                            class="custom-select form-control"
-                            id="university_id"
-                            name="university_id"
-                            ng-model="university_id"
-                            ng-options="university.university_id as university.university_name for university in universities"
-                            ng-disabled="!authenticated_member.admin"
-                            ng-change="load('institutes')"
-                            required
-                        >
-                            <option value="">{{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}</option>
-                        </select>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-university" aria-hidden="true"></i>
+                            </div>
+                            <select
+                                class="custom-select form-control"
+                                id="university_id"
+                                name="university_id"
+                                ng-model="university_id"
+                                ng-options="university.university_id as university.university_name for university in universities"
+                                ng-disabled="!authenticated_member.admin"
+                                ng-change="load('institutes')"
+                                required
+                            >
+                                <option value="">
+                                    {{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}
+                                </option>
+                            </select>
+                        </div>
                         <span ng-show="createMemberForm.university_id.$error.required && !createMemberForm.university_id.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}
                             </small>
                         </span>
-                        <br>
                     </div>
+                    <br>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                     <label>
                         <b>{{ 'INSTITUTE' | translate }}*</b>
                     </label>
                     <div class="form-group" ng-class="{'has-danger': createMemberForm.institute_id.$invalid && !createMemberForm.institute_id.$pristine }">
-                        <select
-                            class="custom-select form-control"
-                            id="institute_id"
-                            name="institute_id"
-                            ng-model="institute_id"
-                            ng-options="institute.institute_id as institute.institute_name for institute in institutes"
-                            ng-disabled="university_id == null"
-                            required
-                        >
-                            <option value="">{{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}</option>
-                        </select>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-building" aria-hidden="true"></i>
+                            </div>
+                            <select
+                                class="custom-select form-control"
+                                id="institute_id"
+                                name="institute_id"
+                                ng-model="institute_id"
+                                ng-options="institute.institute_id as institute.institute_name for institute in institutes"
+                                ng-disabled="university_id == null"
+                                required
+                            >
+                                <option value="">
+                                    {{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}
+                                </option>
+                            </select>
+                        </div>
                         <span ng-show="createMemberForm.institute_id.$error.required && !createMemberForm.institute_id.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}
@@ -243,22 +257,31 @@
                     <label>
                         <b>{{ 'WORKING_GROUP' | translate }}*</b>
                     </label>
-                    <select
-                        class="custom-select form-control"
-                        id="working_group_id"
-                        name="working_group_id"
-                        ng-model="new_member.working_group_id"
-                        ng-options="working_group.working_group_id as working_group.working_group_name for working_group in working_groups"
-                        ng-disabled="institute_id == null"
-                        required
-                    >
-                        <option value="">{{ 'PLEASE_SELECT_A_WORKING_GROUP' | translate }}</option>
-                    </select>
-                    <span ng-show="createMemberForm.working_group_id.$error.required && !createMemberForm.working_group_id.$pristine" class="text-danger">
-                        <small>
-                            {{ 'REQUIRED' | translate }}
-                        </small>
-                    </span>
+                    <div class="form-group" ng-class="{'has-danger': createMemberForm.working_group_id.$invalid && !createMemberForm.working_group_id.$pristine }">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-briefcase" aria-hidden="true"></i>
+                            </div>
+                            <select
+                                class="custom-select form-control"
+                                id="working_group_id"
+                                name="working_group_id"
+                                ng-model="new_member.working_group_id"
+                                ng-options="working_group.working_group_id as working_group.working_group_name for working_group in working_groups"
+                                ng-disabled="institute_id == null"
+                                required
+                            >
+                                <option value="">
+                                    {{ 'PLEASE_SELECT_A_WORKING_GROUP' | translate }}
+                                </option>
+                            </select>
+                        </div>
+                        <span ng-show="createMemberForm.working_group_id.$error.required && !createMemberForm.working_group_id.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
                     <br>
                 </div>
             </div>
@@ -305,7 +328,9 @@
                                 aria-describedby="inputOfficePhoneNumber"
                                 >
                         </div>
-                        <small class="form-text text-muted">{{ 'PLEASE_USE_A_UNIVERSITY_NUMBER' | translate }}</small>
+                        <small class="form-text text-muted">
+                            {{ 'PLEASE_USE_A_UNIVERSITY_NUMBER' | translate }}
+                        </small>
                         <span ng-show="createMemberForm.office_phone_number.$error.required && !createMemberForm.office_phone_number.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}
@@ -335,7 +360,9 @@
                                 autocomplete="on"
                             >
                         </div>
-                        <small class="form-text text-muted">{{ 'PLEASE_USE_A_UNIVERSITY_ADDRESS' | translate }}</small>
+                        <small class="form-text text-muted">
+                            {{ 'PLEASE_USE_A_UNIVERSITY_ADDRESS' | translate }}
+                        </small>
                         <span ng-show="createMemberForm.office_email_address.$error.required && !createMemberForm.office_email_address.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}
@@ -351,136 +378,199 @@
                 </div>
             </div>
 
-            <div class="alert alert-warning" role="alert">
-                <label>
-                    <b>{{ 'ADMIN_ROLE' | translate }}*</b>
-                </label>
-                <p>
-                    <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EXPLANATION_OF_THE_ADMIN_ROLE' | translate }}
-                </p>
-                <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <label class="custom-control custom-radio">
-                            <input
-                            class="custom-control-input"
-                            type="radio"
-                            name="admin"
-                            id="admin_1"
-                            ng-model="new_member.admin"
-                            ng-value="true"
-                            ng-disabled="new_member.former"
-                            required>
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">{{ 'TRUE' | translate }}</span>
-                        </label>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <label class="custom-control custom-radio">
-                            <input
-                            class="custom-control-input"
-                            type="radio"
-                            name="admin"
-                            id="admin_2"
-                            ng-model="new_member.admin"
-                            ng-value="false"
-                            ng-disabled="new_member.former"
-                            required>
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">{{ 'FALSE' | translate }} ({{ 'DEFAULT' | translate }})</span>
-                        </label>
+
+            <label>
+                <b>{{ 'ADMIN_ROLE' | translate }}*</b>
+            </label>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group" ng-class="{'has-danger': createMemberForm.admin.$invalid && !createMemberForm.admin.$pristine }">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-id-badge" aria-hidden="true"></i>
+                            </span>
+                            <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                    <input
+                                    class="custom-control-input"
+                                    type="radio"
+                                    name="admin"
+                                    id="admin_1"
+                                    ng-model="new_member.admin"
+                                    ng-value="true"
+                                    ng-disabled="new_member.former"
+                                    required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">
+                                        {{ 'TRUE' | translate }}
+                                    </span>
+                                </label>
+                            </span>
+                            <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                    <input
+                                    class="custom-control-input"
+                                    type="radio"
+                                    name="admin"
+                                    id="admin_2"
+                                    ng-model="new_member.admin"
+                                    ng-value="false"
+                                    ng-disabled="new_member.former"
+                                    required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">
+                                        {{ 'FALSE' | translate }} <small class="text-muted">(d)</small>
+                                    </span>
+                                </label>
+                            </span>
+                        </div>
+                        <span ng-show="createMemberForm.admin.$error.required && !createMemberForm.admin.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
                     </div>
                 </div>
-            </div>
-            <br>
-
-            <div class="alert alert-warning" role="alert">
-                <label>
-                    <b>{{ 'FORMER_STATUS' | translate }}*</b>
-                </label>
-                <p>
-                    <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EXPLANATION_OF_THE_FORMER_STATUS_OF_A_MEMBER' | translate }}
-                </p>
-                <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <label class="custom-control custom-radio">
-                            <input
-                            class="custom-control-input"
-                            type="radio"
-                            name="former"
-                            id="former_1"
-                            ng-model="new_member.former"
-                            ng-value="true"
-                            ng-change="updateMember()"
-                            required>
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">{{ 'TRUE' | translate }}</span>
-                        </label>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8">
+                    <div class="alert alert-warning justified" role="alert">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EXPLANATION_OF_THE_ADMIN_ROLE' | translate }}
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <label class="custom-control custom-radio">
-                            <input
-                            class="custom-control-input"
-                            type="radio"
-                            name="former"
-                            id="former_2"
-                            ng-model="new_member.former"
-                            ng-value="false"
-                            ng-change="updateMember()"
-                            required>
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">{{ 'FALSE' | translate }} ({{ 'DEFAULT' | translate }})</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <br>
-
-            <div class="alert alert-warning" role="alert">
-                <label>
-                    <b>{{ 'SUBSCRIBED_STATUS' | translate }}*</b>
-                </label>
-                <p>
-                    <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EXPLANATION_OF_THE_SUBSCRIBED_STATUS' | translate }}
-                </p>
-                <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <label class="custom-control custom-radio">
-                            <input
-                            class="custom-control-input"
-                            type="radio"
-                            name="subscribed"
-                            id="subscribed_1"
-                            ng-model="new_member.subscribed"
-                            ng-value="true"
-                            ng-disabled="new_member.former"
-                            required>
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">{{ 'TRUE' | translate }} ({{ 'DEFAULT' | translate }})</span>
-                        </label>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <label class="custom-control custom-radio">
-                            <input
-                            class="custom-control-input"
-                            type="radio"
-                            name="subscribed"
-                            id="subscribed_2"
-                            ng-model="new_member.subscribed"
-                            ng-value="false"
-                            ng-disabled="new_member.former"
-                            required>
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">{{ 'FALSE' | translate }}</span>
-                        </label>
-                    </div>
+                    <br>
                 </div>
             </div>
 
+
+            <label>
+                <b>{{ 'FORMER_STATUS' | translate }}*</b>
+            </label>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group" ng-class="{'has-danger': createMemberForm.admin.$invalid && !createMemberForm.admin.$pristine }">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-archive" aria-hidden="true"></i>
+                            </span>
+                            <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                    <input
+                                    class="custom-control-input"
+                                    type="radio"
+                                    name="former"
+                                    id="former_1"
+                                    ng-model="new_member.former"
+                                    ng-value="true"
+                                    ng-change="updateMember()"
+                                    required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">
+                                        {{ 'TRUE' | translate }}
+                                    </span>
+                                </label>
+                            </span>
+                            <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                    <input
+                                    class="custom-control-input"
+                                    type="radio"
+                                    name="former"
+                                    id="former_2"
+                                    ng-model="new_member.former"
+                                    ng-value="false"
+                                    ng-change="updateMember()"
+                                    required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">
+                                        {{ 'FALSE' | translate }} <small class="text-muted">(d)</small>
+                                    </span>
+                                </label>
+                            </span>
+                        </div>
+                        <span ng-show="createMemberForm.former.$error.required && !createMemberForm.former.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8">
+                    <div class="alert alert-warning justified" role="alert">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EXPLANATION_OF_THE_FORMER_STATUS_OF_A_MEMBER' | translate }}
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+
+            <label>
+                <b>{{ 'SUBSCRIBED_STATUS' | translate }}*</b>
+            </label>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group" ng-class="{'has-danger': createMemberForm.subscribed.$invalid && !createMemberForm.subscribed.$pristine }">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-rss-square" aria-hidden="true"></i>
+                            </span>
+                            <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                    <input
+                                    class="custom-control-input"
+                                    type="radio"
+                                    name="subscribed"
+                                    id="subscribed_1"
+                                    ng-model="new_member.subscribed"
+                                    ng-value="true"
+                                    required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">
+                                        {{ 'TRUE' | translate }} <small class="text muted">(d)</small>
+                                    </span>
+                                </label>
+                            </span>
+                            <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                    <input
+                                    class="custom-control-input"
+                                    type="radio"
+                                    name="subscribed"
+                                    id="subscribed_2"
+                                    ng-model="new_member.subscribed"
+                                    ng-value="false"
+                                    required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">
+                                        {{ 'FALSE' | translate }}
+                                    </span>
+                                </label>
+                            </span>
+                        </div>
+                        <span ng-show="createMemberForm.subscribed.$error.required && !createMemberForm.subscribed.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8">
+                    <div class="alert alert-warning justified" role="alert">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EXPLANATION_OF_THE_SUBSCRIBED_STATUS' | translate }}
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-muted right">
+                    <small>
+                        * {{ 'REQUIRED' | translate }}&nbsp;&nbsp;|&nbsp;&nbsp;d {{ 'DEFAULT' | translate }}
+                    </small>
+                </div>
+            </div>
         </div>
         <div class="card-footer right">
-          <button class="btn btn-success" role="submit">
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SEND' | translate }}
-          </button>
+            <button class="btn btn-success" role="submit">
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SEND' | translate }}
+            </button>
         </div>
     </form>
 </div>

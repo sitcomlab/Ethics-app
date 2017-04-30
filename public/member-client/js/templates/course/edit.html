@@ -40,18 +40,23 @@
                 <b>{{ 'YEAR' | translate }}*</b>
             </label>
             <div class="form-group" ng-class="{'has-danger': editCourseForm.year.$invalid && !editCourseForm.year.$pristine}">
-                <input
-                    type="number"
-                    class="form-control"
-                    ng-model="updated_course.year"
-                    name="year"
-                    id="year"
-                    placeholder="{{ 'YEAR' | translate }}"
-                    aria-describedby="inputYear"
-                    required
-                    autofocus
-                    min="2000"
-                    max="2100">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </span>
+                    <input
+                        type="number"
+                        class="form-control"
+                        ng-model="updated_course.year"
+                        name="year"
+                        id="year"
+                        placeholder="{{ 'YEAR' | translate }}"
+                        aria-describedby="inputYear"
+                        required
+                        autofocus
+                        min="2000"
+                        max="2100">
+                </div>
                 <span ng-show="editCourseForm.year.$error.required && !editCourseForm.year.$pristine" class="text-danger">
                     <small>
                         {{ 'REQUIRED' | translate }}
@@ -59,37 +64,57 @@
                 </span>
             </div>
 
+
             <label>
                 <b>{{ 'TERM' | translate }}*</b>
             </label>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <label class="custom-control custom-radio">
-                        <input
-                        class="custom-control-input"
-                        type="radio"
-                        name="term"
-                        id="winter_term"
-                        ng-model="updated_course.term"
-                        ng-value="true"
-                        required>
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">{{ 'WINTER_TERM' | translate }} <small>({{updated_course.year}} - {{updated_course.year+1}})</small></span>
-                    </label>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <label class="custom-control custom-radio">
-                        <input
-                        class="custom-control-input"
-                        type="radio"
-                        name="term"
-                        id="summer_term"
-                        ng-model="updated_course.term"
-                        ng-value="false"
-                        required>
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">{{ 'SUMMER_TERM' | translate }} <small>({{updated_course.year}})</small></span>
-                    </label>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group" ng-class="{'has-danger': editCourseForm.term.$invalid && !editCourseForm.term.$pristine }">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-columns" aria-hidden="true"></i>
+                            </span>
+                            <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                    <input
+                                    class="custom-control-input"
+                                    type="radio"
+                                    name="term"
+                                    id="winter_term"
+                                    ng-model="updated_course.term"
+                                    ng-value="true"
+                                    required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">
+                                        {{ 'WINTER' | translate }}<br>
+                                        <small>({{updated_course.year}} - {{updated_course.year+1}})</small>
+                                    </span>
+                                </label>
+                            </span>
+                            <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                    <input
+                                    class="custom-control-input"
+                                    type="radio"
+                                    name="term"
+                                    id="summer_term"
+                                    ng-model="updated_course.term"
+                                    ng-value="false"
+                                    required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">
+                                        {{ 'SUMMER' | translate }}<br> <small>({{updated_course.year}})</small>
+                                    </span>
+                                </label>
+                            </span>
+                        </div>
+                        <span ng-show="editCourseForm.term.$error.required && !editCourseForm.term.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
                 </div>
             </div>
             <br>
@@ -116,55 +141,70 @@
                     <label>
                         <b>{{ 'UNIVERSITY' | translate }}*</b>
                     </label>
-                    <select
-                        class="custom-select form-control"
-                        id="university_id"
-                        name="university_id"
-                        ng-model="university_id"
-                        ng-options="university.university_id as university.university_name for university in universities"
-                        ng-disabled="!authenticated_member.admin"
-                        ng-change="load('institutes')"
-                        required
-                    >
-                        <option value="">{{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}</option>
-                    </select>
-                    <span ng-show="editCourseForm.university_id.$error.required && !editCourseForm.university_id.$pristine" class="text-danger">
-                        <small>
-                            {{ 'REQUIRED' | translate }}
-                        </small>
-                    </span>
+                    <div class="form-group" ng-class="{'has-danger': editCourseForm.university_id.$invalid && !editCourseForm.university_id.$pristine }">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-university" aria-hidden="true"></i>
+                            </span>
+                            <select
+                                class="custom-select form-control"
+                                id="university_id"
+                                name="university_id"
+                                ng-model="university_id"
+                                ng-options="university.university_id as university.university_name for university in universities"
+                                ng-disabled="!authenticated_member.admin"
+                                ng-change="load('institutes')"
+                                required
+                            >
+                                <option value="">
+                                    {{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}
+                                </option>
+                            </select>
+                        </div>
+                        <span ng-show="editCourseForm.university_id.$error.required && !editCourseForm.university_id.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
                     <br>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <label>
                         <b>{{ 'INSTITUTE' | translate }}*</b>
                     </label>
-                    <select
-                        class="custom-select form-control"
-                        id="institute_id"
-                        name="institute_id"
-                        ng-model="updated_course.institute_id"
-                        ng-options="institute.institute_id as institute.institute_name for institute in institutes"
-                        ng-disabled="university_id == null || !authenticated_member.admin"
-                        ng-change="load('members')"
-                        required
-                    >
-                        <option value="">{{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}</option>
-                    </select>
-                    <span ng-show="editCourseForm.institute_id.$error.required && !editCourseForm.institute_id.$pristine" class="text-danger">
-                        <small>
-                            {{ 'REQUIRED' | translate }}
-                        </small>
-                    </span>
+                    <div class="form-group" ng-class="{'has-danger': editCourseForm.institute_id.$invalid && !editCourseForm.institute_id.$pristine }">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-building" aria-hidden="true"></i>
+                            </span>
+                            <select
+                                class="custom-select form-control"
+                                id="institute_id"
+                                name="institute_id"
+                                ng-model="updated_course.institute_id"
+                                ng-options="institute.institute_id as institute.institute_name for institute in institutes"
+                                ng-disabled="university_id == null || !authenticated_member.admin"
+                                ng-change="load('members')"
+                                required
+                            >
+                                <option value="">
+                                    {{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}
+                                </option>
+                            </select>
+                        </div>
+                        <span ng-show="editCourseForm.institute_id.$error.required && !editCourseForm.institute_id.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
                 </div>
-                <br>
             </div>
-            <br>
 
             <!-- Responsible members -->
             <div ng-show="updated_course.institute_id && updated_course.institute_id !== null">
-                <br>
-
                 <label>
                     <b>{{ 'RESPONSIBLE_MEMBERS' | translate }}</b>
                 </label>
@@ -225,6 +265,15 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <br>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-muted right">
+                    <small>
+                        * {{ 'REQUIRED' | translate }}
+                    </small>
                 </div>
             </div>
         </div>

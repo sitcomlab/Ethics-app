@@ -37,47 +37,103 @@
             </div>
             <br>
 
-            <div class="alert alert-warning" role="alert">
-                <label>
-                    <b>{{ 'FORMER_STATUS' | translate }}*</b>
-                </label>
-                <p>
-                    <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EXPLANATION_OF_THE_FORMER_STATUS_OF_AN_INSTITUTE' | translate }}
-                </p>
-                <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <label class="custom-control custom-radio">
-                            <input
-                            class="custom-control-input"
-                            type="radio"
-                            name="former"
-                            id="former_1"
-                            ng-model="updated_institute.former"
-                            ng-value="true"
-                            required>
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">{{ 'TRUE' | translate }}</span>
-                        </label>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label>
+                        <b>{{ 'UNIVERSITY' | translate }}*</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': editInstituteForm.university_id.$invalid && !editInstituteForm.university_id.$pristine}">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-university" aria-hidden="true"></i>
+                            </span>
+                            <select
+                                class="custom-select form-control"
+                                id="university_id"
+                                name="university_id"
+                                ng-model="updated_institute.university_id"
+                                ng-options="university.university_id as university.university_name for university in universities"
+                                disabled
+                                required
+                            >
+                                <option value="">
+                                    {{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}
+                                </option>
+                            </select>
+                        </div>
+                        <span ng-show="editInstituteForm.university_id.$error.required && !editInstituteForm.university_id.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <label class="custom-control custom-radio">
-                            <input
-                            class="custom-control-input"
-                            type="radio"
-                            name="former"
-                            id="former_2"
-                            ng-model="updated_institute.former"
-                            ng-value="false"
-                            required>
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">{{ 'FALSE' | translate }} ({{ 'DEFAULT' | translate }})</span>
-                        </label>
-                    </div>
+                    <br>
                 </div>
             </div>
 
-        </div>
 
+            <label>
+                <b>{{ 'FORMER_STATUS' | translate }}*</b>
+            </label>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group" ng-class="{'has-danger': createInstituteForm.former.$invalid && !createInstituteForm.former.$pristine }">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-archive" aria-hidden="true"></i>
+                            </span>
+                            <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                    <input
+                                    class="custom-control-input"
+                                    type="radio"
+                                    name="former"
+                                    id="former_1"
+                                    ng-model="updated_institute.former"
+                                    ng-value="true"
+                                    required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">{{ 'TRUE' | translate }}</span>
+                                </label>
+                            </span>
+                            <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                    <input
+                                    class="custom-control-input"
+                                    type="radio"
+                                    name="former"
+                                    id="former_2"
+                                    ng-model="updated_institute.former"
+                                    ng-value="false"
+                                    required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">{{ 'FALSE' | translate }} (d)</span>
+                                </label>
+                            </span>
+                        </div>
+                        <span ng-show="createInstituteForm.former.$error.required && !createInstituteForm.former.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8">
+                    <div class="alert alert-warning justified" role="alert">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EXPLANATION_OF_THE_FORMER_STATUS_OF_AN_INSTITUTE' | translate }}
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-muted right">
+                    <small>
+                        * {{ 'REQUIRED' | translate }}&nbsp;&nbsp;|&nbsp;&nbsp;d {{ 'DEFAULT' | translate }}
+                    </small>
+                </div>
+            </div>
+        </div>
         <div class="card-footer right">
             <button class="btn btn-success" role="submit">
                 <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SAVE' | translate }}
