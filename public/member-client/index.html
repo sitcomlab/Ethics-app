@@ -127,14 +127,14 @@
                                         <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/id')">
                                             {{ 'SHOW_DOCUMENT_ID' | translate }}
                                         </a>
-                                        <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/overview')" ng-if="document.status > 1">
+                                        <!--<a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/overview')" ng-if="document.status > 1">
                                             <span ng-if="document.status == 2">
                                                 {{ 'SHOW_SUBMISSION' | translate }}
                                             </span>
                                             <span ng-if="document.status > 2">
                                                 {{ 'SHOW_OVERVIEW' | translate }}
                                             </span>
-                                        </a>
+                                        </a>-->
                                         <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/files')" ng-if="document.status == 2 || document.status == 6">
                                             {{ 'SHOW_FILES' | translate }}
                                         </a>
@@ -250,6 +250,7 @@
         <script src="js/services/descriptionService.js"></script>
         <script src="js/services/concernService.js"></script>
         <script src="js/services/commentService.js"></script>
+        <script src="js/services/noteService.js"></script>
         <script src="js/services/reviewerService.js"></script>
         <script src="js/services/fileService.js"></script>
         <script src="js/services/recoveryService.js"></script>

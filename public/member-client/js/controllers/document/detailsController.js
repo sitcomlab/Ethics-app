@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document details controller
-app.controller("documentDetailsController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $q, $timeout, $authenticationService, $documentService, $documentsService, $revisionService, $descriptionService, $concernService, $commentService, $reviewerService, $fileService) {
+app.controller("documentDetailsController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $q, $timeout, $authenticationService, $documentService, $documentsService, $revisionService, $descriptionService, $concernService, $commentService, $reviewerService, $fileService, $noteService) {
 
     /*************************************************
         FUNCTIONS
@@ -94,7 +94,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                         // Checkout reviewers
                         $reviewerService.getByRevision(revision.revision_id)
                         .then(function onSuccess(response) {
-                            $documentService.setReviewers(revision.revision_id, response.data);
+                            $documentService.setReviewers(revision.revision_id, response.data || null);
                             // Resolve sub-promise
                             checkout_reviewers_deferred.resolve();
                         })

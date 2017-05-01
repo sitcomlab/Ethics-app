@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document review controller
-app.controller("documentReviewController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $q, $timeout, $authenticationService, $documentService, $commentService) {
+app.controller("documentReviewController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $q, $timeout, $authenticationService, $documentService, $commentService, $noteService) {
 
     /*************************************************
         FUNCTIONS
@@ -149,16 +149,30 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
     $scope.saveReview = function(){
         $scope.$parent.loading = { status: true, message: "Saving review" };
 
-        // Save comments
-        $commentService.edit($scope.latest_revision.comments.comment_id, $scope.latest_revision.comments)
+        // Save notes
+        $noteService.save($scope.document.note_id, { "note": $scope.document.note })
         .then(function onSuccess(response) {
-            $scope.$parent.loading = { status: false, message: "" };
 
-            // Reset navbar
-            $scope.$parent.document = false;
+            // Save comments
+            $commentService.edit($scope.latest_revision.comments.comment_id, $scope.latest_revision.comments)
+            .then(function onSuccess(response) {
+                $scope.$parent.loading = { status: false, message: "" };
 
-            // Redirect
-            $scope.redirect("/documents/" + $routeParams.document_id);
+                // Reset navbar
+                $scope.$parent.document = false;
+
+                // Redirect
+                $scope.redirect("/documents/" + $routeParams.document_id);
+            })
+            .catch(function onError(response) {
+                $window.alert(response.data);
+
+                // Reset navbar
+                $scope.$parent.document = false;
+
+                // Redirect
+                $scope.redirect("/documents");
+            });
         })
         .catch(function onError(response) {
             $window.alert(response.data);
@@ -176,26 +190,40 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
      * @return {[type]} [description]
      */
     $scope.publish = function(){
-        if($scope.review_status !== null){
-            $scope.$parent.loading = { status: true, message: "Saving review" };
+        // Save notes
+        $noteService.save($scope.document.note_id, { "note": $scope.document.note })
+        .then(function onSuccess(response) {
 
-            // Publish comments for user
-            $scope.latest_revision.comments.published = true;
+            if($scope.review_status !== null){
+                $scope.$parent.loading = { status: true, message: "Saving review" };
 
-            // Save comments
-            $commentService.edit($scope.latest_revision.comments.comment_id, $scope.latest_revision.comments)
-            .then(function onSuccess(response) {
-                $scope.$parent.loading = { status: true, message: "Publishing review" };
+                // Publish comments for user
+                $scope.latest_revision.comments.published = true;
 
-                // Change status of document
-                $documentService.changeStatus($routeParams.document_id, {
-                    status: $scope.review_status
-                })
+                // Save comments
+                $commentService.edit($scope.latest_revision.comments.comment_id, $scope.latest_revision.comments)
                 .then(function onSuccess(response) {
-                    $scope.$parent.loading = { status: false, message: "" };
+                    $scope.$parent.loading = { status: true, message: "Publishing review" };
 
-                    // Redirect
-                    $scope.redirect("/documents/" + $routeParams.document_id);
+                    // Change status of document
+                    $documentService.changeStatus($routeParams.document_id, {
+                        status: $scope.review_status
+                    })
+                    .then(function onSuccess(response) {
+                        $scope.$parent.loading = { status: false, message: "" };
+
+                        // Redirect
+                        $scope.redirect("/documents/" + $routeParams.document_id);
+                    })
+                    .catch(function onError(response) {
+                        $window.alert(response.data);
+
+                        // Reset navbar
+                        $scope.$parent.document = false;
+
+                        // Redirect
+                        $scope.redirect("/documents");
+                    });
                 })
                 .catch(function onError(response) {
                     $window.alert(response.data);
@@ -206,17 +234,17 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
                     // Redirect
                     $scope.redirect("/documents");
                 });
-            })
-            .catch(function onError(response) {
-                $window.alert(response.data);
+            }
+        })
+        .catch(function onError(response) {
+            $window.alert(response.data);
 
-                // Reset navbar
-                $scope.$parent.document = false;
+            // Reset navbar
+            $scope.$parent.document = false;
 
-                // Redirect
-                $scope.redirect("/documents");
-            });
-        }
+            // Redirect
+            $scope.redirect("/documents");
+        });
     };
 
 

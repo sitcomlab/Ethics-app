@@ -12,7 +12,6 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
                 document_id: document.institute_id,
                 document_title: document.document_title,
                 user_id: document.user_id,
-                notes: document.notes,
                 status: document.status
             };
         },
@@ -106,6 +105,9 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
                     document.revisions[i].reviewer = data;
                 }
             }
+        },
+        setNotes: function(data){
+            document.notes = data;
         },
         setFiles: function(data){
             document.files = data;

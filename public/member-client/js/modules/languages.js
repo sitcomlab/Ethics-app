@@ -339,7 +339,8 @@ app.config(function ($translateProvider) {
 
         START_REVIEWING: 'Start reviewing',
         OPEN_REVIEW: 'Open review',
-        CLOSE: 'close',
+        CLOSE: 'Close',
+        _CLOSE: 'close',
         PUBLISH_REVIEW: 'Publish review',
         PARTLY_ACCEPT: 'Partly accept',
         ACCEPT: 'Accept',
