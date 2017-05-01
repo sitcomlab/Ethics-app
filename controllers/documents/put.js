@@ -124,10 +124,6 @@ exports.request = function(req, res) {
                 document_title: req.body.document_title
             };
 
-            if(isMember){
-                object.notes = req.body.notes;
-            }
-
             var params = _.values(object);
             callback(null, client, done, course, query, params);
         },

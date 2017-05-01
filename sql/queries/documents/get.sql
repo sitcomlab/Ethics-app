@@ -7,4 +7,4 @@ SELECT
     document.user_id
 FROM Documents document
 WHERE
-    document_id=$1::TEXT;
+    document.document_id=$1::TEXT;

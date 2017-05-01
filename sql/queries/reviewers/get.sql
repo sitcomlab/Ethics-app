@@ -4,7 +4,8 @@ SELECT
     member.member_id,
     member.title,
     member.first_name,
-    member.last_name
+    member.last_name,
+    member.former
 FROM Reviewers reviewer
     JOIN Members member ON reviewer.member_id = member.member_id
 WHERE

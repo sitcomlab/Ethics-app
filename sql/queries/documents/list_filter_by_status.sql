@@ -5,7 +5,8 @@ SELECT
     document.updated,
     document.document_title,
     document.status,
-    document.notes,
+    _note.note_id,
+    _note.note,
     revision.revision_id,
     revision.revision_created,
     revision.revision_version,
@@ -19,6 +20,7 @@ SELECT
     institute.university_id,
     university.university_name
 FROM Documents document
+    JOIN Notes _note ON document.document_id = _note.document_id
     JOIN (
     	SELECT
     		revision_id AS revision_id,

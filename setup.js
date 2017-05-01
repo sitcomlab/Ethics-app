@@ -43,6 +43,7 @@ queries.push(fs.readFileSync(__dirname + dir + 'revisions.sql', 'utf8').toString
 queries.push(fs.readFileSync(__dirname + dir + 'descriptions.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'concerns.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'comments.sql', 'utf8').toString());
+queries.push(fs.readFileSync(__dirname + dir + 'notes.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'reviewers.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'examples.sql', 'utf8').toString());
 
