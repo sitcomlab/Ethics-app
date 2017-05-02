@@ -27,7 +27,6 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
         // Save notes
         $noteService.save($scope.document.note_id, { "note": $scope.document.note })
         .then(function onSuccess(response) {
-            console.log(response.data);
 
             // Redirect
             $location.url("/documents");

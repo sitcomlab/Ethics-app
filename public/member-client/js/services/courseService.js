@@ -102,6 +102,13 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
                 }
             });
         },
+        retrieveByDocument: function(document_id) {
+            return $http.get(config.apiURL + "/documents/" + document_id + "/course", {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
         edit: function(course_id, data){
             return $http.put(config.apiURL + "/courses/" + course_id, data, {
                 headers: {

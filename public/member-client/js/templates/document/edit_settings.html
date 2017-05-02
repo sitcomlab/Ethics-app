@@ -7,7 +7,7 @@
                     {{ 'DOCUMENT_SETTINGS' | translate }}
                 </div>
                 <div class="col right">
-                    <button class="btn btn-secondary" role="button" ng-click="cancel()">
+                    <button class="btn btn-secondary" role="button" ng-click="redirect('/documents/' + document.document_id)">
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -41,33 +41,67 @@
             </div>
             <br>
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'UNIVERSITY' | translate }}</b>
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-university" aria-hidden="true"></i>
+                        </span>
+                        <select
+                            class="custom-select form-control"
+                            id="university_id"
+                            name="university_id"
+                            ng-model="university_id"
+                            ng-options="university.university_id as university.university_name for university in universities"
+                            ng-change="load('institutes')"
+                            disabled>
+                            <option value="">{{ 'NO_UNIVERSITY' | translate }}</option>
+                        </select>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <label>
                         <b>{{ 'INSTITUTE' | translate }}</b>
                     </label>
-                    <select
-                        class="custom-select form-control"
-                        id="institute_id"
-                        name="institute_id"
-                        ng-model="institute_id"
-                        ng-options="institute.institute_id as institute.institute_name group by institute.university_name for institute in institutes"
-                        ng-change="updateCourses()">
-                        <option value="">{{ 'NO_INSTITUTE' | translate }}</option>
-                    </select>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-building" aria-hidden="true"></i>
+                        </span>
+                        <select
+                            class="custom-select form-control"
+                            id="institute_id"
+                            name="institute_id"
+                            ng-model="institute_id"
+                            ng-options="institute.institute_id as institute.institute_name for institute in institutes"
+                            ng-change="load('courses')"
+                            disabled>
+                            <option value="">{{ 'NO_INSTITUTE' | translate }}</option>
+                        </select>
+                    </div>
+                    <br>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <label>
                         <b>{{ 'COURSE' | translate }}</b>
                     </label>
-                    <select
-                        class="custom-select form-control"
-                        id="course_id"
-                        name="course_id"
-                        ng-model="updated_document.course_id"
-                        ng-options="course.course_id as course.course_name group by course.season for course in courses"
-                        ng-disabled="institute_id == null || institute_id == '' ">
-                        <option value="">{{ 'NO_COURSE' | translate }}</option>
-                    </select>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                        </span>
+                        <select
+                            class="custom-select form-control"
+                            id="course_id"
+                            name="course_id"
+                            ng-model="updated_document.course_id"
+                            ng-options="course.course_id as course.course_name group by course.season for course in courses"
+                            ng-disabled="institute_id == null || institute_id == '' ">
+                            <option value="">{{ 'NO_COURSE' | translate }}</option>
+                        </select>
+                    </div>
+                    <br>
                 </div>
             </div>
 
@@ -96,8 +130,11 @@
                         class="custom-select form-control"
                         id="status"
                         name="status"
-                        ng-model="updated_document.status"
+                        ng-model="updated_document.new_status"
                     >
+                        <option value="" disabled>
+                            {{ 'NO_CHANGES' | translate }}
+                        </option>
                         <option value="5" ng-disabled="document.status!=2 && document.status<5">
                             (5) {{ 'PARTLY_ACCEPTED' | translate }}
                         </option>
@@ -109,22 +146,6 @@
                         </option>
                     </select>
                 </div>
-            </div>
-            <br>
-
-            <label>
-                <b>{{ 'NOTES' | translate }}</b>
-            </label>
-            <div class="input-group">
-                <textarea class="form-control"
-                    rows="5"
-                    ng-model="updated_document.notes"
-                    name="notes"
-                    id="notes"
-                    ></textarea>
-                <span class="input-group-addon">
-                    <span class="flag-icon flag-icon-gb"></span>
-                </span>
             </div>
             <br>
 

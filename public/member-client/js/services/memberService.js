@@ -110,7 +110,6 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             });
         },
         listByInstitute: function(institute_id, filter) {
-            console.log(filter);
 
             var query = "?orderby=" + filter.orderby + "&";
 

@@ -248,9 +248,7 @@
                                 name="university_id"
                                 ng-model="university_id"
                                 ng-options="university.university_id as university.university_name for university in universities"
-                                ng-disabled="!authenticated_member.admin"
-                                ng-change="load('institutes')"
-                                required
+                                disabled
                             >
                                 <option value="">
                                     {{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}
@@ -280,8 +278,7 @@
                                 name="institute_id"
                                 ng-model="institute_id"
                                 ng-options="institute.institute_id as institute.institute_name for institute in institutes"
-                                ng-disabled="university_id == null"
-                                required
+                                disabled
                             >
                                 <option value="">
                                     {{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}
@@ -311,8 +308,7 @@
                                 name="working_group_id"
                                 ng-model="updated_member.working_group_id"
                                 ng-options="working_group.working_group_id as working_group.working_group_name for working_group in working_groups"
-                                ng-disabled="institude_id == null"
-                                required
+                                disabled
                             >
                                 <option value="">
                                     {{ 'PLEASE_SELECT_A_WORKING_GROUP' | translate }}

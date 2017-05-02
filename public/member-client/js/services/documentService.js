@@ -9,7 +9,7 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
     return {
         copy: function(document) {
             return {
-                document_id: document.institute_id,
+                document_id: document.document_id,
                 document_title: document.document_title,
                 user_id: document.user_id,
                 status: document.status
