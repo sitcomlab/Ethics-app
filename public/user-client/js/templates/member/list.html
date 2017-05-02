@@ -38,7 +38,7 @@
                         <i class="fa fa-sort-alpha-desc" aria-hidden="true" ng-if="filter.orderby == 'name.desc'"></i>
                     </span>
                     <select class="form-control custom-select" ng-model="filter.orderby" ng-change="applyFilter()">
-                        <option value="name.asc">name.asc [{{ 'DEFAULT' | translate }}]</option>
+                        <option value="name.asc">{{ 'NAME_ASC' | translate }} [{{ 'DEFAULT' | translate }}]</option>
                         <option value="name.desc">{{ 'NAME_DESC' | translate }}</option>
                     </select>
                 </div>
