@@ -18,7 +18,18 @@ SELECT
     _user.institute_id,
     institute.institute_name,
     institute.university_id,
-    university.university_name
+    university.university_name,
+    affiliation.affiliation_id,
+    course.course_id,
+    course.course_name,
+    course.year,
+    course.term,
+    CASE
+        WHEN course.term
+            THEN CONCAT('WT', course.year, '/', course.year+1)
+            ELSE CONCAT('ST', course.year)
+        END AS season,
+    course.lecturer
 FROM Documents document
     JOIN Notes _note ON document.document_id = _note.document_id
     JOIN (
@@ -39,6 +50,8 @@ FROM Documents document
     JOIN Users _user ON document.user_id = _user.user_id
     JOIN Institutes institute ON institute.institute_id = _user.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
+    LEFT JOIN Affiliations affiliation ON affiliation.document_id = document.document_id
+    LEFT JOIN Courses course ON course.course_id = affiliation.course_id
 WHERE
         _user.institute_id=$4::INTEGER
     AND
