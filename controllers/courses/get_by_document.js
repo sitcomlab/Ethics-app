@@ -10,13 +10,13 @@ var server_url = require('../../server.js').server_url;
 var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
-var dir_1 = "/../../sql/queries/institutes/";
+var dir_1 = "/../../sql/queries/documents/";
 var dir_2 = "/../../sql/queries/courses/";
-var query_get_institute = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
-var query_list_courses_by_institute = fs.readFileSync(__dirname + dir_2 + 'list_by_institute.sql', 'utf8').toString();
+var query_get_document = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
+var query_get_course_by_document = fs.readFileSync(__dirname + dir_2 + 'get_by_document.sql', 'utf8').toString();
 
 
-// LIST BY INSTITUTE
+// GET BY DOCUMENT
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -53,16 +53,16 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_get_institute, [
-                req.params.institute_id
+            client.query(query_get_document, [
+                req.params.document_id
             ], function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    // Check if Institute exists
+                    // Check if Document exists
                     if (result.rows.length === 0) {
-                        callback(new Error("Institute not found"), 404);
+                        callback(new Error("Document not found"), 404);
                     } else {
                         callback(null, client, done);
                     }
@@ -70,29 +70,20 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, callback) {
-            // Preparing parameters
-            var params = [];
-
-            // Pagination parameters
-            params.push(Number(req.query.offset) || null );
-            params.push(Number(req.query.limit) || null );
-
-            // Sorting
-            params.push(req.query.orderby || 'name.asc');
-
-            // Filter by institute
-            params.push(req.params.institute_id);
-
-            callback(null, client, done, params);
-        },
-        function(client, done, params, callback) {
             // Database query
-            client.query(query_list_courses_by_institute, params, function(err, result) {
+            client.query(query_get_course_by_document, [
+                req.params.document_id
+            ], function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, 200, result.rows);
+                    // Check if Course exists
+                    if (result.rows.length === 0) {
+                        callback(null, 204, null);
+                    } else {
+                        callback(null, 200, result.rows[0]);
+                    }
                 }
             });
         }
