@@ -41,10 +41,10 @@
                         <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'year.desc'"></i>
                     </span>
                     <select class="form-control custom-select" ng-model="filter.orderby" ng-change="applyFilter()">
-                        <option value="created.asc">created.asc</option>
-                        <option value="created.desc">created.desc</option>
-                        <option value="updated.asc">updated.asc</option>
-                        <option value="updated.desc">updated.desc</option>
+                        <option value="created.asc">{{ 'CREATED_ASC' | translate }}</option>
+                        <option value="created.desc">{{ 'CREATED_DESC' | translate }}</option>
+                        <option value="updated.asc">{{ 'UPDATED_ASC' | translate }}</option>
+                        <option value="updated.desc">{{ 'UPDATED_DESC' | translate }}</option>
                         <option value="year.asc">year.asc [{{ 'DEFAULT' | translate }}]</option>
                         <option value="year.desc">year.desc</option>
                     </select>

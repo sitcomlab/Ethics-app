@@ -39,7 +39,7 @@
                     </span>
                     <select class="form-control custom-select" ng-model="filter.orderby" ng-change="applyFilter()">
                         <option value="name.asc">name.asc [{{ 'DEFAULT' | translate }}]</option>
-                        <option value="name.desc">name.desc</option>
+                        <option value="name.desc">{{ 'NAME_DESC' | translate }}</option>
                     </select>
                 </div>
                 <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
