@@ -21,9 +21,10 @@ INSERT INTO Members (
     office_room_number,
     office_phone_number,
     office_email_address,
-    subscribed,
+    secret,
     admin,
-    former
+    former,
+    subscribed
 ) VALUES ();
 
 

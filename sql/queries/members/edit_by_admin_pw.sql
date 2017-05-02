@@ -40,7 +40,6 @@ RETURNING
     office_phone_number,
     office_email_address,
     admin,
-    subscribed,
     former,
-    admin
+    subscribed
 ;

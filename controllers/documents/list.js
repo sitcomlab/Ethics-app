@@ -14,7 +14,11 @@ var dir_1 = "/../../sql/queries/members/";
 var dir_2 = "/../../sql/queries/documents/";
 var query_get_member = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
 var query_list_documents_with_user = fs.readFileSync(__dirname + dir_2 + 'list_with_user.sql', 'utf8').toString();
+var query_list_documents_with_user_with_course = fs.readFileSync(__dirname + dir_2 + 'list_with_user_with_course.sql', 'utf8').toString();
+var query_list_documents_with_user_without_course = fs.readFileSync(__dirname + dir_2 + 'list_with_user_without_course.sql', 'utf8').toString();
 var query_list_documents_filter_by_status = fs.readFileSync(__dirname + dir_2 + 'list_filter_by_status.sql', 'utf8').toString();
+var query_list_documents_filter_by_status_with_course = fs.readFileSync(__dirname + dir_2 + 'list_filter_by_status_with_course.sql', 'utf8').toString();
+var query_list_documents_filter_by_status_without_course = fs.readFileSync(__dirname + dir_2 + 'list_filter_by_status_without_course.sql', 'utf8').toString();
 
 
 // LIST ALL
@@ -81,50 +85,70 @@ exports.request = function(req, res) {
             // Filter by institute
             params.push(member.institute_id);
 
-            // Filter by status
-            switch(req.query.status){
-                case '0': {
-                    query = query_list_documents_filter_by_status;
-                    params.push(0);
+            // Filter with/without course
+            query = query_list_documents_with_user;
+            switch(req.query.course){
+                case 'true': {
+                    query = query_list_documents_with_user_with_course;
                     break;
                 }
-                case '1': {
-                    query = query_list_documents_filter_by_status;
-                    params.push(1);
-                    break;
-                }
-                case '2': {
-                    query = query_list_documents_filter_by_status;
-                    params.push(2);
-                    break;
-                }
-                case '3': {
-                    query = query_list_documents_filter_by_status;
-                    params.push(3);
-                    break;
-                }
-                case '4': {
-                    query = query_list_documents_filter_by_status;
-                    params.push(4);
-                    break;
-                }
-                case '5': {
-                    query = query_list_documents_filter_by_status;
-                    params.push(5);
-                    break;
-                }
-                case '6': {
-                    query = query_list_documents_filter_by_status;
-                    params.push(6);
-                    break;
-                }
-                case '7': {
-                    query = query_list_documents_filter_by_status;
-                    params.push(7);
+                case 'false': {
+                    query = query_list_documents_with_user_without_course;
                     break;
                 }
                 default: {
                     query = query_list_documents_with_user;
+                }
+            }
+
+            // Filter by status
+            switch(req.query.status){
+                case '0': {
+                    params.push(0);
+                    break;
+                }
+                case '1': {
+                    params.push(1);
+                    break;
+                }
+                case '2': {
+                    params.push(2);
+                    break;
+                }
+                case '3': {
+                    params.push(3);
+                    break;
+                }
+                case '4': {
+                    params.push(4);
+                    break;
+                }
+                case '5': {
+                    params.push(5);
+                    break;
+                }
+                case '6': {
+                    params.push(6);
+                    break;
+                }
+                case '7': {
+                    params.push(7);
+                    break;
+                }
+            }
+
+            // Filter by status with/without course
+            if(req.query.status){
+                query = query_list_documents_filter_by_status;
+                switch(req.query.course){
+                    case 'true': {
+                        query = query_list_documents_filter_by_status_with_course;
+                        break;
+                    }
+                    case 'false': {
+                        query = query_list_documents_filter_by_status_without_course;
+                        break;
+                    }
                 }
             }
 
