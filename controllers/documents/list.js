@@ -17,8 +17,11 @@ var query_list_documents_with_user = fs.readFileSync(__dirname + dir_2 + 'list_w
 var query_list_documents_with_user_with_course = fs.readFileSync(__dirname + dir_2 + 'list_with_user_with_course.sql', 'utf8').toString();
 var query_list_documents_with_user_without_course = fs.readFileSync(__dirname + dir_2 + 'list_with_user_without_course.sql', 'utf8').toString();
 var query_list_documents_filter_by_status = fs.readFileSync(__dirname + dir_2 + 'list_filter_by_status.sql', 'utf8').toString();
+var query_list_documents_filter_by_status_and_status = fs.readFileSync(__dirname + dir_2 + 'list_filter_by_status_and_status.sql', 'utf8').toString();
 var query_list_documents_filter_by_status_with_course = fs.readFileSync(__dirname + dir_2 + 'list_filter_by_status_with_course.sql', 'utf8').toString();
+var query_list_documents_filter_by_status_and_status_with_course = fs.readFileSync(__dirname + dir_2 + 'list_filter_by_status_and_status_with_course.sql', 'utf8').toString();
 var query_list_documents_filter_by_status_without_course = fs.readFileSync(__dirname + dir_2 + 'list_filter_by_status_without_course.sql', 'utf8').toString();
+var query_list_documents_filter_by_status_and_status_without_course = fs.readFileSync(__dirname + dir_2 + 'list_filter_by_status_and_status_without_course.sql', 'utf8').toString();
 
 
 // LIST ALL
@@ -135,18 +138,39 @@ exports.request = function(req, res) {
                     params.push(7);
                     break;
                 }
+                case '8': {
+                    params.push(2);
+                    params.push(6);
+                    break;
+                }
             }
 
             // Filter by status with/without course
             if(req.query.status){
-                query = query_list_documents_filter_by_status;
+                // Check for status
+                if(params.length === 6){
+                    query = query_list_documents_filter_by_status_and_status;
+                } else {
+                    query = query_list_documents_filter_by_status;
+                }
+                // Check for course
                 switch(req.query.course){
                     case 'true': {
-                        query = query_list_documents_filter_by_status_with_course;
+                        // Check for status
+                        if(params.length === 6){
+                            query = query_list_documents_filter_by_status_and_status_with_course;
+                        } else {
+                            query = query_list_documents_filter_by_status_with_course;
+                        }
                         break;
                     }
                     case 'false': {
-                        query = query_list_documents_filter_by_status_without_course;
+                        // Check for status
+                        if(params.length === 6){
+                            query = query_list_documents_filter_by_status_and_status_without_course;
+                        } else {
+                            query = query_list_documents_filter_by_status_without_course;
+                        }
                         break;
                     }
                 }
