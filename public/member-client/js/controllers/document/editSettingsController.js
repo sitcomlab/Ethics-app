@@ -37,12 +37,37 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $r
             .then(function onSuccess(response) {
                 $documentService.set(response.data);
 
-                // Update navbar
-                $scope.$parent.document = $documentService.get();
-                $scope.$parent.loading = { status: false, message: "" };
+                // Change status if it has been changed
+                if($scope.updated_document.status !== null && ($scope.document.status !== $scope.updated_document.status)){
+                    // Change status of document
+                    $documentService.changeStatus($routeParams.document_id, $scope.updated_document)
+                    .then(function onSuccess(response) {
+                        $documentService.set(response.data);
 
-                // Redirect
-                $scope.redirect("/documents/" + $routeParams.document_id);
+                        // Update navbar
+                        $scope.$parent.document = $documentService.get();
+                        $scope.$parent.loading = { status: false, message: "" };
+
+                        // Redirect
+                        $scope.redirect("/documents/" + $routeParams.document_id);
+                    })
+                    .catch(function onError(response) {
+                        $window.alert(response.data);
+
+                        // Reset navbar
+                        $scope.$parent.document = false;
+
+                        // Redirect
+                        $scope.redirect("/documents" + $routeParams.document_id);
+                    });
+                } else {
+                    // Update navbar
+                    $scope.$parent.document = $documentService.get();
+                    $scope.$parent.loading = { status: false, message: "" };
+
+                    // Redirect
+                    $scope.redirect("/documents/" + $routeParams.document_id);
+                }
             })
             .catch(function onError(response) {
                 $window.alert(response.data);
@@ -122,7 +147,7 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $r
                     }
                 } else {
                     // Reset courses
-                    $scope.working_groups = [];
+                    $scope.courses = [];
                     $scope.updated_document.course_id = null;
                 }
                 break;
@@ -165,14 +190,15 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $r
     // Set default value by member
     $scope.institute_id = $scope.authenticated_member.institute_id;
 
-    // Load related working groups
+    // Load related courses
     $scope.load('courses');
 
     // Load course
     $courseService.retrieveByDocument($routeParams.document_id)
     .then(function onSuccess(response) {
         var course = response.data;
-        if(course === null){
+
+        if(course === null || course === ""){
             $scope.updated_document.course_id = null;
         } else {
             $scope.updated_document.course_id = course.course_id;

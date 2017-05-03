@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <div class="card">
-    <form class="form-horizontal" name="documentEditTitleForm" ng-submit="save()">
+    <form class="form-horizontal" name="editDocumentForm" ng-submit="save()">
         <div class="card-header" style="font-size: 20pt;">
             <div class="row">
                 <div class="col">
@@ -17,7 +17,7 @@
             <label>
                 <b>{{ 'DOCUMENT_TITLE' | translate }}</b>
             </label>
-            <div class="form-group" ng-class="{'has-danger': documentEditTitleForm.title.$invalid && !documentEditTitleForm.title.$pristine}">
+            <div class="form-group" ng-class="{'has-danger': editDocumentForm.title.$invalid && !editDocumentForm.title.$pristine}">
                 <div class="input-group">
                     <input
                         type="text"
@@ -33,7 +33,7 @@
                         <span class="flag-icon flag-icon-gb"></span>
                     </span>
                 </div>
-                <span ng-show="documentEditTitleForm.title.$error.required && !documentEditTitleForm.title.$pristine" class="text-danger">
+                <span ng-show="editDocumentForm.title.$error.required && !editDocumentForm.title.$pristine" class="text-danger">
                     <small>
                         {{ 'REQUIRED' | translate }}
                     </small>
@@ -124,13 +124,13 @@
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <label>
-                        <b>{{ 'CHANGE_STATUS_TO' | translate }}</b>
+                        <b>{{ 'NEW_STATUS' | translate }}</b>
                     </label>
                     <select
                         class="custom-select form-control"
                         id="status"
                         name="status"
-                        ng-model="updated_document.new_status"
+                        ng-model="updated_document.status"
                     >
                         <option value="" disabled>
                             {{ 'NO_CHANGES' | translate }}

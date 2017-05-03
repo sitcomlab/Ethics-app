@@ -12,7 +12,7 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
                 document_id: document.document_id,
                 document_title: document.document_title,
                 user_id: document.user_id,
-                status: document.status
+                status: null
             };
         },
         get: function() {
