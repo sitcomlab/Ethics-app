@@ -107,12 +107,12 @@
                                 <i class="fa fa-sort-alpha-desc" aria-hidden="true" ng-if="filter.orderby == 'name.desc'"></i>
                             </span>
                             <select class="form-control custom-select" ng-model="filter.orderby" ng-change="load('working_groups')">
-                                <option value="created.asc">created.asc</option>
-                                <option value="created.desc">created.desc</option>
-                                <option value="updated.asc">updated.asc</option>
-                                <option value="updated.desc">updated.desc</option>
-                                <option value="name.asc">name.asc [{{ 'DEFAULT' | translate }}]</option>
-                                <option value="name.desc">name.desc</option>
+                                <option value="created.asc">{{ 'CREATED_ASC' | translate }}</option>
+                                <option value="created.desc">{{ 'CREATED_DESC' | translate }}</option>
+                                <option value="updated.asc">{{ 'UPDATED_ASC' | translate }}</option>
+                                <option value="updated.desc">{{ 'UPDATED_DESC' | translate }}</option>
+                                <option value="name.asc">{{ 'NAME_ASC' | translate }} [{{ 'DEFAULT' | translate }}]</option>
+                                <option value="name.desc">{{ 'NAME_DESC' | translate }}</option>
                             </select>
                         </div>
                         <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
@@ -128,12 +128,12 @@
                                 <i class="fa fa-sort-alpha-desc" aria-hidden="true" ng-if="filter.orderby == 'name.desc'"></i>
                             </span>
                             <select class="form-control custom-select" ng-model="filter.orderby" ng-change="load('members')">
-                                <option value="created.asc">created.asc</option>
-                                <option value="created.desc">created.desc</option>
-                                <option value="updated.asc">updated.asc</option>
-                                <option value="updated.desc">updated.desc</option>
-                                <option value="name.asc">name.asc [{{ 'DEFAULT' | translate }}]</option>
-                                <option value="name.desc">name.desc</option>
+                                <option value="created.asc">{{ 'CREATED_ASC' | translate }}</option>
+                                <option value="created.desc">{{ 'CREATED_DESC' | translate }}</option>
+                                <option value="updated.asc">{{ 'UPDATED_ASC' | translate }}</option>
+                                <option value="updated.desc">{{ 'UPDATED_DESC' | translate }}</option>
+                                <option value="name.asc">{{ 'NAME_ASC' | translate }} [{{ 'DEFAULT' | translate }}]</option>
+                                <option value="name.desc">{{ 'NAME_DESC' | translate }}</option>
                             </select>
                         </div>
                         <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
@@ -149,12 +149,12 @@
                                 <i class="fa fa-sort-alpha-desc" aria-hidden="true" ng-if="filter.orderby == 'name.desc'"></i>
                             </span>
                             <select class="form-control custom-select" ng-model="filter.orderby" ng-change="load('users')">
-                                <option value="created.asc">created.asc</option>
-                                <option value="created.desc">created.desc</option>
-                                <option value="updated.asc">updated.asc</option>
-                                <option value="updated.desc">updated.desc</option>
-                                <option value="name.asc">name.asc [{{ 'DEFAULT' | translate }}]</option>
-                                <option value="name.desc">name.desc</option>
+                                <option value="created.asc">{{ 'CREATED_ASC' | translate }}</option>
+                                <option value="created.desc">{{ 'CREATED_DESC' | translate }}</option>
+                                <option value="updated.asc">{{ 'UPDATED_ASC' | translate }}</option>
+                                <option value="updated.desc">{{ 'UPDATED_DESC' | translate }}</option>
+                                <option value="name.asc">{{ 'NAME_ASC' | translate }} [{{ 'DEFAULT' | translate }}]</option>
+                                <option value="name.desc">{{ 'NAME_DESC' | translate }}</option>
                             </select>
                         </div>
                         <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
@@ -170,10 +170,10 @@
                                 <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'year.desc'"></i>
                             </span>
                             <select class="form-control custom-select" ng-model="filter.orderby" ng-change="load('courses')">
-                                <option value="created.asc">created.asc</option>
-                                <option value="created.desc">created.desc</option>
-                                <option value="updated.asc">updated.asc</option>
-                                <option value="updated.desc">updated.desc</option>
+                                <option value="created.asc">{{ 'CREATED_ASC' | translate }}</option>
+                                <option value="created.desc">{{ 'CREATED_DESC' | translate }}</option>
+                                <option value="updated.asc">{{ 'UPDATED_ASC' | translate }}</option>
+                                <option value="updated.desc">{{ 'UPDATED_DESC' | translate }}</option>
                                 <option value="year.asc">year.asc</option>
                                 <option value="year.desc">year.desc [{{ 'DEFAULT' | translate }}]</option>
                             </select>

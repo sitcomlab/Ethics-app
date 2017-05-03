@@ -18,6 +18,7 @@ CREATE TABLE Members (
     office_room_number CHARACTER VARYING(255) DEFAULT NULL,
     office_phone_number CHARACTER VARYING(255) DEFAULT NULL,
     office_email_address CHARACTER VARYING(255) DEFAULT NULL,
+    secret BOOLEAN DEFAULT false NOT NULL,
     admin BOOLEAN DEFAULT false NOT NULL,
     subscribed BOOLEAN DEFAULT true NOT NULL,
     former BOOLEAN DEFAULT false NOT NULL,

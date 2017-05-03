@@ -42,6 +42,13 @@ app.config(function($routeProvider, $locationProvider, config) {
                 factory: checkAuthentication
             }
 		})
+		.when("/documents/:document_id/revise", {
+			templateUrl: "js/templates/document/revise.html",
+			controller: "documentReviseController",
+			resolve: {
+                factory: checkAuthentication
+            }
+		})
 		.when("/documents/:document_id/settings", {
 			templateUrl: "js/templates/document/edit_settings.html",
 			controller: "documentEditSettingsController",

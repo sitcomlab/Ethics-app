@@ -53,7 +53,11 @@ FROM Documents document
     LEFT JOIN Affiliations affiliation ON affiliation.document_id = document.document_id
     LEFT JOIN Courses course ON course.course_id = affiliation.course_id
 WHERE
-    _user.institute_id=$4::INTEGER
+        _user.institute_id=$4::INTEGER
+    AND
+        document.status=$5::INTEGER
+    AND
+        course.course_id IS NULL
 ORDER BY
     CASE
         WHEN $3::TEXT='created.asc' THEN document.created END ASC,

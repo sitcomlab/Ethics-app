@@ -85,14 +85,14 @@
                                 <i class="fa fa-sort-alpha-desc" aria-hidden="true" ng-if="filter.orderby == 'title.desc'"></i>
                             </span>
                             <select class="form-control custom-select" ng-model="filter.orderby" ng-change="load('documents')">
-                                <option value="created.asc">created.asc</option>
-                                <option value="created.desc">created.desc [{{ 'DEFAULT' | translate }}]</option>
-                                <option value="updated.asc">updated.asc</option>
-                                <option value="updated.desc">updated.desc</option>
-                                <option value="status.asc">status.asc</option>
-                                <option value="status.desc">status.desc</option>
-                                <option value="title.asc">title.asc</option>
-                                <option value="title.desc">title.desc</option>
+                                <option value="created.asc">{{ 'CREATED_ASC' | translate }}</option>
+                                <option value="created.desc">{{ 'CREATED_DESC' | translate }} [{{ 'DEFAULT' | translate }}]</option>
+                                <option value="updated.asc">{{ 'UPDATED_ASC' | translate }}</option>
+                                <option value="updated.desc">{{ 'UPDATED_DESC' | translate }}</option>
+                                <option value="status.asc">{{ 'STATUS_ASC' | translate }}</option>
+                                <option value="status.desc">{{ 'STATUS_DESC' | translate }}</option>
+                                <option value="title.asc">{{ 'TITLE_ASC' | translate }}</option>
+                                <option value="title.desc">{{ 'TITLE_DESC' | translate }}</option>
                             </select>
                         </div>
                         <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>

@@ -30,7 +30,7 @@ INSERT INTO Working_Groups (
 );
 
 
--- Administrator
+-- 1st Administrator
 INSERT INTO Members (
     email_address,
     password,
@@ -41,9 +41,10 @@ INSERT INTO Members (
     office_room_number,
     office_phone_number,
     office_email_address,
+    secret,
     admin,
-    subscribed,
-    former
+    former,
+    subscribed
 ) VALUES (
     'admin@example.org',
     crypt('123456789abcde', gen_salt('md5')),
@@ -54,6 +55,7 @@ INSERT INTO Members (
     NULL,
     NULL,
     'admin@example.org',
+    true,
     true,
     false,
     false
