@@ -8,7 +8,7 @@ var mustache = require('mustache');
 var moment = require('moment');
 var httpPort = require('../../server.js').httpPort;
 var server_url = require('../../server.js').server_url;
-var domain = server_url + ":" + httpPort;
+var domain = server_url;
 var jwt = require('jsonwebtoken');
 var pool = require('../../server.js').pool;
 var jwtSecret = require('../../server.js').jwtSecret;
@@ -92,7 +92,7 @@ exports.request = function(req, res) {
                     // Prepare HTML content
                     var output = mustache.render(template_member_account_created, {
                         member: member,
-                        domain: domain || server_url + ":" + httpPort,
+                        domain: domain || server_url,
                         year: moment().format("YYYY")
                     });
 
