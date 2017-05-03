@@ -209,4 +209,5 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $r
     .catch(function onError(response) {
         $window.alert(response.data);
     });
+    
 });

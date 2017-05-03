@@ -15,6 +15,7 @@ var config = require('./config');
 // ENVIRONMENT VARIABLES
 config.environment = process.env.NODE_ENV || config.environment;
 config.server_url = process.env.SERVER_URL || config.server_url;
+config.server_port = process.env.SERVER_PORT || config.server_port;
 config.httpPort = process.env.HTTP_PORT || config.httpPort;
 config.httpsPort = process.env.HTTPS_PORT || config.httpsPort;
 config.postgres_host = process.env.POSTGRES_HOST || config.postgres_host;
@@ -33,6 +34,7 @@ config.jwtSecret = process.env.JWTSECRET || config.jwtSecret;
 
 exports.httpPort = config.httpPort;
 exports.server_url = config.server_url;
+exports.server_port = config.server_port;
 exports.jwtSecret = config.jwtSecret;
 
 // DATABASE CONFIGURATION

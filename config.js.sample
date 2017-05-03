@@ -5,6 +5,7 @@
 module.exports = {
     environment: 'production',
     server_url: 'http://giv-ethics-app.uni-muenster.de',
+    server_port: 8000,
     httpPort: 5000,
     httpsPort: 5443,
     postgres_host: 'localhost',
