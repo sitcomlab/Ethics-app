@@ -174,8 +174,8 @@
                                 <option value="created.desc">{{ 'CREATED_DESC' | translate }}</option>
                                 <option value="updated.asc">{{ 'UPDATED_ASC' | translate }}</option>
                                 <option value="updated.desc">{{ 'UPDATED_DESC' | translate }}</option>
-                                <option value="year.asc">year.asc</option>
-                                <option value="year.desc">year.desc [{{ 'DEFAULT' | translate }}]</option>
+                                <option value="year.asc">{{ 'YEAR_ASC' | translate }}</option>
+                                <option value="year.desc">{{ 'YEAR_DESC' | translate }} [{{ 'DEFAULT' | translate }}]</option>
                             </select>
                         </div>
                         <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
@@ -185,7 +185,7 @@
 
                 <!-- Related working groups -->
                 <div ng-if="filter.tab=='working_groups'">
-                    <div class="row" ng-if="institute.working_groups && institute.working_groups.length>0">
+                    <div class="list-group" ng-if="institute.working_groups && institute.working_groups.length>0">
                         <a href="" ng-click="redirect('/working_groups/' + working_group.working_group_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="working_group in institute.working_groups">
                             <div class="d-flex w-100 justify-content-between">
                                 <div>

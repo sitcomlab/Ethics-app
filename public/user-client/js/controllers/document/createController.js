@@ -125,6 +125,7 @@ app.controller("documentCreateController", function($scope, $rootScope, $filter,
      * [updateCourses description]
      * @return {[type]} [description]
      */
+    // DEPRECATED
     $scope.updateCourses = function(){
         $scope.new_document.course_id = null;
         $scope.courses = $courseService.getByInstitute($scope._institute_id);
@@ -134,9 +135,90 @@ app.controller("documentCreateController", function($scope, $rootScope, $filter,
      * [updateInstitutes description]
      * @return {[type]} [description]
      */
+    // DEPRACATED
     $scope.updateInstitutes = function(){
         $scope.new_user.institute_id = null;
         $scope.institutes = $instituteService.getByUniversity($scope.university_id);
+    };
+
+    /**
+     * [description]
+     * @param  {[type]} related_data [description]
+     * @return {[type]}              [description]
+     */
+    $scope.load = function(related_data){
+        // Check which kind of related data needs to be requested
+        switch (related_data) {
+            case 'universities': {
+                $scope.$parent.loading = { status: true, message: "Loading universities" };
+
+                // Load universities
+                $universityService.list({ orderby: 'name.asc' })
+                .then(function onSuccess(response) {
+                    $scope.universities = response.data;
+                    $scope.$parent.loading = { status: false, message: "" };
+                })
+                .catch(function onError(response) {
+                    $window.alert(response.data);
+                });
+                break;
+            }
+            case 'institutes': {
+                if($scope.university_id){
+                    if($scope.university_id !== null){
+                        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+
+                        // Load related institutes
+                        $instituteService.listByUniversity($scope.university_id, { orderby: 'name.asc' })
+                        .then(function onSuccess(response) {
+                            $scope.institutes = response.data;
+                            $scope.$parent.loading = { status: false, message: "" };
+                        })
+                        .catch(function onError(response) {
+                            $window.alert(response.data);
+                        });
+                    } else {
+                        // Reset institutes
+                        $scope.institutes = [];
+                        $scope.institute_id = null;
+                        $scope.updated_document.course_id = null;
+                    }
+                } else {
+                    // Reset institutes
+                    $scope.institutes = [];
+                    $scope.institute_id = null;
+                    $scope.updated_document.course_id = null;
+                }
+                break;
+            }
+            case 'courses': {
+                if($scope.institute_id){
+                    if($scope.institute_id !== null){
+                        $scope.$parent.loading = { status: true, message: "Loading courses" };
+
+                        // Load related courses
+                        $courseService.listByInstitute($scope.institute_id, { orderby: 'year.desc' })
+                        .then(function onSuccess(response) {
+                            $scope.courses = response.data;
+                            $scope.$parent.loading = { status: false, message: "" };
+                        })
+                        .catch(function onError(response) {
+                            $window.alert(response.data);
+                        });
+                    } else {
+                        // Reset courses
+                        $scope.courses = [];
+                        $scope.updated_document.course_id = null;
+                    }
+                } else {
+                    // Reset courses
+                    $scope.courses = [];
+                    $scope.updated_document.course_id = null;
+                }
+                break;
+            }
+        }
+
     };
 
     /*************************************************
@@ -145,6 +227,7 @@ app.controller("documentCreateController", function($scope, $rootScope, $filter,
     $scope.$parent.loading = { status: true, message: "Initialising new document" };
     $scope.new_document = $documentService.init();
     $scope.new_user = $userService.init();
+    $scope.filter = $universityService.getFilter();
 
     // App agreement
     $scope.agreement = {
@@ -153,19 +236,19 @@ app.controller("documentCreateController", function($scope, $rootScope, $filter,
     };
 
     // Load universities
-    $universityService.list()
+    $universityService.list($scope.filter)
     .then(function onSuccess(response) {
         $universityService.set(response.data);
         $scope.universities = $universityService.get();
 
         // Load institutes
-        $instituteService.list()
+        $instituteService.list($scope.filter)
         .then(function onSuccess(response) {
             $instituteService.set(response.data);
             $scope.institutes = $instituteService.get();
 
             // Load courses
-            $courseService.list()
+            $courseService.list($scope.filter)
             .then(function onSuccess(response) {
                 $courseService.set(response.data);
                 $scope.courses = $courseService.get();

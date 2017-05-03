@@ -57,13 +57,13 @@ app.factory('$userService', function($http, $log, config, $authenticationService
             var query = "?orderby=" + filter.orderby + "&";
 
             if(filter.offset !== null){
-                query = query + "&offset=" + filter.offset + "&";
+                query = query + "offset=" + filter.offset + "&";
             }
             if(filter.limit !== null){
-                query = query + "&limit=" + filter.limit + "&";
+                query = query + "limit=" + filter.limit + "&";
             }
             if(filter.blocked !== null){
-                query = query + "&blocked=" + filter.blocked + "&";
+                query = query + "blocked=" + filter.blocked + "&";
             }
 
             query = query.slice(0, -1);
@@ -78,13 +78,13 @@ app.factory('$userService', function($http, $log, config, $authenticationService
             var query = "?orderby=" + filter.orderby + "&";
 
             if(filter.offset && filter.offset !== null){
-                query = query + "&offset=" + filter.offset + "&";
+                query = query + "offset=" + filter.offset + "&";
             }
             if(filter.limit && filter.limit !== null){
-                query = query + "&limit=" + filter.limit + "&";
+                query = query + "limit=" + filter.limit + "&";
             }
             if(filter.blocked && filter.blocked !== null){
-                query = query + "&blocked=" + filter.blocked + "&";
+                query = query + "blocked=" + filter.blocked + "&";
             }
 
             query = query.slice(0, -1);
@@ -100,13 +100,13 @@ app.factory('$userService', function($http, $log, config, $authenticationService
             var query = "?orderby=" + filter.orderby + "&";
 
             if(filter.offset && filter.offset !== null){
-                query = query + "&offset=" + filter.offset + "&";
+                query = query + "offset=" + filter.offset + "&";
             }
             if(filter.limit && filter.limit !== null){
-                query = query + "&limit=" + filter.limit + "&";
+                query = query + "limit=" + filter.limit + "&";
             }
             if(filter.blocked){
-                query = query + "&blocked=" + filter.blocked + "&";
+                query = query + "blocked=" + filter.blocked + "&";
             }
 
             query = query.slice(0, -1);

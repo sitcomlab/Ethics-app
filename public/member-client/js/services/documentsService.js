@@ -51,8 +51,6 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
 
             query = query.slice(0, -1);
 
-            console.log(config.apiURL + "/documents" + query);
-
             return $http.get(config.apiURL + "/documents" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
@@ -71,8 +69,6 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
 
             query = query.slice(0, -1);
 
-            console.log(config.apiURL + "/courses/" + course_id + "/documents" + query);
-
             return $http.get(config.apiURL + "/courses/" + course_id + "/documents" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
@@ -90,8 +86,6 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
             }
 
             query = query.slice(0, -1);
-
-            console.log(config.apiURL + "/users/" + user_id + "/documents" + query);
 
             return $http.get(config.apiURL + "/users/" + user_id + "/documents" + query, {
                 headers: {

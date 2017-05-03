@@ -18,7 +18,7 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
             return {
                 working_group_name: "",
                 institute_id: null,
-                former: false
+                former: fals
             };
         },
         copy: function(working_group){
@@ -51,13 +51,13 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
             var query = "?orderby=" + filter.orderby + "&";
 
             if(filter.offset && filter.offset !== null){
-                query = query + "&offset=" + filter.offset + "&";
+                query = query + "offset=" + filter.offset + "&";
             }
             if(filter.limit && filter.limit !== null){
-                query = query + "&limit=" + filter.limit + "&";
+                query = query + "limit=" + filter.limit + "&";
             }
             if(filter.former && filter.former !== null){
-                query = query + "&former=" + filter.former + "&";
+                query = query + "former=" + filter.former + "&";
             }
 
             query = query.slice(0, -1);
@@ -72,13 +72,13 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
             var query = "?orderby=" + filter.orderby + "&";
 
             if(filter.offset && filter.offset !== null){
-                query = query + "&offset=" + filter.offset + "&";
+                query = query + "offset=" + filter.offset + "&";
             }
             if(filter.limit && filter.limit !== null){
-                query = query + "&limit=" + filter.limit + "&";
+                query = query + "limit=" + filter.limit + "&";
             }
             if(filter.former && filter.former !== null){
-                query = query + "&former=" + filter.former + "&";
+                query = query + "former=" + filter.former + "&";
             }
 
             query = query.slice(0, -1);

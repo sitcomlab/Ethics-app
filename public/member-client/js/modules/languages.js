@@ -72,6 +72,8 @@ app.config(function ($translateProvider) {
         TITLE_DESC: 'Title descending',
         NAME_ASC: 'Name ascending',
         NAME_DESC: 'Name descending',
+        YEAR_ASC: 'Year ascending',
+        YEAR_DESC: 'Year descending',
 
         DELETE_THIS_DOCUMENT: 'Do you really want to delete this document',
         PLEASE_TYPE_IN_THE_TITLE_OF_THE_DOCUMENT_TO_CONFIRM: 'Please type in the title of the document to confirm',
