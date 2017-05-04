@@ -40,34 +40,102 @@
                 </span>
             </div>
             <br>
+
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'UNIVERSITY' | translate }}</b>
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-university" aria-hidden="true"></i>
+                        </div>
+                        <select
+                            class="custom-select form-control"
+                            id="university_id"
+                            name="university_id"
+                            ng-model="university_id"
+                            ng-options="university.university_id as university.university_name for university in universities"
+                            disabled
+                        >
+                            <option value="">
+                                {{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}
+                            </option>
+                        </select>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <label>
                         <b>{{ 'INSTITUTE' | translate }}</b>
                     </label>
-                    <select
-                        class="custom-select form-control"
-                        id="institute_id"
-                        name="institute_id"
-                        ng-model="institute_id"
-                        ng-options="institute.institute_id as institute.institute_name group by institute.university_name for institute in institutes"
-                        ng-change="updateCourses()">
-                        <option value="">{{ 'NO_INSTITUTE' | translate }}</option>
-                    </select>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-building" aria-hidden="true"></i>
+                        </div>
+                        <select
+                            class="custom-select form-control"
+                            id="institute_id"
+                            name="institute_id"
+                            ng-model="institute_id"
+                            ng-options="institute.institute_id as institute.institute_name for institute in institutes"
+                            disabled
+                        >
+                            <option value="">
+                                {{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}
+                            </option>
+                        </select>
+                    </div>
+                    <br>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <label>
                         <b>{{ 'COURSE' | translate }}</b>
                     </label>
-                    <select
-                        class="custom-select form-control"
-                        id="course_id"
-                        name="course_id"
-                        ng-model="updated_document.course_id"
-                        ng-options="course.course_id as course.course_name group by course.season for course in courses"
-                        ng-disabled="institute_id == null || institute_id == '' ">
-                        <option value="">{{ 'NO_COURSE' | translate }}</option>
-                    </select>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                        </div>
+                        <select
+                            class="custom-select form-control"
+                            id="course_id"
+                            name="course_id"
+                            ng-model="updated_document.course_id"
+                            ng-options="course.course_id as course.course_name group by course.season for course in courses"
+                            ng-change="updateCourse(updated_document.course_id)"
+                        >
+                            <option value="">{{ 'NO_COURSE' | translate }}</option>
+                        </select>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <div ng-if="course !== null">
+                <div class="card" style="background-color: #f7f7f9;">
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-1 right">
+                                <h4 class="card-title">
+                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                </h4>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <h4 class="card-title">
+                                            {{course.course_name}}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                        <b>{{'LECTURERS' | translate}}</b>: {{course.lecturer}}<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

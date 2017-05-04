@@ -16,7 +16,11 @@
                 <b>{{ 'EMAIL_ADDRESS' | translate }}*</b>
             </label>
             <div class="form-group" ng-class="{'has-danger': editAccountForm.user_email_address.$invalid && !editAccountForm.user_email_address.$pristine}">
-                <input
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-at" aria-hidden="true"></i>
+                    </div>
+                    <input
                     type="email"
                     class="form-control"
                     ng-model="updated_user.email_address"
@@ -26,12 +30,18 @@
                     aria-describedby="inputEmailAddress"
                     required
                     autofocus
-                    autocomplete="on"
+                    autocomplete="email"
                     disabled>
+                </div>
                 <small class="form-text text-muted">{{ 'PLEASE_USE_A_UNIVERSITY_ADDRESS' | translate }}</small>
                 <span ng-show="editAccountForm.user_email_address.$error.required && !editAccountForm.user_email_address.$pristine" class="text-danger">
                     <small>
                         {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+                <span ng-show="editAccountForm.user_email_address.$error.email && !editAccountForm.user_email_address.$pristine" class="text-danger">
+                    <small>
+                        {{ 'NO_VALID_EMAIL_ADDRESS' | translate }}
                     </small>
                 </span>
             </div>
@@ -49,8 +59,7 @@
                             name="title"
                             id="title"
                             placeholder="{{ 'TITLE' | translate }}"
-                            aria-describedby="inputTitle"
-                            autocomplete="on">
+                            aria-describedby="inputTitle">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
@@ -67,7 +76,7 @@
                             placeholder="{{ 'FIRST_NAME' | translate }}"
                             aria-describedby="inputFirstName"
                             required
-                            autocomplete="on">
+                            autocomplete="given-name">
                         <span ng-show="editAccountForm.email_address.$error.required && !editAccountForm.email_address.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}
@@ -89,7 +98,7 @@
                             placeholder="{{ 'LAST_NAME' | translate }}"
                             aria-describedby="inputLastName"
                             required
-                            autocomplete="on">
+                            autocomplete="family-name">
                         <span ng-show="editAccountForm.email_address.$error.required && !editAccountForm.email_address.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}
@@ -106,15 +115,22 @@
                         <b>{{ 'UNIVERSITY' | translate }}*</b>
                     </label>
                     <div class="form-group" ng-class="{'has-danger': editAccountForm.university_id.$invalid && !editAccountForm.university_id.$pristine }">
-                        <select
-                            class="custom-select form-control"
-                            id="university_id"
-                            name="university_id"
-                            ng-model="university_id"
-                            ng-options="university.university_id as university.university_name for university in universities"
-                            ng-change="updateInstitutes()"
-                            disabled>
-                        </select>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-university" aria-hidden="true"></i>
+                            </div>
+                            <select
+                                class="custom-select form-control"
+                                id="university_id"
+                                name="university_id"
+                                ng-model="university_id"
+                                ng-options="university.university_id as university.university_name for university in universities"
+                                disabled>
+                                <option value="">
+                                    {{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}
+                                </option>
+                            </select>
+                        </div>
                     </div>
                     <span ng-show="editAccountForm.university_id.$error.required && !editAccountForm.university_id.$pristine" class="text-danger">
                         <small>
@@ -124,18 +140,32 @@
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <label>
-                        <b>{{ 'INSTITUTE' | translate }}</b>
+                        <b>{{ 'INSTITUTE' | translate }}*</b>
                     </label>
-                    <select
-                        class="custom-select form-control"
-                        id="institute_id"
-                        name="institute_id"
-                        ng-model="updated_user.institute_id"
-                        ng-options="institute.institute_id as institute.institute_name for institute in institutes"
-                        disabled
-                        required>
-                        <option value="">{{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}</option>
-                    </select>
+                    <div class="form-group" ng-class="{'has-danger': editAccountForm.institute_id.$invalid && !editAccountForm.institute_id.$pristine }">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-building" aria-hidden="true"></i>
+                            </div>
+                            <select
+                                class="custom-select form-control"
+                                id="institute_id"
+                                name="institute_id"
+                                ng-model="updated_user.institute_id"
+                                ng-options="institute.institute_id as institute.institute_name for institute in institutes"
+                                disabled
+                                required>
+                                <option value="">
+                                    {{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}
+                                </option>
+                            </select>
+                        </div>
+                        <span ng-show="editAccountForm.institute_id.$error.required && !editAccountForm.institute_id.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
                 </div>
             </div>
             <br>

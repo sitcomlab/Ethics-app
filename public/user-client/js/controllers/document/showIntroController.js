@@ -210,7 +210,6 @@ app.controller("documentShowIntroController", function($scope, $rootScope, $rout
     $scope.document = $documentService.get();
     $scope.updated_document = $documentService.copy($scope.document);
     $scope.authenticated_user = $authenticationService.get();
-    $scope.$parent.loading = { status: false, message: "" };
 
     // Load universities
     $scope.load('universities');
@@ -231,4 +230,6 @@ app.controller("documentShowIntroController", function($scope, $rootScope, $rout
     } else {
         $scope.changeTab(1);
     }
+    $scope.$parent.loading = { status: false, message: "" };
+    
 });

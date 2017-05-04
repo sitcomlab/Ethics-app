@@ -21,7 +21,7 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
      * [description]
      * @return {[type]} [description]
      */
-    $scope.closeDocument = function(){
+    $scope.closeOverview = function(){
         $scope.$parent.loading = { status: true, message: "Saving notes" };
 
         // Save notes

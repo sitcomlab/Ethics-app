@@ -24,12 +24,12 @@
             <p>{{ 'COURSE_DESCRIPTION_1' | translate }}</p>
             <p>{{ 'COURSE_DESCRIPTION_2' | translate }}</p>
         </div>
-        </br>
+        <br>
 
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <label>
-                    <b>{{ 'UNIVERSITY' | translate }}*</b>
+                    <b>{{ 'UNIVERSITY' | translate }}</b>
                 </label>
                 <div class="input-group">
                     <div class="input-group-addon">
@@ -41,9 +41,7 @@
                         name="university_id"
                         ng-model="university_id"
                         ng-options="university.university_id as university.university_name for university in universities"
-                        disabled
-                        required
-                    >
+                        disabled>
                         <option value="">
                             {{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}
                         </option>
@@ -57,7 +55,7 @@
                 </label>
                 <div class="input-group">
                     <div class="input-group-addon">
-                        <i class="fa fa-university" aria-hidden="true"></i>
+                        <i class="fa fa-building" aria-hidden="true"></i>
                     </div>
                     <select
                         class="custom-select form-control"
@@ -65,9 +63,7 @@
                         name="institute_id"
                         ng-model="institute_id"
                         ng-options="institute.institute_id as institute.institute_name for institute in institutes"
-                        disabled
-                        required
-                    >
+                        disabled>
                         <option value="">
                             {{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}
                         </option>
@@ -77,7 +73,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <label>
-                    <b>{{ 'COURSE' | translate }}</b>
+                    <b>{{ 'COURSE' | translate }}</b><small></small>
                 </label>
                 <div class="input-group">
                     <div class="input-group-addon">
