@@ -88,7 +88,11 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $r
                 $scope.$parent.loading = { status: true, message: "Loading universities" };
 
                 // Load universities
-                $universityService.list({ orderby: 'name.asc' })
+                $universityService.list({
+                    orderby: 'name.asc',
+                    limit: null,
+                    offset: null
+                })
                 .then(function onSuccess(response) {
                     $scope.universities = response.data;
                     $scope.$parent.loading = { status: false, message: "" };
@@ -104,7 +108,12 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $r
                         $scope.$parent.loading = { status: true, message: "Loading institutes" };
 
                         // Load related institutes
-                        $instituteService.listByUniversity($scope.university_id, { orderby: 'name.asc' })
+                        $instituteService.listByUniversity($scope.university_id, {
+                            orderby: 'name.asc',
+                            limit: null,
+                            offset: null,
+                            former: null
+                        })
                         .then(function onSuccess(response) {
                             $scope.institutes = response.data;
                             $scope.$parent.loading = { status: false, message: "" };
@@ -132,7 +141,12 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $r
                         $scope.$parent.loading = { status: true, message: "Loading courses" };
 
                         // Load related courses
-                        $courseService.listByInstitute($scope.institute_id, { orderby: 'year.desc' })
+                        $courseService.listByInstitute($scope.institute_id, {
+                            orderby: 'year.desc',
+                            limit: null,
+                            offset: null,
+                            former: false
+                        })
                         .then(function onSuccess(response) {
                             $scope.courses = response.data;
                             $scope.$parent.loading = { status: false, message: "" };
@@ -209,5 +223,5 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $r
     .catch(function onError(response) {
         $window.alert(response.data);
     });
-    
+
 });

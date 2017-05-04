@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <div class="card">
-    <form class="form-horizontal" name="createUserForm" ng-submit="send()">
+    <form class="form-horizontal" autocomplete="on" name="createUserForm" ng-submit="send()">
         <div class="card-header" style="font-size: 20pt;">
             <div class="row">
                 <div class="col">
@@ -33,7 +33,7 @@
                         aria-describedby="inputEmailAddress"
                         required
                         autofocus
-                        autocomplete="on">
+                        autocomplete="email" x-autocomplete="email">
                 </div>
                 <small class="form-text text-muted">
                     {{ 'PLEASE_USE_A_UNIVERSITY_ADDRESS' | translate }}
@@ -65,7 +65,7 @@
                             id="title"
                             placeholder="{{ 'TITLE' | translate }}"
                             aria-describedby="inputTitle"
-                            autocomplete="on">
+                            autocomplete="honorific-prefix" x-autocomplete="name-prefix">
                     </div>
                     <br>
                 </div>
@@ -83,7 +83,7 @@
                             placeholder="{{ 'FIRST_NAME' | translate }}"
                             aria-describedby="inputFirstName"
                             required
-                            autocomplete="on">
+                            autocomplete="given-name" x-autocomplete="given-name">
                         <span ng-show="createUserForm.first_name.$error.required && !createUserForm.first_name.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}
@@ -106,7 +106,7 @@
                             placeholder="{{ 'LAST_NAME' | translate }}"
                             aria-describedby="inputLastName"
                             required
-                            autocomplete="on">
+                            autocomplete="family-name" x-autocomplete="surname">
                         <span ng-show="createUserForm.last_name.$error.required && !createUserForm.last_name.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}

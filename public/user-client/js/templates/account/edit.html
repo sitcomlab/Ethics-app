@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <div class="card">
-    <form class="form-horizontal" name="editAccountForm" ng-submit="save()">
+    <form class="form-horizontal" autocomplete="on" name="editAccountForm" ng-submit="save()">
         <div class="card-header" style="font-size: 20pt;">
             <div class="row">
                 <div class="col">{{ 'YOUR_ACCOUNT' | translate }}</div>
@@ -30,7 +30,7 @@
                     aria-describedby="inputEmailAddress"
                     required
                     autofocus
-                    autocomplete="email"
+                    autocomplete="email" x-autocomplete="email"
                     disabled>
                 </div>
                 <small class="form-text text-muted">{{ 'PLEASE_USE_A_UNIVERSITY_ADDRESS' | translate }}</small>
@@ -59,7 +59,8 @@
                             name="title"
                             id="title"
                             placeholder="{{ 'TITLE' | translate }}"
-                            aria-describedby="inputTitle">
+                            aria-describedby="inputTitle"
+                            autocomplete="honorific-prefix" x-autocomplete="name-prefix">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
@@ -76,7 +77,7 @@
                             placeholder="{{ 'FIRST_NAME' | translate }}"
                             aria-describedby="inputFirstName"
                             required
-                            autocomplete="given-name">
+                            autocomplete="given-name" x-autocomplete="given-name">
                         <span ng-show="editAccountForm.email_address.$error.required && !editAccountForm.email_address.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}
@@ -98,7 +99,7 @@
                             placeholder="{{ 'LAST_NAME' | translate }}"
                             aria-describedby="inputLastName"
                             required
-                            autocomplete="family-name">
+                            autocomplete="family-name" x-autocomplete="surname">
                         <span ng-show="editAccountForm.email_address.$error.required && !editAccountForm.email_address.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}

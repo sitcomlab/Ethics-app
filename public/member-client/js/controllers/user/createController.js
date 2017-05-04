@@ -73,7 +73,11 @@ app.controller("userCreateController", function($scope, $rootScope, $routeParams
                 $scope.$parent.loading = { status: true, message: "Loading universities" };
 
                 // Load universities
-                $universityService.list($scope.filter)
+                $universityService.list({
+                    orderby: 'name.asc',
+                    limit: null,
+                    offset: null
+                })
                 .then(function onSuccess(response) {
                     $scope.universities = response.data;
                     $scope.$parent.loading = { status: false, message: "" };
@@ -89,7 +93,12 @@ app.controller("userCreateController", function($scope, $rootScope, $routeParams
                         $scope.$parent.loading = { status: true, message: "Loading institutes" };
 
                         // Load related institutes
-                        $instituteService.listByUniversity($scope.university_id, $scope.filter)
+                        $instituteService.listByUniversity($scope.university_id, {
+                            orderby: 'name.asc',
+                            limit: null,
+                            offset: null,
+                            former: false
+                        })
                         .then(function onSuccess(response) {
                             $scope.institutes = response.data;
                             $scope.$parent.loading = { status: false, message: "" };
@@ -119,9 +128,6 @@ app.controller("userCreateController", function($scope, $rootScope, $routeParams
      *************************************************/
     $scope.new_user = $userService.init();
     $scope.authenticated_member = $authenticationService.get();
-
-    // Filter
-    $scope.filter = { former: false };
 
     // Load universities
     $scope.load('universities');

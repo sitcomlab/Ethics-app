@@ -18,7 +18,7 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
             return {
                 working_group_name: "",
                 institute_id: null,
-                former: fals
+                former: false
             };
         },
         copy: function(working_group){

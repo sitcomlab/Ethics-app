@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="card-block">
-        <form class="form-horizontal" name="resetForm" ng-submit="save()">
+        <form class="form-horizontal" autocomplete="on" name="resetForm" ng-submit="save()">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                     <label>
@@ -32,7 +32,6 @@
                                 ng-minlength="14"
                                 required
                                 autofocus
-                                autocomplete="on"
                             >
                         </div>
                         <small class="form-text text-muted">{{ 'MIN_LENGTH' | translate }}</small>

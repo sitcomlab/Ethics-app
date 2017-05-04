@@ -101,7 +101,9 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
 
                 // Load universities
                 $universityService.list({
-                    orderby: 'name.asc'
+                    orderby: 'name.asc',
+                    limit: null,
+                    offset: null
                 })
                 .then(function onSuccess(response) {
                     $scope.universities = response.data;
@@ -119,7 +121,10 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
 
                         // Load related institutes
                         $instituteService.listByUniversity($scope.university_id, {
-                            orderby: 'name.asc'
+                            orderby: 'name.asc',
+                            limit: null,
+                            offset: null,
+                            former: null
                         })
                         .then(function onSuccess(response) {
                             $scope.institutes = response.data;
@@ -158,7 +163,9 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
                         // Load related members
                         $memberService.listByInstitute($scope.updated_course.institute_id, {
                             orderby: 'name.asc',
-                            former: false
+                            limit: null,
+                            offset: null,
+                            former: null
                         })
                         .then(function onSuccess(response) {
                             $scope.members = response.data;
@@ -207,7 +214,9 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
         // Load related institutes
         $instituteService.listByUniversity($scope.university_id, {
             orderby: 'name.asc',
-            former: false
+            limit: null,
+            offset: null,
+            former: null
         })
         .then(function onSuccess(response) {
             $scope.institutes = response.data;
@@ -215,7 +224,10 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
 
             // Load related members
             $memberService.listByInstitute($scope.updated_course.institute_id, {
-                orderby: 'name.asc'
+                orderby: 'name.asc',
+                limit: null,
+                offset: null,
+                former: null
             })
             .then(function onSuccess(response) {
                 $scope.members = response.data;

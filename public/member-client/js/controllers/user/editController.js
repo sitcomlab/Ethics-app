@@ -75,7 +75,12 @@ app.controller("userEditController", function($scope, $rootScope, $routeParams, 
                         $scope.$parent.loading = { status: true, message: "Loading institutes" };
 
                         // Load related institutes
-                        $instituteService.listByUniversity($scope.university_id, $scope.filter)
+                        $instituteService.listByUniversity($scope.university_id, {
+                            orderby: 'name.asc',
+                            limit: null,
+                            offset: null,
+                            former: null
+                        })
                         .then(function onSuccess(response) {
                             $scope.institutes = response.data;
                             $scope.$parent.loading = { status: false, message: "" };
@@ -104,9 +109,6 @@ app.controller("userEditController", function($scope, $rootScope, $routeParams, 
         INIT
      *************************************************/
     $scope.$parent.loading = { status: true, message: "Loading user" };
-
-    // Filter
-    $scope.filter = { former: false };
 
     // Load user
     $userService.retrieve($routeParams.user_id)

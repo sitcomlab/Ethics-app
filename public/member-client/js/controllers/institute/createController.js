@@ -50,11 +50,14 @@ app.controller("instituteCreateController", function($scope, $rootScope, $routeP
      * @return {[type]}              [description]
      */
     $scope.loadUniversities = function(){
-
       $scope.$parent.loading = { status: true, message: "Loading universities" };
 
       // Load universities
-      $universityService.list($scope.filter)
+      $universityService.list({
+          orderby: 'name.asc',
+          limit: null,
+          offset: null
+      })
       .then(function onSuccess(response) {
           $scope.universities = response.data;
           $scope.$parent.loading = { status: false, message: "" };
@@ -70,9 +73,6 @@ app.controller("instituteCreateController", function($scope, $rootScope, $routeP
      *************************************************/
     $scope.new_institute = $instituteService.init();
     $scope.authenticated_member = $authenticationService.get();
-
-    // Filter
-    $scope.filter = { former: false };
 
     // Load universities
     $scope.loadUniversities();

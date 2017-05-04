@@ -110,7 +110,11 @@ app.controller("accountEditController", function($scope, $rootScope, $routeParam
                 $scope.$parent.loading = { status: true, message: "Loading universities" };
 
                 // Load universities
-                $universityService.list($scope.filter)
+                $universityService.list({
+                    orderby: 'name.asc',
+                    limit: null,
+                    offset: null
+                })
                 .then(function onSuccess(response) {
                     $scope.universities = response.data;
                     $scope.$parent.loading = { status: false, message: "" };
@@ -126,7 +130,12 @@ app.controller("accountEditController", function($scope, $rootScope, $routeParam
                         $scope.$parent.loading = { status: true, message: "Loading institutes" };
 
                         // Load related institutes
-                        $instituteService.listByUniversity($scope.university_id, $scope.filter)
+                        $instituteService.listByUniversity($scope.university_id, {
+                            orderby: 'name.asc',
+                            limit: null,
+                            offset: null,
+                            former: null
+                        })
                         .then(function onSuccess(response) {
                             $scope.institutes = response.data;
                             $scope.$parent.loading = { status: false, message: "" };
@@ -154,7 +163,12 @@ app.controller("accountEditController", function($scope, $rootScope, $routeParam
                         $scope.$parent.loading = { status: true, message: "Loading working groups" };
 
                         // Load related working groups
-                        $workingGroupService.listByInstitute($scope.institute_id, $scope.filter)
+                        $workingGroupService.listByInstitute($scope.institute_id, {
+                            orderby: 'name.asc',
+                            limit: null,
+                            offset: null,
+                            former: null
+                        })
                         .then(function onSuccess(response) {
                             $scope.working_groups = response.data;
                             $scope.$parent.loading = { status: false, message: "" };
@@ -190,9 +204,6 @@ app.controller("accountEditController", function($scope, $rootScope, $routeParam
     .then(function onSuccess(response) {
         $scope.member = response.data;
         $scope.updated_member = $memberService.copy($scope.member);
-
-        // Filter
-        $scope.filter = { former: false };
 
         // Load universities
         $scope.load('universities');

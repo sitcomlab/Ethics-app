@@ -102,7 +102,9 @@ app.controller("courseCreateController", function($scope, $rootScope, $routePara
 
                 // Load universities
                 $universityService.list({
-                    orderby: 'name.asc'
+                    orderby: 'name.asc',
+                    limit: null,
+                    offset: null
                 })
                 .then(function onSuccess(response) {
                     $scope.universities = response.data;
@@ -121,6 +123,8 @@ app.controller("courseCreateController", function($scope, $rootScope, $routePara
                         // Load related institutes
                         $instituteService.listByUniversity($scope.university_id, {
                             orderby: 'name.asc',
+                            limit: null,
+                            offset: null,
                             former: false
                         })
                         .then(function onSuccess(response) {
@@ -160,6 +164,8 @@ app.controller("courseCreateController", function($scope, $rootScope, $routePara
                         // Load related members
                         $memberService.listByInstitute($scope.new_course.institute_id, {
                             orderby: 'name.asc',
+                            limit: null,
+                            offset: null,
                             former: false
                         })
                         .then(function onSuccess(response) {

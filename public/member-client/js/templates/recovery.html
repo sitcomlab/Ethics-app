@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="card-block">
-        <form class="form-horizontal" name="recoveryForm" ng-submit="send()">
+        <form class="form-horizontal" autocomplete="on" name="recoveryForm" ng-submit="send()">
             <label>
                 <b>{{ 'EMAIL_ADDRESS' | translate }}*</b>
             </label>
@@ -29,7 +29,7 @@
                             placeholder="{{ 'EMAIL_ADDRESS' | translate }}"
                             aria-describedby="inputEmailAddress"
                             autofocus
-                            autocomplete="on"
+                            autocomplete="email" x-autocomplete="email"
                             required>
                         <span ng-show="recoveryForm.email_address.$error.required && !recoveryForm.email_address.$pristine" class="text-danger">
                             <small>

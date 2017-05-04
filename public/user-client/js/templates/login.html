@@ -11,7 +11,7 @@
     <br>
 </div>
 <div class="card" style="padding: 30px 10px 20px 10px; background-color: #f7f7f9;">
-    <form class="form-horizontal" name="loginForm" ng-submit="send()">
+    <form class="form-horizontal" autocomplete="on" name="loginForm" ng-submit="send()">
         <div class="card-block">
             <label>
                 {{ 'DOCUMENT_ID' | translate }}*
@@ -29,8 +29,7 @@
                                 placeholder="{{ 'DOCUMENT_ID' | translate }}"
                                 aria-describedby="inputDocumentId"
                                 required
-                                autofocus
-                                autocomplete="on">
+                                autofocus>
                             <span class="input-group-btn" ng-if="login.document_id != null ">
                                 <button class="btn btn-secondary" type="button" ng-click="login.document_id=null">
                                     <i class="fa fa-times" aria-hidden="true"></i>

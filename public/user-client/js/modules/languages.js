@@ -404,7 +404,7 @@ app.config(function ($translateProvider) {
         OFFICE_ROOM_NUMBER: 'Office (room number)',
         OFFICE_PHONE_NUMBER: 'Office (phone number)',
         OFFICE_EMAIL_ADDRESS: 'Office (email-address)',
-        PLEASE_USE_A_UNIVERSITY_NUMBER: 'Please use an official university number',
+        PLEASE_USE_A_UNIVERSITY_NUMBER: 'Please use an official university number in the format',
 
         EXPLANATION_OF_THE_ADMIN_ROLE: 'If you give a member admin priviliges, he/she has gets full access to all data in the database and he/she can administrate it. As an administrator you can create new universities, insitutes, working groups, members and update or archive them.',
         EXPLANATION_OF_THE_FORMER_STATUS_OF_A_MEMBER: 'With this setting you can archive a member, so the member account is no longer accessible. All data is still be stored in the database. It is the recommended way, because deleting a member also, deletes all related reviews.',

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <div class="card">
-    <form class="form-horizontal" name="editMemberForm" ng-submit="save()">
+    <form class="form-horizontal" autocomplete="on" name="editMemberForm" ng-submit="save()">
         <div class="card-header" style="font-size: 20pt;">
             <div class="row">
                 <div class="col">
@@ -33,7 +33,7 @@
                         aria-describedby="inputEmailAddress"
                         required
                         autofocus
-                        autocomplete="on">
+                        autocomplete="email" x-autocomplete="email">
                 </div>
                 <small class="form-text text-muted">{{ 'PLEASE_USE_A_UNIVERSITY_ADDRESS' | translate }}</small>
                 <span ng-show="editMemberForm.email_address.$error.required && !editMemberForm.email_address.$pristine" class="text-danger">
@@ -180,7 +180,7 @@
                             id="title"
                             placeholder="{{ 'TITLE' | translate }}"
                             aria-describedby="inputTitle"
-                            autocomplete="on">
+                            autocomplete="honorific-prefix" x-autocomplete="name-prefix">
                     </div>
                     <br>
                 </div>
@@ -198,7 +198,7 @@
                             placeholder="{{ 'FIRST_NAME' | translate }}"
                             aria-describedby="inputFirstName"
                             required
-                            autocomplete="on">
+                            autocomplete="given-name" x-autocomplete="given-name">
                         <span ng-show="editMemberForm.first_name.$error.required && !editMemberForm.first_name.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}
@@ -221,7 +221,7 @@
                             placeholder="{{ 'LAST_NAME' | translate }}"
                             aria-describedby="inputLastName"
                             required
-                            autocomplete="on">
+                            autocomplete="family-name" x-autocomplete="surname">
                         <span ng-show="editMemberForm.last_name.$error.required && !editMemberForm.last_name.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}
@@ -365,9 +365,10 @@
                                 id="office_phone_number"
                                 placeholder="{{ 'PHONE_NUMBER' | translate }}"
                                 aria-describedby="inputOfficePhoneNumber"
+                                autocomplete="tel" x-autocomplete="phone-full"
                             >
                         </div>
-                        <small class="form-text text-muted">{{ 'PLEASE_USE_A_UNIVERSITY_NUMBER' | translate }}</small>
+                        <small class="form-text text-muted">{{ 'PLEASE_USE_A_UNIVERSITY_NUMBER' | translate }}: <code>+49251...</code></small>
                         <span ng-show="editMemberForm.office_phone_number.$error.required && !editMemberForm.office_phone_number.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}
@@ -394,7 +395,7 @@
                                 placeholder="{{ 'EMAIL_ADDRESS' | translate }}"
                                 aria-describedby="inputOfficeEmailAddress"
                                 required
-                                autocomplete="on"
+                                autocomplete="email" x-autocomplete="email"
                             >
                         </div>
                         <small class="form-text text-muted">{{ 'PLEASE_USE_A_UNIVERSITY_ADDRESS' | translate }}</small>
@@ -474,8 +475,6 @@
                 </div>
             </div>
 
-
-
             <label>
                 <b>{{ 'FORMER_STATUS' | translate }}*</b>
             </label>
@@ -535,7 +534,6 @@
                     <br>
                 </div>
             </div>
-
 
             <label>
                 <b>{{ 'SUBSCRIBED_STATUS' | translate }}*</b>
