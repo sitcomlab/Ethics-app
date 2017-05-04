@@ -19,20 +19,30 @@
                 <b>{{ 'EMAIL_ADDRESS' | translate }}*</b>
             </label>
             <div class="form-group" ng-class="{'has-danger': createDocumentForm.document_email_address.$invalid && !createDocumentForm.document_email_address.$pristine}">
-                <input
-                    type="email"
-                    class="form-control"
-                    ng-model="new_document.email_address"
-                    name="document_email_address"
-                    id="document_email_address"
-                    placeholder="{{ 'EMAIL_ADDRESS' | translate }}"
-                    aria-describedby="inputEmailAddress"
-                    required
-                    autofocus
-                    autocomplete="on">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-at" aria-hidden="true"></i>
+                    </div>
+                    <input
+                        type="email"
+                        class="form-control"
+                        ng-model="new_document.email_address"
+                        name="document_email_address"
+                        id="document_email_address"
+                        placeholder="{{ 'EMAIL_ADDRESS' | translate }}"
+                        aria-describedby="inputEmailAddress"
+                        required
+                        autofocus
+                        autocomplete="on">
+                </div>
                 <span ng-show="createDocumentForm.document_email_address.$error.required && !createDocumentForm.document_email_address.$pristine" class="text-danger">
                     <small>
                         {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+                <span ng-show="createDocumentForm.document_email_address.$error.email && !createDocumentForm.document_email_address.$pristine" class="text-danger">
+                    <small>
+                        {{ 'NO_VALID_EMAIL_ADDRESS' | translate }}
                     </small>
                 </span>
             </div>
@@ -61,38 +71,7 @@
                     </small>
                 </span>
             </div>
-            <br>
 
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <label>
-                        <b>{{ 'INSTITUTE' | translate }} <small>({{ 'OPTIONAL' | translate }})</small></b>
-                    </label>
-                    <select
-                        class="custom-select form-control"
-                        id="_institute_id"
-                        name="_institute_id"
-                        ng-model="_institute_id"
-                        ng-options="institute.institute_id as institute.institute_name group by institute.university_name for institute in institutes"
-                        ng-change="updateCourses()">
-                        <option value="">{{ 'NO_INSTITUTE' | translate }}</option>
-                    </select>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <label>
-                        <b>{{ 'COURSE' | translate }} <small>({{ 'OPTIONAL' | translate }})</small></b>
-                    </label>
-                    <select
-                        class="custom-select form-control"
-                        id="course_id"
-                        name="course_id"
-                        ng-model="new_document.course_id"
-                        ng-options="course.course_id as course.course_name group by course.season for course in courses"
-                        ng-disabled="_institute_id == null || _institute_id == '' ">
-                        <option value="">{{ 'NO_COURSE' | translate }}</option>
-                    </select>
-                </div>
-            </div>
         </div>
         <div class="card-footer right">
             <button class="btn btn-success" role="submit">
@@ -122,21 +101,31 @@
                 <b>{{ 'EMAIL_ADDRESS' | translate }}*</b>
             </label>
             <div class="form-group" ng-class="{'has-danger': createUserForm.user_email_address.$invalid && !createUserForm.user_email_address.$pristine}">
-                <input
-                    type="email"
-                    class="form-control"
-                    ng-model="new_user.email_address"
-                    name="user_email_address"
-                    id="user_email_address"
-                    placeholder="{{ 'EMAIL_ADDRESS' | translate }}"
-                    aria-describedby="inputEmailAddress"
-                    required
-                    autofocus
-                    autocomplete="on">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-at" aria-hidden="true"></i>
+                    </div>
+                    <input
+                        type="email"
+                        class="form-control"
+                        ng-model="new_user.email_address"
+                        name="user_email_address"
+                        id="user_email_address"
+                        placeholder="{{ 'EMAIL_ADDRESS' | translate }}"
+                        aria-describedby="inputEmailAddress"
+                        required
+                        autofocus
+                        autocomplete="email">
+                </div>
                 <small class="form-text text-muted">{{ 'PLEASE_USE_A_UNIVERSITY_ADDRESS' | translate }}</small>
                 <span ng-show="createUserForm.user_email_address.$error.required && !createUserForm.user_email_address.$pristine" class="text-danger">
                     <small>
                         {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+                <span ng-show="createUserForm.user_email_address.$error.email && !createUserForm.user_email_address.$pristine" class="text-danger">
+                    <small>
+                        {{ 'NO_VALID_EMAIL_ADDRESS' | translate }}
                     </small>
                 </span>
             </div>
@@ -154,8 +143,7 @@
                             name="title"
                             id="title"
                             placeholder="{{ 'TITLE' | translate }}"
-                            aria-describedby="inputTitle"
-                            autocomplete="on">
+                            aria-describedby="inputTitle">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
@@ -172,8 +160,8 @@
                             placeholder="{{ 'FIRST_NAME' | translate }}"
                             aria-describedby="inputFirstName"
                             required
-                            autocomplete="on">
-                        <span ng-show="createUserForm.email_address.$error.required && !createUserForm.email_address.$pristine" class="text-danger">
+                            autocomplete="given-name">
+                        <span ng-show="createUserForm.first_name.$error.required && !createUserForm.first_name.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}
                             </small>
@@ -194,8 +182,8 @@
                             placeholder="{{ 'LAST_NAME' | translate }}"
                             aria-describedby="inputLastName"
                             required
-                            autocomplete="on">
-                        <span ng-show="createUserForm.email_address.$error.required && !createUserForm.email_address.$pristine" class="text-danger">
+                            autocomplete="family-name">
+                        <span ng-show="createUserForm.last_name.$error.required && !createUserForm.last_name.$pristine" class="text-danger">
                             <small>
                                 {{ 'REQUIRED' | translate }}
                             </small>
@@ -210,33 +198,53 @@
                         <b>{{ 'UNIVERSITY' | translate }}*</b>
                     </label>
                     <div class="form-group" ng-class="{'has-danger': createUserForm.university_id.$invalid && !createUserForm.university_id.$pristine }">
-                        <select
-                            class="custom-select form-control"
-                            id="university_id"
-                            name="university_id"
-                            ng-model="university_id"
-                            ng-options="university.university_id as university.university_name for university in universities"
-                            ng-change="updateInstitutes()"
-                        >
-                            <option value="">{{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}</option>
-                        </select>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-university" aria-hidden="true"></i>
+                            </div>
+                            <select
+                                class="custom-select form-control"
+                                id="university_id"
+                                name="university_id"
+                                ng-model="university_id"
+                                ng-options="university.university_id as university.university_name for university in universities"
+                                ng-change="load('institutes')"
+                                required
+                            >
+                                <option value="">
+                                    {{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}
+                                </option>
+                            </select>
+                        </div>
                     </div>
+                    <span ng-show="createUserForm.university_id.$error.required && !createUserForm.university_id.$pristine" class="text-danger">
+                        <small>
+                            {{ 'REQUIRED' | translate }}
+                        </small>
+                    </span>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <label>
                         <b>{{ 'INSTITUTE' | translate }}</b>
                     </label>
-                    <select
-                        class="custom-select form-control"
-                        id="institute_id"
-                        name="institute_id"
-                        ng-model="new_user.institute_id"
-                        ng-options="institute.institute_id as institute.institute_name for institute in institutes"
-                        ng-disabled="university_id == null"
-                        required
-                    >
-                        <option value="">{{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}</option>
-                    </select>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-university" aria-hidden="true"></i>
+                        </div>
+                        <select
+                            class="custom-select form-control"
+                            id="institute_id"
+                            name="institute_id"
+                            ng-model="new_user.institute_id"
+                            ng-options="institute.institute_id as institute.institute_name for institute in institutes"
+                            ng-disabled="university_id == null"
+                            required
+                        >
+                            <option value="">
+                                {{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}
+                            </option>
+                        </select>
+                    </div>
                     <span ng-show="createUserForm.institute_id.$error.required && !createUserForm.institute_id.$pristine" class="text-danger">
                         <small>
                             {{ 'REQUIRED' | translate }}
