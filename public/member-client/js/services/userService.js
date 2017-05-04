@@ -59,7 +59,7 @@ app.factory('$userService', function($http, $log, config, $authenticationService
             if(filter.offset && filter.offset !== null){
                 query = query + "offset=" + filter.offset + "&";
             }
-            if(filter.offset && filter.limit !== null){
+            if(filter.limit && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
             if(filter.blocked !== null){
@@ -83,7 +83,7 @@ app.factory('$userService', function($http, $log, config, $authenticationService
             if(filter.limit && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
-            if(filter.blocked && filter.blocked !== null){
+            if(filter.blocked !== null){
                 query = query + "blocked=" + filter.blocked + "&";
             }
 
@@ -105,7 +105,7 @@ app.factory('$userService', function($http, $log, config, $authenticationService
             if(filter.limit && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
-            if(filter.blocked){
+            if(filter.blocked !== null){
                 query = query + "blocked=" + filter.blocked + "&";
             }
 
