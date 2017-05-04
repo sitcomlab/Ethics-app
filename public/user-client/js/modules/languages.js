@@ -57,8 +57,23 @@ app.config(function ($translateProvider) {
         SEARCH_FOR_WORKING_GROUPS: 'Search for working groups',
 
         NO_FILTER: 'No filter',
+        FILTER_BY_COURSE: 'Filter by course',
         FILTER_BY_STATUS: 'Filter by status',
         SORT_BY: 'Sort by',
+        WITH_A_COURSE: 'With a course',
+        WITHOUT_A_COURSE: 'Without a course',
+        CREATED_ASC: 'Created ascending',
+        CREATED_DESC: 'Created descending',
+        UPDATED_ASC: 'Updated ascending',
+        UPDATED_DESC: 'Updated descending',
+        STATUS_ASC: 'Status number ascending',
+        STATUS_DESC: 'Status number descending',
+        TITLE_ASC: 'Title ascending',
+        TITLE_DESC: 'Title descending',
+        NAME_ASC: 'Name ascending',
+        NAME_DESC: 'Name descending',
+        YEAR_ASC: 'Year ascending',
+        YEAR_DESC: 'Year descending',
 
         DELETE_THIS_DOCUMENT: 'Do you really want to delete this document',
         PLEASE_TYPE_IN_THE_TITLE_OF_THE_DOCUMENT_TO_CONFIRM: 'Please type in the title of the document to confirm',
@@ -96,6 +111,8 @@ app.config(function ($translateProvider) {
         WORKING_GROUP_NAME: 'Working group name',
         PLEASE_TYPE_IN_THE_WORKING_GROUP_NAME_TO_CONFIRM: 'Please tpe in the name of the working group to confirm',
         ALTERNATIVE_WORKING_GROUP: 'If you don\'t want to delete EVERYTHING associated with this working group you can change it to a former working group',
+
+        COURSE_DESCRIPTION: 'If you are creating this document for a study, which is part of course, please reference it to the corresponding course. If you are creating the document for a personal study, just click next.',
 
         INTRODUCTION_TEXT_FRAGMENT_1: 'This Web-App will guide you in creating the necessary forms for your user study. You will be asked a series of questions, based on which the Ethics-App will auto-generate three documents.',
         INTRODUCTION_TEXT_FRAGMENT_2: 'The Informed Consent form',
@@ -150,7 +167,7 @@ app.config(function ($translateProvider) {
         ACCEPTED: 'accepted',
         AUTO_ACCEPTED: 'auto accepted',
         PARTLY_ACCEPTED: 'partly accepted',
-        ACCEPTED_AND_AUTO_ACCEPTED: 'accepted and auto accepted',
+        AUTO_ACCEPTED_AND_ACCEPTED: 'auto accepted and accepted',
         REVIEWED_ACCEPTED: 'reviewed (accepted)',
         REVIEWED_PARTLY_ACCEPTED: 'reviewed (partly accepted)',
         REVIEWED_REJECTED: 'reviewed (rejected)',
@@ -178,14 +195,14 @@ app.config(function ($translateProvider) {
 
         DESCRIPTION_1_INFO: '',
         DESCRIPTION_2_INFO: '',
-        DESCRIPTION_3_INFO: 'Specify the period during which you will be collecting the data. If you do not know the exact staring and ending dates, specify in "month-year" format.',
+        DESCRIPTION_3_INFO: 'Specify the period during which you will be collecting the data. If you do not know the exact staring and ending dates, specify in \'month-year\' format.',
         DESCRIPTION_4_INFO: 'In a few sentences, describe the theme and purpose of the study (do not get very technical - the content of this box should be understandable to your participants).',
         DESCRIPTION_5_INFO: 'Keep this limited to a few sentences. Do not describe the details of your experimental design, but make sure that you mention all important actions which are required from the participants.',
         DESCRIPTION_6_INFO: 'Try to give a conservative estimate which will be higher then the average completion time. If you have not used a similar procedure in the past, you can run a simple pilot study to estimate this.',
         DESCRIPTION_7_INFO: 'Potential risks include (but are not limited to): walking on stairs, nausea (e.g. in Virtual Reality studies), spending time in confined spaces (e.g. lifts), cycling, operating vehicles (including simple ones like sport equipment), navigating in crowded or heavy-traffic areas, observing quickly changing or blinking stimuli (e.g. in computer-based studies), interacting with potentially strong emotional content (e.g. viewing pictures), wearing any additional electronics (eye-tracker, sensors), any activities that might cause physical effort or pain (e.g. attaching movement sensors to the body).',
         DESCRIPTION_8_INFO: 'For instance a monetary payment, or a lottery voucher.',
 
-        CONCERNS_INFO: 'Complete the checklist below. If you have answered "yes" to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the ifgi-Ethics Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the ifgi\'s Ethics Committee.',
+        CONCERNS_INFO: 'Complete the checklist below. If you have answered \'yes\' to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the ifgi-Ethics Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the ifgi\'s Ethics Committee.',
 
         CONCERN_1: 'Will the study involve potentially vulnerable groups of participants or people who are unable or unauthorized to give informed consent',
         CONCERN_2: 'Will the study involve deception',

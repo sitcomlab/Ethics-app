@@ -100,7 +100,9 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
                 $scope.$parent.loading = { status: true, message: "Loading universities" };
 
                 // Load universities
-                $universityService.list($scope.filter)
+                $universityService.list({
+                    orderby: 'name.asc'
+                })
                 .then(function onSuccess(response) {
                     $scope.universities = response.data;
                     $scope.$parent.loading = { status: false, message: "" };
@@ -116,7 +118,9 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
                         $scope.$parent.loading = { status: true, message: "Loading institutes" };
 
                         // Load related institutes
-                        $instituteService.listByUniversity($scope.university_id, $scope.filter)
+                        $instituteService.listByUniversity($scope.university_id, {
+                            orderby: 'name.asc'
+                        })
                         .then(function onSuccess(response) {
                             $scope.institutes = response.data;
                             $scope.$parent.loading = { status: false, message: "" };
@@ -152,7 +156,10 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
                         $scope.$parent.loading = { status: true, message: "Loading members" };
 
                         // Load related members
-                        $memberService.listByInstitute($scope.updated_course.institute_id, $scope.filter)
+                        $memberService.listByInstitute($scope.updated_course.institute_id, {
+                            orderby: 'name.asc',
+                            former: false
+                        })
                         .then(function onSuccess(response) {
                             $scope.members = response.data;
                             $scope.$parent.loading = { status: false, message: "" };
@@ -186,8 +193,6 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
     $scope.selectedMember = {};
     $scope.responsible_members = [];
 
-    // Filter
-    $scope.filter = { former: false };
 
     // Load course
     $courseService.retrieve($routeParams.course_id)
@@ -200,13 +205,18 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
         $scope.load('universities');
 
         // Load related institutes
-        $instituteService.listByUniversity($scope.university_id, $scope.filter)
+        $instituteService.listByUniversity($scope.university_id, {
+            orderby: 'name.asc',
+            former: false
+        })
         .then(function onSuccess(response) {
             $scope.institutes = response.data;
             $scope.$parent.loading = { status: false, message: "" };
 
             // Load related members
-            $memberService.listByInstitute($scope.updated_course.institute_id, $scope.filter)
+            $memberService.listByInstitute($scope.updated_course.institute_id, {
+                orderby: 'name.asc'
+            })
             .then(function onSuccess(response) {
                 $scope.members = response.data;
                 $scope.$parent.loading = { status: false, message: "" };

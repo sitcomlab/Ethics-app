@@ -18,36 +18,34 @@ app.controller("courseDetailsController", function($scope, $rootScope, $routePar
     };
 
 
-        /**
-         * [description]
-         * @param  {[type]} related_data [description]
-         * @param  {[type]} status       [description]
-         * @return {[type]}              [description]
-         */
-        $scope.changeTab = function(related_data, status){
-            // Set filter
-            $scope.filter = {
-                tab: related_data,
-                offset: 0,
-                limit: 50
-            };
-
-            switch (related_data) {
-                case 'documents': {
-                    $scope.filter.orderby = 'created.desc';
-                    $scope.filter.former = status;
-                    $scope.filter.blocked = status;
-                    break;
-                }
-                case 'members': {
-                    $scope.filter.orderby = 'name.asc';
-                    $scope.filter.former = status;
-                    $scope.filter.blocked = status;
-                    break;
-                }
-            }
-            $scope.load(related_data);
+    /**
+     * [description]
+     * @param  {[type]} related_data [description]
+     * @param  {[type]} status       [description]
+     * @return {[type]}              [description]
+     */
+    $scope.changeTab = function(related_data, status){
+        // Set filter
+        $scope.filter = {
+            tab: related_data,
+            offset: 0,
+            limit: 50
         };
+
+        switch (related_data) {
+            case 'documents': {
+                $scope.filter.orderby = 'created.desc';
+                $scope.filter.former = status;
+                break;
+            }
+            case 'members': {
+                $scope.filter.orderby = 'name.asc';
+                $scope.filter.former = status;
+                break;
+            }
+        }
+        $scope.load(related_data);
+    };
 
     /**
      * [description]
@@ -157,8 +155,7 @@ app.controller("courseDetailsController", function($scope, $rootScope, $routePar
         offset: 0,
         limit: 50,
         orderby: 'created.desc',
-        former: false,
-        blocked: false
+        former: false
     };
 
     // Load course

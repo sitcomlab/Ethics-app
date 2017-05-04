@@ -9,21 +9,21 @@ app.controller("documentCreateController", function($scope, $rootScope, $filter,
      *************************************************/
 
     /**
-     * [changeTab description]
-     * @param  {[type]} tab [description]
-     * @return {[type]}     [description]
-     */
-    $scope.changeTab = function(tab){
-      $scope.tab = tab;
-    };
-
-    /**
      * [redirect description]
      * @param  {[type]} path [description]
      * @return {[type]}      [description]
      */
     $scope.redirect = function(path){
         $location.url(path);
+    };
+
+    /**
+     * [changeTab description]
+     * @param  {[type]} tab [description]
+     * @return {[type]}     [description]
+     */
+    $scope.changeTab = function(tab){
+      $scope.tab = tab;
     };
 
     /**
@@ -122,26 +122,6 @@ app.controller("documentCreateController", function($scope, $rootScope, $filter,
     };
 
     /**
-     * [updateCourses description]
-     * @return {[type]} [description]
-     */
-    // DEPRECATED
-    $scope.updateCourses = function(){
-        $scope.new_document.course_id = null;
-        $scope.courses = $courseService.getByInstitute($scope._institute_id);
-    };
-
-    /**
-     * [updateInstitutes description]
-     * @return {[type]} [description]
-     */
-    // DEPRACATED
-    $scope.updateInstitutes = function(){
-        $scope.new_user.institute_id = null;
-        $scope.institutes = $instituteService.getByUniversity($scope.university_id);
-    };
-
-    /**
      * [description]
      * @param  {[type]} related_data [description]
      * @return {[type]}              [description]
@@ -154,7 +134,9 @@ app.controller("documentCreateController", function($scope, $rootScope, $filter,
 
                 // Load universities
                 $universityService.list({
-                    orderby: 'name.asc'
+                    orderby: 'name.asc',
+                    limit: null,
+                    offset: null
                 })
                 .then(function onSuccess(response) {
                     $scope.universities = response.data;
@@ -173,7 +155,9 @@ app.controller("documentCreateController", function($scope, $rootScope, $filter,
                         // Load related institutes
                         $instituteService.listByUniversity($scope.university_id, {
                             orderby: 'name.asc',
-                            former: false
+                            former: false,
+                            limit: null,
+                            offset: null
                         })
                         .then(function onSuccess(response) {
                             $scope.institutes = response.data;

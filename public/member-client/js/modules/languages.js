@@ -112,6 +112,10 @@ app.config(function ($translateProvider) {
         PLEASE_TYPE_IN_THE_WORKING_GROUP_NAME_TO_CONFIRM: 'Please tpe in the name of the working group to confirm',
         ALTERNATIVE_WORKING_GROUP: 'If you don\'t want to delete EVERYTHING associated with this working group you can change it to a former working group',
 
+        RELATED_COURSE: 'Related course',
+        COURSE_DESCRIPTION_1: 'If you are creating this document for a course, please reference it to it. If you can not find it, please ask your lecturer, to add it to this list (It is possible to change the course later in the document settings).',
+        COURSE_DESCRIPTION_2: 'If you are creating the document for a personal study, for example your thesis, then you don\'t need to reference a course.',
+
         INTRODUCTION_TEXT_FRAGMENT_1: 'This Web-App will guide you in creating the necessary forms for your user study. You will be asked a series of questions, based on which the Ethics-App will auto-generate three documents.',
         INTRODUCTION_TEXT_FRAGMENT_2: 'The Informed Consent form',
         INTRODUCTION_TEXT_FRAGMENT_3: 'This is the most important document. It assures that the Participant gave his consent prior to participating in the study. Both you and your participant must sign the document, and you need to store your copy safely. Conducting a study without the written consent of the participant is not advised and can lead to various legal issues.',
@@ -225,7 +229,7 @@ app.config(function ($translateProvider) {
         CONCERN_6_INFO: '',
         CONCERN_7_INFO: 'For instance: attaching anything to participant\'s body, requiring participants to perform physically demanding gestures or poses, operating equipment.',
         CONCERN_8_INFO: '',
-        CONCERN_9_INFO: 'If yes: list those parties, approval to use this data (if applicable) and whether participants will be aware of the data aggregation process.',
+        CONCERN_9_INFO: 'If \'yes\': list those parties, approval to use this data (if applicable) and whether participants will be aware of the data aggregation process.',
         CONCERN_10_INFO: 'For instance: mobile HCI studies in heavy-traffic areas, navigational tasks in-the-wild without following, Virtual Reality studies.',
         CONCERN_11_1_INFO: 'For instance: spoken-aloud personal information, video recording of faces.',
         CONCERN_11_2_INFO: '',
