@@ -81,7 +81,7 @@ exports.request = function(req, res) {
             params.push(req.query.orderby || 'name.asc');
 
             // Filter by blocked status
-            params.push(req.query.blocked || false );
+            params.push(String(req.query.blocked));
 
             // Filter by institute
             params.push(req.params.institute_id);

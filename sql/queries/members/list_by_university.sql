@@ -21,7 +21,12 @@ FROM Members member
     JOIN Institutes institute ON institute.institute_id = working_group.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
 WHERE
-        member.former=$4::BOOLEAN
+    (
+        CASE
+            WHEN $4::TEXT='undefined' THEN (member.former=true OR member.former=false)
+            ELSE member.former=$4::BOOLEAN
+        END
+    )
     AND
         university.university_id=$5::INTEGER
 ORDER BY

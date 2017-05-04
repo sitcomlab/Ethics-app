@@ -8,7 +8,12 @@ SELECT
 FROM Institutes institute
     JOIN Universities university ON university.university_id = institute.university_id
 WHERE
-        institute.former=$4::BOOLEAN
+    (
+        CASE
+            WHEN $4::TEXT='undefined' THEN (institute.former=true OR institute.former=false)
+            ELSE institute.former=$4::BOOLEAN
+        END
+    )
     AND
         institute.university_id=$5::INTEGER
 ORDER BY

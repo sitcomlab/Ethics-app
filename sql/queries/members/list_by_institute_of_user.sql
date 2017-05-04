@@ -20,11 +20,16 @@ FROM Members member
     JOIN Institutes institute ON institute.institute_id = working_group.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
 WHERE
-        member.secret=false
-    AND
-        member.former=$4::BOOLEAN
+    (
+        CASE
+            WHEN $4::TEXT='undefined' THEN (member.former=true OR member.former=false)
+            ELSE member.former=$4::BOOLEAN
+        END
+    )
     AND
         institute.institute_id=$5::INTEGER
+    AND
+        member.secret=false
 ORDER BY
     CASE
         WHEN $3::TEXT='created.asc' THEN member.created END ASC,

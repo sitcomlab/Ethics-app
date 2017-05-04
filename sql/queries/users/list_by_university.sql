@@ -14,7 +14,12 @@ FROM Users _user
     JOIN Institutes institute ON institute.institute_id = _user.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
 WHERE
-        _user.blocked=$4::BOOLEAN
+    (
+        CASE
+            WHEN $4::TEXT='undefined' THEN (_user.blocked=true OR _user.blocked=false)
+            ELSE _user.blocked=$4::BOOLEAN
+        END
+    )
     AND
         university.university_id=$5::INTEGER
 ORDER BY

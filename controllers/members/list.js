@@ -98,7 +98,7 @@ exports.request = function(req, res) {
             params.push(req.query.orderby || 'name.asc');
 
             // Filter by former status
-            params.push(req.query.former || false );
+            params.push(String(req.query.former));
 
             // Filter by institute
             if(member){

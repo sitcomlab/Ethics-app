@@ -20,7 +20,7 @@ FROM Members member
     JOIN Institutes institute ON institute.institute_id = working_group.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
 WHERE
-    member.admin != true
+    member.secret != true
 ORDER BY
     CASE
         WHEN $3::TEXT='created.asc' THEN member.created END ASC,

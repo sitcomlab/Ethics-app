@@ -13,6 +13,7 @@ var fs = require("fs");
 var dir_1 = "/../../sql/queries/institutes/";
 var dir_2 = "/../../sql/queries/members/";
 var query_get_institute = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
+var query_get_member = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
 var query_list_members_by_institute = fs.readFileSync(__dirname + dir_2 + 'list_by_institute.sql', 'utf8').toString();
 
 
@@ -40,8 +41,32 @@ exports.request = function(req, res) {
                     if(err){
                         callback(new Error("Authorization failed"), 401);
                     } else {
-                        if(decoded.member && decoded.admin){
-                            callback(null, client, done);
+                        if(decoded.member){
+                            if(decoded.admin){
+                                callback(null, client, done);
+                            } else {
+                                // Database query
+                                client.query(query_get_member, [
+                                    decoded.member_id
+                                ], function(err, result) {
+                                    done();
+                                    if (err) {
+                                        callback(err, 500);
+                                    } else {
+                                        // Check if Member exists
+                                        if (result.rows.length === 0) {
+                                            callback(new Error("Member not found"), 404);
+                                        } else {
+                                            // Check if the member is authorized for this institute
+                                            if(result.rows[0].institute_id === Number(req.params.institute_id)){
+                                                callback(null, client, done);
+                                            } else {
+                                                callback(new Error("Authorization failed"), 401);
+                                            }
+                                        }
+                                    }
+                                });
+                            }
                         } else {
                             callback(new Error("Authorization failed"), 401);
                         }
@@ -81,7 +106,7 @@ exports.request = function(req, res) {
             params.push(req.query.orderby || 'name.asc');
 
             // Filter by former status
-            params.push(req.query.former || false );
+            params.push(String(req.query.former));
 
             // Filter by institute
             params.push(req.params.institute_id);
