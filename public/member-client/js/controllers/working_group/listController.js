@@ -75,7 +75,7 @@ app.controller("workingGroupListController", function($scope, $rootScope, $filte
      */
     $scope.applyFilter = function(){
         $workingGroupService.set();
-        $workingGroupService.setFilter($scope.filter);
+        $workingGroupService.setCachedFilter($scope.filter);
         $scope.working_groups = $workingGroupService.get();
         $scope.load();
     };
@@ -88,7 +88,7 @@ app.controller("workingGroupListController", function($scope, $rootScope, $filte
     $scope.changeOffset = function(offset){
         $scope.filter.offset = offset;
         $workingGroupService.set();
-        $workingGroupService.setFilter($scope.filter);
+        $workingGroupService.setCachedFilter($scope.filter);
         $scope.working_groups = $workingGroupService.get();
         $scope.load();
     };
@@ -98,7 +98,7 @@ app.controller("workingGroupListController", function($scope, $rootScope, $filte
      *************************************************/
 
     // Load working groups
-    $scope.filter = $workingGroupService.getFilter();
+    $scope.filter = $workingGroupService.getCachedFilter();
     $scope.applyFilter();
 
 });

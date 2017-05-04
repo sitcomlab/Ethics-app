@@ -64,7 +64,7 @@ app.controller("universityListController", function($scope, $rootScope, $filter,
      */
     $scope.applyFilter = function(){
         $universityService.set();
-        $universityService.setFilter($scope.filter);
+        $universityService.setCachedFilter($scope.filter);
         $scope.universities = $universityService.get();
         $scope.load();
     };
@@ -77,7 +77,7 @@ app.controller("universityListController", function($scope, $rootScope, $filter,
     $scope.changeOffset = function(offset){
         $scope.filter.offset = offset;
         $universityService.set();
-        $universityService.setFilter($scope.filter);
+        $universityService.setCachedFilter($scope.filter);
         $scope.universities = $universityService.get();
         $scope.load();
     };
@@ -88,7 +88,7 @@ app.controller("universityListController", function($scope, $rootScope, $filter,
      *************************************************/
 
     // Load universities
-    $scope.filter = $universityService.getFilter();
+    $scope.filter = $universityService.getCachedFilter();
     $scope.applyFilter();
 
 });

@@ -227,7 +227,7 @@ app.controller("documentCreateController", function($scope, $rootScope, $filter,
     $scope.$parent.loading = { status: true, message: "Initialising new document" };
     $scope.new_document = $documentService.init();
     $scope.new_user = $userService.init();
-    $scope.filter = $universityService.getFilter();
+    $scope.filter = $universityService.getCachedFilter();
 
     // App agreement
     $scope.agreement = {

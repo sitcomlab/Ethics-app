@@ -5,7 +5,7 @@ var app = angular.module("courseService", []);
 app.factory('$courseService', function($http, $log, config, $authenticationService, _) {
 
     var courses;
-    var filter = {
+    var cached_filter = {
         offset: 0,
         limit: 50,
         orderby: "year.desc"
@@ -37,8 +37,8 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
         get: function(){
             return courses;
         },
-        getFilter: function(){
-            return filter;
+        getCachedFilter: function(){
+            return cached_filter;
         },
         getCount: function(){
             return full_count;
@@ -46,8 +46,8 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
         set: function(data){
             courses = data;
         },
-        setFilter: function(data) {
-            filter = data;
+        setCachedFilter: function(data) {
+            cached_filter = data;
         },
         setCount: function(data) {
             full_count = data;

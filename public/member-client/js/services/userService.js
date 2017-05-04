@@ -5,7 +5,7 @@ var app = angular.module("userService", []);
 app.factory('$userService', function($http, $log, config, $authenticationService) {
 
     var users;
-    var filter = {
+    var cached_filter = {
         offset: 0,
         limit: 50,
         blocked: false,
@@ -38,8 +38,8 @@ app.factory('$userService', function($http, $log, config, $authenticationService
         get: function(){
             return users;
         },
-        getFilter: function(){
-            return filter;
+        getCachedFilter: function(){
+            return cached_filter;
         },
         getCount: function(){
             return full_count;
@@ -47,8 +47,8 @@ app.factory('$userService', function($http, $log, config, $authenticationService
         set: function(data){
             users = data;
         },
-        setFilter: function(data) {
-            filter = data;
+        setCachedFilter: function(data) {
+            cached_filter = data;
         },
         setCount: function(data) {
             full_count = data;
@@ -56,10 +56,10 @@ app.factory('$userService', function($http, $log, config, $authenticationService
         list: function(filter) {
             var query = "?orderby=" + filter.orderby + "&";
 
-            if(filter.offset !== null){
+            if(filter.offset && filter.offset !== null){
                 query = query + "offset=" + filter.offset + "&";
             }
-            if(filter.limit !== null){
+            if(filter.offset && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
             if(filter.blocked !== null){

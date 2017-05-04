@@ -75,7 +75,7 @@ app.controller("userListController", function($scope, $rootScope, $filter, $tran
      */
     $scope.applyFilter = function(){
         $userService.set();
-        $userService.setFilter($scope.filter);
+        $userService.setCachedFilter($scope.filter);
         $scope.users = $userService.get();
         $scope.load();
     };
@@ -88,7 +88,7 @@ app.controller("userListController", function($scope, $rootScope, $filter, $tran
     $scope.changeOffset = function(offset){
         $scope.filter.offset = offset;
         $userService.set();
-        $userService.setFilter($scope.filter);
+        $userService.setCachedFilter($scope.filter);
         $scope.users = $userService.get();
         $scope.load();
     };
@@ -99,6 +99,6 @@ app.controller("userListController", function($scope, $rootScope, $filter, $tran
      *************************************************/
 
     // Load users
-    $scope.filter = $userService.getFilter();
+    $scope.filter = $userService.getCachedFilter();
     $scope.applyFilter();
 });

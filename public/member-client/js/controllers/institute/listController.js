@@ -75,7 +75,7 @@ app.controller("instituteListController", function($scope, $rootScope, $filter, 
      */
     $scope.applyFilter = function(){
         $instituteService.set();
-        $instituteService.setFilter($scope.filter);
+        $instituteService.setCachedFilter($scope.filter);
         $scope.institutes = $instituteService.get();
         $scope.load();
     };
@@ -88,7 +88,7 @@ app.controller("instituteListController", function($scope, $rootScope, $filter, 
     $scope.changeOffset = function(offset){
         $scope.filter.offset = offset;
         $instituteService.set();
-        $instituteService.setFilter($scope.filter);
+        $instituteService.setCachedFilter($scope.filter);
         $scope.institutes = $instituteService.get();
         $scope.load();
     };
@@ -99,7 +99,7 @@ app.controller("instituteListController", function($scope, $rootScope, $filter, 
      *************************************************/
 
     // Load institutes
-    $scope.filter = $instituteService.getFilter();
+    $scope.filter = $instituteService.getCachedFilter();
     $scope.applyFilter();
 
 });

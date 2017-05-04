@@ -5,7 +5,7 @@ var app = angular.module("instituteService", []);
 app.factory('$instituteService', function($http, $log, config, $authenticationService, _) {
 
     var institutes;
-    var filter = {
+    var cached_filter = {
         offset: 0,
         limit: null,
         former: null,
@@ -17,11 +17,17 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
         get: function(){
             return institutes;
         },
+        getCachedFilter: function(){
+            return cached_filter;
+        },
         getByUniversity: function(university_id){ // DEPRECATED
             return _.where(institutes, {university_id: university_id});
         },
         set: function(data){
             institutes = data;
+        },
+        setCachedFilter: function(data){
+            cached_filter = data;
         },
         list: function(filter) {
             var query = "?orderby=" + filter.orderby + "&";
@@ -32,7 +38,7 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
             if(filter.limit && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
-            if(filter.former && filter.former !== null){
+            if(filter.former !== null){
                 query = query + "former=" + filter.former + "&";
             }
 
@@ -56,7 +62,7 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
             if(filter.limit && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
-            if(filter.former && filter.former !== null){
+            if(filter.former !== null){
                 query = query + "former=" + filter.former + "&";
             }
 

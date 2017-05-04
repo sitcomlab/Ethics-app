@@ -5,7 +5,7 @@ var app = angular.module("workingGroupService", []);
 app.factory('$workingGroupService', function($http, $log, config, $authenticationService) {
 
     var working_groups;
-    var filter = {
+    var cached_filter = {
         offset: 0,
         limit: 50,
         former: false,
@@ -32,8 +32,8 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
         get: function(){
             return working_groups;
         },
-        getFilter: function(){
-            return filter;
+        getCachedFilter: function(){
+            return cached_filter;
         },
         getCount: function(){
             return full_count;
@@ -41,8 +41,8 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
         set: function(data){
             working_groups = data;
         },
-        setFilter: function(data) {
-            filter = data;
+        setCachedFilter: function(data) {
+            cached_filter = data;
         },
         setCount: function(data) {
             full_count = data;
@@ -56,7 +56,7 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
             if(filter.limit && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
-            if(filter.former && filter.former !== null){
+            if(filter.former !== null){
                 query = query + "former=" + filter.former + "&";
             }
 
@@ -77,7 +77,7 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
             if(filter.limit && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
-            if(filter.former && filter.former !== null){
+            if(filter.former !== null){
                 query = query + "former=" + filter.former + "&";
             }
 

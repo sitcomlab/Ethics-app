@@ -5,7 +5,7 @@ var app = angular.module("courseService", []);
 app.factory('$courseService', function($http, $log, config, $authenticationService, _) {
 
     var courses;
-    var filter = {
+    var cached_filter = {
         offset: 0,
         limit: null,
         former: null,
@@ -16,6 +16,9 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
     return {
         get: function(){
             return courses;
+        },
+        getCachedFilter: function(){
+            return cached_filter;
         },
         getByInstitute: function(institute_id){ // DEPRECATED
             return _.where(courses, {institute_id: institute_id});
@@ -31,6 +34,9 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
         set: function(data){
             courses = data;
         },
+        setCachedFilter: function(data){
+            cached_filter = data;
+        },
         list: function(filter) {
             var query = "?orderby=" + filter.orderby + "&";
 
@@ -40,7 +46,7 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
             if(filter.limit && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
-            if(filter.former && filter.former !== null){
+            if(filter.former !== null){
                 query = query + "former=" + filter.former + "&";
             }
 
@@ -63,7 +69,7 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
             if(filter.limit && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
-            if(filter.former && filter.former !== null){
+            if(filter.former !== null){
                 query = query + "former=" + filter.former + "&";
             }
 

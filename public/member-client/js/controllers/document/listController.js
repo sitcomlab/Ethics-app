@@ -87,7 +87,7 @@ app.controller("documentListController", function($scope, $rootScope, $filter, $
      */
     $scope.applyFilter = function(){
         $documentsService.set();
-        $documentsService.setFilter($scope.filter);
+        $documentsService.setCachedFilter($scope.filter);
         $scope.documents = $documentsService.get();
         $scope.load();
         $scope.run();
@@ -101,7 +101,7 @@ app.controller("documentListController", function($scope, $rootScope, $filter, $
     $scope.changeOffset = function(offset){
         $scope.filter.offset = offset;
         $documentsService.set();
-        $documentsService.setFilter($scope.filter);
+        $documentsService.setCachedFilter($scope.filter);
         $scope.documents = $documentsService.get();
         $scope.load();
         $scope.run();
@@ -125,7 +125,7 @@ app.controller("documentListController", function($scope, $rootScope, $filter, $
     $scope.authenticated_member = $authenticationService.get();
 
     // Load documents with applied filter (default: documents, which need to be reviewed) and start the interval
-    $scope.filter = $documentsService.getFilter();
+    $scope.filter = $documentsService.getCachedFilter();
     $scope.applyFilter();
 
 });

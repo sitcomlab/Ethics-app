@@ -5,7 +5,7 @@ var app = angular.module("universityService", []);
 app.factory('$universityService', function($http, $log, config, $authenticationService) {
 
     var universities;
-    var filter = {
+    var cached_filter = {
         offset: 0,
         limit: 50,
         orderby: "name.asc"
@@ -26,8 +26,8 @@ app.factory('$universityService', function($http, $log, config, $authenticationS
         get: function(){
             return universities;
         },
-        getFilter: function(){
-            return filter;
+        getCachedFilter: function(){
+            return cached_filter;
         },
         getCount: function(){
             return full_count;
@@ -35,8 +35,8 @@ app.factory('$universityService', function($http, $log, config, $authenticationS
         set: function(data){
             universities = data;
         },
-        setFilter: function(data) {
-            filter = data;
+        setCachedFilter: function(data) {
+            cached_filter = data;
         },
         setCount: function(data) {
             full_count = data;

@@ -5,7 +5,7 @@ var app = angular.module("documentsService", []);
 app.factory('$documentsService', function($http, $log, config, $authenticationService) {
 
     var documents;
-    var filter = {
+    var cached_filter = {
         offset: 0,
         limit: 50,
         orderby: "created.desc",
@@ -18,8 +18,8 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
         get: function() {
             return documents;
         },
-        getFilter: function(){
-            return filter;
+        getCachedFilter: function(){
+            return cached_filter;
         },
         getCount: function(){
             return full_count;
@@ -27,8 +27,8 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
         set: function(data) {
             documents = data;
         },
-        setFilter: function(data) {
-            filter = data;
+        setCachedFilter: function(data) {
+            cached_filter = data;
         },
         setCount: function(data) {
             full_count = data;

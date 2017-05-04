@@ -64,7 +64,7 @@ app.controller("courseListController", function($scope, $rootScope, $filter, $tr
      */
     $scope.applyFilter = function(){
         $courseService.set();
-        $courseService.setFilter($scope.filter);
+        $courseService.setCachedFilter($scope.filter);
         $scope.courses = $courseService.get();
         $scope.load();
     };
@@ -77,7 +77,7 @@ app.controller("courseListController", function($scope, $rootScope, $filter, $tr
     $scope.changeOffset = function(offset){
         $scope.filter.offset = offset;
         $courseService.set();
-        $courseService.setFilter($scope.filter);
+        $courseService.setCachedFilter($scope.filter);
         $scope.courses = $courseService.get();
         $scope.load();
     };
@@ -88,7 +88,7 @@ app.controller("courseListController", function($scope, $rootScope, $filter, $tr
      *************************************************/
 
     // Load courses
-    $scope.filter = $courseService.getFilter();
+    $scope.filter = $courseService.getCachedFilter();
     $scope.applyFilter();
 
 });

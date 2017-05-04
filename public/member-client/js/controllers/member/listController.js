@@ -75,7 +75,7 @@ app.controller("memberListController", function($scope, $rootScope, $filter, $tr
      */
     $scope.applyFilter = function(){
         $memberService.set();
-        $memberService.setFilter($scope.filter);
+        $memberService.setCachedFilter($scope.filter);
         $scope.members = $memberService.get();
         $scope.load();
     };
@@ -88,7 +88,7 @@ app.controller("memberListController", function($scope, $rootScope, $filter, $tr
     $scope.changeOffset = function(offset){
         $scope.filter.offset = offset;
         $memberService.set();
-        $memberService.setFilter($scope.filter);
+        $memberService.setCachedFilter($scope.filter);
         $scope.members = $memberService.get();
         $scope.load();
     };
@@ -100,7 +100,7 @@ app.controller("memberListController", function($scope, $rootScope, $filter, $tr
     $scope.authenticated_member = $authenticationService.get();
 
     // Load members
-    $scope.filter = $memberService.getFilter();
+    $scope.filter = $memberService.getCachedFilter();
     $scope.applyFilter();
 
 });

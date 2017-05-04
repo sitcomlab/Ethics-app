@@ -5,7 +5,7 @@ var app = angular.module("memberService", []);
 app.factory('$memberService', function($http, $log, config, $authenticationService) {
 
     var members;
-    var filter = {
+    var cached_filter = {
         offset: 0,
         limit: 50,
         former: false,
@@ -52,8 +52,8 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
         get: function(){
             return members;
         },
-        getFilter: function(){
-            return filter;
+        getCachedFilter: function(){
+            return cached_filter;
         },
         getCount: function(){
             return full_count;
@@ -61,8 +61,8 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
         set: function(data){
             members = data;
         },
-        setFilter: function(data) {
-            filter = data;
+        setCachedFilter: function(data) {
+            cached_filter = data;
         },
         setCount: function(data) {
             full_count = data;
@@ -76,7 +76,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             if(filter.limit && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
-            if(filter.former && filter.former !== null){
+            if(filter.former !== null){
                 query = query + "former=" + filter.former + "&";
             }
 
@@ -97,7 +97,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             if(filter.limit && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
-            if(filter.former && filter.former !== null){
+            if(filter.former !== null){
                 query = query + "former=" + filter.former + "&";
             }
 
@@ -119,7 +119,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             if(filter.limit && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
-            if(filter.former && filter.former !== null){
+            if(filter.former !== null){
                 query = query + "former=" + filter.former + "&";
             }
 
@@ -140,7 +140,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             if(filter.limit && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
-            if(filter.former && filter.former !== null){
+            if(filter.former !== null){
                 query = query + "former=" + filter.former + "&";
             }
 
@@ -161,7 +161,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
             if(filter.limit && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
-            if(filter.former && filter.former !== null){
+            if(filter.former !== null){
                 query = query + "former=" + filter.former + "&";
             }
 

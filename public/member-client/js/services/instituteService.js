@@ -5,7 +5,7 @@ var app = angular.module("instituteService", []);
 app.factory('$instituteService', function($http, $log, config, $authenticationService) {
 
     var institutes;
-    var filter = {
+    var cached_filter = {
         offset: 0,
         limit: 50,
         former: false,
@@ -31,8 +31,8 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
         get: function(){
             return institutes;
         },
-        getFilter: function(){
-            return filter;
+        getCachedFilter: function(){
+            return cached_filter;
         },
         getCount: function(){
             return full_count;
@@ -40,8 +40,8 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
         set: function(data){
             institutes = data;
         },
-        setFilter: function(data) {
-            filter = data;
+        setCachedFilter: function(data) {
+            cached_filter = data;
         },
         setCount: function(data) {
             full_count = data;
@@ -55,7 +55,7 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
             if(filter.limit && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
-            if(filter.former && filter.former !== null){
+            if(filter.former !== null){
                 query = query + "former=" + filter.former + "&";
             }
 
@@ -76,7 +76,7 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
             if(filter.limit && filter.limit !== null){
                 query = query + "limit=" + filter.limit + "&";
             }
-            if(filter.former && filter.former !== null){
+            if(filter.former !== null){
                 query = query + "former=" + filter.former + "&";
             }
 
