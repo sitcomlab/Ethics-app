@@ -11,7 +11,12 @@ FROM Working_Groups working_group
     JOIN Institutes institute ON institute.institute_id = working_group.institute_id
     JOIN Universities university ON university.university_id = institute.university_id
 WHERE
-    working_group.former=$4::BOOLEAN
+    (
+        CASE
+            WHEN $4::TEXT='undefined' THEN (working_group.former=true OR working_group.former=false)
+            ELSE working_group.former=$4::BOOLEAN
+        END
+    )
 ORDER BY
     CASE
         WHEN $3::TEXT='created.asc' THEN working_group.created END ASC,
