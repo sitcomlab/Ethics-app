@@ -144,6 +144,76 @@ app.factory('$userService', function($http, $log, config, $authenticationService
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
+        },
+        search: function(filter) {
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "limit=" + filter.limit + "&";
+            }
+            if(filter.blocked !== null){
+                query = query + "blocked=" + filter.blocked + "&";
+            }
+
+            query = query.slice(0, -1);
+
+            return $http.post(config.apiURL + "/search/users" + query, {
+                search_text: filter.search_text
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        searchByUniversity: function(university_id, filter) {
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "limit=" + filter.limit + "&";
+            }
+            if(filter.blocked !== null){
+                query = query + "blocked=" + filter.blocked + "&";
+            }
+
+            query = query.slice(0, -1);
+
+            return $http.post(config.apiURL + "/search/universities/" + university_id + "/users" + query, {
+                search_text: filter.search_text
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        searchByInstitute: function(institute_id, filter) {
+
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "limit=" + filter.limit + "&";
+            }
+            if(filter.blocked !== null){
+                query = query + "blocked=" + filter.blocked + "&";
+            }
+
+            query = query.slice(0, -1);
+
+            return $http.post(config.apiURL + "/search/institutes/" + institute_id + "/users" + query, {
+                search_text: filter.search_text
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
         }
     };
 

@@ -120,7 +120,46 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
                 }
             });
         },
+        searchByCourse: function(course_id, filter){
+            var query = "?orderby=" + filter.orderby + "&";
 
+            if(filter.offset && filter.offset !== null){
+                query = query + "offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "limit=" + filter.limit + "&";
+            }
+
+            query = query.slice(0, -1);
+
+            return $http.post(config.apiURL + "/search/courses/" + course_id + "/documents" + query, {
+                search_text: filter.search_text
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        searchByUser: function(user_id, filter){
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "limit=" + filter.limit + "&";
+            }
+
+            query = query.slice(0, -1);
+
+            return $http.post(config.apiURL + "/search/users/" + user_id + "/documents" + query, {
+                search_text: filter.search_text
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        }
     };
 
 });

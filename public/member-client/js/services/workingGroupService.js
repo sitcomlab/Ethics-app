@@ -116,6 +116,52 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
+        },
+        search: function(filter) {
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "limit=" + filter.limit + "&";
+            }
+            if(filter.former !== null){
+                query = query + "former=" + filter.former + "&";
+            }
+
+            query = query.slice(0, -1);
+
+            return $http.post(config.apiURL + "/search/working_groups" + query, {
+                search_text: filter.search_text
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        searchByInstitute: function(institute_id, filter) {
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "limit=" + filter.limit + "&";
+            }
+            if(filter.former !== null){
+                query = query + "former=" + filter.former + "&";
+            }
+
+            query = query.slice(0, -1);
+
+            return $http.post(config.apiURL + "/search/institutes/" + institute_id + "/working_groups" + query, {
+                search_text: filter.search_text
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
         }
     };
 

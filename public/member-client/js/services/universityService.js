@@ -86,6 +86,26 @@ app.factory('$universityService', function($http, $log, config, $authenticationS
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
+        },
+        search: function(filter) {
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "limit=" + filter.limit + "&";
+            }
+
+            query = query.slice(0, -1);
+
+            return $http.post(config.apiURL + "/search/universities" + query, {
+                search_text: filter.search_text
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
         }
     };
 
