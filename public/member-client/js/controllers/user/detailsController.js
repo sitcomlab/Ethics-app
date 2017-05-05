@@ -28,7 +28,7 @@ app.controller("userDetailsController", function($scope, $rootScope, $routeParam
         $scope.filter = {
             tab: related_data,
             offset: 0,
-            limit: 2
+            limit: 50
         };
 
         switch (related_data) {
@@ -107,7 +107,7 @@ app.controller("userDetailsController", function($scope, $rootScope, $routeParam
     $scope.filter = {
         tab: 'documents',
         offset: 0,
-        limit: 2,
+        limit: 50,
         orderby: 'updated.desc'
     };
 
