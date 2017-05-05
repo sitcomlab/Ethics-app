@@ -32,8 +32,6 @@ app.controller("userListController", function($scope, $rootScope, $filter, $tran
      * @return {[type]} [description]
      */
     $scope.load = function(){
-        $scope.$parent.loading = { status: true, message: "Loading users" };
-
         // Check for a search-text
         if($scope.filter.search_text !== ""){
             // Search users
@@ -140,7 +138,8 @@ app.controller("userListController", function($scope, $rootScope, $filter, $tran
     /*************************************************
         INIT
      *************************************************/
-
+    $scope.$parent.loading = { status: true, message: "Loading users" };
+    
     // Load users
     $scope.filter = $userService.getCachedFilter();
     $scope.applyFilter();

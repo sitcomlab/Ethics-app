@@ -104,8 +104,8 @@
     <div class="card-footer right">
 
         <!-- Pagination -->
-        <nav aria-label="pagination" id="pagination" ng-if="working_groups.length > 0">
-            <ul class="pagination justify-content-center">
+        <nav aria-label="pagination" id="pagination">
+            <ul class="pagination justify-content-center" ng-if="working_groups.length > 0">
                 <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
                     <a href="" class="page-link" ng-click="changeOffset(0)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
@@ -132,10 +132,33 @@
                     </a>
                 </li>
             </ul>
-        </nav>
-
-        <nav ng-if="working_groups.length == 0">
-            <ul>&nbsp;</ul>
+            <ul class="pagination justify-content-center" ng-if="working_groups.length == 0">
+                <li class="page-item disabled">
+                    <div class="page-link" style="background-color: #f7f7f9;">
+                        <b><i class="fa fa-angle-left" aria-hidden="true"></i></b>
+                    </div>
+                </li>
+                <li class="page-item disabled">
+                    <div class="page-link" style="background-color: #f7f7f9;">
+                        <b><i class="fa fa-angle-double-left" aria-hidden="true"></i></b>
+                    </div>
+                </li>
+                <li class="page-item disabled">
+                    <div class="page-link" style="background-color: #f7f7f9;">
+                        0
+                    </div>
+                </li>
+                <li class="page-item disabled">
+                    <div class="page-link" style="background-color: #f7f7f9;">
+                        <b><i class="fa fa-angle-right" aria-hidden="true"></i></b>
+                    </div>
+                </li>
+                <li class="page-item disabled">
+                    <div class="page-link" style="background-color: #f7f7f9;">
+                        <b><i class="fa fa-angle-double-right" aria-hidden="true"></i></b>
+                    </div>
+                </li>
+            </ul>
         </nav>
 
     </div>

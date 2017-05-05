@@ -32,8 +32,6 @@ app.controller("workingGroupListController", function($scope, $rootScope, $filte
      * @return {[type]} [description]
      */
     $scope.load = function(){
-        $scope.$parent.loading = { status: true, message: "Loading working groups" };
-
         // Check for a search-text
         if($scope.filter.search_text !== ""){
             // Search working groups
@@ -139,7 +137,8 @@ app.controller("workingGroupListController", function($scope, $rootScope, $filte
     /*************************************************
         INIT
      *************************************************/
-
+    $scope.$parent.loading = { status: true, message: "Loading working groups" };
+    
     // Load working groups
     $scope.filter = $workingGroupService.getCachedFilter();
     $scope.applyFilter();

@@ -32,8 +32,6 @@ app.controller("memberListController", function($scope, $rootScope, $filter, $tr
      * @return {[type]} [description]
      */
     $scope.load = function(){
-        $scope.$parent.loading = { status: true, message: "Loading committee members" };
-
         // Check for a search-text
         if($scope.filter.search_text !== ""){
             // Search members
@@ -140,6 +138,7 @@ app.controller("memberListController", function($scope, $rootScope, $filter, $tr
     /*************************************************
         INIT
      *************************************************/
+    $scope.$parent.loading = { status: true, message: "Loading committee members" };
     $scope.authenticated_member = $authenticationService.get();
 
     // Load members

@@ -71,7 +71,7 @@
         </ul>
         <br>
 
-        <div class="row" ng-if="members && members.length>0 && !filter.former">
+        <div class="row" ng-if="members.length>0 && !filter.former">
             <div class="col text-muted right">
                 <small>
                     <span class="text-success">
@@ -85,7 +85,7 @@
             </div>
             <br>
         </div>
-        <div class="list-group" ng-if="members && members.length>0">
+        <div class="list-group" ng-if="members.length>0">
             <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in members">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
@@ -118,7 +118,7 @@
                 </div>
             </a>
         </div>
-        <div class="list-group" ng-if="!members || members.length==0">
+        <div class="list-group" ng-if="members.length==0">
             <div class="list-group-item middle">
                 - {{ 'NONE' | translate }} -
             </div>
@@ -129,8 +129,8 @@
     <div class="card-footer right">
 
         <!-- Pagination -->
-        <nav aria-label="pagination" id="pagination" ng-if="members.length > 0">
-            <ul class="pagination justify-content-center">
+        <nav aria-label="pagination" id="pagination">
+            <ul class="pagination justify-content-center" ng-if="members.length > 0">
                 <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
                     <a href="" class="page-link" ng-click="changeOffset(0)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
@@ -157,10 +157,33 @@
                     </a>
                 </li>
             </ul>
-        </nav>
-
-        <nav ng-if="members.length == 0">
-            <ul>&nbsp;</ul>
+            <ul class="pagination justify-content-center" ng-if="members.length == 0">
+                <li class="page-item disabled">
+                    <div class="page-link" style="background-color: #f7f7f9;">
+                        <b><i class="fa fa-angle-left" aria-hidden="true"></i></b>
+                    </div>
+                </li>
+                <li class="page-item disabled">
+                    <div class="page-link" style="background-color: #f7f7f9;">
+                        <b><i class="fa fa-angle-double-left" aria-hidden="true"></i></b>
+                    </div>
+                </li>
+                <li class="page-item disabled">
+                    <div class="page-link" style="background-color: #f7f7f9;">
+                        0
+                    </div>
+                </li>
+                <li class="page-item disabled">
+                    <div class="page-link" style="background-color: #f7f7f9;">
+                        <b><i class="fa fa-angle-right" aria-hidden="true"></i></b>
+                    </div>
+                </li>
+                <li class="page-item disabled">
+                    <div class="page-link" style="background-color: #f7f7f9;">
+                        <b><i class="fa fa-angle-double-right" aria-hidden="true"></i></b>
+                    </div>
+                </li>
+            </ul>
         </nav>
 
     </div>

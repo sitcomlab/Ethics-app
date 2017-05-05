@@ -22,8 +22,6 @@ app.controller("courseListController", function($scope, $rootScope, $filter, $tr
      * @return {[type]} [description]
      */
     $scope.load = function(){
-        $scope.$parent.loading = { status: true, message: "Loading courses" };
-
         // Check for a search-text
         if($scope.filter.search_text !== ""){
             // Search courses
@@ -130,7 +128,8 @@ app.controller("courseListController", function($scope, $rootScope, $filter, $tr
     /*************************************************
         INIT
      *************************************************/
-
+    $scope.$parent.loading = { status: true, message: "Loading courses" };
+    
     // Load courses
     $scope.filter = $courseService.getCachedFilter();
     $scope.applyFilter();

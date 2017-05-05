@@ -22,8 +22,6 @@ app.controller("universityListController", function($scope, $rootScope, $filter,
      * @return {[type]} [description]
      */
     $scope.load = function(){
-        $scope.$parent.loading = { status: true, message: "Loading universities" };
-
         // Check for a search-text
         if($scope.filter.search_text !== ""){
             // Search universities
@@ -130,7 +128,8 @@ app.controller("universityListController", function($scope, $rootScope, $filter,
     /*************************************************
         INIT
      *************************************************/
-
+    $scope.$parent.loading = { status: true, message: "Loading universities" };
+    
     // Load universities
     $scope.filter = $universityService.getCachedFilter();
     $scope.applyFilter();
