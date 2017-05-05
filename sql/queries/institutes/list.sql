@@ -1,6 +1,8 @@
 SELECT
     COUNT(*) OVER()::NUMERIC AS full_count,
     institute.institute_id,
+    institute.created,
+    institute.updated,
     institute.institute_name,
     institute.former,
     university.university_id,

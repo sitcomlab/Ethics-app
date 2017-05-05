@@ -1,6 +1,8 @@
 SELECT
     COUNT(*) OVER()::NUMERIC AS full_count,
     _user.user_id,
+    _user.created,
+    _user.updated,
     _user.email_address,
     _user.title,
     _user.first_name,

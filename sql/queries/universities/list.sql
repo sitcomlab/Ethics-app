@@ -1,6 +1,8 @@
 SELECT
     COUNT(*) OVER()::NUMERIC AS full_count,
     university.university_id,
+    university.created,
+    university.updated,
     university.university_name
 FROM Universities university
 ORDER BY

@@ -1,5 +1,7 @@
 SELECT
     member.member_id,
+    member.created,
+    member.updated,
     member.email_address,
     member.title,
     member.first_name,

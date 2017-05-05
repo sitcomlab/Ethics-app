@@ -1,6 +1,8 @@
 SELECT
     COUNT(*) OVER()::NUMERIC AS full_count,
     working_group.working_group_id,
+    working_group.created,
+    working_group.updated,
     working_group.working_group_name,
     working_group.former,
     institute.institute_id,

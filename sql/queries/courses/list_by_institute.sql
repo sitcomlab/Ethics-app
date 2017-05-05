@@ -1,6 +1,8 @@
 SELECT
     COUNT(*) OVER()::NUMERIC AS full_count,
     course.course_id,
+    course.created,
+    course.updated,
     course.course_name,
     course.year,
     course.term,
