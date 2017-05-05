@@ -10,13 +10,13 @@ var server_url = require('../../server.js').server_url;
 var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
-var dir_1 = "/../../sql/queries/users/";
+var dir_1 = "/../../sql/queries/courses/";
 var dir_2 = "/../../sql/queries/documents/";
-var query_get_user = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
-var query_list_documents_by_user = fs.readFileSync(__dirname + dir_2 + 'list_by_user.sql', 'utf8').toString();
+var query_get_course = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
+var query_search_documents_by_course = fs.readFileSync(__dirname + dir_2 + 'search_by_course.sql', 'utf8').toString();
 
 
-// LIST BY USER
+// SEARCH BY COURSE
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -53,16 +53,16 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_get_user, [
-                req.params.user_id
+            client.query(query_get_course, [
+                req.params.course_id
             ], function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    // Check if User exists
+                    // Check if Course exists
                     if (result.rows.length === 0) {
-                        callback(new Error("User not found"), 404);
+                        callback(new Error("Course not found"), 404);
                     } else {
                         callback(null, client, done);
                     }
@@ -74,20 +74,20 @@ exports.request = function(req, res) {
             var params = [];
 
             // Pagination parameters
-            params.push(Number(req.query.offset) || null );
-            params.push(Number(req.query.limit) || null );
+            params.push(Number(req.query.offset) || null );
+            params.push(Number(req.query.limit) || null );
 
             // Sorting
             params.push(req.query.orderby || 'created.desc');
 
-            // Filter by user
-            params.push(req.params.user_id);
+            // Filter by course
+            params.push(req.params.course_id);
 
             callback(null, client, done, params);
         },
         function(client, done, params, callback) {
             // Database query
-            client.query(query_list_documents_by_user, params, function(err, result) {
+            client.query(query_search_documents_by_course, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

@@ -10,13 +10,13 @@ var server_url = require('../../server.js').server_url;
 var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
-var dir_1 = "/../../sql/queries/users/";
-var dir_2 = "/../../sql/queries/documents/";
-var query_get_user = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
-var query_list_documents_by_user = fs.readFileSync(__dirname + dir_2 + 'list_by_user.sql', 'utf8').toString();
+var dir_1 = "/../../sql/queries/universities/";
+var dir_2 = "/../../sql/queries/users/";
+var query_get_university = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
+var query_search_users_by_university = fs.readFileSync(__dirname + dir_2 + 'search_by_university.sql', 'utf8').toString();
 
 
-// LIST BY USER
+// SEARCH BY UNIVERSITY
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -40,7 +40,7 @@ exports.request = function(req, res) {
                     if(err){
                         callback(new Error("Authorization failed"), 401);
                     } else {
-                        if(decoded.member){
+                        if(decoded.member && decoded.admin){
                             callback(null, client, done);
                         } else {
                             callback(new Error("Authorization failed"), 401);
@@ -53,16 +53,16 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_get_user, [
-                req.params.user_id
+            client.query(query_get_university, [
+                req.params.university_id
             ], function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    // Check if User exists
+                    // Check if University exists
                     if (result.rows.length === 0) {
-                        callback(new Error("User not found"), 404);
+                        callback(new Error("University not found"), 404);
                     } else {
                         callback(null, client, done);
                     }
@@ -78,16 +78,39 @@ exports.request = function(req, res) {
             params.push(Number(req.query.limit) || null );
 
             // Sorting
-            params.push(req.query.orderby || 'created.desc');
+            params.push(req.query.orderby || 'name.asc');
 
-            // Filter by user
-            params.push(req.params.user_id);
+            // Filter by blocked status
+            params.push(String(req.query.blocked));
 
-            callback(null, client, done, params);
+            // Filter by university
+            params.push(req.params.university_id);
+
+            // Prepare search-query
+            if(!req.body.search_text || req.body.search_text === ""){
+                callback(new Error("No search text found"), 400);
+            } else {
+                var search_text = req.body.search_text;
+                var search_array = search_text.split(' ');
+                var search_query_text = "";
+
+                for(var i=0; i<search_array.length; i++){
+                    if(i !== search_array.length-1){
+                        search_query_text = search_query_text + search_array[i] + ":*|";
+                    } else {
+                        search_query_text = search_query_text + search_array[i] + ":*";
+                    }
+                }
+
+                params.push(search_query_text);
+
+                callback(null, client, done, params);
+            }
+            
         },
         function(client, done, params, callback) {
             // Database query
-            client.query(query_list_documents_by_user, params, function(err, result) {
+            client.query(query_search_users_by_university, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

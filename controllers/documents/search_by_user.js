@@ -13,10 +13,10 @@ var fs = require("fs");
 var dir_1 = "/../../sql/queries/users/";
 var dir_2 = "/../../sql/queries/documents/";
 var query_get_user = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
-var query_list_documents_by_user = fs.readFileSync(__dirname + dir_2 + 'list_by_user.sql', 'utf8').toString();
+var query_search_documents_by_user = fs.readFileSync(__dirname + dir_2 + 'search_by_user.sql', 'utf8').toString();
 
 
-// LIST BY USER
+// SEARCH BY USER
 exports.request = function(req, res) {
 
     async.waterfall([
@@ -87,7 +87,7 @@ exports.request = function(req, res) {
         },
         function(client, done, params, callback) {
             // Database query
-            client.query(query_list_documents_by_user, params, function(err, result) {
+            client.query(query_search_documents_by_user, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

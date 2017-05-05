@@ -3,14 +3,16 @@ var router = express.Router();
 var isAuthenticated = require('../server.js').isAuthenticated;
 
 var search_documents = require('../controllers/documents/search');
-//var search_documents_by_user = require('../controllers/documents/search_by_user');
-//var search_documents_by_course = require('../controllers/documents/search_by_course');
+var search_documents_by_user = require('../controllers/documents/search_by_user');
+var search_documents_by_course = require('../controllers/documents/search_by_course');
 var search_members = require('../controllers/members/search');
 var search_members_by_course = require('../controllers/members/search_by_course');
 var search_members_by_university = require('../controllers/members/search_by_university');
 var search_members_by_institute = require('../controllers/members/search_by_institute');
 var search_members_by_working_group = require('../controllers/members/search_by_working_group');
-//var search_users = require('../controllers/users/search');
+var search_users = require('../controllers/users/search');
+var search_users_by_university = require('../controllers/users/search_by_university');
+var search_users_by_institute = require('../controllers/users/search_by_institute');
 var search_universities = require('../controllers/universities/search');
 var search_institutes = require('../controllers/institutes/search');
 var search_institutes_by_university = require('../controllers/institutes/search_by_university');
@@ -20,63 +22,63 @@ var search_courses = require('../controllers/courses/search');
 var search_courses_by_institute = require('../controllers/courses/search_by_institute');
 
 
-// SEARCH ALL DOCUMENTS (ONLY MEMBERS)
+// SEARCH DOCUMENTS (ONLY MEMBERS)
 router.post('/search/documents', isAuthenticated, search_documents.request);
 
-// SEARCH ALL DOCUMENTS BY USER (ONLY MEMBERS)
-//router.post('/search/users/:user_id/documents', isAuthenticated, search_documents_by_user.request);
+// SEARCH DOCUMENTS BY USER (ONLY MEMBERS)
+router.post('/search/users/:user_id/documents', isAuthenticated, search_documents_by_user.request);
 
-// SEARCH ALL DOCUMENTS BY COURSE (ONLY MEMBERS)
-//router.post('/search/courses/:course_id/documents', isAuthenticated, search_documents_by_course.request);
+// SEARCH DOCUMENTS BY COURSE (ONLY MEMBERS)
+router.post('/search/courses/:course_id/documents', isAuthenticated, search_documents_by_course.request);
 
 
-// SEARCH ALL MEMBERS
+// SEARCH MEMBERS
 router.post('/search/members', isAuthenticated, search_members.request);
 
-// SEARCH ALL MEMBERS BY COURSE (PUBLIC AND MEMBERS)
+// SEARCH MEMBERS BY COURSE (PUBLIC AND MEMBERS)
 router.post('/search/courses/:course_id/members', isAuthenticated, search_members_by_course.request);
 
-// SEARCH ALL MEMBERS BY UNIVERSITY (ADMINS)
+// SEARCH MEMBERS BY UNIVERSITY (ADMINS)
 router.post('/search/universities/:university_id/members', isAuthenticated, search_members_by_university.request);
 
-// SEARCH ALL MEMBERS BY INSTITUTE (MEMBERS AND ADMINS)
+// SEARCH MEMBERS BY INSTITUTE (ADMINS)
 router.post('/search/institutes/:institute_id/members', isAuthenticated, search_members_by_institute.request);
 
-// SEARCH ALL MEMBERS  BY WORKING GROUP (ADMINS)
+// SEARCH MEMBERS BY WORKING GROUP (ADMINS)
 router.post('/search/working_groups/:working_group_id/members', isAuthenticated, search_members_by_working_group.request);
 
-// SEARCH ALL USERS
-//router.post('/search/users', isAuthenticated, search_members.request);
+// SEARCH USERS (MEMBERS)
+router.post('/search/users', isAuthenticated, search_users.request);
 
-// SEARCH ALL MEMBERS BY UNIVERSITY (ADMINS)
-//router.post('/search/universities/:university_id/users', isAuthenticated, search_users_by_university.request);
+// SEARCH USERS BY UNIVERSITY (ADMINS)
+router.post('/search/universities/:university_id/users', isAuthenticated, search_users_by_university.request);
 
-// SEARCH ALL MEMBERS BY INSTITUTE (MEMBERS AND ADMINS)
-//router.post('/search/institutes/:institute_id/users', isAuthenticated, search_users_by_institute.request);
+// SEARCH USERS BY INSTITUTE (ADMINS)
+router.post('/search/institutes/:institute_id/users', isAuthenticated, search_users_by_institute.request);
 
 
-// SEARCH ALL UNIVERSITIES
+// SEARCH UNIVERSITIES
 router.post('/search/universities', search_universities.request);
 
 
-// SEARCH ALL INSTITUTES
+// SEARCH INSTITUTES
 router.post('/search/institutes', search_institutes.request);
 
-// SEARCH ALL INSTITUTES BY UNIVERSITY
+// SEARCH INSTITUTES BY UNIVERSITY
 router.post('/search/universities/:university_id/institutes', search_institutes_by_university.request);
 
 
-// SEARCH ALL WORKING GROUPS
+// SEARCH WORKING GROUPS
 router.post('/search/working_groups', search_working_groups.request);
 
-// SEARCH ALL WORKING GROUPS BY INSTITUTE
+// SEARCH WORKING GROUPS BY INSTITUTE
 router.post('/search/institutes/:institute_id/working_groups', search_working_groups_by_institute.request);
 
 
-// SEARCH ALL COURSES
+// SEARCH COURSES
 router.post('/search/courses', search_courses.request);
 
-// SEARCH ALL COURSES BY INSTITUTE
+// SEARCH COURSES BY INSTITUTE
 router.post('/search/institutes/:institute_id/courses', search_courses_by_institute.request);
 
 
