@@ -10,7 +10,8 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
         limit: 50,
         orderby: "created.desc",
         course: "false",
-        status: "3"
+        status: "3",
+        search_text: ""
     };
     var full_count = 0;
 
@@ -92,7 +93,33 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
-        }
+        },
+        search: function(filter) {
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "limit=" + filter.limit + "&";
+            }
+            if(filter.course !== null){
+                query = query + "course=" + filter.course + "&";
+            }
+            if(filter.status !== null){
+                query = query + "status=" + filter.status + "&";
+            }
+
+            query = query.slice(0, -1);
+
+            return $http.post(config.apiURL + "/search/documents" + query, {
+                search_text: filter.search_text
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
 
     };
 

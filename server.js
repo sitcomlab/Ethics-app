@@ -151,6 +151,7 @@ app.use(prefix, require ('./routes/comments'));
 app.use(prefix, require ('./routes/notes'));
 app.use(prefix, require ('./routes/reviewers'));
 app.use(prefix, require ('./routes/recovery'));
+app.use(prefix, require ('./routes/search'));
 
 
 // Resolve path after refreshing inside app

@@ -40,45 +40,79 @@ app.controller("documentListController", function($scope, $rootScope, $filter, $
      * @return {[type]} [description]
      */
     $scope.load = function(){
+        // Check for a search-text
+        if($scope.filter.search_text !== ""){
+            $documentsService.search($scope.filter)
+            .then(function onSuccess(response) {
+                $documentsService.set(response.data);
+                $scope.documents = $documentsService.get();
 
-        $documentsService.list($scope.filter)
-        .then(function onSuccess(response) {
-            $documentsService.set(response.data);
-            $scope.documents = $documentsService.get();
+                // Prepare pagination
+                if($scope.documents.length > 0){
+                    // Set count
+                    $documentsService.setCount($scope.documents[0].full_count);
+                } else {
+                    // Reset count
+                    $documentsService.setCount(0);
 
-            // Prepare pagination
-            if($scope.documents.length > 0){
-                // Set count
-                $documentsService.setCount($scope.documents[0].full_count);
-            } else {
-                // Reset count
-                $documentsService.setCount(0);
+                    // Reset pagination
+                    $scope.pages = [];
+                    $scope.filter.offset = 0;
+                }
 
-                // Reset pagination
+                // Set pagination
                 $scope.pages = [];
-                $scope.filter.offset = 0;
-            }
+                for(var i=0; i<Math.ceil($documentsService.getCount() / $scope.filter.limit); i++){
+                    $scope.pages.push({
+                        offset: i * $scope.filter.limit
+                    });
+                }
 
-            // Set pagination
-            $scope.pages = [];
-            for(var i=0; i<Math.ceil($documentsService.getCount() / $scope.filter.limit); i++){
-                $scope.pages.push({
-                    offset: i * $scope.filter.limit
-                });
-            }
+                $scope.$parent.loading = { status: false, message: "" };
+            })
+            .catch(function onError(response) {
+                $window.alert(response.data);
+            });
+        } else {
+            $documentsService.list($scope.filter)
+            .then(function onSuccess(response) {
+                $documentsService.set(response.data);
+                $scope.documents = $documentsService.get();
 
-            $scope.$parent.loading = { status: false, message: "" };
-        })
-        .catch(function onError(response) {
-            $window.alert(response.data);
-        });
+                // Prepare pagination
+                if($scope.documents.length > 0){
+                    // Set count
+                    $documentsService.setCount($scope.documents[0].full_count);
+                } else {
+                    // Reset count
+                    $documentsService.setCount(0);
+
+                    // Reset pagination
+                    $scope.pages = [];
+                    $scope.filter.offset = 0;
+                }
+
+                // Set pagination
+                $scope.pages = [];
+                for(var i=0; i<Math.ceil($documentsService.getCount() / $scope.filter.limit); i++){
+                    $scope.pages.push({
+                        offset: i * $scope.filter.limit
+                    });
+                }
+
+                $scope.$parent.loading = { status: false, message: "" };
+            })
+            .catch(function onError(response) {
+                $window.alert(response.data);
+            });
+        }
     };
 
     /**
      * [resetSearch description]
      */
     $scope.resetSearch = function(){
-        $scope.searchText = "";
+        $scope.filter.search_text = "";
     };
 
     /**
