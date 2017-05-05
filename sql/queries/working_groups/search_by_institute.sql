@@ -37,8 +37,11 @@ FROM (
             working_group.institute_id=$5::INTEGER
     GROUP BY
     	working_group.working_group_id,
+    	working_group.working_group_name,
         institute.institute_id,
-        university.university_id
+        institute.institute_name,
+        university.university_id,
+        university.university_name
 ) p_search
     WHERE
         p_search.search_text @@ to_tsquery('english', $6::TEXT)

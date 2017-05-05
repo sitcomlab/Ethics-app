@@ -10,6 +10,8 @@ var search_institutes = require('../controllers/institutes/search');
 var search_institutes_by_university = require('../controllers/institutes/search_by_university');
 var search_working_groups = require('../controllers/working_groups/search');
 var search_working_groups_by_institute = require('../controllers/working_groups/search_by_institute');
+var search_courses = require('../controllers/courses/search');
+var search_courses_by_institute = require('../controllers/courses/search_by_institute');
 
 
 // SEARCH ALL DOCUMENTS (ONLY MEMBERS)
@@ -47,7 +49,10 @@ router.post('/search/institutes/:institute_id/working_groups', search_working_gr
 
 
 // SEARCH ALL COURSES
+router.post('/search/courses', search_courses.request);
 
+// SEARCH ALL COURSES BY INSTITUTE
+router.post('/search/institutes/:institute_id/courses', search_courses_by_institute.request);
 
 
 module.exports = router;

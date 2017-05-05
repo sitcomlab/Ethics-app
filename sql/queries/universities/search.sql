@@ -15,7 +15,8 @@ FROM (
 	    ) AS search_text
     FROM Universities university
     GROUP BY
-		university.university_id
+		university.university_id,
+		university.university_name
 ) p_search
 WHERE
     p_search.search_text @@ to_tsquery('english', $4::TEXT)

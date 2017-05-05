@@ -30,7 +30,9 @@ FROM (
         )
     GROUP BY
         institute.institute_id,
-        university.university_id
+        institute.institute_name,
+        university.university_id,
+        university.university_name
 ) p_search
     WHERE
         p_search.search_text @@ to_tsquery('english', $5::TEXT)
