@@ -33,6 +33,8 @@ ORDER BY
     CASE
         WHEN $3::TEXT='updated.desc' THEN member.updated END DESC,
     CASE
-        WHEN $3::TEXT='name.asc' THEN (member.first_name, member.last_name) ASC END,
+        WHEN $3::TEXT='name.asc' THEN (member.first_name, member.last_name) END ASC,
     CASE
-        WHEN $3::TEXT='name.desc' THEN (member.first_name, member.last_name) DESC END;
+        WHEN $3::TEXT='name.desc' THEN (member.first_name, member.last_name) END DESC
+OFFSET $1
+LIMIT $2;
