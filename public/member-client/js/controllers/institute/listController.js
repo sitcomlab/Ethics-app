@@ -34,39 +34,82 @@ app.controller("instituteListController", function($scope, $rootScope, $filter, 
     $scope.load = function(){
         $scope.$parent.loading = { status: true, message: "Loading institutes" };
 
-        // Load institutes
-        $instituteService.list($scope.filter)
-        .then(function onSuccess(response) {
-            $instituteService.set(response.data);
-            $scope.institutes = $instituteService.get();
+        // Check for a search-text
+        if($scope.filter.search_text !== ""){
+            // Search institutes
+            $instituteService.search($scope.filter)
+            .then(function onSuccess(response) {
+                $instituteService.set(response.data);
+                $scope.institutes = $instituteService.get();
 
-            // Prepare pagination
-            if($scope.institutes.length > 0){
-                // Set count
-                $instituteService.setCount($scope.institutes[0].full_count);
-            } else {
-                // Reset count
-                $instituteService.setCount(0);
+                // Prepare pagination
+                if($scope.institutes.length > 0){
+                    // Set count
+                    $instituteService.setCount($scope.institutes[0].full_count);
+                } else {
+                    // Reset count
+                    $instituteService.setCount(0);
 
-                // Reset pagination
+                    // Reset pagination
+                    $scope.pages = [];
+                    $scope.filter.offset = 0;
+                }
+
+                // Set pagination
                 $scope.pages = [];
-                $scope.filter.offset = 0;
-            }
+                for(var i=0; i<Math.ceil($instituteService.getCount() / $scope.filter.limit); i++){
+                    $scope.pages.push({
+                        offset: i * $scope.filter.limit
+                    });
+                }
 
-            // Set pagination
-            $scope.pages = [];
-            for(var i=0; i<Math.ceil($instituteService.getCount() / $scope.filter.limit); i++){
-                $scope.pages.push({
-                    offset: i * $scope.filter.limit
-                });
-            }
+                $scope.$parent.loading = { status: false, message: "" };
+            })
+            .catch(function onError(response) {
+                $window.alert(response.data);
+            });
+        } else {
+            // Load institutes
+            $instituteService.list($scope.filter)
+            .then(function onSuccess(response) {
+                $instituteService.set(response.data);
+                $scope.institutes = $instituteService.get();
 
-            $scope.$parent.loading = { status: false, message: "" };
-        })
-        .catch(function onError(response) {
-            $window.alert(response.data);
-        });
+                // Prepare pagination
+                if($scope.institutes.length > 0){
+                    // Set count
+                    $instituteService.setCount($scope.institutes[0].full_count);
+                } else {
+                    // Reset count
+                    $instituteService.setCount(0);
 
+                    // Reset pagination
+                    $scope.pages = [];
+                    $scope.filter.offset = 0;
+                }
+
+                // Set pagination
+                $scope.pages = [];
+                for(var i=0; i<Math.ceil($instituteService.getCount() / $scope.filter.limit); i++){
+                    $scope.pages.push({
+                        offset: i * $scope.filter.limit
+                    });
+                }
+
+                $scope.$parent.loading = { status: false, message: "" };
+            })
+            .catch(function onError(response) {
+                $window.alert(response.data);
+            });
+        }
+    };
+
+    /**
+     * [resetSearch description]
+     */
+    $scope.resetSearch = function(){
+        $scope.filter.search_text = "";
+        $scope.applyFilter();
     };
 
     /**

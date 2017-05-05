@@ -34,39 +34,82 @@ app.controller("userListController", function($scope, $rootScope, $filter, $tran
     $scope.load = function(){
         $scope.$parent.loading = { status: true, message: "Loading users" };
 
-        // Load users
-        $userService.list($scope.filter)
-        .then(function onSuccess(response) {
-            $userService.set(response.data);
-            $scope.users = $userService.get();
+        // Check for a search-text
+        if($scope.filter.search_text !== ""){
+            // Search users
+            $userService.search($scope.filter)
+            .then(function onSuccess(response) {
+                $userService.set(response.data);
+                $scope.users = $userService.get();
 
-            // Prepare pagination
-            if($scope.users.length > 0){
-                // Set count
-                $userService.setCount($scope.users[0].full_count);
-            } else {
-                // Reset count
-                $userService.setCount(0);
+                // Prepare pagination
+                if($scope.users.length > 0){
+                    // Set count
+                    $userService.setCount($scope.users[0].full_count);
+                } else {
+                    // Reset count
+                    $userService.setCount(0);
 
-                // Reset pagination
+                    // Reset pagination
+                    $scope.pages = [];
+                    $scope.filter.offset = 0;
+                }
+
+                // Set pagination
                 $scope.pages = [];
-                $scope.filter.offset = 0;
-            }
+                for(var i=0; i<Math.ceil($userService.getCount() / $scope.filter.limit); i++){
+                    $scope.pages.push({
+                        offset: i * $scope.filter.limit
+                    });
+                }
 
-            // Set pagination
-            $scope.pages = [];
-            for(var i=0; i<Math.ceil($userService.getCount() / $scope.filter.limit); i++){
-                $scope.pages.push({
-                    offset: i * $scope.filter.limit
-                });
-            }
+                $scope.$parent.loading = { status: false, message: "" };
+            })
+            .catch(function onError(response) {
+                $window.alert(response.data);
+            });
+        } else {
+            // Load users
+            $userService.list($scope.filter)
+            .then(function onSuccess(response) {
+                $userService.set(response.data);
+                $scope.users = $userService.get();
 
-            $scope.$parent.loading = { status: false, message: "" };
-        })
-        .catch(function onError(response) {
-            $window.alert(response.data);
-        });
+                // Prepare pagination
+                if($scope.users.length > 0){
+                    // Set count
+                    $userService.setCount($scope.users[0].full_count);
+                } else {
+                    // Reset count
+                    $userService.setCount(0);
 
+                    // Reset pagination
+                    $scope.pages = [];
+                    $scope.filter.offset = 0;
+                }
+
+                // Set pagination
+                $scope.pages = [];
+                for(var i=0; i<Math.ceil($userService.getCount() / $scope.filter.limit); i++){
+                    $scope.pages.push({
+                        offset: i * $scope.filter.limit
+                    });
+                }
+
+                $scope.$parent.loading = { status: false, message: "" };
+            })
+            .catch(function onError(response) {
+                $window.alert(response.data);
+            });
+        }
+    };
+
+    /**
+     * [resetSearch description]
+     */
+    $scope.resetSearch = function(){
+        $scope.filter.search_text = "";
+        $scope.applyFilter();
     };
 
     /**

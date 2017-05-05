@@ -9,7 +9,8 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
         offset: 0,
         limit: 50,
         former: false,
-        orderby: "name.asc"
+        orderby: "name.asc",
+        search_text: ""
     };
     var full_count = 0;
 

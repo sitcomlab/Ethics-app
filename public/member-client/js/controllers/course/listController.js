@@ -24,38 +24,82 @@ app.controller("courseListController", function($scope, $rootScope, $filter, $tr
     $scope.load = function(){
         $scope.$parent.loading = { status: true, message: "Loading courses" };
 
-        // Load courses
-        $courseService.list($scope.filter)
-        .then(function onSuccess(response) {
-            $courseService.set(response.data);
-            $scope.courses = $courseService.get();
+        // Check for a search-text
+        if($scope.filter.search_text !== ""){
+            // Search courses
+            $courseService.search($scope.filter)
+            .then(function onSuccess(response) {
+                $courseService.set(response.data);
+                $scope.courses = $courseService.get();
 
-            // Prepare pagination
-            if($scope.courses.length > 0){
-                // Set count
-                $courseService.setCount($scope.courses[0].full_count);
-            } else {
-                // Reset count
-                $courseService.setCount(0);
+                // Prepare pagination
+                if($scope.courses.length > 0){
+                    // Set count
+                    $courseService.setCount($scope.courses[0].full_count);
+                } else {
+                    // Reset count
+                    $courseService.setCount(0);
 
-                // Reset pagination
+                    // Reset pagination
+                    $scope.pages = [];
+                    $scope.filter.offset = 0;
+                }
+
+                // Set pagination
                 $scope.pages = [];
-                $scope.filter.offset = 0;
-            }
+                for(var i=0; i<Math.ceil($courseService.getCount() / $scope.filter.limit); i++){
+                    $scope.pages.push({
+                        offset: i * $scope.filter.limit
+                    });
+                }
 
-            // Set pagination
-            $scope.pages = [];
-            for(var i=0; i<Math.ceil($courseService.getCount() / $scope.filter.limit); i++){
-                $scope.pages.push({
-                    offset: i * $scope.filter.limit
-                });
-            }
+                $scope.$parent.loading = { status: false, message: "" };
+            })
+            .catch(function onError(response) {
+                $window.alert(response.data);
+            });
+        } else {
+            // Load courses
+            $courseService.list($scope.filter)
+            .then(function onSuccess(response) {
+                $courseService.set(response.data);
+                $scope.courses = $courseService.get();
 
-            $scope.$parent.loading = { status: false, message: "" };
-        })
-        .catch(function onError(response) {
-            $window.alert(response.data);
-        });
+                // Prepare pagination
+                if($scope.courses.length > 0){
+                    // Set count
+                    $courseService.setCount($scope.courses[0].full_count);
+                } else {
+                    // Reset count
+                    $courseService.setCount(0);
+
+                    // Reset pagination
+                    $scope.pages = [];
+                    $scope.filter.offset = 0;
+                }
+
+                // Set pagination
+                $scope.pages = [];
+                for(var i=0; i<Math.ceil($courseService.getCount() / $scope.filter.limit); i++){
+                    $scope.pages.push({
+                        offset: i * $scope.filter.limit
+                    });
+                }
+
+                $scope.$parent.loading = { status: false, message: "" };
+            })
+            .catch(function onError(response) {
+                $window.alert(response.data);
+            });
+        }
+    };
+
+    /**
+     * [resetSearch description]
+     */
+    $scope.resetSearch = function(){
+        $scope.filter.search_text = "";
+        $scope.applyFilter();
     };
 
     /**

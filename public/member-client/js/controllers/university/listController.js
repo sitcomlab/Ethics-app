@@ -24,38 +24,82 @@ app.controller("universityListController", function($scope, $rootScope, $filter,
     $scope.load = function(){
         $scope.$parent.loading = { status: true, message: "Loading universities" };
 
-        // Load universities
-        $universityService.list($scope.filter)
-        .then(function onSuccess(response) {
-            $universityService.set(response.data);
-            $scope.universities = $universityService.get();
+        // Check for a search-text
+        if($scope.filter.search_text !== ""){
+            // Search universities
+            $universityService.search($scope.filter)
+            .then(function onSuccess(response) {
+                $universityService.set(response.data);
+                $scope.universities = $universityService.get();
 
-            // Prepare pagination
-            if($scope.universities.length > 0){
-                // Set count
-                $universityService.setCount($scope.universities[0].full_count);
-            } else {
-                // Reset count
-                $universityService.setCount(0);
+                // Prepare pagination
+                if($scope.universities.length > 0){
+                    // Set count
+                    $universityService.setCount($scope.universities[0].full_count);
+                } else {
+                    // Reset count
+                    $universityService.setCount(0);
 
-                // Reset pagination
+                    // Reset pagination
+                    $scope.pages = [];
+                    $scope.filter.offset = 0;
+                }
+
+                // Set pagination
                 $scope.pages = [];
-                $scope.filter.offset = 0;
-            }
+                for(var i=0; i<Math.ceil($universityService.getCount() / $scope.filter.limit); i++){
+                    $scope.pages.push({
+                        offset: i * $scope.filter.limit
+                    });
+                }
 
-            // Set pagination
-            $scope.pages = [];
-            for(var i=0; i<Math.ceil($universityService.getCount() / $scope.filter.limit); i++){
-                $scope.pages.push({
-                    offset: i * $scope.filter.limit
-                });
-            }
+                $scope.$parent.loading = { status: false, message: "" };
+            })
+            .catch(function onError(response) {
+                $window.alert(response.data);
+            });
+        } else {
+            // Load universities
+            $universityService.list($scope.filter)
+            .then(function onSuccess(response) {
+                $universityService.set(response.data);
+                $scope.universities = $universityService.get();
 
-            $scope.$parent.loading = { status: false, message: "" };
-        })
-        .catch(function onError(response) {
-            $window.alert(response.data);
-        });
+                // Prepare pagination
+                if($scope.universities.length > 0){
+                    // Set count
+                    $universityService.setCount($scope.universities[0].full_count);
+                } else {
+                    // Reset count
+                    $universityService.setCount(0);
+
+                    // Reset pagination
+                    $scope.pages = [];
+                    $scope.filter.offset = 0;
+                }
+
+                // Set pagination
+                $scope.pages = [];
+                for(var i=0; i<Math.ceil($universityService.getCount() / $scope.filter.limit); i++){
+                    $scope.pages.push({
+                        offset: i * $scope.filter.limit
+                    });
+                }
+
+                $scope.$parent.loading = { status: false, message: "" };
+            })
+            .catch(function onError(response) {
+                $window.alert(response.data);
+            });
+        }
+    };
+
+    /**
+     * [resetSearch description]
+     */
+    $scope.resetSearch = function(){
+        $scope.filter.search_text = "";
+        $scope.applyFilter();
     };
 
     /**

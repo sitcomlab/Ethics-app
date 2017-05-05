@@ -9,7 +9,8 @@ app.factory('$userService', function($http, $log, config, $authenticationService
         offset: 0,
         limit: 50,
         blocked: false,
-        orderby: "name.asc"
+        orderby: "name.asc",
+        search_text: ""
     };
     var full_count = 0;
 

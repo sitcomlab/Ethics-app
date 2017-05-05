@@ -8,7 +8,8 @@ app.factory('$universityService', function($http, $log, config, $authenticationS
     var cached_filter = {
         offset: 0,
         limit: 50,
-        orderby: "name.asc"
+        orderby: "name.asc",
+        search_text: ""
     };
     var full_count = 0;
 

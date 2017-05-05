@@ -8,7 +8,8 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
     var cached_filter = {
         offset: 0,
         limit: 50,
-        orderby: "year.desc"
+        orderby: "year.desc",
+        search_text: ""
     };
     var full_count = 0;
 

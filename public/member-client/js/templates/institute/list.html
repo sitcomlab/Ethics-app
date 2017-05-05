@@ -21,8 +21,8 @@
                     <span class="input-group-addon">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </span>
-                    <input type="text" class="form-control" placeholder="{{ 'SEARCH' | translate }}" ng-model="searchText">
-                    <span class="input-group-btn" ng-if="searchText">
+                    <input type="text" class="form-control" placeholder="{{ 'SEARCH' | translate }}" ng-model="filter.search_text" ng-change="applyFilter()">
+                    <span class="input-group-btn" ng-if="filter.search_text">
                         <a href="" class="btn btn-secondary" ng-click="resetSearch()">
                             <i class="fa fa-times" aria-hidden="true"></i>
                         </a>
@@ -70,7 +70,7 @@
         <br>
 
         <div class="list-group" ng-if="institutes && institutes.length>0">
-            <a href="" ng-click="redirect('/institutes/' + institute.institute_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="institute in institutes | filter: searchText">
+            <a href="" ng-click="redirect('/institutes/' + institute.institute_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="institute in institutes">
                 <div class="d-flex w-100 justify-content-between">
                     <div>
                         <i class="fa fa-building" aria-hidden="true" ng-if="!institute.former"></i>

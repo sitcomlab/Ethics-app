@@ -34,39 +34,82 @@ app.controller("workingGroupListController", function($scope, $rootScope, $filte
     $scope.load = function(){
         $scope.$parent.loading = { status: true, message: "Loading working groups" };
 
-        // Load working groups
-        $workingGroupService.list($scope.filter)
-        .then(function onSuccess(response) {
-            $workingGroupService.set(response.data);
-            $scope.working_groups = $workingGroupService.get();
+        // Check for a search-text
+        if($scope.filter.search_text !== ""){
+            // Search working groups
+            $workingGroupService.search($scope.filter)
+            .then(function onSuccess(response) {
+                $workingGroupService.set(response.data);
+                $scope.working_groups = $workingGroupService.get();
 
-            // Prepare pagination
-            if($scope.working_groups.length > 0){
-                // Set count
-                $workingGroupService.setCount($scope.working_groups[0].full_count);
-            } else {
-                // Reset count
-                $workingGroupService.setCount(0);
+                // Prepare pagination
+                if($scope.working_groups.length > 0){
+                    // Set count
+                    $workingGroupService.setCount($scope.working_groups[0].full_count);
+                } else {
+                    // Reset count
+                    $workingGroupService.setCount(0);
 
-                // Reset pagination
+                    // Reset pagination
+                    $scope.pages = [];
+                    $scope.filter.offset = 0;
+                }
+
+                // Set pagination
                 $scope.pages = [];
-                $scope.filter.offset = 0;
-            }
+                for(var i=0; i<Math.ceil($workingGroupService.getCount() / $scope.filter.limit); i++){
+                    $scope.pages.push({
+                        offset: i * $scope.filter.limit
+                    });
+                }
 
-            // Set pagination
-            $scope.pages = [];
-            for(var i=0; i<Math.ceil($workingGroupService.getCount() / $scope.filter.limit); i++){
-                $scope.pages.push({
-                    offset: i * $scope.filter.limit
-                });
-            }
+                $scope.$parent.loading = { status: false, message: "" };
+            })
+            .catch(function onError(response) {
+            $window.alert(response.data);
+            });
+        } else {
+            // Load working groups
+            $workingGroupService.list($scope.filter)
+            .then(function onSuccess(response) {
+                $workingGroupService.set(response.data);
+                $scope.working_groups = $workingGroupService.get();
 
-            $scope.$parent.loading = { status: false, message: "" };
-        })
-        .catch(function onError(response) {
-        $window.alert(response.data);
-        });
+                // Prepare pagination
+                if($scope.working_groups.length > 0){
+                    // Set count
+                    $workingGroupService.setCount($scope.working_groups[0].full_count);
+                } else {
+                    // Reset count
+                    $workingGroupService.setCount(0);
 
+                    // Reset pagination
+                    $scope.pages = [];
+                    $scope.filter.offset = 0;
+                }
+
+                // Set pagination
+                $scope.pages = [];
+                for(var i=0; i<Math.ceil($workingGroupService.getCount() / $scope.filter.limit); i++){
+                    $scope.pages.push({
+                        offset: i * $scope.filter.limit
+                    });
+                }
+
+                $scope.$parent.loading = { status: false, message: "" };
+            })
+            .catch(function onError(response) {
+            $window.alert(response.data);
+            });
+        }
+    };
+
+    /**
+     * [resetSearch description]
+     */
+    $scope.resetSearch = function(){
+        $scope.filter.search_text = "";
+        $scope.applyFilter();
     };
 
     /**

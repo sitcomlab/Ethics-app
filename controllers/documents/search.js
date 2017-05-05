@@ -75,7 +75,6 @@ exports.request = function(req, res) {
             }
         },
         function(client, done, member, callback) {
-            console.log(req.body);
 
             var query;
             var params = [];
@@ -179,19 +178,26 @@ exports.request = function(req, res) {
             }
 
             // Prepare search-query
-            var search_text = req.body.search_text;
-            var search_array = search_text.split(' ');
-            var search_query_text = "";
-            for(var i=0; i<search_array.length; i++){
-                if(i !== search_array.length-1){
-                    search_query_text = search_query_text + search_array[i] + ":*|";
-                } else {
-                    search_query_text = search_query_text + search_array[i] + ":*";
-                }
-            }
-            params.push(search_query_text);
+            if(!req.body.search_text || req.body.search_text === ""){
+                callback(new Error("No search text found"), 400);
+            } else {
+                var search_text = req.body.search_text;
+                var search_array = search_text.split(' ');
+                var search_query_text = "";
 
-            callback(null, client, done, query, params);
+                for(var i=0; i<search_array.length; i++){
+                    if(i !== search_array.length-1){
+                        search_query_text = search_query_text + search_array[i] + ":*|";
+                    } else {
+                        search_query_text = search_query_text + search_array[i] + ":*";
+                    }
+                }
+
+                params.push(search_query_text);
+
+                callback(null, client, done, query, params);
+            }
+
         },
         function(client, done, query, params, callback) {
             // Database query

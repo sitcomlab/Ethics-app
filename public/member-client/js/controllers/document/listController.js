@@ -42,6 +42,7 @@ app.controller("documentListController", function($scope, $rootScope, $filter, $
     $scope.load = function(){
         // Check for a search-text
         if($scope.filter.search_text !== ""){
+            // Search documents
             $documentsService.search($scope.filter)
             .then(function onSuccess(response) {
                 $documentsService.set(response.data);
@@ -74,6 +75,7 @@ app.controller("documentListController", function($scope, $rootScope, $filter, $
                 $window.alert(response.data);
             });
         } else {
+            // Load documents
             $documentsService.list($scope.filter)
             .then(function onSuccess(response) {
                 $documentsService.set(response.data);
@@ -113,6 +115,7 @@ app.controller("documentListController", function($scope, $rootScope, $filter, $
      */
     $scope.resetSearch = function(){
         $scope.filter.search_text = "";
+        $scope.applyFilter();
     };
 
     /**
