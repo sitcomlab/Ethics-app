@@ -47,24 +47,32 @@ app.controller("instituteCreateController", function($scope, $rootScope, $routeP
 
     /**
      * [description]
+     * @param  {[type]} related_data [description]
      * @return {[type]}              [description]
      */
-    $scope.loadUniversities = function(){
-      $scope.$parent.loading = { status: true, message: "Loading universities" };
+    $scope.load = function(related_data){
+        // Check which kind of related data needs to be requested
+        switch (related_data) {
+            case 'universities': {
+                $scope.$parent.loading = { status: true, message: "Loading universities" };
 
-      // Load universities
-      $universityService.list({
-          orderby: 'name.asc',
-          limit: null,
-          offset: null
-      })
-      .then(function onSuccess(response) {
-          $scope.universities = response.data;
-          $scope.$parent.loading = { status: false, message: "" };
-      })
-      .catch(function onError(response) {
-          $window.alert(response);
-      });
+                // Load universities
+                $universityService.list({
+                    orderby: 'name.asc',
+                    limit: null,
+                    offset: null
+                })
+                .then(function onSuccess(response) {
+                    $scope.universities = response.data;
+                    $scope.$parent.loading = { status: false, message: "" };
+                })
+                .catch(function onError(response) {
+                    $window.alert(response.data);
+                });
+                break;
+            }
+        }
+
     };
 
 
@@ -75,6 +83,9 @@ app.controller("instituteCreateController", function($scope, $rootScope, $routeP
     $scope.authenticated_member = $authenticationService.get();
 
     // Load universities
-    $scope.loadUniversities();
+    $scope.load('universities');
+
+    // Set default value by member
+    $scope.new_institute.university_id = $scope.authenticated_member.university_id;
 
 });

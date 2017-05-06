@@ -244,7 +244,7 @@
                                 id="institute_id"
                                 name="institute_id"
                                 ng-model="institute_id"
-                                ng-options="institute.institute_id as institute.institute_name for institute in institutes"
+                                ng-options="institute.institute_id as institute.institute_name group by getGroupName('institutes', institute.former) for institute in institutes"
                                 ng-disabled="university_id == null"
                                 required
                             >
@@ -275,7 +275,7 @@
                                 id="working_group_id"
                                 name="working_group_id"
                                 ng-model="updated_member.working_group_id"
-                                ng-options="working_group.working_group_id as working_group.working_group_name for working_group in working_groups"
+                                ng-options="working_group.working_group_id as working_group.working_group_name group by getGroupName('working_groups', working_group.former) for working_group in working_groups"
                                 ng-disabled="institute_id == null"
                                 required
                             >

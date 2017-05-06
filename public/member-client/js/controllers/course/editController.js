@@ -18,6 +18,19 @@ app.controller("courseEditController", function($scope, $rootScope, $routeParams
     };
 
     /**
+     * [description]
+     * @param  {[type]} former_status [description]
+     * @return {[type]}               [description]
+     */
+    $scope.getGroupName = function(former_status){
+        if(former_status){
+            return $filter('translate')('FORMER_INSTITUTES');
+        } else {
+            return $filter('translate')('INSTITUTES');
+        }
+    };
+
+    /**
      * [save description]
      * @return {[type]} [description]
      */

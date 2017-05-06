@@ -25,7 +25,7 @@
                     ng-model="updated_university.university_name"
                     name="university_name"
                     id="university_name"
-                    placeholder="{{university.university_name}}"
+                    placeholder="{{ 'NAME' | translate }}"
                     aria-describedby="inputUniversityName"
                     required
                     autofocus>
@@ -36,7 +36,7 @@
                 </span>
             </div>
         </div>
-        
+
         <div class="card-footer right">
             <button class="btn btn-success" role="submit">
                 <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SAVE' | translate }}

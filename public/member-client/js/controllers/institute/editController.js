@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Institute edit controller
-app.controller("instituteEditController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $authenticationService, $instituteService) {
+app.controller("instituteEditController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $authenticationService, $universityService, $instituteService) {
 
     /*************************************************
         FUNCTIONS
@@ -41,6 +41,38 @@ app.controller("instituteEditController", function($scope, $rootScope, $routePar
         }
     };
 
+
+    /**
+     * [description]
+     * @param  {[type]} related_data [description]
+     * @return {[type]}              [description]
+     */
+    $scope.load = function(related_data){
+        // Check which kind of related data needs to be requested
+        switch (related_data) {
+            case 'universities': {
+                $scope.$parent.loading = { status: true, message: "Loading universities" };
+
+                // Load universities
+                $universityService.list({
+                    orderby: 'name.asc',
+                    limit: null,
+                    offset: null
+                })
+                .then(function onSuccess(response) {
+                    $scope.universities = response.data;
+                    $scope.$parent.loading = { status: false, message: "" };
+                })
+                .catch(function onError(response) {
+                    $window.alert(response.data);
+                });
+                break;
+            }
+        }
+
+    };
+
+
     /*************************************************
         INIT
      *************************************************/
@@ -51,7 +83,10 @@ app.controller("instituteEditController", function($scope, $rootScope, $routePar
     .then(function onSuccess(response) {
         $scope.institute = response.data;
         $scope.updated_institute = $instituteService.copy($scope.institute);
-        $scope.$parent.loading = { status: false, message: "" };
+
+        // Load universities
+        $scope.load('universities');
+
     })
     .catch(function onError(response) {
         $window.alert(response.data);

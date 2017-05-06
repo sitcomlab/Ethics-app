@@ -26,6 +26,7 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
             return {
                 institute_id: institute.institute_id,
                 institute_name: institute.institute_name,
+                university_id: institute.university_id,
                 former: institute.former
             };
         },

@@ -21,7 +21,8 @@ app.factory('$universityService', function($http, $log, config, $authenticationS
         },
         copy: function(university){
             return {
-                university_id: university.university_id
+                university_id: university.university_id,
+                university_name: university.university_name
             };
         },
         get: function(){

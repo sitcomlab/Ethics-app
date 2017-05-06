@@ -19,6 +19,35 @@ app.controller("accountEditController", function($scope, $rootScope, $routeParam
 
     /**
      * [description]
+     * @param  {[type]} former_status [description]
+     * @return {[type]}               [description]
+     */
+    $scope.getGroupName = function(data, former_status){
+        switch (data) {
+            case 'institutes': {
+                if(former_status){
+                    return $filter('translate')('FORMER_INSTITUTES');
+                } else {
+                    return $filter('translate')('INSTITUTES');
+                }
+                break;
+            }
+            case 'working_groups': {
+                if(former_status){
+                    return $filter('translate')('FORMER_INSTITUTES');
+                } else {
+                    return $filter('translate')('INSTITUTES');
+                }
+                break;
+            }
+            default: {
+                return "";
+            }
+        }
+    };
+
+    /**
+     * [description]
      * @return {[type]} [description]
      */
     $scope.changePassword = function(){

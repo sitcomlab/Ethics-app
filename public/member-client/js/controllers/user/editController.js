@@ -18,6 +18,19 @@ app.controller("userEditController", function($scope, $rootScope, $routeParams, 
     };
 
     /**
+     * [description]
+     * @param  {[type]} former_status [description]
+     * @return {[type]}               [description]
+     */
+    $scope.getGroupName = function(former_status){
+        if(former_status){
+            return $filter('translate')('FORMER_INSTITUTES');
+        } else {
+            return $filter('translate')('INSTITUTES');
+        }
+    };
+
+    /**
      * [send description]
      * @return {[type]} [description]
      */
@@ -59,7 +72,11 @@ app.controller("userEditController", function($scope, $rootScope, $routeParams, 
                 $scope.$parent.loading = { status: true, message: "Loading universities" };
 
                 // Load universities
-                $universityService.list($scope.filter)
+                $universityService.list({
+                    orderby: 'name.asc',
+                    limit: null,
+                    offset: null
+                })
                 .then(function onSuccess(response) {
                     $scope.universities = response.data;
                     $scope.$parent.loading = { status: false, message: "" };

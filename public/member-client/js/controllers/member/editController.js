@@ -19,6 +19,35 @@ app.controller("memberEditController", function($scope, $rootScope, $routeParams
 
     /**
      * [description]
+     * @param  {[type]} former_status [description]
+     * @return {[type]}               [description]
+     */
+    $scope.getGroupName = function(data, former_status){
+        switch (data) {
+            case 'institutes': {
+                if(former_status){
+                    return $filter('translate')('FORMER_INSTITUTES');
+                } else {
+                    return $filter('translate')('INSTITUTES');
+                }
+                break;
+            }
+            case 'working_groups': {
+                if(former_status){
+                    return $filter('translate')('FORMER_WORKING_GROUPS');
+                } else {
+                    return $filter('translate')('WORKING_GROUPS');
+                }
+                break;
+            }
+            default: {
+                return "";
+            }
+        }
+    };
+
+    /**
+     * [description]
      * @return {[type]} [description]
      */
     $scope.updateMember = function(){

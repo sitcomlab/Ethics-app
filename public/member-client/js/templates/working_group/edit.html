@@ -82,7 +82,7 @@
                                 id="institute_id"
                                 name="institute_id"
                                 ng-model="updated_working_group.institute_id"
-                                ng-options="institute.institute_id as institute.institute_name for institute in institutes"
+                                ng-options="institute.institute_id as institute.institute_name group by getGroupName(institute.former) for institute in institutes"
                                 disabled
                                 required
                             >
