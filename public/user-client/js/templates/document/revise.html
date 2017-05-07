@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<form class="form-horizontal" autocomplete="on" name="editDocumentForm" novalidate>
-    <div class="card">
+<div class="card">
+    <form class="form-horizontal" autocomplete="on" name="editDocumentForm" ng-submit="send()">
         <div class="card-header" style="font-size: 20pt;">
             <div class="row">
                 <div class="col">
                     {{ 'REVISE_DOCUMENT' | translate }}
                 </div>
                 <div class="col right">
-                    <button class="btn btn-secondary" role="button" ng-click="cancel()">
+                    <a href="" class="btn btn-secondary" ng-click="saveDocument()">
                         <i class="fa fa-times" aria-hidden="true"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="card-block">
 
-            <!-- GENERAL -->
+            <!-- GENERAL 2 -->
             <div class="row inputs">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <h6 class="text-muted">
+                    <h6>
                         <span ng-if="status.general.history">
-                            {{ 'ALL_REVISIONS' | translate }}
+                            <i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'ALL_REVISIONS' | translate }}
                         </span>
                         <span ng-if="!status.general.history">
-                            {{ 'LATEST_REVISION' | translate }}
+                            <i class="fa fa-tag" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LATEST_REVISION' | translate }}
                         </span>
                     </h6>
                 </div>
@@ -68,7 +68,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <b>{{ 'CREATED' | translate }}</b>
+                                <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'CREATED' | translate }}</b>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <div class="row" ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.general.limit" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
@@ -85,7 +85,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <b>{{ 'SUBMITTED' | translate }}</b>
+                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'SUBMITTED' | translate }}</b>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <div class="row" ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.general.limit" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
@@ -103,10 +103,10 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <span ng-if="status.general.history">
-                                    <b>{{ 'REVIEWERS' | translate }}</b>
+                                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'REVIEWERS' | translate }}</b>
                                 </span>
                                 <span ng-if="!status.general.history">
-                                    <b>{{ 'LATEST_REVIEWER' | translate }}</b>
+                                    <i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'LATEST_REVIEWER' | translate }}</b>
                                 </span>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -115,7 +115,7 @@
                                         <code>{{ 'REV' | translate}}{{revision.version}}</code>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span ng-if="revision.comments.published && revision.reviewer != null">
+                                        <span ng-if="revision.reviewer != null">
                                             <a href="" ng-click="redirect('/members/' + revision.reviewer.member_id)">
                                                 <span ng-if="revision.reviewer.title != null">{{revision.reviewer.title}}&nbsp;</span>{{revision.reviewer.first_name}} {{revision.reviewer.last_name}}
                                             </a>
@@ -128,7 +128,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <b>{{ 'GENERAL_COMMENT' | translate }}</b>
+                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'GENERAL_COMMENT' | translate }}</b>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <div class="row" ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.general.limit" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
@@ -136,9 +136,24 @@
                                         <code>{{ 'REV' | translate}}{{revision.version}}</code>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.general_comment !== null && revision.comments.general_comment !== ''">
-                                            <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.general_comment}}
+                                        <span class="comment" ng-if="!$first && revision.comments.general_comment !== null && revision.comments.general_comment !== ''">
+                                            <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.general_comment}}
                                         </span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                        <p>
+                                            <div class="input-group">
+                                                <textarea class="form-control"
+                                                    rows="3"
+                                                    ng-model="latest_revision.comments.general_comment"
+                                                    name="general_comment"
+                                                    id="general_comment"
+                                                    ></textarea>
+                                                <span class="input-group-addon">
+                                                    <span class="flag-icon flag-icon-gb"></span>
+                                                </span>
+                                            </div>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -152,8 +167,8 @@
             <!-- English descriptions -->
             <div class="row inputs">
                 <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6">
-                    <h6 class="text-muted">
-                        {{ 'STUDY_DESCRIPTION' | translate }}&nbsp;&nbsp;<span class="flag-icon flag-icon-gb"></span>
+                    <h6>
+                        <span class="flag-icon flag-icon-gb"></span>&nbsp;&nbsp;{{ 'STUDY_DESCRIPTION' | translate }}
                     </h6>
                 </div>
                 <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
@@ -207,11 +222,26 @@
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.en_title}}</i><br>
-                                            <span ng-if="status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.en_title_comment !== null && revision.comments.en_title_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_title_comment}}
+                                            <span ng-if="!$first && status.descriptions.comments.en">
+                                                <span class="comment" ng-if="revision.comments.en_title_comment !== null && revision.comments.en_title_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_title_comment}}
                                                 </span>
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.en_title_comment"
+                                                        name="en_title_comment"
+                                                        id="en_title_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -233,11 +263,26 @@
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.en_researcher}}</i><br>
-                                            <span ng-if="status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.en_researcher_comment !== null && revision.comments.en_researcher_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_researcher_comment}}
+                                            <span ng-if="!$first && status.descriptions.comments.en">
+                                                <span class="comment" ng-if="revision.comments.en_researcher_comment !== null && revision.comments.en_researcher_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_researcher_comment}}
                                                 </span>
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.en_researcher_comment"
+                                                        name="en_researcher_comment"
+                                                        id="en_researcher_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -259,11 +304,26 @@
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.en_study_time}}</i><br>
-                                            <span ng-if="status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.en_study_time_comment !== null && revision.comments.en_study_time_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_study_time_comment}}
+                                            <span ng-if="!$first && status.descriptions.comments.en">
+                                                <span class="comment" ng-if="revision.comments.en_study_time_comment !== null && revision.comments.en_study_time_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_study_time_comment}}
                                                 </span>
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.en_study_time_comment"
+                                                        name="en_study_time_comment"
+                                                        id="en_study_time_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -285,11 +345,26 @@
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.en_purpose}}</i><br>
-                                            <span ng-if="status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.en_purpose_comment !== null && revision.comments.en_purpose_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_purpose_comment}}
+                                            <span ng-if="!$first && status.descriptions.comments.en">
+                                                <span class="comment" ng-if="revision.comments.en_purpose_comment !== null && revision.comments.en_purpose_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_purpose_comment}}
                                                 </span>
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.en_purpose_comment"
+                                                        name="en_purpose_comment"
+                                                        id="en_purpose_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -311,11 +386,26 @@
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.en_procedure}}</i><br>
-                                            <span ng-if="status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.en_procedure_comment !== null && revision.comments.en_procedure_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_procedure_comment}}
+                                            <span ng-if="!$first && status.descriptions.comments.en">
+                                                <span class="comment" ng-if="revision.comments.en_procedure_comment !== null && revision.comments.en_procedure_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_procedure_comment}}
                                                 </span>
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.en_procedure_comment"
+                                                        name="en_procedure_comment"
+                                                        id="en_procedure_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -337,11 +427,26 @@
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.en_duration}}</i><br>
-                                            <span ng-if="status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.en_duration_comment !== null && revision.comments.en_duration_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_duration_comment}}
+                                            <span ng-if="!$first && status.descriptions.comments.en">
+                                                <span class="comment" ng-if="revision.comments.en_duration_comment !== null && revision.comments.en_duration_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_duration_comment}}
                                                 </span>
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.en_duration_comment"
+                                                        name="en_duration_comment"
+                                                        id="en_duration_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -363,11 +468,26 @@
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.en_risks}}</i><br>
-                                            <span ng-if="status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.en_risks_comment !== null && revision.comments.en_risks_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_risks_comment}}
+                                            <span ng-if="!$first && status.descriptions.comments.en">
+                                                <span class="comment" ng-if="revision.comments.en_risks_comment !== null && revision.comments.en_risks_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_risks_comment}}
                                                 </span>
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.en_risks_comment"
+                                                        name="en_risks_comment"
+                                                        id="en_risks_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -389,11 +509,26 @@
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.en_benefits}}</i><br>
-                                            <span ng-if="status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.en_benefits_comment !== null && revision.comments.en_benefits_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_benefits_comment}}
+                                            <span ng-if="!$first && status.descriptions.comments.en">
+                                                <span class="comment" ng-if="revision.comments.en_benefits_comment !== null && revision.comments.en_benefits_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_benefits_comment}}
                                                 </span>
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.en_benefits_comment"
+                                                        name="en_benefits_comment"
+                                                        id="en_benefits_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -408,8 +543,8 @@
             <!-- German descriptions -->
             <div class="row inputs">
                 <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6">
-                    <h6 class="text-muted">
-                        {{ 'STUDY_DESCRIPTION' | translate }}&nbsp;&nbsp;<span class="flag-icon flag-icon-de"></span>
+                    <h6>
+                        <span class="flag-icon flag-icon-de"></span>&nbsp;&nbsp;{{ 'STUDY_DESCRIPTION' | translate }}
                     </h6>
                 </div>
                 <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
@@ -467,8 +602,8 @@
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.de_title}}</i><br>
                                             <span ng-if="status.descriptions.comments.de">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.de_title_comment !== null && revision.comments.de_title_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.de_title_comment}}
+                                                <span class="comment" ng-if="revision.comments.de_title_comment !== null && revision.comments.de_title_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_title_comment}}
                                                 </span>
                                             </span>
                                         </div>
@@ -493,8 +628,8 @@
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.de_researcher}}</i><br>
                                             <span ng-if="status.descriptions.comments.de">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.de_researcher_comment !== null && revision.comments.de_researcher_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.de_researcher_comment}}
+                                                <span class="comment" ng-if="revision.comments.de_researcher_comment !== null && revision.comments.de_researcher_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_researcher_comment}}
                                                 </span>
                                             </span>
                                         </div>
@@ -519,8 +654,8 @@
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.de_study_time}}</i><br>
                                             <span ng-if="status.descriptions.comments.de">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.de_study_time_comment !== null && revision.comments.de_study_time_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.de_study_time_comment}}
+                                                <span class="comment" ng-if="revision.comments.de_study_time_comment !== null && revision.comments.de_study_time_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_study_time_comment}}
                                                 </span>
                                             </span>
                                         </div>
@@ -545,8 +680,8 @@
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.de_purpose}}</i><br>
                                             <span ng-if="status.descriptions.comments.de">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.de_purpose_comment !== null && revision.comments.de_purpose_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.de_purpose_comment}}
+                                                <span class="comment" ng-if="revision.comments.de_purpose_comment !== null && revision.comments.de_purpose_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_purpose_comment}}
                                                 </span>
                                             </span>
                                         </div>
@@ -571,8 +706,8 @@
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.de_procedure}}</i><br>
                                             <span ng-if="status.descriptions.comments.de">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.de_procedure_comment !== null && revision.comments.de_procedure_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.de_procedure_comment}}
+                                                <span class="comment" ng-if="revision.comments.de_procedure_comment !== null && revision.comments.de_procedure_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_procedure_comment}}
                                                 </span>
                                             </span>
                                         </div>
@@ -597,8 +732,8 @@
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.de_duration}}</i><br>
                                             <span ng-if="status.descriptions.comments.de">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.de_duration_comment !== null && revision.comments.de_duration_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.de_duration_comment}}
+                                                <span class="comment" ng-if="revision.comments.de_duration_comment !== null && revision.comments.de_duration_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_duration_comment}}
                                                 </span>
                                             </span>
                                         </div>
@@ -623,8 +758,8 @@
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.de_risks}}</i><br>
                                             <span ng-if="status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.de_risks_comment !== null && revision.comments.de_risks_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.de_risks_comment}}
+                                                <span class="comment" ng-if="revision.comments.de_risks_comment !== null && revision.comments.de_risks_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_risks_comment}}
                                                 </span>
                                             </span>
                                         </div>
@@ -649,8 +784,8 @@
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.de_benefits}}</i><br>
                                             <span ng-if="status.descriptions.comments.de">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.de_benefits_comment !== null && revision.comments.de_benefits_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.de_benefits_comment}}
+                                                <span class="comment" ng-if="revision.comments.de_benefits_comment !== null && revision.comments.de_benefits_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_benefits_comment}}
                                                 </span>
                                             </span>
                                         </div>
@@ -666,8 +801,8 @@
             <!-- Portuguese descriptions -->
             <div class="row inputs">
                 <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6">
-                    <h6 class="text-muted">
-                        {{ 'STUDY_DESCRIPTION' | translate }}&nbsp;&nbsp;<span class="flag-icon flag-icon-pt"></span>
+                    <h6>
+                        <span class="flag-icon flag-icon-pt"></span>&nbsp;&nbsp;{{ 'STUDY_DESCRIPTION' | translate }}
                     </h6>
                 </div>
                 <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
@@ -725,7 +860,7 @@
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.pt_title}}</i><br>
                                             <span ng-if="status.descriptions.comments.pt">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.pt_title_comment !== null && revision.comments.pt_title_comment !== ''">
+                                                <span class="comment" ng-if="revision.comments.pt_title_comment !== null && revision.comments.pt_title_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_title_comment}}
                                                 </span>
                                             </span>
@@ -751,7 +886,7 @@
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.pt_researcher}}</i><br>
                                             <span ng-if="status.descriptions.comments.pt">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.pt_researcher_comment !== null && revision.comments.pt_researcher_comment !== ''">
+                                                <span class="comment" ng-if="revision.comments.pt_researcher_comment !== null && revision.comments.pt_researcher_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_researcher_comment}}
                                                 </span>
                                             </span>
@@ -777,7 +912,7 @@
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.pt_study_time}}</i><br>
                                             <span ng-if="status.descriptions.comments.pt">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.pt_study_time_comment !== null && revision.comments.pt_study_time_comment !== ''">
+                                                <span class="comment" ng-if="revision.comments.pt_study_time_comment !== null && revision.comments.pt_study_time_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_study_time_comment}}
                                                 </span>
                                             </span>
@@ -803,7 +938,7 @@
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.pt_purpose}}</i><br>
                                             <span ng-if="status.descriptions.comments.pt">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.de_purpose_comment !== null && revision.comments.pt_purpose_comment !== ''">
+                                                <span class="comment" ng-if="revision.comments.de_purpose_comment !== null && revision.comments.pt_purpose_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_purpose_comment}}
                                                 </span>
                                             </span>
@@ -829,7 +964,7 @@
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.pt_procedure}}</i><br>
                                             <span ng-if="status.descriptions.comments.pt">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.pt_procedure_comment !== null && revision.comments.pt_procedure_comment !== ''">
+                                                <span class="comment" ng-if="revision.comments.pt_procedure_comment !== null && revision.comments.pt_procedure_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_procedure_comment}}
                                                 </span>
                                             </span>
@@ -855,7 +990,7 @@
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.pt_duration}}</i><br>
                                             <span ng-if="status.descriptions.comments.pt">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.pt_duration_comment !== null && revision.comments.pt_duration_comment !== ''">
+                                                <span class="comment" ng-if="revision.comments.pt_duration_comment !== null && revision.comments.pt_duration_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_duration_comment}}
                                                 </span>
                                             </span>
@@ -881,7 +1016,7 @@
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.pt_risks}}</i><br>
                                             <span ng-if="status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.pt_risks_comment !== null && revision.comments.pt_risks_comment !== ''">
+                                                <span class="comment" ng-if="revision.comments.pt_risks_comment !== null && revision.comments.pt_risks_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_risks_comment}}
                                                 </span>
                                             </span>
@@ -907,7 +1042,7 @@
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <i>{{revision.descriptions.pt_benefits}}</i><br>
                                             <span ng-if="status.descriptions.comments.pt">
-                                                <span class="comment" ng-if="revision.comments.published && revision.comments.pt_benefits_comment !== null && revision.comments.pt_benefits_comment !== ''">
+                                                <span class="comment" ng-if="revision.comments.pt_benefits_comment !== null && revision.comments.pt_benefits_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_benefits_comment}}
                                                 </span>
                                             </span>
@@ -925,8 +1060,8 @@
             <!-- CONCERNS -->
             <div class="row inputs">
                 <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6">
-                    <h6 class="text-muted">
-                        {{ 'STUDY_CONCERNS' | translate }}
+                    <h6>
+                        <i class="fa fa-gavel" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'STUDY_CONCERNS' | translate }}
                     </h6>
                 </div>
                 <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
@@ -960,7 +1095,7 @@
                     </small>
                 </div>
             </div>
-            <br>
+
 
             <!-- Questions -->
             <div class="bs-fix">
@@ -990,10 +1125,25 @@
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                             <!-- devider -->
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.q01_comment !== null && revision.comments.q01_comment !== ''">
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
+                                            <span class="comment" ng-if="revision.comments.q01_comment !== null && revision.comments.q01_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q01_comment}}
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.q01_comment"
+                                                        name="q01_comment"
+                                                        id="q01_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1025,10 +1175,25 @@
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                             <!-- devider -->
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.q02_comment !== null && revision.comments.q02_comment !== ''">
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
+                                            <span class="comment" ng-if="revision.comments.q02_comment !== null && revision.comments.q02_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q02_comment}}
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.q02_comment"
+                                                        name="q02_comment"
+                                                        id="q02_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1060,10 +1225,25 @@
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                             <!-- devider -->
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.q03_comment !== null && revision.comments.q03_comment !== ''">
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
+                                            <span class="comment" ng-if="revision.comments.q03_comment !== null && revision.comments.q03_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q03_comment}}
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.q03_comment"
+                                                        name="q03_comment"
+                                                        id="q03_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1095,16 +1275,32 @@
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                             <!-- devider -->
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.q04_comment !== null && revision.comments.q04_comment !== ''">
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
+                                            <span class="comment" ng-if="revision.comments.q04_comment !== null && revision.comments.q04_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q04_comment}}
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.q04_comment"
+                                                        name="q04_comment"
+                                                        id="q04_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <!-- 5th question -->
                     <div class="list-group-item">
                         <div class="row">
@@ -1129,10 +1325,25 @@
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                             <!-- devider -->
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.q05_comment !== null && revision.comments.q05_comment !== ''">
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
+                                            <span class="comment" ng-if="revision.comments.q05_comment !== null && revision.comments.q05_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q05_comment}}
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.q05_comment"
+                                                        name="q05_comment"
+                                                        id="q05_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1164,10 +1375,25 @@
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                             <!-- devider -->
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.q06_comment !== null && revision.comments.q06_comment !== ''">
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
+                                            <span class="comment" ng-if="revision.comments.q06_comment !== null && revision.comments.q06_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q06_comment}}
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.q06_comment"
+                                                        name="q06_comment"
+                                                        id="q06_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1199,10 +1425,25 @@
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                             <!-- devider -->
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.q07_comment !== null && revision.comments.q07_comment !== ''">
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
+                                            <span class="comment" ng-if="revision.comments.q07_comment !== null && revision.comments.q07_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q07_comment}}
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.q07_comment"
+                                                        name="q07_comment"
+                                                        id="q07_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1234,10 +1475,25 @@
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                             <!-- devider -->
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.q08_comment !== null && revision.comments.q08_comment !== ''">
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
+                                            <span class="comment" ng-if="revision.comments.q08_comment !== null && revision.comments.q08_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q08_comment}}
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.q08_comment"
+                                                        name="q08_comment"
+                                                        id="q08_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1269,10 +1525,25 @@
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                             <!-- devider -->
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.q09_comment !== null && revision.comments.q09_comment !== ''">
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
+                                            <span class="comment" ng-if="revision.comments.q09_comment !== null && revision.comments.q09_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q09_comment}}
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.q09_comment"
+                                                        name="q09_comment"
+                                                        id="q09_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1304,10 +1575,25 @@
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                             <!-- devider -->
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.q10_comment !== null && revision.comments.q10_comment !== ''">
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
+                                            <span class="comment" ng-if="revision.comments.q10_comment !== null && revision.comments.q10_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q10_comment}}
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.q10_comment"
+                                                        name="q10_comment"
+                                                        id="q10_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1339,10 +1625,25 @@
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                             <!-- devider -->
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.q11_1_comment !== null && revision.comments.q11_1_comment !== ''">
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
+                                            <span class="comment" ng-if="revision.comments.q11_1_comment !== null && revision.comments.q11_1_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q11_1_comment}}
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.q11_1_comment"
+                                                        name="q11_1_comment"
+                                                        id="q11_1_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1374,10 +1675,25 @@
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                             <!-- devider -->
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.q11_2_comment !== null && revision.comments.q11_2_comment !== ''">
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
+                                            <span class="comment" ng-if="revision.comments.q11_2_comment !== null && revision.comments.q11_2_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q11_2_comment}}
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.q11_2_comment"
+                                                        name="q11_2_comment"
+                                                        id="q11_2_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1409,10 +1725,25 @@
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                             <!-- devider -->
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.q12_comment !== null && revision.comments.q12_comment !== ''">
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
+                                            <span class="comment" ng-if="revision.comments.q12_comment !== null && revision.comments.q12_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q12_comment}}
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.q12_comment"
+                                                        name="q12_comment"
+                                                        id="q12_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1444,10 +1775,25 @@
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                             <!-- devider -->
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.q13_comment !== null && revision.comments.q13_comment !== ''">
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
+                                            <span class="comment" ng-if="revision.comments.q13_comment !== null && revision.comments.q13_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q13_comment}}
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.q13_comment"
+                                                        name="q13_comment"
+                                                        id="q13_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1456,21 +1802,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="card-footer">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 left">
-                    <a href="" class="btn btn-primary btn-block-xs-only btn-block-sm-only" ng-click="saveDocument()">
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SAVE' | translate }} &amp; {{ 'CLOSE' | translate }}
-                    </a>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 right">
-                    <button class="btn btn-success btn-block-xs-only btn-block-sm-only" ng-click="submit()">
-                        <i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SUBMIT' | translate }}
-                    </button>
-                </div>
-            </div>
+
         </div>
-    </div>
-</form>
+    </form>
+</div>
