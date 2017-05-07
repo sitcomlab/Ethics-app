@@ -13,23 +13,60 @@
         </div>
     </div>
     <div class="card-block">
-
         <h4>
-            {{ 'FLOW' | translate }}
+            Important Questions to be asked during review:
         </h4>
-        <img src="img/flow.png">
-
+      <br>
+      <ol>
+        <li>General questions:<br>
+          <ul>
+            <li>Are the participants likely to leave the study in the same (or better) mood that they started it in? If their wellbeing is compromised during the study, are the suggested debriefing procedures likely to ensure that the participant does not leave the procedure distressed, sad, anxious or unhappy? If not - identify the main causes of distress and suggest substitution. If substitution is impossible, providing an explicit opportunity to stop and quit the study during critical moments can be a solution.</li>
+            <li>Are all participants (e.g. across all experimental groups) treated with the same level of ethical awareness and subject to the same risks? Is there a possibility that members of one particular experimental group leave the study at a worse mood than the others? If levels of safety need to be raised they should typically be raised equally for all groups to ensure comparable study conditions.</li>
+          </ul>  
+        </li>
+        <br>
+        <li>
+          If obtaining an Informed Consent Form is impossible or not feasible the procedure can still be ethical if the research cannot be reasonably assumed to create distress or harm and<br>
+          <ol type="a">
+          <li>takes place in an education setting to study classroom management methods, educational practices, job/organisational effectiveness; <b>or</b></li>
+          <li>involves only archival research, public observations without collecting identifiable personal information, or anonymous questionnaires (e.g. big data studies, street surveys).</li>
+          </ol>
+        </li>
+        <br>
+        <li>
+            If deception is involved:<br>
+            <ul>
+              <li>can the study be conducted without deception? (if yes - always preferred)</li>
+              <li>can the deception cause strong psychological distress? (if yes - unethical)</li>
+              <li>is the deception explained and disclosed as soon as possible after the data collection?</li>
+              <li>is the participant informed before and after the study about the right to withdraw at any point?</li>
+              <li>after the study, is the participant informed that even if retracting own data he/she will still be paid for participation (if payment applicable)?</li>
+            </ul>
+        </li>
+        <br>
+        <li>If other live observers are present who are invisible to the participant:<br>
+          <ul>
+            <li>unethical w.r.t. German Psychological Society (DGP) ethics conduct;</li>
+            <li>potentially allowed by other standards if the study takes place in a public area/situation;</li>
+            <li>potentially allowed by DGP in exceptional cases (where the experiment is impossible to conduct otherwise) but the information must be provided at debriefing and the payment must still be given even if data is retracted;</li>
+            <li>otherwise the participant must be told about the presence of other live observers.</li>
+          </ul>  
+        </li>
+      </ol>
+      <br>
+      <br>
+        
         <h4>
-            {{ 'STATUS' | translate }}
+            Different Document Status:
         </h4>
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>{{ 'STATUS' }}</th>
-                    <th>{{ 'MEMBER_CLIENT' }}</th>
-                    <th>{{ 'USER_CLIENT' }}</th>
-                    <th>{{ 'DESCRIPTION' }}</th>
-                </tr>
+                    <th>Status</th>
+                    <th>Name in Member Client</th>
+                    <th>Name in User Client </th>
+                    <th>{Description---------------------------------------------</th>
+                </t
             </thead>
             <tbody>
                 <tr>
@@ -47,7 +84,7 @@
                         </span>
                     </td>
                     <td>
-
+                        The Document has been created but the User has not yet provided any information.
                     </td>
                 </tr>
                 <tr>
@@ -65,7 +102,7 @@
                         </span>
                     </td>
                     <td>
-
+                        The Document has been created and the User is currently filling out the required forms.
                     </td>
                 </tr>
                 <tr>
@@ -83,7 +120,7 @@
                         </span>
                     </td>
                     <td>
-
+                        The Document has been submitted by the user and automatically accepted by the System as it stated to pose no ethical concerns.
                     </td>
                 </tr>
                 <tr>
@@ -101,7 +138,7 @@
                         </span>
                     </td>
                     <td>
-
+                      The Document has been submitted by the user and there is need for a manual review of the Study by a Ethics Committee Member. The Review has not yet been started.
                     </td>
                 </tr>
                 <tr>
@@ -119,7 +156,7 @@
                         </span>
                     </td>
                     <td>
-
+                      The Document is currently being reviewed by a Member of the Ethics Committee.
                     </td>
                 </tr>
                 <tr>
@@ -137,7 +174,7 @@
                         </span>
                     </td>
                     <td>
-
+                      The Review concluded that the study has one or more unadressed ethical concerns and needs to be revised by the user. The User will have to modify the study accordingly and needs to submit it for review again.
                     </td>
                 </tr>
                 <tr>
@@ -155,7 +192,7 @@
                         </span>
                     </td>
                     <td>
-
+                      The Study has been reviewed by a Committee Member and has been deemed free of unadressed ethical concerns. The User is now able to download the Documents.
                     </td>
                 </tr>
                 <tr>
@@ -173,11 +210,17 @@
                         </span>
                     </td>
                     <td>
-
+                      The study has been deemed ethically unacceptable and no ethical approval is granted. The User is not allowed to modify the study anymore as even with modification the study would not adhere to ethical standards.
                     </td>
                 </tr>
             </tbody>
         </table>
+
+        <h4>
+            Study Proposal Lifecycle:
+        </h4>
+        <img src="img/flow.png" width=50%>
+        
 
     </div>
 </div>
