@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<div class="card">
+    <div class="card-header" style="font-size: 20pt;">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+                {{ 'COURSE' | translate }}
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 right">
+                <div class="btn-group">
+                    <button class="btn btn-info" role="button" ng-click="redirect('/courses/' + course.course_id + '/edit')">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-danger" role="button" ng-click="redirect('/courses/' + course.course_id + '/delete')">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/courses')">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="card" style="background-color: #f7f7f9;">
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-1 right">
+                        <h4 class="card-title">
+                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                        </h4>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h4 class="card-title">
+                                    {{course.course_name}}
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="text-muted">
+                                    {{course.institute_name}}<br>
+                                </div>
+                                <div class="text-muted">
+                                    {{course.university_name}}<br>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <b>{{'SEASON' | translate}}</b>: {{course.season}}<br>
+                                <b>{{'LECTURERS' | translate}}</b>: {{course.lecturer}}<br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <!-- Sub-nav -->
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                        <ul class="nav nav-pills flex-column flex-sm-row flex-sm-wrap justify-content-start">
+                            <li class="nav-item">
+                                <a class="nav-link" href="" ng-class="{ 'active': filter.tab=='documents' }" ng-click="changeTab('documents', false)">
+                                    {{ 'RELATED_DOCUMENTS' | translate }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="" ng-class="{ 'active': !filter.former && filter.tab=='members'}" ng-click="changeTab('members', false)">
+                                    {{ 'RESPONSIBLE_MEMBERS' | translate }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="" ng-class="{ 'active': filter.former && filter.tab=='members'}" ng-click="changeTab('members', true)">
+                                    {{ 'RESPONSIBLE_FORMER_MEMBERS' | translate }}
+                                </a>
+                            </li>
+                        </ul>
+                        <br>
+                    </div>
+                    <!-- SORTING -->
+                    <!-- Sorting documents -->
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="filter.tab == 'documents' ">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="background-color: #ffffff;">
+                                <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'created.asc' || filter.orderby == 'updated.asc' || filter.orderby == 'status.asc'"></i>
+                                <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'created.desc' || filter.orderby == 'updated.desc' || filter.orderby == 'status.desc'"></i>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true" ng-if="filter.orderby == 'title.asc'"></i>
+                                <i class="fa fa-sort-alpha-desc" aria-hidden="true" ng-if="filter.orderby == 'title.desc'"></i>
+                            </span>
+                            <select class="form-control custom-select" ng-model="filter.orderby" ng-change="load('documents')">
+                                <option value="created.asc">{{ 'CREATED_ASC' | translate }}</option>
+                                <option value="created.desc">{{ 'CREATED_DESC' | translate }} [{{ 'DEFAULT' | translate }}]</option>
+                                <option value="updated.asc">{{ 'UPDATED_ASC' | translate }}</option>
+                                <option value="updated.desc">{{ 'UPDATED_DESC' | translate }}</option>
+                                <option value="status.asc">{{ 'STATUS_ASC' | translate }}</option>
+                                <option value="status.desc">{{ 'STATUS_DESC' | translate }}</option>
+                                <option value="title.asc">{{ 'TITLE_ASC' | translate }}</option>
+                                <option value="title.desc">{{ 'TITLE_DESC' | translate }}</option>
+                            </select>
+                        </div>
+                        <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
+                        <br>
+                    </div>
+                    <!-- Sorting members -->
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="filter.tab == 'members' ">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="background-color: #ffffff;">
+                                <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'created.asc' || filter.orderby == 'updated.asc'"></i>
+                                <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'created.desc' || filter.orderby == 'updated.desc'"></i>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true" ng-if="filter.orderby == 'name.asc'"></i>
+                                <i class="fa fa-sort-alpha-desc" aria-hidden="true" ng-if="filter.orderby == 'name.desc'"></i>
+                            </span>
+                            <select class="form-control custom-select" ng-model="filter.orderby" ng-change="load('members')">
+                                <option value="created.asc">{{ 'CREATED_ASC' | translate }}</option>
+                                <option value="created.desc">{{ 'CREATED_DESC' | translate }}</option>
+                                <option value="updated.asc">{{ 'UPDATED_ASC' | translate }}</option>
+                                <option value="updated.desc">{{ 'UPDATED_DESC' | translate }}</option>
+                                <option value="name.asc">{{ 'NAME_ASC' | translate }} [{{ 'DEFAULT' | translate }}]</option>
+                                <option value="name.desc">{{ 'NAME_DESC' | translate }}</option>
+                            </select>
+                        </div>
+                        <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
+                        <br>
+                    </div>
+                </div>
+
+                <!-- Related documents -->
+                <div class="list-group" ng-if="course.documents && course.documents.length>0 && filter.tab=='documents' ">
+                    <a href="" ng-click="redirect('/documents/' + document.document_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="document in course.documents">
+                        <div class="d-flex w-100 justify-content-between">
+                            <div>
+                                <i class="fa fa-file-text" aria-hidden="true"></i>
+                                &nbsp;&nbsp;
+                                <b>{{document.document_title}}</b>
+                            </div>
+                            <div>
+                                <span class="badge" ng-class="{'badge-default': document.status==0 || document.status==1, 'badge-success': document.status==2 || document.status==6, 'badge-primary': document.status==3, 'badge-info': document.status==4, 'badge-warning': document.status=='5', 'badge-danger': document.status==7}">
+                                    <span ng-if="document.status==0">{{ 'INITIALISED' | translate }}</span>
+                                    <span ng-if="document.status==1">{{ 'UNSUBMITTED' | translate }}</span>
+                                    <span ng-if="document.status==2">{{ 'SUBMITTED' | translate }}</span>
+                                    <span ng-if="document.status==3">{{ 'REVIEW_REQUIRED' | translate }}</span>
+                                    <span ng-if="document.status==4">{{ 'UNDER_REVIEW' | translate }}</span>
+                                    <span ng-if="document.status==5">{{ 'PARTLY_ACCEPTED' | translate }}</span>
+                                    <span ng-if="document.status==6">{{ 'REVIEWED' | translate }}</span>
+                                    <span ng-if="document.status==7">{{ 'REJECTED' | translate }}</span>
+                                </span>
+                                <span ng-if="document.note !== null && document.note !== '' ">
+                                    &nbsp;<i class="fa fa-sticky-note" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div ng-if="(!course.documents || course.documents.length==0) && filter.tab=='documents' ">
+                    <div class="list-group">
+                        <div class="list-group-item middle">
+                            - {{ 'NONE' | translate }} -
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related members -->
+                <div class="row" ng-if="filter.tab=='members' && course.members && course.members.length>0">
+                    <div class="col text-muted right">
+                        <small>
+                            <span class="text-success">
+                                <i class="fa fa-rss-square" aria-hidden="true"></i>
+                            </span> {{ 'SUBSCRIBED' | translate }}
+                            &nbsp;&nbsp;|&nbsp;&nbsp;
+                            <span class="text-danger">
+                                <i class="fa fa-rss-square" aria-hidden="true"></i>
+                            </span> {{ 'CURRENTLY_NOT_SUBSCRIBED' | translate }}
+                        </small>
+                    </div>
+                    <br>
+                </div>
+                <div class="list-group" ng-if="course.members && course.members.length>0 &&  filter.tab=='members' ">
+                    <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in course.members">
+                        <div class="d-flex w-100 justify-content-between">
+                            <div>
+                                <span ng-if="member.admin">
+                                    <i class="fa fa-id-badge" aria-hidden="true"></i>
+                                </span>
+                                <span ng-if="!member.admin">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </span>
+                                &nbsp;&nbsp;
+                                <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}<span ng-if="member.member_id == authenticated_member.member_id">&nbsp;({{ 'YOU' | translate }})</span></b>
+                                &nbsp;
+                                <span class="text-muted" ng-if="member.working_group_name">
+                                    <small>{{member.working_group_name}}&nbsp;|</small>
+                                </span>
+                                <span class="text-muted" ng-if="member.institute_name">
+                                    <small>{{member.institute_name}}&nbsp;|</small>
+                                </span>
+                                <span class="text-muted" ng-if="member.university_name">
+                                    <small>{{member.university_name}}</small>
+                                </span>
+                            </div>
+                            <div ng-if="!member.former">
+                                <span class="text-success" ng-if="member.subscribed">
+                                    <i class="fa fa-rss-square" aria-hidden="true"></i>
+                                </span>
+                                <span class="text-danger" ng-if="!member.subscribed">
+                                    <i class="fa fa-rss-square" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <div ng-if="member.former">
+                                <span class="badge badge-default">
+                                    <i class="fa fa-archive" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'FORMER' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div ng-if="(!course.members || course.members.length==0) && filter.tab=='members' ">
+                    <div class="list-group">
+                        <div class="list-group-item middle">
+                            - {{ 'NONE' | translate }} -
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer right" ng-if="
+                (course.documents.length > 0 && filter.tab == 'documents') ||
+                (course.members.length > 0 && filter.tab == 'members')">
+
+                <!-- Pagination -->
+                <nav aria-label="pagination" id="pagination">
+                    <ul class="pagination pagination-sm justify-content-center">
+                        <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
+                            <a href="" class="page-link" ng-click="changeOffset(0)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
+                                <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
+                            <a href="" class="page-link" ng-click="changeOffset(filter.offset - filter.limit)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
+                                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="page-item" ng-class="{'active': filter.offset == page.offset}" ng-repeat="page in pages">
+                            <a href="" class="page-link" ng-click="changeOffset(page.offset)">
+                                {{$index+1}}
+                            </a>
+                        </li>
+                        <li class="page-item" ng-class="{ 'disabled': filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit }">
+                            <a href="" class="page-link" ng-click="changeOffset(filter.offset + filter.limit)" ng-style="filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit && {'background-color':'#f7f7f9'}">
+                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="page-item" ng-class="{ 'disabled': filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit }">
+                            <a href="" class="page-link" ng-click="changeOffset(pages[pages.length - 1].offset)" ng-style="filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit && {'background-color':'#f7f7f9'}">
+                                <b><i class="fa fa-angle-double-right" aria-hidden="true"></i></b>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <nav ng-if="institutes.length == 0">
+                    <ul>&nbsp;</ul>
+                </nav>
+
+            </div>
+
+        </div>
+    </div>
+</div>

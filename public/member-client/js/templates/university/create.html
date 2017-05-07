@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<div class="card">
+    <form class="form-horizontal" autocomplete="on" name="createUniversityForm" ng-submit="send()">
+        <div class="card-header" style="font-size: 20pt;">
+            <div class="row">
+                <div class="col">
+                    {{ 'NEW_UNIVERSITY' | translate }}
+                </div>
+                <div class="col right">
+                    <button class="btn btn-secondary" role="button" ng-click="redirect('/universities')">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-block">
+            <label>
+                <b>{{ 'UNIVERSITY_NAME' | translate }}*</b>
+            </label>
+            <div class="form-group" ng-class="{'has-danger': createUniversityForm.document_email_address.$invalid && !createUniversityForm.document_email_address.$pristine}">
+                <input
+                    type="text"
+                    class="form-control"
+                    ng-model="new_university.university_name"
+                    name="university_name"
+                    id="university_name"
+                    placeholder="{{ 'NAME' | translate }}"
+                    aria-describedby="inputUniversityName"
+                    required
+                    autofocus>
+                <span ng-show="createUniversityForm.course_name.$error.required && !createUniversityForm.course_name.$pristine" class="text-danger">
+                    <small>
+                        {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+            </div>
+        </div>
+
+        <div class="card-footer right">
+          <button class="btn btn-success" role="submit">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SEND' | translate }}
+          </button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<div class="middle">
+    <br>
+    <h1 class="display-3">
+        {{ 'WELCOME' | translate }}
+    </h1>
+    <br>
+    <p class="lead">
+        {{ 'WELCOME_MESSAGE' | translate }}
+    </p>
+    <br>
+</div>
+<div class="card" style="padding: 30px 10px 20px 10px; background-color: #f7f7f9;">
+    <form class="form-horizontal" autocomplete="on" name="loginForm" ng-submit="send()">
+        <div class="card-block">
+            <label>
+                {{ 'DOCUMENT_ID' | translate }}*
+            </label>
+            <div class="row">
+                <div class="col-xs-12 col-md-9">
+                    <div class="form-group" ng-class="{'has-danger': loginForm.document_id.$invalid && !loginForm.document_id.$pristine}">
+                        <div class="input-group">
+                            <input
+                                type="text"
+                                class="form-control form-control-lg"
+                                ng-model="login.document_id"
+                                name="document_id"
+                                id="document_id"
+                                placeholder="{{ 'DOCUMENT_ID' | translate }}"
+                                aria-describedby="inputDocumentId"
+                                required
+                                autofocus>
+                            <span class="input-group-btn" ng-if="login.document_id != null ">
+                                <button class="btn btn-secondary" type="button" ng-click="login.document_id=null">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <span ng-show="loginForm.document_id.$error.required && !loginForm.document_id.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                </div>
+                <div class="col">
+                    <button class="form-control btn btn-lg btn-success" role="submit">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LOGIN' | translate }}
+                    </button>
+                    <br>
+                    <br>
+                </div>
+            </div>
+            <div class="middle">
+                <div class="row">
+                    <div class="col right">
+                        <a href="" ng-click="redirect('/new/document')">
+                            {{ 'CREATE_NEW_DOCUMENT' | translate }}
+                        </a>
+                    </div>
+                    |
+                    <div class="col left">
+                        <a href="" ng-click="redirect('/recovery')">
+                            {{ 'FORGOT_YOUR_DOCUMENT_ID' | translate }}?
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<br>

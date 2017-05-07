@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<div class="card">
+    <form class="form-horizontal" autocomplete="on" name="editUserForm" ng-submit="save()">
+        <div class="card-header" style="font-size: 20pt;">
+            <div class="row">
+                <div class="col">
+                    {{ 'EDIT_USER' | translate }}
+                </div>
+                <div class="col right">
+                    <button class="btn btn-secondary" role="button" ng-click="redirect('/users/' + user.id)">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-block">
+            <label>
+                <b>{{ 'EMAIL_ADDRESS' | translate }}*</b>
+            </label>
+            <div class="form-group" ng-class="{'has-danger': editUserForm.user_email_address.$invalid && !editUserForm.user_email_address.$pristine}">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-at" aria-hidden="true"></i>
+                    </div>
+                    <input
+                        type="email"
+                        class="form-control"
+                        ng-model="updated_user.email_address"
+                        name="user_email_address"
+                        id="user_email_address"
+                        placeholder="{{ 'EMAIL_ADDRESS' | translate }}"
+                        aria-describedby="inputEmailAddress"
+                        required
+                        autofocus
+                        autocomplete="email" x-autocomplete="email">
+                </div>
+                <small class="form-text text-muted">
+                    {{ 'PLEASE_USE_A_UNIVERSITY_ADDRESS' | translate }}
+                </small>
+                <span ng-show="editUserForm.user_email_address.$error.required && !editUserForm.user_email_address.$pristine" class="text-danger">
+                    <small>
+                        {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+                <span ng-show="editUserForm.user_email_address.$error.email && !editUserForm.user_email_address.$pristine" class="text-danger">
+                    <small>
+                        {{ 'NO_VALID_EMAIL_ADDRESS' | translate }}
+                    </small>
+                </span>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                    <label>
+                        <b>{{ 'TITLE' | translate }}</b>
+                    </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            class="form-control"
+                            ng-model="updated_user.title"
+                            name="title"
+                            id="title"
+                            placeholder="{{ 'TITLE' | translate }}"
+                            aria-describedby="inputTitle"
+                            autocomplete="honorific-prefix" x-autocomplete="name-prefix">
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                    <label>
+                        <b>{{ 'FIRST_NAME' | translate }}*</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': editUserForm.first_name.$invalid && !editUserForm.first_name.$pristine }">
+                        <input
+                            type="text"
+                            class="form-control"
+                            ng-model="updated_user.first_name"
+                            name="first_name"
+                            id="first_name"
+                            placeholder="{{ 'FIRST_NAME' | translate }}"
+                            aria-describedby="inputFirstName"
+                            required
+                            autocomplete="given-name" x-autocomplete="given-name">
+                        <span ng-show="editUserForm.first_name.$error.required && !editUserForm.first_name.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                    <label>
+                        <b>{{ 'LAST_NAME' | translate }}*</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': editUserForm.last_name.$invalid && !editUserForm.last_name.$pristine }">
+                        <input
+                            type="text"
+                            class="form-control"
+                            ng-model="updated_user.last_name"
+                            name="last_name"
+                            id="last_name"
+                            placeholder="{{ 'LAST_NAME' | translate }}"
+                            aria-describedby="inputLastName"
+                            required
+                            autocomplete="family-name" x-autocomplete="surname">
+                        <span ng-show="editUserForm.last_name.$error.required && !editUserForm.last_name.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'UNIVERSITY' | translate }}*</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': editUserForm.university_id.$invalid && !editUserForm.university_id.$pristine }">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-university" aria-hidden="true"></i>
+                            </div>
+                            <select
+                                class="custom-select form-control"
+                                id="university_id"
+                                name="university_id"
+                                ng-model="university_id"
+                                ng-options="university.university_id as university.university_name for university in universities"
+                                ng-disabled="!authenticated_member.admin"
+                                ng-change="load('institutes')"
+                                required
+                            >
+                                <option value="">
+                                    {{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}
+                                </option>
+                            </select>
+                        </div>
+                        <span ng-show="editUserForm.university_id.$error.required && !editUserForm.university_id.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'INSTITUTE' | translate }}*</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': editUserForm.institute_id.$invalid && !editUserForm.institute_id.$pristine }">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-building" aria-hidden="true"></i>
+                            </div>
+                            <select
+                                class="custom-select form-control"
+                                id="institute_id"
+                                name="institute_id"
+                                ng-model="updated_user.institute_id"
+                                ng-options="institute.institute_id as institute.institute_name group by getGroupName(institute.former) for institute in institutes"
+                                ng-disabled="university_id == null || !authenticated_member.admin"
+                                required
+                            >
+                                <option value="">
+                                    {{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}
+                                </option>
+                            </select>
+                        </div>
+                        <span ng-show="editUserForm.institute_id.$error.required && !editUserForm.institute_id.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <label>
+                <b>{{ 'BLOCKING_STATUS' | translate }}*</b>
+            </label>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group" ng-class="{'has-danger': editUserForm.blocked.$invalid && !editUserForm.blocked.$pristine }">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-ban" aria-hidden="true"></i>
+                            </span>
+                            <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                    <input
+                                    class="custom-control-input"
+                                    type="radio"
+                                    name="blocked"
+                                    id="blocked_1"
+                                    ng-model="updated_user.blocked"
+                                    ng-value="true"
+                                    required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">
+                                        {{ 'TRUE' | translate }}
+                                    </span>
+                                </label>
+                            </span>
+                            <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                    <input
+                                    class="custom-control-input"
+                                    type="radio"
+                                    name="blocked"
+                                    id="blocked_2"
+                                    ng-model="updated_user.blocked"
+                                    ng-value="false"
+                                    required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">
+                                        {{ 'FALSE' | translate }} <small class="text muted">(d)</small>
+                                    </span>
+                                </label>
+                            </span>
+                        </div>
+                        <span ng-show="editUserForm.blocked.$error.required && !editUserForm.blocked.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8">
+                    <div class="alert alert-warning justified" role="alert">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EXPLANATION_OF_THE_BLOCKING_STATUS' | translate }}
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-muted right">
+                    <small>
+                        * {{ 'REQUIRED' | translate }}&nbsp;&nbsp;|&nbsp;&nbsp;d {{ 'DEFAULT' | translate }}
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer right">
+          <button class="btn btn-success" role="submit">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SAVE' | translate }}
+          </button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Informed Consent Form</title>
+    </head>
+    <body style="font-size: small">
+        <div class="firstpage">
+            <p align="center" style="font-size: large"><b>Informed Consent Form</b></p>
+            <br>
+            <p align="center" style="font-size: medium">Project Title: <b>{{document.document_title}}</b></p>
+            <br>
+            <p>
+                Dear Participant,
+            </p>
+            <p>
+                Thank you for your participation in the study.
+            </p>
+            <p style="text-align: justify">
+                <b>Purpose of the study: </b><br>{{description.en_purpose}}
+            </p>
+            <p style="text-align: justify">
+                <b>Procedure: </b><br>{{description.en_procedure}}
+            </p>
+            <p style="text-align: justify">
+                <b>Duration: </b><br>{{description.en_duration}}
+            </p>
+            <p style="text-align: justify">
+                <b>Potential Risks: </b><br>{{description.en_risks}}
+            </p>
+            <p style="text-align: justify">
+                <b>Privacy: </b><br>Original data obtained from this study will be anonymised and only processed in aggregate. In such form, it might be published in academic journals, presentations or other media, but never in a way that would allow individual identification. One week after the completion of the study it might no longer be possible to retract your data from such aggregated analyses.
+            </p>
+        </div>
+        <div class="secondpage" style="page-break-before:always;">
+            <br>
+            <p>
+                You are free to stop, quit the study and retract your data <b>at any time during the study</b> with no further consequences. <br><b>If you have any questions, please ask them now.</b>
+            </p>
+            <p>
+                For further questions and complains, you can contact the Institute's Research Ethics Committee</i>
+            </p>
+            <br>
+            <p>
+                &#9634; I confirm I volunteered to participate in this study.
+            </p>
+            <p>
+                &#9634; I confirm I was allowed to ask questions and that I was provided with responses.
+            </p>
+            <p>
+                &#9634; I confirm I was presented with this document prior to the beginning of the study.
+            </p>
+            <p>
+                &#9634; I confirm I understand my right to quit the study at any time.
+            </p>
+            <p>
+                {{#concern.q11.checkbox_1}}
+                &#9634; I agree for an audio/video* recording of the procedure, including my voice/image*. [*cross out irrelevant options]
+                {{/concern.q11.checkbox_1}}
+            </p>
+            <br>
+            <p>
+              <table style="width:100%;font-size: small">
+                    <tr>
+                        <td align="center"><hr width=100px></td>
+                        <td align="center"><hr width=200px></td>
+                    </tr>
+                    <tr>
+                        <td align="center">date</td>
+                        <td align="center">signature of researcher</td>
+                    </tr>
+                    <tr>
+						<td height="40px"></td>
+                    </tr>
+                    <tr>
+						<td align="center"></td>
+                        <td align="center"><hr width=200px></td>
+                    </tr>
+                    <tr>
+						<td align="center"></td>
+                        <td align="center">signature of participant</td>
+                    </tr>
+                </table>
+            </p>
+            <br>
+            <p>
+                <b>Optional</b>:<br> Please provide your email address if you would like to be informed about future studies.
+            </p>
+            <p>
+                Email: _____________________________________
+            </p>
+        </div>
+    </body>
+</html>

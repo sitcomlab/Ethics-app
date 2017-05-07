@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<div class="card">
+    <form class="form-horizontal" autocomplete="on" name="editUniversityForm" ng-submit="save()">
+        <div class="card-header" style="font-size: 20pt;">
+            <div class="row">
+                <div class="col">
+                    {{ 'EDIT_UNIVERSITY' | translate }}
+                </div>
+                <div class="col right">
+                    <button class="btn btn-secondary" role="button" ng-click="redirect('/universities/' + university.university_id)">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-block">
+            <label>
+                <b>{{ 'UNIVERSITY_NAME' | translate }}*</b>
+            </label>
+            <div class="form-group" ng-class="{'has-danger': editUniversityForm.document_email_address.$invalid && !editUniversityForm.document_email_address.$pristine}">
+                <input
+                    type="text"
+                    class="form-control"
+                    ng-model="updated_university.university_name"
+                    name="university_name"
+                    id="university_name"
+                    placeholder="{{ 'NAME' | translate }}"
+                    aria-describedby="inputUniversityName"
+                    required
+                    autofocus>
+                <span ng-show="editUniversityForm.university_name.$error.required && !editUniversityForm.university_name.$pristine" class="text-danger">
+                    <small>
+                        {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+            </div>
+        </div>
+
+        <div class="card-footer right">
+            <button class="btn btn-success" role="submit">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SAVE' | translate }}
+            </button>
+        </div>
+    </form>
+</div>

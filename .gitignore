@@ -1,6 +1,8 @@
 node_modules/*
-public/lib/*
-public/files/tmp/*
-!*.gitkeep/
-
+ssl/*
+public/bower_components/*
+public/files/temp/*
 .DS_Store
+/config.js
+sql/schema/examples.sql
+sql/schema/defaults.sql

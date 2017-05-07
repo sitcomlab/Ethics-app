@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<div class="card">
+    <div class="card-header" style="font-size: 20pt;">
+        <div class="row">
+            <div class="col">
+                {{ 'RECOVERY' | translate }}
+            </div>
+            <div class="col right">
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/')">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <form class="form-horizontal" autocomplete="on" name="resetForm" ng-submit="save()">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                    <label>
+                        <b>{{ 'NEW_PASSWORD' | translate }}*</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': resetForm.password.$invalid && !resetForm.password.$pristine}">
+                        <div class="input-group">
+                            <input
+                                type="password"
+                                class="form-control"
+                                ng-model="updated_member.password"
+                                name="password"
+                                id="password"
+                                placeholder="{{ 'PASSWORD' | translate }}"
+                                aria-describedby="inputPassword"
+                                ng-minlength="14"
+                                required
+                                autofocus
+                            >
+                        </div>
+                        <small class="form-text text-muted">{{ 'MIN_LENGTH' | translate }}</small>
+                        <span ng-show="resetForm.password.$error.required && !resetForm.password.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                        <span ng-show="resetForm.password.$error.minlength && !resetForm.password.$pristine" class="text-danger">
+                            <small>
+                                {{ 'TOO_SHORT' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                    <label>
+                        <b>{{ 'NEW_REPEATED_PASSWORD' | translate }}*</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': resetForm.repeated_password.$invalid && !resetForm.repeated_password.$pristine}">
+                        <div class="input-group">
+                            <input
+                                type="password"
+                                class="form-control"
+                                ng-model="repeated_password"
+                                name="repeated_password"
+                                id="repeated_password"
+                                placeholder="{{ 'PASSWORD' | translate }}"
+                                aria-describedby="inputRepeatedPassword"
+                                ng-minlength="14"
+                                required>
+                        </div>
+                        <span ng-show="resetForm.repeated_password.$error.required && !resetForm.repeated_password.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                        <span ng-show="resetForm.repeated_password.$error.minlength && !resetForm.repeated_password.$pristine" class="text-danger">
+                            <small>
+                                {{ 'TOO_SHORT' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                    <label>
+                        &nbsp;
+                    </label>
+                    <button class="btn btn-block btn-success" role="submit" ng-disabled="updated_member.password != repeated_password">
+                        <i class="fa fa-foppy-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SAVE' | translate }}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

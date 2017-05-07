@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Ethics-App">
+        <title>Review required</title>
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+
+        <!-- Fontawesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"  crossorigin="anonymous">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+        <!-- Custom styles -->
+        <style>
+
+            body {
+                background-color: #eeeeee;
+                font-family: 'Open Sans script=all rev=1', sans-serif;
+                font-weight: 300;
+            }
+
+            hr {
+                width: 80%;
+            }
+
+            h1 {
+                font-family: 'Open Sans script=all rev=3', sans-serif;
+                font-weight: 400;
+            }
+
+            .header {
+                margin-top: 40px;
+                margin-bottom: 40px;
+            }
+
+            .left {
+                text-align: left;
+            }
+            .middle {
+                text-align: center;
+            }
+            .right {
+                text-align: right;
+            }
+            .justified {
+                text-align: justify;
+            }
+
+            .content, .header, .footer {
+                padding-left: 1%;
+                padding-right: 1%;
+            }
+
+            .content {
+                padding-bottom: 40px;
+            }
+
+            .footer {
+                padding-bottom: 40px;
+                font-size: 10pt;
+            }
+
+            .timestamp {
+                font-size: 8pt;
+                font-style: italic;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <!-- Header -->
+        <div class="header middle">
+            <h1 class="display-4">
+                Hi <span style="color: #0066ff;">{{member.first_name}}</span>!
+            </h1>
+            <br>
+            <p class="lead">
+                A document needs your review
+            </p>
+        </div>
+        <!-- Main -->
+        <div class="content">
+            <div class="card">
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3 col-md-2 col-lg-1 middle">
+                            <i class="fa fa-4x fa-eye" aria-hidden="true" style="color: #0066ff;"></i>
+                        </div>
+                        <div class="col-xs-12 col-sm-9 col-md-10 col-lg-11 justified" style="padding-top: 5px">
+                            <p>
+                                The document below needs your review. Please go back to the application and publish your review with comments for the user. You can <span class="badge badge-success">accept</span> the request, <span class="badge badge-warning">partly accept</span>it, so that the user has to revise the document and submit it again or <span class="badge badge-danger">reject</span> the document, so the user can no longer access the document (Attention: Use this option only in extreme situations or block the user, if he/she clearly violated the rules).
+                            </p>
+                            <p>
+                                If you have problems to access the document or review, please get in touch with another committee member of your institute.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="list-group">
+                <a href="{{domain}}/member-client/documents/{{document.document_id}}/login" target="_blank" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <div>
+                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                            &nbsp;&nbsp;<b>{{document.document_title}}</b>
+                            &nbsp;&nbsp;<code>rev{{revision.version}}</code>&nbsp;&nbsp;
+                        </div>
+                        <div class="right">
+                            <span class="badge badge-primary">
+                                review required
+                            </span>
+                        </div>
+                    </div>
+                    <div class="d-flex w-100 justify-content-between" style="margin-top:5px;">
+                        <div>
+                            <code>{{document.document_id}}</code>
+                        </div>
+                        <div class="timestamp right">
+                            &nbsp;&nbsp;{{document._updated}}
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <br>
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-subtitle middle">Preview</h4>
+
+                    {{#course}}
+                    <h6 style="margin-bottom: 5px;">Course</h6>
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <i>{{course.course_name}} ({{course.season}})</i>
+                        </div>
+                    </div>
+                    <br>
+                    {{/course}}
+
+                    <h6 style="margin-bottom: 5px;">Author</h6>
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <i>{{author.title}} {{author.first_name}} {{author.last_name}}</i>
+                        </div>
+                    </div>
+                    <br>
+
+                    <h6 style="margin-bottom: 5px;">Study description</h6>
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 120px; flex-shrink: 0;">
+                                    <b>Title</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <i>{{description.en_title}}</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 120px; flex-shrink: 0;">
+                                    <b>Researcher(s)</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <i>{{description.en_researcher}}</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 120px; flex-shrink: 0;">
+                                    <b>Time</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <i>{{description.en_study_time}}</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 120px; flex-shrink: 0;">
+                                    <b>Purpose</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <i>{{description.en_purpose}}</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 120px; flex-shrink: 0;">
+                                    <b>Procedure</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <i>{{description.en_procedure}}</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 120px; flex-shrink: 0;">
+                                    <b>Duration</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <i>{{description.en_duration}}</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 120px; flex-shrink: 0;">
+                                    <b>Risks</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <i>{{description.en_risks}}</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 120px; flex-shrink: 0;">
+                                    <b>Benefits</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <i>{{description.en_benefits}}</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <h6 style="margin-bottom: 5px;">Ethical concerns</h6>
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 40px; flex-shrink: 0;">
+                                    <b>1.</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <p>
+                                        <b>Will the study involve potentially vulnerable groups of participants or people who are unable or unauthorized to give informed consent?</b>
+                                    </p>
+                                    <i>{{concern.q01_explanation}}</i>
+                                </div>
+                                <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
+                                    <span class="badge {{concern.q01_label}} badge-pill">
+                                        {{concern.q01_sign}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 40px; flex-shrink: 0;">
+                                    <b>2.</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <p>
+                                        <b>Will the study involve deception?</b>
+                                    </p>
+                                    <i>{{concern.q02_explanation}}</i>
+                                </div>
+                                <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
+                                    <span class="badge {{concern.q02_label}} badge-pill">
+                                        {{concern.q02_sign}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 40px; flex-shrink: 0;">
+                                    <b>3.</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <p>
+                                        <b>Will the study involve discussion, judgment or presentation of strongly emotional or sensitive stimuli or topics?</b>
+                                    </p>
+                                    <i>{{concern.q03_explanation}}</i>
+                                </div>
+                                <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
+                                    <span class="badge {{concern.q03_label}} badge-pill">
+                                        {{concern.q03_sign}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 40px; flex-shrink: 0;">
+                                    <b>4.</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <p>
+                                        <b>Will participants be required to eat or drink any potentially allergic substances?</b>
+                                    </p>
+                                    <i>{{concern.q04_explanation}}</i>
+                                </div>
+                                <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
+                                    <span class="badge {{concern.q04_label}} badge-pill">
+                                        {{concern.q04_sign}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 40px; flex-shrink: 0;">
+                                    <b>5.</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <p>
+                                        <b>Will you be in the position of power in relation to your participants?</b>
+                                    </p>
+                                    <i>{{concern.q05_explanation}}</i>
+                                </div>
+                                <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
+                                    <span class="badge {{concern.q05_label}} badge-pill">
+                                        {{concern.q05_sign}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 40px; flex-shrink: 0;">
+                                    <b>6.</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <p>
+                                        <b>Will there be any other live observers present who are invisible to the participant and whose presence will not be disclosed to the participant?</b>
+                                    </p>
+                                    <i>{{concern.q06_explanation}}</i>
+                                </div>
+                                <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
+                                    <span class="badge {{concern.q06_label}} badge-pill">
+                                        {{concern.q06_sign}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 40px; flex-shrink: 0;">
+                                    <b>7.</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <p>
+                                        <b>Can any element of the procedure cause physical pain or more than mild discomfort?</b>
+                                    </p>
+                                    <i>{{concern.q07_explanation}}</i>
+                                </div>
+                                <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
+                                    <span class="badge {{concern.q07_label}} badge-pill">
+                                        {{concern.q07_sign}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 40px; flex-shrink: 0;">
+                                    <b>8.</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <p>
+                                        <b>Can the study cause psychological stress, anxiety or negative emotions stronger than what is experienced naturally on an everyday basis outside of research?</b>
+                                    </p>
+                                    <i>{{concern.q08_explanation}}</i>
+                                </div>
+                                <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
+                                    <span class="badge {{concern.q08_label}} badge-pill">
+                                        {{concern.q08_sign}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 40px; flex-shrink: 0;">
+                                    <b>9.</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <p>
+                                        <b>Will any additional information on your participants be obtained from third parties?</b>
+                                    </p>
+                                    <i>{{concern.q09_explanation}}</i>
+                                </div>
+                                <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
+                                    <span class="badge {{concern.q09_label}} badge-pill">
+                                        {{concern.q09_sign}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 40px; flex-shrink: 0;">
+                                    <b>10.</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <p>
+                                        <b>Does the procedure involve potential moments when the participant is left without the supervision of a researcher in a potentially challenging or dangerous situation in an uncontrolled environment?</b>
+                                    </p>
+                                    <i>{{concern.q10_explanation}}</i>
+                                </div>
+                                <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
+                                    <span class="badge {{concern.q10_label}} badge-pill">
+                                        {{concern.q10_sign}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 40px; flex-shrink: 0;">
+                                    <b>11.1.</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <p>
+                                        <b>Does the study involve audio or film recordings potentially identifying participants?</b>
+                                    </p>
+                                    <i>{{concern.q11_1_explanation}}</i>
+                                </div>
+                                <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
+                                    <span class="badge {{concern.q11_1_label}} badge-pill">
+                                        {{concern.q11_1_sign}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 40px; flex-shrink: 0;">
+                                    <b>11.2.</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <p>
+                                        <b>If yes: Will the study involve any recording without prior consent?</b>
+                                    </p>
+                                    <i>{{concern.q11_2_explanation}}</i>
+                                </div>
+                                <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
+                                    <span class="badge {{concern.q11_2_label}} badge-pill">
+                                        {{concern.q11_2_sign}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 40px; flex-shrink: 0;">
+                                    <b>12.</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <p>
+                                        <b>Is any raw data from the study likely to be passed on to external partners?</b>
+                                    </p>
+                                    <i>{{concern.q12_explanation}}</i>
+                                </div>
+                                <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
+                                    <span class="badge {{concern.q12_label}} badge-pill">
+                                        {{concern.q12_sign}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100">
+                                <div style="padding-right: 10px; flex-basis: 40px; flex-shrink: 0;">
+                                    <b>13.</b>
+                                </div>
+                                <div class="justified" style="flex-grow: 1;">
+                                    <p>
+                                        <b>Does the study involve collection of any information without obtaining an Informed Consent in a situation different from public observations or anonymous street surveys?</b>
+                                    </p>
+                                    <i>{{concern.q13_explanation}}</i>
+                                </div>
+                                <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
+                                    <span class="badge {{concern.q13_label}} badge-pill">
+                                        {{concern.q13_sign}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Footer -->
+        <div class="footer middle">
+            &copy; {{year}} <a href="{{domain}}/member-client/" target="_blank">Ethics-App</a> | COMMITTEE
+        </div>
+    </body>
+</html>

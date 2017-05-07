@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<div class="card">
+    <div class="card-header" style="font-size: 20pt;">
+        <div class="row">
+            <div class="col">
+                {{ 'RECOVERY' | translate }}
+            </div>
+            <div class="col right">
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/')">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <form class="form-horizontal" autocomplete="on" name="recoveryForm" ng-submit="send()">
+            <label>
+                <b>{{ 'EMAIL_ADDRESS' | translate }}*</b>
+            </label>
+            <div class="row">
+                <div class="col-xs-12 col-md-9">
+                    <div class="form-group" ng-class="{'has-danger': recoveryForm.email_address.$invalid && !recoveryForm.email_address.$pristine}">
+                        <input
+                            type="email"
+                            class="form-control"
+                            ng-model="recovery.email_address"
+                            name="email_address"
+                            id="email_address"
+                            placeholder="{{ 'EMAIL_ADDRESS' | translate }}"
+                            aria-describedby="inputEmailAddress"
+                            autofocus
+                            autocomplete="email" x-autocomplete="email"
+                            required>
+                        <span ng-show="recoveryForm.email_address.$error.required && !recoveryForm.email_address.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                    <button class="btn btn-block btn-primary" role="submit">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SEND' | translate }}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

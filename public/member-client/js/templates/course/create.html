@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<div class="card">
+    <form class="form-horizontal" autocomplete="on" name="createCourseForm" ng-submit="send()">
+        <div class="card-header" style="font-size: 20pt;">
+            <div class="row">
+                <div class="col">
+                    {{ 'NEW_COURSE' | translate }}
+                </div>
+                <div class="col right">
+                    <button class="btn btn-secondary" role="button" ng-click="redirect('/courses')">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-block">
+            <label>
+                <b>{{ 'COURSE_NAME' | translate }}*</b>
+            </label>
+            <div class="form-group" ng-class="{'has-danger': createCourseForm.document_email_address.$invalid && !createCourseForm.document_email_address.$pristine}">
+                <input
+                    type="text"
+                    class="form-control"
+                    ng-model="new_course.course_name"
+                    name="course_name"
+                    id="course_name"
+                    placeholder="{{ 'NAME' | translate }}"
+                    aria-describedby="inputCourseName"
+                    required
+                    autofocus>
+                <span ng-show="createCourseForm.course_name.$error.required && !createCourseForm.course_name.$pristine" class="text-danger">
+                    <small>
+                        {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+            </div>
+
+            <label>
+                <b>{{ 'YEAR' | translate }}*</b>
+            </label>
+            <div class="form-group" ng-class="{'has-danger': createCourseForm.year.$invalid && !createCourseForm.year.$pristine}">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </span>
+                    <input
+                        type="number"
+                        class="form-control"
+                        ng-model="new_course.year"
+                        name="year"
+                        id="year"
+                        placeholder="{{ 'YEAR' | translate }}"
+                        aria-describedby="inputYear"
+                        required
+                        autofocus
+                        min="2000"
+                        max="2100">
+                </div>
+                <span ng-show="createCourseForm.year.$error.required && !createCourseForm.year.$pristine" class="text-danger">
+                    <small>
+                        {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+            </div>
+
+            <label>
+                <b>{{ 'TERM' | translate }}*</b>
+            </label>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group" ng-class="{'has-danger': createCourseForm.term.$invalid && !createCourseForm.term.$pristine }">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-columns" aria-hidden="true"></i>
+                            </span>
+                            <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                    <input
+                                    class="custom-control-input"
+                                    type="radio"
+                                    name="term"
+                                    id="winter_term"
+                                    ng-model="new_course.term"
+                                    ng-value="true"
+                                    required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">
+                                        {{ 'WINTER' | translate }}<br>
+                                        <small>({{new_course.year}} - {{new_course.year+1}})</small>
+                                    </span>
+                                </label>
+                            </span>
+                            <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                    <input
+                                    class="custom-control-input"
+                                    type="radio"
+                                    name="term"
+                                    id="summer_term"
+                                    ng-model="new_course.term"
+                                    ng-value="false"
+                                    required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">
+                                        {{ 'SUMMER' | translate }}<br> <small>({{new_course.year}})</small>
+                                    </span>
+                                </label>
+                            </span>
+                        </div>
+                        <span ng-show="createCourseForm.term.$error.required && !createCourseForm.term.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <label>
+                <b>{{ 'LECTURER' | translate }}*</b>
+            </label>
+            <textarea class="form-control"
+                rows="2"
+                ng-model="new_course.lecturer"
+                name="lecturer"
+                id="lecturer"
+                required
+                ></textarea>
+            <span ng-show="createCourseForm.lecturer.$error.required && !createCourseForm.lecturer.$pristine" class="text-danger">
+                <small>
+                    {{ 'REQUIRED' | translate }}
+                </small>
+            </span>
+            <br>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'UNIVERSITY' | translate }}*</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': createCourseForm.university_id.$invalid && !createCourseForm.university_id.$pristine }">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-university" aria-hidden="true"></i>
+                            </span>
+                            <select
+                                class="custom-select form-control"
+                                id="university_id"
+                                name="university_id"
+                                ng-model="university_id"
+                                ng-options="university.university_id as university.university_name for university in universities"
+                                ng-disabled="!authenticated_member.admin"
+                                ng-change="load('institutes')"
+                                required
+                            >
+                                <option value="">
+                                    {{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}
+                                </option>
+                            </select>
+                        </div>
+                        <span ng-show="createCourseForm.university_id.$error.required && !createCourseForm.university_id.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'INSTITUTE' | translate }}*</b>
+                    </label>
+                    <div class="form-group" ng-class="{'has-danger': createCourseForm.institute_id.$invalid && !createCourseForm.institute_id.$pristine }">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-building" aria-hidden="true"></i>
+                            </span>
+                            <select
+                                class="custom-select form-control"
+                                id="institute_id"
+                                name="institute_id"
+                                ng-model="new_course.institute_id"
+                                ng-options="institute.institute_id as institute.institute_name for institute in institutes"
+                                ng-disabled="university_id == null || !authenticated_member.admin"
+                                ng-change="load('members')"
+                                required
+                            >
+                                <option value="">
+                                    {{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}
+                                </option>
+                            </select>
+                        </div>
+                        <span ng-show="createCourseForm.institute_id.$error.required && !createCourseForm.institute_id.$pristine" class="text-danger">
+                            <small>
+                                {{ 'REQUIRED' | translate }}
+                            </small>
+                        </span>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <!-- Responsible members -->
+            <div ng-show="new_course.institute_id && new_course.institute_id !== null">
+                <label>
+                    <b>{{ 'RESPONSIBLE_MEMBERS' | translate }}</b>
+                </label>
+                <div class="list-group">
+                    <div class="list-group-item flex-column align-items-start" ng-repeat="member in responsible_members" ng-if="responsible_members && responsible_members.length>0">
+                        <div class="d-flex w-100 justify-content-between">
+                            <div>
+                                <span ng-if="member.admin">
+                                    <i class="fa fa-id-badge" aria-hidden="true"></i>
+                                </span>
+                                <span ng-if="!member.admin">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </span>
+                                &nbsp;&nbsp;
+                                <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}</b>
+                                &nbsp;
+                                <span class="text-muted" ng-if="member.working_group_name">
+                                    <small>{{member.working_group_name}}&nbsp;|</small>
+                                </span>
+                                <span class="text-muted" ng-if="member.institute_name">
+                                    <small>{{member.institute_name}}&nbsp;|</small>
+                                </span>
+                                <span class="text-muted" ng-if="member.university_name">
+                                    <small>{{member.university_name}}</small>
+                                </span>
+                            </div>
+                            <div>
+                                <a href="" class="btn btn-sm btn-danger" ng-click="deleteMember($index)">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item middle" ng-if="!responsible_members || responsible_members.length==0">
+                        - {{ 'NONE' | translate }} -
+                    </div>
+                    <div class="list-group-item" style="background-color: #f7f7f9;">
+                        <div class="row">
+                            <div class="col">
+                                <div angucomplete-alt
+                                    id="members"
+                                    placeholder="{{ 'SEARCH_FOR_MEMBERS' | translate }}"
+                                    maxlength="18"
+                                    pause="100"
+                                    selected-object="selectedMember"
+                                    local-data="members"
+                                    search-fields="title,first_name,last_name"
+                                    title-field="title,first_name,last_name"
+                                    minlength="1"
+                                    input-class="form-control"
+                                    match-class="highlight">
+                                </div>
+                            </div>
+                            <div class="col-2 col-xs-auto col-sm-auto col-md-auto col-lg-auto">
+                                <button class="btn btn-primary" type="button" ng-click="addMember()" ng-disabled="!selectedMember.originalObject">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-muted right">
+                    <small>
+                        * {{ 'REQUIRED' | translate }}
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer right">
+            <button class="btn btn-success" role="submit">
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SEND' | translate }}
+            </button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<div class="card">
+    <div class="card-header" style="font-size: 20pt;">
+        {{ 'DOCUMENT_IS_CURRENTLY_UNDER_REVIEW' | translate }}
+    </div>
+    <div class="card-block">
+        <br>
+        <div style="text-align: justify;">
+            {{ 'STATUS_4' | translate }}
+        </div>
+        <br>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <button class="btn btn-secondary btn-block-xs-only btn-block-sm-only" role="button" ng-click="redirect('/documents/' + document.document_id + '/submission')">
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SHOW_SUBMISSION' | translate }}
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 right">
+                <button class="btn btn-primary btn-block-xs-only btn-block-sm-only" role="button" ng-click="redirect('/')">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'LOGOUT' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

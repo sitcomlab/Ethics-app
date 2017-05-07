@@ -1,31 +1,47 @@
 {
   "name": "ethics-app",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-    "async": "^1.5.2",
-    "body-parser": "~1.0.0",
-    "bson": "^0.4.20",
-    "commander": "^2.9.0",
-    "cookie-parser": "~1.0.1",
-    "debug": "^0.7.4",
-    "express": "~4.2.0",
-    "fs": "0.0.2",
-    "i": "^0.3.5",
-    "install": "^0.8.1",
-    "jquery": "^2.1.4",
-    "jsdoc": "^3.3.3",
-    "jsonwebtoken": "^5.7.0",
-    "moment": "^2.10.6",
-    "mongoose": "3.8.0",
-    "morgan": "~1.0.0",
-    "mustache": "^2.2.1",
-    "nodemailer": "^1.11.0",
-    "npm": "^3.9.2",
-    "pdfkit": "^0.7.2",
-    "phantom-html-to-pdf": "^0.4.1",
-    "underscore": "^1.6.0",
-    "validator": "^4.5.0"
+  "version": "1.0.0",
+  "description": "Application for the approval of user-studies",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sitcomlab/Ethics-app.git"
   },
-  "devDependencies": {}
+  "author": {
+    "name": "Nicholas Schiestel",
+    "email": "n.schiestel@uni-muenster.de"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sitcomlab/Ethics-app/issues"
+  },
+  "homepage": "https://github.com/sitcomlab/Ethics-app#readme",
+  "engines": {
+    "node": ">=6.9.1",
+    "npm": ">=3.10.8"
+  },
+  "dependencies": {
+    "async": "^2.0.1",
+    "body-parser": "^1.15.2",
+    "bower": "^1.8.0",
+    "colors": "^1.1.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "helmet": "^3.4.1",
+    "html-pdf": "^2.1.0",
+    "jsonwebtoken": "^7.2.1",
+    "moment": "^2.14.1",
+    "mustache": "^2.3.0",
+    "nodemailer": "^2.7.0",
+    "pg": "^6.1.0",
+    "underscore": "^1.8.3",
+    "uuid": "^3.0.1"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "postinstall": "bower install"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
 }

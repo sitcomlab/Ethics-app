@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<div class="card">
+    <form class="form-horizontal" autocomplete="on" name="editDocumentForm" ng-submit="save()">
+        <div class="card-header" style="font-size: 20pt;">
+            <div class="row">
+                <div class="col">
+                    {{ 'DOCUMENT_SETTINGS' | translate }}
+                </div>
+                <div class="col right">
+                    <button class="btn btn-secondary" role="button" ng-click="redirect('/documents/' + document.document_id)">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-block">
+            <label>
+                <b>{{ 'DOCUMENT_TITLE' | translate }}</b>
+            </label>
+            <div class="form-group" ng-class="{'has-danger': editDocumentForm.title.$invalid && !editDocumentForm.title.$pristine}">
+                <div class="input-group">
+                    <input
+                        type="text"
+                        class="form-control"
+                        ng-model="updated_document.document_title"
+                        name="document_title"
+                        id="document_title"
+                        placeholder="{{ 'DOCUMENT_TITLE' | translate }}*"
+                        aria-describedby="inputTitle"
+                        autofocus
+                        required>
+                    <span class="input-group-addon">
+                        <span class="flag-icon flag-icon-gb"></span>
+                    </span>
+                </div>
+                <span ng-show="editDocumentForm.title.$error.required && !editDocumentForm.title.$pristine" class="text-danger">
+                    <small>
+                        {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'UNIVERSITY' | translate }}</b>
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-university" aria-hidden="true"></i>
+                        </span>
+                        <select
+                            class="custom-select form-control"
+                            id="university_id"
+                            name="university_id"
+                            ng-model="university_id"
+                            ng-options="university.university_id as university.university_name for university in universities"
+                            ng-change="load('institutes')"
+                            disabled>
+                            <option value="">{{ 'NO_UNIVERSITY' | translate }}</option>
+                        </select>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'INSTITUTE' | translate }}</b>
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-building" aria-hidden="true"></i>
+                        </span>
+                        <select
+                            class="custom-select form-control"
+                            id="institute_id"
+                            name="institute_id"
+                            ng-model="institute_id"
+                            ng-options="institute.institute_id as institute.institute_name group by getGroupName(institute.former) for institute in institutes"
+                            ng-change="load('courses')"
+                            disabled>
+                            <option value="">{{ 'NO_INSTITUTE' | translate }}</option>
+                        </select>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'COURSE' | translate }}</b>
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                        </span>
+                        <select
+                            class="custom-select form-control"
+                            id="course_id"
+                            name="course_id"
+                            ng-model="updated_document.course_id"
+                            ng-options="course.course_id as course.course_name group by course.season for course in courses"
+                            ng-disabled="institute_id == null || institute_id == '' ">
+                            <option value="">{{ 'NO_COURSE' | translate }}</option>
+                        </select>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'CURRENT_STATUS' | translate }}</b>
+                    </label>
+                    <br>
+                    <span class="badge" ng-class="{'badge-default': document.status==0 || document.status==1, 'badge-success': document.status==2 || document.status==6, 'badge-primary': document.status==3, 'badge-info': document.status==4, 'badge-warning': document.status=='5', 'badge-danger': document.status==7}">
+                        <span ng-if="document.status==0">{{ 'INITIALISED' | translate }}</span>
+                        <span ng-if="document.status==1">{{ 'UNSUBMITTED' | translate }}</span>
+                        <span ng-if="document.status==2">{{ 'AUTO_ACCEPTED' | translate }}</span>
+                        <span ng-if="document.status==3">{{ 'REVIEW_REQUIRED' | translate }}</span>
+                        <span ng-if="document.status==4">{{ 'REVIEW_IN_PROGRESS' | translate }}</span>
+                        <span ng-if="document.status==5">{{ 'PARTLY_ACCEPTED' | translate }}</span>
+                        <span ng-if="document.status==6">{{ 'ACCEPTED' | translate }}</span>
+                        <span ng-if="document.status==7">{{ 'REJECTED' | translate }}</span>
+                    </span>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <label>
+                        <b>{{ 'NEW_STATUS' | translate }}</b>
+                    </label>
+                    <select
+                        class="custom-select form-control"
+                        id="status"
+                        name="status"
+                        ng-model="updated_document.status"
+                    >
+                        <option value="" disabled>
+                            {{ 'NO_CHANGES' | translate }}
+                        </option>
+                        <option value="5" ng-disabled="document.status!=2 && document.status<5">
+                            (5) {{ 'PARTLY_ACCEPTED' | translate }}
+                        </option>
+                        <option value="6" ng-disabled="document.status!=2 && document.status<5">
+                            (6) {{ 'ACCEPTED' | translate }}
+                        </option>
+                        <option value="7" ng-disabled="document.status!=2 && document.status<5">
+                            (7) {{ 'REJECTED' | translate }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="alert alert-info" role="alert">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'REVIEW_OPTIONS' | translate }}</b>:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                        <span class="badge badge-warning">
+                            {{ 'PARTLY_ACCEPT' | translate }}
+                        </span>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 justified">
+                        {{ 'REVIEW_OPTION_2' | translate }}.
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                        <span class="badge badge-success">
+                            {{ 'ACCEPT' | translate }}
+                        </span>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 justified">
+                        {{ 'REVIEW_OPTION_1' | translate }}.
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                        <span class="badge badge-danger">
+                            {{ 'REJECT' | translate }}
+                        </span>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 justified">
+                        {{ 'REVIEW_OPTION_3' | translate }}.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer right">
+            <button class="btn btn-success" role="submit">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SAVE' | translate }}
+            </button>
+        </div>
+    </form>
+</div>

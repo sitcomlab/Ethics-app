@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Ethics-App">
+        <title>Document created</title>
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+
+        <!-- Fontawesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"  crossorigin="anonymous">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+        <!-- Custom styles -->
+        <style>
+
+            body {
+                background-color: #eeeeee;
+                font-family: 'Open Sans script=all rev=1', sans-serif;
+                font-weight: 300;
+            }
+
+            hr {
+                width: 80%;
+            }
+
+            h1 {
+                font-family: 'Open Sans script=all rev=3', sans-serif;
+                font-weight: 400;
+            }
+
+            .header {
+                margin-top: 40px;
+                margin-bottom: 40px;
+            }
+
+            .left {
+                text-align: left;
+            }
+            .middle {
+                text-align: center;
+            }
+            .right {
+                text-align: right;
+            }
+            .justified {
+                text-align: justify;
+            }
+
+            .content, .header, .footer {
+                padding-left: 1%;
+                padding-right: 1%;
+            }
+
+            .content {
+                padding-bottom: 40px;
+            }
+
+            .footer {
+                padding-bottom: 40px;
+                font-size: 10pt;
+            }
+
+            .timestamp {
+                font-size: 8pt;
+                font-style: italic;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <!-- Header -->
+        <div class="header middle">
+            <h1 class="display-4">
+                Hi <span style="color: #0066ff;">{{user.first_name}}</span>!
+            </h1>
+            <br>
+            <p class="lead">
+                Your new document has been created
+            </p>
+        </div>
+        <!-- Main -->
+        <div class="content">
+            <div class="card">
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3 col-md-2 col-lg-1 middle">
+                            <i class="fa fa-4x fa-key" aria-hidden="true" style="color: #0066ff;"></i>
+                        </div>
+                        <div class="col-xs-12 col-sm-9 col-md-10 col-lg-11 justified" style="padding-top: 5px">
+                            <p>
+                                Your new document has been created. Please go back to the application to login with the document-ID below.
+                            </p>
+                            <p>
+                                If you have problems with your document, please get in touch with a committee member of your institute.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="list-group">
+                <a href="{{domain}}/user-client/documents/{{document.document_id}}" target="_blank" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <div>
+                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                            &nbsp;&nbsp;<b>{{document.document_title}}</b>
+                            &nbsp;&nbsp;
+                        </div>
+                        <div class="right">
+                            <span class="badge badge-default">
+                                initialised
+                            </span>
+                        </div>
+                    </div>
+                    <div class="d-flex w-100 justify-content-between" style="margin-top:5px;">
+                        <div>
+                            <code>{{document.document_id}}</code>
+                        </div>
+                        <div class="timestamp right">
+                            &nbsp;&nbsp;{{document._created}}
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="footer middle">
+            &copy; {{year}} <a href="{{domain}}/user-client/" target="_blank">Ethics-App</a>
+        </div>
+    </body>
+</html>

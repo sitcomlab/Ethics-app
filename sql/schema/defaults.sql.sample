@@ -1,0 +1,62 @@
+-- Universities
+INSERT INTO Universities (
+    university_name
+) VALUES (
+    'UNIVERSITY'
+);
+
+
+-- Institutes
+INSERT INTO Institutes (
+    institute_name,
+    university_id,
+    former
+) VALUES (
+    'INSTITUTE'
+    1,
+    false
+);
+
+
+-- Working groups, e.g. Research groups
+INSERT INTO Working_Groups (
+    working_group_name,
+    institute_id,
+    former
+) VALUES  (
+    'WORKING-GROUP'
+    1,
+    false
+);
+
+
+-- 1st Administrator
+INSERT INTO Members (
+    email_address,
+    password,
+    title,
+    first_name,
+    last_name,
+    working_group_id,
+    office_room_number,
+    office_phone_number,
+    office_email_address,
+    secret,
+    admin,
+    former,
+    subscribed
+) VALUES (
+    'admin@example.org',
+    crypt('123456789abcde', gen_salt('md5')),
+    NULL,
+    'Admin',
+    '',
+    1,
+    NULL,
+    NULL,
+    'admin@example.org',
+    true,
+    true,
+    false,
+    false
+);

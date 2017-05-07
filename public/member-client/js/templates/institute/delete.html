@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<div class="card">
+    <div class="card-header" style="font-size: 20pt;">
+        <div class="row">
+            <div class="col-9">
+                {{ 'INSTITUTE' | translate }}
+            </div>
+            <div class="col-3 right">
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/institutes/' + institute.institute_id)">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <h6>
+            {{ 'DELETE_THIS_INSTITUTE' | translate }} <kbd>{{institute.institute_name}}</kbd>?
+        </h6>
+        <br>
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'ATTENTION' | translate }}</h4>
+            <p>
+                {{ 'EXPLANATION_OF_DELETING_A_INSTITUTE' | translate }}
+            </p>
+            <p>
+                {{ 'ALTERNATIVE_INSTITUTE' | translate }}:
+            </p>
+            <p>
+                <a href="" class="btn btn-sm btn-primary" ng-click="redirect('/institutes/' + institute.institute_id + '/edit')">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'EDIT_INSTITUTE' | translate }}
+                </a>
+            </p>
+        </div>
+        <br>
+        <label>
+            <b>{{ 'INSTITUTE_NAME' | translate }}*</b>
+        </label>
+        <input type="text" class="form-control" ng-model="input" id="instituteName" placeholder="{{ 'INSTITUTE_NAME' | translate }}" autofocus>
+        <small class="form-text text-muted">{{ 'PLEASE_TYPE_IN_THE_INSTITUTE_NAME_TO_CONFIRM' | translate }}</small>
+    </div>
+    <div class="card-footer right">
+        <button class="btn btn-danger" role="button" ng-click="delete()" ng-disabled="input != institute.institute_name">
+            <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'DELETE' | translate }}
+        </button>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Informed Consent Form</title>
+    </head>
+    <body style="font-size: small">
+        <div class="firstpage">
+            <p align="center" style="font-size: medium"><b>Einverständniserklärung</b></p>
+            <p align="center" style="font-size: x-small">(mehrseitig: bitte zusammen aufbewahren)</p>
+            <br>
+            <p align="center" style="font-size: medium">Projekt Name: <b>{{project_name}}</b></p>
+            <br>
+            <p>
+                Liebe/r Teilnehmer/in,
+            </p>
+            <p>
+                Vielen Dank für Ihre Teilnahme an der Studie.
+            </p>
+            <p style="text-align: justify">
+                <b>Zweck der Studie:</b><br>{{general.german.q04}}
+            </p>
+            <p style="text-align: justify">
+                <b>Vorgehensweise:</b><br>{{general.german.q05}}
+            </p>
+            <p style="text-align: justify">
+                <b>Dauer:</b><br>{{general.german.q06}}
+            </p>
+            <p style="text-align: justify">
+                <b>Potentielle Risiken: </b>{{general.german.q07}}
+            </p>
+            <p style="text-align: justify">
+                <b>Datenschutz:</b><br>Die Daten, die in dieser Studie erhoben werden, werden in anonymisierter Form erhoben und nur in Aggregation mit weiteren anonymen Daten verarbeitet. In dieser Form werden die Daten ggf. in akademischen Journalen, Präsentationen oder anderen Medien veröffenlicht, jedoch ist niemals eine Identifizierung der einzelnen Teilnehmer möglich. Eine Woche nach Abschluss der Studie ist es daher quasi nicht mehr möglich die Daten aus deiner Teilnahme zu aus den aggregierten Datensätzen aller Teilnehmer zu identifizieren.
+            </p>
+        </div>
+        <div class="secondpage" style="page-break-before:always;">
+            <br>
+            <p>
+                Sie können <b>zu jeder Zeit</b> ohne Angabe von Gründen die Studie abbrechen und Ihre Antworten zurückziehen. Dies hat keine weiteren Konsequenzen für Sie. <b>Falls Sie noch Fragen haben, stellen Sie diese bitte jetzt.</b>
+            </p>
+            <p>
+                Bei weiteren Fragen oder auch Beschwerden bitten wir Sie sich an die Ethik-Kommission des Instituts zu wenden.
+            </p>
+            <br>
+            <p>
+                &#9634; Ich bestätige, dass ich freiwillig an der Studie teilnehme.
+            </p>
+            <p>
+                &#9634; Ich bestätige, dass ich meine Fragen stellen durfte und Antworten bekommen habe.
+            </p>
+            <p>
+                &#9634; Ich bestätige, dass mir dieses Dokument vor der Studie ausgehändigt wurde.
+            </p>
+            <p>
+                &#9634; Ich bestätige und verstehe, dass ich die Studie zu jedem Zeitpunkt ohne Konsequenzen abbrechen kann.
+            </p>
+            <p>
+                {{#ethics.q11.checkbox_1}}
+                &#9634; Ich bestätige mein Einverständnis zu der Aufnahme von Audio/Videomaterial*, einschließlich meiner Stimme/meinem Bild*. [*streiche nicht zutreffendes]
+                {{/ethics.q11.checkbox_1}}
+            </p>
+            <br>
+            <p>
+              <table style="width:100%;font-size: small">
+                    <tr>
+                        <td align="center"><hr width=100px></td>
+                        <td align="center"><hr width=200px></td>
+                    </tr>
+                    <tr>
+                        <td align="center">Datum</td>
+                        <td align="center">Unterschrift des Forschers</td>
+                    </tr>
+                    <tr>
+						<td height="40px"></td>
+                    </tr>
+                    <tr>
+						<td align="center"></td>
+                        <td align="center"><hr width=200px></td>
+                    </tr>
+                    <tr>
+						<td align="center"></td>
+                        <td align="center">Unterschrift des Teilnehmers</td>
+                    </tr>
+                </table>
+            </p>
+            <br>
+            <p>
+                <b>Freiwillig</b>: Falls Sie über weitere Studien am Institut informiert werden wollen, tragen Sie hier Ihre Email Adresse ein.
+            </p>
+            <br>
+            <p>
+                Email: ________________________________________________
+            </p>
+        </div>
+    </body>
+</html>

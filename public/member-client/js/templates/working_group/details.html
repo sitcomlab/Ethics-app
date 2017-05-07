@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<div class="card">
+    <div class="card-header" style="font-size: 20pt;">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+                <span class="badge badge-default" ng-if="working_group.former" style="font-size: 20pt;">
+                    <i class="fa fa-archive" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'FORMER' | translate }}
+                </span>
+                {{ 'WORKING_GROUP' | translate }}
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 right">
+                <div class="btn-group">
+                    <button class="btn btn-info" role="button" ng-click="redirect('/working_groups/' + working_group.working_group_id + '/edit')">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-danger" role="button" ng-click="redirect('/working_groups/' + working_group.working_group_id + '/delete')">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/working_groups')">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="card" style="background-color: #f7f7f9;">
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-1 right">
+                        <h4 class="card-title">
+                            <i class="fa fa-briefcase" aria-hidden="true"></i>
+                        </h4>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h4 class="card-title">
+                                    {{working_group.working_group_name}}
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <!-- Sub-nav -->
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                        <ul class="nav nav-pills flex-column flex-sm-row flex-sm-wrap justify-content-start">
+                            <li class="nav-item">
+                                <a class="nav-link" href="" ng-class="{ 'active': !filter.former }" ng-click="changeTab('members', false)">
+                                    {{ 'RELATED_MEMBERS' | translate }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="" ng-class="{ 'active': filter.former }" ng-click="changeTab('members', true)">
+                                    {{ 'RELATED_FORMER_MEMBERS' | translate }}
+                                </a>
+                            </li>
+                        </ul>
+                        <br>
+                    </div>
+                    <!-- SORTING -->
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="filter.tab == 'members' ">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="background-color: #ffffff;">
+                                <i class="fa fa-sort-numeric-asc" aria-hidden="true" ng-if="filter.orderby == 'created.asc' || filter.orderby == 'updated.asc'"></i>
+                                <i class="fa fa-sort-numeric-desc" aria-hidden="true" ng-if="filter.orderby == 'created.desc' || filter.orderby == 'updated.desc'"></i>
+                                <i class="fa fa-sort-alpha-asc" aria-hidden="true" ng-if="filter.orderby == 'name.asc'"></i>
+                                <i class="fa fa-sort-alpha-desc" aria-hidden="true" ng-if="filter.orderby == 'name.desc'"></i>
+                            </span>
+                            <select class="form-control custom-select" ng-model="filter.orderby" ng-change="load('members')">
+                                <option value="created.asc">{{ 'CREATED_ASC' | translate }}</option>
+                                <option value="created.desc">{{ 'CREATED_DESC' | translate }}</option>
+                                <option value="updated.asc">{{ 'UPDATED_ASC' | translate }}</option>
+                                <option value="updated.desc">{{ 'UPDATED_DESC' | translate }}</option>
+                                <option value="name.asc">{{ 'NAME_ASC' | translate }} [{{ 'DEFAULT' | translate }}]</option>
+                                <option value="name.desc">{{ 'NAME_DESC' | translate }}</option>
+                            </select>
+                        </div>
+                        <small class="form-text text-muted">{{ 'SORT_BY' | translate }}</small>
+                        <br>
+                    </div>
+                </div>
+
+                <!-- Related members -->
+                <div class="row" ng-if="!filter.former && working_group.members && working_group.members.length>0">
+                    <div class="col text-muted right">
+                        <small>
+                            <span class="text-success">
+                                <i class="fa fa-rss-square" aria-hidden="true"></i>
+                            </span> {{ 'SUBSCRIBED' | translate }}
+                            &nbsp;&nbsp;|&nbsp;&nbsp;
+                            <span class="text-danger">
+                                <i class="fa fa-rss-square" aria-hidden="true"></i>
+                            </span> {{ 'CURRENTLY_NOT_SUBSCRIBED' | translate }}
+                        </small>
+                    </div>
+                    <br>
+                </div>
+                <div class="list-group" ng-if="working_group.members && working_group.members.length>0">
+                    <a href="" ng-click="redirect('/members/' + member.member_id)" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="member in working_group.members">
+                        <div class="d-flex w-100 justify-content-between">
+                            <div>
+                                <span ng-if="member.admin">
+                                    <i class="fa fa-id-badge" aria-hidden="true"></i>
+                                </span>
+                                <span ng-if="!member.admin">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </span>
+                                &nbsp;&nbsp;
+                                <b><span ng-if="member.title">{{member.title}}&nbsp;</span>{{member.first_name}} {{member.last_name}}<span ng-if="member.member_id == authenticated_member.member_id">&nbsp;({{ 'YOU' | translate }})</span></b>
+                                &nbsp;
+                                <span class="text-muted" ng-if="member.working_group_name">
+                                    <small>{{member.working_group_name}}&nbsp;|</small>
+                                </span>
+                                <span class="text-muted" ng-if="member.institute_name">
+                                    <small>{{member.institute_name}}&nbsp;|</small>
+                                </span>
+                                <span class="text-muted" ng-if="member.university_name">
+                                    <small>{{member.university_name}}</small>
+                                </span>
+                            </div>
+                            <div ng-if="!member.former">
+                                <span class="text-success" ng-if="member.subscribed">
+                                    <i class="fa fa-rss-square" aria-hidden="true"></i>
+                                </span>
+                                <span class="text-danger" ng-if="!member.subscribed">
+                                    <i class="fa fa-rss-square" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <div ng-if="member.former">
+                                <span class="badge badge-default">
+                                    <i class="fa fa-archive" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'FORMER' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div ng-if="!working_group.members || working_group.members.length==0">
+                    <div class="list-group">
+                        <div class="list-group-item middle">
+                            - {{ 'NONE' | translate }} -
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <div class="card-footer right" ng-if="working_group.members.length > 0">
+
+                <!-- Pagination -->
+                <nav aria-label="pagination" id="pagination">
+                    <ul class="pagination pagination-sm justify-content-center">
+                        <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
+                            <a href="" class="page-link" ng-click="changeOffset(0)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
+                                <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
+                            <a href="" class="page-link" ng-click="changeOffset(filter.offset - filter.limit)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
+                                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="page-item" ng-class="{'active': filter.offset == page.offset}" ng-repeat="page in pages">
+                            <a href="" class="page-link" ng-click="changeOffset(page.offset)">
+                                {{$index+1}}
+                            </a>
+                        </li>
+                        <li class="page-item" ng-class="{ 'disabled': filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit }">
+                            <a href="" class="page-link" ng-click="changeOffset(filter.offset + filter.limit)" ng-style="filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit && {'background-color':'#f7f7f9'}">
+                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="page-item" ng-class="{ 'disabled': filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit }">
+                            <a href="" class="page-link" ng-click="changeOffset(pages[pages.length - 1].offset)" ng-style="filter.offset + filter.limit >= pages[pages.length - 1].offset + filter.limit && {'background-color':'#f7f7f9'}">
+                                <b><i class="fa fa-angle-double-right" aria-hidden="true"></i></b>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<div class="card">
+    <form class="form-horizontal" autocomplete="on" name="documentEditTitleForm" ng-submit="save()">
+        <div class="card-header" style="font-size: 20pt;">
+            <div class="row">
+                <div class="col">
+                    {{ 'DOCUMENT_SETTINGS' | translate }}
+                </div>
+                <div class="col right">
+                    <button class="btn btn-secondary" role="button" ng-click="cancel()">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-block">
+            <label>
+                <b>{{ 'DOCUMENT_TITLE' | translate }}</b>
+            </label>
+            <div class="form-group" ng-class="{'has-danger': documentEditTitleForm.title.$invalid && !documentEditTitleForm.title.$pristine}">
+                <div class="input-group">
+                    <input
+                        type="text"
+                        class="form-control"
+                        ng-model="updated_document.document_title"
+                        name="document_title"
+                        id="document_title"
+                        placeholder="{{ 'DOCUMENT_TITLE' | translate }}*"
+                        aria-describedby="inputTitle"
+                        autofocus
+                        required>
+                    <span class="input-group-addon">
+                        <span class="flag-icon flag-icon-gb"></span>
+                    </span>
+                </div>
+                <span ng-show="documentEditTitleForm.title.$error.required && !documentEditTitleForm.title.$pristine" class="text-danger">
+                    <small>
+                        {{ 'REQUIRED' | translate }}
+                    </small>
+                </span>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'UNIVERSITY' | translate }}</b>
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-university" aria-hidden="true"></i>
+                        </div>
+                        <select
+                            class="custom-select form-control"
+                            id="university_id"
+                            name="university_id"
+                            ng-model="university_id"
+                            ng-options="university.university_id as university.university_name for university in universities"
+                            disabled
+                        >
+                            <option value="">
+                                {{ 'PLEASE_SELECT_AN_UNIVERSITY' | translate }}
+                            </option>
+                        </select>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'INSTITUTE' | translate }}</b>
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-building" aria-hidden="true"></i>
+                        </div>
+                        <select
+                            class="custom-select form-control"
+                            id="institute_id"
+                            name="institute_id"
+                            ng-model="institute_id"
+                            ng-options="institute.institute_id as institute.institute_name for institute in institutes"
+                            disabled
+                        >
+                            <option value="">
+                                {{ 'PLEASE_SELECT_AN_INSTITUTE' | translate }}
+                            </option>
+                        </select>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label>
+                        <b>{{ 'COURSE' | translate }}</b>
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                        </div>
+                        <select
+                            class="custom-select form-control"
+                            id="course_id"
+                            name="course_id"
+                            ng-model="updated_document.course_id"
+                            ng-options="course.course_id as course.course_name group by course.season for course in courses"
+                            ng-change="updateCourse(updated_document.course_id)"
+                        >
+                            <option value="">{{ 'NO_COURSE' | translate }}</option>
+                        </select>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <div ng-if="course !== null">
+                <div class="card" style="background-color: #f7f7f9;">
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-1 right">
+                                <h4 class="card-title">
+                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                </h4>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <h4 class="card-title">
+                                            {{course.course_name}}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                        <b>{{'LECTURERS' | translate}}</b>: {{course.lecturer}}<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer right">
+            <button class="btn btn-success" role="submit">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SAVE' | translate }}
+            </button>
+        </div>
+    </form>
+</div>

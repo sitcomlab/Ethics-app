@@ -1,38 +1,32 @@
 {
-    "name": "Ethics-App",
+    "name": "ethics-app",
     "version": "0.0.1",
     "authors": [
-        "Nicholas Schiestel <n.schiestel@uni-muenster.de>",
-        "Heinrich Löwen <loewen.heinrich@uni-muenster.de>"
+        "Nicholas Schiestel <n.schiestel@uni-muenster.de>"
     ],
     "description": "Ethics-App for the Institute for Geoinformatics, Münster",
     "license": "MIT",
     "private": true,
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "lib",
-        "test",
-        "tests"
-    ],
     "dependencies": {
-        "jquery": "~2.1.3",
-        "bootstrap": "v4.0.0-alpha.5",
-        "moment": "~2.10.3",
-        "underscore": "~1.8.3",
-        "angular": "1.5.9",
-        "angular-translate": "~2.6.1",
-        "angular-route": "~1.3.15",
-        "angular-filter": "~0.5.4",
-        "ngDialog": "~0.4.0",
-        "ngBootbox": "~0.0.5",
-        "font-awesome": "~4.5.0",
+        "angular": "1.6.4",
+        "angular-momentjs": "^0.2.2",
+        "angular-route": "1.6.4",
+        "angular-sanitize": "1.6.4",
+        "angular-translate": "^2.11.1",
+        "bootstrap": "v4.0.0-alpha.6",
+        "font-awesome": "^4.6.3",
+        "jquery": "^3.1.0",
+        "moment": "^2.14.1",
+        "tether": "^1.3.7",
         "flag-icon-css": "^2.0.0",
-        "angular-bootstrap": "~1.3.3"
+        "underscore": "^1.8.3",
+        "angular-underscore-module": "^1.0.3",
+        "angucomplete-alt": "^3.0.0"
     },
     "resolutions": {
-        "angular": "1.5.9",
-        "bootstrap": "v4.0.0-alpha.5"
+        "angular": "1.6.4",
+        "angular-route": "1.6.4",
+        "angular-sanitize": "1.6.4",
+        "bootstrap": "v4.0.0-alpha.6"
     }
 }

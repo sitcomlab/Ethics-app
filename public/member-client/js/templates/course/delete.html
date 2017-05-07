@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<div class="card">
+    <div class="card-header" style="font-size: 20pt;">
+        <div class="row">
+            <div class="col-9">
+                {{ 'COURSE' | translate }}
+            </div>
+            <div class="col-3 right">
+                <button class="btn btn-secondary" role="button" ng-click="redirect('/courses/' + course.course_id)">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <h6>
+            {{ 'DELETE_THIS_COURSE' | translate }} <kbd>{{course.course_name}}</kbd>?
+        </h6>
+        <br>
+        <label>
+            <b>{{ 'COURSE_NAME' | translate }}*</b>
+        </label>
+        <input type="text" class="form-control" ng-model="input" id="courseName" placeholder="{{ 'COURSE_NAME' | translate }}" autofocus>
+        <small class="form-text text-muted">{{ 'PLEASE_TYPE_IN_THE_COURSE_NAME_TO_CONFIRM' | translate }}</small>
+    </div>
+    <div class="card-footer right">
+        <button class="btn btn-danger" role="button" ng-click="delete()" ng-disabled="input != course.course_name">
+            <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'DELETE' | translate }}
+        </button>
+    </div>
+</div>

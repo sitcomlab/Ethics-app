@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS Reviewers CASCADE;
+
+-- SCHEMA
+CREATE TABLE Reviewers (
+
+    -- General
+    reviewer_id SERIAL PRIMARY KEY,
+    created TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+    updated TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+
+    -- Attributes
+    member_id INTEGER NOT NULL REFERENCES Members(member_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    revision_id INTEGER NOT NULL REFERENCES Revisions(revision_id) ON UPDATE CASCADE ON DELETE CASCADE
+
+);
