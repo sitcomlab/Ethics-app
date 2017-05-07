@@ -108,7 +108,7 @@
                                     document.status===5 && {'background-color':'#f0ad4e','border':'1px solid #f0ad4e', 'color': '#FFFFFF'} ||
                                     document.status===6 && {'background-color':'#5cb85c','border':'1px solid #5cb85c', 'color': '#FFFFFF'} ||
                                     document.status===7 && {'background-color':'#d9534f','border':'1px solid #d9534f', 'color': '#FFFFFF'}">
-                                        <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;<span ng-if="document.document_title.length <= 20 ">{{document.document_title}}</span><span ng-if="document.document_title.length > 20 ">{{document.document_title.substring(0, 20)}}...</span>
+                                        <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;<span ng-if="document.document_title.length <= 16 ">{{document.document_title}}</span><span ng-if="document.document_title.length > 16 ">{{document.document_title.substring(0, 16)}}...</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="document_dropdown">
                                         <h6 class="dropdown-header">
@@ -147,7 +147,7 @@
                                             <i class="fa fa-user-circle" aria-hidden="true"></i>
                                         </span>
                                         &nbsp;
-                                        <span ng-if="authenticated_member.title">{{authenticated_member.title}}&nbsp;</span>{{authenticated_member.first_name}} {{authenticated_member.last_name}}
+                                        <span ng-if="authenticated_member.full_name.length <= 16 ">{{authenticated_member.full_name}}</span><span ng-if="authenticated_member.full_name.length > 16 ">{{authenticated_member.full_name.substring(0, 16)}}...</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="member_dropdown">
                                         <h6 class="dropdown-header">
