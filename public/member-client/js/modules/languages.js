@@ -75,8 +75,11 @@ app.config(function ($translateProvider) {
         YEAR_ASC: 'Year ascending',
         YEAR_DESC: 'Year descending',
 
+
         DELETE_THIS_DOCUMENT: 'Do you really want to delete this document',
+        EXPLANATION_OF_DELETING_A_DOCUMENT: 'Deleting a document also deletes ALL ASSOCIATED data. PLEASE PROCEED WITH CAUTION!',
         PLEASE_TYPE_IN_THE_TITLE_OF_THE_DOCUMENT_TO_CONFIRM: 'Please type in the title of the document to confirm',
+        ALTERNATIVE_DOCUMENT: 'If you don\'t want to delete EVERYTHING associated with this document you can also temporay reject the document, so that the user has no longer access to it',
 
         DELETE_THIS_COURSE: 'Do you really want to delete this course',
         PLEASE_TYPE_IN_THE_COURSE_NAME_TO_CONFIRM: 'Please type in the name of the course to confirm',
@@ -184,6 +187,7 @@ app.config(function ($translateProvider) {
         _SUBMITTED: 'submitted',
         REVIEWED: 'reviewed',
         REVIEW_OPTIONS: 'Review options',
+        NO_CHANGES: 'No changes',
 
         DESCRIPTION_1: 'Title of the project',
         DESCRIPTION_2: 'Name of the lead researcher, his/her position (and his/her lab)',
@@ -381,6 +385,7 @@ app.config(function ($translateProvider) {
         SUMMER: 'Summer',
         LECTURER: 'Lecturer(s)',
 
+        EDIT_DOCUMENT_SETTINGS: 'Edit document settings',
         EDIT_MEMBER: 'Edit member',
         EDIT_USER: 'Edit user',
         EDIT_UNIVERSITY: 'Edit university',
@@ -411,6 +416,7 @@ app.config(function ($translateProvider) {
         PLEASE_USE_A_UNIVERSITY_NUMBER: 'Please use an official university number in the format',
 
         EXPLANATION_OF_THE_ADMIN_ROLE: 'If you give a member admin priviliges, he/she has gets full access to all data in the database and he/she can administrate it. As an administrator you can create new universities, insitutes, working groups, members and update or archive them.',
+        EXPLANATION_OF_THE_FORMER_STATUS: 'This setting can only be changed by an administrator. It is used to archive your account, sothat you will have no longer access to it. But all data is still be stored in the database and your account can reactivated by the administrator, in case you need access again.',
         EXPLANATION_OF_THE_FORMER_STATUS_OF_A_MEMBER: 'With this setting you can archive a member, so the member account is no longer accessible. All data is still be stored in the database. It is the recommended way, because deleting a member also, deletes all related reviews.',
         EXPLANATION_OF_THE_FORMER_STATUS_OF_AN_INSTITUTE: 'With this setting you can archive an insitute, so that the users or members can no longer select it from the lists. All data is still be stored in the database. It is the recommended way, because deleting an institute also, deletes all related working groups, members, users, documents.',
         EXPLANATION_OF_THE_FORMER_STATUS_OF_A_WORKING_GROUP: 'With this setting you can archive a working group, so that the users or members can no longer select it from the lists. All data is still be stored in the database. It is the recommended way, because deleting a working group also, deletes all related working groups, members, users, documents.',

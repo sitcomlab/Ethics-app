@@ -75,8 +75,11 @@ app.config(function ($translateProvider) {
         YEAR_ASC: 'Year ascending',
         YEAR_DESC: 'Year descending',
 
+
         DELETE_THIS_DOCUMENT: 'Do you really want to delete this document',
+        EXPLANATION_OF_DELETING_A_DOCUMENT: 'Deleting a document also deletes ALL ASSOCIATED data. PLEASE PROCEED WITH CAUTION!',
         PLEASE_TYPE_IN_THE_TITLE_OF_THE_DOCUMENT_TO_CONFIRM: 'Please type in the title of the document to confirm',
+        ALTERNATIVE_DOCUMENT: 'If you don\'t want to delete EVERYTHING associated with this document you can also temporay reject the document, so that the user has no longer access to it',
 
         DELETE_THIS_COURSE: 'Do you really want to delete this course',
         PLEASE_TYPE_IN_THE_COURSE_NAME_TO_CONFIRM: 'Please type in the name of the course to confirm',
@@ -112,7 +115,9 @@ app.config(function ($translateProvider) {
         PLEASE_TYPE_IN_THE_WORKING_GROUP_NAME_TO_CONFIRM: 'Please tpe in the name of the working group to confirm',
         ALTERNATIVE_WORKING_GROUP: 'If you don\'t want to delete EVERYTHING associated with this working group you can change it to a former working group',
 
-        COURSE_DESCRIPTION: 'If you are creating this document for a study, which is part of course, please reference it to the corresponding course. If you are creating the document for a personal study, just click next.',
+        RELATED_COURSE: 'Related course',
+        COURSE_DESCRIPTION_1: 'If you are creating this document for a course, please reference it to it. If you can not find it, please ask your lecturer, to add it to this list (It is possible to change the course later in the document settings).',
+        COURSE_DESCRIPTION_2: 'If you are creating the document for a personal study, for example your thesis, then you don\'t need to reference a course.',
 
         INTRODUCTION_TEXT_FRAGMENT_1: 'This Web-App will guide you in creating the necessary forms for your user study. You will be asked a series of questions, based on which the Ethics-App will auto-generate three documents.',
         INTRODUCTION_TEXT_FRAGMENT_2: 'The Informed Consent form',
@@ -149,6 +154,7 @@ app.config(function ($translateProvider) {
         SHOW_DOCUMENT_ID: 'Show document-ID',
         SHOW_DOCUMENT_INTRO: 'Show introduction',
         SHOW_FILES: 'Show files',
+        DOWNLOAD_FILES: 'Download files',
         CHANGE_DOCUMENT_SETTINGS: 'Change document settings',
         SAVE_DOCUMENT: 'Save document',
         DELETE_DOCUMENT: 'Delete document',
@@ -180,6 +186,8 @@ app.config(function ($translateProvider) {
         IN_PROGRESS: 'in progress',
         _SUBMITTED: 'submitted',
         REVIEWED: 'reviewed',
+        REVIEW_OPTIONS: 'Review options',
+        NO_CHANGES: 'No changes',
 
         DESCRIPTION_1: 'Title of the project',
         DESCRIPTION_2: 'Name of the lead researcher, his/her position (and his/her lab)',
@@ -227,7 +235,7 @@ app.config(function ($translateProvider) {
         CONCERN_6_INFO: '',
         CONCERN_7_INFO: 'For instance: attaching anything to participant\'s body, requiring participants to perform physically demanding gestures or poses, operating equipment.',
         CONCERN_8_INFO: '',
-        CONCERN_9_INFO: 'If yes: list those parties, approval to use this data (if applicable) and whether participants will be aware of the data aggregation process.',
+        CONCERN_9_INFO: 'If \'yes\': list those parties, approval to use this data (if applicable) and whether participants will be aware of the data aggregation process.',
         CONCERN_10_INFO: 'For instance: mobile HCI studies in heavy-traffic areas, navigational tasks in-the-wild without following, Virtual Reality studies.',
         CONCERN_11_1_INFO: 'For instance: spoken-aloud personal information, video recording of faces.',
         CONCERN_11_2_INFO: '',
@@ -377,6 +385,7 @@ app.config(function ($translateProvider) {
         SUMMER: 'Summer',
         LECTURER: 'Lecturer(s)',
 
+        EDIT_DOCUMENT_SETTINGS: 'Edit document settings',
         EDIT_MEMBER: 'Edit member',
         EDIT_USER: 'Edit user',
         EDIT_UNIVERSITY: 'Edit university',
@@ -407,6 +416,7 @@ app.config(function ($translateProvider) {
         PLEASE_USE_A_UNIVERSITY_NUMBER: 'Please use an official university number in the format',
 
         EXPLANATION_OF_THE_ADMIN_ROLE: 'If you give a member admin priviliges, he/she has gets full access to all data in the database and he/she can administrate it. As an administrator you can create new universities, insitutes, working groups, members and update or archive them.',
+        EXPLANATION_OF_THE_FORMER_STATUS: 'This setting can only be changed by an administrator. It is used to archive your account, sothat you will have no longer access to it. But all data is still be stored in the database and your account can reactivated by the administrator, in case you need access again.',
         EXPLANATION_OF_THE_FORMER_STATUS_OF_A_MEMBER: 'With this setting you can archive a member, so the member account is no longer accessible. All data is still be stored in the database. It is the recommended way, because deleting a member also, deletes all related reviews.',
         EXPLANATION_OF_THE_FORMER_STATUS_OF_AN_INSTITUTE: 'With this setting you can archive an insitute, so that the users or members can no longer select it from the lists. All data is still be stored in the database. It is the recommended way, because deleting an institute also, deletes all related working groups, members, users, documents.',
         EXPLANATION_OF_THE_FORMER_STATUS_OF_A_WORKING_GROUP: 'With this setting you can archive a working group, so that the users or members can no longer select it from the lists. All data is still be stored in the database. It is the recommended way, because deleting a working group also, deletes all related working groups, members, users, documents.',
