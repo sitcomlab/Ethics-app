@@ -162,7 +162,7 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
                 $scope.$parent.document = false;
 
                 // Redirect
-                $scope.redirect("/documents/" + $routeParams.document_id);
+                $scope.redirect("/documents");
             })
             .catch(function onError(response) {
                 $window.alert(response.data);
@@ -213,7 +213,7 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
                         $scope.$parent.loading = { status: false, message: "" };
 
                         // Redirect
-                        $scope.redirect("/documents/" + $routeParams.document_id);
+                        $scope.redirect("/documents");
                     })
                     .catch(function onError(response) {
                         $window.alert(response.data);
@@ -280,8 +280,8 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
         descriptions: {
             language: {
                 en: true,
-                de: true,
-                pt: true
+                de: false,
+                pt: false
             },
             history: {
                 en: {
@@ -310,6 +310,15 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
             comments: true
         }
     };
+
+    // Show all comments and history
+    $scope.toggle('general', 'history');
+    $scope.toggle('descriptions', 'history', 'en');
+    $scope.toggle('descriptions', 'history', 'de');
+    $scope.toggle('descriptions', 'language', 'de');
+    $scope.toggle('descriptions', 'history', 'pt');
+    $scope.toggle('descriptions', 'language', 'de');
+    $scope.toggle('concerns', 'history');
 
     $scope.$parent.loading = { status: false, message: "" };
 });

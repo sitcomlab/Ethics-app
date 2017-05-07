@@ -367,8 +367,8 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
         descriptions: {
             language: {
                 en: true,
-                de: true,
-                pt: true
+                de: false,
+                pt: false
             },
             history: {
                 en: {
@@ -397,6 +397,15 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
             comments: true
         }
     };
+
+    // Show all comments and history
+    $scope.toggle('general', 'history');
+    $scope.toggle('descriptions', 'history', 'en');
+    $scope.toggle('descriptions', 'history', 'de');
+    $scope.toggle('descriptions', 'language', 'de');
+    $scope.toggle('descriptions', 'history', 'pt');
+    $scope.toggle('descriptions', 'language', 'pt');
+    $scope.toggle('concerns', 'history');
 
     $scope.$parent.loading = { status: false, message: "" };
 

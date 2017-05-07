@@ -161,41 +161,57 @@ app.controller("documentShowSubmissionController", function($scope, $rootScope, 
     $scope.status = {
         general: {
             display: true,
-            history: true,
+            history: false,
             limit: 1
         },
         descriptions: {
             language: {
                 en: true,
-                de: $scope.latest_revision.descriptions.de_used,
-                pt: $scope.latest_revision.descriptions.pt_used
+                de: false,
+                pt: false
             },
             history: {
                 en: {
-                    display: true,
+                    display: false,
                     limit: 1
                 },
                 de: {
-                    display: true,
+                    display: false,
                     limit: 1
                 },
                 pt: {
-                    display: true,
+                    display: false,
                     limit: 1
                 }
             },
             comments: {
                 en: true,
-                de: $scope.latest_revision.descriptions.de_used,
-                pt: $scope.latest_revision.descriptions.pt_used
+                de: true,
+                pt: true
             }
         },
         concerns: {
             display: true,
-            history: true,
+            history: false,
             limit: 1,
             comments: true
         }
     };
+
+    // Show all comments and history
+    $scope.toggle('general', 'history');
+    $scope.toggle('descriptions', 'history', 'en');
+    if($scope.latest_revision.descriptions.de_used){
+        $scope.toggle('descriptions', 'history', 'de');
+    } else {
+        $scope.toggle('descriptions', 'language', 'de');
+    }
+    if($scope.latest_revision.descriptions.pt_used){
+        $scope.toggle('descriptions', 'history', 'pt');
+    } else {
+        $scope.toggle('descriptions', 'language', 'de');
+    }
+    $scope.toggle('concerns', 'history');
+
     $scope.$parent.loading = { status: false, message: "" };
 });

@@ -151,6 +151,7 @@ app.config(function ($translateProvider) {
         SHOW_DOCUMENT_ID: 'Show document-ID',
         SHOW_DOCUMENT_INTRO: 'Show introduction',
         SHOW_FILES: 'Show files',
+        DOWNLOAD_FILES: 'Download files',
         CHANGE_DOCUMENT_SETTINGS: 'Change document settings',
         SAVE_DOCUMENT: 'Save document',
         DELETE_DOCUMENT: 'Delete document',
@@ -182,6 +183,7 @@ app.config(function ($translateProvider) {
         IN_PROGRESS: 'in progress',
         _SUBMITTED: 'submitted',
         REVIEWED: 'reviewed',
+        REVIEW_OPTIONS: 'Review options',
 
         DESCRIPTION_1: 'Title of the project',
         DESCRIPTION_2: 'Name of the lead researcher, his/her position (and his/her lab)',
