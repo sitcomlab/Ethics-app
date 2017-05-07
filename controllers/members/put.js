@@ -188,6 +188,24 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, member, updated_member, callback) {
+            // Database query
+            client.query(query_get_member, [
+                req.params.member_id
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    // Check if Member exists
+                    if (result.rows.length === 0) {
+                        callback(new Error("Member not found"), 404);
+                    } else {
+                        callback(null, client, done, member, result.rows[0]);
+                    }
+                }
+            });
+        },
+        function(client, done, member, updated_member, callback) {
             // Check if member-account has been deactivated (set to former) or reactivated
             if(member.former !== updated_member.former){
 

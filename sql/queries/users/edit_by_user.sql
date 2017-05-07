@@ -13,4 +13,14 @@ UPDATE Users SET (
 )
 WHERE
     user_id=$1::INTEGER
-RETURNING *;
+RETURNING
+    user_id
+    created,
+    updated,
+    title,
+    first_name,
+    last_name,
+    institute_id,
+    email_address,
+    blocked
+;
