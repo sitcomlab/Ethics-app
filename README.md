@@ -20,7 +20,7 @@ The Ethics-app is used by the Institute for Geoinformatics, Münster for the app
 
 The following flow chart shows the reviewing process of a document.
 
-![Reviewing-process](documentation/flow.svg)
+![Reviewing-process](documentation/flow.png)
 
 * `0`: First a document has been created by a researcher
 * `1`: The researcher is filling out the forms
@@ -29,7 +29,6 @@ The following flow chart shows the reviewing process of a document.
 * `4`: A committee member has started to review the document and an email has been sent to the researcher about the status update
 * `5`: The committee member has published the review and an email has been sent to the researcher about the status update. But the researcher needs to revise the document and has to submit it again.
 * `6`: The committee member has published the review and an email has been sent to the researcher about the status update. The request has been accepted and the researcher is able to download the PDF-files for his/her user-study. The PDF-files are generated automatically on the server-side and filled out with the data the researcher provided in the forms.
-.
 * `7`: The committee member has published the review and an email has been sent to the researcher about the status update. The request has been rejected, so that the researcher is no longer able to access his/her document. This option is used, when a researcher clearly violated the app-guidelines.
 
 The status of the document can be updated by only 2 options: the *system* in the background or a Committee *member* after reviewing.
