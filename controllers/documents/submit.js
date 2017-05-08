@@ -141,6 +141,7 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, document, course, revision, description, concern, callback) {
+
             // Auto-confirmation
             if(concern.q01_value){
                 callback(null, client, done, document, course, revision, description, concern, 3);
@@ -173,7 +174,12 @@ exports.request = function(req, res) {
             } else if(concern.q13_value){
                 callback(null, client, done, document, course, revision, description, concern, 3);
             } else {
-                callback(null, client, done, document, course, revision, description, concern, 2);
+                // Check if document has been already in review
+                if(document.status === 5){
+                    callback(null, client, done, document, course, revision, description, concern, 3);
+                } else {
+                    callback(null, client, done, document, course, revision, description, concern, 2);
+                }
             }
         },
         function(client, done, document, course, revision, description, concern, status, callback) {
