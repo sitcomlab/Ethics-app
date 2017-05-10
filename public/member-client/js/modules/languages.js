@@ -192,7 +192,7 @@ app.config(function ($translateProvider) {
         DESCRIPTION_7: 'List all potential risks and uncomfortable activities which can occur to your participants over the course of the study',
         DESCRIPTION_8: 'List benefits (if applicable)',
 
-        STUDY_DESCRIPTION_INFO: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally the German version. Depending on the language(s), you will receive the informed consent forms for your experiment',
+        STUDY_DESCRIPTION_INFO: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally the language-specific version appriopiate for your participants. Depending on the language(s), you will receive the informed consent forms for your experiment',
         LANGUAGE_OPTIONS: 'Please select the language, in which you want to generate the informed consent forms',
 
         DESCRIPTION_1_INFO: '',
@@ -204,7 +204,7 @@ app.config(function ($translateProvider) {
         DESCRIPTION_7_INFO: 'Potential risks include (but are not limited to): walking on stairs, nausea (e.g. in Virtual Reality studies), spending time in confined spaces (e.g. lifts), cycling, operating vehicles (including simple ones like sport equipment), navigating in crowded or heavy-traffic areas, observing quickly changing or blinking stimuli (e.g. in computer-based studies), interacting with potentially strong emotional content (e.g. viewing pictures), wearing any additional electronics (eye-tracker, sensors), any activities that might cause physical effort or pain (e.g. attaching movement sensors to the body).',
         DESCRIPTION_8_INFO: 'For instance a monetary payment, or a lottery voucher.',
 
-        CONCERNS_INFO: 'Complete the checklist below. If you have answered \'yes\' to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the ifgi-Ethics Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the ifgi\'s Ethics Committee.',
+        CONCERNS_INFO: 'Complete the checklist below. If you have answered \'yes\' to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the Ethics Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the Ethics Committee.',
 
         CONCERN_1: 'Will the study involve potentially vulnerable groups of participants or people who are unable or unauthorized to give informed consent',
         CONCERN_2: 'Will the study involve deception',
@@ -318,8 +318,8 @@ app.config(function ($translateProvider) {
         WORKING_GROUPS: 'Working groups',
 
         REVIEW_OPTION_1: 'The user gets access to download the files',
-        REVIEW_OPTION_2: 'The user has to revise the document and submit it again, until it gets finally accepted',
-        REVIEW_OPTION_3: 'The user can no longer access the document. (Attention: Use this option only in extreme situations, for example when your comments have been totally ignored in a revised document. In case of violated rules, you can also block the user). In all other cases, please use the option party accept to give the user the chance to revise the document and submit it again',
+        REVIEW_OPTION_2: 'The user has to revise the document and submit it again, until it gets fully accepted',
+        REVIEW_OPTION_3: 'The user can no longer access the document. (Attention: Use this option only in extreme situations, for example when your comments have been totally ignored in a revised document. In case of violated rules, you can also block the user). In all other cases, please use the option \'partly accept\' to give the user the chance to revise the document and submit it again',
 
         COURSES: 'Courses',
         COURSE: 'Course',
@@ -409,13 +409,13 @@ app.config(function ($translateProvider) {
         PLEASE_USE_A_UNIVERSITY_NUMBER: 'Please use an official university number in the format',
 
         EXPLANATION_OF_THE_ADMIN_ROLE: 'If you give a member admin priviliges, he/she has gets full access to all data in the database and he/she can administrate it. As an administrator you can create new universities, insitutes, working groups, members and update or archive them.',
-        EXPLANATION_OF_THE_FORMER_STATUS_OF_A_MEMBER: 'With this setting you can archive a member, so the member account is no longer accessible. All data is still be stored in the database. It is the recommended way, because deleting a member also, deletes all related reviews.',
-        EXPLANATION_OF_THE_FORMER_STATUS_OF_AN_INSTITUTE: 'With this setting you can archive an insitute, so that the users or members can no longer select it from the lists. All data is still be stored in the database. It is the recommended way, because deleting an institute also, deletes all related working groups, members, users, documents.',
-        EXPLANATION_OF_THE_FORMER_STATUS_OF_A_WORKING_GROUP: 'With this setting you can archive a working group, so that the users or members can no longer select it from the lists. All data is still be stored in the database. It is the recommended way, because deleting a working group also, deletes all related working groups, members, users, documents.',
-        EXPLANATION_OF_THE_SUBSCRIBED_STATUS: 'With this setting you can turn on/off the email notifications, if a document needs your review. If you are in holiday, you can turn the subscription off and users and members can see that you are currently not responsible for reviewing.',
-        EXPLANATION_OF_THE_BLOCKING_STATUS: 'With this setting you can block a user, if he/she clearly violated the rules. The user has then no longer access until you reactivate the account again.',
+        EXPLANATION_OF_THE_FORMER_STATUS_OF_A_MEMBER: 'With this setting you can archive a member, so the member account is no longer accessible. All data is still be stored in the database. This is the recommended way to remove a Member, as all related reviews will still be stored in the Database.',
+        EXPLANATION_OF_THE_FORMER_STATUS_OF_AN_INSTITUTE: 'With this setting you can archive an institute. The Institute can no longer be selected by users or members, but  all data will still be stored in the database. This is the recommended way of removing an institute, as it retains all the assiciated data, while completely deleting an institute also deletes all related working groups, members, users and documents.',
+        EXPLANATION_OF_THE_FORMER_STATUS_OF_A_WORKING_GROUP: 'With this setting you can archive a working group. The Working Group can no longer be selected by users or members. All data will still be stored in the database. This is the the recommended way to remove a working group, as it retains all the assiciated data, while  deleting a working group also, deletes all related working groups, members, users and documents.',
+        EXPLANATION_OF_THE_SUBSCRIBED_STATUS: 'With this setting you can turn on/off the email notifications, notifying you about a document needing your review. If you are in temporarily unavailable, you can turn the subscription off and users and members can see that you are currently not responsible for reviewing.',
+        EXPLANATION_OF_THE_BLOCKING_STATUS: 'With this setting you can block a user. This is the last measure applied if the user has clearly violated the rules. The user has then no longer access to the App until the account is reactivated again.',
 
-        OVERWRITING_INFORMATION: 'You are not the latest reviewer! If you continue, you are going to overwrite the review. Please make sure, that you asked the latest reviewer, if he/she is currently not reviewing.',
+        OVERWRITING_INFORMATION: 'You are not the latest reviewer! If you continue, you are going to overwrite the existing review. Please make sure you asked the latest reviewer about the status of the latest review.',
         OKAY: 'Okay',
         ADMIN_ROLE: 'Admin role',
         SUBSCRIBED_STATUS: 'Subscribed status',
