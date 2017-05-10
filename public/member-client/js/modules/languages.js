@@ -116,8 +116,8 @@ app.config(function ($translateProvider) {
         ALTERNATIVE_WORKING_GROUP: 'If you don\'t want to delete EVERYTHING associated with this working group you can change it to a former working group',
 
         RELATED_COURSE: 'Related course',
-        COURSE_DESCRIPTION_1: 'If you are creating this document for a course, please reference it to it. If you can not find it, please ask your lecturer, to add it to this list (It is possible to change the course later in the document settings).',
-        COURSE_DESCRIPTION_2: 'If you are creating the document for a personal study, for example your thesis, then you don\'t need to reference a course.',
+        COURSE_DESCRIPTION_1: 'If you are creating this document for a course, please select the appropiate Course from the selection below. If you cannot find it, please ask your lecturer to add it to the list (It is possible to change the course later in the document settings).',
+        COURSE_DESCRIPTION_2: 'If you are creating the document for a personal study, for example your thesis, then you do not need to connect it to a course.',
 
         INTRODUCTION_TEXT_FRAGMENT_1: 'This Web-App will guide you in creating the necessary forms for your user study. You will be asked a series of questions, based on which the Ethics-App will auto-generate three documents.',
         INTRODUCTION_TEXT_FRAGMENT_2: 'The Informed Consent form',
@@ -163,6 +163,10 @@ app.config(function ($translateProvider) {
         CURRENT_STATUS: 'Current status',
         CHANGE_STATUS: 'Change status',
         NEW_STATUS: 'New status',
+      
+        PROVIDED_TO_PARTICIPANTS_AFTER_STUDY:'(provided to participants after the study)',
+        TO_BE_FILLED_OUT_BY_PARTICIPANT:'(to be filled out by each participant)',
+        SIGN_BY_YOURSELF:'(sign by yourself and add to archive)',
 
         DEFAULT:'Default',
         STATUS:'Status',
@@ -242,8 +246,10 @@ app.config(function ($translateProvider) {
         CONCERN_12_INFO: 'For instance companies, funding bodies, other universities. If yes: who is responsible for the safety of the passed information?',
         CONCERN_13_INFO: 'Excluded cases (select \'no\'): remote sensing data, recordings from public settings allowed by the law, and other situations where the observed individual is expected to be aware of remaining in the public view. Continuous observation of targeted individuals, however, infringes this condition (similarly to how following someone physically in the public is different from observing the same person passing-by).',
 
-        SUBMIT_WARNING: '',
-
+        SUBMIT_WARNING: 'You are about to finally submit your Proposal for review by the Ethics-Committee. Please be aware that after this step the Study cannot be changed or modified anymore, until a revised version is requested by the Ethics-Committee.',
+        DOCUMENT_FILES: 'Download the associated Files',
+      
+      
         YES: 'yes',
         NO: 'no',
         EXPLANATION: 'Explanation',
@@ -416,7 +422,7 @@ app.config(function ($translateProvider) {
         PLEASE_USE_A_UNIVERSITY_NUMBER: 'Please use an official university number in the format',
 
         EXPLANATION_OF_THE_ADMIN_ROLE: 'If you give a member admin priviliges, he/she has gets full access to all data in the database and he/she can administrate it. As an administrator you can create new universities, insitutes, working groups, members and update or archive them.',
-      
+        EXPLANATION_OF_THE_FORMER_STATUS: 'This setting can only be changed by an administrator. It is used to archive your account, sothat you will have no longer access to it. But all data is still be stored in the database and your account can reactivated by the administrator, in case you need access again.',
         EXPLANATION_OF_THE_FORMER_STATUS_OF_A_MEMBER: 'With this setting you can archive a member, resulting in the member account no longer being accessible. All data will still be stored in the database. This is the recommended way to remove a Member, as all related reviews will still be stored in the Database.',
         EXPLANATION_OF_THE_FORMER_STATUS_OF_AN_INSTITUTE: 'With this setting you can archive an institute. The Institute can no longer be selected by users or members, but all associated data will still be stored in the database. This is the recommended way of removing an institute, as it retains all the assiciated data, while completely deleting an institute also deletes all related working groups, members, users and documents.',
         EXPLANATION_OF_THE_FORMER_STATUS_OF_A_WORKING_GROUP: 'With this setting you can archive a working group. The Working Group can no longer be selected by users or members. All data will still be stored in the database. This is the the recommended way to remove a working group, as it retains all the assiciated data, while  deleting a working group also, deletes all related working groups, members, users and documents.',

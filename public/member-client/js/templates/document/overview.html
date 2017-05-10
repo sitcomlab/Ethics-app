@@ -5,7 +5,26 @@
             <div class="col">
                 {{ 'OVERVIEW' | translate }}
             </div>
-            <div class="col right">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 right" ng-show="document.status == 3 ||  document.status == 4">
+                <button class="btn btn-primary btn-block-xs-only btn-block-sm-only" role="button" ng-click="reviewDocument()" ng-if="document.status == 3 || document.status == 4 && (latest_revision.reviewer.member_id === authenticated_member.member_id)">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                    &nbsp;
+                    <span ng-if="document.status == 3">
+                        {{ 'START_REVIEWING' | translate }}
+                    </span>
+                    <span ng-if="document.status == 4">
+                        {{ 'OPEN_REVIEW' | translate }}
+                    </span>
+                    &nbsp;
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </button>
+                <button class="btn btn-primary btn-block-xs-only btn-block-sm-only" role="button" ng-click="reviewDocument()" ng-if="document.status == 4 && (latest_revision.reviewer.member_id !== authenticated_member.member_id)" ng-disabled="!overwrite">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                    &nbsp;
+                    {{ 'OPEN_REVIEW' | translate }}
+                    &nbsp;
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </button>
                 <button class="btn btn-secondary" role="button" ng-click="closeOverview()">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
@@ -1540,28 +1559,6 @@
                 <a href="" class="btn btn-primary btn-block-xs-only btn-block-sm-only" ng-click="closeOverview()">
                     <i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'CLOSE' | translate }}
                 </a>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 right" ng-show="document.status == 3 ||  document.status == 4">
-                <button class="btn btn-primary btn-block-xs-only btn-block-sm-only" role="button" ng-click="reviewDocument()" ng-if="document.status == 3 || document.status == 4 && (latest_revision.reviewer.member_id === authenticated_member.member_id)">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    &nbsp;
-                    <span ng-if="document.status == 3">
-                        {{ 'START_REVIEWING' | translate }}
-                    </span>
-                    <span ng-if="document.status == 4">
-                        {{ 'OPEN_REVIEW' | translate }}
-                    </span>
-                    &nbsp;
-                    <i class="fa fa-angle-right" aria-hidden="true"></i>
-                </button>
-                <button class="btn btn-primary btn-block-xs-only btn-block-sm-only" role="button" ng-click="reviewDocument()" ng-if="document.status == 4 && (latest_revision.reviewer.member_id !== authenticated_member.member_id)" ng-disabled="!overwrite">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    &nbsp;
-                    {{ 'OPEN_REVIEW' | translate }}
-                    &nbsp;
-                    <i class="fa fa-angle-right" aria-hidden="true"></i>
-                </button>
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 right" ng-show="document.status == 2 || document.status == 6">

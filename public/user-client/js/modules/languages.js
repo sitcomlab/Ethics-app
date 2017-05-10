@@ -164,6 +164,10 @@ app.config(function ($translateProvider) {
         CHANGE_STATUS: 'Change status',
         NEW_STATUS: 'New status',
 
+        PROVIDED_TO_PARTICIPANTS_AFTER_STUDY:'(provided to participants after the study)',
+        TO_BE_FILLED_OUT_BY_PARTICIPANT:'(to be filled out by each participant)',
+        SIGN_BY_YOURSELF:'(sign by yourself and add to archive)',
+      
         DEFAULT:'Default',
         STATUS:'Status',
         ALL:'All',
@@ -417,11 +421,11 @@ app.config(function ($translateProvider) {
 
         EXPLANATION_OF_THE_ADMIN_ROLE: 'If you give a member admin priviliges, he/she has gets full access to all data in the database and he/she can administrate it. As an administrator you can create new universities, insitutes, working groups, members and update or archive them.',
         EXPLANATION_OF_THE_FORMER_STATUS: 'This setting can only be changed by an administrator. It is used to archive your account, sothat you will have no longer access to it. But all data is still be stored in the database and your account can reactivated by the administrator, in case you need access again.',
-        EXPLANATION_OF_THE_FORMER_STATUS_OF_A_MEMBER: 'With this setting you can archive a member, so the member account is no longer accessible. All data is still be stored in the database. It is the recommended way, because deleting a member also, deletes all related reviews.',
-        EXPLANATION_OF_THE_FORMER_STATUS_OF_AN_INSTITUTE: 'With this setting you can archive an insitute, so that the users or members can no longer select it from the lists. All data is still be stored in the database. It is the recommended way, because deleting an institute also, deletes all related working groups, members, users, documents.',
-        EXPLANATION_OF_THE_FORMER_STATUS_OF_A_WORKING_GROUP: 'With this setting you can archive a working group, so that the users or members can no longer select it from the lists. All data is still be stored in the database. It is the recommended way, because deleting a working group also, deletes all related working groups, members, users, documents.',
-        EXPLANATION_OF_THE_SUBSCRIBED_STATUS: 'With this setting you can turn on/off the email notifications, if a document needs your review. If you are in holiday, you can turn the subscription off and users and members can see that you are currently not responsible for reviewing.',
-        EXPLANATION_OF_THE_BLOCKING_STATUS: 'With this setting you can block a user, if he/she clearly violated the rules. The user has then no longer access until you reactivate the account again.',
+        EXPLANATION_OF_THE_FORMER_STATUS_OF_A_MEMBER: 'With this setting you can archive a member, resulting in the member account no longer being accessible. All data will still be stored in the database. This is the recommended way to remove a Member, as all related reviews will still be stored in the Database.',
+        EXPLANATION_OF_THE_FORMER_STATUS_OF_AN_INSTITUTE: 'With this setting you can archive an institute. The Institute can no longer be selected by users or members, but all associated data will still be stored in the database. This is the recommended way of removing an institute, as it retains all the assiciated data, while completely deleting an institute also deletes all related working groups, members, users and documents.',
+        EXPLANATION_OF_THE_FORMER_STATUS_OF_A_WORKING_GROUP: 'With this setting you can archive a working group. The Working Group can no longer be selected by users or members. All data will still be stored in the database. This is the the recommended way to remove a working group, as it retains all the assiciated data, while  deleting a working group also, deletes all related working groups, members, users and documents.',
+        EXPLANATION_OF_THE_SUBSCRIBED_STATUS: 'With this setting you can turn on/off the email notifications notifying you about a document needing your review. If you are in temporarily unavailable, you can turn the subscription off and users and members can see that you are currently not responsible for reviewing.',
+        EXPLANATION_OF_THE_BLOCKING_STATUS: 'With this setting you can block a user. This is the last measure applied if the user has clearly violated the rules. The user no longer has access to the App until the account is reactivated again.',
 
         OVERWRITING_INFORMATION: 'You are not the latest reviewer! If you continue, you are going to overwrite the review. Please make sure, that you asked the latest reviewer, if he/she is currently not reviewing.',
         OKAY: 'Okay',
