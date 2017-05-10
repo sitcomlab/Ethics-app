@@ -9,7 +9,8 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
         offset: 0,
         limit: 50,
         former: false,
-        orderby: 'name.asc'
+        orderby: 'name.asc',
+        search_text: ""
     };
     var full_count = 0;
 
@@ -97,6 +98,75 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
         },
         retrieve: function(member_id) {
             return $http.get(config.apiURL + "/members/" + member_id, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        search: function(filter) {
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "limit=" + filter.limit + "&";
+            }
+            if(filter.former !== null){
+                query = query + "former=" + filter.former + "&";
+            }
+
+            query = query.slice(0, -1);
+
+            return $http.post(config.apiURL + "/search/members" + query, {
+                search_text: filter.search_text
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        searchByUniversity: function(university_id, filter) {
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "limit=" + filter.limit + "&";
+            }
+            if(filter.former !== null){
+                query = query + "former=" + filter.former + "&";
+            }
+
+            query = query.slice(0, -1);
+
+            return $http.post(config.apiURL + "/search/universities/" + university_id + "/members" + query, {
+                search_text: filter.search_text
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+        searchByInstitute: function(institute_id, filter) {
+            var query = "?orderby=" + filter.orderby + "&";
+
+            if(filter.offset && filter.offset !== null){
+                query = query + "offset=" + filter.offset + "&";
+            }
+            if(filter.limit && filter.limit !== null){
+                query = query + "limit=" + filter.limit + "&";
+            }
+            if(filter.former !== null){
+                query = query + "former=" + filter.former + "&";
+            }
+
+            query = query.slice(0, -1);
+
+            return $http.post(config.apiURL + "/search/institutes/" + institute_id + "/members" + query, {
+                search_text: filter.search_text
+            }, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

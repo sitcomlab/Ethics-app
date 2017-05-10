@@ -18,11 +18,128 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
     };
 
     /**
-     * [cancel description]
-     * @return {[type]} [description]
+     * [toggleConcernHistory description]
+     * @param  {[type]} language [description]
+     * @return {[type]}          [description]
      */
-    $scope.cancel = function(){
-        $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
+    $scope.toggle = function(category, property, language){
+        switch (category) {
+            case 'general': {
+                switch (property){
+                    case 'display': {
+                        $scope.status.general.display = !$scope.status.general.display;
+                        break;
+                    }
+                    case 'history': {
+                        $scope.status.general.history = !$scope.status.general.history;
+                        if($scope.status.general.history){
+                            $scope.status.general.limit = $scope.document.revisions.length;
+                        } else {
+                            $scope.status.general.limit = 1;
+                        }
+                        break;
+                    }
+                }
+                break;
+            }
+            case 'descriptions': {
+                switch (property) {
+                    case 'language': {
+                        switch (language) {
+                            case 'en': {
+                                $scope.status.descriptions.language.en = !$scope.status.descriptions.language.en;
+                                break;
+                            }
+                            case 'de': {
+                                $scope.status.descriptions.language.de = !$scope.status.descriptions.language.de;
+                                break;
+                            }
+                            case 'pt': {
+                                $scope.status.descriptions.language.pt = !$scope.status.descriptions.language.pt;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                    case 'history': {
+                        switch (language) {
+                            case 'en': {
+                                $scope.status.descriptions.history.en.display = !$scope.status.descriptions.history.en.display;
+
+                                if($scope.status.descriptions.history.en.display){
+                                    $scope.status.descriptions.history.en.limit = $scope.document.revisions.length;
+                                } else {
+                                    $scope.status.descriptions.history.en.limit = 1;
+                                }
+                                break;
+                            }
+                            case 'de': {
+                                $scope.status.descriptions.history.de.display = !$scope.status.descriptions.history.de.display;
+
+                                if($scope.status.descriptions.history.de.display){
+                                    $scope.status.descriptions.history.de.limit = $scope.document.revisions.length;
+                                } else {
+                                    $scope.status.descriptions.history.de.limit = 1;
+                                }
+                                break;
+                            }
+                            case 'pt': {
+                                $scope.status.descriptions.history.pt.display = !$scope.status.descriptions.history.pt.display;
+
+                                if($scope.status.descriptions.history.pt.display){
+                                    $scope.status.descriptions.history.pt.limit = $scope.document.revisions.length;
+                                } else {
+                                    $scope.status.descriptions.history.pt.limit = 1;
+                                }
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                    case 'comments': {
+                        switch (language) {
+                            case 'en': {
+                                $scope.status.descriptions.comments.en = !$scope.status.descriptions.comments.en;
+                                break;
+                            }
+                            case 'de': {
+                                $scope.status.descriptions.comments.de = !$scope.status.descriptions.comments.de;
+                                break;
+                            }
+                            case 'pt': {
+                                $scope.status.descriptions.comments.pt = !$scope.status.descriptions.comments.pt;
+                                break;
+                            }
+                        }
+                    }
+                }
+                break;
+            }
+            case 'concerns': {
+                switch (property) {
+                    case 'display': {
+                        $scope.status.concerns.display = !$scope.status.concerns.display;
+                        break;
+                    }
+                    case 'history': {
+                        $scope.status.concerns.history = !$scope.status.concerns.history;
+
+                        if($scope.status.concerns.history){
+                            $scope.status.concerns.limit = $scope.document.revisions.length;
+                        } else {
+                            $scope.status.concerns.limit = 1;
+                        }
+
+                        break;
+                    }
+                    case 'comments': {
+                        $scope.status.concerns.comments = !$scope.status.concerns.comments;
+                        break;
+                    }
+                }
+                break;
+            }
+        }
     };
 
 
@@ -68,6 +185,15 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
             save_concerns.promise
         ]).then(function(){
             $scope.$parent.loading = { status: false, message: ""};
+
+            console.log(tab);
+
+            // Redirect
+            if(tab !== null){
+                $scope.tab = tab;
+            } else {
+                $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
+            }
         });
     };
 
@@ -190,14 +316,72 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
         INIT
      *************************************************/
     $scope.$parent.loading = { status: true, message: $scope.$parent.loading.message };
+    $scope.document = $documentService.get();
     $scope.latest_revision = $documentService.getLatestRevision();
+    $scope.tab = 0;
 
     // Check status
     if($documentService.getStatus()>1 && $documentService.getStatus()!=5){
         // Redirect
         $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
-    } else {
-        $scope.$parent.loading = { status: false, message: "" };
     }
+
+    // Show/hide comments and history
+    $scope.status = {
+        general: {
+            display: true,
+            history: false,
+            limit: 1
+        },
+        descriptions: {
+            language: {
+                en: true,
+                de: false,
+                pt: false
+            },
+            history: {
+                en: {
+                    display: false,
+                    limit: 1
+                },
+                de: {
+                    display: false,
+                    limit: 1
+                },
+                pt: {
+                    display: false,
+                    limit: 1
+                }
+            },
+            comments: {
+                en: true,
+                de: true,
+                pt: true
+            }
+        },
+        concerns: {
+            display: true,
+            history: false,
+            limit: 1,
+            comments: true
+        }
+    };
+
+    // Show all comments and history
+    $scope.toggle('general', 'history');
+    $scope.toggle('descriptions', 'history', 'en');
+    if($scope.latest_revision.descriptions.de_used){
+        $scope.toggle('descriptions', 'history', 'de');
+    } else {
+        $scope.toggle('descriptions', 'language', 'de');
+    }
+    if($scope.latest_revision.descriptions.pt_used){
+        $scope.toggle('descriptions', 'history', 'pt');
+    } else {
+        $scope.toggle('descriptions', 'language', 'de');
+    }
+    $scope.toggle('concerns', 'history');
+
+    $scope.$parent.loading = { status: false, message: "" };
 
 });

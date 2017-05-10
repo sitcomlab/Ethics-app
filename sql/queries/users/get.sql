@@ -4,6 +4,17 @@ SELECT
     _user.title,
     _user.first_name,
     _user.last_name,
+    CONCAT(
+        CASE
+            WHEN _user.title IS NOT NULL
+            THEN CONCAT(_user.title, ' ') END,
+        CASE
+            WHEN _user.title IS NULL
+            THEN '' END,
+        _user.first_name,
+        ' ',
+        _user.last_name
+    ) AS full_name,
     _user.blocked,
     institute.institute_id,
     institute.institute_name,

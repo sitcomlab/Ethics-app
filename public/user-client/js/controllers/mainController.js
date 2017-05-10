@@ -6,7 +6,7 @@ app.controller("mainController", function($scope, $rootScope, $location, config,
 	/*************************************************
         FUNCTIONS
      *************************************************/
-	 
+
 	/**
      * [isActive description]
      * @param  {[type]}  viewLocation [description]
@@ -24,7 +24,6 @@ app.controller("mainController", function($scope, $rootScope, $location, config,
             return false;
         }
     };
-
 
     /**
      * [redirect description]

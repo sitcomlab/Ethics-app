@@ -24,7 +24,6 @@ app.controller("mainController", function($scope, $rootScope, $location, config,
         }
     };
 
-
     /**
      * [redirect description]
      * @param  {[type]} path [description]

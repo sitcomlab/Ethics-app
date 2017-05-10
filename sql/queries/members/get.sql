@@ -3,6 +3,17 @@ SELECT
     member.title,
     member.first_name,
     member.last_name,
+    CONCAT(
+        CASE
+            WHEN member.title IS NOT NULL
+            THEN CONCAT(member.title, ' ') END,
+        CASE
+            WHEN member.title IS NULL
+            THEN '' END,
+        member.first_name,
+        ' ',
+        member.last_name
+    ) AS full_name,
     working_group.working_group_id,
     working_group.working_group_name,
     institute.institute_id,

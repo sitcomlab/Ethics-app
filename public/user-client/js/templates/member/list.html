@@ -20,8 +20,8 @@
                     <span class="input-group-addon">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </span>
-                    <input type="text" class="form-control" placeholder="{{ 'SEARCH' | translate }}" ng-model="searchText">
-                    <span class="input-group-btn" ng-if="searchText">
+                    <input type="text" class="form-control" placeholder="{{ 'SEARCH' | translate }}" ng-model="filter.search_text" ng-change="applyFilter()">
+                    <span class="input-group-btn" ng-if="filter.search_text">
                         <a href="" class="btn btn-secondary" ng-click="resetSearch()">
                             <i class="fa fa-times" aria-hidden="true"></i>
                         </a>
@@ -115,8 +115,8 @@
     <div class="card-footer right">
 
         <!-- Pagination -->
-        <nav aria-label="pagination" id="pagination" ng-if="members.length > 0">
-            <ul class="pagination justify-content-center">
+        <nav aria-label="pagination" id="pagination">
+            <ul class="pagination justify-content-center" ng-if="members.length > 0">
                 <li class="page-item" ng-class="{ 'disabled': filter.offset - filter.limit < 0 }">
                     <a href="" class="page-link" ng-click="changeOffset(0)" ng-style="filter.offset - filter.limit < 0 && {'background-color':'#f7f7f9'}">
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
@@ -143,10 +143,33 @@
                     </a>
                 </li>
             </ul>
-        </nav>
-
-        <nav ng-if="members.length == 0">
-            <ul>&nbsp;</ul>
+            <ul class="pagination justify-content-center" ng-if="members.length == 0">
+                <li class="page-item disabled">
+                    <div class="page-link" style="background-color: #f7f7f9;">
+                        <b><i class="fa fa-angle-left" aria-hidden="true"></i></b>
+                    </div>
+                </li>
+                <li class="page-item disabled">
+                    <div class="page-link" style="background-color: #f7f7f9;">
+                        <b><i class="fa fa-angle-double-left" aria-hidden="true"></i></b>
+                    </div>
+                </li>
+                <li class="page-item disabled">
+                    <div class="page-link" style="background-color: #f7f7f9;">
+                        0
+                    </div>
+                </li>
+                <li class="page-item disabled">
+                    <div class="page-link" style="background-color: #f7f7f9;">
+                        <b><i class="fa fa-angle-right" aria-hidden="true"></i></b>
+                    </div>
+                </li>
+                <li class="page-item disabled">
+                    <div class="page-link" style="background-color: #f7f7f9;">
+                        <b><i class="fa fa-angle-double-right" aria-hidden="true"></i></b>
+                    </div>
+                </li>
+            </ul>
         </nav>
 
     </div>

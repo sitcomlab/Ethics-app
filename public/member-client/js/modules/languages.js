@@ -75,8 +75,11 @@ app.config(function ($translateProvider) {
         YEAR_ASC: 'Year ascending',
         YEAR_DESC: 'Year descending',
 
+
         DELETE_THIS_DOCUMENT: 'Do you really want to delete this document',
+        EXPLANATION_OF_DELETING_A_DOCUMENT: 'Deleting a document also deletes ALL ASSOCIATED data. PLEASE PROCEED WITH CAUTION!',
         PLEASE_TYPE_IN_THE_TITLE_OF_THE_DOCUMENT_TO_CONFIRM: 'Please type in the title of the document to confirm',
+        ALTERNATIVE_DOCUMENT: 'If you don\'t want to delete EVERYTHING associated with this document you can also temporay reject the document, so that the user has no longer access to it',
 
         DELETE_THIS_COURSE: 'Do you really want to delete this course',
         PLEASE_TYPE_IN_THE_COURSE_NAME_TO_CONFIRM: 'Please type in the name of the course to confirm',
@@ -151,6 +154,7 @@ app.config(function ($translateProvider) {
         SHOW_DOCUMENT_ID: 'Show document-ID',
         SHOW_DOCUMENT_INTRO: 'Show introduction',
         SHOW_FILES: 'Show files',
+        DOWNLOAD_FILES: 'Download files',
         CHANGE_DOCUMENT_SETTINGS: 'Change document settings',
         SAVE_DOCUMENT: 'Save document',
         DELETE_DOCUMENT: 'Delete document',
@@ -182,6 +186,8 @@ app.config(function ($translateProvider) {
         IN_PROGRESS: 'in progress',
         _SUBMITTED: 'submitted',
         REVIEWED: 'reviewed',
+        REVIEW_OPTIONS: 'Review options',
+        NO_CHANGES: 'No changes',
 
         DESCRIPTION_1: 'Title of the project',
         DESCRIPTION_2: 'Name of the lead researcher, his/her position (and his/her lab)',
@@ -379,6 +385,7 @@ app.config(function ($translateProvider) {
         SUMMER: 'Summer',
         LECTURER: 'Lecturer(s)',
 
+        EDIT_DOCUMENT_SETTINGS: 'Edit document settings',
         EDIT_MEMBER: 'Edit member',
         EDIT_USER: 'Edit user',
         EDIT_UNIVERSITY: 'Edit university',
@@ -409,11 +416,12 @@ app.config(function ($translateProvider) {
         PLEASE_USE_A_UNIVERSITY_NUMBER: 'Please use an official university number in the format',
 
         EXPLANATION_OF_THE_ADMIN_ROLE: 'If you give a member admin priviliges, he/she has gets full access to all data in the database and he/she can administrate it. As an administrator you can create new universities, insitutes, working groups, members and update or archive them.',
-        EXPLANATION_OF_THE_FORMER_STATUS_OF_A_MEMBER: 'With this setting you can archive a member, so the member account is no longer accessible. All data is still be stored in the database. This is the recommended way to remove a Member, as all related reviews will still be stored in the Database.',
-        EXPLANATION_OF_THE_FORMER_STATUS_OF_AN_INSTITUTE: 'With this setting you can archive an institute. The Institute can no longer be selected by users or members, but  all data will still be stored in the database. This is the recommended way of removing an institute, as it retains all the assiciated data, while completely deleting an institute also deletes all related working groups, members, users and documents.',
+      
+        EXPLANATION_OF_THE_FORMER_STATUS_OF_A_MEMBER: 'With this setting you can archive a member, resulting in the member account no longer being accessible. All data will still be stored in the database. This is the recommended way to remove a Member, as all related reviews will still be stored in the Database.',
+        EXPLANATION_OF_THE_FORMER_STATUS_OF_AN_INSTITUTE: 'With this setting you can archive an institute. The Institute can no longer be selected by users or members, but all associated data will still be stored in the database. This is the recommended way of removing an institute, as it retains all the assiciated data, while completely deleting an institute also deletes all related working groups, members, users and documents.',
         EXPLANATION_OF_THE_FORMER_STATUS_OF_A_WORKING_GROUP: 'With this setting you can archive a working group. The Working Group can no longer be selected by users or members. All data will still be stored in the database. This is the the recommended way to remove a working group, as it retains all the assiciated data, while  deleting a working group also, deletes all related working groups, members, users and documents.',
-        EXPLANATION_OF_THE_SUBSCRIBED_STATUS: 'With this setting you can turn on/off the email notifications, notifying you about a document needing your review. If you are in temporarily unavailable, you can turn the subscription off and users and members can see that you are currently not responsible for reviewing.',
-        EXPLANATION_OF_THE_BLOCKING_STATUS: 'With this setting you can block a user. This is the last measure applied if the user has clearly violated the rules. The user has then no longer access to the App until the account is reactivated again.',
+        EXPLANATION_OF_THE_SUBSCRIBED_STATUS: 'With this setting you can turn on/off the email notifications notifying you about a document needing your review. If you are in temporarily unavailable, you can turn the subscription off and users and members can see that you are currently not responsible for reviewing.',
+        EXPLANATION_OF_THE_BLOCKING_STATUS: 'With this setting you can block a user. This is the last measure applied if the user has clearly violated the rules. The user no longer has access to the App until the account is reactivated again.',
 
         OVERWRITING_INFORMATION: 'You are not the latest reviewer! If you continue, you are going to overwrite the existing review. Please make sure you asked the latest reviewer about the status of the latest review.',
         OKAY: 'Okay',
