@@ -116,8 +116,8 @@ app.config(function ($translateProvider) {
         ALTERNATIVE_WORKING_GROUP: 'If you don\'t want to delete EVERYTHING associated with this working group you can change it to a former working group',
 
         RELATED_COURSE: 'Related course',
-        COURSE_DESCRIPTION_1: 'If you are creating this document for a course, please reference it to it. If you can not find it, please ask your lecturer, to add it to this list (It is possible to change the course later in the document settings).',
-        COURSE_DESCRIPTION_2: 'If you are creating the document for a personal study, for example your thesis, then you don\'t need to reference a course.',
+        COURSE_DESCRIPTION_1: 'If you are creating this document for a course, please select the appropiate Course from the selection below. If you cannot find it, please ask your lecturer to add it to the list (It is possible to change the course later in the document settings).',
+        COURSE_DESCRIPTION_2: 'If you are creating the document for a personal study, for example your thesis, then you do not need to connect it to a course.',
 
         INTRODUCTION_TEXT_FRAGMENT_1: 'This Web-App will guide you in creating the necessary forms for your user study. You will be asked a series of questions, based on which the Ethics-App will auto-generate three documents.',
         INTRODUCTION_TEXT_FRAGMENT_2: 'The Informed Consent form',
@@ -167,7 +167,7 @@ app.config(function ($translateProvider) {
         PROVIDED_TO_PARTICIPANTS_AFTER_STUDY:'(provided to participants after the study)',
         TO_BE_FILLED_OUT_BY_PARTICIPANT:'(to be filled out by each participant)',
         SIGN_BY_YOURSELF:'(sign by yourself and add to archive)',
-      
+
         DEFAULT:'Default',
         STATUS:'Status',
         ALL:'All',
@@ -202,7 +202,7 @@ app.config(function ($translateProvider) {
         DESCRIPTION_7: 'List all potential risks and uncomfortable activities which can occur to your participants over the course of the study',
         DESCRIPTION_8: 'List benefits (if applicable)',
 
-        STUDY_DESCRIPTION_INFO: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally the German version. Depending on the language(s), you will receive the informed consent forms for your experiment',
+        STUDY_DESCRIPTION_INFO: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally the language-specific version appriopiate for your participants. Depending on the language(s), you will receive the informed consent forms for your experiment',
         LANGUAGE_OPTIONS: 'Please select the language, in which you want to generate the informed consent forms',
 
         DESCRIPTION_1_INFO: '',
@@ -214,7 +214,7 @@ app.config(function ($translateProvider) {
         DESCRIPTION_7_INFO: 'Potential risks include (but are not limited to): walking on stairs, nausea (e.g. in Virtual Reality studies), spending time in confined spaces (e.g. lifts), cycling, operating vehicles (including simple ones like sport equipment), navigating in crowded or heavy-traffic areas, observing quickly changing or blinking stimuli (e.g. in computer-based studies), interacting with potentially strong emotional content (e.g. viewing pictures), wearing any additional electronics (eye-tracker, sensors), any activities that might cause physical effort or pain (e.g. attaching movement sensors to the body).',
         DESCRIPTION_8_INFO: 'For instance a monetary payment, or a lottery voucher.',
 
-        CONCERNS_INFO: 'Complete the checklist below. If you have answered \'yes\' to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the ifgi-Ethics Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the ifgi\'s Ethics Committee.',
+        CONCERNS_INFO: 'Complete the checklist below. If you have answered \'yes\' to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the Ethics Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the Ethics Committee.',
 
         CONCERN_1: 'Will the study involve potentially vulnerable groups of participants or people who are unable or unauthorized to give informed consent',
         CONCERN_2: 'Will the study involve deception',
@@ -246,7 +246,9 @@ app.config(function ($translateProvider) {
         CONCERN_12_INFO: 'For instance companies, funding bodies, other universities. If yes: who is responsible for the safety of the passed information?',
         CONCERN_13_INFO: 'Excluded cases (select \'no\'): remote sensing data, recordings from public settings allowed by the law, and other situations where the observed individual is expected to be aware of remaining in the public view. Continuous observation of targeted individuals, however, infringes this condition (similarly to how following someone physically in the public is different from observing the same person passing-by).',
 
-        SUBMIT_WARNING: '',
+        SUBMIT_WARNING: 'You are about to finally submit your Proposal for review by the Ethics-Committee. Please be aware that after this step the Study cannot be changed or modified anymore, until a revised version is requested by the Ethics-Committee.',
+        DOCUMENT_FILES: 'Download the associated Files',
+
 
         YES: 'yes',
         NO: 'no',
@@ -328,8 +330,8 @@ app.config(function ($translateProvider) {
         WORKING_GROUPS: 'Working groups',
 
         REVIEW_OPTION_1: 'The user gets access to download the files',
-        REVIEW_OPTION_2: 'The user has to revise the document and submit it again, until it gets finally accepted',
-        REVIEW_OPTION_3: 'The user can no longer access the document. (Attention: Use this option only in extreme situations, for example when your comments have been totally ignored in a revised document. In case of violated rules, you can also block the user). In all other cases, please use the option party accept to give the user the chance to revise the document and submit it again',
+        REVIEW_OPTION_2: 'The user has to revise the document and submit it again, until it gets fully accepted',
+        REVIEW_OPTION_3: 'The user can no longer access the document. (Attention: Use this option only in extreme situations, for example when your comments have been totally ignored in a revised document. In case of violated rules, you can also block the user). In all other cases, please use the option \'partly accept\' to give the user the chance to revise the document and submit it again',
 
         COURSES: 'Courses',
         COURSE: 'Course',
@@ -427,7 +429,7 @@ app.config(function ($translateProvider) {
         EXPLANATION_OF_THE_SUBSCRIBED_STATUS: 'With this setting you can turn on/off the email notifications notifying you about a document needing your review. If you are in temporarily unavailable, you can turn the subscription off and users and members can see that you are currently not responsible for reviewing.',
         EXPLANATION_OF_THE_BLOCKING_STATUS: 'With this setting you can block a user. This is the last measure applied if the user has clearly violated the rules. The user no longer has access to the App until the account is reactivated again.',
 
-        OVERWRITING_INFORMATION: 'You are not the latest reviewer! If you continue, you are going to overwrite the review. Please make sure, that you asked the latest reviewer, if he/she is currently not reviewing.',
+        OVERWRITING_INFORMATION: 'You are not the latest reviewer! If you continue, you are going to overwrite the existing review. Please make sure you asked the latest reviewer about the status of the latest review.',
         OKAY: 'Okay',
         ADMIN_ROLE: 'Admin role',
         SUBSCRIBED_STATUS: 'Subscribed status',
