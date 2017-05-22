@@ -14,6 +14,8 @@ module.exports = {
     postgres_username: 'username',
     postgres_password: 'password',
     postgres_ssl: false,
+    defaults: false,
+    examples: false,
     from_email_address: 'ifgi-ethics@uni-muenster.de',
     smtp_host: 'smtp.gmail.com',
     smtp_port: 465,

@@ -123,6 +123,8 @@ node setup.js
     * `POSTGRES_USERNAME`: Postgres username (default: `admin `)
     * `POSTGRES_PASSWORD`: Postgres password (default: `admin`)
     * `POSTGRES_SSL`: Postgres ssl connection (default: `false`)
+    * `DEFAULTS`: Load default entries for the database with the file `sql/schema/defaults.sql` (see [1.4.](#default-values) for reference) (default: `false`)
+    * `EXAMPLES`: Load example entries for the database with the file`sql/schema/examples.sql` (see [1.5.](#example-values) for reference) (default: `false`)
 
 * If you are using NODE ENVIRONMENT VARIABLES, instead of the `config.js`, then start the script with the following command:
 
@@ -143,6 +145,7 @@ cp defaults.sql.sample defaults.sql
 ```
 
 * Next create inside the `/sql/schema/defaults.sql` file an overall administrator account. This account needs to be `secret`, which will be hidden from the view of the users. The secret administrator is NOT a part of the Ethics committee and only there for hosting and administrating the app. There can be more administrators, if it is required, but it is recommended to split administrators from committee members. Administrators have full access to all data inside the application, which is critical, when entries, like universities, institutes, working groups, members and users would be deleted. Please checkout the upper database schema to get a full overview about all required attributes and dependencies.
+* Don't forget to update the settings `defaults: true` inside the `config.js`.
 
 ##### 1.5. Example values
 
@@ -151,6 +154,8 @@ cp defaults.sql.sample defaults.sql
 ```
 cp examples.sql.sample examples.sql
 ```
+
+* Don't forget to update the settings `examples: true` inside the `config.js`!
 
 ### 2. Ethics-app
 
@@ -207,7 +212,7 @@ Execute the following command inside our local repository-folder:
 cp config.js.sample config.js
 ```
 
-Open the `config.js` with your preferred text editor and configure the app appropiately for your host-server.
+Open the `config.js` with your preferred text editor and configure the app appropriately for your host-server.
 
 
 ##### 2.4 Host-server configuration
