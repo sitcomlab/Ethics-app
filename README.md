@@ -255,6 +255,8 @@ node server.js
     * `NODE_ENV`: server environment (default: `development`, option: `production`, which uses https with a certificate)
     * `SERVER_URL`: url/domain of the host-server (default: `http://ethics-app.uni-muenster.de`)
     * `SERVER_PORT`: port number of the host-server (default: `80`)
+    * `MEMBER_CLIENT_PATH`: path to the member-client on the host-server (default: `/member-client`)
+    * `USER_CLIENT_PATH`: path to the user-client on the host-server (default: `/user-client`)
     * `HTTP_PORT`: port number of the nodejs-server: (default: `5000`)
     * `HTTPS_PORT`: secure port number of the nodejs-server: (default: `HTTP_PORT + 443`)
     * `POSTGRES_HOST`: Postgres host address (default: `localhost`)

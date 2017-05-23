@@ -7,6 +7,7 @@ var _ = require('underscore');
 var mustache = require('mustache');
 var moment = require('moment');
 var domain = process.env.SERVER_URL + ":" + process.env.SERVER_PORT;
+var member_client_path = process.env.MEMBER_CLIENT_PATH;
 var pool = require('../../server.js').pool;
 var transporter = require('../../server.js').transporter;
 
@@ -373,9 +374,6 @@ exports.request = function(req, res) {
                     concern.q13_sign = "no";
                 }
 
-                // Formatting
-                document.link = domain + "/committee/documents/" + document.document_id + "/login";
-
                 // Notify each committee member
                 async.eachOfSeries(members, function (member, key, callback) {
 
@@ -389,6 +387,7 @@ exports.request = function(req, res) {
                         concern: concern,
                         course: course,
                         domain: domain,
+                        member_client_path: member_client_path,
                         year: moment().format("YYYY")
                     });
 
