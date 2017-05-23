@@ -6,8 +6,6 @@ types.setTypeParser(1700, 'text', parseFloat);
 var _ = require('underscore');
 var jwt = require('jsonwebtoken');
 var pool = require('../../server.js').pool;
-var server_url = require('../../server.js').server_url;
-var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
 var dir_1 = "/../../sql/queries/courses/";
@@ -41,7 +39,7 @@ exports.request = function(req, res) {
                 var token = req.headers.authorization.substring(7);
 
                 // Verify token
-                jwt.verify(token, jwtSecret, function(err, decoded) {
+                jwt.verify(token, process.env.JWTSECRET, function(err, decoded) {
                     if(err){
                         callback(new Error("Authorization failed"), 401);
                     } else {

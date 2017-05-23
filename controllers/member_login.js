@@ -7,8 +7,6 @@ var _ = require('underscore');
 var moment = require('moment');
 var jwt = require('jsonwebtoken');
 var pool = require('../server.js').pool;
-var server_url = require('../server.js').server_url;
-var jwtSecret = require('../server.js').jwtSecret;
 
 var fs = require("fs");
 var dir = "/../sql/queries/members/";
@@ -94,7 +92,7 @@ exports.request = function(req, res) {
                     } else {
                         // Create payload
                         payload = {
-                            iss: server_url,
+                            iss: process.env.SERVER_URL,
                             sub: 'Login by email-address and password',
                             member_id: member.member_id,
                             title: member.title,
@@ -109,7 +107,7 @@ exports.request = function(req, res) {
                         };
 
                         // Create JWT
-                        member.token = jwt.sign(payload, jwtSecret);
+                        member.token = jwt.sign(payload, process.env.JWTSECRET);
                         callback(null, 200, member);
                     }
                 });

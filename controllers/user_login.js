@@ -7,8 +7,6 @@ var _ = require('underscore');
 var moment = require('moment');
 var jwt = require('jsonwebtoken');
 var pool = require('../server.js').pool;
-var server_url = require('../server.js').server_url;
-var jwtSecret = require('../server.js').jwtSecret;
 
 var fs = require("fs");
 var dir_1 = "/../sql/queries/documents/";
@@ -78,7 +76,7 @@ exports.request = function(req, res) {
         function(client, done, user, callback){
             // Create payload
             payload = {
-                iss: server_url,
+                iss: process.env.SERVER_URL,
                 sub: 'Login by document-ID',
                 user_id: user.user_id,
                 title: user.title,
@@ -92,7 +90,7 @@ exports.request = function(req, res) {
                 exp: moment().add(1, 'days').unix()
             };
             // Create JWT
-            user.token = jwt.sign(payload, jwtSecret);
+            user.token = jwt.sign(payload, process.env.JWTSECRET);
             callback(null, 200, user);
         },
     ], function(err, code, result) {

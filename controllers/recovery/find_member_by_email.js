@@ -6,15 +6,10 @@ types.setTypeParser(1700, 'text', parseFloat);
 var _ = require('underscore');
 var mustache = require('mustache');
 var moment = require('moment');
-var httpPort = require('../../server.js').httpPort;
-var server_url = require('../../server.js').server_url;
-var server_port = require('../../server.js').server_port;
-var domain = server_url + ":" + server_port;
+var domain = process.env.SERVER_URL + ":" + process.env.SERVER_PORT;
 var pool = require('../../server.js').pool;
 var transporter = require('../../server.js').transporter;
-var mail_options = require('../../server.js').mail_options;
 var jwt = require('jsonwebtoken');
-var jwtSecret = require('../../server.js').jwtSecret;
 
 var fs = require("fs");
 var dir_1 = "/../../templates/emails/";
@@ -61,7 +56,7 @@ exports.request = function(req, res) {
 
             // Create payload
             payload = {
-                iss: server_url,
+                iss: process.env.SERVER_URL,
                 sub: 'Reset member account',
                 member_id: member.member_id,
                 title: member.title,
@@ -76,7 +71,7 @@ exports.request = function(req, res) {
             };
 
             // Create JWT
-            member.token = jwt.sign(payload, jwtSecret);
+            member.token = jwt.sign(payload, process.env.JWTSECRET);
             member.expires = "5 minutes";
 
             // Render HTML content
@@ -91,7 +86,10 @@ exports.request = function(req, res) {
 
             // Send email
             transporter.sendMail({
-                from: mail_options,
+                from: {
+                    name: process.env.SENDER_NAME,
+                    address: process.env.SENDER_EMAIL_ADDRESS
+                },
                 to: member.email_address,
                 subject: "[Ethics-App] Reset your password",
                 text: text,

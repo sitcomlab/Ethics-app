@@ -6,25 +6,24 @@ types.setTypeParser(1700, 'text', parseFloat);
 var _ = require('underscore');
 var mustache = require('mustache');
 var moment = require('moment');
-var httpPort = require('../../server.js').httpPort;
-var server_url = require('../../server.js').server_url;
-var server_port = require('../../server.js').server_port;
-var domain = server_url + ":" + server_port;
+var domain = process.env.SERVER_URL + ":" + process.env.SERVER_PORT;
 var jwt = require('jsonwebtoken');
 var pool = require('../../server.js').pool;
-var jwtSecret = require('../../server.js').jwtSecret;
 var transporter = require('../../server.js').transporter;
-var mail_options = require('../../server.js').mail_options;
 
 var fs = require("fs");
-var dir = "/../../sql/queries/members/";
-var query_get_member = fs.readFileSync(__dirname + dir + 'get.sql', 'utf8').toString();
-var query_login_member = fs.readFileSync(__dirname + dir + 'login.sql', 'utf8').toString();
-var query_reset_fails = fs.readFileSync(__dirname + dir + 'reset_fails.sql', 'utf8').toString();
-var query_edit_member_by_admin_pw = fs.readFileSync(__dirname + dir + 'edit_by_admin_pw.sql', 'utf8').toString();
-var query_edit_member_by_admin = fs.readFileSync(__dirname + dir + 'edit_by_admin.sql', 'utf8').toString();
-var query_edit_member_by_member_pw = fs.readFileSync(__dirname + dir + 'edit_by_member_pw.sql', 'utf8').toString();
-var query_edit_member_by_member = fs.readFileSync(__dirname + dir + 'edit_by_member.sql', 'utf8').toString();
+var dir_1 = "/../../templates/emails/";
+var dir_2 = "/../../sql/queries/members/";
+var template_member_account_reactivated = fs.readFileSync(__dirname + dir_1 + 'member_account_reactivated.html', 'utf8').toString();
+var template_member_account_deactivated = fs.readFileSync(__dirname + dir_1 + 'member_account_deactivated.html', 'utf8').toString();
+var query_get_member = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
+var query_get_member_by_member = fs.readFileSync(__dirname + dir_2 + 'get_by_member.sql', 'utf8').toString();
+var query_login_member = fs.readFileSync(__dirname + dir_2 + 'login.sql', 'utf8').toString();
+var query_reset_fails = fs.readFileSync(__dirname + dir_2 + 'reset_fails.sql', 'utf8').toString();
+var query_edit_member_by_admin_pw = fs.readFileSync(__dirname + dir_2 + 'edit_by_admin_pw.sql', 'utf8').toString();
+var query_edit_member_by_admin = fs.readFileSync(__dirname + dir_2 + 'edit_by_admin.sql', 'utf8').toString();
+var query_edit_member_by_member_pw = fs.readFileSync(__dirname + dir_2 + 'edit_by_member_pw.sql', 'utf8').toString();
+var query_edit_member_by_member = fs.readFileSync(__dirname + dir_2 + 'edit_by_member.sql', 'utf8').toString();
 
 
 // PUT
@@ -47,7 +46,7 @@ exports.request = function(req, res) {
                 var token = req.headers.authorization.substring(7);
 
                 // Verify token
-                jwt.verify(token, jwtSecret, function(err, decoded) {
+                jwt.verify(token, process.env.JWTSECRET, function(err, decoded) {
                     if(err){
                         callback(new Error("Authorization failed"), 401);
                     } else {
@@ -189,7 +188,7 @@ exports.request = function(req, res) {
         },
         function(client, done, member, updated_member, callback) {
             // Database query
-            client.query(query_get_member, [
+            client.query(query_get_member_by_member, [
                 req.params.member_id
             ], function(err, result) {
                 done();
@@ -224,6 +223,7 @@ exports.request = function(req, res) {
                     output = mustache.render(template_member_account_deactivated, {
                         member: member,
                         updated_member: updated_member,
+                        domain: domain,
                         year: moment().format("YYYY")
                     });
                 } else {
@@ -232,13 +232,17 @@ exports.request = function(req, res) {
                     output = mustache.render(template_member_account_reactivated, {
                         member: member,
                         updated_member: updated_member,
+                        domain: domain,
                         year: moment().format("YYYY")
                     });
                 }
 
                 // Send email
                 transporter.sendMail({
-                    from: mail_options,
+                    from: {
+                        name: process.env.SENDER_NAME,
+                        address: process.env.SENDER_EMAIL_ADDRESS
+                    },
                     to: updated_member.email_address,
                     subject: subject,
                     text: text,

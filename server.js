@@ -10,41 +10,17 @@ var path = require('path');
 var nodemailer = require('nodemailer');
 var jwt = require('jsonwebtoken');
 var helmet = require('helmet');
-var config = require('./config');
+var config = require('dotenv').config();
 
-// ENVIRONMENT VARIABLES
-config.environment = process.env.NODE_ENV || config.environment;
-config.server_url = process.env.SERVER_URL || config.server_url;
-config.server_port = process.env.SERVER_PORT || config.server_port;
-config.httpPort = process.env.HTTP_PORT || config.httpPort;
-config.httpsPort = process.env.HTTPS_PORT || config.httpsPort;
-config.postgres_host = process.env.POSTGRES_HOST || config.postgres_host;
-config.postgres_port = process.env.POSTGRES_PORT || config.postgres_port;
-config.postgres_db_name = process.env.POSTGRES_DB_NAME || config.postgres_db_name;
-config.postgres_username = process.env.POSTGRES_USERNAME || config.postgres_username;
-config.postgres_password = process.env.POSTGRES_PASSWORD || config.postgres_password;
-config.postgres_ssl = process.env.POSTGRES_SSL || config.postgres_ssl;
-config.from_email_address = process.env.FROM || config.from_email_address;
-config.smtp_host = process.env.SMTP_HOST || config.smtp_host;
-config.smtp_port = process.env.SMTP_PORT || config.smtp_port;
-config.smtp_ssl = process.env.SMTP_SSL || config.smtp_ssl;
-config.smtp_email_address = process.env.SMTP_EMAIL_ADDRESS || config.smtp_email_address;
-config.smtp_password = process.env.SMTP_PASSWORD || config.smtp_password;
-config.jwtSecret = process.env.JWTSECRET || config.jwtSecret;
-
-exports.httpPort = config.httpPort;
-exports.server_url = config.server_url;
-exports.server_port = config.server_port;
-exports.jwtSecret = config.jwtSecret;
 
 // DATABASE CONFIGURATION
 var pool = new pg.Pool({
-    host: config.postgres_host,
-    port: config.postgres_port,
-    database: config.postgres_db_name,
-    user: config.postgres_username,
-    password: config.postgres_password,
-    ssl: JSON.parse(config.postgres_ssl)
+    host: process.env.POSTGRES_HOST,
+    port: Number(process.env.POSTGRES_PORT),
+    database: process.env.POSTGRES_DB_NAME,
+    user: process.env.POSTGRES_USERNAME,
+    password: process.env.POSTGRES_PASSWORD,
+    ssl: JSON.parse(process.env.POSTGRES_SSL)
 });
 exports.pool = pool;
 
@@ -60,7 +36,7 @@ pool.connect(function(err, client, done) {
             if (err) {
                 console.error(colors.red(JSON.stringify(err)));
             } else {
-                console.log(colors.green(new Date() + " Postgres is running on port " + config.postgres_port));
+                console.log(colors.green(new Date() + " Postgres is running on port " + process.env.POSTGRES_PORT));
             }
         });
     }
@@ -73,22 +49,18 @@ pool.on('error', function (err, client) {
 
 // SMTP CONFIGURATION
 exports.transporter = nodemailer.createTransport({
-    host: config.smtp_host,
-    port: config.smtp_port,
-    secure: config.smtp_ssl,
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    secure: JSON.parse(process.env.SMTP_SSL),
     auth: {
-        user: config.smtp_email_address,
-        pass: config.smtp_password
+        user: process.env.SMTP_EMAIL_ADDRESS,
+        pass: process.env.SMTP_PASSWORD
     }
 });
-exports.mail_options = {
-    name: "Ethics-App",
-    address: config.from_email_address
-};
 
 
 // Load certificstes
-if(config.environment === "production") {
+if(process.env.NODE_ENV === "production") {
     var credentials = {
         key: fs.readFileSync('ssl/server.key', 'utf8'),
         cert: fs.readFileSync('ssl/server.crt', 'utf8')
@@ -117,7 +89,7 @@ exports.isAuthenticated = function isAuthenticated(req, res, next) {
         var token = req.headers.authorization.substring(7);
 
         // Verify token
-        jwt.verify(token, config.jwtSecret, function(err, decoded) {
+        jwt.verify(token, process.env.JWTSECRET, function(err, decoded) {
             if(err){
                 res.status(401).send("Authentication failed!");
             } else {
@@ -168,14 +140,14 @@ app.get('/member-client/*', function(req, res, next) {
 
 // Start Webserver
 var httpServer = http.createServer(app);
-httpServer.listen(config.httpPort, function() {
-    console.log(colors.green(new Date() + " HTTP-Server is listening at port " + config.httpPort));
+httpServer.listen(Number(process.env.HTTP_PORT), function() {
+    console.log(colors.green(new Date() + " HTTP-Server is listening at port " + process.env.HTTP_PORT));
 });
-if(config.environment === "production") {
+if(process.env.NODE_ENV === "production") {
     var httpsServer = https.createServer(credentials, app);
 
-    httpsServer.listen(config.httpsPort, function() {
-        console.log(colors.green(new Date() + " HTTPS-Server is listening at port " + config.httpsPort));
+    httpsServer.listen(Number(process.env.HTTPS_PORT), function() {
+        console.log(colors.green(new Date() + " HTTPS-Server is listening at port " + process.env.HTTPS_PORT));
     });
 }
 
