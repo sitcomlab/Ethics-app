@@ -184,6 +184,12 @@ git clone https://github.com/sitcomlab/Ethics-app.git
 node npm install
 ```
 
+* Alternatively you can also use **yarn** for that (run the command with `sudo`, if you don't have permission):
+
+```
+yarn install
+```
+
 ##### 2.4. Bower
 
 * Install Bower via **npm** (run the command with `sudo`, if you don't have permission):
