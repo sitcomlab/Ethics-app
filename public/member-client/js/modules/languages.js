@@ -499,7 +499,7 @@ app.config(function ($translateProvider) {
         LOADING_ACCOUNT_SETTINGS: 'Loading account settings',
 
         INITIALISING_NEW_DOCUMENT: 'Initialising new document',
-        CHECK_AUTHENTICATION: 'Checking authentication',
+        CHECKING_AUTHENTICATION: 'Checking authentication',
 
         SAVING_ACCOUNT_SETTINGS: 'Saving account settings',
         SAVING_NOTES: 'Saving notes',
