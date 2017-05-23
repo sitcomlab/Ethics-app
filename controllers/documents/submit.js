@@ -6,13 +6,9 @@ types.setTypeParser(1700, 'text', parseFloat);
 var _ = require('underscore');
 var mustache = require('mustache');
 var moment = require('moment');
-var httpPort = require('../../server.js').httpPort;
-var server_url = require('../../server.js').server_url;
-var server_port = require('../../server.js').server_port;
-var domain = server_url + ":" + server_port;
+var domain = process.env.SERVER_URL + ":" + process.env.SERVER_PORT;
 var pool = require('../../server.js').pool;
 var transporter = require('../../server.js').transporter;
-var mail_options = require('../../server.js').mail_options;
 
 var fs = require("fs");
 var dir_1 = "/../../templates/emails/";
@@ -378,7 +374,7 @@ exports.request = function(req, res) {
                 }
 
                 // Formatting
-                document.link = server_url + ":" + httpPort + "/committee/documents/" + document.document_id + "/login"; // TODO: Login by document_id, email_address & password, or by token
+                document.link = domain + "/committee/documents/" + document.document_id + "/login";
 
                 // Notify each committee member
                 async.eachOfSeries(members, function (member, key, callback) {
@@ -401,7 +397,10 @@ exports.request = function(req, res) {
 
                     // Send email
                     transporter.sendMail({
-                        from: mail_options,
+                        from: {
+                            name: process.env.SENDER_NAME,
+                            address: process.env.SENDER_EMAIL_ADDRESS
+                        },
                         to: member.email_address,
                         subject: "[Ethics-App] A document needs your review",
                         text: text,

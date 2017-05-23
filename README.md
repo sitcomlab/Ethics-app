@@ -116,22 +116,24 @@ CREATE DATABASE ethics-app;
 node setup.js
 ```
 
-* Before you execute the `setup.js`, please make sure, that you have already created the  `/sql/schema/defaults.sql` file or follow the instructions of [1.4.](#default-values) first. Check also if you have already created the `config.js` file or provide the following **NODE ENVIRONMENT VARIABLES** before you run the script:
+* Before you execute the `setup.js`, please make sure, that you have already created the  `/sql/schema/defaults.sql` file or follow the instructions of [1.4.](#default-values) first. Check also if you have already created the `.env` file or provide the following **NODE ENVIRONMENT VARIABLES** before you run the script:
     * `POSTGRES_HOST`: Postgres host address (default: `localhost`)
     * `POSTGRES_PORT`: Postgres port number (default: `5432`)
     * `POSTGRES_DB_NAME`: Postgres database name (default: `ethics-app`)
     * `POSTGRES_USERNAME`: Postgres username (default: `admin `)
     * `POSTGRES_PASSWORD`: Postgres password (default: `admin`)
     * `POSTGRES_SSL`: Postgres ssl connection (default: `false`)
+    * `DEFAULTS`: Load default entries for the database with the file `sql/schema/defaults.sql` (see [1.4.](#default-values) for reference) (default: `false`)
+    * `EXAMPLES`: Load example entries for the database with the file`sql/schema/examples.sql` (see [1.5.](#example-values) for reference) (default: `false`)
 
-* If you are using NODE ENVIRONMENT VARIABLES, instead of the `config.js`, then start the script with the following command:
+* If you are using NODE ENVIRONMENT VARIABLES, instead of the `.env`, then start the script with the following command:
 
 ```
 # Linux & macOS
-node setup.js
+DEFAULTS=true node setup.js
 
 # Windows
-set node setup.js
+set DEFAULTS=true node setup.js
 ```
 
 ##### 1.4. Default values (administrator account)
@@ -143,6 +145,7 @@ cp defaults.sql.sample defaults.sql
 ```
 
 * Next create inside the `/sql/schema/defaults.sql` file an overall administrator account. This account needs to be `secret`, which will be hidden from the view of the users. The secret administrator is NOT a part of the Ethics committee and only there for hosting and administrating the app. There can be more administrators, if it is required, but it is recommended to split administrators from committee members. Administrators have full access to all data inside the application, which is critical, when entries, like universities, institutes, working groups, members and users would be deleted. Please checkout the upper database schema to get a full overview about all required attributes and dependencies.
+* Don't forget to update the settings `DEFAULTS=true` inside the `.env`.
 
 ##### 1.5. Example values
 
@@ -151,6 +154,8 @@ cp defaults.sql.sample defaults.sql
 ```
 cp examples.sql.sample examples.sql
 ```
+
+* Don't forget to update the settings `EXAMPLES=true` inside the `.env`!
 
 ### 2. Ethics-app
 
@@ -199,15 +204,15 @@ bower install
 sudo bower install --allow-root
 ```
 
-##### 2.3. Node-server configuration
+##### 2.3. Server configuration
 
 Execute the following command inside our local repository-folder:
 
 ```
-cp config.js.sample config.js
+cp .env.sample .env
 ```
 
-Open the `config.js` with your preferred text editor and configure the app appropiately for your host-server.
+Open the `.env` with your preferred text editor and configure the app appropriately for your host-server.
 
 
 ##### 2.4 Host-server configuration
@@ -246,7 +251,7 @@ Open the `config.js` with your preferred text editor and configure the app appro
 node server.js
 ```
 
-* Before you start the server, please create a `config.js` file or start the websever with the following **NODE ENVIRONMENT VARIABLES**:
+* Before you start the server, please create a `.env` file or start the websever with the following **NODE ENVIRONMENT VARIABLES**:
     * `NODE_ENV`: server environment (default: `development`, option: `production`, which uses https with a certificate)
     * `SERVER_URL`: url/domain of the host-server (default: `http://ethics-app.uni-muenster.de`)
     * `SERVER_PORT`: port number of the host-server (default: `80`)
@@ -258,7 +263,8 @@ node server.js
     * `POSTGRES_USERNAME`: Postgres username (default: `admin `)
     * `POSTGRES_PASSWORD`: Postgres password (default: `admin`)
     * `POSTGRES_SSL`: Postgres ssl connection (default: `false`)
-    * `FROM`: Email-address for users to reply, if they have question (default: `ifgi-ethics@uni-muenster.de`)
+    * `SENDER_NAME`: Name of the sender for Emails (default: `Ethics-App`)
+    * `SENDER_EMAIL_ADDRESS`: Email-address of the sender, so users can reply to it, if they have question (default: `ifgi-ethics@uni-muenster.de`)
     * `SMTP_HOST`: SMTP host address (default: `smtp.gmail.com`)
     * `SMTP_PORT`: SMTP port number (default: `465`)
     * `SMTP_SSL`: SMTP ssl connection (default: `true`)
@@ -268,7 +274,7 @@ node server.js
 
 * If you want to run the application, you need to specify the `SMTP_EMAIL_ADDRESS` and `SMTP_PASSWORD`, otherwise no Emails with the document-IDs can be sent.
 
-* If you are using NODE ENVIRONMENT VARIABLES instead of the `config.js`, then start the script with the following command:
+* If you are using NODE ENVIRONMENT VARIABLES instead of the `.env`, then start the script with the following command:
 
 ```
 # Linux & macOS
