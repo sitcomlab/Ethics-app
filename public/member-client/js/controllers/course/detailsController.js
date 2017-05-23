@@ -57,7 +57,7 @@ app.controller("courseDetailsController", function($scope, $rootScope, $routePar
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'documents': {
-                $scope.$parent.loading = { status: true, message: "Loading related documents" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_RELATED_DOCUMENTS') };
 
                 // Load related documents
                 $documentsService.listByCourse($scope.course.course_id, $scope.filter)
@@ -93,7 +93,7 @@ app.controller("courseDetailsController", function($scope, $rootScope, $routePar
                 break;
             }
             case 'members': {
-                $scope.$parent.loading = { status: true, message: "Loading related members" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_RELATED_MEMBERS') };
 
                 // Load related members
                 $memberService.listByCourse($scope.course.course_id, $scope.filter)
@@ -146,7 +146,7 @@ app.controller("courseDetailsController", function($scope, $rootScope, $routePar
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading course" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_COURSE') };
     $scope.authenticated_member = $authenticationService.get();
 
     // Filter

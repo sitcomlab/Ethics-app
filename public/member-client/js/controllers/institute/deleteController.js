@@ -22,7 +22,7 @@ app.controller("instituteDeleteController", function($scope, $rootScope, $routeP
      * @return {[type]} [description]
      */
     $scope.delete = function(){
-        $scope.$parent.loading = { status: true, message: "Deleting institute" };
+        $scope.$parent.loading = { status: true, message: $filter('translate')('DELETING_INSTITUTE') };
 
         // Delete institute
         $instituteService.remove($scope.institute.institute_id)
@@ -37,7 +37,7 @@ app.controller("instituteDeleteController", function($scope, $rootScope, $routeP
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading institute" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_INSTITUTE') };
     $scope.input = "";
 
     // Load institute

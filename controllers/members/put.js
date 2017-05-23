@@ -7,6 +7,7 @@ var _ = require('underscore');
 var mustache = require('mustache');
 var moment = require('moment');
 var domain = process.env.SERVER_URL + ":" + process.env.SERVER_PORT;
+var member_client_path = process.env.MEMBER_CLIENT_PATH;
 var jwt = require('jsonwebtoken');
 var pool = require('../../server.js').pool;
 var transporter = require('../../server.js').transporter;
@@ -224,6 +225,7 @@ exports.request = function(req, res) {
                         member: member,
                         updated_member: updated_member,
                         domain: domain,
+                        member_client_path: member_client_path,
                         year: moment().format("YYYY")
                     });
                 } else {
@@ -233,6 +235,7 @@ exports.request = function(req, res) {
                         member: member,
                         updated_member: updated_member,
                         domain: domain,
+                        member_client_path: member_client_path,
                         year: moment().format("YYYY")
                     });
                 }

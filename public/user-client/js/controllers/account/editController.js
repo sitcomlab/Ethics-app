@@ -39,7 +39,7 @@ app.controller("accountEditController", function($scope, $rootScope, $filter, $t
             $scope.editAccountForm.last_name.$pristine = false;
             $scope.editAccountForm.institute_id.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Saving account settings" };
+            $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_ACCOUNT_SETTINGS') };
 
             $userService.edit($authenticationService.getId(), $scope.updated_user)
             .then(function onSuccess(response) {
@@ -69,7 +69,7 @@ app.controller("accountEditController", function($scope, $rootScope, $filter, $t
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'universities': {
-                $scope.$parent.loading = { status: true, message: "Loading universities" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITIES') };
 
                 // Load universities
                 $universityService.list({
@@ -89,7 +89,7 @@ app.controller("accountEditController", function($scope, $rootScope, $filter, $t
             case 'institutes': {
                 if($scope.university_id){
                     if($scope.university_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_INSTITUTES') };
 
                         // Load related institutes
                         $instituteService.listByUniversity($scope.university_id, {
@@ -124,7 +124,7 @@ app.controller("accountEditController", function($scope, $rootScope, $filter, $t
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading account settings" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_ACCOUNT_SETTINGS') };
     $scope.authenticated_user = $authenticationService.get();
     $scope.updated_user = $authenticationService.copy();
 

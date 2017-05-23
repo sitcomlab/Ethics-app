@@ -44,7 +44,7 @@ app.controller("courseCreateController", function($scope, $rootScope, $routePara
             $scope.createCourseForm.lecturer.$pristine = false;
             $scope.createCourseForm.institute_id.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Creating new course" };
+            $scope.$parent.loading = { status: true, message: $filter('translate')('CREATING_NEW_COURSE') };
 
             // Create new course
             $courseService.create($scope.new_course)
@@ -111,7 +111,7 @@ app.controller("courseCreateController", function($scope, $rootScope, $routePara
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'universities': {
-                $scope.$parent.loading = { status: true, message: "Loading universities" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITIES') };
 
                 // Load universities
                 $universityService.list({
@@ -131,7 +131,7 @@ app.controller("courseCreateController", function($scope, $rootScope, $routePara
             case 'institutes': {
                 if($scope.university_id){
                     if($scope.university_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_INSTITUTES') };
 
                         // Load related institutes
                         $instituteService.listByUniversity($scope.university_id, {
@@ -172,7 +172,7 @@ app.controller("courseCreateController", function($scope, $rootScope, $routePara
             case 'members': {
                 if($scope.new_course.institute_id){
                     if($scope.new_course.institute_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading members" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_MEMBERS') };
 
                         // Load related members
                         $memberService.listByInstitute($scope.new_course.institute_id, {

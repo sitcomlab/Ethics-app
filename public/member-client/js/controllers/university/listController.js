@@ -128,7 +128,7 @@ app.controller("universityListController", function($scope, $rootScope, $filter,
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading universities" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITIES') };
     
     // Load universities
     $scope.filter = $universityService.getCachedFilter();

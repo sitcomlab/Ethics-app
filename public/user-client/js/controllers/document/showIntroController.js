@@ -39,7 +39,7 @@ app.controller("documentShowIntroController", function($scope, $rootScope, $rout
      * @return {[type]} [description]
      */
     $scope.send = function(){
-        $scope.$parent.loading = { status: true, message: "Auto saving" };
+        $scope.$parent.loading = { status: true, message: $filter('translate')('AUTO_SAVING') };
 
         if($documentService.getStatus()===0){
             // Confirm intro
@@ -68,7 +68,7 @@ app.controller("documentShowIntroController", function($scope, $rootScope, $rout
      * @return {[type]} [description]
      */
     $scope.save = function(){
-        $scope.$parent.loading = { status: true, message: "Saving document" };
+        $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_DOCUMENT') };
 
         // Save document
         $documentService.edit($routeParams.document_id, $scope.updated_document)
@@ -100,7 +100,7 @@ app.controller("documentShowIntroController", function($scope, $rootScope, $rout
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'universities': {
-                $scope.$parent.loading = { status: true, message: "Loading universities" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITIES') };
 
                 // Load universities
                 $universityService.list({
@@ -120,7 +120,7 @@ app.controller("documentShowIntroController", function($scope, $rootScope, $rout
             case 'institutes': {
                 if($scope.university_id){
                     if($scope.university_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_INSTITUTES') };
 
                         // Load related institutes
                         $instituteService.listByUniversity($scope.university_id, {
@@ -153,7 +153,7 @@ app.controller("documentShowIntroController", function($scope, $rootScope, $rout
             case 'courses': {
                 if($scope.institute_id){
                     if($scope.institute_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading courses" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_COURSES') };
 
                         // Load related courses
                         $courseService.listByInstitute($scope.institute_id, {
@@ -206,7 +206,7 @@ app.controller("documentShowIntroController", function($scope, $rootScope, $rout
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading document" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_DOCUMENT') };
     $scope.document = $documentService.get();
     $scope.updated_document = $documentService.copy($scope.document);
     $scope.authenticated_user = $authenticationService.get();

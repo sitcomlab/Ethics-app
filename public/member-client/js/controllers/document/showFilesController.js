@@ -31,14 +31,14 @@ app.controller("documentShowFilesController", function($scope, $rootScope, $rout
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading document" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_DOCUMENT') };
 
     // Update navbar
     $scope.$parent.document = $documentService.get();
 
     // Check status of document to generate files
     if($documentService.getStatus()===2 || $documentService.getStatus()===6){
-        $scope.$parent.loading = { status: true, message: "Generating files" };
+        $scope.$parent.loading = { status: true, message: $filter('translate')('GENERATING_FILES') };
 
         // Generate files on server
         $documentService.generateFiles($routeParams.document_id)
@@ -55,7 +55,7 @@ app.controller("documentShowFilesController", function($scope, $rootScope, $rout
             $scope.redirect("/documents/" + $routeParams.document_id + "/overview");
         });
     } else {
-        $window.alert("Files can only be generated, if the document has been accepted");
+        $window.alert($filter('translate')('ALERT_FILE_GENERATION_FAILED'));
 
         // Redirect
         $scope.redirect("/documents/" + $routeParams.document_id + "/overview");

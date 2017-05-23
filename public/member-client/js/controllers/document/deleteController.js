@@ -22,7 +22,7 @@ app.controller("documentDeleteController", function($scope, $rootScope, $routePa
      * @return {[type]} [description]
      */
     $scope.delete = function(){
-        $scope.$parent.loading = { status: true, message: "Deleting document" };
+        $scope.$parent.loading = { status: true, message: $filter('translate')('DELETING_DOCUMENT') };
 
         // Delete document
         $documentService.remove($scope.document.document_id)
@@ -48,7 +48,7 @@ app.controller("documentDeleteController", function($scope, $rootScope, $routePa
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading document" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_DOCUMENT') };
     $scope.input = "";
 
     // Update navbar

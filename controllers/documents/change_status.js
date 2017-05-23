@@ -5,10 +5,10 @@ var types = require('pg').types;
 types.setTypeParser(1700, 'text', parseFloat);
 var _ = require('underscore');
 var jwt = require('jsonwebtoken');
-var jwtSecret = require('../../server.js').jwtSecret;
 var mustache = require('mustache');
 var moment = require('moment');
 var domain = process.env.SERVER_URL + ":" + process.env.SERVER_PORT;
+var user_client_path = process.env.USER_CLIENT_PATH;
 var pool = require('../../server.js').pool;
 var transporter = require('../../server.js').transporter;
 
@@ -380,6 +380,7 @@ exports.request = function(req, res) {
                     status_description_1: status_description_1,
                     status_description_2: status_description_2,
                     domain: domain,
+                    user_client_path: user_client_path,
                     year: moment().format("YYYY")
                 });
 

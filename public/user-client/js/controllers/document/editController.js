@@ -40,7 +40,7 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
      * @return {[type]} [description]
      */
     $scope.saveDocument = function(tab){
-        $scope.$parent.loading = { status: true, message: "Auto saving" };
+        $scope.$parent.loading = { status: true, message: $filter('translate')('AUTO_SAVING') };
 
         var save_descriptions = $q.defer();
         var save_concerns = $q.defer();
@@ -185,9 +185,9 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
                 $scope.editDocumentForm.q13_explanation.$pristine = false;
             }
 
-            $window.alert("Your document can not be submitted, please fill out all required fields");
+            $window.alert($filter('translate')('ALERT_SUBMIT_DOCUMENT_FAILED'));
         } else {
-            $scope.$parent.loading = { status: true, message: "Submitting document" };
+            $scope.$parent.loading = { status: true, message: $filter('translate')('SUBMITTING_DOCUMENT') };
 
             // Submit document
             $documentService.submit($documentService.getId())

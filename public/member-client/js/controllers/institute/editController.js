@@ -27,7 +27,7 @@ app.controller("instituteEditController", function($scope, $rootScope, $routePar
             // Update UI
             $scope.editInstituteForm.institute_name.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Saving institute" };
+            $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_INSTITUTE') };
 
             // Updating Institute
             $instituteService.edit($routeParams.institute_id, $scope.updated_institute)
@@ -51,7 +51,7 @@ app.controller("instituteEditController", function($scope, $rootScope, $routePar
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'universities': {
-                $scope.$parent.loading = { status: true, message: "Loading universities" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITIES') };
 
                 // Load universities
                 $universityService.list({
@@ -76,7 +76,7 @@ app.controller("instituteEditController", function($scope, $rootScope, $routePar
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading institute" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_INSTITUTE') };
 
     // Load Institute
     $instituteService.retrieve($routeParams.institute_id)

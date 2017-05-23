@@ -153,7 +153,7 @@ app.controller("documentShowSubmissionController", function($scope, $rootScope, 
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading submission" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_SUBMISSION') };
     $scope.document = $documentService.get();
     $scope.latest_revision = $documentService.getLatestRevision();
 

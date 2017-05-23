@@ -7,6 +7,7 @@ var _ = require('underscore');
 var mustache = require('mustache');
 var moment = require('moment');
 var domain = process.env.SERVER_URL + ":" + process.env.SERVER_PORT;
+var member_client_path = process.env.MEMBER_CLIENT_PATH;
 var jwt = require('jsonwebtoken');
 var pool = require('../../server.js').pool;
 var transporter = require('../../server.js').transporter;
@@ -38,7 +39,7 @@ exports.request = function(req, res) {
                 var token = req.headers.authorization.substring(7);
 
                 // Verify token
-                jwt.verify(token, jwtSecret, function(err, decoded) {
+                jwt.verify(token, process.env.JWTSECRET, function(err, decoded) {
                     if(err){
                         callback(new Error("Authorization failed"), 401);
                     } else {
@@ -89,6 +90,7 @@ exports.request = function(req, res) {
                     var output = mustache.render(template_member_account_created, {
                         member: member,
                         domain: domain,
+                        member_client_path: member_client_path,
                         year: moment().format("YYYY")
                     });
 

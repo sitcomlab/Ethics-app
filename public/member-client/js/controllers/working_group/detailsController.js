@@ -52,7 +52,7 @@ app.controller("workingGroupDetailsController", function($scope, $rootScope, $ro
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'members': {
-                $scope.$parent.loading = { status: true, message: "Loading related members" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_RELATED_MEMBERS') };
 
                 // Load related members
                 $memberService.listByWorkingGroup($scope.working_group.working_group_id, $scope.filter)
@@ -104,7 +104,7 @@ app.controller("workingGroupDetailsController", function($scope, $rootScope, $ro
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading working group" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_WORKING_GROUP') };
 
     // Filter
     $scope.filter = {

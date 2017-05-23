@@ -26,7 +26,7 @@ app.controller("loginController", function($scope, $rootScope, $filter, $transla
             // Update UI
             $scope.loginForm.document_id.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Logging in" };
+            $scope.$parent.loading = { status: true, message: $filter('translate')('LOGGING_IN') };
             $scope.redirect("/documents/" + $scope.login.document_id);
         }
     };
@@ -35,7 +35,7 @@ app.controller("loginController", function($scope, $rootScope, $filter, $transla
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading application" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_APPLICATION') };
 
     // Reset all services
     $authenticationService.set();

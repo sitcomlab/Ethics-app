@@ -7,6 +7,7 @@ var _ = require('underscore');
 var mustache = require('mustache');
 var moment = require('moment');
 var domain = process.env.SERVER_URL + ":" + process.env.SERVER_PORT;
+var user_client_path = process.env.USER_CLIENT_PATH;
 var pool = require('../../server.js').pool;
 var transporter = require('../../server.js').transporter;
 
@@ -142,6 +143,7 @@ exports.request = function(req, res) {
                 amount: amount,
                 amount_description: amount_description,
                 domain: domain,
+                user_client_path: user_client_path,
                 year: moment().format("YYYY")
             });
 

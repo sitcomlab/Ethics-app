@@ -45,7 +45,7 @@ app.controller("userCreateController", function($scope, $rootScope, $routeParams
             $scope.createUserForm.institute_id.$pristine = false;
             $scope.createUserForm.blocked.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Creating new user" };
+            $scope.$parent.loading = { status: true, message: $filter('translate')('CREATING_NEW_USER') };
 
             // Create new user
             $userService.create($scope.new_user)
@@ -70,7 +70,7 @@ app.controller("userCreateController", function($scope, $rootScope, $routeParams
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'universities': {
-                $scope.$parent.loading = { status: true, message: "Loading universities" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITIES') };
 
                 // Load universities
                 $universityService.list({
@@ -90,7 +90,7 @@ app.controller("userCreateController", function($scope, $rootScope, $routeParams
             case 'institutes': {
                 if($scope.university_id){
                     if($scope.university_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_INSTITUTES') };
 
                         // Load related institutes
                         $instituteService.listByUniversity($scope.university_id, {

@@ -27,7 +27,7 @@ app.controller("universityEditController", function($scope, $rootScope, $routePa
             // Update UI
             $scope.editUniversityForm.university_name.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Saving university" };
+            $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_UNIVERSITY') };
 
             // Updating University
             $universityService.edit($routeParams.university_id, $scope.updated_university)
@@ -44,7 +44,7 @@ app.controller("universityEditController", function($scope, $rootScope, $routePa
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading university" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITY') };
 
     // Load University
     $universityService.retrieve($routeParams.university_id)

@@ -64,7 +64,7 @@ app.controller("universityDetailsController", function($scope, $rootScope, $rout
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'institutes': {
-                $scope.$parent.loading = { status: true, message: "Loading related institutes" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_RELATED_INSTITUTES') };
 
                 // Load related institutes
                 $instituteService.listByUniversity($scope.university.university_id, $scope.filter)
@@ -100,7 +100,7 @@ app.controller("universityDetailsController", function($scope, $rootScope, $rout
                 break;
             }
             case 'members': {
-                $scope.$parent.loading = { status: true, message: "Loading related members" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_RELATED_MEMBERS') };
 
                 // Load related members
                 $memberService.listByInstitute($scope.university.university_id, $scope.filter)
@@ -136,7 +136,7 @@ app.controller("universityDetailsController", function($scope, $rootScope, $rout
                 break;
             }
             case 'users': {
-                $scope.$parent.loading = { status: true, message: "Loading related users" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_RELATED_USERS') };
 
                 // Load related users
                 $userService.listByInstitute($scope.university.university_id, $scope.filter)
@@ -189,7 +189,7 @@ app.controller("universityDetailsController", function($scope, $rootScope, $rout
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading university" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITY') };
 
     // Filter
     $scope.filter = {

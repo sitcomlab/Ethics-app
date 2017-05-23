@@ -147,7 +147,7 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
      * @return {[type]} [description]
      */
     $scope.saveReview = function(){
-        $scope.$parent.loading = { status: true, message: "Saving review" };
+        $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_REVIEW') };
 
         // Save notes
         $noteService.save($scope.document.note_id, { "note": $scope.document.note })
@@ -195,7 +195,7 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
         .then(function onSuccess(response) {
 
             if($scope.review_status !== null){
-                $scope.$parent.loading = { status: true, message: "Saving review" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_REVIEW') };
 
                 // Publish comments for user
                 $scope.latest_revision.comments.published = true;
@@ -203,7 +203,7 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
                 // Save comments
                 $commentService.edit($scope.latest_revision.comments.comment_id, $scope.latest_revision.comments)
                 .then(function onSuccess(response) {
-                    $scope.$parent.loading = { status: true, message: "Publishing review" };
+                    $scope.$parent.loading = { status: true, message: $filter('translate')('PUBLISHING_REVIEW') };
 
                     // Change status of document
                     $documentService.changeStatus($routeParams.document_id, {
@@ -261,7 +261,7 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading review" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_REVIEW') };
     $scope.review_status = null;
     $scope.authenticated_member = $authenticationService.get();
     $scope.document = $documentService.get();

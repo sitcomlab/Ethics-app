@@ -105,7 +105,7 @@
             <br>
             <div class="list-group">
                 {{#documents}}
-                <a href="{{domain}}/user-client/documents/{{document_id}}" target="_blank" class="list-group-item list-group-item-action">
+                <a href="{{domain}}{{user_client_path}}/documents/{{document_id}}" target="_blank" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <div>
                             <i class="fa fa-file-text" aria-hidden="true"></i>
@@ -132,7 +132,7 @@
         </div>
         <!-- Footer -->
         <div class="footer middle">
-            &copy; {{year}} <a href="{{domain}}/user-client/" target="_blank">Ethics-App</a>
+            &copy; {{year}} <a href="{{domain}}{{user_client_path}}/" target="_blank">Ethics-App</a>
         </div>
     </body>
 </html>

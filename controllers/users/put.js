@@ -7,9 +7,9 @@ var _ = require('underscore');
 var mustache = require('mustache');
 var moment = require('moment');
 var domain = process.env.SERVER_URL + ":" + process.env.SERVER_PORT;
+var user_client_path = process.env.USER_CLIENT_PATH;
 var jwt = require('jsonwebtoken');
 var pool = require('../../server.js').pool;
-var jwtSecret = require('../../server.js').jwtSecret;
 var transporter = require('../../server.js').transporter;
 
 var fs = require("fs");
@@ -141,6 +141,8 @@ exports.request = function(req, res) {
                     output = mustache.render(template_user_account_blocked, {
                         user: user,
                         updated_user: updated_user,
+                        domain: domain,
+                        user_client_path: user_client_path,
                         year: moment().format("YYYY")
                     });
                 } else {
@@ -149,6 +151,8 @@ exports.request = function(req, res) {
                     output = mustache.render(template_user_account_reactivated, {
                         user: user,
                         updated_user: updated_user,
+                        domain: domain,
+                        user_client_path: user_client_path,
                         year: moment().format("YYYY")
                     });
                 }

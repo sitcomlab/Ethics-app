@@ -47,7 +47,7 @@ app.controller("documentShowIdController", function($scope, $rootScope, $filter,
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading document" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_DOCUMENT') };
     $scope.document = $documentService.get();
     $scope.$parent.loading = { status: false, message: "" };
 });

@@ -138,7 +138,7 @@ app.controller("userListController", function($scope, $rootScope, $filter, $tran
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading users" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_USERS') };
     
     // Load users
     $scope.filter = $userService.getCachedFilter();

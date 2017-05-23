@@ -46,7 +46,7 @@ app.controller("documentCreateController", function($scope, $rootScope, $filter,
             $scope.createDocumentForm.document_email_address.$pristine = false;
             $scope.createDocumentForm.course_id.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Searching for user" };
+            $scope.$parent.loading = { status: true, message: $filter('translate')('SEARCHING_FOR_USER') };
 
             $timeout(function () {
                 // Check if user exists
@@ -55,12 +55,12 @@ app.controller("documentCreateController", function($scope, $rootScope, $filter,
                     // Check if user was found
                     if(JSON.parse(response.data)){
                         $timeout(function() {
-                            $scope.$parent.loading = { status: true, message: "Creating new document" };
+                            $scope.$parent.loading = { status: true, message: $filter('translate')('CREATING_NEW_DOCUMENT') };
 
                             // Create new document
                             $documentService.create($scope.new_document)
                             .then(function onSuccess(response) {
-                                $window.alert("Your new document has been created and an email with the document-ID has been sent to you!");
+                                $window.alert($filter('translate')('ALERT_DOCUMENT_CREATED'));
 
                                 // Redirect
                                 $scope.redirect("/");
@@ -100,12 +100,12 @@ app.controller("documentCreateController", function($scope, $rootScope, $filter,
             $scope.createUserForm.university_id.$pristine = false;
             $scope.createUserForm.institute_id.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Creating new user" };
+            $scope.$parent.loading = { status: true, message: $filter('translate')('CREATING_NEW_USER') };
 
             // Create new user
             $userService.create($scope.new_user)
             .then(function onSuccess(response) {
-                $window.alert("You have successfully signed up, you can now create your document!");
+                $window.alert($filter('translate')('ALERT_SIGN_UP_SUCCESSFULL'));
 
                 // Change tab to send the new document again
                 $scope.new_document.email_address = $scope.new_user.email_address || "";
@@ -130,7 +130,7 @@ app.controller("documentCreateController", function($scope, $rootScope, $filter,
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'universities': {
-                $scope.$parent.loading = { status: true, message: "Loading universities" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITIES') };
 
                 // Load universities
                 $universityService.list({
@@ -150,7 +150,7 @@ app.controller("documentCreateController", function($scope, $rootScope, $filter,
             case 'institutes': {
                 if($scope.university_id){
                     if($scope.university_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_INSTITUTES') };
 
                         // Load related institutes
                         $instituteService.listByUniversity($scope.university_id, {
@@ -184,7 +184,7 @@ app.controller("documentCreateController", function($scope, $rootScope, $filter,
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Initialising new document" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('INITIALISING_NEW_DOCUMENT') };
     $scope.new_document = $documentService.init();
     $scope.new_user = $userService.init();
 
