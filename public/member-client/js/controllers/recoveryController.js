@@ -26,7 +26,7 @@ app.controller("recoveryController", function($scope, $rootScope, $filter, $tran
             // Update UI
             $scope.recoveryForm.email_address.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Searching for Email-address" };
+            $scope.$parent.loading = { status: true, message: $filter('translate')('SEARCHING_FOR_EMAIL_ADDRESS') };
 
             $recoveryService.findByEmail($scope.recovery.email_address)
             .then(function onSuccess(response) {
@@ -34,13 +34,13 @@ app.controller("recoveryController", function($scope, $rootScope, $filter, $tran
                 $scope.recovery.email_address = "";
 
                 // Show info
-                $window.alert("An email to reset your password was sent to you!");
+                $window.alert($filter('translate')('ALERT_RESET_EMAIL_SENT'));
 
                 // Redirect
                 $scope.redirect("/");
             })
             .catch(function onError(response) {
-                $window.alert("The email-address could not be found!");
+                $window.alert($filter('translate')('ALERT_EMAIL_ADDRESS_NOT_FOUND'));
 
                 // Reset
                 $scope.recoveryForm.email_address.$pristine = false;

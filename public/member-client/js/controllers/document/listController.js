@@ -158,7 +158,7 @@ app.controller("documentListController", function($scope, $rootScope, $filter, $
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading documents" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_DOCUMENTS') };
     $scope.authenticated_member = $authenticationService.get();
 
     // Load documents with applied filter (default: documents, which need to be reviewed) and start the interval

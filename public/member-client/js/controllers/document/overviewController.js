@@ -22,7 +22,7 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
      * @return {[type]} [description]
      */
     $scope.closeOverview = function(){
-        $scope.$parent.loading = { status: true, message: "Saving notes" };
+        $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_NOTES') };
 
         // Save notes
         $noteService.save($scope.document.note_id, { "note": $scope.document.note })
@@ -168,7 +168,7 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
      * @return {[type]} [description]
      */
     $scope.reviewDocument = function(){
-        $scope.$parent.loading = { status: true, message: "Updating reviewer" };
+        $scope.$parent.loading = { status: true, message: $filter('translate')('UPDATING_REVIEWER') };
 
         // Update reviewer
         var revision = $documentService.getLatestRevision();
@@ -182,21 +182,21 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
                 status: 4
             })
             .then(function onSuccess(response) {
-                $scope.$parent.loading = { status: true, message: "Saving notes" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_NOTES') };
 
                 $timeout(function(){
                     // Save notes
                     $noteService.save($scope.document.note_id, { "note": $scope.document.note })
                     .then(function onSuccess(response) {
 
-                        $scope.$parent.loading = { status: true, message: "Loading document" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_DOCUMENT') };
 
                         $timeout(function(){
                             // Load document
                             $documentService.retrieve($routeParams.document_id)
                             .then(function onSuccess(response) {
                                 $documentService.set(response.data);
-                                $scope.$parent.loading = { status: true, message: "Loading revisions" };
+                                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_REVISIONS') };
 
                                 $timeout(function(){
 
@@ -346,7 +346,7 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading document overview" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_OVERVIEW') };
     $scope.document = $documentService.get();
     $scope.latest_revision = $documentService.getLatestRevision();
     $scope.authenticated_member = $authenticationService.get();

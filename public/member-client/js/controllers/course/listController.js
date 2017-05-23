@@ -128,7 +128,7 @@ app.controller("courseListController", function($scope, $rootScope, $filter, $tr
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading courses" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_COURSES') };
     
     // Load courses
     $scope.filter = $courseService.getCachedFilter();

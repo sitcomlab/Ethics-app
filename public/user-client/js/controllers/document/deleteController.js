@@ -30,7 +30,7 @@ app.controller("documentDeleteController", function($scope, $rootScope, $filter,
      * @return {[type]} [description]
      */
     $scope.delete = function(){
-        $scope.$parent.loading = { status: true, message: "Deleting document" };
+        $scope.$parent.loading = { status: true, message: $filter('translate')('DELETING_DOCUMENT') };
 
         $documentService.delete($documentService.getId())
         .then(function onSuccess(response) {
@@ -51,7 +51,7 @@ app.controller("documentDeleteController", function($scope, $rootScope, $filter,
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading document" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_DOCUMENT') };
     $scope.input = "";
     $scope.document = $documentService.get();
     $scope.$parent.loading = { status: false, message: "" };

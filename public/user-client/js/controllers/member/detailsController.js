@@ -21,7 +21,7 @@ app.controller("memberDetailsController", function($scope, $rootScope, $routePar
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading committee member" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_MEMBER') };
 
     // Load member
     $memberService.retrieve($routeParams.member_id)

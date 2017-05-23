@@ -95,7 +95,7 @@ app.controller("memberEditController", function($scope, $rootScope, $routeParams
             // Check if passwords are equal, if it has been changed
             if($scope.updated_member.new_password){
                 if($scope.updated_member.password === $scope.repeated_password){
-                    $scope.$parent.loading = { status: true, message: "Saving member" };
+                    $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_MEMBER') };
 
                     // Update member
                     $memberService.edit($routeParams.member_id, $scope.updated_member)
@@ -107,10 +107,10 @@ app.controller("memberEditController", function($scope, $rootScope, $routeParams
                         $window.alert(response.data);
                     });
                 } else {
-                    $window.alert("Your passwords are not equal!");
+                    $window.alert($filter('translate')('ALERT_PASSWORD_NOT_EQUAL'));
                 }
             } else {
-                $scope.$parent.loading = { status: true, message: "Saving member" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_MEMBER') };
 
                 // Update member
                 $memberService.edit($routeParams.member_id, $scope.updated_member)
@@ -134,7 +134,7 @@ app.controller("memberEditController", function($scope, $rootScope, $routeParams
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'universities': {
-                $scope.$parent.loading = { status: true, message: "Loading universities" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITIES') };
 
                 // Load universities
                 $universityService.list({
@@ -154,7 +154,7 @@ app.controller("memberEditController", function($scope, $rootScope, $routeParams
             case 'institutes': {
                 if($scope.university_id){
                     if($scope.university_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_INSTITUTES') };
 
                         // Load related institutes
                         $instituteService.listByUniversity($scope.university_id, {
@@ -187,7 +187,7 @@ app.controller("memberEditController", function($scope, $rootScope, $routeParams
             case 'working_groups': {
                 if($scope.institute_id){
                     if($scope.institute_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading working groups" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_WORKING_GROUPS') };
 
                         // Load related working groups
                         $workingGroupService.listByInstitute($scope.institute_id, {

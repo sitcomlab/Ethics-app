@@ -75,7 +75,6 @@ app.config(function ($translateProvider) {
         YEAR_ASC: 'Year ascending',
         YEAR_DESC: 'Year descending',
 
-
         DELETE_THIS_DOCUMENT: 'Do you really want to delete this document',
         EXPLANATION_OF_DELETING_A_DOCUMENT: 'Deleting a document also deletes ALL ASSOCIATED data. PLEASE PROCEED WITH CAUTION!',
         PLEASE_TYPE_IN_THE_TITLE_OF_THE_DOCUMENT_TO_CONFIRM: 'Please type in the title of the document to confirm',
@@ -440,6 +439,86 @@ app.config(function ($translateProvider) {
         NO_VALID_EMAIL_ADDRESS: 'No valid email-address',
         CHANGE_PASSWORD: 'Change password',
         DO_NOT_CHANGE_PASSWORD: 'Do not change password',
+
+        CREATING_NEW_MEMBER: 'Creating new committee member',
+        SAVING_MEMBER: 'Saving committee member',
+        DELETING_MEMBER: 'Deleting committee member',
+
+        CREATING_NEW_USER: 'Creating new user',
+        SAVING_USER: 'Saving user',
+        DELETING_USER: 'Deleting user',
+
+        CREATING_NEW_DOCUMENT: 'Creating new document',
+        SAVING_DOCUMENT: 'Saving document',
+        DELETING_DOCUMENT: 'Deleting document',
+
+        CREATING_NEW_COURSE: 'Creating new course',
+        SAVING_COURSE: 'Saving course',
+        DELETING_COURSE: 'Deleting course',
+
+        CREATING_NEW_UNIVERSITY: 'Creating new university',
+        SAVING_UNIVERSITY: 'Saving university',
+        DELETING_UNIVERSITY: 'Deleting university',
+
+        CREATING_NEW_INSTITUTE: 'Creating new institute',
+        SAVING_INSTITUTE: 'Saving institute',
+        DELETING_INSTITUTE: 'Deleting institute',
+
+        CREATING_NEW_WORKING_GROUP: 'Creating new working group',
+        SAVING_WORKING_GROUP: 'Saving working group',
+        DELETING_WORKING_GROUP: 'Deleting working group',
+
+        LOADING_APPLICATION: 'Loading application',
+        LOGGING_IN: 'Logging in',
+        AUTO_SAVING: 'Auto saving',
+
+        LOADING_DOCUMENT: 'Loading document',
+        LOADING_DOCUMENTS: 'Loading documents',
+        LOADING_RELATED_DOCUMENTS: 'Loading related documents',
+        LOADING_MEMBER: 'Loading committe member',
+        LOADING_MEMBERS: 'Loading committe members',
+        LOADING_RELATED_MEMBERS: 'Loading related committe members',
+        LOADING_USER: 'Loading user',
+        LOADING_USERS: 'Loading users',
+        LOADING_RELATED_USERS: 'Loading related users',
+        LOADING_COURSE: 'Loading course',
+        LOADING_COURSES: 'Loading courses',
+        LOADING_RELATED_COURSES: 'Loading related courses',
+        LOADING_UNIVERSITY: 'Loading university',
+        LOADING_UNIVERSITIES: 'Loading universities',
+        LOADING_INSTITUTE: 'Loading institute',
+        LOADING_INSTITUTES: 'Loading institutes',
+        LOADING_RELATED_INSTITUTES: 'Loading related institutes',
+        LOADING_WORKING_GROUP: 'Loading working group',
+        LOADING_WORKING_GROUPS: 'Loading working groups',
+        LOADING_RELATED_WORKING_GROUPS: 'Loading related working groups',
+        LOADING_REVISIONS: 'Loading revisions',
+        LOADING_SUBMISSION: 'Loading submission',
+        LOADING_OVERVIEW: 'Loading overview',
+        LOADING_REVIEW: 'Loading review',
+        LOADING_ACCOUNT_SETTINGS: 'Loading account settings',
+
+        INITIALISING_NEW_DOCUMENT: 'Initialising new document',
+        CHECK_AUTHENTICATION: 'Checking authentication',
+
+        SAVING_ACCOUNT_SETTINGS: 'Saving account settings',
+        SAVING_NOTES: 'Saving notes',
+        SAVING_REVIEW: 'Saving review',
+        PUBLISHING_REVIEW: 'Publishing review',
+        UPDATING_REVIEWER: 'Updating reviewer',
+        SEARCHING_FOR_EMAIL_ADDRESS: 'Searching for Email-address',
+        SEARCHING_FOR_USER: 'Searching for user',
+        GENERATING_FILES: 'Generating files',
+        SUBMITTING_DOCUMENT: 'Submitting document',
+
+        ALERT_SIGN_UP_SUCCESSFULL: 'You have successfully signed up, you can now create your document!',
+        ALERT_PASSWORD_NOT_EQUAL: 'Your passwords are not equal!',
+        ALERT_RESET_EMAIL_SENT: 'An email to reset your password was sent to you!',
+        ALERT_RECOVERY_EMAIL_SENT: 'An email with your document-IDs was sent to you!',
+        ALERT_EMAIL_ADDRESS_NOT_FOUND: 'The email-address could not be found!',
+        ALERT_DOCUMENT_CREATED: 'Your new document has been created and an email with the document-ID has been sent to you!',
+        ALERT_SUBMIT_DOCUMENT_FAILED: 'Your document can not be submitted, please fill out all required fields!',
+        ALERT_FILE_GENERATION_FAILED: 'Files can only be generated, if the document has been accepted!',
 
     });
 

@@ -1,7 +1,7 @@
 var app = angular.module("ethics-app");
 
 // Main controller
-app.controller("mainController", function($scope, $rootScope, $location, config, $authenticationService, $documentService) {
+app.controller("mainController", function($scope, $rootScope, $filter, $translate, $location, config, $authenticationService, $documentService) {
 	/*************************************************
         FUNCTIONS
      *************************************************/
@@ -33,6 +33,14 @@ app.controller("mainController", function($scope, $rootScope, $location, config,
         $location.url(path);
     };
 
+	/*************************************************
+        LISTENERS
+     *************************************************/
+	$rootScope.$on('updateAccount', function (event, data) {
+		$scope.authenticated_member = $authenticationService.get();
+		$scope.loading = { status: false, message: "" };
+	});
+
 
 	/*************************************************
         INIT
@@ -40,9 +48,6 @@ app.controller("mainController", function($scope, $rootScope, $location, config,
 	$scope.config = config;
 	$scope.authenticated_member = $authenticationService.get();
 	$scope.document = $documentService.get();
-	$scope.loading = {
-		status: false,
-		message: ""
-	};
+	$scope.loading = { status: false, message: "" };
 
 });

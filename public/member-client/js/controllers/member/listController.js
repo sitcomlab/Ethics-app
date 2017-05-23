@@ -138,7 +138,7 @@ app.controller("memberListController", function($scope, $rootScope, $filter, $tr
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading committee members" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_MEMBERS') };
     $scope.authenticated_member = $authenticationService.get();
 
     // Load members

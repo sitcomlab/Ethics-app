@@ -21,7 +21,7 @@ app.controller("statusController", function($scope, $rootScope, $filter, $transl
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading document" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_DOCUMENT') };
     $scope.document = $documentService.get();
     $scope.latest_revision = $documentService.getLatestRevision();
     $scope.files = $fileService.get();

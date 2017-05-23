@@ -28,7 +28,7 @@ app.controller("instituteCreateController", function($scope, $rootScope, $routeP
             $scope.createInstituteForm.institute_name.$pristine = false;
             $scope.createInstituteForm.university_id.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Creating new institute" };
+            $scope.$parent.loading = { status: true, message: $filter('translate')('CREATING_NEW_INSTITUTE') };
 
             // Create new Institute
             $instituteService.create($scope.new_institute)
@@ -54,7 +54,7 @@ app.controller("instituteCreateController", function($scope, $rootScope, $routeP
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'universities': {
-                $scope.$parent.loading = { status: true, message: "Loading universities" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITIES') };
 
                 // Load universities
                 $universityService.list({

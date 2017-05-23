@@ -22,7 +22,7 @@ app.controller("universityDeleteController", function($scope, $rootScope, $route
      * @return {[type]} [description]
      */
     $scope.delete = function(){
-        $scope.$parent.loading = { status: true, message: "Deleting university" };
+        $scope.$parent.loading = { status: true, message: $filter('translate')('DELETING_UNIVERSITY') };
 
         // Delete university
         $universityService.remove($scope.university.university_id)
@@ -37,7 +37,7 @@ app.controller("universityDeleteController", function($scope, $rootScope, $route
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading university" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITY') };
     $scope.input = "";
 
     // Load university

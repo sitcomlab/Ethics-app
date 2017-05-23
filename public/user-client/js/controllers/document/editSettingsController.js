@@ -30,7 +30,7 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $f
      * @return {[type]} [description]
      */
     $scope.save = function(){
-        $scope.$parent.loading = { status: true, message: "Saving document" };
+        $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_DOCUMENT') };
 
         $documentService.edit($documentService.getId(), $scope.updated_document)
         .then(function onSuccess(response) {
@@ -57,7 +57,7 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $f
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'universities': {
-                $scope.$parent.loading = { status: true, message: "Loading universities" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITIES') };
 
                 // Load universities
                 $universityService.list({
@@ -77,7 +77,7 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $f
             case 'institutes': {
                 if($scope.university_id){
                     if($scope.university_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_INSTITUTES') };
 
                         // Load related institutes
                         $instituteService.listByUniversity($scope.university_id, {
@@ -109,7 +109,7 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $f
             case 'courses': {
                 if($scope.institute_id){
                     if($scope.institute_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading courses" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_COURSES') };
 
                         // Load related courses
                         $courseService.listByInstitute($scope.institute_id, {
@@ -162,7 +162,7 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $f
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading document" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_DOCUMENT') };
     $scope.document = $documentService.get();
     $scope.updated_document = $documentService.copy();
 

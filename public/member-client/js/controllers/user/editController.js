@@ -45,7 +45,7 @@ app.controller("userEditController", function($scope, $rootScope, $routeParams, 
             $scope.editUserForm.institute_id.$pristine = false;
             $scope.editUserForm.blocked.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Saving user" };
+            $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_USER') };
 
             // Updating user
             $userService.edit($routeParams.user_id, $scope.updated_user)
@@ -69,7 +69,7 @@ app.controller("userEditController", function($scope, $rootScope, $routeParams, 
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'universities': {
-                $scope.$parent.loading = { status: true, message: "Loading universities" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITIES') };
 
                 // Load universities
                 $universityService.list({
@@ -89,7 +89,7 @@ app.controller("userEditController", function($scope, $rootScope, $routeParams, 
             case 'institutes': {
                 if($scope.university_id){
                     if($scope.university_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_INSTITUTES') };
 
                         // Load related institutes
                         $instituteService.listByUniversity($scope.university_id, {
@@ -125,7 +125,7 @@ app.controller("userEditController", function($scope, $rootScope, $routeParams, 
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading user" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_USER') };
 
     // Load user
     $userService.retrieve($routeParams.user_id)

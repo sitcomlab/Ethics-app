@@ -23,21 +23,21 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
      *************************************************/
 
     $timeout(function(){
-        $scope.$parent.loading = { status: true, message: "Check authentication" };
+        $scope.$parent.loading = { status: true, message: $filter('translate')('CHECKING_AUTHENTICATION') };
 
         $timeout(function(){
             // Authentication
             $authenticationService.loginByDocumentId($routeParams.document_id)
             .then(function onSuccess(response) {
                 $authenticationService.set(response.data);
-                $scope.$parent.loading = { status: true, message: "Loading document" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_DOCUMENT') };
 
                 $timeout(function(){
                     // Load document
                     $documentService.retrieve($routeParams.document_id)
                     .then(function onSuccess(response) {
                         $documentService.set(response.data);
-                        $scope.$parent.loading = { status: true, message: "Loading revisions" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_REVISIONS') };
 
                         $timeout(function(){
                             // Load revisions
@@ -135,7 +135,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                                     // Update navbar
                                     $scope.$parent.authenticated_user = $authenticationService.get();
                                     $scope.$parent.document = $documentService.get();
-                                    $scope.$parent.loading = { status: true, message: "Generating files" };
+                                    $scope.$parent.loading = { status: true, message: $filter('translate')('GENERATING_FILES') };
 
                                     // Check status of document to generate files
                                     if($documentService.getStatus()===2 || $documentService.getStatus()===6){

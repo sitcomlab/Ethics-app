@@ -22,7 +22,7 @@ app.controller("workingGroupDeleteController", function($scope, $rootScope, $rou
      * @return {[type]} [description]
      */
     $scope.delete = function(){
-        $scope.$parent.loading = { status: true, message: "Deleting working group" };
+        $scope.$parent.loading = { status: true, message: $filter('translate')('DELETING_WORKING_GROUP') };
 
         // Delete working group
         $workingGroupService.remove($scope.working_group.working_group_id)
@@ -38,7 +38,7 @@ app.controller("workingGroupDeleteController", function($scope, $rootScope, $rou
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading working group" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_WORKING_GROUP') };
     $scope.input = "";
 
     // Load university

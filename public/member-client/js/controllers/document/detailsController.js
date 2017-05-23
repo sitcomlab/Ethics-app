@@ -21,7 +21,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading document" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_DOCUMENT') };
 
     // Reset
     $documentService.set();
@@ -34,7 +34,7 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
         $documentService.retrieve($routeParams.document_id)
         .then(function onSuccess(response) {
             $documentService.set(response.data);
-            $scope.$parent.loading = { status: true, message: "Loading revisions" };
+            $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_REVISIONS') };
 
             $timeout(function(){
                 // Load revisions

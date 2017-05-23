@@ -137,7 +137,7 @@ app.controller("workingGroupListController", function($scope, $rootScope, $filte
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading working groups" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_WORKING_GROUPS') };
     
     // Load working groups
     $scope.filter = $workingGroupService.getCachedFilter();

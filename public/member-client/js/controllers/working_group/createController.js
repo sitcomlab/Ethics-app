@@ -29,7 +29,7 @@ app.controller("workingGroupCreateController", function($scope, $rootScope, $rou
             $scope.createWorkingGroupForm.institute_id.$pristine = false;
             $scope.createWorkingGroupForm.university_id.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Creating new working group" };
+            $scope.$parent.loading = { status: true, message: $filter('translate')('CREATING_NEW_WORKING_GROUP') };
 
             // Create new working group
             $workingGroupService.create($scope.new_working_group)
@@ -54,7 +54,7 @@ app.controller("workingGroupCreateController", function($scope, $rootScope, $rou
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'universities': {
-                $scope.$parent.loading = { status: true, message: "Loading universities" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITIES') };
 
                 // Load universities
                 $universityService.list({
@@ -74,7 +74,7 @@ app.controller("workingGroupCreateController", function($scope, $rootScope, $rou
             case 'institutes': {
                 if($scope.university_id){
                     if($scope.university_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_INSTITUTES') };
 
                         // Load related institutes
                         $instituteService.listByUniversity($scope.university_id, {

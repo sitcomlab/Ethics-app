@@ -55,7 +55,7 @@ app.controller("memberCreateController", function($scope, $rootScope, $routePara
             $scope.createMemberForm.subscribed.$pristine = false;
         } else {
             if($scope.new_member.password === $scope.repeated_password){
-                $scope.$parent.loading = { status: true, message: "Creating new member" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('CREATING_NEW_MEMBER') };
 
                 // Create new member
                 $memberService.create($scope.new_member)
@@ -69,7 +69,7 @@ app.controller("memberCreateController", function($scope, $rootScope, $routePara
                     $window.alert(response.data);
                 });
             } else {
-                $window.alert("Your passwords are not equal!");
+                $window.alert($filter('translate')('ALERT_PASSWORD_NOT_EQUAL'));
             }
         }
     };
@@ -83,7 +83,7 @@ app.controller("memberCreateController", function($scope, $rootScope, $routePara
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'universities': {
-                $scope.$parent.loading = { status: true, message: "Loading universities" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITIES') };
 
                 // Load universities
                 $universityService.list({
@@ -103,7 +103,7 @@ app.controller("memberCreateController", function($scope, $rootScope, $routePara
             case 'institutes': {
                 if($scope.university_id){
                     if($scope.university_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_INSTITUTES') };
 
                         // Load related institutes
                         $instituteService.listByUniversity($scope.university_id, {
@@ -136,7 +136,7 @@ app.controller("memberCreateController", function($scope, $rootScope, $routePara
             case 'working_groups': {
                 if($scope.institute_id){
                     if($scope.institute_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading working groups" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_WORKING_GROUPS') };
 
                         // Load related working groups
                         $workingGroupService.listByInstitute($scope.institute_id, {

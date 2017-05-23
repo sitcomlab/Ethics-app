@@ -22,7 +22,7 @@ app.controller("memberDeleteController", function($scope, $rootScope, $routePara
      * @return {[type]} [description]
      */
     $scope.delete = function(){
-        $scope.$parent.loading = { status: true, message: "Deleting committee member" };
+        $scope.$parent.loading = { status: true, message: $filter('translate')('DELETING_MEMBER') };
 
         // Delete member
         $memberService.remove($scope.member.member_id)
@@ -37,7 +37,7 @@ app.controller("memberDeleteController", function($scope, $rootScope, $routePara
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading committee member" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_MEMBER') };
     $scope.input = "";
 
     // Load member

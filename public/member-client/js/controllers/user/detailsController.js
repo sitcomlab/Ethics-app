@@ -50,7 +50,7 @@ app.controller("userDetailsController", function($scope, $rootScope, $routeParam
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'documents': {
-                $scope.$parent.loading = { status: true, message: "Loading related documents" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_RELATED_DOCUMENTS') };
 
                 // Load related documents
                 $documentsService.listByUser($scope.user.user_id, $scope.filter)
@@ -101,7 +101,7 @@ app.controller("userDetailsController", function($scope, $rootScope, $routeParam
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading user" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_USER') };
 
     // Filter
     $scope.filter = {

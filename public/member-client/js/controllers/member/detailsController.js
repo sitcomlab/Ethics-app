@@ -32,7 +32,7 @@ app.controller("memberDetailsController", function($scope, $rootScope, $routePar
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading committee member" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_MEMBER') };
     $scope.authenticated_member = $authenticationService.get();
 
     // Load member

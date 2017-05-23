@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Account edit controller
-app.controller("accountEditController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $authenticationService, $memberService, $universityService, $instituteService, $workingGroupService) {
+app.controller("accountEditController", function($scope, $rootScope, $routeParams, $filter, $translate, $location, config, $window, $timeout, $authenticationService, $memberService, $universityService, $instituteService, $workingGroupService) {
 
     /*************************************************
         FUNCTIONS
@@ -82,36 +82,40 @@ app.controller("accountEditController", function($scope, $rootScope, $routeParam
             // Cache token
             var token = $authenticationService.getToken();
 
-            // Check if passwords are equal, if it has been changed
+            // Check if has been changed
             if($scope.updated_member.new_password){
+                // Check if new passwords are equal
                 if($scope.updated_member.password === $scope.repeated_password){
-                    $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_MEMBER') };
+                    $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_ACCOUNT_SETTINGS') };
 
                     // Update member
                     $memberService.edit($scope.authenticated_member.member_id, $scope.updated_member)
                     .then(function onSuccess(response) {
-                        var authenticated_member = response.data;
-                        authenticated_member.token = token;
-                        $authenticationService.set(authenticated_member);
+                        response.data.token = token;
+                        $authenticationService.set(response.data);
+
+                        // Reset navbar
+                        $scope.$parent.authenticated_member = $authenticationService.get();
+                        $scope.$parent.loading = { status: false, message: "" };
 
                         // Redirect
                         $scope.redirect("/members/" + $scope.authenticated_member.member_id);
+
                     })
                     .catch(function onError(response) {
                         $window.alert(response.data);
                     });
                 } else {
-                    $window.alert("Your passwords are not equal!");
+                    $window.alert($filter('translate')('ALERT_PASSWORD_NOT_EQUAL'));
                 }
             } else {
-                $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_MEMBER') };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_ACCOUNT_SETTINGS') };
 
                 // Update member
                 $memberService.edit($scope.authenticated_member.member_id, $scope.updated_member)
                 .then(function onSuccess(response) {
-                    var authenticated_member = response.data;
-                    authenticated_member.token = token;
-                    $authenticationService.set(authenticated_member);
+                    response.data.token = token;
+                    $authenticationService.set(response.data);
 
                     // Reset navbar
                     $scope.$parent.authenticated_member = $authenticationService.get();
@@ -136,7 +140,7 @@ app.controller("accountEditController", function($scope, $rootScope, $routeParam
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'universities': {
-                $scope.$parent.loading = { status: true, message: "Loading universities" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITIES') };
 
                 // Load universities
                 $universityService.list({
@@ -156,7 +160,7 @@ app.controller("accountEditController", function($scope, $rootScope, $routeParam
             case 'institutes': {
                 if($scope.university_id){
                     if($scope.university_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_INSTITUTES') };
 
                         // Load related institutes
                         $instituteService.listByUniversity($scope.university_id, {
@@ -189,7 +193,7 @@ app.controller("accountEditController", function($scope, $rootScope, $routeParam
             case 'working_groups': {
                 if($scope.institute_id){
                     if($scope.institute_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading working groups" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_WORKING_GROUPS') };
 
                         // Load related working groups
                         $workingGroupService.listByInstitute($scope.institute_id, {
@@ -225,6 +229,7 @@ app.controller("accountEditController", function($scope, $rootScope, $routeParam
     /*************************************************
         INIT
      *************************************************/
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_ACCOUNT_SETTINGS') };
     $scope.authenticated_member = $authenticationService.get();
     $scope.repeated_password = "";
 

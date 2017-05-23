@@ -70,7 +70,7 @@ app.controller("instituteDetailsController", function($scope, $rootScope, $route
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'working_groups': {
-                $scope.$parent.loading = { status: true, message: "Loading related working groups" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_RELATED_WORKING_GROUPS') };
 
                 // Load related working groups
                 $workingGroupService.listByInstitute($scope.institute.institute_id, $scope.filter)
@@ -106,7 +106,7 @@ app.controller("instituteDetailsController", function($scope, $rootScope, $route
                 break;
             }
             case 'members': {
-                $scope.$parent.loading = { status: true, message: "Loading related members" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_RELATED_MEMBERS') };
 
                 // Load related members
                 $memberService.listByInstitute($scope.institute.institute_id, $scope.filter)
@@ -142,7 +142,7 @@ app.controller("instituteDetailsController", function($scope, $rootScope, $route
                 break;
             }
             case 'users': {
-                $scope.$parent.loading = { status: true, message: "Loading related users" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_RELATED_USERS') };
 
                 // Load related users
                 $userService.listByInstitute($scope.institute.institute_id, $scope.filter)
@@ -178,7 +178,7 @@ app.controller("instituteDetailsController", function($scope, $rootScope, $route
                 break;
             }
             case 'courses': {
-                $scope.$parent.loading = { status: true, message: "Loading related courses" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_RELATED_COURSES') };
 
                 // Load related courses
                 $courseService.listByInstitute($scope.institute.institute_id, $scope.filter)
@@ -231,7 +231,7 @@ app.controller("instituteDetailsController", function($scope, $rootScope, $route
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading institute" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_INSTITUTE') };
 
     // Filter
     $scope.filter = {

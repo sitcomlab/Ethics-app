@@ -22,7 +22,7 @@ app.controller("userDeleteController", function($scope, $rootScope, $routeParams
      * @return {[type]} [description]
      */
     $scope.delete = function(){
-        $scope.$parent.loading = { status: true, message: "Deleting user" };
+        $scope.$parent.loading = { status: true, message: $filter('translate')('DELETING_USER') };
 
         // Delete user
         $userService.remove($scope.user.user_id)
@@ -37,7 +37,7 @@ app.controller("userDeleteController", function($scope, $rootScope, $routeParams
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading user" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_USER') };
     $scope.input = "";
 
     // Load user

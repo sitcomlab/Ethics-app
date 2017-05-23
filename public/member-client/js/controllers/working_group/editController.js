@@ -39,7 +39,7 @@ app.controller("workingGroupEditController", function($scope, $rootScope, $route
         // Check which kind of related data needs to be requested
         switch (related_data) {
             case 'universities': {
-                $scope.$parent.loading = { status: true, message: "Loading universities" };
+                $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_UNIVERSITIES') };
 
                 // Load universities
                 $universityService.list({
@@ -59,7 +59,7 @@ app.controller("workingGroupEditController", function($scope, $rootScope, $route
             case 'institutes': {
                 if($scope.university_id){
                     if($scope.university_id !== null){
-                        $scope.$parent.loading = { status: true, message: "Loading institutes" };
+                        $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_INSTITUTES') };
 
                         // Load related institutes
                         $instituteService.listByUniversity($scope.university_id, {
@@ -102,7 +102,7 @@ app.controller("workingGroupEditController", function($scope, $rootScope, $route
             // Update UI
             $scope.editWorkingGroupForm.working_group_name.$pristine = false;
         } else {
-            $scope.$parent.loading = { status: true, message: "Saving working group" };
+            $scope.$parent.loading = { status: true, message: $filter('translate')('SAVING_WORKING_GROUP') };
 
             // Updating working group
             $workingGroupService.edit($routeParams.working_group_id, $scope.updated_working_group)
@@ -119,7 +119,7 @@ app.controller("workingGroupEditController", function($scope, $rootScope, $route
     /*************************************************
         INIT
      *************************************************/
-    $scope.$parent.loading = { status: true, message: "Loading working group" };
+    $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_WORKING_GROUP') };
 
     // Load working group
     $workingGroupService.retrieve($routeParams.working_group_id)
