@@ -210,7 +210,7 @@ bower install
 sudo bower install --allow-root
 ```
 
-##### 2.3. Server configuration
+##### 2.3. Node-Server configuration
 
 Execute the following command inside our local repository-folder:
 
@@ -223,6 +223,7 @@ Open the `.env` with your preferred text editor and configure the app appropriat
 
 ##### 2.4 Host-server configuration
 
+###### 2.4.1 Automatic Startup 
 * If you have installed the Ethics-app on a Linux server, you can create a cronjob to automatically start the server after a reboot. Open `sudo nano /etc/crontab` and add the following lines:
 
 ```
@@ -231,18 +232,43 @@ Open the `.env` with your preferred text editor and configure the app appropriat
 ```
 
 * Add an optional `>> log.txt` to automatically log the output of the console to a text-file.
-* Add the following lines to your `/etc/crontab`, if you want to create an internal redirect from incoming port 80, to internal port 5000, as well as incoming port 443 to internal port 5443:
+
+###### 2.4.2 Port Forwarding 
+* Add the following lines to your `/etc/crontab`, if you want to create an internal redirect from externally accessible port 80, to internal port 5000, as well as port 443 to internal port 5443:
 
 ```
 # Redirecting
 @reboot        root    iptables -A INPUT -i eth0 -p tcp --dport 80 -j ACCEPT && iptables -A INPUT -i eth0 -p tcp --dport 80 -j ACCEPT && iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 5000 && iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 443 -j REDIRECT --to-port 5443
 ```
 
-* If you need more advanced options for internal redirects, it is recommended to use an [Apache server](https://httpd.apache.org) or [nginx server](http://nginx.org).
+* If you need more advanced options for internal redirects or if `iptables` is not accessible, it is recommended to use an [Apache server](https://httpd.apache.org) or [nginx server](http://nginx.org) as a reverse Proxy.
+
+###### 2.4.1 Running in different Context Path
+
+* If you are running multiple Instances of the Ethics-App on your Server, it might be necessary to run them under different context paths, e.g. `/app1/` and `/app2/`. Modifications in the following locations are needed:
+
+```
+.env Line 4
+.env Line 5
+
+/public/user-client/js/modules/config.js Line 14
+/public/member-client/js/modules/config.js Line 14
+
+/public/user-client/index.html Line 5
+/public/user-client/index.html Line 62
+/public/user-client/index.html Line 178
+
+/public/member-client/index.html Line 5
+/public/member-client/index.html Line 63
+/public/member-client/index.html Line 212
+
+/public/member-client/js/templates/login.html Line 9
+/public/member-client/js/templates/login_by_document.html Line 9
+```
 
 ##### 2.5 Cleaning up during production
 
-* If you use the app in production, please create another cronjob for automatically cleaning up outdated PDFs. The app was designed to automatically generate PDFs on every request. The `cleanup.sh` script deletes all outdated PDFs, which are no longer needed. Open `sudo nano /etc/crontab` and add the following lines:
+* If you use the app in production, please create a cronjob for automatically cleaning up outdated PDFs. The app was designed to automatically generate PDFs on every request. The `cleanup.sh` script deletes all PDFs older than 7 days, which are presumed to not be needed anymore. Open `sudo nano /etc/crontab` and add the following lines:
 
 ```
 # Delete outdated PDFs
