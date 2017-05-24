@@ -27,7 +27,7 @@ app.controller("documentDeleteController", function($scope, $rootScope, $routePa
         // Delete document
         $documentService.remove($scope.document.document_id)
         .then(function onSuccess(response) {
-            $scope.redirect("/institutes");
+            $scope.redirect("/documents");
         })
         .catch(function onError(response) {
             $window.alert(response.data);
