@@ -65,7 +65,7 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
 
             query = query.slice(0, -1);
 
-            return $http.get(config.apiURL + "/courses" + query, {
+            return $http.get(config.getApiEndpoint() + "/courses" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
@@ -83,42 +83,42 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
 
             query = query.slice(0, -1);
 
-            return $http.get(config.apiURL + "/institutes/" + institute_id + "/courses" + query, {
+            return $http.get(config.getApiEndpoint() + "/institutes/" + institute_id + "/courses" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         create: function(data){
-            return $http.post(config.apiURL + "/courses", data, {
+            return $http.post(config.getApiEndpoint() + "/courses", data, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         retrieve: function(course_id) {
-            return $http.get(config.apiURL + "/courses/" + course_id, {
+            return $http.get(config.getApiEndpoint() + "/courses/" + course_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         retrieveByDocument: function(document_id) {
-            return $http.get(config.apiURL + "/documents/" + document_id + "/course", {
+            return $http.get(config.getApiEndpoint() + "/documents/" + document_id + "/course", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         edit: function(course_id, data){
-            return $http.put(config.apiURL + "/courses/" + course_id, data, {
+            return $http.put(config.getApiEndpoint() + "/courses/" + course_id, data, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         remove: function(course_id){
-            return $http.delete(config.apiURL + "/courses/" + course_id, {
+            return $http.delete(config.getApiEndpoint() + "/courses/" + course_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
@@ -136,7 +136,7 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
 
             query = query.slice(0, -1);
 
-            return $http.post(config.apiURL + "/search/courses" + query, {
+            return $http.post(config.getApiEndpoint() + "/search/courses" + query, {
                 search_text: filter.search_text
             }, {
                 headers: {
@@ -156,7 +156,7 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
 
             query = query.slice(0, -1);
 
-            return $http.post(config.apiURL + "/search/institutes/" + institute_id + "/courses" + query, {
+            return $http.post(config.getApiEndpoint() + "/search/institutes/" + institute_id + "/courses" + query, {
                 search_text: filter.search_text
             }, {
                 headers: {

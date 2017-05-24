@@ -55,35 +55,35 @@ app.factory('$universityService', function($http, $log, config, $authenticationS
 
             query = query.slice(0, -1);
 
-            return $http.get(config.apiURL + "/universities" + query, {
+            return $http.get(config.getApiEndpoint() + "/universities" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         create: function(data){
-            return $http.post(config.apiURL + "/universities" , data, {
+            return $http.post(config.getApiEndpoint() + "/universities" , data, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         retrieve: function(university_id){
-            return $http.get(config.apiURL + "/universities/" + university_id, {
+            return $http.get(config.getApiEndpoint() + "/universities/" + university_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         edit: function(university_id, data){
-            return $http.put(config.apiURL + "/universities/" + university_id, data, {
+            return $http.put(config.getApiEndpoint() + "/universities/" + university_id, data, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         remove: function(university_id){
-            return $http.delete(config.apiURL + "/universities/" + university_id, {
+            return $http.delete(config.getApiEndpoint() + "/universities/" + university_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
@@ -101,7 +101,7 @@ app.factory('$universityService', function($http, $log, config, $authenticationS
 
             query = query.slice(0, -1);
 
-            return $http.post(config.apiURL + "/search/universities" + query, {
+            return $http.post(config.getApiEndpoint() + "/search/universities" + query, {
                 search_text: filter.search_text
             }, {
                 headers: {

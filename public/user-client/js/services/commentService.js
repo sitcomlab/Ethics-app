@@ -6,7 +6,7 @@ app.factory('$commentService', function($http, $log, config, $authenticationServ
 
     return {
         getByRevision: function(revision_id, language) {
-            return $http.get(config.apiURL + "/revisions/" + revision_id + "/comments", {
+            return $http.get(config.getApiEndpoint() + "/revisions/" + revision_id + "/comments", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

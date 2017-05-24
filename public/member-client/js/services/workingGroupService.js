@@ -63,7 +63,7 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
 
             query = query.slice(0, -1);
 
-            return $http.get(config.apiURL + "/working_groups" + query, {
+            return $http.get(config.getApiEndpoint() + "/working_groups" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
@@ -84,35 +84,35 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
 
             query = query.slice(0, -1);
 
-            return $http.get(config.apiURL + "/institutes/" + institute_id + "/working_groups" + query, {
+            return $http.get(config.getApiEndpoint() + "/institutes/" + institute_id + "/working_groups" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         create: function(data){
-            return $http.post(config.apiURL + "/working_groups" , data, {
+            return $http.post(config.getApiEndpoint() + "/working_groups" , data, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         retrieve: function(working_group_id){
-            return $http.get(config.apiURL + "/working_groups/" + working_group_id, {
+            return $http.get(config.getApiEndpoint() + "/working_groups/" + working_group_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         edit: function(working_group_id, data){
-            return $http.put(config.apiURL + "/working_groups/" + working_group_id, data, {
+            return $http.put(config.getApiEndpoint() + "/working_groups/" + working_group_id, data, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         remove: function(working_group_id){
-            return $http.delete(config.apiURL + "/working_groups/" + working_group_id, {
+            return $http.delete(config.getApiEndpoint() + "/working_groups/" + working_group_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
@@ -133,7 +133,7 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
 
             query = query.slice(0, -1);
 
-            return $http.post(config.apiURL + "/search/working_groups" + query, {
+            return $http.post(config.getApiEndpoint() + "/search/working_groups" + query, {
                 search_text: filter.search_text
             }, {
                 headers: {
@@ -156,7 +156,7 @@ app.factory('$workingGroupService', function($http, $log, config, $authenticatio
 
             query = query.slice(0, -1);
 
-            return $http.post(config.apiURL + "/search/institutes/" + institute_id + "/working_groups" + query, {
+            return $http.post(config.getApiEndpoint() + "/search/institutes/" + institute_id + "/working_groups" + query, {
                 search_text: filter.search_text
             }, {
                 headers: {

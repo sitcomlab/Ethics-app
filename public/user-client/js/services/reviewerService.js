@@ -6,7 +6,7 @@ app.factory('$reviewerService', function($http, $log, config, $authenticationSer
 
     return {
         getByRevision: function(revision_id, language) {
-            return $http.get(config.apiURL + "/revisions/" + revision_id + "/reviewer", {
+            return $http.get(config.getApiEndpoint() + "/revisions/" + revision_id + "/reviewer", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

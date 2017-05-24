@@ -59,7 +59,7 @@
                         <button class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#navbarContent">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <a class="navbar-brand" href="/user-client/">
+                        <a class="navbar-brand" href="{{userClient}}/">
                             {{config.appName}}
                         </a>
                         <div class="collapse navbar-collapse" id="navbarContent">
@@ -175,7 +175,7 @@
                     &copy; {{config.appYear}}
                     <a href="https://www.uni-muenster.de/Geoinformatics/en/index.html" target="_blank">Institute for Geoinformatics</a>
                     &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <a href="/member-client/" target="_self" class="link">
+                    <a href="{{memberClient}}/" target="_self" class="link">
                         <i class="fa fa-users" aria-hidden="true"></i>
                     </a>
                     &nbsp;&nbsp;|&nbsp;&nbsp;
@@ -188,8 +188,10 @@
         </main>
 
 
+        <!-- CONFIG -->
+        <script src="../config.js"></script>
+
         <!-- MODULES -->
-        <script src="js/modules/config.js"></script>
         <script src="js/modules/routes.js"></script>
         <script src="js/modules/languages.js"></script>
         <script src="js/modules/filters.js"></script>

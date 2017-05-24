@@ -60,7 +60,7 @@ app.factory('$authenticationService', function($http, $log, config) {
             }
         },
         loginByDocumentId: function(document_id){
-            return $http.get(config.apiURL + "/login/" + document_id);
+            return $http.get(config.getApiEndpoint() + "/login/" + document_id);
         }
 
     };

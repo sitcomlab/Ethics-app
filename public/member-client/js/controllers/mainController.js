@@ -46,6 +46,9 @@ app.controller("mainController", function($scope, $rootScope, $filter, $translat
         INIT
      *************************************************/
 	$scope.config = config;
+	$scope.memberClient = config.getURL('member');
+	$scope.userClient = config.getURL('user');
+	
 	$scope.authenticated_member = $authenticationService.get();
 	$scope.document = $documentService.get();
 	$scope.loading = { status: false, message: "" };

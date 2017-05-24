@@ -63,7 +63,7 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
 
             query = query.slice(0, -1);
 
-            return $http.get(config.apiURL + "/institutes" + query, {
+            return $http.get(config.getApiEndpoint() + "/institutes" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
@@ -84,35 +84,35 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
 
             query = query.slice(0, -1);
 
-            return $http.get(config.apiURL + "/universities/" + university_id + "/institutes" + query, {
+            return $http.get(config.getApiEndpoint() + "/universities/" + university_id + "/institutes" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         create: function(data){
-            return $http.post(config.apiURL + "/institutes" , data, {
+            return $http.post(config.getApiEndpoint() + "/institutes" , data, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         retrieve: function(institute_id){
-            return $http.get(config.apiURL + "/institutes/" + institute_id, {
+            return $http.get(config.getApiEndpoint() + "/institutes/" + institute_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         edit: function(institute_id, data){
-            return $http.put(config.apiURL + "/institutes/" + institute_id, data, {
+            return $http.put(config.getApiEndpoint() + "/institutes/" + institute_id, data, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         remove: function(institute_id){
-            return $http.delete(config.apiURL + "/institutes/" + institute_id, {
+            return $http.delete(config.getApiEndpoint() + "/institutes/" + institute_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
@@ -133,7 +133,7 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
 
             query = query.slice(0, -1);
 
-            return $http.post(config.apiURL + "/search/institutes" + query, {
+            return $http.post(config.getApiEndpoint() + "/search/institutes" + query, {
                 search_text: filter.search_text
             }, {
                 headers: {
@@ -156,7 +156,7 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
 
             query = query.slice(0, -1);
 
-            return $http.post(config.apiURL + "/search/universities/" + university_id + "/institutes" + query, {
+            return $http.post(config.getApiEndpoint() + "/search/universities/" + university_id + "/institutes" + query, {
                 search_text: filter.search_text
             }, {
                 headers: {

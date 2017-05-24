@@ -212,18 +212,40 @@ sudo bower install --allow-root
 
 ##### 2.3. Node-Server configuration
 
-Execute the following command inside our local repository-folder:
+* Execute the following command inside our local repository-folder:
 
 ```
 cp .env.sample .env
 ```
 
-Open the `.env` with your preferred text editor and configure the app appropriately for your host-server.
+* Open the `.env` with your preferred text editor and configure the app appropriately for your host-server.
 
+##### 2.4 Client configuration
 
-##### 2.4 Host-server configuration
+* Open the `/public/config.js` and configure the app appropriately for your host-server:
 
-###### 2.4.1 Automatic Startup 
+```JavaScript
+serverSettings: {
+    development: {
+        host: 'http://localhost',
+        port: 5000,
+        apiPath: "/api",
+        memberClientPath: '/member-client',
+        userClientPath: '/user-client'
+    },
+    production: {
+        host: 'http://localhost',
+        port: 5000,
+        apiPath: "/api",
+        memberClientPath: '/member-client',
+        userClientPath: '/user-client'
+    }
+}
+```
+
+##### 2.5 Host-server configuration
+
+###### 2.5.1 Automatic startup
 * If you have installed the Ethics-app on a Linux server, you can create a cronjob to automatically start the server after a reboot. Open `sudo nano /etc/crontab` and add the following lines:
 
 ```
@@ -233,7 +255,7 @@ Open the `.env` with your preferred text editor and configure the app appropriat
 
 * Add an optional `>> log.txt` to automatically log the output of the console to a text-file.
 
-###### 2.4.2 Port Forwarding 
+###### 2.5.2 Port forwarding
 * Add the following lines to your `/etc/crontab`, if you want to create an internal redirect from externally accessible port 80, to internal port 5000, as well as port 443 to internal port 5443:
 
 ```
@@ -243,27 +265,44 @@ Open the `.env` with your preferred text editor and configure the app appropriat
 
 * If you need more advanced options for internal redirects or if `iptables` is not accessible, it is recommended to use an [Apache server](https://httpd.apache.org) or [nginx server](http://nginx.org) as a reverse Proxy.
 
-###### 2.4.3 Running in different Context Path
+###### 2.5.3 Running multiple instances of App under different context paths
 
-* If you are running multiple Instances of the Ethics-App on your Server, it might be necessary to run them under different context paths, e.g. `/app1/` and `/app2/`. Modifications in the following locations are needed:
+* If you are running multiple instances of the Ethics-App on your host-server, it might be necessary to run them under different context paths, e.g. `<YOUR-DOMAINE>/app1/` and `<YOUR-DOMAINE>/app2/`. Modifications in the following files are necessary as well as the usage of an already configured reverse Proxy.
+* First configure all `.env` files:
 
 ```
-.env Line 4
-.env Line 5
+...
+MEMBER_CLIENT_PATH='/app1/member-client'
+USER_CLIENT_PATH='/app1/user-client'
+...
 
-/public/user-client/js/modules/config.js Line 14
-/public/member-client/js/modules/config.js Line 14
+...
+MEMBER_CLIENT_PATH='/app2/member-client'
+USER_CLIENT_PATH='/app2/user-client'
+...
 
-/public/user-client/index.html Line 5
-/public/user-client/index.html Line 62
-/public/user-client/index.html Line 178
+etc.
+```
 
-/public/member-client/index.html Line 5
-/public/member-client/index.html Line 63
-/public/member-client/index.html Line 212
+* Next configure the `serverSettings` in all `/public/config.js` files:
 
-/public/member-client/js/templates/login.html Line 9
-/public/member-client/js/templates/login_by_document.html Line 9
+```JavaScript
+serverSettings: {
+    development: {
+        host: 'http://localhost',
+        port: 5000,
+        apiPath: "/api",
+        memberClientPath: '/app1/member-client',
+        userClientPath: '/app1/user-client'
+    },
+    production: {
+        host: '<YOUR-DOMAINE>',
+        port: 80,
+        apiPath: "/api",
+        memberClientPath: '/app1/member-client',
+        userClientPath: '/app1/user-client'
+    }
+}
 ```
 
 ##### 2.5 Cleaning up during production

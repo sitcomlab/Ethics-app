@@ -116,45 +116,45 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
             document.files = data;
         },
         create: function(data) {
-            return $http.post(config.apiURL + "/documents", data);
+            return $http.post(config.getApiEndpoint() + "/documents", data);
         },
         retrieve: function(document_id) {
-            return $http.get(config.apiURL + "/documents/" + document_id, {
+            return $http.get(config.getApiEndpoint() + "/documents/" + document_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         confirmIntro: function(document_id) {
-            return $http.get(config.apiURL + "/documents/" + document_id + "/intro", {
+            return $http.get(config.getApiEndpoint() + "/documents/" + document_id + "/intro", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         submit: function(document_id) {
-            return $http.get(config.apiURL + "/documents/" + document_id + "/submit", {
+            return $http.get(config.getApiEndpoint() + "/documents/" + document_id + "/submit", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         generateFiles: function(document_id) {
-            return $http.get(config.apiURL + "/documents/" + document_id + "/files", {
+            return $http.get(config.getApiEndpoint() + "/documents/" + document_id + "/files", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         edit: function(document_id, data) {
-            return $http.put(config.apiURL + "/documents/" + document_id, data, {
+            return $http.put(config.getApiEndpoint() + "/documents/" + document_id, data, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         delete: function(document_id) {
-            return $http.delete(config.apiURL + "/documents/" + document_id, {
+            return $http.delete(config.getApiEndpoint() + "/documents/" + document_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

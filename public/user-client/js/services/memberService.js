@@ -48,7 +48,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
 
             query = query.slice(0, -1);
 
-            return $http.get(config.apiURL + "/members" + query, {
+            return $http.get(config.getApiEndpoint() + "/members" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
@@ -69,7 +69,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
 
             query = query.slice(0, -1);
 
-            return $http.get(config.apiURL + "/universities/" + university_id + "/members" + query, {
+            return $http.get(config.getApiEndpoint() + "/universities/" + university_id + "/members" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
@@ -90,14 +90,14 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
 
             query = query.slice(0, -1);
 
-            return $http.get(config.apiURL + "/institutes/" + institute_id + "/members" + query, {
+            return $http.get(config.getApiEndpoint() + "/institutes/" + institute_id + "/members" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         retrieve: function(member_id) {
-            return $http.get(config.apiURL + "/members/" + member_id, {
+            return $http.get(config.getApiEndpoint() + "/members/" + member_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
@@ -118,7 +118,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
 
             query = query.slice(0, -1);
 
-            return $http.post(config.apiURL + "/search/members" + query, {
+            return $http.post(config.getApiEndpoint() + "/search/members" + query, {
                 search_text: filter.search_text
             }, {
                 headers: {
@@ -141,7 +141,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
 
             query = query.slice(0, -1);
 
-            return $http.post(config.apiURL + "/search/universities/" + university_id + "/members" + query, {
+            return $http.post(config.getApiEndpoint() + "/search/universities/" + university_id + "/members" + query, {
                 search_text: filter.search_text
             }, {
                 headers: {
@@ -164,7 +164,7 @@ app.factory('$memberService', function($http, $log, config, $authenticationServi
 
             query = query.slice(0, -1);
 
-            return $http.post(config.apiURL + "/search/institutes/" + institute_id + "/members" + query, {
+            return $http.post(config.getApiEndpoint() + "/search/institutes/" + institute_id + "/members" + query, {
                 search_text: filter.search_text
             }, {
                 headers: {

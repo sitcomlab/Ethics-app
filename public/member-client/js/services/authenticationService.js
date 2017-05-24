@@ -53,7 +53,8 @@ app.factory('$authenticationService', function($http, $log, config) {
             }
         },
         login: function(data){
-            return $http.post(config.apiURL + "/login", data);
+
+            return $http.post(config.getApiEndpoint() + "/login", data);
         }
 
     };

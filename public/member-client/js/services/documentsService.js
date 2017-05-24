@@ -52,7 +52,7 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
 
             query = query.slice(0, -1);
 
-            return $http.get(config.apiURL + "/documents" + query, {
+            return $http.get(config.getApiEndpoint() + "/documents" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
@@ -70,7 +70,7 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
 
             query = query.slice(0, -1);
 
-            return $http.get(config.apiURL + "/courses/" + course_id + "/documents" + query, {
+            return $http.get(config.getApiEndpoint() + "/courses/" + course_id + "/documents" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
@@ -88,7 +88,7 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
 
             query = query.slice(0, -1);
 
-            return $http.get(config.apiURL + "/users/" + user_id + "/documents" + query, {
+            return $http.get(config.getApiEndpoint() + "/users/" + user_id + "/documents" + query, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
@@ -112,7 +112,7 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
 
             query = query.slice(0, -1);
 
-            return $http.post(config.apiURL + "/search/documents" + query, {
+            return $http.post(config.getApiEndpoint() + "/search/documents" + query, {
                 search_text: filter.search_text
             }, {
                 headers: {
@@ -132,7 +132,7 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
 
             query = query.slice(0, -1);
 
-            return $http.post(config.apiURL + "/search/courses/" + course_id + "/documents" + query, {
+            return $http.post(config.getApiEndpoint() + "/search/courses/" + course_id + "/documents" + query, {
                 search_text: filter.search_text
             }, {
                 headers: {
@@ -152,7 +152,7 @@ app.factory('$documentsService', function($http, $log, config, $authenticationSe
 
             query = query.slice(0, -1);
 
-            return $http.post(config.apiURL + "/search/users/" + user_id + "/documents" + query, {
+            return $http.post(config.getApiEndpoint() + "/search/users/" + user_id + "/documents" + query, {
                 search_text: filter.search_text
             }, {
                 headers: {

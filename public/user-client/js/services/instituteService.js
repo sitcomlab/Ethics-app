@@ -44,13 +44,13 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
 
             // Check if token exists
             if($authenticationService.getToken()){
-                return $http.get(config.apiURL + "/institutes" + query, {
+                return $http.get(config.getApiEndpoint() + "/institutes" + query, {
                     headers: {
                         'Authorization': 'Bearer ' + $authenticationService.getToken()
                     }
                 });
             } else {
-                return $http.get(config.apiURL + "/institutes" + query);
+                return $http.get(config.getApiEndpoint() + "/institutes" + query);
             }
         },
         listByUniversity: function(university_id, filter){ // DEPRECATED
@@ -70,17 +70,17 @@ app.factory('$instituteService', function($http, $log, config, $authenticationSe
 
             // Check if token exists
             if($authenticationService.getToken()){
-                return $http.get(config.apiURL + "/universities/" + university_id + "/institutes" + query, {
+                return $http.get(config.getApiEndpoint() + "/universities/" + university_id + "/institutes" + query, {
                     headers: {
                         'Authorization': 'Bearer ' + $authenticationService.getToken()
                     }
                 });
             } else {
-                return $http.get(config.apiURL + "/universities/" + university_id + "/institutes" + query);
+                return $http.get(config.getApiEndpoint() + "/universities/" + university_id + "/institutes" + query);
             }
         },
         retrieve: function(institute_id) {
-            return $http.get(config.apiURL + "/institutes/" + institute_id);
+            return $http.get(config.getApiEndpoint() + "/institutes/" + institute_id);
         }
     };
 

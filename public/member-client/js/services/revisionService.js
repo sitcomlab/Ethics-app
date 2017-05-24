@@ -6,7 +6,7 @@ app.factory('$revisionService', function($http, $log, config, $authenticationSer
 
     return {
         listByDocument: function(document_id) {
-            return $http.get(config.apiURL + "/documents/" + document_id + "/revisions", {
+            return $http.get(config.getApiEndpoint() + "/documents/" + document_id + "/revisions", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

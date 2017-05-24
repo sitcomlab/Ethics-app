@@ -51,13 +51,13 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
             }
 
             if($authenticationService.getToken()){
-                return $http.get(config.apiURL + "/courses" + query, {
+                return $http.get(config.getApiEndpoint() + "/courses" + query, {
                     headers: {
                         'Authorization': 'Bearer ' + $authenticationService.getToken()
                     }
                 });
             } else {
-                return $http.get(config.apiURL + "/courses" + query);
+                return $http.get(config.getApiEndpoint() + "/courses" + query);
             }
         },
         listByInstitute: function(institute_id, filter) {
@@ -74,17 +74,17 @@ app.factory('$courseService', function($http, $log, config, $authenticationServi
             }
 
             if($authenticationService.getToken()){
-                return $http.get(config.apiURL + "/institutes/" + institute_id+ "/courses" + query, {
+                return $http.get(config.getApiEndpoint() + "/institutes/" + institute_id+ "/courses" + query, {
                     headers: {
                         'Authorization': 'Bearer ' + $authenticationService.getToken()
                     }
                 });
             } else {
-                return $http.get(config.apiURL + "/institutes/" + institute_id+ "/courses" + query);
+                return $http.get(config.getApiEndpoint() + "/institutes/" + institute_id+ "/courses" + query);
             }
         },
         retrieve: function(course_id) {
-            return $http.get(config.apiURL + "/courses/" + course_id);
+            return $http.get(config.getApiEndpoint() + "/courses/" + course_id);
         }
     };
 

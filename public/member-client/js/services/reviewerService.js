@@ -6,14 +6,14 @@ app.factory('$reviewerService', function($http, $log, config, $authenticationSer
 
     return {
         getByRevision: function(revision_id, language) {
-            return $http.get(config.apiURL + "/revisions/" + revision_id + "/reviewer", {
+            return $http.get(config.getApiEndpoint() + "/revisions/" + revision_id + "/reviewer", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         editByRevision: function(revision_id, data) {
-            return $http.put(config.apiURL + "/revisions/" + revision_id + "/reviewer", data, {
+            return $http.put(config.getApiEndpoint() + "/revisions/" + revision_id + "/reviewer", data, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }

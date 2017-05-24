@@ -43,17 +43,17 @@ app.factory('$universityService', function($http, $log, config, $authenticationS
 
             // Check if token exists
             if($authenticationService.getToken()){
-                return $http.get(config.apiURL + "/universities" + query, {
+                return $http.get(config.getApiEndpoint() + "/universities" + query, {
                     headers: {
                         'Authorization': 'Bearer ' + $authenticationService.getToken()
                     }
                 });
             } else {
-                return $http.get(config.apiURL + "/universities" + query);
+                return $http.get(config.getApiEndpoint() + "/universities" + query);
             }
         },
         retrieve: function(university_id) {
-            return $http.get(config.apiURL + "/universities/" + university_id);
+            return $http.get(config.getApiEndpoint() + "/universities/" + university_id);
         }
     };
 

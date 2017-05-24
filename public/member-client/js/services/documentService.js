@@ -113,35 +113,35 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
             document.files = data;
         },
         retrieve: function(document_id) {
-            return $http.get(config.apiURL + "/documents/" + document_id, {
+            return $http.get(config.getApiEndpoint() + "/documents/" + document_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         edit: function(document_id, data) {
-            return $http.put(config.apiURL + "/documents/" + document_id, data, {
+            return $http.put(config.getApiEndpoint() + "/documents/" + document_id, data, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         changeStatus: function(document_id, data){
-            return $http.put(config.apiURL + "/documents/" + document_id + "/status", data, {
+            return $http.put(config.getApiEndpoint() + "/documents/" + document_id + "/status", data, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         generateFiles: function(document_id) {
-            return $http.get(config.apiURL + "/documents/" + document_id + "/files", {
+            return $http.get(config.getApiEndpoint() + "/documents/" + document_id + "/files", {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
             });
         },
         remove: function(document_id){
-            return $http.delete(config.apiURL + "/documents/" + document_id, {
+            return $http.delete(config.getApiEndpoint() + "/documents/" + document_id, {
                 headers: {
                     'Authorization': 'Bearer ' + $authenticationService.getToken()
                 }
