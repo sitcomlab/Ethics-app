@@ -243,7 +243,7 @@ Open the `.env` with your preferred text editor and configure the app appropriat
 
 * If you need more advanced options for internal redirects or if `iptables` is not accessible, it is recommended to use an [Apache server](https://httpd.apache.org) or [nginx server](http://nginx.org) as a reverse Proxy.
 
-###### 2.4.1 Running in different Context Path
+###### 2.4.3 Running in different Context Path
 
 * If you are running multiple Instances of the Ethics-App on your Server, it might be necessary to run them under different context paths, e.g. `/app1/` and `/app2/`. Modifications in the following locations are needed:
 
