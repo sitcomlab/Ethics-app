@@ -10,8 +10,10 @@ app.config(function ($translateProvider) {
     $translateProvider.translations('en_US', {
 
         WELCOME: 'Welcome',
-        WELCOME_MESSAGE: 'This Web-App provides a way to create the necessary forms for your user study. Please login or create a new document.',
-        WELCOME_MESSAGE_MEMBER: 'This is the Login for Members of the Ethics-Committee. If you are not a member of the Ethics-Committee, please login',
+        WELCOME_MESSAGE: 'This Web-App provides a way to create the necessary forms for your user study.',
+        WELCOME_MESSAGE_2: 'Please login or create a new document.',
+        WELCOME_MESSAGE_MEMBER: 'This is the Login for Members of the Ethics-Committee.',
+        WELCOME_MESSAGE_MEMBER_2: 'If you are not a member of the Ethics-Committee, please login',
         HERE: 'here',
 
         DOCUMENT_ID: 'Document-ID',
