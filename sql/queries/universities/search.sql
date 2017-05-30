@@ -3,7 +3,8 @@ SELECT
     university_id,
     created,
     updated,
-    university_name
+    university_name,
+    university_logo
 FROM (
     SELECT
         university.university_id,

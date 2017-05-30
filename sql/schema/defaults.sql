@@ -1,40 +1,50 @@
 -- Universities
 INSERT INTO Universities (
-    university_name
+    university_name,
+    university_logo
 ) VALUES (
-    'University of Münster'
+    'University of Münster',
+    'logo-wwu-münster.svg'
 ), (
-    'Portuguese University'
+    'Portuguese University',
+    NULL
 );
 
 
 -- Institutes
 INSERT INTO Institutes (
     institute_name,
+    institute_logo,
     university_id,
     former
 ) VALUES (
     'Institute for Geoinformatics',
+    'logo-ifgi.svg',
     1,
     false
 ), (
     'Institute for Geography',
+    NULL,
     1,
     false
 ), (
     'Institute for Landscape Ecology',
+    NULL,
     1,
     false
 ), (
     'WWU Institute TEST (former)',
+    NULL,
     1,
     true
 ), (
     'PTU Institute TEST',
+    NULL,
     2,
     false
 ), (
     'PTU Institute TEST (former)',
+    NULL,
     2,
     false
 );

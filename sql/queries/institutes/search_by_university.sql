@@ -4,6 +4,7 @@ SELECT
     created,
     updated,
     institute_name,
+    institute_logo,
     former,
     university_id,
     university_name

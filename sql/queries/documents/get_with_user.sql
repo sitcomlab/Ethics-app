@@ -13,8 +13,10 @@ SELECT
     _user.last_name,
     _user.institute_id,
     institute.institute_name,
+    institute.institute_logo,
     institute.university_id,
-    university.university_name
+    university.university_name,
+    university.university_logo
 FROM Documents document
     JOIN Notes _note ON document.document_id = _note.document_id
     JOIN Users _user ON document.user_id = _user.user_id

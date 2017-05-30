@@ -3,7 +3,8 @@ SELECT
     university.university_id,
     university.created,
     university.updated,
-    university.university_name
+    university.university_name,
+    university.university_logo
 FROM Universities university
 ORDER BY
     CASE

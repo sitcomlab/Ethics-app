@@ -9,6 +9,7 @@ CREATE TABLE Universities (
     updated TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
 
     -- Attributes
-    university_name CHARACTER VARYING(255) NOT NULL
-    
+    university_name CHARACTER VARYING(255) NOT NULL,
+    university_logo CHARACTER VARYING(255) DEFAULT NULL
+
 );
