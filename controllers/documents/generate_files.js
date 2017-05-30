@@ -16,6 +16,9 @@ var dir_2 = "/../../sql/queries/documents/";
 var dir_3 = "/../../sql/queries/revisions/";
 var dir_4 = "/../../sql/queries/descriptions/";
 var dir_5 = "/../../sql/queries/concerns/";
+var template_consent_by_third_party_en = fs.readFileSync(__dirname + dir_1 + 'consent_by_third_party_en.html', 'utf8').toString();
+var template_consent_by_third_party_de = fs.readFileSync(__dirname + dir_1 + 'consent_by_third_party_de.html', 'utf8').toString();
+var template_consent_by_third_party_pt = fs.readFileSync(__dirname + dir_1 + 'consent_by_third_party_pt.html', 'utf8').toString();
 var template_debriefing_information = fs.readFileSync(__dirname + dir_1 + 'debriefing_information.html', 'utf8').toString();
 var template_statement_of_researcher = fs.readFileSync(__dirname + dir_1 + 'statement_of_researcher.html', 'utf8').toString();
 var template_consent_form_en = fs.readFileSync(__dirname + dir_1 + 'consent_form_en.html', 'utf8').toString();
@@ -159,6 +162,70 @@ exports.request = function(req, res) {
 
             // Create files
             async.parallel([
+              function(callback) { // Generate consent_by_third_party form (English)
+                // Check if user group is unable to give consent
+                if(concern.q01_value){
+                    // Render HTML-content
+                    var html = mustache.render(template_consent_by_third_party_en, {
+                        year: moment().format("YYYY")
+                    });
+
+                    // Create file
+                    var file = fs.createWriteStream(folders.pathFilesFolder + '/consent_by_third_party_en.pdf');
+
+                    // Write content into file
+                    pdf.create(html, options).toStream(function(err, stream){
+                        stream.pipe(file);
+                    });
+                    file.on('finish', function() {
+                        callback();
+                    });
+                  } else {
+                      callback();
+                  }
+                },function(callback) { // Generate consent_by_third_party form (German)
+                // Check if user group is unable to give consent
+                if(concern.q01_value && description.de_used){
+                    // Render HTML-content
+                    var html = mustache.render(template_consent_by_third_party_de, {
+                        year: moment().format("YYYY")
+                    });
+
+                    // Create file
+                    var file = fs.createWriteStream(folders.pathFilesFolder + '/consent_by_third_party_de.pdf');
+
+                    // Write content into file
+                    pdf.create(html, options).toStream(function(err, stream){
+                        stream.pipe(file);
+                    });
+                    file.on('finish', function() {
+                        callback();
+                    });
+                  } else {
+                      callback();
+                  }
+                },function(callback) { // Generate consent_by_third_party form (Portuguese)
+                // Check if user group is unable to give consent
+                if(concern.q01_value && description.pt_used){
+                    // Render HTML-content
+                    var html = mustache.render(template_consent_by_third_party_pt, {
+                        year: moment().format("YYYY")
+                    });
+
+                    // Create file
+                    var file = fs.createWriteStream(folders.pathFilesFolder + '/consent_by_third_party_pt.pdf');
+
+                    // Write content into file
+                    pdf.create(html, options).toStream(function(err, stream){
+                        stream.pipe(file);
+                    });
+                    file.on('finish', function() {
+                        callback();
+                    });
+                  } else {
+                      callback();
+                  }
+                },
                 function(callback) { // Generate debriefing information
                     // Render HTML-content
                     var html = mustache.render(template_debriefing_information, {
@@ -194,6 +261,7 @@ exports.request = function(req, res) {
                     });
                 },
                 function(callback) { // Generate consent form (English)
+                  if(!concern.q01_value){
                     // Render HTML-content
                     var html = mustache.render(template_consent_form_en, {
                         document: document,
@@ -212,10 +280,13 @@ exports.request = function(req, res) {
                     file.on('finish', function() {
                         callback();
                     });
+                  } else {
+                    callback();
+                  }
                 },
                 function(callback) { // Generate consent form (German)
                     // Check if a German description was used
-                    if(description.de_used){
+                    if(description.de_used && !concern.q01_value){
 
                         // Render HTML-content
                         var html = mustache.render(template_consent_form_de, {
@@ -241,7 +312,7 @@ exports.request = function(req, res) {
                 },
                 function(callback) { // Generate consent form (Portuguese)
                     // Check if a Portuguese description was used
-                    if(description.pt_used){
+                    if(description.pt_used && !concern.q01_value){
 
                         // Render HTML-content
                         var html = mustache.render(template_consent_form_pt, {

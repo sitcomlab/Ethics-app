@@ -167,6 +167,7 @@ app.config(function ($translateProvider) {
 
         PROVIDED_TO_PARTICIPANTS_AFTER_STUDY:'(provided to participants after the study)',
         TO_BE_FILLED_OUT_BY_PARTICIPANT:'(to be filled out by each participant)',
+        TO_BE_FILLED_OUT_BY_THIRD_PARTY:'(to be filled out by legal representative)',
         SIGN_BY_YOURSELF:'(sign by yourself and add to archive)',
 
         DEFAULT:'Default',

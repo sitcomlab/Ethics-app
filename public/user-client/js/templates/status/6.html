@@ -10,7 +10,7 @@
         </div>
         <br>
         <br>
-        <div class="row">
+         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle">
                 <p>
                     <a href="{{files.path}}/debriefing_information.pdf" download="debriefing_information.pdf" target="_blank">
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle" ng-if="!latest_revision.concerns.q01_value">
                 <p>
                     <a href="{{files.path}}/consent_form_en.pdf" download="consent_form_en.pdf" target="_blank">
                         <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
@@ -49,7 +49,19 @@
                 <br>
                 <br>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle" ng-if="latest_revision.descriptions.de_used">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle" ng-if="latest_revision.concerns.q01_value">
+                <p>
+                    <a href="{{files.path}}/consent_by_third_party_en.pdf" download="consent_by_third_party_en.pdf" target="_blank">
+                        <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
+                    </a>
+                </p>
+                <p class="text-muted">
+                    <span class="flag-icon flag-icon-gb"></span>&nbsp;&nbsp;{{ 'INFORMED_CONSENT_FORM' | translate }}<br>{{ 'TO_BE_FILLED_OUT_BY_THIRD_PARTY' | translate }}
+                </p>
+                <br>
+                <br>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle" ng-if="latest_revision.descriptions.de_used && !latest_revision.concerns.q01_value">
                 <p>
                     <a href="{{files.path}}/consent_form_de.pdf" download="consent_form_de.pdf" target="_blank">
                         <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
@@ -61,7 +73,19 @@
                 <br>
                 <br>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle" ng-if="latest_revision.descriptions.pt_used">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle" ng-if="latest_revision.descriptions.de_used && latest_revision.concerns.q01_value">
+                <p>
+                    <a href="{{files.path}}/consent_by_third_party_de.pdf" download="consent_by_third_party_de.pdf" target="_blank">
+                        <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
+                    </a>
+                </p>
+                <p class="text-muted">
+                    <span class="flag-icon flag-icon-de"></span>&nbsp;&nbsp;{{ 'INFORMED_CONSENT_FORM' | translate }}<br>{{ 'TO_BE_FILLED_OUT_BY_THIRD_PARTY' | translate }}
+                </p>
+                <br>
+                <br>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle" ng-if="latest_revision.descriptions.pt_used && !latest_revision.concerns.q01_value">
                 <p>
                     <a href="{{files.path}}/consent_form_pt.pdf" download="consent_form_pt.pdf" target="_blank">
                         <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
@@ -69,6 +93,18 @@
                 </p>
                 <p class="text-muted">
                     <span class="flag-icon flag-icon-pt"></span>&nbsp;&nbsp;{{ 'INFORMED_CONSENT_FORM' | translate }}<br>{{ 'TO_BE_FILLED_OUT_BY_PARTICIPANT' | translate }}
+                </p>
+                <br>
+                <br>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle" ng-if="latest_revision.descriptions.pt_used && latest_revision.concerns.q01_value">
+                <p>
+                    <a href="{{files.path}}/consent_by_third_party_pt.pdf" download="consent_by_third_party_pt.pdf" target="_blank">
+                        <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
+                    </a>
+                </p>
+                <p class="text-muted">
+                    <span class="flag-icon flag-icon-pt"></span>&nbsp;&nbsp;{{ 'INFORMED_CONSENT_FORM' | translate }}<br>{{ 'TO_BE_FILLED_OUT_BY_THIRD_PARTY' | translate }}
                 </p>
                 <br>
                 <br>
