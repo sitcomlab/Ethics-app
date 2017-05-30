@@ -3,45 +3,68 @@
     <head>
         <meta charset="utf-8">
         <title>Informed Consent Form</title>
+        <link rel="stylesheet" href="css/styles.css">
     </head>
-    <body style="font-size: small">
+    <body>
         <div class="firstpage">
-            <p align="center" style="font-size: medium"><b>Informed Consent Form</b></p>
-            <p align="center" style="font-size: x-small">(double-sided: to be stored together)</p>
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 50%; text-align: left;">
+                        <img src="images/{{document.institute_logo}}" alt="{{document.institute_name}}" height="45px">
+                    </td>
+                    <td style="width: 50%; text-align: right;">
+                        <img src="images/{{document.university_logo}}" alt="{{document.university_name}}" height="45px">
+                    </td>
+                </tr>
+            </table>
             <br>
-            <p align="center" style="font-size: medium">Project Title: <b>{{project_name}}</b></p>
+            <br>
+            <br>
+
+            <h1 style="width:100%; text-align: center;">Informed Consent Form</h1>
+            <h3 style="width:100%; text-align: center;">Study title: {{description.pt_title}}</h3>
+
             <br>
             <p>
                 Dear Participant,
             </p>
             <p>
-                Thank you for your involvement in our study.
+                thank you for your participation in the study.
             </p>
-            <p style="text-align: justify">
-                <b>Purpose of the study: </b>{{general.english.q04}}
+            <br>
+            <p style="text-align: justify;">
+                <b>Researchers:</b><br>
+                {{description.pt_researcher}}
             </p>
-            <p style="text-align: justify">
-                <b>Procedure: </b>{{general.english.q05}}
+            <p style="text-align: justify;">
+                <b>Purpose of the study:</b><br>
+                {{description.pt_purpose}}
             </p>
-            <p style="text-align: justify">
-                <b>Duration: </b>{{general.english.q06}}
+            <p style="text-align: justify;">
+                <b>Procedure:</b><br>
+                {{description.pt_procedure}}
             </p>
-            <p style="text-align: justify">
-                <b>Potential Risks: </b>{{general.english.q07}}
+            <p style="text-align: justify;">
+                <b>Duration:</b><br>
+                {{description.pt_duration}}
             </p>
-            <p style="text-align: justify">
-                <b>Privacy: </b>Original data obtained from this study will be anonymised and only processed in aggregate. In such form, it might be published in academic journals, presentations or other media, but never in a way that would allow anyone to
-                identify you individually. One week after the completion of the study it might no longer be possible to retract your data from such aggregated analyses.
+            <p style="text-align: justify;">
+                <b>Potential risks:</b><br>
+                {{description.pt_risks}}
             </p>
-            <!-- <b>Benefits: </b>{{general.english.q08}} -->
+            <p style="text-align: justify;">
+                <b>Privacy:</b><br>
+                Original data obtained from this study will be anonymised and only processed in aggregate. In such form, it might be published in academic journals, presentations or other media, but never in a way that would allow individual identification. One week after the completion of the study it might no longer be possible to retract your data from such aggregated analyses.
+            </p>
         </div>
-        <div class="secondpage" style="page-break-before:always;">
+        <div class="secondpage" style="page-break-before: always;">
             <br>
             <p>
-                You are free to stop, quit the study and retract your data <b>at any time during the study</b> with no further consequences. <b>If you have any questions, please ask them now.</b>
+                You are free to stop, quit the study and retract your data <b>at any time during the study</b> with no further consequences.<br>
+                <b>If you have any questions, please ask them now.</b>
             </p>
             <p>
-                For further questions and complains, you can contact the Institute's Research Ethics Committee: <i>ifgi-ethics@uni-muenster.de</i>
+                For further questions and complains, you can contact the Institute's Research Ethics Committee.
             </p>
             <br>
             <p>
@@ -57,33 +80,55 @@
                 &#9634; I confirm I understand my right to quit the study at any time.
             </p>
             <p>
-                {{#ethics.q11.checkbox_1}}
-                &#9634; I agree for an audio/video* recording of the procedure, including my voice/image*. [*cross out irrelevant options]
-                {{/ethics.q11.checkbox_1}}
+                {{#concern.q11.checkbox_1}}
+                &#9634; I agree for an audio/video* recording of the procedure, including my voice/image*. [* cross out irrelevant options]
+                {{/concern.q11.checkbox_1}}
             </p>
             <br>
-            <p>
-                <table style="width:100%;font-size: small">
-                    <tr>
-                        <td align="center">_______________</td>
-                        <td align="center">_________________________________</td>
-                        <td align="center">_________________________________</td>
-                    </tr>
-                    <tr>
-                        <td align="center">date</td>
-                        <td align="center">signature of researcher</td>
-                        <td align="center">signature of participant</td>
-                    </tr>
-                </table>
-            </p>
             <br>
-            <p>
-                <b>Optional</b>: Please provide your email address if you would like to be informed about future studies conducted at the Institute for Geoinformatics.
-            </p>
-            <br>
-            <p>
-                Email: ________________________________________________
-            </p>
+            <table style="width:100%; font-size: small">
+                <tr>
+                    <td style="width: 50%; text-align: center;">
+                        <hr>
+                    </td>
+                    <td style="width: 50%; text-align: center;">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 50%; text-align: center;">Date</td>
+                    <td style="width: 50%; text-align: center;">Signature of researcher</td>
+                </tr>
+                <tr>
+                    <td style="height: 40px;" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td style="width: 50%; text-align: center;"></td>
+                    <td style="width: 50%; text-align: center;">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 50%; text-align: center;"></td>
+                    <td style="width: 50%; text-align: center;">Signature of participant</td>
+                </tr>
+                <tr>
+                    <td style="height: 40px;" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        Email address (optional)<br>
+                        <small>
+                            (Please provide your email address if you would like to be informed about future studies)
+                        </small>
+                    </td>
+                </tr>
+            </table>
         </div>
     </body>
 </html>

@@ -21,7 +21,7 @@ var template_statement_of_researcher = fs.readFileSync(__dirname + dir_1 + 'stat
 var template_consent_form_en = fs.readFileSync(__dirname + dir_1 + 'consent_form_en.html', 'utf8').toString();
 var template_consent_form_de = fs.readFileSync(__dirname + dir_1 + 'consent_form_de.html', 'utf8').toString();
 var template_consent_form_pt = fs.readFileSync(__dirname + dir_1 + 'consent_form_pt.html', 'utf8').toString();
-var query_get_document = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
+var query_get_document_with_user = fs.readFileSync(__dirname + dir_2 + 'get_with_user.sql', 'utf8').toString();
 var query_get_latest_revision = fs.readFileSync(__dirname + dir_3 + 'get_latest_by_document.sql', 'utf8').toString();
 var query_get_description = fs.readFileSync(__dirname + dir_4 + 'get_by_revision.sql', 'utf8').toString();
 var query_get_concern = fs.readFileSync(__dirname + dir_5 + 'get_by_revision.sql', 'utf8').toString();
@@ -43,7 +43,7 @@ exports.request = function(req, res) {
         },
         function(client, done, callback) {
             // Database query
-            client.query(query_get_document, [
+            client.query(query_get_document_with_user, [
                 req.params.document_id
             ], function(err, result) {
                 done();
@@ -150,18 +150,21 @@ exports.request = function(req, res) {
             var options = {
                 format: 'A4',
                 border: {
-                    top: "2cm",
+                    top: "1.5cm",
                     left: "2cm",
                     right: "2cm",
-                    bottom: "2cm"
-                }
+                    bottom: "1.5cm"
+                },
+                base: "file://" + __dirname + "/../../templates/pdfs/",
             };
+
 
             // Create files
             async.parallel([
                 function(callback) { // Generate debriefing information
                     // Render HTML-content
                     var html = mustache.render(template_debriefing_information, {
+                        document: document,
                         year: moment().format("YYYY")
                     });
 
@@ -179,6 +182,7 @@ exports.request = function(req, res) {
                 function(callback) { // Generate statement of researcher
                     // Render HTML-content
                     var html = mustache.render(template_statement_of_researcher, {
+                        document: document,
                         year: moment().format("YYYY")
                     });
 
