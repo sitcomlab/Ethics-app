@@ -3,6 +3,10 @@ var app = angular.module("config", []);
 // Constants
 app.constant("config", {
     appName: "Ethics-app",
+    appSubnames: {
+        user_client: "Ethics-app",
+        member_client: "Ethics-app | Committee",
+    },
     appGithub: "https://github.com/sitcomlab/Ethics-app",
     appVersion: "v1.0",
     appLanguage: 'en_US',

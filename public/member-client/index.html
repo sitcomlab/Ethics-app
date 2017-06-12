@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="ethics-app">
     <head>
         <!-- Base -->
         <base href="/member-client/index.html"/>
@@ -15,7 +15,8 @@
         <meta name="format-detection" content="telephone=no">
         <meta http-equiv="x-rim-auto-match" content="none">
 
-        <title>Ethics-App | COMMITTEE</title>
+        <!-- Title -->
+        <title ng-bind="config.appSubnames.member_client">Ethics-app</title>
 
         <!-- Bootstrap core CSS -->
         <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
@@ -47,7 +48,7 @@
 
     </head>
 
-    <body ng-app="ethics-app" class="ng-cloak">
+    <body class="ng-cloak">
 
 
         <!-- Main -->
@@ -61,7 +62,7 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <a class="navbar-brand" href="{{memberClient}}/">
-                            {{config.appName}}
+                            {{config.appSubnames.member_client}}
                         </a>
                         <div class="collapse navbar-collapse" id="navbarContent">
                             <ul class="navbar-nav mr-auto">
@@ -222,12 +223,16 @@
         </main>
 
 
+        <!-- TRANSLATIONS -->
+        <script src="../translations/en_US.js"></script>
+        <script src="../translations/de_DE.js"></script>
+        <script src="../translations/pt_PT.js"></script>
+
         <!-- CONFIG -->
         <script src="../config.js"></script>
 
         <!-- MODULES -->
         <script src="js/modules/routes.js"></script>
-        <script src="js/modules/languages.js"></script>
         <script src="js/modules/filters.js"></script>
 
         <!-- SERVICES -->

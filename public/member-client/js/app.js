@@ -1,9 +1,14 @@
 var app = angular.module("ethics-app", [
 
-    // App Settings
+    // Import translations
+    "en_US",
+    "de_DE",
+    "pt_PT",
+
+    // Import app settings
     "config",
 
-    // External Modules
+    // Import external modules (libraries)
     "ngRoute",
     "ngSanitize",
     "pascalprecht.translate",
@@ -11,12 +16,11 @@ var app = angular.module("ethics-app", [
     "angular-momentjs",
     "underscore",
 
-    // Own Modules
+    // Import own modules
     "filters",
     "routes",
-    "languages",
 
-    // Services
+    // Import services
     "authenticationService",
     "documentsService",
     "documentService",
@@ -39,20 +43,29 @@ var app = angular.module("ethics-app", [
 
 
 /**
- * Log Provider
- * turn on/off debug logging
+ * Configurating application before starting
  */
-app.config(function($logProvider, config) {
+app.config(function($logProvider, $translateProvider, en_US, de_DE, pt_PT, config) {
+    // Logging
     $logProvider.debugEnabled(config.debugMode);
+
+    // Translations
+    $translateProvider.translations('en_US', en_US);
+    $translateProvider.translations('de_DE', de_DE);
+    $translateProvider.translations('pt_PT', pt_PT);
+
+    // Set default language
+    $translateProvider.preferredLanguage(config.appLanguage);
+    $translateProvider.useSanitizeValueStrategy('sanitize');
 });
 
 
 /**
  * Start application
  */
-app.run(function($translate, config) {
+app.run(function($translate, $rootScope, config, en_US) {
+    $rootScope.config = config;
 
-    // Use Translator and set Language
+    // Run with default language
     $translate.use(config.appLanguage);
-
 });
