@@ -338,7 +338,7 @@ exports.request = function(req, res) {
                 switch (updated_document.status) {
                     case 4: {
                         icon = "fa-eye";
-                        status_description_1 = "Your document is under review now. You will get an email as soon as the committee has reviewed it completely.";
+                        status_description_1 = "Your document is under review now. You will get another email as soon as the Ethics-committee has reviewed it completely.";
                         status_description_2 = "If you have problems with your document, please get in touch with a committee member of your institute.";
                         updated_document._status_label = "badge-info";
                         updated_document._status_description = "under review";

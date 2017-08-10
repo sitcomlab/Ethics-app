@@ -55,6 +55,10 @@
             <p style="text-align: justify;">
                 <b>Datenschutz:</b><br>Die Daten, die in dieser Studie erhoben werden, werden in anonymisierter Form erhoben und nur in Aggregation mit weiteren anonymen Daten verarbeitet. In dieser Form werden die Daten ggf. in akademischen Journalen, Präsentationen oder anderen Medien veröffenlicht, jedoch ist niemals eine Identifizierung der einzelnen Teilnehmer möglich. Eine Woche nach Abschluss der Studie ist es daher quasi nicht mehr möglich die Daten aus deiner Teilnahme zu aus den aggregierten Datensätzen aller Teilnehmer zu identifizieren.
             </p>
+            <p style="text-align: justify;">
+                <b>Vergütung:</b><br>
+                {{description.de_benefits}}
+            </p>
         </div>
         <div class="secondpage" style="page-break-before: always;">
             <br>
@@ -62,7 +66,7 @@
                 Sie können <b>zu jeder Zeit</b> ohne Angabe von Gründen die Studie abbrechen und Ihre Antworten zurückziehen. Dies hat keine weiteren Konsequenzen für Sie. <b>Falls Sie noch Fragen haben, stellen Sie diese bitte jetzt.</b>
             </p>
             <p>
-                Bei weiteren Fragen oder auch Beschwerden bitten wir Sie sich an die Ethik-Kommission des Instituts zu wenden.
+                Bei weiteren Fragen oder auch Beschwerden bitten wir Sie sich an die Ethik-Kommission des Instituts zu wenden: &lt;{{support_email_address}}&gt;.
             </p>
             <br>
             <p>
@@ -75,13 +79,18 @@
                 &#9634; Ich bestätige, dass mir dieses Dokument vor der Studie ausgehändigt wurde.
             </p>
             <p>
-                &#9634; Ich bestätige und verstehe, dass ich die Studie zu jedem Zeitpunkt ohne Konsequenzen abbrechen kann.
+                &#9634; Ich bestätige und habe verstanden, dass ich die Studie zu jedem Zeitpunkt ohne Konsequenzen abbrechen kann.
             </p>
-            <p>
-                {{#concern.q11.checkbox_1}}
-                &#9634; Ich bestätige mein Einverständnis zu der Aufnahme von Audio/Videomaterial*, einschließlich meiner Stimme/meinem Bild*. [* streiche nicht zutreffendes]
-                {{/concern.q11.checkbox_1}}
-            </p>
+            {{#concern.q11_1_value}}
+                <p>
+                    &#9634; Ich bestätige mein Einverständnis zu der Aufnahme von Tonmaterial während der Studie.
+                </p>
+            {{/concern.q11_1_value}}
+            {{#concern.q11_1_value}}
+                <p>
+                    &#9634; Ich bestätige mein Einverständnis zu der Aufnahme von Videomaterial während der Studie.
+                </p>
+            {{/concern.q11_1_value}}
             <br>
             <br>
             <table style="width:100%;">

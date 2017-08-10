@@ -2980,9 +2980,21 @@
             {{ 'SUBMIT' | translate }}
         </div>
         <div class="card-block">
-            <br>
-            <div style="text-align: justify;">
+            <div class="alert alert-warning justified" role="alert">
+                <h5>
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'ATTENTION' | translate }}
+                </h5>
                 {{ 'SUBMIT_WARNING' | translate }}
+            </div>
+            <br>
+
+            <!-- TODO: Add a picture to show the document states / process -->
+
+            <div class="alert alert-info justified" role="alert">
+                <h5>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'AUTO_SAVING' | translate }}
+                </h5>
+                {{ 'AUTO_SAVING_HINT' | translate }}
             </div>
             <br>
         </div>

@@ -336,6 +336,7 @@ node server.js
     * `POSTGRES_USERNAME`: Postgres username (default: `admin `)
     * `POSTGRES_PASSWORD`: Postgres password (default: `admin`)
     * `POSTGRES_SSL`: Postgres ssl connection (default: `false`)
+    * `SUPPORT_EMAIL_ADDRESS`: Email address of the support or Ethics committee for questions, which is used in the Informed consent forms for the participants (default: `ifgi-ethics@uni-muenster.de`)
     * `SENDER_NAME`: Name of the sender for Emails (default: `Ethics-App`)
     * `SENDER_EMAIL_ADDRESS`: Email-address of the sender, so users can reply to it, if they have question (default: `ifgi-ethics@uni-muenster.de`)
     * `SMTP_HOST`: SMTP host address (default: `smtp.gmail.com`)

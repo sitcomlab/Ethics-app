@@ -4,11 +4,12 @@
         {{ 'YOUR_DOCUMENT_HAS_BEEN_REJECTED' | translate }}
     </div>
     <div class="card-block">
-        <br>
-        <div style="text-align: justify;">
-            {{ 'STATUS_7' | translate }}
+        <div class="alert alert-danger justified" role="alert">
+            <h5>
+                <i class="fa fa-gavel" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'INFORMATION' | translate }}
+            </h5>
+            {{ 'STATUS_7' | translate }} <b><i class="fa fa-user" aria-hidden="true"></i> <a href="" ng-click="redirect('/members/' + document.revisions[0].reviewer.member_id)">{{document.revisions[0].reviewer.full_name}}</a></b>.
         </div>
-        <br>
     </div>
     <div class="card-footer">
         <div class="row">

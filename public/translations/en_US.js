@@ -6,7 +6,7 @@ app.constant("en_US", {
     WELCOME: 'Welcome',
     WELCOME_MESSAGE: 'This Web-App provides a way to create the necessary forms for your user study.',
     WELCOME_MESSAGE_2: 'Please login or create a new document.',
-    WELCOME_MESSAGE_MEMBER: 'This is the Login for Members of the Ethics-Committee.',
+    WELCOME_MESSAGE_MEMBER: 'This is the login for members of the Ethics-Committee.',
     WELCOME_MESSAGE_MEMBER_2: 'If you are not a member of the Ethics-Committee, please login',
     HERE: 'here',
 
@@ -43,6 +43,8 @@ app.constant("en_US", {
     REGISTRATION: 'Registration',
     NEW_DOCUMENT: 'New document',
     PLEASE_USE_A_UNIVERSITY_ADDRESS: 'Please use an official university address',
+    WORKING_TITLE: 'Please type in a working title for your document',
+    WORKING_TITLE_2: 'you can still change it afterwards',
 
     SEARCH_FOR_DOCUMENT_TITLES_AND_AUTHORS: 'Search for documents, titles and authors',
     SEARCH_FOR_MEMBERS: 'Search for members',
@@ -127,17 +129,18 @@ app.constant("en_US", {
 
     STUDY_DESCRIPTION_FORM_TEXT: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally versions in other languages. Depending on the language(s) filled out, you will receive the informed consent forms in the chosen languages to be used during your experiment.',
     CHOOSE_LANGUAGE:'Please select the language(s), in which you want to generate the informed consent forms:',
-    STUDY_CONCERNS_FORM_TEXT: 'Complete the checklist below. If you have answered yes to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the Institutes Ethics committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the Intitutes\'s Ethics committee.',
+    STUDY_CONCERNS_FORM_TEXT: 'Complete the checklist below. If you have answered yes to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the Institutes Ethics-Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the Intitutes\'s Ethics-Committee.',
 
     AGREEMENT_DATA: 'I agree that all given information is correct, and I am aware that my data will be stored by the Institute responsible for the study and its partners',
-    AGREEMENT_DELETION: 'I agree that as soon as I submit my document request, only Members of the Ethics committee can delete my account',
+    AGREEMENT_DELETION: 'I agree that as soon as I submit my document request, only Members of the Ethics-Committee can delete my account',
 
-    STATUS_2: 'Your files have been created successfully. Please click on the following icons to download them.',
-    STATUS_3: 'Your document was submitted successfully, but has one or more ethical concerns. You will get an email as soon as the committee start to review it.',
-    STATUS_4: 'Your document was submitted successfully, but has one or more ethical concerns. The committee has started to review it. You will get an email as soon as the committee has reviewed it completely.',
-    STATUS_5: 'Your document has been partly accepted by the committee. Please read the comments and revise your document.',
-    STATUS_6: 'Your files have been created successfully. Please click on the following icons to download them.',
-    STATUS_7: 'Unfortunatly your document has been rejected by the Ethics committee. Please get in contact with the corresponding reviewers.',
+    STATUS_2: 'Your document has been accepted successfully. You can download your PDF files below',
+    STATUS_3: 'Your document was submitted successfully, but has one or more ethical concerns. You will get an email as soon as the Ethics-committee start to review it',
+    STATUS_4_1: 'Your document was submitted successfully, but has one or more ethical concerns',
+    STATUS_4_2: 'has begun to review it. You will get another email as soon as the document has been reviewed  completely',
+    STATUS_5: 'Your document has been partly accepted by the Ethics-committee. Please read the comments of the reviewer and revise your document accordingly. For further questions, please contact your reviewer',
+    STATUS_6: 'Your document has been accepted successfully. You can download your PDF files below',
+    STATUS_7: 'Unfortunatly your document has been rejected by the Ethics-Committee. Please get in contact with the corresponding reviewer',
 
     ACCOUNT: 'Account',
     SETTINGS: 'Settings',
@@ -189,7 +192,7 @@ app.constant("en_US", {
     NO_CHANGES: 'No changes',
 
     DESCRIPTION_1: 'Title of the project',
-    DESCRIPTION_2: 'Name of the lead researcher, his/her position (and his/her lab)',
+    DESCRIPTION_2: 'Name of the researcher(s) (and his/her position or his/her lab)',
     DESCRIPTION_3: 'Time scale of the data collection process (range)',
     DESCRIPTION_4: 'Theme and purpose of the study',
     DESCRIPTION_5: 'Describe the procedure of your study (make sure to list, all potentially difficult or distressing actions that you will require from your participants)',
@@ -200,16 +203,21 @@ app.constant("en_US", {
     STUDY_DESCRIPTION_INFO: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally the language-specific version appriopiate for your participants. Depending on the language(s), you will receive the informed consent forms for your experiment',
     LANGUAGE_OPTIONS: 'Please select the language, in which you want to generate the informed consent forms',
 
-    DESCRIPTION_1_INFO: '',
-    DESCRIPTION_2_INFO: '',
-    DESCRIPTION_3_INFO: 'Specify the period during which you will be collecting the data. If you do not know the exact staring and ending dates, specify in \'month-year\' format.',
+    EXAMPLE: 'Example',
+    DESCRIPTION_1_INFO: 'Please type in an offical study title',
+    DESCRIPTION_1_INFO_2: 'this title will be used in the generated PDFs. You can also use your document working if it is already an offical title. Please choose a title, which is easy to understand for your participants',
+    DESCRIPTION_2_INFO: 'If you are planning to do a study together with other researchers, please type in their names and email-addresses. Please use only a single document for a shared study, to avoid multiple requests of the same study for the Ethics-Committee. You can share your Document-ID with your colleagues, so you can work together on the same document.',
+    DESCRIPTION_3_INFO: 'Specify the period in the \'day-month-year\' format during which you will be collecting the data. If you don\'t not know the exact starting and ending dates, specify it in the \'month-year\' format.',
     DESCRIPTION_4_INFO: 'In a few sentences, describe the theme and purpose of the study (do not get very technical - the content of this box should be understandable to your participants).',
     DESCRIPTION_5_INFO: 'Keep this limited to a few sentences. Do not describe the details of your experimental design, but make sure that you mention all important actions which are required from the participants.',
     DESCRIPTION_6_INFO: 'Try to give a conservative estimate which will be higher then the average completion time. If you have not used a similar procedure in the past, you can run a simple pilot study to estimate this.',
+    DESCRIPTION_6_INFO_2: '40-60 minutes',
     DESCRIPTION_7_INFO: 'Potential risks include (but are not limited to): walking on stairs, nausea (e.g. in Virtual Reality studies), spending time in confined spaces (e.g. lifts), cycling, operating vehicles (including simple ones like sport equipment), navigating in crowded or heavy-traffic areas, observing quickly changing or blinking stimuli (e.g. in computer-based studies), interacting with potentially strong emotional content (e.g. viewing pictures), wearing any additional electronics (eye-tracker, sensors), any activities that might cause physical effort or pain (e.g. attaching movement sensors to the body).',
     DESCRIPTION_8_INFO: 'For instance a monetary payment, or a lottery voucher.',
+    DESCRIPTION_8_INFO_2: 'The participant will get 10',
+    DESCRIPTION_8_INFO_3: 'as a reward at the end of the study.',
 
-    CONCERNS_INFO: 'Complete the checklist below. If you have answered \'yes\' to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the Ethics Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the Ethics Committee.',
+    CONCERNS_INFO: 'Complete the checklist below. If you have answered \'yes\' to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the Ethics-Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the Ethics-Committee.',
 
     CONCERN_1: 'Will the study involve potentially vulnerable groups of participants or people who are unable or unauthorized to give informed consent',
     CONCERN_2: 'Will the study involve deception',
@@ -241,9 +249,10 @@ app.constant("en_US", {
     CONCERN_12_INFO: 'For instance companies, funding bodies, other universities. If yes: who is responsible for the safety of the passed information?',
     CONCERN_13_INFO: 'Excluded cases (select \'no\'): remote sensing data, recordings from public settings allowed by the law, and other situations where the observed individual is expected to be aware of remaining in the public view. Continuous observation of targeted individuals, however, infringes this condition (similarly to how following someone physically in the public is different from observing the same person passing-by).',
 
-    SUBMIT_WARNING: 'You are about to finally submit your Proposal for review by the Ethics-Committee. Please be aware that after this step the Study cannot be changed or modified anymore, until a revised version is requested by the Ethics-Committee.',
+    SUBMIT_WARNING: 'You are about to finally submit your document for reviewing it by the Ethics-Committee. Please be aware that after this step your document can no longer be changed or modified. If your document is reviewed and accepted you can download your PDF files for your study. You will receive an email as soon as your status of your document has been changed. If want to revise it, because you find a typo, you need to ask your reviewer to get writing access again. After you revised your document, you need to submit it again. To avoid this, please make sure that all information is correct, before you submit to the Ethics-Committee.',
+    AUTO_SAVING: 'Auto saving',
+    AUTO_SAVING_HINT: 'You don\'t need to submit your document now! Everytime when you click on the \'Next page\' buttons in the previous pages (\'Study description\' and \'Study concerns\') all your information has been automatically saved in the background. As soon as you enter this page (\'Submit\'), you can savely logout and come back later to continue your work.',
     DOCUMENT_FILES: 'Download the associated Files',
-
 
     YES: 'yes',
     NO: 'no',
@@ -272,11 +281,17 @@ app.constant("en_US", {
 
     YOU: 'You',
     ADMIN: 'admin',
+    INFORMATION: 'Information',
     YOUR_DOCUMENT_NEEDS_TO_BE_REVIEWED: 'Your document needs to be reviewed',
     DOCUMENT_IS_CURRENTLY_UNDER_REVIEW: 'Your document is currently under review',
     DOCUMENT_REVIEWED_SUCCESSFULLY: 'Your document has been reviewed successfully',
     DOCUMENT_PARTLY_ACCEPTED: 'Your document has been partly accepted',
     YOUR_DOCUMENT_HAS_BEEN_REJECTED: 'Your document has been rejected',
+    MODIFICATIONS: 'Modifications',
+    REVISING_INFORMATION_1: 'If you want to change your document again, because you find a typo or want to revise a section, you have to ask the Ethics-Committee to get writing access agian. You can find the corresponding members',
+    HERE: 'here',
+    REVISING_INFORMATION_2: 'If you want to change your document again, because you find a typo or want to revise a section, you have to ask the Ethics-Committee to get writing access agian. You can find your corresponding  reviewer ',
+    REVISING_INFORMATION_3: 'It is recommended to ask him/her directly, because he/she is already familar with your document',
 
     SHOW_SUBMISSION: 'Show submission',
     SHOW_REVIEW: 'Show review',
@@ -368,7 +383,7 @@ app.constant("en_US", {
     RELATED_FORMER_INSTITUTES: 'Related former institutes',
     RELATED_COURSES: 'Related courses',
 
-    START_REVIEWING: 'Start reviewing',
+    START_REVIEWING: 'Start review',
     OPEN_REVIEW: 'Open review',
     CLOSE: 'Close',
     _CLOSE: 'close',

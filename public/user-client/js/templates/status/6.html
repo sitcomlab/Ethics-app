@@ -4,9 +4,17 @@
         {{ 'DOWNLOAD_YOUR_FILES' | translate }}
     </div>
     <div class="card-block">
-        <br>
-        <div style="text-align: justify;">
+        <div class="alert alert-success justified" role="alert">
+            <h5>
+                <i class="fa fa-check-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'INFORMATION' | translate }}
+            </h5>
             {{ 'STATUS_6' | translate }}
+        </div>
+        <div class="alert alert-info justified" role="alert">
+            <h5>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'MODIFICATIONS' | translate }}
+            </h5>
+            {{ 'REVISING_INFORMATION_2' | translate }} (<b><i class="fa fa-user" aria-hidden="true"></i> {{document.revisions[0].reviewer.full_name}}</b>) <a href="" ng-click="redirect('/members/' + document.revisions[0].reviewer.member_id)">{{ 'HERE' | translate }}</a>. {{ 'REVISING_INFORMATION_3' | translate }}.
         </div>
         <br>
         <br>

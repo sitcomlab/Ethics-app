@@ -30,11 +30,11 @@
             <div class="row">
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 middle">
                     <label style="margin-bottom: .5rem;">
-                        <span class="flag-icon flag-icon-gb"></span>&nbsp;&nbsp;<b>{{ 'ENGLISH' | translate }}</b>
+                        <span class="flag-icon flag-icon-gb"></span>&nbsp;&nbsp;<b>{{ 'ENGLISH' | translate }}</b> <sup class="text-danger">*</sup>
                     </label>
                     <br>
                     <small class="form-text text-muted">
-                        ({{ 'REQUIRED' | translate }})
+                        (<span class="text-danger">{{ 'REQUIRED' | translate }}</span>)
                     </small>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 middle">
@@ -70,11 +70,11 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <label for="descriptionTitle">
-                        <b>1. {{ 'DESCRIPTION_1' | translate }}</b>
-                        <!--<br>
+                        <b>1. {{ 'DESCRIPTION_1' | translate }}</b> <sup class="text-danger">*</sup>
+                        <br>
                         <small class="text-muted">
-                            <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'DESCRIPTION_1_INFO' | translate }}
-                        </small>-->
+                            <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'DESCRIPTION_1_INFO' | translate }} ({{ 'DESCRIPTION_1_INFO_2' | translate }})
+                        </small>
                     </label>
                 </div>
             </div>
@@ -82,9 +82,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_title.$invalid && !editDocumentForm.en_title.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="2"
-                                placeholder="{{ 'TITLE' | translate }}*" ng-model="latest_revision.descriptions.en_title"
+                                placeholder="{{ 'TITLE' | translate }}" ng-model="latest_revision.descriptions.en_title"
                                 name="en_title"
                                 id="en_title"
                                 required
@@ -103,9 +106,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_title.$invalid && !editDocumentForm.de_title.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="2"
-                                placeholder="{{ 'TITLE' | translate }}*" ng-model="latest_revision.descriptions.de_title"
+                                placeholder="{{ 'TITLE' | translate }}" ng-model="latest_revision.descriptions.de_title"
                                 name="de_title"
                                 id="de_title"
                                 ng-required="latest_revision.descriptions.de_used"></textarea>
@@ -123,9 +129,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_title.$invalid && !editDocumentForm.pt_title.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="2"
-                                placeholder="{{ 'TITLE' | translate }}*" ng-model="latest_revision.descriptions.pt_title"
+                                placeholder="{{ 'TITLE' | translate }}" ng-model="latest_revision.descriptions.pt_title"
                                 name="pt_title"
                                 id="pt_title"
                                 ng-required="latest_revision.descriptions.pt_used"></textarea>
@@ -147,11 +156,13 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <label for="descriptionResearcher">
-                        <b>2. {{ 'DESCRIPTION_2' | translate }}</b>
-                        <!--<br>
+                        <b>2. {{ 'DESCRIPTION_2' | translate }}</b> <sup class="text-danger">*</sup>
+                        <br>
                         <small class="text-muted">
                             <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'DESCRIPTION_2_INFO' | translate }}
-                        </small>-->
+                            <br>
+                            <b>{{ 'EXAMPLE' | translate }}</b>: <code>Prof. Dr. John Doe &lt;john.doe@example.org&gt; (Situated Computing and Interaction Lab), Jane Doe &lt;jane.doe@example.org&gt; (MSc student of Geoinformatics)</code>
+                        </small>
                     </label>
                 </div>
             </div>
@@ -159,9 +170,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_researcher.$invalid && !editDocumentForm.en_researcher.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
-                                rows="2"
-                                placeholder="{{ 'NAME' | translate }}*" ng-model="latest_revision.descriptions.en_researcher"
+                                rows="5"
+                                placeholder="{{ 'NAME' | translate }}" ng-model="latest_revision.descriptions.en_researcher"
                                 name="en_researcher"
                                 id="en_researcher"
                                 required></textarea>
@@ -179,9 +193,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_researcher.$invalid && !editDocumentForm.de_researcher.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="2"
-                                placeholder="{{ 'NAME' | translate }}*" ng-model="latest_revision.descriptions.de_researcher"
+                                placeholder="{{ 'NAME' | translate }}" ng-model="latest_revision.descriptions.de_researcher"
                                 name="de_researcher"
                                 id="de_researcher"
                                 ng-required="latest_revision.descriptions.de_used"></textarea>
@@ -199,9 +216,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_researcher.$invalid && !editDocumentForm.pt_researcher.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="2"
-                                placeholder="{{ 'NAME' | translate }}*" ng-model="latest_revision.descriptions.pt_researcher"
+                                placeholder="{{ 'NAME' | translate }}" ng-model="latest_revision.descriptions.pt_researcher"
                                 name="pt_researcher"
                                 id="pt_researcher"
                                 ng-required="latest_revision.descriptions.pt_used"></textarea>
@@ -223,10 +243,11 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <label for="descriptionTime">
-                        <b>3. {{ 'DESCRIPTION_3' | translate }}</b>
+                        <b>3. {{ 'DESCRIPTION_3' | translate }}</b> <sup class="text-danger">*</sup>
                         <br>
                         <small class="text-muted">
-                            <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'DESCRIPTION_3_INFO' | translate }}
+                            <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'DESCRIPTION_3_INFO' | translate }}<br>
+                            <b>{{ 'EXAMPLE' | translate }}</b>: <code>{{startDate}} - {{endDate}}</code>
                         </small>
                     </label>
                 </div>
@@ -235,9 +256,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_study_time.$invalid && !editDocumentForm.en_study_time.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="2"
-                                placeholder="{{ 'TIME' | translate }}*" ng-model="latest_revision.descriptions.en_study_time"
+                                placeholder="{{ 'TIME' | translate }}" ng-model="latest_revision.descriptions.en_study_time"
                                 name="en_study_time"
                                 id="en_study_time"
                                 required></textarea>
@@ -255,9 +279,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_study_time.$invalid && !editDocumentForm.de_study_time.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="2"
-                                placeholder="{{ 'TIME' | translate }}*" ng-model="latest_revision.descriptions.de_study_time"
+                                placeholder="{{ 'TIME' | translate }}" ng-model="latest_revision.descriptions.de_study_time"
                                 name="de_study_time"
                                 id="de_study_time"
                                 ng-required="latest_revision.descriptions.de_used"></textarea>
@@ -275,9 +302,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_study_time.$invalid && !editDocumentForm.pt_study_time.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="2"
-                                placeholder="{{ 'TIME' | translate }}*" ng-model="latest_revision.descriptions.pt_study_time"
+                                placeholder="{{ 'TIME' | translate }}" ng-model="latest_revision.descriptions.pt_study_time"
                                 name="pt_study_time"
                                 id="pt_study_time"
                                 ng-required="latest_revision.descriptions.pt_used"></textarea>
@@ -299,7 +329,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <label for="descriptionPurpose">
-                        <b>4. {{ 'DESCRIPTION_4' | translate }}</b>
+                        <b>4. {{ 'DESCRIPTION_4' | translate }}</b> <sup class="text-danger">*</sup>
                         <br>
                         <small class="text-muted">
                             <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'DESCRIPTION_4_INFO' | translate }}
@@ -311,9 +341,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_purpose.$invalid && !editDocumentForm.en_purpose.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'PURPOSE' | translate }}*" ng-model="latest_revision.descriptions.en_purpose"
+                                placeholder="{{ 'PURPOSE' | translate }}" ng-model="latest_revision.descriptions.en_purpose"
                                 name="en_purpose"
                                 id="en_purpose"
                                 required></textarea>
@@ -331,9 +364,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_purpose.$invalid && !editDocumentForm.de_purpose.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'PURPOSE' | translate }}*" ng-model="latest_revision.descriptions.de_purpose"
+                                placeholder="{{ 'PURPOSE' | translate }}" ng-model="latest_revision.descriptions.de_purpose"
                                 name="de_purpose"
                                 id="de_purpose"
                                 ng-required="latest_revision.descriptions.de_used"></textarea>
@@ -351,9 +387,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_purpose.$invalid && !editDocumentForm.pt_purpose.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'PURPOSE' | translate }}*" ng-model="latest_revision.descriptions.pt_purpose"
+                                placeholder="{{ 'PURPOSE' | translate }}" ng-model="latest_revision.descriptions.pt_purpose"
                                 name="pt_purpose"
                                 id="pt_purpose"
                                 ng-required="latest_revision.descriptions.pt_used"></textarea>
@@ -375,7 +414,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <label for="descriptionProcedure">
-                        <b>5. {{ 'DESCRIPTION_5' | translate }}</b>
+                        <b>5. {{ 'DESCRIPTION_5' | translate }}</b> <sup class="text-danger">*</sup>
                         <br>
                         <small class="text-muted">
                             <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'DESCRIPTION_5_INFO' | translate }}
@@ -387,9 +426,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_procedure.$invalid && !editDocumentForm.en_procedure.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'PROCEDURE' | translate }}*" ng-model="latest_revision.descriptions.en_procedure"
+                                placeholder="{{ 'PROCEDURE' | translate }}" ng-model="latest_revision.descriptions.en_procedure"
                                 name="en_procedure"
                                 id="en_procedure"
                                 required></textarea>
@@ -407,9 +449,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_procedure.$invalid && !editDocumentForm.de_procedure.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'PROCEDURE' | translate }}*" ng-model="latest_revision.descriptions.de_procedure"
+                                placeholder="{{ 'PROCEDURE' | translate }}" ng-model="latest_revision.descriptions.de_procedure"
                                 name="de_procedure"
                                 id="de_procedure"
                                 ng-required="latest_revision.descriptions.de_used"></textarea>
@@ -427,9 +472,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_procedure.$invalid && !editDocumentForm.pt_procedure.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'PROCEDURE' | translate }}*" ng-model="latest_revision.descriptions.pt_procedure"
+                                placeholder="{{ 'PROCEDURE' | translate }}" ng-model="latest_revision.descriptions.pt_procedure"
                                 name="pt_procedure"
                                 id="pt_procedure"
                                 ng-required="latest_revision.descriptions.pt_used"></textarea>
@@ -451,10 +499,11 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <label for="descriptionDuration">
-                        <b>6. {{ 'DESCRIPTION_6' | translate }}</b>
+                        <b>6. {{ 'DESCRIPTION_6' | translate }}</b> <sup class="text-danger">*</sup>
                         <br>
                         <small class="text-muted">
-                            <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'DESCRIPTION_6_INFO' | translate }}
+                            <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'DESCRIPTION_6_INFO' | translate }}<br>
+                            <b>{{ 'EXAMPLE' | translate }}</b>: <code>{{ 'DESCRIPTION_6_INFO_2' | translate }}</code>
                         </small>
                     </label>
                 </div>
@@ -463,9 +512,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_duration.$invalid && !editDocumentForm.en_duration.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'DURATION' | translate }}*" ng-model="latest_revision.descriptions.en_duration"
+                                placeholder="{{ 'DURATION' | translate }}" ng-model="latest_revision.descriptions.en_duration"
                                 name="en_duration"
                                 id="en_duration"
                                 required></textarea>
@@ -483,9 +535,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_duration.$invalid && !editDocumentForm.de_duration.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'DURATION' | translate }}*" ng-model="latest_revision.descriptions.de_duration"
+                                placeholder="{{ 'DURATION' | translate }}" ng-model="latest_revision.descriptions.de_duration"
                                 name="de_duration"
                                 id="de_duration"
                                 ng-required="latest_revision.descriptions.de_used"></textarea>
@@ -503,9 +558,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_duration.$invalid && !editDocumentForm.pt_duration.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'DURATION' | translate }}*" ng-model="latest_revision.descriptions.pt_duration"
+                                placeholder="{{ 'DURATION' | translate }}" ng-model="latest_revision.descriptions.pt_duration"
                                 name="pt_duration"
                                 id="pt_duration"
                                 ng-required="latest_revision.descriptions.pt_used"></textarea>
@@ -527,7 +585,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <label for="descriptionRisks">
-                        <b>7. {{ 'DESCRIPTION_7' | translate }}</b>
+                        <b>7. {{ 'DESCRIPTION_7' | translate }}</b> <sup class="text-danger">*</sup>
                         <br>
                         <small class="text-muted">
                             <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'DESCRIPTION_7_INFO' | translate }}
@@ -539,9 +597,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_risks.$invalid && !editDocumentForm.en_risks.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'RISKS' | translate }}*" ng-model="latest_revision.descriptions.en_risks"
+                                placeholder="{{ 'RISKS' | translate }}" ng-model="latest_revision.descriptions.en_risks"
                                 name="en_risks"
                                 id="en_risks"
                                 required></textarea>
@@ -559,9 +620,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_risks.$invalid && !editDocumentForm.de_risks.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'RISKS' | translate }}*" ng-model="latest_revision.descriptions.de_risks"
+                                placeholder="{{ 'RISKS' | translate }}" ng-model="latest_revision.descriptions.de_risks"
                                 name="de_risks"
                                 id="de_risks"
                                 ng-required="latest_revision.descriptions.de_used"></textarea>
@@ -579,9 +643,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_risks.$invalid && !editDocumentForm.pt_risks.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'RISKS' | translate }}*" ng-model="latest_revision.descriptions.pt_risks"
+                                placeholder="{{ 'RISKS' | translate }}" ng-model="latest_revision.descriptions.pt_risks"
                                 name="pt_risks"
                                 id="pt_risks"
                                 ng-required="latest_revision.descriptions.pt_used"></textarea>
@@ -603,10 +670,11 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <label for="descriptionBenefits">
-                        <b>8. {{ 'DESCRIPTION_8' | translate }}</b>
+                        <b>8. {{ 'DESCRIPTION_8' | translate }}</b> <sup class="text-danger">*</sup>
                         <br>
                         <small class="text-muted">
-                            <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'DESCRIPTION_8_INFO' | translate }}
+                            <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'DESCRIPTION_8_INFO' | translate }}<br>
+                            <b>{{ 'EXAMPLE' | translate }}</b>: <code>{{ 'DESCRIPTION_8_INFO_2' | translate }}&euro; {{ 'DESCRIPTION_8_INFO_3' | translate }}</code>
                         </small>
                     </label>
                 </div>
@@ -615,9 +683,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_benefits.$invalid && !editDocumentForm.en_benefits.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'BENEFITS' | translate }}*" ng-model="latest_revision.descriptions.en_benefits"
+                                placeholder="{{ 'BENEFITS' | translate }}" ng-model="latest_revision.descriptions.en_benefits"
                                 name="en_benefits"
                                 id="en_benefits"
                                 required></textarea>
@@ -635,9 +706,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_benefits.$invalid && !editDocumentForm.de_benefits.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'BENEFITS' | translate }}*" ng-model="latest_revision.descriptions.de_benefits"
+                                placeholder="{{ 'BENEFITS' | translate }}" ng-model="latest_revision.descriptions.de_benefits"
                                 name="de_benefits"
                                 id="de_benefits"
                                 ng-required="latest_revision.descriptions.de_used"></textarea>
@@ -655,9 +729,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_benefits.$invalid && !editDocumentForm.pt_benefits.$pristine }">
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                            </span>
                             <textarea class="form-control"
                                 rows="5"
-                                placeholder="{{ 'BENEFITS' | translate }}*" ng-model="latest_revision.descriptions.pt_benefits"
+                                placeholder="{{ 'BENEFITS' | translate }}" ng-model="latest_revision.descriptions.pt_benefits"
                                 name="pt_benefits"
                                 id="pt_benefits"
                                 ng-required="latest_revision.descriptions.pt_used"></textarea>
@@ -717,7 +794,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q01_value.$invalid && !editDocumentForm.q01_value.$pristine }">
                         <label for="q01_value">
-                            <b>1. {{ 'CONCERN_1' | translate }}?</b>
+                            <b>1. {{ 'CONCERN_1' | translate }}?</b> <sup class="text-danger">*</sup>
                             <br>
                             <small class="text-muted">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_1_INFO' | translate }}
@@ -768,7 +845,7 @@
                             <textarea
                                 class="form-control"
                                 rows="5"
-                                placeholder="{{ 'EXPLANATION' | translate }}*"
+                                placeholder="{{ 'EXPLANATION' | translate }}"
                                 name="q01_explanation"
                                 id="q01_explanation"
                                 ng-model="latest_revision.concerns.q01_explanation"
@@ -791,7 +868,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q02_value.$invalid && !editDocumentForm.q02_value.$pristine }">
                         <label for="q02_value">
-                            <b>2. {{ 'CONCERN_2' | translate }}?</b>
+                            <b>2. {{ 'CONCERN_2' | translate }}?</b> <sup class="text-danger">*</sup>
                             <br>
                             <small class="text-muted">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_2_INFO' | translate }}
@@ -842,7 +919,7 @@
                             <textarea
                                 class="form-control"
                                 rows="5"
-                                placeholder="{{ 'EXPLANATION' | translate }}*"
+                                placeholder="{{ 'EXPLANATION' | translate }}"
                                 name="q02_explanation"
                                 id="q02_explanation"
                                 ng-model="latest_revision.concerns.q02_explanation"
@@ -865,7 +942,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q03_value.$invalid && !editDocumentForm.q03_value.$pristine }">
                         <label for="q03_value">
-                            <b>3. {{ 'CONCERN_3' | translate }}?</b>
+                            <b>3. {{ 'CONCERN_3' | translate }}?</b> <sup class="text-danger">*</sup>
                             <br>
                             <small class="text-muted">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_3_INFO' | translate }}
@@ -916,7 +993,7 @@
                             <textarea
                                 class="form-control"
                                 rows="5"
-                                placeholder="{{ 'EXPLANATION' | translate }}*"
+                                placeholder="{{ 'EXPLANATION' | translate }}"
                                 name="q03_explanation"
                                 id="q03_explanation"
                                 ng-model="latest_revision.concerns.q03_explanation"
@@ -939,7 +1016,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q04_value.$invalid && !editDocumentForm.q04_value.$pristine }">
                         <label for="q04_value">
-                            <b>4. {{ 'CONCERN_4' | translate }}?</b>
+                            <b>4. {{ 'CONCERN_4' | translate }}?</b> <sup class="text-danger">*</sup>
                             <!--<br>
                             <small class="text-muted">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_4_INFO' | translate }}
@@ -990,7 +1067,7 @@
                             <textarea
                                 class="form-control"
                                 rows="5"
-                                placeholder="{{ 'EXPLANATION' | translate }}*"
+                                placeholder="{{ 'EXPLANATION' | translate }}"
                                 name="q04_explanation"
                                 id="q04_explanation"
                                 ng-model="latest_revision.concerns.q04_explanation"
@@ -1013,7 +1090,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q05_value.$invalid && !editDocumentForm.q05_value.$pristine }">
                         <label for="q05_value">
-                            <b>5. {{ 'CONCERN_5' | translate }}?</b>
+                            <b>5. {{ 'CONCERN_5' | translate }}?</b> <sup class="text-danger">*</sup>
                             <br>
                             <small class="text-muted">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_5_INFO' | translate }}
@@ -1064,7 +1141,7 @@
                             <textarea
                                 class="form-control"
                                 rows="5"
-                                placeholder="{{ 'EXPLANATION' | translate }}*"
+                                placeholder="{{ 'EXPLANATION' | translate }}"
                                 name="q05_explanation"
                                 id="q05_explanation"
                                 ng-model="latest_revision.concerns.q05_explanation"
@@ -1087,7 +1164,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q06_value.$invalid && !editDocumentForm.q06_value.$pristine }">
                         <label for="q06_value">
-                            <b>6. {{ 'CONCERN_6' | translate }}?</b>
+                            <b>6. {{ 'CONCERN_6' | translate }}?</b> <sup class="text-danger">*</sup>
                             <!--<br>
                             <small class="text-muted">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_6_INFO' | translate }}
@@ -1138,7 +1215,7 @@
                             <textarea
                                 class="form-control"
                                 rows="5"
-                                placeholder="{{ 'EXPLANATION' | translate }}*"
+                                placeholder="{{ 'EXPLANATION' | translate }}"
                                 name="q06_explanation"
                                 id="q06_explanation"
                                 ng-model="latest_revision.concerns.q06_explanation"
@@ -1161,7 +1238,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q07_value.$invalid && !editDocumentForm.q07_value.$pristine }">
                         <label for="q07_value">
-                            <b>7. {{ 'CONCERN_7' | translate }}?</b>
+                            <b>7. {{ 'CONCERN_7' | translate }}?</b> <sup class="text-danger">*</sup>
                             <br>
                             <small class="text-muted">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_7_INFO' | translate }}
@@ -1212,7 +1289,7 @@
                             <textarea
                                 class="form-control"
                                 rows="5"
-                                placeholder="{{ 'EXPLANATION' | translate }}*"
+                                placeholder="{{ 'EXPLANATION' | translate }}"
                                 name="q07_explanation"
                                 id="q07_explanation"
                                 ng-model="latest_revision.concerns.q07_explanation"
@@ -1235,7 +1312,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q08_value.$invalid && !editDocumentForm.q08_value.$pristine }">
                         <label for="q08_value">
-                            <b>8. {{ 'CONCERN_8' | translate }}?</b>
+                            <b>8. {{ 'CONCERN_8' | translate }}?</b> <sup class="text-danger">*</sup>
                             <!--<br>
                             <small class="text-muted">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_8_INFO' | translate }}
@@ -1286,7 +1363,7 @@
                             <textarea
                                 class="form-control"
                                 rows="5"
-                                placeholder="{{ 'EXPLANATION' | translate }}*"
+                                placeholder="{{ 'EXPLANATION' | translate }}"
                                 name="q08_explanation"
                                 id="q08_explanation"
                                 ng-model="latest_revision.concerns.q08_explanation"
@@ -1309,7 +1386,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q09_value.$invalid && !editDocumentForm.q09_value.$pristine }">
                         <label for="q09_value">
-                            <b>9. {{ 'CONCERN_9' | translate }}?</b>
+                            <b>9. {{ 'CONCERN_9' | translate }}?</b> <sup class="text-danger">*</sup>
                             <br>
                             <small class="text-muted">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_9_INFO' | translate }}
@@ -1360,7 +1437,7 @@
                             <textarea
                                 class="form-control"
                                 rows="5"
-                                placeholder="{{ 'EXPLANATION' | translate }}*"
+                                placeholder="{{ 'EXPLANATION' | translate }}"
                                 name="q09_explanation"
                                 id="q09_explanation"
                                 ng-model="latest_revision.concerns.q09_explanation"
@@ -1383,7 +1460,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q10_value.$invalid && !editDocumentForm.q10_value.$pristine }">
                         <label for="q10_value">
-                            <b>10. {{ 'CONCERN_10' | translate }}?</b>
+                            <b>10. {{ 'CONCERN_10' | translate }}?</b> <sup class="text-danger">*</sup>
                             <br>
                             <small class="text-muted">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_10_INFO' | translate }}
@@ -1434,7 +1511,7 @@
                             <textarea
                                 class="form-control"
                                 rows="5"
-                                placeholder="{{ 'EXPLANATION' | translate }}*"
+                                placeholder="{{ 'EXPLANATION' | translate }}"
                                 name="q10_explanation"
                                 id="q10_explanation"
                                 ng-model="latest_revision.concerns.q10_explanation"
@@ -1457,7 +1534,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q11_1_value.$invalid && !editDocumentForm.q11_1_value.$pristine }">
                         <label for="q11_1_value">
-                            <b>11.1. {{ 'CONCERN_11_1' | translate }}?</b>
+                            <b>11.1. {{ 'CONCERN_11_1' | translate }}?</b> <sup class="text-danger">*</sup>
                             <br>
                             <small class="text-muted">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_11_1_INFO' | translate }}
@@ -1508,7 +1585,7 @@
                             <textarea
                                 class="form-control"
                                 rows="5"
-                                placeholder="{{ 'EXPLANATION' | translate }}*"
+                                placeholder="{{ 'EXPLANATION' | translate }}"
                                 name="q11_1_explanation"
                                 id="q11_1_explanation"
                                 ng-model="latest_revision.concerns.q11_1_explanation"
@@ -1531,7 +1608,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q11_2_value.$invalid && !editDocumentForm.q11_2_value.$pristine }">
                         <label for="q11_2_value">
-                            <b>11.2. {{ 'CONCERN_11_2' | translate }}?</b>
+                            <b>11.2. {{ 'CONCERN_11_2' | translate }}?</b> <sup class="text-danger">*</sup>
                             <!--<br>
                             <small class="text-muted">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_11_2_INFO' | translate }}
@@ -1582,7 +1659,7 @@
                             <textarea
                                 class="form-control"
                                 rows="5"
-                                placeholder="{{ 'EXPLANATION' | translate }}*"
+                                placeholder="{{ 'EXPLANATION' | translate }}"
                                 name="q11_2_explanation"
                                 id="q11_2_explanation"
                                 ng-model="latest_revision.concerns.q11_2_explanation"
@@ -1605,7 +1682,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q12_value.$invalid && !editDocumentForm.q12_value.$pristine }">
                         <label for="q12_value">
-                            <b>12. {{ 'CONCERN_12' | translate }}?</b>
+                            <b>12. {{ 'CONCERN_12' | translate }}?</b> <sup class="text-danger">*</sup>
                             <br>
                             <small class="text-muted">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_12_INFO' | translate }}
@@ -1656,7 +1733,7 @@
                             <textarea
                                 class="form-control"
                                 rows="5"
-                                placeholder="{{ 'EXPLANATION' | translate }}*"
+                                placeholder="{{ 'EXPLANATION' | translate }}"
                                 name="q12_explanation"
                                 id="q12_explanation"
                                 ng-model="latest_revision.concerns.q12_explanation"
@@ -1679,7 +1756,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.q13_value.$invalid && !editDocumentForm.q13_value.$pristine }">
                         <label for="q13_value">
-                            <b>13. {{ 'CONCERN_13' | translate }}?</b>
+                            <b>13. {{ 'CONCERN_13' | translate }}?</b> <sup class="text-danger">*</sup>
                             <br>
                             <small class="text-muted">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_13_INFO' | translate }}
@@ -1730,7 +1807,7 @@
                             <textarea
                                 class="form-control"
                                 rows="5"
-                                placeholder="{{ 'EXPLANATION' | translate }}*"
+                                placeholder="{{ 'EXPLANATION' | translate }}"
                                 name="q13_explanation"
                                 id="q13_explanation"
                                 ng-model="latest_revision.concerns.q13_explanation"
@@ -1772,9 +1849,21 @@
             {{ 'SUBMIT' | translate }}
         </div>
         <div class="card-block">
-            <br>
-            <div style="text-align: justify;">
+            <div class="alert alert-warning justified" role="alert">
+                <h5>
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'ATTENTION' | translate }}
+                </h5>
                 {{ 'SUBMIT_WARNING' | translate }}
+            </div>
+            <br>
+
+            <!-- TODO: Add a picture to show the document states / process -->
+
+            <div class="alert alert-info justified" role="alert">
+                <h5>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'AUTO_SAVING' | translate }}
+                </h5>
+                {{ 'AUTO_SAVING_HINT' | translate }}
             </div>
             <br>
         </div>

@@ -216,4 +216,8 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
         $scope.changeTab(1);
     }
 
+    // Study description 8
+    $scope.startDate = moment().format("DD.MM.YYYY");
+    $scope.endDate = moment().add(14, 'days').format("DD.MM.YYYY");
+
 });

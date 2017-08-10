@@ -203,6 +203,7 @@ exports.request = function(req, res) {
                         document: document,
                         description: description,
                         concern: concern,
+                        support_email_address: process.env.SUPPORT_EMAIL_ADDRESS,
                         year: moment().format("YYYY")
                     });
 
@@ -226,6 +227,7 @@ exports.request = function(req, res) {
                             document: document,
                             description: description,
                             concern: concern,
+                            support_email_address: process.env.SUPPORT_EMAIL_ADDRESS,
                             year: moment().format("YYYY")
                         });
 
@@ -252,6 +254,7 @@ exports.request = function(req, res) {
                             document: document,
                             description: description,
                             concern: concern,
+                            support_email_address: process.env.SUPPORT_EMAIL_ADDRESS,
                             year: moment().format("YYYY")
                         });
 

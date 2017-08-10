@@ -33,7 +33,7 @@
             </p>
             <br>
             <p style="text-align: justify;">
-                <b>Researchers:</b><br>
+                <b>Researcher(s):</b><br>
                 {{description.en_researcher}}
             </p>
             <p style="text-align: justify;">
@@ -56,6 +56,10 @@
                 <b>Privacy:</b><br>
                 Original data obtained from this study will be anonymised and only processed in aggregate. In such form, it might be published in academic journals, presentations or other media, but never in a way that would allow individual identification. One week after the completion of the study it might no longer be possible to retract your data from such aggregated analyses.
             </p>
+            <p style="text-align: justify;">
+                <b>Benefits:</b><br>
+                {{description.en_benefits}}
+            </p>
         </div>
         <div class="secondpage" style="page-break-before: always;">
             <br>
@@ -64,7 +68,7 @@
                 <b>If you have any questions, please ask them now.</b>
             </p>
             <p>
-                For further questions and complains, you can contact the Institute's Research Ethics Committee.
+                For further questions, complains or issues, please contact the institute's Ethics-Committee: &lt;{{support_email_address}}&gt;.
             </p>
             <br>
             <p>
@@ -77,13 +81,18 @@
                 &#9634; I confirm I was presented with this document prior to the beginning of the study.
             </p>
             <p>
-                &#9634; I confirm I understand my right to quit the study at any time.
+                &#9634; I confirm and I understood my right to quit the study at any time.
             </p>
-            <p>
-                {{#concern.q11.checkbox_1}}
-                &#9634; I agree for an audio/video* recording of the procedure, including my voice/image*. [* cross out irrelevant options]
-                {{/concern.q11.checkbox_1}}
-            </p>
+            {{#concern.q11_1_value}}
+                <p>
+                    &#9634; I agree to be audio recorded during the study.
+                </p>
+            {{/concern.q11_1_value}}
+            {{#concern.q11_1_value}}
+                <p>
+                    &#9634; I agree to be video recorded during the study.
+                </p>
+            {{/concern.q11_1_value}}
             <br>
             <br>
             <table style="width:100%;">
