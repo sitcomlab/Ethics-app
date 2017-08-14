@@ -288,9 +288,9 @@ app.constant("en_US", {
     DOCUMENT_PARTLY_ACCEPTED: 'Your document has been partly accepted',
     YOUR_DOCUMENT_HAS_BEEN_REJECTED: 'Your document has been rejected',
     MODIFICATIONS: 'Modifications',
-    REVISING_INFORMATION_1: 'If you want to change your document again, because you find a typo or want to revise a section, you have to ask the Ethics-Committee to get writing access agian. You can find the corresponding members',
+    REVISING_INFORMATION_1: 'If you want to change your document again, because you find a typo or want to revise a section, you have to ask the Ethics-Committee to get writing access again. You can find the corresponding members',
     HERE: 'here',
-    REVISING_INFORMATION_2: 'If you want to change your document again, because you find a typo or want to revise a section, you have to ask the Ethics-Committee to get writing access agian. You can find your corresponding  reviewer ',
+    REVISING_INFORMATION_2: 'If you want to change your document again, because you find a typo or want to revise a section, you have to ask the Ethics-Committee to get writing access again. You can find your corresponding  reviewer ',
     REVISING_INFORMATION_3: 'It is recommended to ask him/her directly, because he/she is already familar with your document',
 
     SHOW_SUBMISSION: 'Show submission',
