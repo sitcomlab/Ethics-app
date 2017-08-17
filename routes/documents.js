@@ -36,6 +36,9 @@ router.put('/documents/:document_id', isAuthenticated, put.request);
 // CHANGE STATUS
 router.put('/documents/:document_id/status', isAuthenticated, change_status.request);
 
+// RETRACT STUDY FOR MODIFICATION -> CHANGE STATUS TO 1
+router.put('/documents/:document_id/retract', change_status.request);
+
 // DELETE
 router.delete('/documents/:document_id', isAuthenticated, del.request);
 

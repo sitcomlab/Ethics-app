@@ -59,9 +59,9 @@ exports.request = function(req, res) {
                     if(err){
                         callback(new Error("Authorization failed"), 401);
                     } else {
-                        if(decoded.member){
+                        if(decoded.member || req.body.status == 1){
                             callback(null, client, done);
-                        } else {
+                        } else {  
                             callback(new Error("Authorization failed"), 401);
                         }
                     }
@@ -200,7 +200,7 @@ exports.request = function(req, res) {
         },
         function(client, done, document, revision, description, concern, comment, user, updated_document, callback){
             // Check if new revision is needed
-            if((document.status !== updated_document.status) && updated_document.status == 5){
+            if((document.status !== updated_document.status) && (updated_document.status == 5 || (document.status !== 0 && updated_document.status == 1))){
                 // Database query
                 client.query(query_create_revision, [
                     document.document_id,
@@ -346,7 +346,7 @@ exports.request = function(req, res) {
                     }
                     case 5: {
                         icon = "fa-pencil-square-o";
-                        status_description_1 = "Your document has been reviewed and partly accepted. Please read the comments in your review and revise it agian. If you have questions regarding your document, please get in touch with your reviewer.";
+                        status_description_1 = "Your document has been reviewed and partly accepted. Please read the comments in your review and revise it again. If you have questions regarding your document, please get in touch with your reviewer.";
                         status_description_2 = "If you have problems with your document, please get in touch with a committee member of your institute.";
                         updated_document._status_label = "badge-warning";
                         updated_document._status_description = "reviewed (partly accepted)";
