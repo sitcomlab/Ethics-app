@@ -31,6 +31,7 @@
     "helmet": "^3.4.1",
     "html-pdf": "^2.1.0",
     "jsonwebtoken": "^7.2.1",
+    "keepass.io": "^1.1.4",
     "moment": "^2.14.1",
     "mustache": "^2.3.0",
     "nodemailer": "^2.7.0",

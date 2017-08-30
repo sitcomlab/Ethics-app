@@ -1,0 +1,7 @@
+{
+    "DBPATH": "/home/user/desktop/",
+    "DBNAME": "ethics-app.kdbx",
+    "DBPASSWORD": "test",
+    "DBKEYFILE": "/home/user/desktop/ethics-app.key",
+    "PASSWORD_LENGTH": 25
+}

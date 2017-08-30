@@ -9,6 +9,7 @@ var moment = require('moment');
 var pool = require('../../server.js').pool;
 var pdf = require('html-pdf');
 var uuid = require("uuid");
+var secureStorageModule = require("./generate_secure_storage.js");
 
 var fs = require("fs");
 var dir_1 = "/../../templates/pdfs/";
@@ -21,11 +22,11 @@ var template_statement_of_researcher = fs.readFileSync(__dirname + dir_1 + 'stat
 var template_consent_form_en = fs.readFileSync(__dirname + dir_1 + 'consent_form_en.html', 'utf8').toString();
 var template_consent_form_de = fs.readFileSync(__dirname + dir_1 + 'consent_form_de.html', 'utf8').toString();
 var template_consent_form_pt = fs.readFileSync(__dirname + dir_1 + 'consent_form_pt.html', 'utf8').toString();
+var template_secure_storage_tutorial = fs.readFileSync(__dirname + dir_1 + 'secure_storage_tutorial.html', 'utf8').toString();
 var query_get_document_with_user = fs.readFileSync(__dirname + dir_2 + 'get_with_user.sql', 'utf8').toString();
 var query_get_latest_revision = fs.readFileSync(__dirname + dir_3 + 'get_latest_by_document.sql', 'utf8').toString();
 var query_get_description = fs.readFileSync(__dirname + dir_4 + 'get_by_revision.sql', 'utf8').toString();
 var query_get_concern = fs.readFileSync(__dirname + dir_5 + 'get_by_revision.sql', 'utf8').toString();
-
 
 // GENERATE FILES
 exports.request = function(req, res) {
@@ -267,6 +268,31 @@ exports.request = function(req, res) {
                         });
                         file.on('finish', function() {
                             callback();
+                        });
+                    } else {
+                        callback();
+                    }
+                },
+                function(callback) { // Generate Secure Storage Tutorial
+                    // Check if Password was already Generated
+                    if(!document.hassecurestoragepassword){
+                        secureStorageModule.createSS(req,res,document.document_id, function (err, psw) {
+                            if (err) callback(err, 500);
+                            // Render HTML-content
+                            var html = mustache.render(template_secure_storage_tutorial, {
+                                password: psw,
+                            });
+
+                            // Create file
+                            var file = fs.createWriteStream(folders.pathFilesFolder + '/secure_storage_tutorial.pdf');
+
+                            // Write content into file
+                            pdf.create(html, options).toStream(function(err, stream){
+                                stream.pipe(file);
+                            });
+                            file.on('finish', function() {
+                                callback();
+                            });
                         });
                     } else {
                         callback();

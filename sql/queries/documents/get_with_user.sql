@@ -3,6 +3,7 @@ SELECT
     document.created,
     document.updated,
     document.document_title,
+    document.hasSecureStoragePassword,
     document.status,
     _note.note_id,
     _note.note,
