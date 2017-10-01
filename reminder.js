@@ -387,7 +387,7 @@ async.waterfall([
     if(err){
         console.error(colors.red(err));
     } else {
-        console.error(colors.green(new Date() + " Reminder has been completed!"));
+        console.log(colors.green(new Date() + " Reminder has been completed!"));
     }
     // Close reminder
     process.exit(1);
