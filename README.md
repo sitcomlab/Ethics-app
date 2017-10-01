@@ -307,11 +307,20 @@ serverSettings: {
 
 ##### 2.5 Cleaning up during production
 
-* If you use the app in production, please create a cronjob for automatically cleaning up outdated PDFs. The app was designed to automatically generate PDFs on every request. The `cleanup.sh` script deletes all PDFs older than 7 days, which are presumed to not be needed anymore. Open `sudo nano /etc/crontab` and add the following lines:
+* If you use the app in production, please create a cronjob for automatically cleaning up outdated PDFs. The app was designed to automatically generate PDFs on every request. The `cleanup.sh` script deletes all PDFs older than 7 days, which are presumed to not be needed anymore. Open the CRON tab `sudo nano /etc/crontab` and add the following lines to it:
 
 ```
 # Delete outdated PDFs
 00 00 * * *   root    cd /home/<username>/Ethics-app && ./cleanup.sh
+```
+
+##### 2.6 Setting up the Review reminder
+
+* If a document has not been reviewed since 7 days, all members will receive a Reminder Email. Open the CRON tab `sudo nano /etc/crontab` and add the following lines to it:
+
+```
+# Review reminder
+00 00 * * *   root    cd /home/<username>/Ethics-app && node reminder.js
 ```
 
 ### 3. Starting the Ethics-app
