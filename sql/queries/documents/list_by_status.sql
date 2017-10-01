@@ -3,7 +3,7 @@ SELECT
     document.document_id,
     document.created,
     document.updated,
-    DATE_PART('day', now() - document.updated) AS remaning_days,
+    DATE_PART('day', now() - document.updated) AS past_days,
     document.document_title,
     document.status,
     _note.note_id,
@@ -56,7 +56,7 @@ FROM Documents document
 WHERE
         document.status = 3
     AND
-        DATE_PART('day', now() - document.updated) = $4::INTEGER
+        DATE_PART('day', now() - document.updated) >= $4::INTEGER
 ORDER BY
     CASE
         WHEN $3::TEXT='created.asc'     THEN document.created END ASC,

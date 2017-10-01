@@ -316,11 +316,13 @@ serverSettings: {
 
 ##### 2.6 Setting up the Review reminder
 
-* If a document has not been reviewed since 7 days, all members will receive a Reminder Email. Open the CRON tab `sudo nano /etc/crontab` and add the following lines to it:
+* If a document has not been reviewed since several days, all members will receive a reminder Email.
+* You need to define in the `.env` file the amount of days, after a reminder Email will be sent, for example: `REMINDER_DAYS=7`.
+* Open the CRON tab `sudo nano /etc/crontab` and add the following lines to it:
 
 ```
 # Review reminder
-00 00 * * *   root    cd /home/<username>/Ethics-app && node reminder.js
+00 00 * * *   root    cd /home/<username>/Ethics-app && node reminder.js >> reminder.log
 ```
 
 ### 3. Starting the Ethics-app
@@ -353,6 +355,7 @@ node server.js
     * `SMTP_SSL`: SMTP ssl connection (default: `true`)
     * `SMTP_EMAIL_ADDRESS`: SMTP email address, which is used to send emails via nodemailer to send document-Ids and notify the users and members about changes (default: `undefined`)
     * `SMTP_PASSWORD`: SMTP password (default: `undefined`)
+    * `REMINDER_DAYS`: Amount of days after a reminder Email will be sent, if a document has not been reviewed (default: `7`)
     * `JWTSECRET`: Secret for the JSON-Webtoken-authentication (default: `superSecretKey`)
 
 * If you want to run the application, you need to specify the `SMTP_EMAIL_ADDRESS` and `SMTP_PASSWORD`, otherwise no Emails with the document-IDs can be sent.
@@ -361,7 +364,7 @@ node server.js
 
 ```
 # Linux & macOS
-HTTP_PORT=4000 node server.js
+HTTP_PORT=4000 node server.js >> server.log
 
 # Windows
 set HTTP_PORT=4000 node server.js

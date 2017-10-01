@@ -91,7 +91,7 @@ async.waterfall([
             null,
             null,
             'title.asc',
-            0 // days
+            Number(process.env.REMINDER_DAYS)
         ], function(err, result) {
             done();
             if (err) {
@@ -102,8 +102,6 @@ async.waterfall([
         });
     },
     function(client, done, documents, callback){
-        console.log(documents);
-
         async.forEachOf(documents, function (document, key, callback) {
             async.waterfall([
                 function(callback){
@@ -202,7 +200,7 @@ async.waterfall([
                         } else {
                             // Check if members are available
                             if(result.rows.length === 0){
-                                callback("Currently no members are available at the institute '" + document.institute_name + "'");
+                                callback(new Error("Currently no members are available at the institute '" + document.institute_name + "'"));
                             } else {
                                 callback(null, course, revision, description, concern, author, result.rows);
                             }
@@ -357,17 +355,21 @@ async.waterfall([
                             if (err) {
                                 callback(err);
                             } else {
-                                callback();
+                                callback(null);
                             }
                         });
 
                     }, function(err){
-                        callback(null);
+                        if(err){
+                            callback(err);
+                        } else {
+                            callback(null);
+                        }
                     });
                 }
             ], function(err){
                 if(err){
-                    console.error(colors.red(err));
+                    callback(err);
                 } else {
                     console.log(colors.blue(new Date() + " Reminder has been sent for Document '" + document.document_id + "'"));
                     callback(null);
@@ -375,7 +377,7 @@ async.waterfall([
             });
         }, function (err) {
             if(err){
-                console.error(colors.red(err));
+                callback(err);
             } else {
                 callback(null);
             }
@@ -388,5 +390,5 @@ async.waterfall([
         console.error(colors.green(new Date() + " Reminder has been completed!"));
     }
     // Close reminder
-    process.exit();
+    process.exit(1);
 });
