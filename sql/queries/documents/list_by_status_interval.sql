@@ -56,7 +56,9 @@ FROM Documents document
 WHERE
         document.status = 3
     AND
-        DATE_PART('day', now() - document.updated) = $4::INTEGER
+        DATE_PART('day', now() - document.updated) >= $4::INTEGER
+    AND
+        DATE_PART('day', now() - document.updated) <= $5::INTEGER
 ORDER BY
     CASE
         WHEN $3::TEXT='created.asc'     THEN document.created END ASC,

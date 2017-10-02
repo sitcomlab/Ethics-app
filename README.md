@@ -316,13 +316,17 @@ serverSettings: {
 
 ##### 2.6 Setting up the Review reminder
 
-* If a document has not been reviewed since several days, all members will receive a reminder Email.
-* You need to define in the `.env` file the amount of days, after a reminder Email will be sent, for example: `REMINDER_DAYS=7`.
+* If a document has not been reviewed since several days, all members will receive a reminder Email at `9°° am`.
+* To set the amount of days, after the reminder Emails will be sent, you have to specified the `REMIND_AFTER=7` in the `.env` file.
+* If you set an amount of days for `REMIND_UNTIL=14`, everyday between `REMIND_AFTER` and  `REMIND_UNTIL` an Email will be sent to the members. To avoid this, set `REMIND_UNTIL=0`.
+* To avoid, that all members receive an Email, you can set `REMIND_ALL=false`. In this case the reminders will sent to corresponding members first, if a document is related to a course.
 * Open the CRON tab `sudo nano /etc/crontab` and add the following lines to it:
 
 ```
-# Review reminder
-00 00 * * *   root    cd /home/<username>/Ethics-app && node reminder.js >> reminder.log
+# Review reminders
+00 09 * * *   root    cd /home/<username>/Ethics-app && REMIND_AFTER=7 REMIND_ALL=false node reminder.js >> reminder.log
+01 09 * * *   root    cd /home/<username>/Ethics-app && REMIND_AFTER=14 node reminder.js >> reminder.log
+02 09 * * *   root    cd /home/<username>/Ethics-app && REMIND_AFTER=21 REMIND_UNTIL=30 node reminder.js >> reminder.log
 ```
 
 ### 3. Starting the Ethics-app
@@ -355,7 +359,9 @@ node server.js
     * `SMTP_SSL`: SMTP ssl connection (default: `true`)
     * `SMTP_EMAIL_ADDRESS`: SMTP email address, which is used to send emails via nodemailer to send document-Ids and notify the users and members about changes (default: `undefined`)
     * `SMTP_PASSWORD`: SMTP password (default: `undefined`)
-    * `REMINDER_DAYS`: Amount of days after a reminder Email will be sent, if a document has not been reviewed (default: `7`)
+    * `REMIND_AFTER`: Amount of days after a reminder Email will be sent everyday (default: `7`)
+    * `REMIND_UNTIL`: Amount of days until a reminder Email will no longer been sent (default: `0`)
+    * `REMIND_ALL`: Remind all members, if `false` the reminders will sent to corresponding members first, if a document is related to a course (default: `true`)
     * `JWTSECRET`: Secret for the JSON-Webtoken-authentication (default: `superSecretKey`)
 
 * If you want to run the application, you need to specify the `SMTP_EMAIL_ADDRESS` and `SMTP_PASSWORD`, otherwise no Emails with the document-IDs can be sent.

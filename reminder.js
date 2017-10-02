@@ -7,6 +7,8 @@ var mustache = require('mustache');
 var moment = require('moment');
 var jwt = require('jsonwebtoken');
 var config = require('dotenv').config();
+var domain = process.env.SERVER_URL + ":" + process.env.SERVER_PORT;
+var member_client_path = process.env.MEMBER_CLIENT_PATH;
 
 
 // DATABASE CONFIGURATION
@@ -19,6 +21,13 @@ var pool = new pg.Pool({
     ssl: JSON.parse(process.env.POSTGRES_SSL)
 });
 exports.pool = pool;
+
+
+if(Number(process.env.REMIND_UNTIL) > 0 && Number(process.env.REMIND_UNTIL) > Number(process.env.REMIND_AFTER)){
+    console.log(colors.green(new Date() + " Reminder (after " + process.env.REMIND_AFTER + " until " + process.env.REMIND_UNTIL + " days) has started"));
+} else {
+    console.log(colors.green(new Date() + " Reminder (after " + process.env.REMIND_AFTER + " days) has started"));
+}
 
 
 // Check database connection
@@ -53,9 +62,9 @@ var transporter = nodemailer.createTransport({
         pass: process.env.SMTP_PASSWORD
     }
 });
-var domain = process.env.SERVER_URL + ":" + process.env.SERVER_PORT;
-var member_client_path = process.env.MEMBER_CLIENT_PATH;
 
+
+// SQL files
 var dir_1 = "/templates/emails/";
 var dir_2 = "/sql/queries/documents/";
 var dir_3 = "/sql/queries/courses/";
@@ -67,13 +76,17 @@ var dir_8 = "/sql/queries/members/";
 
 var template_member_review_reminder = fs.readFileSync(__dirname + dir_1 + 'member_review_reminder.html', 'utf8').toString();
 var query_list_documents_by_status = fs.readFileSync(__dirname + dir_2 + 'list_by_status.sql', 'utf8').toString();
+var query_list_documents_by_status_interval = fs.readFileSync(__dirname + dir_2 + 'list_by_status_interval.sql', 'utf8').toString();
 var query_get_course_by_document = fs.readFileSync(__dirname + dir_3 + 'get_by_document.sql', 'utf8').toString();
 var query_get_latest_revision_by_document = fs.readFileSync(__dirname + dir_4 + 'get_latest_by_document.sql', 'utf8').toString();
 var query_get_description_by_revision = fs.readFileSync(__dirname + dir_5 + 'get_by_revision.sql', 'utf8').toString();
 var query_get_concern_by_revision = fs.readFileSync(__dirname + dir_6 + 'get_by_revision.sql', 'utf8').toString();
 var query_get_user = fs.readFileSync(__dirname + dir_7 + 'get.sql', 'utf8').toString();
+var query_list_members_by_course = fs.readFileSync(__dirname + dir_8 + 'list_by_course_internal.sql', 'utf8').toString();
 var query_list_members_by_subscription_filter_by_institute = fs.readFileSync(__dirname + dir_8 + 'list_by_subscription_filter_by_institute.sql', 'utf8').toString();
 
+
+// Start
 async.waterfall([
     function(callback){
         // Connect to database
@@ -86,13 +99,25 @@ async.waterfall([
         });
     },
     function(client, done, callback) {
-        // Database query
-        client.query(query_list_documents_by_status, [
+        var query = query_list_documents_by_status;
+        var params = [
             null,
             null,
             'title.asc',
-            Number(process.env.REMINDER_DAYS)
-        ], function(err, result) {
+            Number(process.env.REMIND_AFTER)
+        ];
+
+        // Check if interval was defined
+        if(Number(process.env.REMIND_UNTIL) > 0 && Number(process.env.REMIND_UNTIL) > Number(process.env.REMIND_AFTER)){
+            var query = query_list_documents_by_status_interval;
+            params.push(Number(process.env.REMIND_UNTIL));
+        }
+
+        callback(null, client, done, query, params);
+    },
+    function(client, done, query, params, callback) {
+        // Database query
+        client.query(query, params, function(err, result) {
             done();
             if (err) {
                 callback(err);
@@ -102,7 +127,7 @@ async.waterfall([
         });
     },
     function(client, done, documents, callback){
-        async.forEachOf(documents, function (document, key, callback) {
+        async.forEachOfSeries(documents, function (document, key, callback) {
             async.waterfall([
                 function(callback){
                     // Database query
@@ -190,22 +215,49 @@ async.waterfall([
                     });
                 },
                 function(course, revision, description, concern, author, callback){
-                    // Database query
-                    client.query(query_list_members_by_subscription_filter_by_institute, [
-                        document.institute_id
-                    ], function(err, result) {
-                        done();
-                        if (err) {
-                            callback(err);
-                        } else {
-                            // Check if members are available
-                            if(result.rows.length === 0){
-                                callback(new Error("Currently no members are available at the institute '" + document.institute_name + "'"));
+                    // Find responsible members, when document was referenced to a course
+                    if(course && !JSON.parse(process.env.REMIND_ALL)){
+                        // Database query
+                        client.query(query_list_members_by_course, [
+                            course.course_id
+                        ], function(err, result) {
+                            done();
+                            if (err) {
+                                callback(err);
                             } else {
-                                callback(null, course, revision, description, concern, author, result.rows);
+                                // Check if Members exists
+                                if (result.rows.length === 0) {
+                                    callback(null, course, revision, description, concern, author, result.rows);
+                                } else {
+                                    callback(null, course, revision, description, concern, author, []);
+                                }
                             }
-                        }
-                    });
+                        });
+                    } else {
+                        callback(null, course, revision, description, concern, author, []);
+                    }
+                },
+                function(course, revision, description, concern, author, members, callback){
+                    if(members.length > 0){
+                        callback(null, course, revision, description, concern, author, members)
+                    } else {
+                        // Database query
+                        client.query(query_list_members_by_subscription_filter_by_institute, [
+                            document.institute_id
+                        ], function(err, result) {
+                            done();
+                            if (err) {
+                                callback(err);
+                            } else {
+                                // Check if members are available
+                                if(result.rows.length === 0){
+                                    callback(new Error("Currently no members are available at the institute '" + document.institute_name + "'"));
+                                } else {
+                                    callback(null, course, revision, description, concern, author, result.rows);
+                                }
+                            }
+                        });
+                    }
                 },
                 function(course, revision, description, concern, author, members, callback){
                     // Formatting
@@ -371,7 +423,7 @@ async.waterfall([
                 if(err){
                     callback(err);
                 } else {
-                    console.log(colors.blue(new Date() + " Reminder has been sent for Document '" + document.document_id + "'"));
+                    console.log(colors.blue(new Date() + " Reminder has been sent for document '" + document.document_id + "'"));
                     callback(null);
                 }
             });
