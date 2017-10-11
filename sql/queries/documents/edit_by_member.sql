@@ -1,8 +1,6 @@
 UPDATE Documents SET (
-    updated,
     document_title
 ) = (
-    now(),
     $2::TEXT
 )
 WHERE
