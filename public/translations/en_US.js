@@ -266,6 +266,8 @@ app.constant("en_US", {
     STATEMENT_OF_RESEARCHER: 'Statement of researcher',
     INFORMED_CONSENT_FORM: 'Informed consent form',
     REVISE_DOCUMENT: 'Revise document',
+    HOW_TO_GUIDE: 'How-To Guide',
+    WE_PROVIDE_HOW_TO_GUIDE: 'Comprehensive How-To Guide is available here',
 
     INTRO: 'Introduction',
     REQUIRED: 'required',
