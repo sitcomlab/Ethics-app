@@ -288,10 +288,11 @@ app.constant("en_US", {
     DOCUMENT_PARTLY_ACCEPTED: 'Your document has been partly accepted',
     YOUR_DOCUMENT_HAS_BEEN_REJECTED: 'Your document has been rejected',
     MODIFICATIONS: 'Modifications',
-    REVISING_INFORMATION_1: 'If you want to change your document again, because you find a typo or want to revise a section, you have to ask the Ethics-Committee to get writing access again. You can find the corresponding members',
+    REVISING_INFORMATION_1: 'If you want to change some Details of the Study or fix some mistakes in this draft of the study, you can revert your study to the initial Draft Phase again. Please note that this resets your progress as the Document will need to be approved by the Ethics-Committee again.',
     HERE: 'here',
-    REVISING_INFORMATION_2: 'If you want to change your document again, because you find a typo or want to revise a section, you have to ask the Ethics-Committee to get writing access again. You can find your corresponding  reviewer ',
+    REVISING_INFORMATION_2: 'If you want to change some Details of the Study or fix some mistakes in this draft of the study, you can revert your study to the initial Draft Phase again. Please speak to the corresponding Reviewer of the Ethics-Committee first! He/She will have to review the Document all over again. You can find your corresponding reviewer ',
     REVISING_INFORMATION_3: 'It is recommended to ask him/her directly, because he/she is already familar with your document',
+    REVERT_TO_UNSUBMITTED: 'Revert to Draft Phase',
 
     SHOW_SUBMISSION: 'Show submission',
     SHOW_REVIEW: 'Show review',
