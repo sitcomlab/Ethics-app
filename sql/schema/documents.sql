@@ -11,6 +11,7 @@ CREATE TABLE Documents (
     -- Attributes
     user_id INTEGER NOT NULL REFERENCES Users(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
     document_title CHARACTER VARYING(255) NOT NULL,
+    hasSecureStoragePassword BOOLEAN DEFAULT false NOT NULL,
     status SMALLINT NOT NULL CHECK (status >= 0 AND status <= 7) DEFAULT 0
         -- 0 = unsubmitted - init (empty)
         -- 1 = unsubmitted - saved (in progress)

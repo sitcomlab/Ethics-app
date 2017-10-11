@@ -9,6 +9,8 @@ var moment = require('moment');
 var pool = require('../../server.js').pool;
 var pdf = require('html-pdf');
 var uuid = require("uuid");
+var secureStorageModule = require("./generate_secure_storage.js");
+var nodemailer = require('nodemailer'); 
 
 var fs = require("fs");
 var dir_1 = "/../../templates/pdfs/";
@@ -16,16 +18,28 @@ var dir_2 = "/../../sql/queries/documents/";
 var dir_3 = "/../../sql/queries/revisions/";
 var dir_4 = "/../../sql/queries/descriptions/";
 var dir_5 = "/../../sql/queries/concerns/";
+var dir_6 = "/../../templates/emails/";
 var template_debriefing_information = fs.readFileSync(__dirname + dir_1 + 'debriefing_information.html', 'utf8').toString();
 var template_statement_of_researcher = fs.readFileSync(__dirname + dir_1 + 'statement_of_researcher.html', 'utf8').toString();
 var template_consent_form_en = fs.readFileSync(__dirname + dir_1 + 'consent_form_en.html', 'utf8').toString();
 var template_consent_form_de = fs.readFileSync(__dirname + dir_1 + 'consent_form_de.html', 'utf8').toString();
 var template_consent_form_pt = fs.readFileSync(__dirname + dir_1 + 'consent_form_pt.html', 'utf8').toString();
+var template_secure_storage_tutorial = fs.readFileSync(__dirname + dir_6 + 'secure_storage_tutorial.html', 'utf8').toString();
 var query_get_document_with_user = fs.readFileSync(__dirname + dir_2 + 'get_with_user.sql', 'utf8').toString();
 var query_get_latest_revision = fs.readFileSync(__dirname + dir_3 + 'get_latest_by_document.sql', 'utf8').toString();
 var query_get_description = fs.readFileSync(__dirname + dir_4 + 'get_by_revision.sql', 'utf8').toString();
 var query_get_concern = fs.readFileSync(__dirname + dir_5 + 'get_by_revision.sql', 'utf8').toString();
 
+// SMTP CONFIGURATION
+var transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    secure: JSON.parse(process.env.SMTP_SSL),
+    auth: {
+        user: process.env.SMTP_EMAIL_ADDRESS,
+        pass: process.env.SMTP_PASSWORD
+    }
+});
 
 // GENERATE FILES
 exports.request = function(req, res) {
@@ -267,6 +281,42 @@ exports.request = function(req, res) {
                         });
                         file.on('finish', function() {
                             callback();
+                        });
+                    } else {
+                        callback();
+                    }
+                },
+                function(callback) { // Generate Secure Storage Tutorial
+                    // Check if Password was already Generated
+                    if(!document.hassecurestoragepassword){
+                        secureStorageModule.createSS(req,res,document.document_id, function (err, psw) {
+                            if (err) callback(err, 500);
+                            // Render HTML-content
+                            var html = mustache.render(template_secure_storage_tutorial, {
+                                password: psw,
+                                document: document,
+                            });
+
+                            // Render text for emails without HTML support
+                            var text = "Ethics-App Secure Storage Password: " + psw;
+
+                            // Send email
+                            transporter.sendMail({
+                                from: {
+                                    name: process.env.SENDER_NAME,
+                                    address: process.env.SENDER_EMAIL_ADDRESS
+                                },
+                                to: document.email_address,
+                                subject: "[Ethics-App] Secure Storage Password",
+                                text: text,
+                                html: html
+                            }, function(err, info) {
+                                if (err) {
+                                    callback(err);
+                                } else {
+                                    callback();
+                                }
+                            });  
                         });
                     } else {
                         callback();

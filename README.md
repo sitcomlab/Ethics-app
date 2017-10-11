@@ -212,14 +212,15 @@ sudo bower install --allow-root
 
 ##### 2.3. Node-Server configuration
 
-* Execute the following command inside our local repository-folder:
+* Execute the following commands inside our local repository-folder:
 
 ```
 cp .env.sample .env
+cp .securestorage.json.example .securestorage.json
 ```
 
 * Open the `.env` with your preferred text editor and configure the app appropriately for your host-server.
-
+* Open the `.securestorage.json` with youre preferred text editor and configure the app appropriately for your Keypass Database.
 ##### 2.4 Client configuration
 
 * Open the `/public/config.js` and configure the app appropriately for your host-server:
@@ -305,7 +306,7 @@ serverSettings: {
 }
 ```
 
-##### 2.5 Cleaning up during production
+##### 2.6 Cleaning up during production
 
 * If you use the app in production, please create a cronjob for automatically cleaning up outdated PDFs. The app was designed to automatically generate PDFs on every request. The `cleanup.sh` script deletes all PDFs older than 7 days, which are presumed to not be needed anymore. Open `sudo nano /etc/crontab` and add the following lines:
 
@@ -313,6 +314,11 @@ serverSettings: {
 # Delete outdated PDFs
 00 00 * * *   root    cd /home/<username>/Ethics-app && ./cleanup.sh
 ```
+
+##### 2.7 Keepass 
+
+For saving the passwords for the secure storage volume the Server needs an accessible kdbx Database.
+The Location of the Database has been configured in Step 2.3 in the config file `.securestorage.json`.
 
 ### 3. Starting the Ethics-app
 
@@ -357,8 +363,11 @@ HTTP_PORT=4000 node server.js
 # Windows
 set HTTP_PORT=4000 node server.js
 ```
-
-
+### 4. Known Bugs 
+### 4.1 Keepass Database deleted Items
+The Ethics App can currently not handle Keepass Databases only containing Items in the Recycle Bin. The Server will crash upon generating a new password.
+This issue can easily be avoided by not manually fiddling with the Database and deleting Entries.
+Due to the low impact and easy avoidance of the Bug this will probably not be fixed in the near future. 
 ## License
 
 [MIT](LICENSE)
