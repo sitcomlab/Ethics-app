@@ -53,11 +53,18 @@ module.exports.createSS = function(req, res, document_id, callback) {
                             .replace("U","F")
                             .replace("V","Z")
                             .replace("Q","X");
+                
+                var newEntry = {"String":[{"Key":"Password","Value":{"_":psw,"$":{"Protected":"True"}}},{"Key":"Title","Value":document_id}]};
 
-                // Add new Entry
-                rawDatabase.KeePassFile.Root.Group.Entry.push(
-                    {"String":[{"Key":"Password","Value":{"_":psw,"$":{"Protected":"True"}}},{"Key":"Title","Value":document_id}]}              
-                );
+                // Add new Entry. Check if Entries already exists else create new Array of Entries. Arrays of 1 always get converted to Object therefore
+                // custom handling is necessary.
+                if(rawDatabase.KeePassFile.Root.Group.Entry === undefined){
+                    rawDatabase.KeePassFile.Root.Group.Entry = newEntry
+                } else if (Array.isArray(rawDatabase.KeePassFile.Root.Group.Entry)) {
+                    rawDatabase.KeePassFile.Root.Group.Entry.push(newEntry);
+                } else {
+                    rawDatabase.KeePassFile.Root.Group.Entry = [rawDatabase.KeePassFile.Root.Group.Entry, newEntry];
+                }
                 // Write to Database
                 db.getRawApi().set(rawDatabase);
                 db.saveFile(config.DBPATH + config.DBNAME, function(err) {

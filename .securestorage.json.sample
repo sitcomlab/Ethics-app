@@ -1,7 +1,7 @@
 {
-    "DBPATH": "/home/user/desktop/",
-    "DBNAME": "ethics-app.kdbx",
-    "DBPASSWORD": "test",
-    "DBKEYFILE": "/home/user/desktop/ethics-app.key",
-    "PASSWORD_LENGTH": 25
+    "DBPATH": "/home/user/desktop/", // Path to Keepass Database
+    "DBNAME": "ethics-app.kdbx", // Keepass Database Name
+    "DBPASSWORD": "test", // Keepass Database Password
+    "DBKEYFILE": "/home/user/desktop/ethics-app.key", // Keepass Database Keyfile
+    "PASSWORD_LENGTH": 25 // Length of generated passwords
 }
