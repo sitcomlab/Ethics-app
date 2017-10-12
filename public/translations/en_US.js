@@ -165,6 +165,7 @@ app.constant("en_US", {
     PROVIDED_TO_PARTICIPANTS_AFTER_STUDY:'(provided to participants after the study)',
     TO_BE_FILLED_OUT_BY_PARTICIPANT:'(to be filled out by each participant)',
     SIGN_BY_YOURSELF:'(sign by yourself and add to archive)',
+    COVER_SHEET: 'Cover sheet',
 
     DEFAULT:'Default',
     STATUS:'Status',
