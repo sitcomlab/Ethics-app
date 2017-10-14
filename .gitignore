@@ -7,3 +7,4 @@ sql/schema/defaults.sql
 *.env
 *.log
 *.DS_Store
+.securestorage.json

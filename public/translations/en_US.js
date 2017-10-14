@@ -113,10 +113,10 @@ app.constant("en_US", {
     ALTERNATIVE_WORKING_GROUP: 'If you don\'t want to delete EVERYTHING associated with this working group you can change it to a former working group',
 
     RELATED_COURSE: 'Related course',
-    COURSE_DESCRIPTION_1: 'If you are creating this document for a course, please select the appropiate Course from the selection below. If you cannot find it, please ask your lecturer to add it to the list (It is possible to change the course later in the document settings).',
-    COURSE_DESCRIPTION_2: 'If you are creating the document for a personal study, for example your thesis, then you do not need to connect it to a course.',
+    COURSE_DESCRIPTION_1: 'If you are creating this document for a course, please select the appropiate course from the selection below. If you cannot find it, please ask your lecturer to add it to the list (It is possible to change the course later in the document settings).',
+    COURSE_DESCRIPTION_2: 'If you are creating the document for a personal study, for example your thesis, you do not need to connect it to a course.',
 
-    INTRODUCTION_TEXT_FRAGMENT_1: 'This Web-App will guide you in creating the necessary forms for your user study. You will be asked a series of questions, based on which the Ethics-App will auto-generate three documents.',
+    INTRODUCTION_TEXT_FRAGMENT_1: 'This Web-App will guide you in creating the necessary forms for your user study. You will be asked a series of questions, based on which the Ethics-App will auto-generate appropiate documents. If the process is unclear please refer to the Help Section.,
     INTRODUCTION_TEXT_FRAGMENT_2: 'The Informed Consent form',
     INTRODUCTION_TEXT_FRAGMENT_3: 'This is the most important document. It assures that the Participant gave his consent prior to participating in the study. Both you and your participant must sign the document, and you need to store your copy safely. Conducting a study without the written consent of the participant is not advised and can lead to various legal issues.',
     INTRODUCTION_TEXT_FRAGMENT_4: 'The Statement of the Researcher',
@@ -126,7 +126,9 @@ app.constant("en_US", {
     INTRODUCTION_TEXT_FRAGMENT_8: 'You are ',
     INTRODUCTION_TEXT_FRAGMENT_9: 'required',
     INTRODUCTION_TEXT_FRAGMENT_10: ' to use these Documents in your experiment.',
-
+    INTRODUCTION_TEXT_FRAGMENT_11: 'The cover sheet',
+    INTRODUCTION_TEXT_FRAGMENT_12: 'The cover sheet is handed in together with the signed Consent Forms to the secretariat. It will be filled out automatically. Please note that your forms will be rejected by the secretariat if the appropiate cover sheet is not supplied.',
+    
     STUDY_DESCRIPTION_FORM_TEXT: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally versions in other languages. Depending on the language(s) filled out, you will receive the informed consent forms in the chosen languages to be used during your experiment.',
     CHOOSE_LANGUAGE:'Please select the language(s), in which you want to generate the informed consent forms:',
     STUDY_CONCERNS_FORM_TEXT: 'Complete the checklist below. If you have answered yes to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the Institutes Ethics-Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the Intitutes\'s Ethics-Committee.',
@@ -235,7 +237,7 @@ app.constant("en_US", {
     CONCERN_12: 'Is any raw data from the study likely to be passed on to external partners',
     CONCERN_13: 'Does the study involve collection of any information without obtaining an Informed Consent in a situation different from public observations or anonymous street surveys',
 
-    CONCERN_1_INFO: 'For instance: children and youth under 18yo, participants with impairments, patients, people assisted by a carer, people recruited from groups associated with a specific mental or physical condition.',
+    CONCERN_1_INFO: 'For instance: participants under the age of 18, participants with impairments, patients, people assisted by a carer, people recruited from groups associated with a specific mental or physical condition.',
     CONCERN_2_INFO: 'That is to say: Will participants be deliberately mislead in such a way that they might show distress or ask to retract their data when debriefed?',
     CONCERN_3_INFO: 'For instance: viewing images involving emotional content that participants might want to avoid, discussing topics related to sexuality, asking personal questions in a publicly exposed environment.',
     CONCERN_4_INFO: '',
