@@ -353,28 +353,28 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
     
     switch($scope.document.status) {
         case 0:
-            $scope.document.status = "initialized"
+            $scope.document.statusText = "initialized"
             break;
         case 1:
-            $scope.document.status = "unsubmitted (in progress)"
+            $scope.document.statusText = "unsubmitted (in progress)"
             break;
         case 2:
-            $scope.document.status = "auto-accepted (submitted without concerns)"
+            $scope.document.statusText = "auto-accepted (submitted without concerns)"
             break;
         case 3:
-            $scope.document.status = "review required (submitted with concerns)"
+            $scope.document.statusText = "review required (submitted with concerns)"
             break;
         case 4:
-            $scope.document.status = "under review (review in progress)"
+            $scope.document.statusText = "under review (review in progress)"
             break;
         case 5:
-            $scope.document.status = "reviewed & partly accepted"
+            $scope.document.statusText = "reviewed & partly accepted"
             break;
         case 6:
-            $scope.document.status = "reviewed & accepted"
+            $scope.document.statusText = "reviewed & accepted"
             break;
         case 7:
-            $scope.document.status = "reviewed & rejected"
+            $scope.document.statusText = "reviewed & rejected"
             break;
     }
 
