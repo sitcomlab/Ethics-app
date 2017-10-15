@@ -116,7 +116,7 @@ app.constant("en_US", {
     COURSE_DESCRIPTION_1: 'If you are creating this document for a course, please select the appropiate course from the selection below. If you cannot find it, please ask your lecturer to add it to the list (It is possible to change the course later in the document settings).',
     COURSE_DESCRIPTION_2: 'If you are creating the document for a personal study, for example your thesis, you do not need to connect it to a course.',
 
-    INTRODUCTION_TEXT_FRAGMENT_1: 'This Web-App will guide you in creating the necessary forms for your user study. You will be asked a series of questions, based on which the Ethics-App will auto-generate appropiate documents. If the process is unclear please refer to the Help Section.,
+    INTRODUCTION_TEXT_FRAGMENT_1: 'This Web-App will guide you in creating the necessary forms for your user study. You will be asked a series of questions, based on which the Ethics-App will auto-generate appropiate documents. If the process is unclear please refer to the Help Section.',
     INTRODUCTION_TEXT_FRAGMENT_2: 'The Informed Consent Form',
     INTRODUCTION_TEXT_FRAGMENT_3: 'This is the most important document. It assures that the participant gave his consent prior to participating in the study. Both you and your participant must sign the document, and you need to store your copy safely. Conducting a study without the written consent of the participant is not advised and can lead to various legal issues.',
     INTRODUCTION_TEXT_FRAGMENT_4: 'The Statement of the researcher',
