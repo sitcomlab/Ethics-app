@@ -139,6 +139,14 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
                 }
             });
         },
+        changeStatusTo1: function(document_id){
+            return $http.put(config.getApiEndpoint() + "/documents/" + document_id + "/retract", {status: 1}, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
+      
         generateFiles: function(document_id) {
             return $http.get(config.getApiEndpoint() + "/documents/" + document_id + "/files", {
                 headers: {

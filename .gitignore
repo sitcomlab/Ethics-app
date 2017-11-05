@@ -4,5 +4,7 @@ public/bower_components/*
 public/files/temp/*
 sql/schema/examples.sql
 sql/schema/defaults.sql
-.env
-.DS_Store
+*.env
+*.log
+*.DS_Store
+.securestorage.json

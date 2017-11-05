@@ -10,12 +10,6 @@
             </h5>
             {{ 'STATUS_6' | translate }}
         </div>
-        <div class="alert alert-info justified" role="alert">
-            <h5>
-                <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'MODIFICATIONS' | translate }}
-            </h5>
-            {{ 'REVISING_INFORMATION_2' | translate }} (<b><i class="fa fa-user" aria-hidden="true"></i> {{document.revisions[0].reviewer.full_name}}</b>) <a href="" ng-click="redirect('/members/' + document.revisions[0].reviewer.member_id)">{{ 'HERE' | translate }}</a>. {{ 'REVISING_INFORMATION_3' | translate }}.
-        </div>
         <br>
         <br>
         <div class="row">
@@ -82,6 +76,30 @@
                 <p class="text-muted">
                     <span class="flag-icon flag-icon-pt"></span>&nbsp;&nbsp;<b>{{ 'INFORMED_CONSENT_FORM' | translate }}</b><br>
                     {{ 'TO_BE_FILLED_OUT_BY_PARTICIPANT' | translate }}
+                </p>
+                <br>
+                <br>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle">
+                <p>
+                    <a href="/files/howto.pdf" download="Ethics-app_How-To.pdf" target="_blank">
+                        <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
+                    </a>
+                </p>
+                <p class="text-muted">
+                    <b>{{ 'HOW_TO_GUIDE' | translate }}</b>
+                </p>
+                <br>
+                <br>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle">
+                <p>
+                    <a href="{{files.path}}/cover_sheet.pdf" download="cover_sheet.pdf" target="_blank">
+                        <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
+                    </a>
+                </p>
+                <p class="text-muted">
+                    <b>{{ 'COVER_SHEET' | translate }}</b>
                 </p>
                 <br>
                 <br>

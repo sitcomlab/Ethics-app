@@ -246,6 +246,7 @@
                                 ng-model="institute_id"
                                 ng-options="institute.institute_id as institute.institute_name group by getGroupName('institutes', institute.former) for institute in institutes"
                                 ng-disabled="university_id == null"
+                                ng-change="load('working_groups')"
                                 required
                             >
                                 <option value="">

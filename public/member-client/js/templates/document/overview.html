@@ -46,11 +46,21 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'STATUS' | translate }}</b>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <b>{{document.statusText}}</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'AUTHOR' | translate }}</b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <a href="" ng-click="redirect('/users/' + document.user_id)">
-                                {{document.title}} {{document.first_name}} {{document.last_name}}
+                                {{document.first_name}} {{document.last_name}}
                             </a>
                         </div>
                     </div>

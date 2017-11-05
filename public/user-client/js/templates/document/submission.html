@@ -1456,8 +1456,34 @@
                         </div>
                     </div>
                 </div>
+                <div class="card-footer">
+                  <div class="alert alert-info justified" role="alert" ng-if=!document.revisions[0].reviewer>
+                      <h5>
+                          <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'MODIFICATIONS' | translate }}
+                      </h5>
+                      {{ 'REVISING_INFORMATION_1' | translate }} <a href="" ng-click="redirect('/members')">{{ 'HERE' | translate }}</a>.
+                  </div>
+                  <div class="alert alert-info justified" role="alert" ng-if=document.revisions[0].reviewer>
+                    <h5>
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'MODIFICATIONS' | translate }}
+                    </h5>
+                    {{ 'REVISING_INFORMATION_2' | translate }} (<b><i class="fa fa-user" aria-hidden="true"></i> {{latest_revision.reviewer.full_name}}</b>) <a href="" ng-if=document.revisions[0].reviewer ng-click="redirect('/members/' + latest_revision.reviewer.member_id)">{{ 'HERE' | translate }}</a>. {{ 'REVISING_INFORMATION_3' | translate }}.
+                  </div>
+                  <h6>
+                    {{ 'PLEASE_TYPE_IN_THE_TITLE_OF_THE_DOCUMENT_TO_CONFIRM' | translate }} <kbd>{{document.document_title}}</kbd>?
+                  </h6>
+                  <br>
+                  <input type="text" class="form-control" ng-model="input" id="documentName" placeholder="{{ 'DOCUMENT_TITLE' | translate }}" autofocus>
+                  <br>
+                  <div class="row">
+                      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 center">
+                          <button href="" class="btn btn-danger btn-block-xs-only btn-block-sm-only" role="button" ng-click="changeStatusToOne()" ng-disabled="input != document.document_title">
+                              <i class="fa fa-angle-center" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'REVERT_TO_UNSUBMITTED' | translate }}
+                          </button>
+                      </div>
+                  </div>
+              </div>
             </div>
         </div>
-
     </div>
 </div>

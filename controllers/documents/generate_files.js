@@ -16,6 +16,7 @@ var dir_2 = "/../../sql/queries/documents/";
 var dir_3 = "/../../sql/queries/revisions/";
 var dir_4 = "/../../sql/queries/descriptions/";
 var dir_5 = "/../../sql/queries/concerns/";
+var template_cover_sheet = fs.readFileSync(__dirname + dir_1 + 'cover_sheet.html', 'utf8').toString();
 var template_debriefing_information = fs.readFileSync(__dirname + dir_1 + 'debriefing_information.html', 'utf8').toString();
 var template_statement_of_researcher = fs.readFileSync(__dirname + dir_1 + 'statement_of_researcher.html', 'utf8').toString();
 var template_consent_form_en = fs.readFileSync(__dirname + dir_1 + 'consent_form_en.html', 'utf8').toString();
@@ -161,6 +162,26 @@ exports.request = function(req, res) {
 
             // Create files
             async.parallel([
+                function(callback) { // Generate Cover Sheet
+                    // Render HTML-content
+                    var html = mustache.render(template_cover_sheet, {
+                        document: document,
+                        description: description,
+                        revision: revision,
+                        year: moment().format("YYYY")
+                    });
+
+                    // Create file
+                    var file = fs.createWriteStream(folders.pathFilesFolder + '/cover_sheet.pdf');
+
+                    // Write content into file
+                    pdf.create(html, options).toStream(function(err, stream){
+                        stream.pipe(file);
+                    });
+                    file.on('finish', function() {
+                        callback();
+                    });
+                },
                 function(callback) { // Generate debriefing information
                     // Render HTML-content
                     var html = mustache.render(template_debriefing_information, {
@@ -203,6 +224,7 @@ exports.request = function(req, res) {
                         document: document,
                         description: description,
                         concern: concern,
+                        revision: revision,
                         support_email_address: process.env.SUPPORT_EMAIL_ADDRESS,
                         year: moment().format("YYYY")
                     });
@@ -227,6 +249,7 @@ exports.request = function(req, res) {
                             document: document,
                             description: description,
                             concern: concern,
+                            revision: revision,
                             support_email_address: process.env.SUPPORT_EMAIL_ADDRESS,
                             year: moment().format("YYYY")
                         });
@@ -254,6 +277,7 @@ exports.request = function(req, res) {
                             document: document,
                             description: description,
                             concern: concern,
+                            revision: revision,
                             support_email_address: process.env.SUPPORT_EMAIL_ADDRESS,
                             year: moment().format("YYYY")
                         });

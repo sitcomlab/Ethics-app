@@ -350,6 +350,33 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
     $scope.document = $documentService.get();
     $scope.latest_revision = $documentService.getLatestRevision();
     $scope.authenticated_member = $authenticationService.get();
+    
+    switch($scope.document.status) {
+        case 0:
+            $scope.document.statusText = "initialized"
+            break;
+        case 1:
+            $scope.document.statusText = "unsubmitted (in progress)"
+            break;
+        case 2:
+            $scope.document.statusText = "auto-accepted (submitted without concerns)"
+            break;
+        case 3:
+            $scope.document.statusText = "review required (submitted with concerns)"
+            break;
+        case 4:
+            $scope.document.statusText = "under review (review in progress)"
+            break;
+        case 5:
+            $scope.document.statusText = "reviewed & partly accepted"
+            break;
+        case 6:
+            $scope.document.statusText = "reviewed & accepted"
+            break;
+        case 7:
+            $scope.document.statusText = "reviewed & rejected"
+            break;
+    }
 
     // Update navbar
     $scope.$parent.document = $documentService.get();
