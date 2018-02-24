@@ -8,3 +8,4 @@ sql/schema/defaults.sql
 *.log
 *.DS_Store
 .securestorage.json
+.dejavuerc

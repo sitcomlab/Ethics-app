@@ -1,16 +1,22 @@
 {
   "name": "ethics-app",
-  "version": "1.0.0",
+  "version": "1.4.0",
   "description": "Application for the approval of user-studies",
   "main": "server.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sitcomlab/Ethics-app.git"
   },
-  "author": {
-    "name": "Nicholas Schiestel",
-    "email": "n.schiestel@uni-muenster.de"
-  },
+  "contributors": [
+    {
+      "name": "Nicholas Schiestel",
+      "email": "n.schiestel@uni-muenster.de"
+    },
+    {
+      "name": "Jan Speckamp",
+      "email": "speckij@gmail.com"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sitcomlab/Ethics-app/issues"

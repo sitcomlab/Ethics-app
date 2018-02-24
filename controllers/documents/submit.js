@@ -401,9 +401,10 @@ exports.request = function(req, res) {
                             address: process.env.SENDER_EMAIL_ADDRESS
                         },
                         to: member.email_address,
-                        subject: "[Ethics-App] A document needs your review",
+                        subject: "[Ethics-App] A Study needs your review - Study Title: " + description.en_title,
                         text: text,
-                        html: output
+                        html: output,
+                        messageId: document.document_id + "_review_reminder@giv-ethics-app.uni-muenster.de"
                     }, function(err, info) {
                         if (err) {
                             callback(err);
