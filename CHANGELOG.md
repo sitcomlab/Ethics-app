@@ -1,5 +1,6 @@
 # Version 1.4.1
  - Added Email Notification to all Members when Review is started (and not pending anymore)
+ - bugfixes & style improvements
 
 # Version 1.4.0
  - Added Reminder Email to be sent out after 7 days of inactivity with still pending reviews.
