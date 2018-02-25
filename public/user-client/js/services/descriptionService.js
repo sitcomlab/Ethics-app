@@ -1,6 +1,5 @@
 var app = angular.module("descriptionService", []);
 
-
 // Description service
 app.factory('$descriptionService', function($http, $log, config, $authenticationService) {
 
@@ -20,5 +19,4 @@ app.factory('$descriptionService', function($http, $log, config, $authentication
             });
         }
     };
-
 });

@@ -9,11 +9,11 @@ var pool = require('../../server.js').pool;
 var fs = require("fs");
 var dir = "/../../sql/queries/concerns/";
 var query_get_concern = fs.readFileSync(__dirname + dir + 'get.sql', 'utf8').toString();
-var query_edit_concern = fs.readFileSync(__dirname + dir + 'edit.sql', 'utf8').toString();
+var query_add_file = fs.readFileSync(__dirname + dir + 'set_uploaded_file.sql', 'utf8').toString();
 
 
 // EDIT
-exports.request = function(req, res) {
+exports.upload = function(req, res) {
 
     async.waterfall([
         function(callback){
@@ -48,43 +48,16 @@ exports.request = function(req, res) {
             // TODO: Add object/schema validation
             var object = {
                 concern_id: req.params.concern_id,
-                q01_value: req.body.q01_value,
-                q01_explanation: req.body.q01_explanation,
-                q02_value: req.body.q02_value,
-                q02_explanation: req.body.q02_explanation,
-                q03_value: req.body.q03_value,
-                q03_explanation: req.body.q03_explanation,
-                q04_value: req.body.q04_value,
-                q04_explanation: req.body.q04_explanation,
-                q05_value: req.body.q05_value,
-                q05_explanation: req.body.q05_explanation,
-                q06_value: req.body.q06_value,
-                q06_explanation: req.body.q06_explanation,
-                q07_value: req.body.q07_value,
-                q07_explanation: req.body.q07_explanation,
-                q08_value: req.body.q08_value,
-                q08_explanation: req.body.q08_explanation,
-                q09_value: req.body.q09_value,
-                q09_explanation: req.body.q09_explanation,
-                q10_value: req.body.q10_value,
-                q10_explanation: req.body.q10_explanation,
-                q11_1_value: req.body.q11_1_value,
-                q11_1_explanation: req.body.q11_1_explanation,
-                q11_2_value: req.body.q11_2_value,
-                q11_2_explanation: req.body.q11_2_explanation,
-                q12_value: req.body.q12_value,
-                q12_explanation: req.body.q12_explanation,
-                q13_value: req.body.q13_value,
-                q13_explanation: req.body.q13_explanation,
-                q14_value: req.body.q14_value,
-                q14_explanation: req.body.q14_explanation
+                q14_filename: req.file.originalname,
+                q14_filepath: req.file.path
             };
             var params = _.values(object);
             callback(null, client, done, params);
         },
         function(client, done, params, callback){
+            console.log(req.file);
             // Database query
-            client.query(query_edit_concern, params, function(err, result) {
+            client.query(query_add_file, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);

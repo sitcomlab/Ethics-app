@@ -1,0 +1,7 @@
+
+TODO(specki): add file column to description
+
+ALTER TABLE Concerns ADD q14_value boolean default null;
+ALTER TABLE Concerns ADD q14_explanation text default null;
+ALTER TABLE Concerns ADD q14_filename text default null;
+ALTER TABLE Concerns ADD q14_filepath text default null;

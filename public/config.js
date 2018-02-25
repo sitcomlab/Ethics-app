@@ -12,7 +12,7 @@ app.constant("config", {
     appLanguage: 'en_US',
     appYear: moment().format("YYYY"),
     timeZone: "Europe/Berlin",
-    debugMode: false,
+    debugMode: true,
     html5Mode: true,
     serverMode: 'development',
     serverSettings: {
@@ -20,6 +20,7 @@ app.constant("config", {
             host: 'http://localhost',
             port: 5000,
             apiPath: "/api",
+            uploadPath: "/upload/",
             memberClientPath: '/member-client',
             userClientPath: '/user-client'
         },
@@ -27,8 +28,16 @@ app.constant("config", {
             host: 'http://localhost',
             port: 80,
             apiPath: "/api",
+            uploadPath: "/upload/",
             memberClientPath: '/member-client',
             userClientPath: '/user-client'
+        }
+    },
+    getUploadEndpoint: function(){
+        if(this.serverMode === 'production'){
+            return this.serverSettings.production.host + ":" + this.serverSettings.production.port + this.serverSettings.production.uploadPath
+        } else {
+            return this.serverSettings.development.host + ":" + this.serverSettings.development.port + this.serverSettings.development.uploadPath
         }
     },
     getApiEndpoint: function(){

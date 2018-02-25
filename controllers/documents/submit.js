@@ -170,6 +170,8 @@ exports.request = function(req, res) {
                 callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q13_value){
                 callback(null, client, done, document, course, revision, description, concern, 3);
+            } else if(concern.q14_value){
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else {
                 // Check if document has been already in review
                 if(document.status === 5){

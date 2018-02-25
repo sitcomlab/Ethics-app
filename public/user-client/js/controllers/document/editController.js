@@ -1,8 +1,7 @@
 var app = angular.module("ethics-app");
 
-
 // Document edit controller
-app.controller("documentEditController", function($scope, $rootScope, $filter, $translate, $location, config, $window, $q, $authenticationService, $documentService, $descriptionService, $concernService) {
+app.controller("documentEditController", function($scope, $rootScope, $filter, $translate, $location, config, $window, $q, $authenticationService, $documentService, $descriptionService, $concernService, upload) {
 
     /*************************************************
         FUNCTIONS
@@ -33,8 +32,34 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
     $scope.cancel = function(){
         $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
     };
-
-
+    
+    /**
+     * [upload file]
+     * @return {[type]} [file]
+     */
+    $scope.doUpload = function (files) {
+        $scope.status = "uploading";
+        upload({
+          url: config.getUploadEndpoint() + $scope.latest_revision.concerns.concern_id,
+          method: 'POST',
+          headers: {
+              'Authorization': 'Bearer ' + $authenticationService.getToken()
+          },
+          data: {
+            filename: files[0], // a jqLite type="file" element, upload() will extract all the files from the input and put them into the FormData object before sending.
+          }
+        }).then(
+          function (response) {
+            $scope.status = "success";
+            $scope.latest_revision.concerns.q14_file = true;
+          },
+          function (response) {
+            $scope.status = "fail";
+            $window.alert($filter('translate')('ALERT_UPLOAD_FILE_FAILED'));
+          }
+        );
+    }
+    
     /**
      * [saveDocument description]
      * @return {[type]} [description]
@@ -140,6 +165,7 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
             $scope.editDocumentForm.q11_2_value.$pristine = false;
             $scope.editDocumentForm.q12_value.$pristine = false;
             $scope.editDocumentForm.q13_value.$pristine = false;
+            $scope.editDocumentForm.q14_value.$pristine = false;
 
             // Conerns (explanations)
             if($scope.editDocumentForm.q01_explanation){
@@ -183,6 +209,9 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
             }
             if($scope.editDocumentForm.q13_explanation){
                 $scope.editDocumentForm.q13_explanation.$pristine = false;
+            }
+            if($scope.editDocumentForm.q14_explanation){
+                $scope.editDocumentForm.q14_explanation.$pristine = false;
             }
 
             $window.alert($filter('translate')('ALERT_SUBMIT_DOCUMENT_FAILED'));
