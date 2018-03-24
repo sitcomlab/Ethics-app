@@ -39,6 +39,7 @@ CREATE TABLE Concerns (
     q13_value BOOLEAN DEFAULT NULL,
     q13_explanation TEXT DEFAULT NULL,
     q14_value BOOLEAN DEFAULT NULL,
+    q14_explanation TEXT DEFAULT NULL,
     q14_filename TEXT DEFAULT NULL,
     q14_filepath TEXT DEFAULT NULL,
 );

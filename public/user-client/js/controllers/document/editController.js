@@ -24,13 +24,21 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
     $scope.redirect = function(path){
         $location.url(path);
     };
-
+    
     /**
      * [cancel description]
      * @return {[type]} [description]
      */
     $scope.cancel = function(){
         $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
+    };
+    
+   /**
+     * []
+     */
+    $scope.resetFile = function(){
+        $scope.status = "fail";
+        $scope.latest_revision.concerns.q14_filename = null;
     };
     
     /**
@@ -43,8 +51,9 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
           url: config.getUploadEndpoint() + $scope.latest_revision.concerns.concern_id,
           method: 'POST',
           headers: {
-              'Authorization': 'Bearer ' + $authenticationService.getToken()
-          },
+              'Authorization': 'Bearer ' + $authenticationService.getToken(),
+              'X-DocumentId' : $documentService.getId()
+            },
           data: {
             filename: files[0], // a jqLite type="file" element, upload() will extract all the files from the input and put them into the FormData object before sending.
           }
@@ -52,6 +61,8 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
           function (response) {
             $scope.status = "success";
             $scope.latest_revision.concerns.q14_file = true;
+            $scope.latest_revision.concerns.q14_filename = files[0].name;
+            $scope.latest_revision.concerns.q14_filepath = response.data;
           },
           function (response) {
             $scope.status = "fail";
@@ -117,7 +128,7 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
      */
     $scope.submit = function() {
         // Validate input
-        if($scope.editDocumentForm.$invalid) {
+        if($scope.editDocumentForm.$invalid || ($scope.status == "fail" && $scope.editDocumentForm.q14_value)) {
             // Update UI
 
             // Descriptions (en)
@@ -244,7 +255,11 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
         $scope.$parent.loading = { status: false, message: "" };
         $scope.changeTab(1);
     }
-
+    
+    if ($scope.latest_revision.concerns.q14_filename !== null) {
+        $scope.status= 'success';
+    }
+    
     // Study description 8
     $scope.startDate = moment().format("DD.MM.YYYY");
     $scope.endDate = moment().add(14, 'days').format("DD.MM.YYYY");

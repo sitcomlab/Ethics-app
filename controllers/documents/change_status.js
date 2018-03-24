@@ -294,7 +294,11 @@ exports.request = function(req, res) {
                     concern.q12_value,
                     concern.q12_explanation,
                     concern.q13_value,
-                    concern.q13_explanation
+                    concern.q13_explanation,
+                    concern.q14_value,
+                    concern.q14_explanation,
+                    concern.q14_filename,
+                    concern.q14_filepath
                 ], function(err, result) {
                     done();
                     if (err) {
@@ -399,7 +403,7 @@ exports.request = function(req, res) {
                     html: output
                 }, function(err, info) {
                     if (err) {
-                        callback(err);
+                        callback(err, 500);
                     } else {
                         callback(null, 200, updated_document);
                     }

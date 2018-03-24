@@ -2,6 +2,7 @@ node_modules/*
 ssl/*
 public/bower_components/*
 public/files/temp/*
+public/files/custom/*
 sql/schema/examples.sql
 sql/schema/defaults.sql
 *.env
@@ -9,3 +10,5 @@ sql/schema/defaults.sql
 *.DS_Store
 .securestorage.json
 .dejavuerc
+.idea/*
+

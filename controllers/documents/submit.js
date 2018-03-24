@@ -375,6 +375,14 @@ exports.request = function(req, res) {
                     concern.q13_label = "badge-success";
                     concern.q13_sign = "no";
                 }
+                
+                if(concern.q14_value){
+                    concern.q14_label = "badge-danger";
+                    concern.q14_sign = "yes";
+                } else {
+                    concern.q14_label = "badge-success";
+                    concern.q14_sign = "no";
+                }
 
                 // Notify each committee member
                 async.eachOfSeries(members, function (member, key, callback) {

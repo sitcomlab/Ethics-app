@@ -1,14 +1,31 @@
 var express = require('express');
 var router = express.Router();
 var isAuthenticated = require('../server.js').isAuthenticated;
-var filetype = require('file-type')
-var path = require('path')
+var filetype = require('file-type');
+var path = require('path');
+var fs = require('fs');
 
 // File Upload
 var multer = require('multer');
 var store_file = require('../controllers/concerns/upload_file');
+var storage = multer.diskStorage({
+    destination: function (req, file, cb){
+        var folder = process.cwd() + '/public/files/custom/' 
+
+        // Create custom folder, if doesn't exist
+        if (!fs.existsSync(folder)) {
+            fs.mkdirSync(folder);
+        }
+        folder += req.headers['x-documentid'];
+        // Create study specific folder, if doesn't exist
+        if (!fs.existsSync(folder)) {
+            fs.mkdirSync(folder);
+        }
+        cb(null, folder)
+    }
+})
 var upload = multer({
-    dest: '/home/specki/Desktop/',
+    storage: storage,
     fileFilter: function (req, file, cb) {
 
         var filetypes = /pdf|zip/;

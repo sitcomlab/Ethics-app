@@ -27,7 +27,11 @@ INSERT INTO Concerns (
     q12_value,
     q12_explanation,
     q13_value,
-    q13_explanation
+    q13_explanation,
+    q14_value,
+    q14_explanation,
+    q14_filename,
+    q14_filepath
 ) VALUES (
     $1::INTEGER,
     $2::BOOLEAN,
@@ -57,6 +61,10 @@ INSERT INTO Concerns (
     $26::BOOLEAN,
     $27::TEXT,
     $28::BOOLEAN,
-    $29::TEXT
+    $29::TEXT,
+    $30::BOOLEAN,
+    $31::TEXT,
+    $32::TEXT,
+    $33::TEXT
 )
 RETURNING *;

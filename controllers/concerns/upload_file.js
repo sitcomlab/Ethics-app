@@ -49,29 +49,28 @@ exports.upload = function(req, res) {
             var object = {
                 concern_id: req.params.concern_id,
                 q14_filename: req.file.originalname,
-                q14_filepath: req.file.path
+                q14_filepath: '/files/custom/' + req.headers['x-documentid'] + "/" + req.file.filename
             };
             var params = _.values(object);
             callback(null, client, done, params);
         },
         function(client, done, params, callback){
-            console.log(req.file);
             // Database query
             client.query(query_add_file, params, function(err, result) {
                 done();
                 if (err) {
                     callback(err, 500);
                 } else {
-                    callback(null, 200, result.rows[0]);
+                    callback(null, 200, params[2], result.rows[0]);
                 }
             });
         }
-    ], function(err, code, result) {
+    ], function(err, code, destination, result) {
         if(err){
             console.error(colors.red(err));
             res.status(code).send(err.message);
         } else {
-            res.status(code).send(result);
+            res.status(code).send(destination);
         }
     });
 };

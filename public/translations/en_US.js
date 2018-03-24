@@ -256,6 +256,9 @@ app.constant("en_US", {
     AUTO_SAVING: 'Auto saving',
     AUTO_SAVING_HINT: 'You don\'t need to submit your document now! Everytime when you click on the \'Next page\' buttons in the previous pages (\'Study description\' and \'Study concerns\') all your information has been automatically saved in the background. As soon as you enter this page (\'Submit\'), you can savely logout and come back later to continue your work.',
     DOCUMENT_FILES: 'Download the associated Files',
+    
+    CURRENTLY_ATTACHED_DOCUMENT: 'Currently the following document is provided: ',
+    DELETE_ATTACHED_DOCUMENT: 'Delete Document',
 
     YES: 'yes',
     NO: 'no',
