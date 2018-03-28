@@ -13,7 +13,3 @@
 
 # Version 1.0
  - Initial App
-
-
-# TODO
- - q14 in email templates
