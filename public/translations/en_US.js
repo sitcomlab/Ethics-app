@@ -236,6 +236,7 @@ app.constant("en_US", {
     CONCERN_11_2: 'If yes: Will the study involve any recording without prior consent',
     CONCERN_12: 'Is any raw data from the study likely to be passed on to external partners',
     CONCERN_13: 'Does the study involve collection of any information without obtaining an Informed Consent in a situation different from public observations or anonymous street surveys',
+    CONCERN_14: 'Do you use any additional forms/documents in your study that are relevant to evaluating ethical approval',
 
     CONCERN_1_INFO: 'For instance: participants under the age of 18, participants with impairments, patients, people assisted by a carer, people recruited from groups associated with a specific mental or physical condition.',
     CONCERN_2_INFO: 'That is to say: Will participants be deliberately mislead in such a way that they might show distress or ask to retract their data when debriefed?',
@@ -251,6 +252,7 @@ app.constant("en_US", {
     CONCERN_11_2_INFO: '',
     CONCERN_12_INFO: 'For instance companies, funding bodies, other universities. If yes: who is responsible for the safety of the passed information?',
     CONCERN_13_INFO: 'Excluded cases (select \'no\'): remote sensing data, recordings from public settings allowed by the law, and other situations where the observed individual is expected to be aware of remaining in the public view. Continuous observation of targeted individuals, however, infringes this condition (similarly to how following someone physically in the public is different from observing the same person passing-by).',
+    CONCERN_14_INFO: 'For instance: Additional Consent Forms to be signed by the participants',
 
     SUBMIT_WARNING: 'You are about to finally submit your document for review by the Ethics-Committee. Please be aware that after this step your document can no longer be changed or modified. If your document is reviewed and accepted you can download your PDF files for your study. You will receive an email as soon as the status of your document has been changed. If want to revise it you need to ask your reviewer to get writing access again. After you revised your document, you need to submit it again. To avoid this, please make sure that all information is correct, before you submit to the Ethics-Committee.',
     AUTO_SAVING: 'Auto saving',
