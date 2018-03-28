@@ -50,7 +50,8 @@ SELECT
     q11_1_comment,
     q11_2_comment,
     q12_comment,
-    q13_comment
+    q13_comment,
+    q14_comment
 FROM Comments
 WHERE
     revision_id=$1::INTEGER;

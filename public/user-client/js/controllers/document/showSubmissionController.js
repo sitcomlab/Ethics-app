@@ -31,7 +31,7 @@ app.controller("documentShowSubmissionController", function($scope, $rootScope, 
      */
     $scope.changeStatusToOne = function(){
         $documentService.changeStatusTo1($documentService.getId());
-        $scope.redirect("/documents/" + $documentService.getId());
+        $scope.redirect("/");
     };
   
 

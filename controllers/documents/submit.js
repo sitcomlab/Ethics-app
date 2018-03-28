@@ -170,6 +170,8 @@ exports.request = function(req, res) {
                 callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q13_value){
                 callback(null, client, done, document, course, revision, description, concern, 3);
+            } else if(concern.q14_value){
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else {
                 // Check if document has been already in review
                 if(document.status === 5){
@@ -373,6 +375,14 @@ exports.request = function(req, res) {
                     concern.q13_label = "badge-success";
                     concern.q13_sign = "no";
                 }
+                
+                if(concern.q14_value){
+                    concern.q14_label = "badge-danger";
+                    concern.q14_sign = "yes";
+                } else {
+                    concern.q14_label = "badge-success";
+                    concern.q14_sign = "no";
+                }
 
                 // Notify each committee member
                 async.eachOfSeries(members, function (member, key, callback) {
@@ -401,9 +411,10 @@ exports.request = function(req, res) {
                             address: process.env.SENDER_EMAIL_ADDRESS
                         },
                         to: member.email_address,
-                        subject: "[Ethics-App] A document needs your review",
+                        subject: "[Ethics-App] A Study needs your review - Study Title: " + description.en_title,
                         text: text,
-                        html: output
+                        html: output,
+                        messageId: document.document_id + "_review_reminder@giv-ethics-app.uni-muenster.de"
                     }, function(err, info) {
                         if (err) {
                             callback(err);

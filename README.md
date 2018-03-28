@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/sitcomlab/Ethics-app/dev/documentation/logo.png" alt="Ethics-app" title="Ethics-app" align="right" height="250" width="250"/>
+
 # Ethics-app
 
 Ethics-application for the approval of user-studies

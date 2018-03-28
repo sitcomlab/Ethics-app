@@ -266,6 +266,8 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
     $scope.authenticated_member = $authenticationService.get();
     $scope.document = $documentService.get();
     $scope.latest_revision = $documentService.getLatestRevision();
+    
+    //TODO Add concerns to make filepath available in review.html
 
     // Update navbar
     $scope.$parent.document = $documentService.get();
