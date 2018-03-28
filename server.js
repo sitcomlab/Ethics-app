@@ -47,7 +47,7 @@ pool.on('error', function (err, client) {
 
 
 // SMTP CONFIGURATION
-exports.transporter = nodemailer.createTransport({
+var trans = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
     secure: JSON.parse(process.env.SMTP_SSL),
@@ -57,6 +57,16 @@ exports.transporter = nodemailer.createTransport({
     }
 });
 
+// verify connection configuration
+trans.verify(function(error, success) {
+   if (error) {
+        console.log(error);
+   } else {
+        console.log('Connection to Email Server successfull!');
+   }
+});
+
+exports.transporter = trans;
 
 // Load certificstes
 if(process.env.NODE_ENV === "production") {
