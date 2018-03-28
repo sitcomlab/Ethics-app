@@ -128,9 +128,9 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
      */
     $scope.submit = function() {
         // Validate input
-        if($scope.editDocumentForm.$invalid || ($scope.status == "fail" && $scope.editDocumentForm.q14_value)) {
+        if($scope.editDocumentForm.$invalid || ($scope.latest_revision.concerns.q14_filename == null && $scope.editDocumentForm.q14_value.$modelValue)) {
             // Update UI
-
+            
             // Descriptions (en)
             $scope.editDocumentForm.en_title.$pristine = false;
             $scope.editDocumentForm.en_researcher.$pristine = false;

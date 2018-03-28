@@ -2,7 +2,7 @@ var app = angular.module("ethics-app");
 
 
 // Document revise controller
-app.controller("documentReviseController", function($scope, $rootScope, $filter, $translate, $location, config, $window, $q, $authenticationService, $documentService, $descriptionService, $concernService) {
+app.controller("documentReviseController", function($scope, $rootScope, $filter, $translate, $location, config, $window, $q, $authenticationService, $documentService, $descriptionService, $concernService, upload) {
 
     /*************************************************
         FUNCTIONS
@@ -21,7 +21,7 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
      * []
      */
     $scope.resetFile = function(){
-        $scope.status = "fail";
+        $scope.uploadstatus = "fail";
         $scope.latest_revision.concerns.q14_filename = null;
     };
     
@@ -30,7 +30,7 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
      * @return {[type]} [file]
      */
     $scope.doUpload = function (files) {
-        $scope.status = "uploading";
+        $scope.uploadstatus = "uploading";
         upload({
           url: config.getUploadEndpoint() + $scope.latest_revision.concerns.concern_id,
           method: 'POST',
@@ -43,17 +43,17 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
           }
         }).then(
           function (response) {
-            $scope.status = "success";
+            $scope.uploadstatus = "success";
             $scope.latest_revision.concerns.q14_file = true;
             $scope.latest_revision.concerns.q14_filename = files[0].name;
             $scope.latest_revision.concerns.q14_filepath = response.data;
           },
           function (response) {
-            $scope.status = "fail";
+            $scope.uploadstatus = "fail";
             $window.alert($filter('translate')('ALERT_UPLOAD_FILE_FAILED'));
           }
         );
-    }
+    };
 
     /**
      * [toggleConcernHistory description]
@@ -224,10 +224,8 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
         ]).then(function(){
             $scope.$parent.loading = { status: false, message: ""};
 
-            console.log(tab);
-
             // Redirect
-            if(tab !== null){
+            if(tab !== null){;
                 $scope.tab = tab;
             } else {
                 $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
@@ -241,7 +239,7 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
      */
     $scope.submit = function() {
         // Validate input
-        if($scope.editDocumentForm.$invalid) {
+        if($scope.editDocumentForm.$invalid || ($scope.latest_revision.concerns.q14_filename == null && $scope.editDocumentForm.q14_value.$modelValue)) {
             // Update UI
 
             // Descriptions (en)
@@ -361,7 +359,7 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
     $scope.document = $documentService.get();
     $scope.latest_revision = $documentService.getLatestRevision();
     $scope.tab = 0;
-
+    
     // Check status
     if($documentService.getStatus()>1 && $documentService.getStatus()!=5){
         // Redirect
@@ -408,7 +406,7 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
             comments: true
         }
     };
-
+    
     // Show all comments and history
     $scope.toggle('general', 'history');
     $scope.toggle('descriptions', 'history', 'en');
@@ -423,7 +421,10 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
         $scope.toggle('descriptions', 'language', 'de');
     }
     $scope.toggle('concerns', 'history');
+    
+    if ($scope.latest_revision.concerns.q14_filename !== null) {
+        $scope.uploadstatus= 'success';
+    }
 
     $scope.$parent.loading = { status: false, message: "" };
-
 });
