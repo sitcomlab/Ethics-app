@@ -14,6 +14,7 @@ var app = angular.module("ethics-app", [
     "pascalprecht.translate",
     "angular-momentjs",
     "underscore",
+    "lr.upload",
 
     // Import own modules
     "filters",
@@ -55,6 +56,38 @@ app.config(function($logProvider, $translateProvider, en_US, de_DE, pt_PT, confi
     $translateProvider.useSanitizeValueStrategy('sanitize');
 });
 
+app.directive('validFile',function(){
+  return {
+    restrict: 'A',
+    require:'ngModel',
+    link:function(scope,el,attrs,ngModel){
+      //change event is fired when file is selected
+      el.bind('change',function(){
+        scope.$apply(function(){
+          scope[attrs['fileChange']](element[0].files);
+          ngModel.$setViewValue(el.val());
+          ngModel.$render();
+        })
+      })
+    }
+  }
+})
+
+//
+// fileChange directive because ng-change doesn't work for file inputs.
+//
+app.directive('fileChange', function() {
+return {
+  restrict: 'A',
+  link: function(scope, element, attrs) {
+    element.bind('change', function() {
+      scope.$apply(function() {
+        scope[attrs['fileChange']](element[0].files);
+      })
+    })
+  },
+}
+})
 
 /**
  * Start application

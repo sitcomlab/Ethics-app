@@ -20,5 +20,4 @@ app.factory('$concernService', function($http, $log, config, $authenticationServ
             });
         }
     };
-
 });

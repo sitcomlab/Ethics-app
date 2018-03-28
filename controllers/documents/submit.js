@@ -170,6 +170,8 @@ exports.request = function(req, res) {
                 callback(null, client, done, document, course, revision, description, concern, 3);
             } else if(concern.q13_value){
                 callback(null, client, done, document, course, revision, description, concern, 3);
+            } else if(concern.q14_value){
+                callback(null, client, done, document, course, revision, description, concern, 3);
             } else {
                 // Check if document has been already in review
                 if(document.status === 5){
@@ -372,6 +374,14 @@ exports.request = function(req, res) {
                 } else {
                     concern.q13_label = "badge-success";
                     concern.q13_sign = "no";
+                }
+                
+                if(concern.q14_value){
+                    concern.q14_label = "badge-danger";
+                    concern.q14_sign = "yes";
+                } else {
+                    concern.q14_label = "badge-success";
+                    concern.q14_sign = "no";
                 }
 
                 // Notify each committee member

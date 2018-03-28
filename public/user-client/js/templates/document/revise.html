@@ -2951,12 +2951,131 @@
                             </div>
                         </div>
                     </div>
+                    
+                    
+                    <!-- 14th Question -->
+                    <div class="list-group-item">
+                        <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                            <div class="form-group" ng-class="{'has-danger': editDocumentForm.q14_value.$invalid && !editDocumentForm.q14_value.$pristine }">
+                                <label for="q14_value">
+                                    <b>14. {{ 'CONCERN_14' | translate }}?</b> <sup class="text-danger">*</sup>
+                                    <br>
+                                    <small class="text-muted">
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_14_INFO' | translate }}
+                                    </small>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                        <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                            <input
+                                                class="custom-control-input"
+                                                type="radio"
+                                                name="q14_value"
+                                                id="q14_value_1"
+                                                ng-model="latest_revision.concerns.q14_value"
+                                                ng-value="false"
+                                                required>
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">
+                                                {{ 'NO' | translate }}
+                                            </span>
+                                        </label>
+                                    </span>
+                                    <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                        <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                            <input
+                                                class="custom-control-input"
+                                                type="radio"
+                                                name="q14_value"
+                                                id="q14_value_2"
+                                                ng-model="latest_revision.concerns.q14_value"
+                                                ng-value="true"
+                                                required>
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">
+                                                {{ 'YES' | translate }}
+                                            </span>
+                                        </label>
+                                    </span>
+                                </div>
+                            </div>
+                            <span ng-show="editDocumentForm.q14_value.$error.required && !editDocumentForm.q14_value.$pristine" class="text-danger">
+                                <small>
+                                    {{ 'REQUIRED' | translate }}
+                                </small>
+                            </span>
+                    <div class="form-group">
+                        <!-- yes + document is attached-->
+                         <div class="input-group" ng-if="latest_revision.concerns.q14_value && latest_revision.concerns.q14_filename !== null">
+                                <div class="flexarea">
+                                    {{ 'CURRENTLY_ATTACHED_DOCUMENT' | translate }}
+                                    <br>
+                                    <a href="{{latest_revision.concerns.q14_filepath}}" download="{{latest_revision.concerns.q14_filename}}" target="_blank">
+                                        <i class="fa fa-file-pdf-o fa-1x text-danger" aria-hidden="true">{{latest_revision.concerns.q14_filename}}</i>
+                                    </a>
+                                </div>
+                                    <a class="input-group-addon btn btn-danger btn-block-xs-only btn-block-sm-only"  ng-click="resetFile()">{{ 'DELETE_ATTACHED_DOCUMENT' | translate }}</a>
+                            <span class="input-group-addon" style="width: 74px;">
+                            <svg ng-if="uploadstatus == 'uploading'" class="checkmark__template" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                            </svg>
+                            <svg ng-if="uploadstatus == 'success'" class="checkmark__fill_green checkmark__template checkmark__template_green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                               <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                            </svg>
+                            <svg ng-if="uploadstatus == 'fail' || uploadstatus == undefined" class="checkmark__fill_red checkmark__template checkmark__template_red" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <path class="checkmark__check" fill="none" d="M16 16 36 36 M36 16 16 36"/>
+                            </svg>
+                        </span>
+                        </div>
+                        <div class="input-group" ng-if="latest_revision.concerns.q14_value && latest_revision.concerns.q14_filename === null" ng-class="{'has-danger': editDocumentForm.q14_file.$invalid}">
+                            <input
+                               class="form-control"
+                               type="file"
+                               accept="application/pdf,application/zip"
+                               file-change="doUpload"
+                               name="q14_file"
+                               id="q14_file"
+                               ng-model="latest_revision.concerns.q14_filepath"
+                               required=true>
+                            </input>
+                        <span class="input-group-addon" style="width: 74px;">
+                            <svg ng-if="uploadstatus == 'uploading'" class="checkmark__template" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                            </svg>
+                            <svg ng-if="uploadstatus == 'success'" class="checkmark__fill_green checkmark__template checkmark__template_green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                               <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                            </svg>
+                            <svg ng-if="uploadstatus == 'fail' || uploadstatus == undefined" class="checkmark__fill_red checkmark__template checkmark__template_red" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <path class="checkmark__check" fill="none" d="M16 16 36 36 M36 16 16 36"/>
+                            </svg>
+                        </span>
+                        </div>                                <br>
+                                <div class="input-group" ng-if="latest_revision.concerns.q14_value" ng-class="{'has-danger': editDocumentForm.q14_explanation.$invalid}">
+                                    <textarea
+                                        class="form-control"
+                                        rows="5"
+                                        placeholder="{{ 'EXPLANATION' | translate }}"
+                                        name="q14_explanation"
+                                        id="q14_explanation"
+                                        ng-model="latest_revision.concerns.q14_explanation"
+                                        ng-required="latest_revision.concerns.q14_value"></textarea>
+                                    <span class="input-group-addon">
+                                        <span class="flag-icon flag-icon-gb"></span>
+                                    </span>
+                                </div>
+                                <span ng-show="editDocumentForm.q14_explanation.$invalid" class="text-danger">
+                                    <small>
+                                        {{ 'REQUIRED' | translate }}
+                                    </small>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="card-block" ng-show="tab == 1">
-
-        </div>
+    </div>
         <div class="card-footer">
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 left">

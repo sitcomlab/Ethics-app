@@ -19,6 +19,9 @@ footer {
     background-color: #f5f5f5;
 }
 
+.flexarea {
+    flex: 1 1 auto;
+}
 
 .left {
     text-align: left;
@@ -93,4 +96,72 @@ footer {
 /* https://docs.angularjs.org/api/ng/directive/ngCloak */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
+}
+
+/* https://stackoverflow.com/a/41078668 */
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: #7ac142;
+  fill: none;
+  animation: stroke 1.5s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+  animation-iteration-count:infinite;
+}
+
+.checkmark__fill_green {
+animation: fill_green .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+.checkmark__fill_red {
+animation: fill_red .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+
+.checkmark__template {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 2;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  margin: 10% auto;
+}
+
+.checkmark__template_red {
+  box-shadow: inset 0px 0px 0px #f64408;
+}
+.checkmark__template_green {
+  box-shadow: inset 0px 0px 0px #7ac142;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 90;
+  stroke-dashoffset: 100;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes scale {
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+@keyframes fill_red {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #f64408;
+  }
+}
+@keyframes fill_green {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #7ac142;
+  }
 }

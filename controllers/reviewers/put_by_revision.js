@@ -222,15 +222,11 @@ exports.request = function(req, res) {
                                 html: output,
                             }, function(err, info) {
                                 if (err) {
-                                    callback(err);
+                                    callback(err ,500);
                                 } else {
                                     callback();
                                 }
                             });
-                        }, function(err){
-                            if (err) {
-                                callback(err, 500);
-                            }
                         });
                         callback(null, client, done)
                     } else {

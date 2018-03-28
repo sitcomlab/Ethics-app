@@ -1,5 +1,6 @@
 # Version 1.4.1
  - Added Email Notification to all Members when Review is started (and not pending anymore)
+ - Added q14 (Custom Files)
  - Added Password Generation on Cover Sheet
  - bugfixes & style improvements
 
