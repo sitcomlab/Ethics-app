@@ -9,6 +9,7 @@ var moment = require('moment');
 var pool = require('../../server.js').pool;
 var pdf = require('html-pdf');
 var uuid = require("uuid");
+var crypto = require('crypto'); 
 
 var fs = require("fs");
 var dir_1 = "/../../templates/pdfs/";
@@ -163,11 +164,23 @@ exports.request = function(req, res) {
             // Create files
             async.parallel([
                 function(callback) { // Generate Cover Sheet
+                    
+                    // create distinguishable password
+                    var psw = crypto.randomBytes(32)
+                            .toString('base64')
+                            .replace("1","R")
+                            .replace("I","A")
+                            .replace("0","M")
+                            .replace("O","P")
+                            .replace("U","F")
+                            .replace("V","Z")
+                            .replace("Q","X");
                     // Render HTML-content
                     var html = mustache.render(template_cover_sheet, {
                         document: document,
                         description: description,
                         revision: revision,
+                        veracryptpassword: psw,
                         year: moment().format("YYYY")
                     });
 
