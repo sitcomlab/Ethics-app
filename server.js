@@ -140,6 +140,7 @@ app.use(prefix, require ('./routes/notes'));
 app.use(prefix, require ('./routes/reviewers'));
 app.use(prefix, require ('./routes/recovery'));
 app.use(prefix, require ('./routes/search'));
+app.use(prefix, require ('./routes/export_review'));
 
 app.use(uploadprefix, require ('./routes/fileupload'));
 

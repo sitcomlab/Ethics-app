@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Review Process</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <div class="firstpage">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 50%; text-align: left;">
+                        <img src="images/{{document.institute_logo}}" alt="{{document.institute_name}}" height="45px">
+                    </td>
+                    <td style="width: 50%; text-align: right;">
+                        <img src="images/{{document.university_logo}}" alt="{{document.university_name}}" height="45px">
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <br>
+            
+        <div class="row inputs">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <i class="fa fa-tag" aria-hidden="true"></i>&nbsp;&nbsp;Revisions:
+            </div>
+        </div>
+        <div class="bs-fix">
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'CREATED' | translate }}</b>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            
+                            {{#revision}}
+                            <div class="row">
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <code>rev{{revision.version}}</code>
+                                </div>
+                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                    <i>{{revision.created}}</i>
+                                </div>
+                            </div>
+                            {{/revision}}
+                        </div>
+                    </div>
+                </div>
+            
+            
+            
+            <h1 style="width:100%; text-align: center;">Review process</h1>
+            <br>
+            <p style="text-align: justify;">
+                1. Disclose other experimental conditions (if there were any).
+            </p>
+            <p style="text-align: justify;">
+                2. Disclose deception (if there was any).
+            </p>
+            <p style="text-align: justify;">
+                3. Correct any misconception that the participant might have if you are aware of any.</p>
+            <p style="text-align: justify;">
+                4. List your hypotheses (if applicable).</p>
+            <p style="text-align: justify;">
+                5. <b>Remind about the right to retract data now</b> (if applicable, payment still is due).
+            </p>
+            <p style="text-align: justify;">
+                6. Provide a website with the description of the research project and other relevant resources (if applicable).
+            </p>
+            <p style="text-align: justify;">
+                7. Provide your business card / contact information.
+            </p>
+            <p style="text-align: justify;">
+                8. <b>DO NOT</b> talk of some patterns of the studied behavior being more plausible (or expected) than others.
+            </p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <p style="text-align: justify;">
+                (no signatures required)
+            </p>
+        </div>
+    </body>
+</html>

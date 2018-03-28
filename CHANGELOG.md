@@ -4,8 +4,8 @@
  - Added Password Generation on Cover Sheet
  - bugfixes & style improvements
  - Added Debugging for SMTP Connection
+ - Added Export of Review Process
  
->>>>>>> Stashed changes
 # Version 1.4.0
  - Added Reminder Email to be sent out after 7 days of inactivity with still pending reviews.
  - Added Revision Number on Output Documents
