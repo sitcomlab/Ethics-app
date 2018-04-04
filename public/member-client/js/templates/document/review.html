@@ -1855,6 +1855,59 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- 14th question -->
+                    <div class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
+                                <b>14. {{ 'CONCERN_14' | translate }}?</b>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
+                                    <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
+                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        </div>
+                                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                            <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q14_value">
+                                                {{ 'YES' | translate }}
+                                            </span>
+                                            <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q14_value">
+                                                {{ 'NO' | translate }}
+                                            </span>
+                                            &nbsp;&nbsp;<a href="{{revision.concerns.q14_filepath}}" download="{{revision.concerns.q14_filename}}" ng-if="revision.concerns.q14_value" target="_blank">
+                                                <i class="fa fa-file-pdf-o fa-1x text-danger" aria-hidden="true">{{ 'DOCUMENT' | translate }}</i>
+                                            </a>
+                                            &nbsp;&nbsp;<i>{{revision.concerns.q14_explanation}}</i>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                            <!-- divider -->
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
+                                            <span class="comment" ng-if="revision.comments.q14_comment !== null && revision.comments.q14_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q14_comment}}
+                                            </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.q14_comment"
+                                                        name="q14_comment"
+                                                        id="q14_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

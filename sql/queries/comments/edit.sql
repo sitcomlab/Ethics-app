@@ -47,7 +47,8 @@ UPDATE Comments SET (
     q11_1_comment,
     q11_2_comment,
     q12_comment,
-    q13_comment
+    q13_comment,
+    q14_comment
 ) = (
     now(),
     $2::BOOLEAN,
@@ -97,7 +98,8 @@ UPDATE Comments SET (
     $38::TEXT,
     $39::TEXT,
     $40::TEXT,
-    $41::TEXT
+    $41::TEXT,
+    $42::TEXT
 )
 WHERE
     comment_id=$1::INTEGER
