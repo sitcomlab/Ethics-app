@@ -14,7 +14,7 @@ app.constant("config", {
     timeZone: "Europe/Berlin",
     debugMode: true,
     html5Mode: true,
-    serverMode: 'development',
+    serverMode: 'production',
     serverSettings: {
         development: {
             host: 'http://localhost',
@@ -25,12 +25,12 @@ app.constant("config", {
             userClientPath: '/user-client'
         },
         production: {
-            host: 'http://localhost',
-            port: 80,
-            apiPath: "/api",
-            uploadPath: "/upload/",
-            memberClientPath: '/member-client',
-            userClientPath: '/user-client'
+            host: 'https://giv-ethics-app.uni-muenster.de',
+            port: 443,
+            apiPath: "/app/api",
+	    uploadPath: "/upload",
+            memberClientPath: '/app/member-client',
+            userClientPath: '/app/user-client'
         }
     },
     getUploadEndpoint: function(){

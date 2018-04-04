@@ -69,12 +69,12 @@ trans.verify(function(error, success) {
 exports.transporter = trans;
 
 // Load certificstes
-if(process.env.NODE_ENV === "production") {
+/*if(process.env.NODE_ENV === "production") {
     var credentials = {
-        key: fs.readFileSync('ssl/server.key', 'utf8'),
-        cert: fs.readFileSync('ssl/server.crt', 'utf8')
+        key: fs.readFileSync('/etc/nginx/ssl/giv-ethics-app-key-unsafe.pem', 'utf8'),
+        cert: fs.readFileSync('/etc/nginx/ssl/giv-ethics-app-cert.pem', 'utf8')
     };
-}
+}*/
 
 // Setup settings
 var app = express();
@@ -90,7 +90,7 @@ var urlencodedParser = bodyParser.json({
 })
 
 app.use(cookieParser());
-
+app.enable('trust proxy');
 // Set folder for static files
 app.use(express.static(__dirname + '/public', {
     redirect: false
@@ -161,13 +161,13 @@ var httpServer = http.createServer(app);
 httpServer.listen(Number(process.env.HTTP_PORT), function() {
     console.log(colors.green(new Date() + " HTTP-Server is listening at port " + process.env.HTTP_PORT));
 });
-if(process.env.NODE_ENV === "production") {
+/*if(process.env.NODE_ENV === "production") {
     var httpsServer = https.createServer(credentials, app);
 
-    httpsServer.listen(Number(process.env.HTTPS_PORT), function() {
-        console.log(colors.green(new Date() + " HTTPS-Server is listening at port " + process.env.HTTPS_PORT));
+    httpsServer.listen(Number(process.env.HTTP_PORT), function() {
+        console.log(colors.green(new Date() + " HTTPS-Server is listening at port " + process.env.HTTP_PORT));
     });
-}
+}*/
 
 
 module.exports = app;
