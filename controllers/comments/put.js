@@ -113,7 +113,8 @@ exports.request = function(req, res) {
                 req.body.q11_1_comment,
                 req.body.q11_2_comment,
                 req.body.q12_comment,
-                req.body.q13_comment
+                req.body.q13_comment,
+                req.body.q14_comment
             ], function(err, result) {
                 done();
                 if (err) {

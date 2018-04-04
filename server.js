@@ -12,7 +12,6 @@ var jwt = require('jsonwebtoken');
 var helmet = require('helmet');
 var config = require('dotenv').config();
 
-
 // DATABASE CONFIGURATION
 var pool = new pg.Pool({
     host: process.env.POSTGRES_HOST,
@@ -48,7 +47,7 @@ pool.on('error', function (err, client) {
 
 
 // SMTP CONFIGURATION
-exports.transporter = nodemailer.createTransport({
+var trans = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
     secure: JSON.parse(process.env.SMTP_SSL),
@@ -58,6 +57,16 @@ exports.transporter = nodemailer.createTransport({
     }
 });
 
+// verify connection configuration
+trans.verify(function(error, success) {
+   if (error) {
+        console.log(error);
+   } else {
+        console.log('Connection to Email Server successfull!');
+   }
+});
+
+exports.transporter = trans;
 
 // Load certificstes
 if(process.env.NODE_ENV === "production") {
@@ -69,13 +78,17 @@ if(process.env.NODE_ENV === "production") {
 
 // Setup settings
 var app = express();
-app.use(bodyParser.json({
+
+// create application/json parser
+var jsonParser = bodyParser.json({
     limit: 52428800 // 50MB
-}));
-app.use(bodyParser.urlencoded({
+})
+// create application/json parser
+var urlencodedParser = bodyParser.json({
     extended: false,
     limit: 52428800 // 50MB
-}));
+})
+
 app.use(cookieParser());
 
 // Set folder for static files
@@ -106,8 +119,11 @@ app.use(helmet());
 
 // API endpoint
 var prefix = '/api';
+var uploadprefix = '/upload';
 
 // Load API routes
+app.use(prefix, jsonParser);
+app.use(prefix, urlencodedParser);
 app.use(prefix, require ('./routes/login'));
 app.use(prefix, require ('./routes/universities'));
 app.use(prefix, require ('./routes/institutes'));
@@ -124,6 +140,8 @@ app.use(prefix, require ('./routes/notes'));
 app.use(prefix, require ('./routes/reviewers'));
 app.use(prefix, require ('./routes/recovery'));
 app.use(prefix, require ('./routes/search'));
+
+app.use(uploadprefix, require ('./routes/fileupload'));
 
 
 // Resolve path after refreshing inside app

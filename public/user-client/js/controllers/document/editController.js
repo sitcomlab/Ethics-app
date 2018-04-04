@@ -1,8 +1,7 @@
 var app = angular.module("ethics-app");
 
-
 // Document edit controller
-app.controller("documentEditController", function($scope, $rootScope, $filter, $translate, $location, config, $window, $q, $authenticationService, $documentService, $descriptionService, $concernService) {
+app.controller("documentEditController", function($scope, $rootScope, $filter, $translate, $location, config, $window, $q, $authenticationService, $documentService, $descriptionService, $concernService, upload) {
 
     /*************************************************
         FUNCTIONS
@@ -25,7 +24,7 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
     $scope.redirect = function(path){
         $location.url(path);
     };
-
+    
     /**
      * [cancel description]
      * @return {[type]} [description]
@@ -33,8 +32,45 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
     $scope.cancel = function(){
         $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
     };
-
-
+    
+   /**
+     * []
+     */
+    $scope.resetFile = function(){
+        $scope.status = "fail";
+        $scope.latest_revision.concerns.q14_filename = null;
+    };
+    
+    /**
+     * [upload file]
+     * @return {[type]} [file]
+     */
+    $scope.doUpload = function (files) {
+        $scope.status = "uploading";
+        upload({
+          url: config.getUploadEndpoint() + $scope.latest_revision.concerns.concern_id,
+          method: 'POST',
+          headers: {
+              'Authorization': 'Bearer ' + $authenticationService.getToken(),
+              'X-DocumentId' : $documentService.getId()
+            },
+          data: {
+            filename: files[0], // a jqLite type="file" element, upload() will extract all the files from the input and put them into the FormData object before sending.
+          }
+        }).then(
+          function (response) {
+            $scope.status = "success";
+            $scope.latest_revision.concerns.q14_file = true;
+            $scope.latest_revision.concerns.q14_filename = files[0].name;
+            $scope.latest_revision.concerns.q14_filepath = response.data;
+          },
+          function (response) {
+            $scope.status = "fail";
+            $window.alert($filter('translate')('ALERT_UPLOAD_FILE_FAILED'));
+          }
+        );
+    }
+    
     /**
      * [saveDocument description]
      * @return {[type]} [description]
@@ -92,9 +128,9 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
      */
     $scope.submit = function() {
         // Validate input
-        if($scope.editDocumentForm.$invalid) {
+        if($scope.editDocumentForm.$invalid || ($scope.latest_revision.concerns.q14_filename == null && $scope.editDocumentForm.q14_value.$modelValue)) {
             // Update UI
-
+            
             // Descriptions (en)
             $scope.editDocumentForm.en_title.$pristine = false;
             $scope.editDocumentForm.en_researcher.$pristine = false;
@@ -140,6 +176,7 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
             $scope.editDocumentForm.q11_2_value.$pristine = false;
             $scope.editDocumentForm.q12_value.$pristine = false;
             $scope.editDocumentForm.q13_value.$pristine = false;
+            $scope.editDocumentForm.q14_value.$pristine = false;
 
             // Conerns (explanations)
             if($scope.editDocumentForm.q01_explanation){
@@ -184,6 +221,9 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
             if($scope.editDocumentForm.q13_explanation){
                 $scope.editDocumentForm.q13_explanation.$pristine = false;
             }
+            if($scope.editDocumentForm.q14_explanation){
+                $scope.editDocumentForm.q14_explanation.$pristine = false;
+            }
 
             $window.alert($filter('translate')('ALERT_SUBMIT_DOCUMENT_FAILED'));
         } else {
@@ -215,7 +255,11 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
         $scope.$parent.loading = { status: false, message: "" };
         $scope.changeTab(1);
     }
-
+    
+    if ($scope.latest_revision.concerns.q14_filename !== null) {
+        $scope.status= 'success';
+    }
+    
     // Study description 8
     $scope.startDate = moment().format("DD.MM.YYYY");
     $scope.endDate = moment().add(14, 'days').format("DD.MM.YYYY");
