@@ -24,16 +24,17 @@ app.controller("documentShowSubmissionController", function($scope, $rootScope, 
     $scope.cancel = function(){
         $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
     };
-  
-      /**
+
+
+    /**
      * [push back Document to Status 1]
      * @return {[type]} [description]
      */
     $scope.changeStatusToOne = function(){
         $documentService.changeStatusTo1($documentService.getId());
-        $scope.redirect("/");
+        $scope.redirect("/documents/" + $documentService.getId());
     };
-  
+
 
     /**
      * [toggleConcernHistory description]
