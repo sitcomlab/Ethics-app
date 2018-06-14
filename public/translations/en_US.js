@@ -75,7 +75,7 @@ app.constant("en_US", {
 
     DELETE_THIS_DOCUMENT: 'Do you really want to delete this document',
     EXPLANATION_OF_DELETING_A_DOCUMENT: 'Deleting a document also deletes ALL ASSOCIATED data. PLEASE PROCEED WITH CAUTION!',
-    PLEASE_TYPE_IN_THE_TITLE_OF_THE_DOCUMENT_TO_CONFIRM: 'Please type in the title of the document to confirm',
+    PLEASE_TYPE_IN_THE_ID_OF_THE_DOCUMENT_TO_CONFIRM: 'Please type in the ID of the document to confirm',
     ALTERNATIVE_DOCUMENT: 'If you don\'t want to delete EVERYTHING associated with this document you can also temporay reject the document, so that the user has no longer access to it',
 
     DELETE_THIS_COURSE: 'Do you really want to delete this course',
@@ -128,7 +128,7 @@ app.constant("en_US", {
     INTRODUCTION_TEXT_FRAGMENT_10: ' to use these Documents in your experiment.',
     INTRODUCTION_TEXT_FRAGMENT_11: 'The cover sheet',
     INTRODUCTION_TEXT_FRAGMENT_12: 'The cover sheet is handed in together with the signed Consent Forms to the secretariat. It will be filled out automatically. Please note that your forms will be rejected by the secretariat if the appropiate cover sheet is not supplied.',
-    
+
     STUDY_DESCRIPTION_FORM_TEXT: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally versions in other languages. Depending on the language(s) filled out, you will receive the informed consent forms in the chosen languages to be used during your experiment.',
     CHOOSE_LANGUAGE:'Please select the language(s), in which you want to generate the informed consent forms:',
     STUDY_CONCERNS_FORM_TEXT: 'Complete the checklist below. If you have answered yes to any of the questions, please provide a brief overview of how you are going to ensure ethical conduct with regard to the given risk. This will be reviewed by the Institutes Ethics-Committee. Remember that any ethical approval granted based on untrue or incomplete disclosure of your research procedure is invalid. The checklist is intended as a guideline and its role is to alert you in cases where you might be proposing an unethical study. Make sure you discuss any concerns with the members of the Intitutes\'s Ethics-Committee.',
@@ -258,7 +258,7 @@ app.constant("en_US", {
     AUTO_SAVING: 'Auto saving',
     AUTO_SAVING_HINT: 'You don\'t need to submit your document now! Everytime when you click on the \'Next page\' buttons in the previous pages (\'Study description\' and \'Study concerns\') all your information has been automatically saved in the background. As soon as you enter this page (\'Submit\'), you can savely logout and come back later to continue your work.',
     DOCUMENT_FILES: 'Download the associated Files',
-    
+
     CURRENTLY_ATTACHED_DOCUMENT: 'Currently the following document is provided: ',
     DELETE_ATTACHED_DOCUMENT: 'Delete Document',
 

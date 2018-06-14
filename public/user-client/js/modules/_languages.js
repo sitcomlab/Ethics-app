@@ -79,7 +79,7 @@ app.config(function ($translateProvider) {
 
         DELETE_THIS_DOCUMENT: 'Do you really want to delete this document',
         EXPLANATION_OF_DELETING_A_DOCUMENT: 'Deleting a document also deletes ALL ASSOCIATED data. PLEASE PROCEED WITH CAUTION!',
-        PLEASE_TYPE_IN_THE_TITLE_OF_THE_DOCUMENT_TO_CONFIRM: 'Please type in the title of the document to confirm',
+        PLEASE_TYPE_IN_THE_ID_OF_THE_DOCUMENT_TO_CONFIRM: 'Please type in the ID of the document to confirm',
         ALTERNATIVE_DOCUMENT: 'If you don\'t want to delete EVERYTHING associated with this document you can also temporay reject the document, so that the user has no longer access to it',
 
         DELETE_THIS_COURSE: 'Do you really want to delete this course',

@@ -18,13 +18,13 @@
         </h6>
         <br>
         <label>
-            <b>{{ 'DOCUMENT_TITLE' | translate }}*</b>
+            <b>{{ 'DOCUMENT_ID' | translate }}*</b>
         </label>
-        <input type="text" class="form-control" ng-model="input" id="documentName" placeholder="{{ 'DOCUMENT_TITLE' | translate }}" autofocus>
-        <small class="form-text text-muted">{{ 'PLEASE_TYPE_IN_THE_TITLE_OF_THE_DOCUMENT_TO_CONFIRM' | translate }}</small>
+        <input type="text" class="form-control" ng-model="input" id="documentId" placeholder="{{ 'DOCUMENT_ID' | translate }}" autofocus>
+        <small class="form-text text-muted">{{ 'PLEASE_TYPE_IN_THE_ID_OF_THE_DOCUMENT_TO_CONFIRM' | translate }}</small>
     </div>
     <div class="card-footer right">
-        <button class="btn btn-danger" role="button" ng-click="delete()" ng-disabled="input != document.document_title">
+        <button class="btn btn-danger" role="button" ng-click="delete()" ng-disabled="input != document.document_id">
             <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'DELETE' | translate }}
         </button>
     </div>

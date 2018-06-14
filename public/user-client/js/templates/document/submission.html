@@ -1507,14 +1507,14 @@
                     {{ 'REVISING_INFORMATION_2' | translate }} (<b><i class="fa fa-user" aria-hidden="true"></i> {{latest_revision.reviewer.full_name}}</b>) <a href="" ng-if=document.revisions[0].reviewer ng-click="redirect('/members/' + latest_revision.reviewer.member_id)">{{ 'HERE' | translate }}</a>. {{ 'REVISING_INFORMATION_3' | translate }}.
                   </div>
                   <h6>
-                    {{ 'PLEASE_TYPE_IN_THE_TITLE_OF_THE_DOCUMENT_TO_CONFIRM' | translate }} <kbd>{{document.document_title}}</kbd>?
+                    {{ 'PLEASE_TYPE_IN_THE_ID_OF_THE_DOCUMENT_TO_CONFIRM' | translate }}?
                   </h6>
                   <br>
-                  <input type="text" class="form-control" ng-model="input" id="documentName" placeholder="{{ 'DOCUMENT_TITLE' | translate }}" autofocus>
+                  <input type="text" class="form-control" ng-model="input" id="documentId" placeholder="{{ 'DOCUMENT_ID' | translate }}" autofocus>
                   <br>
                   <div class="row">
                       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 center">
-                          <button href="" class="btn btn-danger btn-block-xs-only btn-block-sm-only" role="button" ng-click="changeStatusToOne()" ng-disabled="input != document.document_title">
+                          <button href="" class="btn btn-danger btn-block-xs-only btn-block-sm-only" role="button" ng-click="changeStatusToOne()" ng-disabled="input != document.document_id">
                               <i class="fa fa-angle-center" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'REVERT_TO_UNSUBMITTED' | translate }}
                           </button>
                       </div>
