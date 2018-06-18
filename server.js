@@ -57,16 +57,16 @@ var trans = nodemailer.createTransport({
     }
 });
 
-// verify connection configuration
+// Verify connection configuration
 trans.verify(function(error, success) {
-   if (error) {
+    if (error) {
         console.log(error);
-   } else {
-        console.log('Connection to Email Server successfull!');
-   }
+    } else {
+        console.log(colors.green(new Date() + " Connection to Email-server successfully!"));
+    }
 });
-
 exports.transporter = trans;
+
 
 // Load certificstes
 if(process.env.NODE_ENV === "production") {

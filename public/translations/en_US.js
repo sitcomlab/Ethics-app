@@ -164,11 +164,14 @@ app.constant("en_US", {
     CHANGE_STATUS: 'Change status',
     NEW_STATUS: 'New status',
 
+    PLEASE_READ_BEFORE: '(please read before)',
     PROVIDED_TO_PARTICIPANTS_AFTER_STUDY:'(provided to participants after the study)',
     TO_BE_FILLED_OUT_BY_PARTICIPANT:'(to be filled out by each participant)',
     IN_CASE_OF_A_REWARDED_STUDY: '(in case of a rewarded study)',
     SIGN_BY_YOURSELF:'(sign by yourself and add to archive)',
+    ADD_TO_ARCHIVE: '(add to archive)',
     COVER_SHEET: 'Cover sheet',
+    RECEIPT: 'Receipt',
 
     DEFAULT:'Default',
     STATUS:'Status',
