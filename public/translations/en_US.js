@@ -166,6 +166,7 @@ app.constant("en_US", {
 
     PROVIDED_TO_PARTICIPANTS_AFTER_STUDY:'(provided to participants after the study)',
     TO_BE_FILLED_OUT_BY_PARTICIPANT:'(to be filled out by each participant)',
+    IN_CASE_OF_A_REWARDED_STUDY: '(in case of a rewarded study)',
     SIGN_BY_YOURSELF:'(sign by yourself and add to archive)',
     COVER_SHEET: 'Cover sheet',
 
@@ -541,4 +542,5 @@ app.constant("en_US", {
     ALERT_DOCUMENT_CREATED: 'Your new document has been created and an email with the document-ID has been sent to you!',
     ALERT_SUBMIT_DOCUMENT_FAILED: 'Your document can not be submitted, please fill out all required fields!',
     ALERT_FILE_GENERATION_FAILED: 'Files can only be generated, if the document has been accepted!',
+
 });

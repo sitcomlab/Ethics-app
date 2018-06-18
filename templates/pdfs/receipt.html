@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Receipt</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <div class="firstpage">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 50%; text-align: left;">
+                        <img src="images/{{document.institute_logo}}" alt="{{document.institute_name}}" height="45px">
+                    </td>
+                    <td style="width: 50%; text-align: right;">
+                        <img src="images/{{document.university_logo}}" alt="{{document.university_name}}" height="45px">
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <br>
+
+            <h1 style="width:100%; text-align: center;">Receipt</h1>
+            <!--<h3 style="width:100%; text-align: center;">Study title: {{description.en_title}}</h3>
+            <h5 style="width:100%; text-align: center;">Revision: {{revision.version}}</h5>-->
+
+            <br>
+            <p>
+                Dear Participant,
+            </p>
+            <p>
+                thank you for your participation in the study! With your signature you confirm the receipt of the reward.
+            </p>
+            <br>
+
+            <br>
+            <p style="text-align: justify;">
+                <b>Study title</b>
+                <br>
+                <br>
+                {{description.en_title}}
+                <hr>
+            </p>
+
+            <br>
+            <p style="text-align: justify;">
+                <b>Researcher(s)</b>
+                <br>
+                <br>
+                {{description.en_researcher}}
+                <hr>
+            </p>
+
+            <br>
+            <p style="text-align: justify;">
+                <b>Date</b><br>
+                <br>
+                <hr>
+            </p>
+
+            <br>
+            <p style="text-align: justify;">
+                <b>Reward</b>
+                <br>
+                <br>
+                <hr>
+            </p>
+
+            <br>
+            <p style="text-align: justify;">
+                <b>Signature of the supervisor</b>
+                <br>
+                <br>
+                <br>
+                <hr>
+            </p>
+
+            <br>
+            <p style="text-align: justify;">
+                <b>Signature of the participant</b>
+                <br>
+                <br>
+                <hr>
+            </p>
+
+        </div>
+    </body>
+</html>

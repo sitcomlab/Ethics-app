@@ -9,7 +9,7 @@ var moment = require('moment');
 var pool = require('../../server.js').pool;
 var pdf = require('html-pdf');
 var uuid = require("uuid");
-var crypto = require('crypto'); 
+var crypto = require('crypto');
 
 var fs = require("fs");
 var dir_1 = "/../../templates/pdfs/";
@@ -17,16 +17,19 @@ var dir_2 = "/../../sql/queries/documents/";
 var dir_3 = "/../../sql/queries/revisions/";
 var dir_4 = "/../../sql/queries/descriptions/";
 var dir_5 = "/../../sql/queries/concerns/";
+var query_get_document_with_user = fs.readFileSync(__dirname + dir_2 + 'get_with_user.sql', 'utf8').toString();
+var query_get_latest_revision = fs.readFileSync(__dirname + dir_3 + 'get_latest_by_document.sql', 'utf8').toString();
+var query_get_description = fs.readFileSync(__dirname + dir_4 + 'get_by_revision.sql', 'utf8').toString();
+var query_get_concern = fs.readFileSync(__dirname + dir_5 + 'get_by_revision.sql', 'utf8').toString();
+
+// Templates
 var template_cover_sheet = fs.readFileSync(__dirname + dir_1 + 'cover_sheet.html', 'utf8').toString();
 var template_debriefing_information = fs.readFileSync(__dirname + dir_1 + 'debriefing_information.html', 'utf8').toString();
 var template_statement_of_researcher = fs.readFileSync(__dirname + dir_1 + 'statement_of_researcher.html', 'utf8').toString();
 var template_consent_form_en = fs.readFileSync(__dirname + dir_1 + 'consent_form_en.html', 'utf8').toString();
 var template_consent_form_de = fs.readFileSync(__dirname + dir_1 + 'consent_form_de.html', 'utf8').toString();
 var template_consent_form_pt = fs.readFileSync(__dirname + dir_1 + 'consent_form_pt.html', 'utf8').toString();
-var query_get_document_with_user = fs.readFileSync(__dirname + dir_2 + 'get_with_user.sql', 'utf8').toString();
-var query_get_latest_revision = fs.readFileSync(__dirname + dir_3 + 'get_latest_by_document.sql', 'utf8').toString();
-var query_get_description = fs.readFileSync(__dirname + dir_4 + 'get_by_revision.sql', 'utf8').toString();
-var query_get_concern = fs.readFileSync(__dirname + dir_5 + 'get_by_revision.sql', 'utf8').toString();
+var template_receipt = fs.readFileSync(__dirname + dir_1 + 'receipt.html', 'utf8').toString();
 
 
 // GENERATE FILES
@@ -164,7 +167,7 @@ exports.request = function(req, res) {
             // Create files
             async.parallel([
                 function(callback) { // Generate Cover Sheet
-                    
+
                     // create distinguishable password
                     var psw = crypto.randomBytes(32)
                             .toString('base64')
@@ -308,6 +311,25 @@ exports.request = function(req, res) {
                     } else {
                         callback();
                     }
+                },
+                function(callback) { // Generate statement of researcher
+                    // Render HTML-content
+                    var html = mustache.render(template_receipt, {
+                        document: document,
+                        description: description,
+                        year: moment().format("YYYY")
+                    });
+
+                    // Create file
+                    var file = fs.createWriteStream(folders.pathFilesFolder + '/receipt.pdf');
+
+                    // Write content into file
+                    pdf.create(html, options).toStream(function(err, stream){
+                        stream.pipe(file);
+                    });
+                    file.on('finish', function() {
+                        callback();
+                    });
                 }
             ],
             function(err, results) {
