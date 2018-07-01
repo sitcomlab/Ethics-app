@@ -516,7 +516,7 @@
                                 <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
                             </span>
                             <textarea class="form-control"
-                                rows="5"
+                                rows="2"
                                 placeholder="{{ 'DURATION' | translate }}" ng-model="latest_revision.descriptions.en_duration"
                                 name="en_duration"
                                 id="en_duration"
@@ -539,7 +539,7 @@
                                 <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
                             </span>
                             <textarea class="form-control"
-                                rows="5"
+                                rows="2"
                                 placeholder="{{ 'DURATION' | translate }}" ng-model="latest_revision.descriptions.de_duration"
                                 name="de_duration"
                                 id="de_duration"
@@ -562,7 +562,7 @@
                                 <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
                             </span>
                             <textarea class="form-control"
-                                rows="5"
+                                rows="2"
                                 placeholder="{{ 'DURATION' | translate }}" ng-model="latest_revision.descriptions.pt_duration"
                                 name="pt_duration"
                                 id="pt_duration"
@@ -1878,26 +1878,24 @@
                     </span>
                     <div class="form-group">
                         <!-- yes + document is attached-->
-                         <div class="input-group" ng-if="latest_revision.concerns.q14_value && latest_revision.concerns.q14_filename !== null">
-                                <div class="flexarea">
-                                    {{ 'CURRENTLY_ATTACHED_DOCUMENT' | translate }}
-                                    <br>
-                                    <a href="{{latest_revision.concerns.q14_filepath}}" download="{{latest_revision.concerns.q14_filename}}" target="_blank">
-                                        <i class="fa fa-file-pdf-o fa-1x text-danger" aria-hidden="true">{{latest_revision.concerns.q14_filename}}</i>
-                                    </a>
-                                </div>
-                                    <a class="input-group-addon btn btn-danger btn-block-xs-only btn-block-sm-only"  ng-click="resetFile()">{{ 'DELETE_ATTACHED_DOCUMENT' | translate }}</a>
+                        <div class="input-group" ng-if="latest_revision.concerns.q14_value && latest_revision.concerns.q14_filename !== null">
+                            <div class="flexarea">
+                                {{ 'CURRENTLY_ATTACHED_DOCUMENT' | translate }}
+                                <br>
+                                <a href="{{latest_revision.concerns.q14_filepath}}" download="{{latest_revision.concerns.q14_filename}}" target="_blank"><i class="fa fa-file-pdf-o fa-1x text-danger" aria-hidden="true">{{latest_revision.concerns.q14_filename}}</i></a>
+                            </div>
+                            <a class="input-group-addon btn btn-danger btn-block-xs-only btn-block-sm-only"  ng-click="resetFile()">{{ 'DELETE_ATTACHED_DOCUMENT' | translate }}</a>
                             <span class="input-group-addon" style="width: 74px;">
-                            <svg ng-if="status == 'uploading'" class="checkmark__template" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-                            </svg>
-                            <svg ng-if="status == 'success'" class="checkmark__fill_green checkmark__template checkmark__template_green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                               <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                            </svg>
-                            <svg ng-if="status == 'fail' || status == undefined" class="checkmark__fill_red checkmark__template checkmark__template_red" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                <path class="checkmark__check" fill="none" d="M16 16 36 36 M36 16 16 36"/>
-                            </svg>
-                        </span>
+                                <svg ng-if="status == 'uploading'" class="checkmark__template" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 52 52">
+                                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                                </svg>
+                                <svg ng-if="status == 'success'" class="checkmark__fill_green checkmark__template checkmark__template_green" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 52 52">
+                                   <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                </svg>
+                                <svg ng-if="status == 'fail' || status == undefined" class="checkmark__fill_red checkmark__template checkmark__template_red" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 52 52">
+                                    <path class="checkmark__check" fill="none" d="M16 16 36 36 M36 16 16 36"/>
+                                </svg>
+                            </span>
                         </div>
                         <div class="input-group" ng-if="latest_revision.concerns.q14_value && latest_revision.concerns.q14_filename === null" ng-class="{'has-danger': editDocumentForm.q14_file.$invalid}">
                             <input
@@ -1908,19 +1906,18 @@
                                name="q14_file"
                                id="q14_file"
                                ng-model="latest_revision.concerns.q14_filepath"
-                               required=true>
-                            </input>
-                        <span class="input-group-addon" style="width: 74px;">
-                            <svg ng-if="status == 'uploading'" class="checkmark__template" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-                            </svg>
-                            <svg ng-if="status == 'success'" class="checkmark__fill_green checkmark__template checkmark__template_green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                               <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                            </svg>
-                            <svg ng-if="status == 'fail' || status == undefined" class="checkmark__fill_red checkmark__template checkmark__template_red" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                <path class="checkmark__check" fill="none" d="M16 16 36 36 M36 16 16 36"/>
-                            </svg>
-                        </span>
+                               required>
+                            <span class="input-group-addon" style="width: 74px;">
+                                <svg ng-if="status == 'uploading'" class="checkmark__template" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 52 52">
+                                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                                </svg>
+                                <svg ng-if="status == 'success'" class="checkmark__fill_green checkmark__template checkmark__template_green" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 52 52">
+                                   <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                </svg>
+                                <svg ng-if="status == 'fail' || status == undefined" class="checkmark__fill_red checkmark__template checkmark__template_red" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 52 52">
+                                    <path class="checkmark__check" fill="none" d="M16 16 36 36 M36 16 16 36"/>
+                                </svg>
+                            </span>
                         </div>
                         <br>
                         <div class="input-group" ng-if="latest_revision.concerns.q14_value" ng-class="{'has-danger': editDocumentForm.q14_explanation.$invalid}">

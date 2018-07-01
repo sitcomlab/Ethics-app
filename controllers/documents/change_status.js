@@ -61,7 +61,7 @@ exports.request = function(req, res) {
                     } else {
                         if(decoded.member || req.body.status == 1){
                             callback(null, client, done);
-                        } else {  
+                        } else {
                             callback(new Error("Authorization failed"), 401);
                         }
                     }
@@ -340,6 +340,14 @@ exports.request = function(req, res) {
                 var status_description_2 = "";
 
                 switch (updated_document.status) {
+                    case 1: {
+                        icon = "fa-pencil-square-o";
+                        status_description_1 = "You reverted your document and can now modify it. Please note that a reverted document has to be submitted and approved again.";
+                        status_description_2 = "If you have problems with your document, please get in touch with a committee member of your institute.";
+                        updated_document._status_label = "badge-info";
+                        updated_document._status_description = "unsubmitted";
+                        break;
+                    }
                     case 4: {
                         icon = "fa-eye";
                         status_description_1 = "Your document is under review now. You will get another email as soon as the Ethics-committee has reviewed it completely.";

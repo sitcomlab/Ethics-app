@@ -173,7 +173,7 @@ exports.request = function(req, res) {
             } else if(concern.q14_value){
                 callback(null, client, done, document, course, revision, description, concern, 3);
             } else {
-                // Check if document has been already in review
+                // Check if document has already been in review
                 if(document.status === 5){
                     callback(null, client, done, document, course, revision, description, concern, 3);
                 } else {
@@ -258,6 +258,7 @@ exports.request = function(req, res) {
             }
         },
         function(client, done, document, course, revision, description, concern, author, members, callback){
+
             // Check status to notify members, in case of a review
             if(document.status === 2){
                 callback(null, 204, null);
@@ -265,122 +266,122 @@ exports.request = function(req, res) {
 
                 // Formatting
                 if(concern.q01_value){
-                    concern.q01_label = "badge-danger";
+                    concern.q01_label = "badge-warning";
                     concern.q01_sign = "yes";
                 } else {
-                    concern.q01_label = "badge-success";
+                    concern.q01_label = "badge-default";
                     concern.q01_sign = "no";
                 }
 
                 if(concern.q02_value){
-                    concern.q02_label = "badge-danger";
+                    concern.q02_label = "badge-warning";
                     concern.q02_sign = "yes";
                 } else {
-                    concern.q02_label = "badge-success";
+                    concern.q02_label = "badge-default";
                     concern.q02_sign = "no";
                 }
 
                 if(concern.q03_value){
-                    concern.q03_label = "badge-danger";
+                    concern.q03_label = "badge-warning";
                     concern.q03_sign = "yes";
                 } else {
-                    concern.q03_label = "badge-success";
+                    concern.q03_label = "badge-default";
                     concern.q03_sign = "no";
                 }
 
                 if(concern.q04_value){
-                    concern.q04_label = "badge-danger";
+                    concern.q04_label = "badge-warning";
                     concern.q04_sign = "yes";
                 } else {
-                    concern.q04_label = "badge-success";
+                    concern.q04_label = "badge-default";
                     concern.q04_sign = "no";
                 }
 
                 if(concern.q05_value){
-                    concern.q05_label = "badge-danger";
+                    concern.q05_label = "badge-warning";
                     concern.q05_sign = "yes";
                 } else {
-                    concern.q05_label = "badge-success";
+                    concern.q05_label = "badge-default";
                     concern.q05_sign = "no";
                 }
 
                 if(concern.q06_value){
-                    concern.q06_label = "badge-danger";
+                    concern.q06_label = "badge-warning";
                     concern.q06_sign = "yes";
                 } else {
-                    concern.q06_label = "badge-success";
+                    concern.q06_label = "badge-default";
                     concern.q06_sign = "no";
                 }
 
                 if(concern.q07_value){
-                    concern.q07_label = "badge-danger";
+                    concern.q07_label = "badge-warning";
                     concern.q07_sign = "yes";
                 } else {
-                    concern.q07_label = "badge-success";
+                    concern.q07_label = "badge-default";
                     concern.q07_sign = "no";
                 }
 
                 if(concern.q08_value){
-                    concern.q08_label = "badge-danger";
+                    concern.q08_label = "badge-warning";
                     concern.q08_sign = "yes";
                 } else {
-                    concern.q08_label = "badge-success";
+                    concern.q08_label = "badge-default";
                     concern.q08_sign = "no";
                 }
 
                 if(concern.q09_value){
-                    concern.q09_label = "badge-danger";
+                    concern.q09_label = "badge-warning";
                     concern.q09_sign = "yes";
                 } else {
-                    concern.q09_label = "badge-success";
+                    concern.q09_label = "badge-default";
                     concern.q09_sign = "no";
                 }
 
                 if(concern.q10_value){
-                    concern.q10_label = "badge-danger";
+                    concern.q10_label = "badge-warning";
                     concern.q10_sign = "yes";
                 } else {
-                    concern.q10_label = "badge-success";
+                    concern.q10_label = "badge-default";
                     concern.q10_sign = "no";
                 }
 
                 if(concern.q11_1_value){
-                    concern.q11_1_label = "badge-danger";
+                    concern.q11_1_label = "badge-warning";
                     concern.q11_1_sign = "yes";
                 } else {
-                    concern.q11_1_label = "badge-success";
+                    concern.q11_1_label = "badge-default";
                     concern.q11_1_sign = "no";
                 }
 
                 if(concern.q11_2_value){
-                    concern.q11_2_label = "badge-danger";
+                    concern.q11_2_label = "badge-warning";
                     concern.q11_2_sign = "yes";
                 } else {
-                    concern.q11_2_label = "badge-success";
+                    concern.q11_2_label = "badge-default";
                     concern.q11_2_sign = "no";
                 }
 
                 if(concern.q12_value){
-                    concern.q12_label = "badge-danger";
+                    concern.q12_label = "badge-warning";
                     concern.q12_sign = "yes";
                 } else {
-                    concern.q12_label = "badge-success";
+                    concern.q12_label = "badge-default";
                     concern.q12_sign = "no";
                 }
 
                 if(concern.q13_value){
-                    concern.q13_label = "badge-danger";
+                    concern.q13_label = "badge-warning";
                     concern.q13_sign = "yes";
                 } else {
-                    concern.q13_label = "badge-success";
+                    concern.q13_label = "badge-default";
                     concern.q13_sign = "no";
                 }
-                
+
                 if(concern.q14_value){
-                    concern.q14_label = "badge-danger";
+                    concern.q14_label = "badge-warning";
                     concern.q14_sign = "yes";
                 } else {
-                    concern.q14_label = "badge-success";
+                    concern.q14_label = "badge-default";
                     concern.q14_sign = "no";
                 }
 
@@ -411,7 +412,7 @@ exports.request = function(req, res) {
                             address: process.env.SENDER_EMAIL_ADDRESS
                         },
                         to: member.email_address,
-                        subject: "[Ethics-App] A Study needs your review - Study Title: " + description.en_title,
+                        subject: "[Ethics-App] A document needs your review - Study title: " + description.en_title,
                         text: text,
                         html: output,
                         messageId: document.document_id + "_review_reminder@giv-ethics-app.uni-muenster.de"
@@ -419,9 +420,10 @@ exports.request = function(req, res) {
                         if (err) {
                             callback(err);
                         } else {
-                            callback();
+                            callback(null);
                         }
                     });
+                    callback(null);
 
                 }, function(err){
                     callback(null, 204, null);

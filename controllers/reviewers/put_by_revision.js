@@ -18,7 +18,8 @@ var dir_2 = "/../../sql/queries/members/";
 var dir_3 = "/../../sql/queries/reviewers/";
 var dir_4 = "/../../sql/queries/courses/";
 var dir_5 = "/../../sql/queries/descriptions/";
-var dir_8 = "/../../sql/queries/members/";
+var dir_6 = "/../../sql/queries/members/";
+var dir_7 = "/../../sql/queries/documents/";
 
 var query_get_revision = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
 var query_get_member = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
@@ -27,10 +28,10 @@ var query_delete_reviewer_by_revision = fs.readFileSync(__dirname + dir_3 + 'del
 var query_create_reviewer = fs.readFileSync(__dirname + dir_3 + 'create.sql', 'utf8').toString();
 var query_get_reviewer_by_revision = fs.readFileSync(__dirname + dir_3 + 'get_by_revision.sql', 'utf8').toString();
 var query_get_description_by_revision = fs.readFileSync(__dirname + dir_5 + 'get_by_revision.sql', 'utf8').toString();
-
 var query_get_course_by_document = fs.readFileSync(__dirname + dir_4 + 'get_by_document.sql', 'utf8').toString();
-var query_list_members_by_subscription = fs.readFileSync(__dirname + dir_8 + 'list_by_subscription.sql', 'utf8').toString();
-var query_list_members_by_course = fs.readFileSync(__dirname + dir_8 + 'list_by_course_internal.sql', 'utf8').toString();
+var query_list_members_by_subscription = fs.readFileSync(__dirname + dir_6 + 'list_by_subscription.sql', 'utf8').toString();
+var query_list_members_by_course = fs.readFileSync(__dirname + dir_6 + 'list_by_course_internal.sql', 'utf8').toString();
+var query_get_document = fs.readFileSync(__dirname + dir_7 + 'get.sql', 'utf8').toString();
 
 var template_review_claimed = fs.readFileSync(__dirname + '/../../templates/emails/member_review_claimed.html', 'utf8').toString();
 
@@ -90,6 +91,24 @@ exports.request = function(req, res) {
         },
         function(client, revision, done, callback) {
             // Database query
+            client.query(query_get_document, [
+                revision.document_id
+            ], function(err, result) {
+                done();
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    // Check if Document exists
+                    if (result.rows.length === 0) {
+                        callback(new Error("Document not found"), 404);
+                    } else {
+                        callback(null, client, result.rows[0], revision, done);
+                    }
+                }
+            });
+        },
+        function(client, document, revision, done, callback) {
+            // Database query
             client.query(query_get_member, [
                 req.body.member_id
             ], function(err, result) {
@@ -101,12 +120,12 @@ exports.request = function(req, res) {
                     if (result.rows.length === 0) {
                         callback(new Error("Member not found"), 404);
                     } else {
-                        callback(null, client, result.rows[0], revision, done);
+                        callback(null, client, document, revision, result.rows[0], done);
                     }
                 }
             });
         },
-        function(client, member, revision, done, callback) {
+        function(client, document, revision, member, done, callback) {
             // Database query
             client.query(query_get_course_by_document, [
                 revision.document_id
@@ -117,14 +136,14 @@ exports.request = function(req, res) {
                 } else {
                     // Check if Course exists
                     if (result.rows.length === 0) {
-                        callback(null, client, member, revision, false, done);
+                        callback(null, client, document, revision, member, false, done);
                     } else {
-                        callback(null, client, member, revision, result.rows[0], done);
+                        callback(null, client, document, revision, member, result.rows[0], done);
                     }
                 }
             });
         },
-        function(client, member, revision, course, done, callback) {
+        function(client, document, revision, member, course, done, callback) {
             // Find responsible members, when document was referenced to a course
             if(course){
                 // Database query
@@ -137,20 +156,20 @@ exports.request = function(req, res) {
                     } else {
                         // Check if Members exists
                         if (result.rows.length === 0) {
-                            callback(null, client, member, revision, [], done);
+                            callback(null, client, document, revision, member, [], done);
                         } else {
-                            callback(null, client, member, revision, result.rows, done);
+                            callback(null, client, document, revision, member, result.rows, done);
                         }
                     }
                 });
             } else {
-                callback(null, client, member, revision, [], done);
+                callback(null, client, document, revision, member, [], done);
             }
         },
-        function(client, member, revision, members, done, callback) {
+        function(client, document, revision, member, members, done, callback) {
             // Find responsible members, when document was not referenced to a course, or course didn't had responsible members
             if(members.length > 0){
-                callback(null, client, member, revision, members, done);
+                callback(null, client, document, revision, member, members, done);
             } else {
                 // Database query
                 client.query(query_list_members_by_subscription, function(err, result) {
@@ -158,12 +177,12 @@ exports.request = function(req, res) {
                     if (err) {
                         callback(err, 500);
                     } else {
-                        callback(null, client, member, revision, result.rows, done);
+                        callback(null, client, document, revision, member, result.rows, done);
                     }
                 });
             }
         },
-        function(client, member, revision, members, done, callback) {
+        function(client, document, revision, member, members, done, callback) {
             // Database query
             client.query(query_get_description_by_revision, [
                 req.params.revision_id
@@ -176,12 +195,12 @@ exports.request = function(req, res) {
                     if (result.rows.length === 0) {
                         callback(new Error("Description not found"), 404);
                     } else {
-                        callback(null, client, member, revision, members, result.rows[0], done);
+                        callback(null, client, document, revision, result.rows[0], member, members, done);
                     }
                 }
             });
         },
-        function(client, newmember, revision, members, description, done, callback) {
+        function(client, document, revision, description, newmember, members, done, callback) {
             // Database query
             // Check if there is an old reviewer - if not send email that it is already taken.
             client.query(query_get_reviewer_by_revision, [
@@ -199,6 +218,7 @@ exports.request = function(req, res) {
                                 member: member,
                                 newmember: newmember,
                                 year: moment().format("YYYY"),
+                                document: document,
                                 revision: revision,
                                 description: description,
                                 domain: domain,
@@ -217,9 +237,9 @@ exports.request = function(req, res) {
                                 to: member.email_address,
                                 inReplyTo: revision.document_id + "_review_reminder@giv-ethics-app.uni-muenster.de",
                                 references: revision.document_id + "_review_reminder@giv-ethics-app.uni-muenster.de",
-                                subject: "RE: [Ethics-App] A document needs your review - Study Title: " + description.en_title,
+                                subject: "RE: [Ethics-App] A document needs your review - Study title: " + description.en_title,
                                 text: text,
-                                html: output,
+                                html: output
                             }, function(err, info) {
                                 if (err) {
                                     callback(err ,500);

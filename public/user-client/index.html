@@ -32,7 +32,7 @@
 
         <!-- Custom styles -->
         <link href="..bower_components/angular-upload/src/directives/btnUpload.min.css" rel="stylesheet">
-        
+
         <link href="css/styles.css" rel="stylesheet"/>
 
         <!-- JavaScript dependecies -->
@@ -113,10 +113,13 @@
                                             {{ 'SHOW_DOCUMENT_ID' | translate }}
                                         </a>
                                         <a class="dropdown-item" href="" ng-click="redirect('/documents/' + document.document_id + '/submission')" ng-if="document.status > 1">
-                                            <span ng-if="document.status == 2">
+                                            <span ng-if="document.status == 2 || document.status == 4">
                                                 {{ 'SHOW_SUBMISSION' | translate }}
                                             </span>
-                                            <span ng-if="document.status > 2">
+                                            <span ng-if="document.status == 5">
+                                                {{ 'REVISE_DOCUMENT' | translate }}
+                                            </span>
+                                            <span ng-if="document.status == 6 || document.status == 7">
                                                 {{ 'SHOW_REVIEW' | translate }}
                                             </span>
                                         </a>

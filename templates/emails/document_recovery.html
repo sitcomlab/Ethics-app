@@ -109,7 +109,12 @@
                     <div class="d-flex w-100 justify-content-between">
                         <div>
                             <i class="fa fa-file-text" aria-hidden="true"></i>
-                            &nbsp;&nbsp;<b>{{document_title}}</b>
+                            &nbsp;&nbsp;
+                            <b>{{document_title}}</b>
+                            &nbsp;
+                            <span class="badge badge-primary">
+                                <i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{latest_revision.version}}
+                            </span>
                             &nbsp;&nbsp;
                         </div>
                         <div class="right">

@@ -42,8 +42,18 @@ footer {
 }
 
 .comment {
-    padding-top: 3px;
-    color: #ff4d4d;
+    color: #8a6d3b;
+    border-color: #faf2cc;
+    background-color: #fcf8e3;
+}
+
+.comment-textarea {
+    border-color: #faf2cc;
+}
+
+.alert-comment {
+    margin-top: 5px;
+    margin-bottom: 0px;
 }
 
 .timestamp {

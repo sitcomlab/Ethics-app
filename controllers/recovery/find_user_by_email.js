@@ -15,9 +15,11 @@ var fs = require("fs");
 var dir_1 = "/../../templates/emails/";
 var dir_2 = "/../../sql/queries/users/";
 var dir_3 = "/../../sql/queries/documents/";
+var dir_4 = "/../../sql/queries/revisions/";
 var template_document_recovery = fs.readFileSync(__dirname + dir_1 + 'document_recovery.html', 'utf8').toString();
 var query_get_user_by_email = fs.readFileSync(__dirname + dir_2 + 'get_by_email.sql', 'utf8').toString();
 var query_list_documents_by_user = fs.readFileSync(__dirname + dir_3 + 'list_by_user.sql', 'utf8').toString();
+var query_get_latest_revision_by_document = fs.readFileSync(__dirname + dir_4 + 'get_latest_by_document.sql', 'utf8').toString();
 
 
 // FIND BY EMAIL
@@ -76,6 +78,33 @@ exports.request = function(req, res) {
                     callback(err, 500);
                 } else {
                     callback(null, client, done, user, result.rows);
+                }
+            });
+        },
+        function(client, done, user, documents, callback) {
+            async.eachOfSeries(documents, function (document, key, callback) {
+                // Database query
+                client.query(query_get_latest_revision_by_document, [
+                    document.document_id
+                ], function(err, result) {
+                    done();
+                    if (err) {
+                        callback(err, 500);
+                    } else {
+                        // Check if Revision exists
+                        if (result.rows.length === 0) {
+                            callback(new Error("Revision not found"), 404);
+                        } else {
+                            document.latest_revision = result.rows[0];
+                            callback(null);
+                        }
+                    }
+                });
+            }, function(err){
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    callback(null, client, done, user, documents);
                 }
             });
         },
@@ -148,7 +177,7 @@ exports.request = function(req, res) {
             });
 
             // Render text for emails without HTML support
-            var text = "You asked for your Document-IDs";
+            var text = "You asked for your document-IDs";
 
             // Send email
             transporter.sendMail({
@@ -157,7 +186,7 @@ exports.request = function(req, res) {
                     address: process.env.SENDER_EMAIL_ADDRESS
                 },
                 to: user.email_address,
-                subject: "[Ethics-App] You asked for your Document-IDs",
+                subject: "[Ethics-App] You asked for your document-IDs",
                 text: text,
                 html: output
             }, function(err, info) {

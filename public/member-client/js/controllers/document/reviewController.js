@@ -266,7 +266,7 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
     $scope.authenticated_member = $authenticationService.get();
     $scope.document = $documentService.get();
     $scope.latest_revision = $documentService.getLatestRevision();
-    
+
     //TODO Add concerns to make filepath available in review.html
 
     // Update navbar
@@ -312,15 +312,6 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
             comments: true
         }
     };
-
-    // Show all comments and history
-    $scope.toggle('general', 'history');
-    $scope.toggle('descriptions', 'history', 'en');
-    $scope.toggle('descriptions', 'history', 'de');
-    $scope.toggle('descriptions', 'language', 'de');
-    $scope.toggle('descriptions', 'history', 'pt');
-    $scope.toggle('descriptions', 'language', 'de');
-    $scope.toggle('concerns', 'history');
 
     $scope.$parent.loading = { status: false, message: "" };
 });

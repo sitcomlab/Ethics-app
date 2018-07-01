@@ -93,7 +93,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-9 col-md-10 col-lg-11 justified" style="padding-top: 5px">
                             <p>
-                                The Study below needs your review. Please go back to the application and publish your review with comments for the user. You can <span class="badge badge-success">accept</span> the request, <span class="badge badge-warning">partly accept</span>it, so that the user has to revise the document and submit it again or <span class="badge badge-danger">reject</span> the document, so the user can no longer access the document (Attention: Use this option only in extreme situations or block the user, if he/she clearly violated the rules).
+                                The document below needs your review. Please go back to the application and publish your review with comments for the user. You can <span class="badge badge-success">accept</span> the request, <span class="badge badge-warning">partly accept</span>it, so that the user has to revise the document and submit it again or <span class="badge badge-danger">reject</span> the document, so the user can no longer access the document (Attention: Use this option only in extreme situations or block the user, if he/she clearly violated the rules).
                             </p>
                             <p>
                                 If you have problems to access the document or review, please get in touch with another committee member of your institute.
@@ -108,8 +108,13 @@
                     <div class="d-flex w-100 justify-content-between">
                         <div>
                             <i class="fa fa-file-text" aria-hidden="true"></i>
-                            &nbsp;&nbsp;<b>{{document.document_title}}</b>
-                            &nbsp;&nbsp;<code>rev{{revision.version}}</code>&nbsp;&nbsp;
+                            &nbsp;&nbsp;
+                            <b>{{document.document_title}}</b>
+                            &nbsp;
+                            <span class="badge badge-primary">
+                                <i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}
+                            </span>
+                            &nbsp;&nbsp;
                         </div>
                         <div class="right">
                             <span class="badge badge-primary">
@@ -250,6 +255,9 @@
                                 </div>
                                 <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
                                     <span class="badge {{concern.q01_label}} badge-pill">
+                                        {{#concern.q01_value}}
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                                        {{/concern.q01_value}}
                                         {{concern.q01_sign}}
                                     </span>
                                 </div>
@@ -268,6 +276,9 @@
                                 </div>
                                 <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
                                     <span class="badge {{concern.q02_label}} badge-pill">
+                                        {{#concern.q02_value}}
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                                        {{/concern.q02_value}}
                                         {{concern.q02_sign}}
                                     </span>
                                 </div>
@@ -286,6 +297,9 @@
                                 </div>
                                 <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
                                     <span class="badge {{concern.q03_label}} badge-pill">
+                                        {{#concern.q03_value}}
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                                        {{/concern.q03_value}}
                                         {{concern.q03_sign}}
                                     </span>
                                 </div>
@@ -304,6 +318,9 @@
                                 </div>
                                 <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
                                     <span class="badge {{concern.q04_label}} badge-pill">
+                                        {{#concern.q04_value}}
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                                        {{/concern.q04_value}}
                                         {{concern.q04_sign}}
                                     </span>
                                 </div>
@@ -322,6 +339,9 @@
                                 </div>
                                 <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
                                     <span class="badge {{concern.q05_label}} badge-pill">
+                                        {{#concern.q05_value}}
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                                        {{/concern.q05_value}}
                                         {{concern.q05_sign}}
                                     </span>
                                 </div>
@@ -340,6 +360,9 @@
                                 </div>
                                 <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
                                     <span class="badge {{concern.q06_label}} badge-pill">
+                                        {{#concern.q06_value}}
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                                        {{/concern.q06_value}}
                                         {{concern.q06_sign}}
                                     </span>
                                 </div>
@@ -358,6 +381,9 @@
                                 </div>
                                 <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
                                     <span class="badge {{concern.q07_label}} badge-pill">
+                                        {{#concern.q07_value}}
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                                        {{/concern.q07_value}}
                                         {{concern.q07_sign}}
                                     </span>
                                 </div>
@@ -376,6 +402,9 @@
                                 </div>
                                 <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
                                     <span class="badge {{concern.q08_label}} badge-pill">
+                                        {{#concern.q08_value}}
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                                        {{/concern.q08_value}}
                                         {{concern.q08_sign}}
                                     </span>
                                 </div>
@@ -394,6 +423,9 @@
                                 </div>
                                 <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
                                     <span class="badge {{concern.q09_label}} badge-pill">
+                                        {{#concern.q09_value}}
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                                        {{/concern.q09_value}}
                                         {{concern.q09_sign}}
                                     </span>
                                 </div>
@@ -412,6 +444,9 @@
                                 </div>
                                 <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
                                     <span class="badge {{concern.q10_label}} badge-pill">
+                                        {{#concern.q10_value}}
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                                        {{/concern.q10_value}}
                                         {{concern.q10_sign}}
                                     </span>
                                 </div>
@@ -430,6 +465,9 @@
                                 </div>
                                 <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
                                     <span class="badge {{concern.q11_1_label}} badge-pill">
+                                        {{#concern.q11_1_value}}
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                                        {{/concern.q11_1_value}}
                                         {{concern.q11_1_sign}}
                                     </span>
                                 </div>
@@ -448,6 +486,9 @@
                                 </div>
                                 <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
                                     <span class="badge {{concern.q11_2_label}} badge-pill">
+                                        {{#concern.q11_2_value}}
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                                        {{/concern.q11_2_value}}
                                         {{concern.q11_2_sign}}
                                     </span>
                                 </div>
@@ -466,6 +507,9 @@
                                 </div>
                                 <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
                                     <span class="badge {{concern.q12_label}} badge-pill">
+                                        {{#concern.q12_value}}
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                                        {{/concern.q12_value}}
                                         {{concern.q12_sign}}
                                     </span>
                                 </div>
@@ -484,6 +528,9 @@
                                 </div>
                                 <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
                                     <span class="badge {{concern.q13_label}} badge-pill">
+                                        {{#concern.q13_value}}
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                                        {{/concern.q13_value}}
                                         {{concern.q13_sign}}
                                     </span>
                                 </div>
@@ -502,6 +549,9 @@
                                 </div>
                                 <div class="right" style="padding-left: 10px; flex-basis: 50px; flex-shrink: 0;">
                                     <span class="badge {{concern.q14_label}} badge-pill">
+                                        {{#concern.q14_value}}
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                                        {{/concern.q14_value}}
                                         {{concern.q14_sign}}
                                     </span>
                                 </div>
@@ -514,7 +564,7 @@
         </div>
         <!-- Footer -->
         <div class="footer middle">
-            &copy; {{year}} <a href="{{domain}}{{member_client_path}}/" target="_blank">Ethics-App</a> | COMMITTEE
+            &copy; {{year}} <a href="{{domain}}{{member_client_path}}/" target="_blank">Ethics-App</a>
         </div>
     </body>
 </html>

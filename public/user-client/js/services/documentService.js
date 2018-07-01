@@ -125,6 +125,13 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
                 }
             });
         },
+        retrieve_v2: function(document_id) {
+            return $http.get(config.getApiEndpoint() + "/v2/documents/" + document_id, {
+                headers: {
+                    'Authorization': 'Bearer ' + $authenticationService.getToken()
+                }
+            });
+        },
         confirmIntro: function(document_id) {
             return $http.get(config.getApiEndpoint() + "/documents/" + document_id + "/intro", {
                 headers: {
@@ -146,7 +153,7 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
                 }
             });
         },
-      
+
         generateFiles: function(document_id) {
             return $http.get(config.getApiEndpoint() + "/documents/" + document_id + "/files", {
                 headers: {

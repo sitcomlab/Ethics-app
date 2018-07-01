@@ -80,7 +80,7 @@
             </h1>
             <br>
             <p class="lead">
-                The review for the Study has been started
+                The review for a document has been started
             </p>
         </div>
         <!-- Main -->
@@ -89,11 +89,11 @@
                 <div class="card-block">
                     <div class="row">
                         <div class="col-xs-12 col-sm-3 col-md-2 col-lg-1 middle">
-                            <i class="fa fa-4x fa-check-circle text-success" aria-hidden="true"></i>
+                            <i class="fa fa-4x fa-info-circle" aria-hidden="true" style="color: #0066ff;"></i>
                         </div>
                         <div class="col-xs-12 col-sm-9 col-md-10 col-lg-11 justified" style="padding-top: 5px">
                             <p>
-                                {{newmember.title}} {{newmember.first_name}} {{newmember.last_name}} of the Ethics-Board has started the review for the Study below.
+                                {{newmember.title}} {{newmember.first_name}} {{newmember.last_name}} of the Ethics-committee has started to review the document below.
                             </p>
                         </div>
                     </div>
@@ -105,8 +105,13 @@
                     <div class="d-flex w-100 justify-content-between">
                         <div>
                             <i class="fa fa-file-text" aria-hidden="true"></i>
-                            &nbsp;&nbsp;<b>{{description.en_title}}</b>
-                            &nbsp;&nbsp;<code>rev{{revision.version}}</code>&nbsp;&nbsp;
+                            &nbsp;&nbsp;
+                            <b>{{document.document_title}}</b>
+                            &nbsp;
+                            <span class="badge badge-primary">
+                                <i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}
+                            </span>
+                            &nbsp;&nbsp;
                         </div>
                         <div class="right">
                             <span class="badge badge-info">
@@ -114,12 +119,20 @@
                             </span>
                         </div>
                     </div>
+                    <div class="d-flex w-100 justify-content-between" style="margin-top:5px;">
+                        <div>
+                            <code>{{document.document_id}}</code>
+                        </div>
+                        <div class="timestamp right">
+                            &nbsp;&nbsp;{{document._updated}}
+                        </div>
+                    </div>
                 </a>
             </div>
         </div>
         <!-- Footer -->
         <div class="footer middle">
-            &copy; {{year}} <a href="{{domain}}{{member_client_path}}/" target="_blank">Ethics-App</a> | COMMITTEE
+            &copy; {{year}} <a href="{{domain}}{{member_client_path}}/" target="_blank">Ethics-App</a>
         </div>
     </body>
 </html>

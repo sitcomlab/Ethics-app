@@ -16,15 +16,16 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
     $scope.redirect = function(path){
         $location.url(path);
     };
-    
+
     /**
-     * []
+     * [description]
+     * @return {[type]} [description]
      */
     $scope.resetFile = function(){
         $scope.uploadstatus = "fail";
         $scope.latest_revision.concerns.q14_filename = null;
     };
-    
+
     /**
      * [upload file]
      * @return {[type]} [file]
@@ -359,7 +360,7 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
     $scope.document = $documentService.get();
     $scope.latest_revision = $documentService.getLatestRevision();
     $scope.tab = 0;
-    
+
     // Check status
     if($documentService.getStatus()>1 && $documentService.getStatus()!=5){
         // Redirect
@@ -370,27 +371,27 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
     $scope.status = {
         general: {
             display: true,
-            history: false,
-            limit: 1
+            history: true,
+            limit: 2
         },
         descriptions: {
             language: {
                 en: true,
-                de: false,
-                pt: false
+                de: true,
+                pt: true
             },
             history: {
                 en: {
-                    display: false,
-                    limit: 1
+                    display: true,
+                    limit: 2
                 },
                 de: {
-                    display: false,
-                    limit: 1
+                    display: true,
+                    limit: 2
                 },
                 pt: {
-                    display: false,
-                    limit: 1
+                    display: true,
+                    limit: 2
                 }
             },
             comments: {
@@ -401,27 +402,12 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
         },
         concerns: {
             display: true,
-            history: false,
-            limit: 1,
+            history: true,
+            limit: 2,
             comments: true
         }
     };
-    
-    // Show all comments and history
-    $scope.toggle('general', 'history');
-    $scope.toggle('descriptions', 'history', 'en');
-    if($scope.latest_revision.descriptions.de_used){
-        $scope.toggle('descriptions', 'history', 'de');
-    } else {
-        $scope.toggle('descriptions', 'language', 'de');
-    }
-    if($scope.latest_revision.descriptions.pt_used){
-        $scope.toggle('descriptions', 'history', 'pt');
-    } else {
-        $scope.toggle('descriptions', 'language', 'de');
-    }
-    $scope.toggle('concerns', 'history');
-    
+
     if ($scope.latest_revision.concerns.q14_filename !== null) {
         $scope.uploadstatus= 'success';
     }

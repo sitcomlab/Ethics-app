@@ -32,7 +32,54 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                 $authenticationService.set(response.data);
                 $scope.$parent.loading = { status: true, message: $filter('translate')('LOADING_DOCUMENT') };
 
-                $timeout(function(){
+                // Load document
+                $documentService.retrieve_v2($routeParams.document_id)
+                .then(function onSuccess(response) {
+                    $documentService.set(response.data);
+
+                    // Update navbar
+                    $scope.$parent.authenticated_user = $authenticationService.get();
+                    $scope.$parent.document = $documentService.get();
+                    $scope.$parent.loading = { status: true, message: $filter('translate')('GENERATING_FILES') };
+
+                    // Check status of document to generate files
+                    if($documentService.getStatus()===2 || $documentService.getStatus()===6){
+
+                        // Check if files were already created and cached
+                        if($fileService.get()){
+                            $documentService.setFiles($fileService.get());
+                            $scope.$parent.loading = { status: false, message: "" };
+
+                            // Redirect
+                            $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
+                        } else {
+                            // Generate files on server
+                            $documentService.generateFiles($documentService.getId())
+                            .then(function onSuccess(response) {
+                                $fileService.set(response.data);
+                                $documentService.setFiles($fileService.get());
+                                $scope.$parent.loading = { status: false, message: "" };
+
+                                // Redirect
+                                $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
+                            })
+                            .catch(function onError(response) {
+                                $window.alert(response.data);
+                            });
+                        }
+                    } else {
+                        $scope.$parent.loading = { status: false, message: "" };
+
+                        // Redirect
+                        $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
+                    }
+                })
+                .catch(function onError(response) {
+                    $window.alert(response.data);
+                    $scope.redirect("/");
+                });
+
+                /*$timeout(function(){
                     // Load document
                     $documentService.retrieve($routeParams.document_id)
                     .then(function onSuccess(response) {
@@ -180,12 +227,12 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                         $window.alert(response.data);
                         $scope.redirect("/");
                     });
-                }, 400);
+                }, 400);;*/
             })
             .catch(function onError(response) {
                 $window.alert(response.data);
                 $scope.redirect("/");
-            });
+            })
         }, 400);
     }, 1000);
 

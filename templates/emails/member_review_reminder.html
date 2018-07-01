@@ -80,7 +80,7 @@
             </h1>
             <br>
             <p class="lead">
-                A document has not been reviewed <span class="text-danger"><b>since {{document.past_days}} days</b><span>
+                A document has not been reviewed <span class="text-danger"><b>since {{document.past_days}} days</b></span>
             </p>
         </div>
         <!-- Main -->
@@ -108,8 +108,13 @@
                     <div class="d-flex w-100 justify-content-between">
                         <div>
                             <i class="fa fa-file-text" aria-hidden="true"></i>
-                            &nbsp;&nbsp;<b>{{document.document_title}}</b>
-                            &nbsp;&nbsp;<code>rev{{revision.version}}</code>&nbsp;&nbsp;
+                            &nbsp;&nbsp;
+                            <b>{{document.document_title}}</b>
+                            &nbsp;
+                            <span class="badge badge-primary">
+                                <i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}
+                            </span>
+                            &nbsp;&nbsp;
                         </div>
                         <div class="right">
                             <span class="badge badge-primary">
@@ -514,7 +519,7 @@
         </div>
         <!-- Footer -->
         <div class="footer middle">
-            &copy; {{year}} <a href="{{domain}}{{member_client_path}}/" target="_blank">Ethics-App</a> | COMMITTEE
+            &copy; {{year}} <a href="{{domain}}{{member_client_path}}/" target="_blank">Ethics-App</a>
         </div>
     </body>
 </html>

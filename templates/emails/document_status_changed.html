@@ -108,8 +108,13 @@
                     <div class="d-flex w-100 justify-content-between">
                         <div>
                             <i class="fa fa-file-text" aria-hidden="true"></i>
-                            &nbsp;&nbsp;<b>{{document.document_title}}</b>
-                            &nbsp;&nbsp;<code>rev{{revision.version}}</code>&nbsp;&nbsp;
+                            &nbsp;&nbsp;
+                            <b>{{document.document_title}}</b>
+                            &nbsp;
+                            <span class="badge badge-primary">
+                                <i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}
+                            </span>
+                            &nbsp;&nbsp;
                         </div>
                         <div class="right">
                             <span class="badge {{document._status_label}}">

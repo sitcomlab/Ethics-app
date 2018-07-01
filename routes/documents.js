@@ -7,6 +7,7 @@ var list_by_user = require('../controllers/documents/list_by_user');
 var list_by_course = require('../controllers/documents/list_by_course');
 var post = require('../controllers/documents/post');
 var get = require('../controllers/documents/get');
+var get_v2 = require('../controllers/documents/get_v2');
 var put = require('../controllers/documents/put');
 var del = require('../controllers/documents/delete');
 var confirm_intro = require('../controllers/documents/confirm_intro');
@@ -29,6 +30,9 @@ router.post('/documents', post.request);
 
 // GET
 router.get('/documents/:document_id', isAuthenticated, get.request);
+
+// GET v2
+router.get('/v2/documents/:document_id', isAuthenticated, get_v2.request);
 
 // PUT
 router.put('/documents/:document_id', isAuthenticated, put.request);

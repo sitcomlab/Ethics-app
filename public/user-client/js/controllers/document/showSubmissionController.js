@@ -24,7 +24,7 @@ app.controller("documentShowSubmissionController", function($scope, $rootScope, 
     $scope.cancel = function(){
         $scope.redirect("/documents/" + $documentService.getId() + "/status/" + $documentService.getStatus());
     };
-  
+
       /**
      * [push back Document to Status 1]
      * @return {[type]} [description]
@@ -33,7 +33,7 @@ app.controller("documentShowSubmissionController", function($scope, $rootScope, 
         $documentService.changeStatusTo1($documentService.getId());
         $scope.redirect("/");
     };
-  
+
 
     /**
      * [toggleConcernHistory description]
@@ -207,21 +207,6 @@ app.controller("documentShowSubmissionController", function($scope, $rootScope, 
             comments: true
         }
     };
-
-    // Show all comments and history
-    $scope.toggle('general', 'history');
-    $scope.toggle('descriptions', 'history', 'en');
-    if($scope.latest_revision.descriptions.de_used){
-        $scope.toggle('descriptions', 'history', 'de');
-    } else {
-        $scope.toggle('descriptions', 'language', 'de');
-    }
-    if($scope.latest_revision.descriptions.pt_used){
-        $scope.toggle('descriptions', 'history', 'pt');
-    } else {
-        $scope.toggle('descriptions', 'language', 'de');
-    }
-    $scope.toggle('concerns', 'history');
 
     $scope.$parent.loading = { status: false, message: "" };
 });

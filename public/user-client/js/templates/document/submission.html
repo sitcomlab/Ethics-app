@@ -50,10 +50,10 @@
                     </span>
                     <a href="" ng-click="toggle('general', 'display')">
                         <span ng-if="status.general.display">
-                            {{ 'HIDE' | translate }}
+                            {{ 'HIDE_LATEST_REVISION' | translate }}
                         </span>
                         <span ng-if="!status.general.display">
-                            {{ 'SHOW' | translate }}
+                            {{ 'SHOW_LATEST_REVISION' | translate }}
                         </span>
                     </a>
                     <span ng-if="!status.general.display">
@@ -75,7 +75,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div class="row" ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.general.limit" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                    <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                    <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                 </div>
                                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                     <i>{{revision.created | timestamp | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</i>
@@ -92,7 +92,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div class="row" ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.general.limit" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                    <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                    <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                 </div>
                                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                     <i>{{revision.updated | timestamp | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</i>
@@ -114,7 +114,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div class="row" ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.general.limit" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                    <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                    <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                 </div>
                                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                     <span ng-if="revision.comments.published && revision.reviewer != null">
@@ -135,12 +135,12 @@
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div class="row" ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.general.limit" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                    <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                    <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                 </div>
                                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                    <span class="comment" ng-if="revision.comments.published && revision.comments.general_comment !== null && revision.comments.general_comment !== ''">
-                                        <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.general_comment}}
-                                    </span>
+                                    <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.general_comment !== null && revision.comments.general_comment !== ''">
+                                        <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.general_comment}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -180,8 +180,8 @@
                         </span>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
                     </span>
-                    <a href="" ng-click="toggle('descriptions', 'language', 'en')" ng-if="status.descriptions.language.en">{{ 'HIDE' | translate }}</a>
-                    <a href="" ng-click="toggle('descriptions', 'language', 'en')" ng-if="!status.descriptions.language.en">{{ 'SHOW' | translate }}</a>
+                    <a href="" ng-click="toggle('descriptions', 'language', 'en')" ng-if="status.descriptions.language.en">{{ 'HIDE_ENGLISH_DESCRIPTION' | translate }}</a>
+                    <a href="" ng-click="toggle('descriptions', 'language', 'en')" ng-if="!status.descriptions.language.en">{{ 'SHOW_ENGLISH_DESCRIPTION' | translate }}</a>
                     <span ng-if="!status.descriptions.language.en">
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </span><span ng-if="status.descriptions.language.en">
@@ -205,15 +205,28 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_title}}</i><br>
-                                        <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.en_title_comment !== null && revision.comments.en_title_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_title_comment}}
+                                        <i>
+                                            <span ng-repeat="diff in revision.descriptions.en_title_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
                                             </span>
-                                        </span>
+                                        </i>
+                                        <br>
+                                        <div ng-if="status.descriptions.comments.en">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.en_title_comment !== null && revision.comments.en_title_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_title_comment}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -231,15 +244,28 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_researcher}}</i><br>
-                                        <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.en_researcher_comment !== null && revision.comments.en_researcher_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_researcher_comment}}
+                                        <i>
+                                            <span ng-repeat="diff in revision.descriptions.en_researcher_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
                                             </span>
-                                        </span>
+                                        </i>
+                                        <br>
+                                        <div ng-if="status.descriptions.comments.en">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.en_researcher_comment !== null && revision.comments.en_researcher_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_researcher_comment}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -257,15 +283,28 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_study_time}}</i><br>
-                                        <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.en_study_time_comment !== null && revision.comments.en_study_time_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_study_time_comment}}
+                                        <i>
+                                            <span ng-repeat="diff in revision.descriptions.en_study_time_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
                                             </span>
-                                        </span>
+                                        </i>
+                                        <br>
+                                        <div ng-if="status.descriptions.comments.en">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.en_study_time_comment !== null && revision.comments.en_study_time_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_study_time_comment}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -283,15 +322,28 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_purpose}}</i><br>
-                                        <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.en_purpose_comment !== null && revision.comments.en_purpose_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_purpose_comment}}
+                                        <i>
+                                            <span ng-repeat="diff in revision.descriptions.en_purpose_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
                                             </span>
-                                        </span>
+                                        </i>
+                                        <br>
+                                        <div ng-if="status.descriptions.comments.en">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.en_purpose_comment !== null && revision.comments.en_purpose_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_purpose_comment}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -309,15 +361,28 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_procedure}}</i><br>
-                                        <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.en_procedure_comment !== null && revision.comments.en_procedure_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_procedure_comment}}
+                                        <i>
+                                            <span ng-repeat="diff in revision.descriptions.en_procedure_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
                                             </span>
-                                        </span>
+                                        </i>
+                                        <br>
+                                        <div ng-if="status.descriptions.comments.en">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.en_procedure_comment !== null && revision.comments.en_procedure_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_procedure_comment}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -335,15 +400,28 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_duration}}</i><br>
-                                        <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.en_duration_comment !== null && revision.comments.en_duration_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_duration_comment}}
+                                        <i>
+                                            <span ng-repeat="diff in revision.descriptions.en_duration_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
                                             </span>
-                                        </span>
+                                        </i>
+                                        <br>
+                                        <div ng-if="status.descriptions.comments.en">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.en_duration_comment !== null && revision.comments.en_duration_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_duration_comment}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -361,15 +439,28 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_risks}}</i><br>
-                                        <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.en_risks_comment !== null && revision.comments.en_risks_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_risks_comment}}
+                                        <i>
+                                            <span ng-repeat="diff in revision.descriptions.en_risks_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
                                             </span>
-                                        </span>
+                                        </i>
+                                        <br>
+                                        <div ng-if="status.descriptions.comments.en">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.en_risks_comment !== null && revision.comments.en_risks_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_risks_comment}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -387,15 +478,28 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_benefits}}</i><br>
-                                        <span ng-if="status.descriptions.comments.en">
-                                            <span class="comment" ng-if="revision.comments.published && revision.comments.en_benefits_comment !== null && revision.comments.en_benefits_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.published && revision.comments.en_benefits_comment}}
+                                        <i>
+                                            <span ng-repeat="diff in revision.descriptions.en_benefits_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
                                             </span>
-                                        </span>
+                                        </i>
+                                        <br>
+                                        <div ng-if="status.descriptions.comments.en">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.en_benefits_comment !== null && revision.comments.en_benefits_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_benefits_comment}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -436,8 +540,8 @@
                         </span>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
                     </span>
-                    <a href="" ng-click="toggle('descriptions', 'language', 'de')" ng-if="status.descriptions.language.de">{{ 'HIDE' | translate }}</a>
-                    <a href="" ng-click="toggle('descriptions', 'language', 'de')" ng-if="!status.descriptions.language.de">{{ 'SHOW' | translate }}</a>
+                    <a href="" ng-click="toggle('descriptions', 'language', 'de')" ng-if="status.descriptions.language.de">{{ 'HIDE_GERMAN_DESCRIPTION' | translate }}</a>
+                    <a href="" ng-click="toggle('descriptions', 'language', 'de')" ng-if="!status.descriptions.language.de">{{ 'SHOW_GERMAN_DESCRIPTION' | translate }}</a>
                     <span ng-if="!status.descriptions.language.de">
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </span><span ng-if="status.descriptions.language.de">
@@ -464,7 +568,7 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.de.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.de_title}}</i><br>
@@ -490,7 +594,7 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.de.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.de_researcher}}</i><br>
@@ -516,7 +620,7 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.de.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.de_study_time}}</i><br>
@@ -542,7 +646,7 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.de.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.de_purpose}}</i><br>
@@ -568,7 +672,7 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.de.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.de_procedure}}</i><br>
@@ -594,7 +698,7 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.de.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.de_duration}}</i><br>
@@ -620,7 +724,7 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.de.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.de_risks}}</i><br>
@@ -646,7 +750,7 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.de.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.de_benefits}}</i><br>
@@ -694,8 +798,8 @@
                         </span>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
                     </span>
-                    <a href="" ng-click="toggle('descriptions', 'language', 'pt')" ng-if="status.descriptions.language.pt">{{ 'HIDE' | translate }}</a>
-                    <a href="" ng-click="toggle('descriptions', 'language', 'pt')" ng-if="!status.descriptions.language.pt">{{ 'SHOW' | translate }}</a>
+                    <a href="" ng-click="toggle('descriptions', 'language', 'pt')" ng-if="status.descriptions.language.pt">{{ 'HIDE_PORTUGUESE_DESCRIPTION' | translate }}</a>
+                    <a href="" ng-click="toggle('descriptions', 'language', 'pt')" ng-if="!status.descriptions.language.pt">{{ 'SHOW_PORTUGUESE_DESCRIPTION' | translate }}</a>
                     <span ng-if="!status.descriptions.language.pt">
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </span><span ng-if="status.descriptions.language.pt">
@@ -722,7 +826,7 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.pt.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_title}}</i><br>
@@ -748,7 +852,7 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.pt.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_researcher}}</i><br>
@@ -774,7 +878,7 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.pt.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_study_time}}</i><br>
@@ -800,7 +904,7 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.pt.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_purpose}}</i><br>
@@ -826,7 +930,7 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.pt.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_procedure}}</i><br>
@@ -852,7 +956,7 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.pt.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_duration}}</i><br>
@@ -878,7 +982,7 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.pt.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_risks}}</i><br>
@@ -904,7 +1008,7 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.pt.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_benefits}}</i><br>
@@ -951,8 +1055,8 @@
                         </span>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
                     </span>
-                    <a href="" ng-click="toggle('concerns', 'display')" ng-if="status.concerns.display">{{ 'HIDE' | translate }}</a>
-                    <a href="" ng-click="toggle('concerns', 'display')" ng-if="!status.concerns.display">{{ 'SHOW' | translate }}</a>
+                    <a href="" ng-click="toggle('concerns', 'display')" ng-if="status.concerns.display">{{ 'HIDE_CONCERNS' | translate }}</a>
+                    <a href="" ng-click="toggle('concerns', 'display')" ng-if="!status.concerns.display">{{ 'SHOW_CONCERNS' | translate }}</a>
                     <span ng-if="!status.concerns.display">
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </span>
@@ -978,24 +1082,37 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q01_value">
-                                            {{ 'YES' | translate }}
+                                        <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q01_value">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                         </span>
-                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q01_value">
+                                        <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q01_value">
                                             {{ 'NO' | translate }}
                                         </span>
-                                        &nbsp;&nbsp;<i>{{revision.concerns.q01_explanation}}</i>
+                                        &nbsp;&nbsp;
+                                        <i>
+                                            <span ng-repeat="diff in revision.concerns.q01_explanation_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
+                                            </span>
+                                        </i>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q01_comment !== null && revision.comments.q01_comment !== ''">
+                                        <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.q01_comment !== null && revision.comments.q01_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q01_comment}}
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1013,24 +1130,37 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q02_value">
-                                            {{ 'YES' | translate }}
+                                        <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q02_value">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                         </span>
-                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q02_value">
+                                        <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q02_value">
                                             {{ 'NO' | translate }}
                                         </span>
-                                        &nbsp;&nbsp;<i>{{revision.concerns.q02_explanation}}</i>
+                                        &nbsp;&nbsp;
+                                        <i>
+                                            <span ng-repeat="diff in revision.concerns.q02_explanation_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
+                                            </span>
+                                        </i>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q02_comment !== null && revision.comments.q02_comment !== ''">
+                                        <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.q02_comment !== null && revision.comments.q02_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q02_comment}}
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1048,24 +1178,37 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q03_value">
-                                            {{ 'YES' | translate }}
+                                        <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q03_value">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                         </span>
-                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q03_value">
+                                        <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q03_value">
                                             {{ 'NO' | translate }}
                                         </span>
-                                        &nbsp;&nbsp;<i>{{revision.concerns.q03_explanation}}</i>
+                                        &nbsp;&nbsp;
+                                        <i>
+                                            <span ng-repeat="diff in revision.concerns.q03_explanation_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
+                                            </span>
+                                        </i>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q03_comment !== null && revision.comments.q03_comment !== ''">
+                                        <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.q03_comment !== null && revision.comments.q03_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q03_comment}}
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1083,24 +1226,37 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q04_value">
-                                            {{ 'YES' | translate }}
+                                        <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q04_value">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                         </span>
-                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q04_value">
+                                        <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q04_value">
                                             {{ 'NO' | translate }}
                                         </span>
-                                        &nbsp;&nbsp;<i>{{revision.concerns.q04_explanation}}</i>
+                                        &nbsp;&nbsp;
+                                        <i>
+                                            <span ng-repeat="diff in revision.concerns.q04_explanation_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
+                                            </span>
+                                        </i>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q04_comment !== null && revision.comments.q04_comment !== ''">
+                                        <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.q04_comment !== null && revision.comments.q04_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q04_comment}}
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1117,24 +1273,37 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q05_value">
-                                            {{ 'YES' | translate }}
+                                        <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q05_value">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                         </span>
-                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q05_value">
+                                        <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q05_value">
                                             {{ 'NO' | translate }}
                                         </span>
-                                        &nbsp;&nbsp;<i>{{revision.concerns.q05_explanation}}</i>
+                                        &nbsp;&nbsp;
+                                        <i>
+                                            <span ng-repeat="diff in revision.concerns.q05_explanation_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
+                                            </span>
+                                        </i>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q05_comment !== null && revision.comments.q05_comment !== ''">
+                                        <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.q05_comment !== null && revision.comments.q05_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q05_comment}}
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1152,24 +1321,37 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q06_value">
-                                            {{ 'YES' | translate }}
+                                        <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q06_value">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                         </span>
-                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q06_value">
+                                        <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q06_value">
                                             {{ 'NO' | translate }}
                                         </span>
-                                        &nbsp;&nbsp;<i>{{revision.concerns.q06_explanation}}</i>
+                                        &nbsp;&nbsp;
+                                        <i>
+                                            <span ng-repeat="diff in revision.concerns.q06_explanation_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
+                                            </span>
+                                        </i>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q06_comment !== null && revision.comments.q06_comment !== ''">
+                                        <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.q06_comment !== null && revision.comments.q06_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q06_comment}}
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1187,24 +1369,37 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q07_value">
-                                            {{ 'YES' | translate }}
+                                        <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q07_value">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                         </span>
-                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q07_value">
+                                        <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q07_value">
                                             {{ 'NO' | translate }}
                                         </span>
-                                        &nbsp;&nbsp;<i>{{revision.concerns.q07_explanation}}</i>
+                                        &nbsp;&nbsp;
+                                        <i>
+                                            <span ng-repeat="diff in revision.concerns.q07_explanation_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
+                                            </span>
+                                        </i>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q07_comment !== null && revision.comments.q07_comment !== ''">
+                                        <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.q07_comment !== null && revision.comments.q07_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q07_comment}}
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1222,24 +1417,37 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q08_value">
-                                            {{ 'YES' | translate }}
+                                        <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q08_value">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                         </span>
-                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q08_value">
+                                        <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q08_value">
                                             {{ 'NO' | translate }}
                                         </span>
-                                        &nbsp;&nbsp;<i>{{revision.concerns.q08_explanation}}</i>
+                                        &nbsp;&nbsp;
+                                        <i>
+                                            <span ng-repeat="diff in revision.concerns.q08_explanation_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
+                                            </span>
+                                        </i>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q08_comment !== null && revision.comments.q08_comment !== ''">
+                                        <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.q08_comment !== null && revision.comments.q08_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q08_comment}}
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1257,24 +1465,37 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q09_value">
-                                            {{ 'YES' | translate }}
+                                        <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q09_value">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                         </span>
-                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q09_value">
+                                        <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q09_value">
                                             {{ 'NO' | translate }}
                                         </span>
-                                        &nbsp;&nbsp;<i>{{revision.concerns.q09_explanation}}</i>
+                                        &nbsp;&nbsp;
+                                        <i>
+                                            <span ng-repeat="diff in revision.concerns.q09_explanation_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
+                                            </span>
+                                        </i>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q09_comment !== null && revision.comments.q09_comment !== ''">
+                                        <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.q09_comment !== null && revision.comments.q09_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q09_comment}}
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1292,24 +1513,37 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q10_value">
-                                            {{ 'YES' | translate }}
+                                        <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q10_value">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                         </span>
-                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q10_value">
+                                        <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q10_value">
                                             {{ 'NO' | translate }}
                                         </span>
-                                        &nbsp;&nbsp;<i>{{revision.concerns.q10_explanation}}</i>
+                                        &nbsp;&nbsp;
+                                        <i>
+                                            <span ng-repeat="diff in revision.concerns.q10_explanation_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
+                                            </span>
+                                        </i>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q10_comment !== null && revision.comments.q10_comment !== ''">
+                                        <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.q10_comment !== null && revision.comments.q10_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q10_comment}}
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1327,24 +1561,37 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q11_1_value">
-                                            {{ 'YES' | translate }}
+                                        <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q11_1_value">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                         </span>
-                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q11_1_value">
+                                        <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q11_1_value">
                                             {{ 'NO' | translate }}
                                         </span>
-                                        &nbsp;&nbsp;<i>{{revision.concerns.q11_1_explanation}}</i>
+                                        &nbsp;&nbsp;
+                                        <i>
+                                            <span ng-repeat="diff in revision.concerns.q11_1_explanation_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
+                                            </span>
+                                        </i>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q11_1_comment !== null && revision.comments.q11_1_comment !== ''">
+                                        <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.q11_1_comment !== null && revision.comments.q11_1_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q11_1_comment}}
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1362,24 +1609,37 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q11_2_value">
-                                            {{ 'YES' | translate }}
+                                        <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q11_2_value">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                         </span>
-                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q11_2_value">
+                                        <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q11_2_value">
                                             {{ 'NO' | translate }}
                                         </span>
-                                        &nbsp;&nbsp;<i>{{revision.concerns.q11_2_explanation}}</i>
+                                        &nbsp;&nbsp;
+                                        <i>
+                                            <span ng-repeat="diff in revision.concerns.q11_2_explanation_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
+                                            </span>
+                                        </i>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q11_2_comment !== null && revision.comments.q11_2_comment !== ''">
+                                        <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.q11_2_comment !== null && revision.comments.q11_2_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q11_2_comment}}
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1397,24 +1657,37 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q12_value">
-                                            {{ 'YES' | translate }}
+                                        <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q12_value">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                         </span>
-                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q12_value">
+                                        <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q12_value">
                                             {{ 'NO' | translate }}
                                         </span>
-                                        &nbsp;&nbsp;<i>{{revision.concerns.q12_explanation}}</i>
+                                        &nbsp;&nbsp;
+                                        <i>
+                                            <span ng-repeat="diff in revision.concerns.q12_explanation_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
+                                            </span>
+                                        </i>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q12_comment !== null && revision.comments.q12_comment !== ''">
+                                        <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.q12_comment !== null && revision.comments.q12_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q12_comment}}
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1432,24 +1705,37 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q13_value">
-                                            {{ 'YES' | translate }}
+                                        <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q13_value">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                         </span>
-                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q13_value">
+                                        <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q13_value">
                                             {{ 'NO' | translate }}
                                         </span>
-                                        &nbsp;&nbsp;<i>{{revision.concerns.q13_explanation}}</i>
+                                        &nbsp;&nbsp;
+                                        <i>
+                                            <span ng-repeat="diff in revision.concerns.q13_explanation_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
+                                            </span>
+                                        </i>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q13_comment !== null && revision.comments.q13_comment !== ''">
+                                        <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.q13_comment !== null && revision.comments.q13_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q13_comment}}
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1466,61 +1752,77 @@
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                 <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q14_value">
-                                            {{ 'YES' | translate }}
+                                        <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q14_value">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                         </span>
-                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q14_value">
+                                        <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q14_value">
                                             {{ 'NO' | translate }}
                                         </span>
-                                        &nbsp;&nbsp;<a href="{{revision.concerns.q14_filepath}}" download="{{revision.concerns.q14_filename}}" ng-if="revision.concerns.q14_value" target="_blank">
+                                        &nbsp;&nbsp;
+                                        <a href="{{revision.concerns.q14_filepath}}" download="{{revision.concerns.q14_filename}}" ng-if="revision.concerns.q14_value" target="_blank">
                                             <i class="fa fa-file-pdf-o fa-1x text-danger" aria-hidden="true">{{ 'DOCUMENT' | translate }}</i>
                                         </a>
-                                        &nbsp;&nbsp;<i>{{revision.concerns.q14_explanation}}</i>
+                                        &nbsp;&nbsp;
+                                        <i>
+                                            <span ng-repeat="diff in revision.concerns.q14_explanation_diff">
+                                                <span ng-if="diff.added" class="text-success">
+                                                    {{diff.value}}
+                                                </span>
+                                                <span ng-if="diff.removed" class="text-danger">
+                                                    <s>{{diff.value}}</s>
+                                                </span>
+                                                <span ng-if="!diff.added && !diff.removed">
+                                                    {{diff.value}}
+                                                </span>
+                                            </span>
+                                        </i>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                         <!-- divider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.published && revision.comments.q14_comment !== null && revision.comments.q14_comment !== ''">
+                                        <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.published && revision.comments.q14_comment !== null && revision.comments.q14_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q14_comment}}
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                  <div class="alert alert-info justified" role="alert" ng-if=!document.revisions[0].reviewer>
-                      <h5>
-                          <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'MODIFICATIONS' | translate }}
-                      </h5>
-                      {{ 'REVISING_INFORMATION_1' | translate }}.
-                  </div>
-                  <div class="alert alert-info justified" role="alert" ng-if=document.revisions[0].reviewer>
-                    <h5>
-                        <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'MODIFICATIONS' | translate }}
-                    </h5>
-                    {{ 'REVISING_INFORMATION_2' | translate }} (<b><i class="fa fa-user" aria-hidden="true"></i> {{latest_revision.reviewer.full_name}}</b>) <a href="" ng-if=document.revisions[0].reviewer ng-click="redirect('/members/' + latest_revision.reviewer.member_id)">{{ 'HERE' | translate }}</a>. {{ 'REVISING_INFORMATION_3' | translate }}.
-                  </div>
-                  <h6>
-                    {{ 'PLEASE_TYPE_IN_THE_ID_OF_THE_DOCUMENT_TO_CONFIRM' | translate }}?
-                  </h6>
-                  <br>
-                  <input type="text" class="form-control" ng-model="input" id="documentId" placeholder="{{ 'DOCUMENT_ID' | translate }}" autofocus>
-                  <br>
-                  <div class="row">
-                      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 center">
-                          <button href="" class="btn btn-danger btn-block-xs-only btn-block-sm-only" role="button" ng-click="changeStatusToOne()" ng-disabled="input != document.document_id">
-                              <i class="fa fa-angle-center" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'REVERT_TO_UNSUBMITTED' | translate }}
-                          </button>
-                      </div>
-                  </div>
-              </div>
             </div>
+            <br>
+
+            <div class="alert alert-info justified" role="alert">
+                <h5>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'MODIFICATIONS' | translate }}
+                </h5>
+                <div ng-if="!latest_revision.reviewer">
+                    {{ 'REVISING_INFORMATION_1' | translate }}.
+                </div>
+                <div ng-if="latest_revision.reviewer">
+                    {{ 'REVISING_INFORMATION_2' | translate }} (<b><i class="fa fa-user" aria-hidden="true"></i> {{latest_revision.reviewer.full_name}}</b>) <a href="" ng-if="latest_revision.reviewer" ng-click="redirect('/members/' + latest_revision.reviewer.member_id)">{{ 'HERE' | translate }}</a>. {{ 'REVISING_INFORMATION_3' | translate }}.
+                </div>
+                <br>
+
+                <label>
+                    <b>{{ 'PLEASE_TYPE_IN_THE_ID_OF_THE_DOCUMENT_TO_CONFIRM' | translate }}:</b>  <code>{{document.document_id}}</code>
+                </label>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-9">
+                        <input type="text" class="form-control" ng-model="input" id="documentId" placeholder="{{ 'DOCUMENT_ID' | translate }}">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-3 right">
+                        <button href="" class="btn btn-danger btn-block-xs-only btn-block-sm-only" role="button" ng-click="changeStatusToOne()" ng-disabled="input != document.document_id">
+                            <i class="fa fa-undo" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'REVERT_TO_UNSUBMITTED' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <br>
         </div>
     </div>
 </div>

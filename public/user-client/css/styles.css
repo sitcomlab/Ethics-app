@@ -44,9 +44,9 @@ footer {
     padding-bottom: 3px;
 }
 
-.comment {
-    padding-top: 3px;
-    color: #ff4d4d;
+.alert-comment {
+    margin-top: 5px;
+    margin-bottom: 0px;
 }
 
 .timestamp {

@@ -48,10 +48,10 @@
                         </span>
                         <a href="" ng-click="toggle('general', 'display')">
                             <span ng-if="status.general.display">
-                                {{ 'HIDE' | translate }}
+                                {{ 'HIDE_LATEST_REVISION' | translate }}
                             </span>
                             <span ng-if="!status.general.display">
-                                {{ 'SHOW' | translate }}
+                                {{ 'SHOW_LATEST_REVISION' | translate }}
                             </span>
                         </a>
                         <span ng-if="!status.general.display">
@@ -73,7 +73,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <div class="row" ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.general.limit" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.created | timestamp | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</i>
@@ -90,7 +90,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <div class="row" ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.general.limit" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.updated | timestamp | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</i>
@@ -112,7 +112,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <div class="row" ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.general.limit" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <span ng-if="revision.reviewer != null">
@@ -133,12 +133,12 @@
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <div class="row" ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.general.limit" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="comment" ng-if="revision.comments.general_comment !== null && revision.comments.general_comment !== ''">
+                                        <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.general_comment !== null && revision.comments.general_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.general_comment}}
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -178,8 +178,8 @@
                             </span>
                             &nbsp;&nbsp;|&nbsp;&nbsp;
                         </span>
-                        <a href="" ng-click="toggle('descriptions', 'language', 'en')" ng-if="status.descriptions.language.en">{{ 'HIDE' | translate }}</a>
-                        <a href="" ng-click="toggle('descriptions', 'language', 'en')" ng-if="!status.descriptions.language.en">{{ 'SHOW' | translate }}</a>
+                        <a href="" ng-click="toggle('descriptions', 'language', 'en')" ng-if="status.descriptions.language.en">{{ 'HIDE_ENGLISH_DESCRIPTION' | translate }}</a>
+                        <a href="" ng-click="toggle('descriptions', 'language', 'en')" ng-if="!status.descriptions.language.en">{{ 'SHOW_ENGLISH_DESCRIPTION' | translate }}</a>
                         <span ng-if="!status.descriptions.language.en">
                             <i class="fa fa-caret-down" aria-hidden="true"></i>
                         </span><span ng-if="status.descriptions.language.en">
@@ -203,14 +203,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_title.$invalid && !editDocumentForm.en_title.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="2"
                                                                 ng-model="latest_revision.descriptions.en_title"
                                                                 name="en_title"
                                                                 id="en_title"
@@ -226,14 +226,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.en_title}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.en_title_comment !== null && revision.comments.en_title_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.en_title_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.en">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.en_title_comment !== null && revision.comments.en_title_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_title_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -251,14 +264,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_researcher.$invalid && !editDocumentForm.en_researcher.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="5"
                                                                 ng-model="latest_revision.descriptions.en_researcher"
                                                                 name="en_researcher"
                                                                 id="en_researcher"
@@ -274,14 +287,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.en_researcher}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.en_researcher_comment !== null && revision.comments.en_researcher_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.en_researcher_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.en">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.en_researcher_comment !== null && revision.comments.en_researcher_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_researcher_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -299,14 +325,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_study_time.$invalid && !editDocumentForm.en_study_time.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="2"
                                                                 ng-model="latest_revision.descriptions.en_study_time"
                                                                 name="en_study_time"
                                                                 id="en_study_time"
@@ -322,14 +348,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.en_study_time}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.en_study_time_comment !== null && revision.comments.en_study_time_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.en_study_time_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.en">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.en_study_time_comment !== null && revision.comments.en_study_time_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_study_time_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -347,14 +386,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_purpose.$invalid && !editDocumentForm.en_purpose.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="5"
                                                                 ng-model="latest_revision.descriptions.en_purpose"
                                                                 name="en_purpose"
                                                                 id="en_purpose"
@@ -370,14 +409,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.en_purpose}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.en_purpose_comment !== null && revision.comments.en_purpose_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.en_purpose_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.en">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.en_purpose_comment !== null && revision.comments.en_purpose_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_purpose_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -395,14 +447,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_procedure.$invalid && !editDocumentForm.en_procedure.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="5"
                                                                 ng-model="latest_revision.descriptions.en_procedure"
                                                                 name="en_procedure"
                                                                 id="en_procedure"
@@ -418,14 +470,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.en_procedure}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.en_procedure_comment !== null && revision.comments.en_procedure_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.en_procedure_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.en">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.en_procedure_comment !== null && revision.comments.en_procedure_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_procedure_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -443,14 +508,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_duration.$invalid && !editDocumentForm.en_duration.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="2"
                                                                 ng-model="latest_revision.descriptions.en_duration"
                                                                 name="en_duration"
                                                                 id="en_duration"
@@ -466,14 +531,29 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.en_duration}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.en_duration_comment !== null && revision.comments.en_duration_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_duration_comment}}
-                                                </span>
-                                            </span>
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.en_duration_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.en">
+                                                <div ng-if="!$first && status.descriptions.comments.en">
+                                                    <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.en_duration_comment !== null && revision.comments.en_duration_comment !== ''">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_duration_comment}}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -491,14 +571,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_risks.$invalid && !editDocumentForm.en_risks.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="5"
                                                                 ng-model="latest_revision.descriptions.en_risks"
                                                                 name="en_risks"
                                                                 id="en_risks"
@@ -514,14 +594,29 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.en_risks}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.en_risks_comment !== null && revision.comments.en_risks_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_risks_comment}}
-                                                </span>
-                                            </span>
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.en_risks_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.en">
+                                                <div ng-if="!$first && status.descriptions.comments.en">
+                                                    <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.en_risks_comment !== null && revision.comments.en_risks_comment !== ''">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_risks_comment}}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -539,14 +634,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_benefits.$invalid && !editDocumentForm.en_benefits.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="5"
                                                                 ng-model="latest_revision.descriptions.en_benefits"
                                                                 name="en_benefits"
                                                                 id="en_benefits"
@@ -562,14 +657,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.en_risks}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.en_benefits_comment !== null && revision.comments.en_benefits_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.en_benefits_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.en">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.en_benefits_comment !== null && revision.comments.en_benefits_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_benefits_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -621,8 +729,8 @@
                             </span>
                             &nbsp;&nbsp;|&nbsp;&nbsp;
                         </span>
-                        <a href="" ng-click="toggle('descriptions', 'language', 'de')" ng-if="status.descriptions.language.de">{{ 'HIDE' | translate }}</a>
-                        <a href="" ng-click="toggle('descriptions', 'language', 'de')" ng-if="!status.descriptions.language.de">{{ 'SHOW' | translate }}</a>
+                        <a href="" ng-click="toggle('descriptions', 'language', 'de')" ng-if="status.descriptions.language.de">{{ 'HIDE_GERMAN_DESCRIPTION' | translate }}</a>
+                        <a href="" ng-click="toggle('descriptions', 'language', 'de')" ng-if="!status.descriptions.language.de">{{ 'SHOW_GERMAN_DESCRIPTION' | translate }}</a>
                         <span ng-if="!status.descriptions.language.de">
                             <i class="fa fa-caret-down" aria-hidden="true"></i>
                         </span><span ng-if="status.descriptions.language.de">
@@ -649,14 +757,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_title.$invalid && !editDocumentForm.de_title.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="2"
                                                                 ng-model="latest_revision.descriptions.de_title"
                                                                 name="de_title"
                                                                 id="de_title"
@@ -697,14 +805,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_researcher.$invalid && !editDocumentForm.de_researcher.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="5"
                                                                 ng-model="latest_revision.descriptions.de_researcher"
                                                                 name="de_researcher"
                                                                 id="de_researcher"
@@ -745,14 +853,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_study_time.$invalid && !editDocumentForm.de_study_time.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="2"
                                                                 ng-model="latest_revision.descriptions.de_study_time"
                                                                 name="de_study_time"
                                                                 id="de_study_time"
@@ -793,14 +901,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_purpose.$invalid && !editDocumentForm.de_purpose.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="5"
                                                                 ng-model="latest_revision.descriptions.de_purpose"
                                                                 name="de_purpose"
                                                                 id="de_purpose"
@@ -841,14 +949,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_procedure.$invalid && !editDocumentForm.de_procedure.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="5"
                                                                 ng-model="latest_revision.descriptions.de_procedure"
                                                                 name="de_procedure"
                                                                 id="de_procedure"
@@ -889,14 +997,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_duration.$invalid && !editDocumentForm.de_duration.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="2"
                                                                 ng-model="latest_revision.descriptions.de_duration"
                                                                 name="de_duration"
                                                                 id="de_duration"
@@ -937,14 +1045,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_risks.$invalid && !editDocumentForm.de_risks.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="5"
                                                                 ng-model="latest_revision.descriptions.de_risks"
                                                                 name="de_risks"
                                                                 id="de_risks"
@@ -985,14 +1093,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_benefits.$invalid && !editDocumentForm.de_benefits.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="5"
                                                                 ng-model="latest_revision.descriptions.de_benefits"
                                                                 name="de_benefits"
                                                                 id="de_benefits"
@@ -1066,8 +1174,8 @@
                             </span>
                             &nbsp;&nbsp;|&nbsp;&nbsp;
                         </span>
-                        <a href="" ng-click="toggle('descriptions', 'language', 'pt')" ng-if="status.descriptions.language.pt">{{ 'HIDE' | translate }}</a>
-                        <a href="" ng-click="toggle('descriptions', 'language', 'pt')" ng-if="!status.descriptions.language.pt">{{ 'SHOW' | translate }}</a>
+                        <a href="" ng-click="toggle('descriptions', 'language', 'pt')" ng-if="status.descriptions.language.pt">{{ 'HIDE_PORTUGUESE_DESCRIPTION' | translate }}</a>
+                        <a href="" ng-click="toggle('descriptions', 'language', 'pt')" ng-if="!status.descriptions.language.pt">{{ 'SHOW_PORTUGUESE_DESCRIPTION' | translate }}</a>
                         <span ng-if="!status.descriptions.language.pt">
                             <i class="fa fa-caret-down" aria-hidden="true"></i>
                         </span><span ng-if="status.descriptions.language.pt">
@@ -1094,14 +1202,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_title.$invalid && !editDocumentForm.pt_title.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="2"
                                                                 ng-model="latest_revision.descriptions.pt_title"
                                                                 name="pt_title"
                                                                 id="pt_title"
@@ -1142,14 +1250,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_researcher.$invalid && !editDocumentForm.pt_researcher.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="5"
                                                                 ng-model="latest_revision.descriptions.pt_researcher"
                                                                 name="pt_researcher"
                                                                 id="pt_researcher"
@@ -1190,14 +1298,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_study_time.$invalid && !editDocumentForm.pt_study_time.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="2"
                                                                 ng-model="latest_revision.descriptions.pt_study_time"
                                                                 name="pt_study_time"
                                                                 id="pt_study_time"
@@ -1238,14 +1346,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_purpose.$invalid && !editDocumentForm.pt_purpose.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="5"
                                                                 ng-model="latest_revision.descriptions.pt_purpose"
                                                                 name="pt_purpose"
                                                                 id="pt_purpose"
@@ -1286,14 +1394,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_procedure.$invalid && !editDocumentForm.pt_procedure.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="5"
                                                                 ng-model="latest_revision.descriptions.pt_procedure"
                                                                 name="pt_procedure"
                                                                 id="pt_procedure"
@@ -1334,14 +1442,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_duration.$invalid && !editDocumentForm.pt_duration.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="2"
                                                                 ng-model="latest_revision.descriptions.pt_duration"
                                                                 name="pt_duration"
                                                                 id="pt_duration"
@@ -1382,14 +1490,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_risks.$invalid && !editDocumentForm.pt_risks.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="5"
                                                                 ng-model="latest_revision.descriptions.pt_risks"
                                                                 name="pt_risks"
                                                                 id="pt_risks"
@@ -1430,14 +1538,14 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <div ng-if="$first" style="margin-bottom:5px;">
                                                 <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_benefits.$invalid && !editDocumentForm.pt_benefits.$pristine }">
                                                     <div class="input-group" >
                                                         <textarea class="form-control"
-                                                                rows="3"
+                                                                rows="5"
                                                                 ng-model="latest_revision.descriptions.pt_benefits"
                                                                 name="pt_benefits"
                                                                 id="pt_benefits"
@@ -1499,8 +1607,8 @@
                             </span>
                             &nbsp;&nbsp;|&nbsp;&nbsp;
                         </span>
-                        <a href="" ng-click="toggle('concerns', 'display')" ng-if="status.concerns.display">{{ 'HIDE' | translate }}</a>
-                        <a href="" ng-click="toggle('concerns', 'display')" ng-if="!status.concerns.display">{{ 'SHOW' | translate }}</a>
+                        <a href="" ng-click="toggle('concerns', 'display')" ng-if="status.concerns.display">{{ 'HIDE_CONCERNS' | translate }}</a>
+                        <a href="" ng-click="toggle('concerns', 'display')" ng-if="!status.concerns.display">{{ 'SHOW_CONCERNS' | translate }}</a>
                         <span ng-if="!status.concerns.display">
                             <i class="fa fa-caret-down" aria-hidden="true"></i>
                         </span>
@@ -1526,24 +1634,37 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ng-if="!$first">
-                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q01_value">
-                                                {{ 'YES' | translate }}
+                                            <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q01_value">
+                                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                             </span>
-                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q01_value">
+                                            <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q01_value">
                                                 {{ 'NO' | translate }}
                                             </span>
-                                            &nbsp;&nbsp;<i>{{revision.concerns.q01_explanation}}</i>
+                                            &nbsp;&nbsp;
+                                            <i>
+                                                <span ng-repeat="diff in revision.concerns.q01_explanation_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
+                                                </span>
+                                            </i>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="!$first">
                                             <!-- devider -->
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.q01_comment !== null && revision.comments.q01_comment !== ''">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.q01_comment !== null && revision.comments.q01_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q01_comment}}
-                                            </span>
+                                            </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first" style="padding-bottom: 3px;">
                                             <div class="input-group">
@@ -1559,9 +1680,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-success">
-                                                                {{ 'NO' | translate }}
-                                                            </span>
+                                                            {{ 'NO' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -1577,9 +1696,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-danger">
-                                                                {{ 'YES' | translate }}
-                                                            </span>
+                                                            {{ 'YES' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -1630,24 +1747,37 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ng-if="!$first">
-                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q02_value">
-                                                {{ 'YES' | translate }}
+                                            <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q02_value">
+                                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                             </span>
-                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q02_value">
+                                            <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q02_value">
                                                 {{ 'NO' | translate }}
                                             </span>
-                                            &nbsp;&nbsp;<i>{{revision.concerns.q02_explanation}}</i>
+                                            &nbsp;&nbsp;
+                                            <i>
+                                                <span ng-repeat="diff in revision.concerns.q02_explanation_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
+                                                </span>
+                                            </i>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="!$first">
                                             <!-- devider -->
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.q02_comment !== null && revision.comments.q02_comment !== ''">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.q02_comment !== null && revision.comments.q02_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q02_comment}}
-                                            </span>
+                                            </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first" style="padding-bottom: 3px;">
                                             <div class="input-group">
@@ -1663,9 +1793,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-success">
-                                                                {{ 'NO' | translate }}
-                                                            </span>
+                                                            {{ 'NO' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -1681,9 +1809,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-danger">
-                                                                {{ 'YES' | translate }}
-                                                            </span>
+                                                            {{ 'YES' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -1734,24 +1860,37 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ng-if="!$first">
-                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q03_value">
-                                                {{ 'YES' | translate }}
+                                            <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q03_value">
+                                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                             </span>
-                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q03_value">
+                                            <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q03_value">
                                                 {{ 'NO' | translate }}
                                             </span>
-                                            &nbsp;&nbsp;<i>{{revision.concerns.q03_explanation}}</i>
+                                            &nbsp;&nbsp;
+                                            <i>
+                                                <span ng-repeat="diff in revision.concerns.q03_explanation_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
+                                                </span>
+                                            </i>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="!$first">
                                             <!-- devider -->
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.q03_comment !== null && revision.comments.q03_comment !== ''">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.q03_comment !== null && revision.comments.q03_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q03_comment}}
-                                            </span>
+                                            </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first" style="padding-bottom: 3px;">
                                             <div class="input-group">
@@ -1767,9 +1906,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-success">
-                                                                {{ 'NO' | translate }}
-                                                            </span>
+                                                            {{ 'NO' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -1785,9 +1922,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-danger">
-                                                                {{ 'YES' | translate }}
-                                                            </span>
+                                                            {{ 'YES' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -1834,24 +1969,36 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ng-if="!$first">
-                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q04_value">
-                                                {{ 'YES' | translate }}
+                                            <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q04_value">
+                                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                             </span>
-                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q04_value">
+                                            <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q04_value">
                                                 {{ 'NO' | translate }}
                                             </span>
-                                            &nbsp;&nbsp;<i>{{revision.concerns.q04_explanation}}</i>
+                                            &nbsp;&nbsp;<i>
+                                                <span ng-repeat="diff in revision.concerns.q04_explanation_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
+                                                </span>
+                                            </i>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="!$first">
                                             <!-- devider -->
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.q04_comment !== null && revision.comments.q04_comment !== ''">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.q04_comment !== null && revision.comments.q04_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q04_comment}}
-                                            </span>
+                                            </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first" style="padding-bottom: 3px;">
                                             <div class="input-group">
@@ -1867,9 +2014,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-success">
-                                                                {{ 'NO' | translate }}
-                                                            </span>
+                                                            {{ 'NO' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -1885,9 +2030,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-danger">
-                                                                {{ 'YES' | translate }}
-                                                            </span>
+                                                            {{ 'YES' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -1938,24 +2081,36 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ng-if="!$first">
-                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q05_value">
-                                                {{ 'YES' | translate }}
+                                            <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q05_value">
+                                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                             </span>
-                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q05_value">
+                                            <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q05_value">
                                                 {{ 'NO' | translate }}
                                             </span>
-                                            &nbsp;&nbsp;<i>{{revision.concerns.q05_explanation}}</i>
+                                            &nbsp;&nbsp;<i>
+                                                <span ng-repeat="diff in revision.concerns.q05_explanation_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
+                                                </span>
+                                            </i>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="!$first">
                                             <!-- devider -->
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.q05_comment !== null && revision.comments.q05_comment !== ''">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.q05_comment !== null && revision.comments.q05_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q05_comment}}
-                                            </span>
+                                            </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first" style="padding-bottom: 3px;">
                                             <div class="input-group">
@@ -1971,9 +2126,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-success">
-                                                                {{ 'NO' | translate }}
-                                                            </span>
+                                                            {{ 'NO' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -1989,9 +2142,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-danger">
-                                                                {{ 'YES' | translate }}
-                                                            </span>
+                                                            {{ 'YES' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2038,24 +2189,36 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ng-if="!$first">
-                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q06_value">
-                                                {{ 'YES' | translate }}
+                                            <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q06_value">
+                                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                             </span>
-                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q06_value">
+                                            <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q06_value">
                                                 {{ 'NO' | translate }}
                                             </span>
-                                            &nbsp;&nbsp;<i>{{revision.concerns.q06_explanation}}</i>
+                                            &nbsp;&nbsp;<i>
+                                                <span ng-repeat="diff in revision.concerns.q06_explanation_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
+                                                </span>
+                                            </i>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="!$first">
                                             <!-- devider -->
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.q06_comment !== null && revision.comments.q06_comment !== ''">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.q06_comment !== null && revision.comments.q06_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q06_comment}}
-                                            </span>
+                                            </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first" style="padding-bottom: 3px;">
                                             <div class="input-group">
@@ -2071,9 +2234,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-success">
-                                                                {{ 'NO' | translate }}
-                                                            </span>
+                                                            {{ 'NO' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2089,9 +2250,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-danger">
-                                                                {{ 'YES' | translate }}
-                                                            </span>
+                                                            {{ 'YES' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2142,24 +2301,37 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ng-if="!$first">
-                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q07_value">
-                                                {{ 'YES' | translate }}
+                                            <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q07_value">
+                                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                             </span>
-                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q07_value">
+                                            <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q07_value">
                                                 {{ 'NO' | translate }}
                                             </span>
-                                            &nbsp;&nbsp;<i>{{revision.concerns.q07_explanation}}</i>
+                                            &nbsp;&nbsp;
+                                            <i>
+                                                <span ng-repeat="diff in revision.concerns.q07_explanation_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
+                                                </span>
+                                            </i>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="!$first">
                                             <!-- devider -->
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.q07_comment !== null && revision.comments.q07_comment !== ''">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.q07_comment !== null && revision.comments.q07_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q07_comment}}
-                                            </span>
+                                            </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first" style="padding-bottom: 3px;">
                                             <div class="input-group">
@@ -2175,9 +2347,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-success">
-                                                                {{ 'NO' | translate }}
-                                                            </span>
+                                                            {{ 'NO' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2193,9 +2363,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-danger">
-                                                                {{ 'YES' | translate }}
-                                                            </span>
+                                                            {{ 'YES' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2242,24 +2410,36 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ng-if="!$first">
-                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q08_value">
-                                                {{ 'YES' | translate }}
+                                            <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q08_value">
+                                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                             </span>
-                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q08_value">
+                                            <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q08_value">
                                                 {{ 'NO' | translate }}
                                             </span>
-                                            &nbsp;&nbsp;<i>{{revision.concerns.q08_explanation}}</i>
+                                            &nbsp;&nbsp;<i>
+                                                <span ng-repeat="diff in revision.concerns.q08_explanation_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
+                                                </span>
+                                            </i>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="!$first">
                                             <!-- devider -->
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.q08_comment !== null && revision.comments.q08_comment !== ''">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.q08_comment !== null && revision.comments.q08_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q08_comment}}
-                                            </span>
+                                            </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first" style="padding-bottom: 3px;">
                                             <div class="input-group">
@@ -2275,9 +2455,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-success">
-                                                                {{ 'NO' | translate }}
-                                                            </span>
+                                                            {{ 'NO' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2293,9 +2471,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-danger">
-                                                                {{ 'YES' | translate }}
-                                                            </span>
+                                                            {{ 'YES' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2346,24 +2522,36 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ng-if="!$first">
-                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q09_value">
-                                                {{ 'YES' | translate }}
+                                            <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q09_value">
+                                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                             </span>
-                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q09_value">
+                                            <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q09_value">
                                                 {{ 'NO' | translate }}
                                             </span>
-                                            &nbsp;&nbsp;<i>{{revision.concerns.q09_explanation}}</i>
+                                            &nbsp;&nbsp;<i>
+                                                <span ng-repeat="diff in revision.concerns.q09_explanation_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
+                                                </span>
+                                            </i>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="!$first">
                                             <!-- devider -->
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.q09_comment !== null && revision.comments.q09_comment !== ''">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.q09_comment !== null && revision.comments.q09_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q09_comment}}
-                                            </span>
+                                            </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first" style="padding-bottom: 3px;">
                                             <div class="input-group">
@@ -2379,9 +2567,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-success">
-                                                                {{ 'NO' | translate }}
-                                                            </span>
+                                                            {{ 'NO' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2397,9 +2583,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-danger">
-                                                                {{ 'YES' | translate }}
-                                                            </span>
+                                                            {{ 'YES' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2450,24 +2634,36 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ng-if="!$first">
-                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q10_value">
-                                                {{ 'YES' | translate }}
+                                            <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q10_value">
+                                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                             </span>
-                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q10_value">
+                                            <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q10_value">
                                                 {{ 'NO' | translate }}
                                             </span>
-                                            &nbsp;&nbsp;<i>{{revision.concerns.q10_explanation}}</i>
+                                            &nbsp;&nbsp;<i>
+                                                <span ng-repeat="diff in revision.concerns.q10_explanation_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
+                                                </span>
+                                            </i>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="!$first">
                                             <!-- devider -->
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.q10_comment !== null && revision.comments.q10_comment !== ''">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.q10_comment !== null && revision.comments.q10_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q10_comment}}
-                                            </span>
+                                            </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first" style="padding-bottom: 3px;">
                                             <div class="input-group">
@@ -2483,9 +2679,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-success">
-                                                                {{ 'NO' | translate }}
-                                                            </span>
+                                                            {{ 'NO' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2501,9 +2695,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-danger">
-                                                                {{ 'YES' | translate }}
-                                                            </span>
+                                                            {{ 'YES' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2554,24 +2746,36 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ng-if="!$first">
-                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q11_1_value">
-                                                {{ 'YES' | translate }}
+                                            <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q11_1_value">
+                                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                             </span>
-                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q11_1_value">
+                                            <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q11_1_value">
                                                 {{ 'NO' | translate }}
                                             </span>
-                                            &nbsp;&nbsp;<i>{{revision.concerns.q11_1_explanation}}</i>
+                                            &nbsp;&nbsp;<i>
+                                                <span ng-repeat="diff in revision.concerns.q11_1_explanation_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
+                                                </span>
+                                            </i>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="!$first">
                                             <!-- devider -->
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.q11_1_comment !== null && revision.comments.q11_1_comment !== ''">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.q11_1_comment !== null && revision.comments.q11_1_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q11_1_comment}}
-                                            </span>
+                                            </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first" style="padding-bottom: 3px;">
                                             <div class="input-group">
@@ -2587,9 +2791,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-success">
-                                                                {{ 'NO' | translate }}
-                                                            </span>
+                                                            {{ 'NO' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2605,9 +2807,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-danger">
-                                                                {{ 'YES' | translate }}
-                                                            </span>
+                                                            {{ 'YES' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2654,24 +2854,37 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ng-if="!$first">
-                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q11_2_value">
-                                                {{ 'YES' | translate }}
+                                            <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q11_2_value">
+                                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                             </span>
-                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q11_2_value">
+                                            <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q11_2_value">
                                                 {{ 'NO' | translate }}
                                             </span>
-                                            &nbsp;&nbsp;<i>{{revision.concerns.q11_2_explanation}}</i>
+                                            &nbsp;&nbsp;
+                                            <i>
+                                                <span ng-repeat="diff in revision.concerns.q11_2_explanation_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
+                                                </span>
+                                            </i>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="!$first">
                                             <!-- devider -->
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.q11_2_comment !== null && revision.comments.q11_2_comment !== ''">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.q11_2_comment !== null && revision.comments.q11_2_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q11_2_comment}}
-                                            </span>
+                                            </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first" style="padding-bottom: 3px;">
                                             <div class="input-group">
@@ -2687,9 +2900,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-success">
-                                                                {{ 'NO' | translate }}
-                                                            </span>
+                                                            {{ 'NO' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2705,9 +2916,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-danger">
-                                                                {{ 'YES' | translate }}
-                                                            </span>
+                                                            {{ 'YES' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2758,24 +2967,37 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ng-if="!$first">
-                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q12_value">
-                                                {{ 'YES' | translate }}
+                                            <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q12_value">
+                                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                             </span>
-                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q12_value">
+                                            <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q12_value">
                                                 {{ 'NO' | translate }}
                                             </span>
-                                            &nbsp;&nbsp;<i>{{revision.concerns.q12_explanation}}</i>
+                                            &nbsp;&nbsp;
+                                            <i>
+                                                <span ng-repeat="diff in revision.concerns.q12_explanation_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
+                                                </span>
+                                            </i>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="!$first">
                                             <!-- devider -->
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.q12_comment !== null && revision.comments.q12_comment !== ''">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.q12_comment !== null && revision.comments.q12_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q12_comment}}
-                                            </span>
+                                            </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first" style="padding-bottom: 3px;">
                                             <div class="input-group">
@@ -2791,9 +3013,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-success">
-                                                                {{ 'NO' | translate }}
-                                                            </span>
+                                                            {{ 'NO' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2809,9 +3029,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-danger">
-                                                                {{ 'YES' | translate }}
-                                                            </span>
+                                                            {{ 'YES' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2862,24 +3080,37 @@
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
                                     <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                            <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ng-if="!$first">
-                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q13_value">
-                                                {{ 'YES' | translate }}
+                                            <span class="badge badge-pill badge-warning" ng-if="revision.concerns.q13_value">
+                                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;{{ 'YES' | translate }}
                                             </span>
-                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q13_value">
+                                            <span class="badge badge-pill badge-default" ng-if="!revision.concerns.q13_value">
                                                 {{ 'NO' | translate }}
                                             </span>
-                                            &nbsp;&nbsp;<i>{{revision.concerns.q13_explanation}}</i>
+                                            &nbsp;&nbsp;
+                                            <i>
+                                                <span ng-repeat="diff in revision.concerns.q13_explanation_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
+                                                </span>
+                                            </i>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="!$first">
                                             <!-- devider -->
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.q13_comment !== null && revision.comments.q13_comment !== ''">
+                                            <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.q13_comment !== null && revision.comments.q13_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q13_comment}}
-                                            </span>
+                                            </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first" style="padding-bottom: 3px;">
                                             <div class="input-group">
@@ -2895,9 +3126,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-success">
-                                                                {{ 'NO' | translate }}
-                                                            </span>
+                                                            {{ 'NO' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2913,9 +3142,7 @@
                                                         required>
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">
-                                                            <span class="badge badge-pill badge-danger">
-                                                                {{ 'YES' | translate }}
-                                                            </span>
+                                                            {{ 'YES' | translate }}
                                                         </span>
                                                     </label>
                                                 </span>
@@ -2951,131 +3178,129 @@
                             </div>
                         </div>
                     </div>
-                    
-                    
+
+
                     <!-- 14th Question -->
                     <div class="list-group-item">
                         <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
-                            <div class="form-group" ng-class="{'has-danger': editDocumentForm.q14_value.$invalid && !editDocumentForm.q14_value.$pristine }">
-                                <label for="q14_value">
-                                    <b>14. {{ 'CONCERN_14' | translate }}?</b> <sup class="text-danger">*</sup>
-                                    <br>
-                                    <small class="text-muted">
-                                        <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_14_INFO' | translate }}
-                                    </small>
-                                </label>
-                                <div class="input-group">
-                                    <span class="input-group-addon" style="background-color: #FFFFFF;">
-                                        <label class="custom-control custom-radio" style="margin-bottom: 0px;">
-                                            <input
-                                                class="custom-control-input"
-                                                type="radio"
-                                                name="q14_value"
-                                                id="q14_value_1"
-                                                ng-model="latest_revision.concerns.q14_value"
-                                                ng-value="false"
-                                                required>
-                                            <span class="custom-control-indicator"></span>
-                                            <span class="custom-control-description">
-                                                {{ 'NO' | translate }}
-                                            </span>
-                                        </label>
-                                    </span>
-                                    <span class="input-group-addon" style="background-color: #FFFFFF;">
-                                        <label class="custom-control custom-radio" style="margin-bottom: 0px;">
-                                            <input
-                                                class="custom-control-input"
-                                                type="radio"
-                                                name="q14_value"
-                                                id="q14_value_2"
-                                                ng-model="latest_revision.concerns.q14_value"
-                                                ng-value="true"
-                                                required>
-                                            <span class="custom-control-indicator"></span>
-                                            <span class="custom-control-description">
-                                                {{ 'YES' | translate }}
-                                            </span>
-                                        </label>
-                                    </span>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 justified">
+                                <div class="form-group" ng-class="{'has-danger': editDocumentForm.q14_value.$invalid && !editDocumentForm.q14_value.$pristine }">
+                                    <label for="q14_value">
+                                        <b>14. {{ 'CONCERN_14' | translate }}?</b> <sup class="text-danger">*</sup>
+                                        <br>
+                                        <small class="text-muted">
+                                            <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_14_INFO' | translate }}
+                                        </small>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                            <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                                <input
+                                                    class="custom-control-input"
+                                                    type="radio"
+                                                    name="q14_value"
+                                                    id="q14_value_1"
+                                                    ng-model="latest_revision.concerns.q14_value"
+                                                    ng-value="false"
+                                                    required>
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description">
+                                                    {{ 'NO' | translate }}
+                                                </span>
+                                            </label>
+                                        </span>
+                                        <span class="input-group-addon" style="background-color: #FFFFFF;">
+                                            <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                                <input
+                                                    class="custom-control-input"
+                                                    type="radio"
+                                                    name="q14_value"
+                                                    id="q14_value_2"
+                                                    ng-model="latest_revision.concerns.q14_value"
+                                                    ng-value="true"
+                                                    required>
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description">
+                                                    {{ 'YES' | translate }}
+                                                </span>
+                                            </label>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <span ng-show="editDocumentForm.q14_value.$error.required && !editDocumentForm.q14_value.$pristine" class="text-danger">
-                                <small>
-                                    {{ 'REQUIRED' | translate }}
-                                </small>
-                            </span>
-                    <div class="form-group">
-                        <!-- yes + document is attached-->
-                         <div class="input-group" ng-if="latest_revision.concerns.q14_value && latest_revision.concerns.q14_filename !== null">
-                                <div class="flexarea">
-                                    {{ 'CURRENTLY_ATTACHED_DOCUMENT' | translate }}
-                                    <br>
-                                    <a href="{{latest_revision.concerns.q14_filepath}}" download="{{latest_revision.concerns.q14_filename}}" target="_blank">
-                                        <i class="fa fa-file-pdf-o fa-1x text-danger" aria-hidden="true">{{latest_revision.concerns.q14_filename}}</i>
-                                    </a>
-                                </div>
-                                    <a class="input-group-addon btn btn-danger btn-block-xs-only btn-block-sm-only"  ng-click="resetFile()">{{ 'DELETE_ATTACHED_DOCUMENT' | translate }}</a>
-                            <span class="input-group-addon" style="width: 74px;">
-                            <svg ng-if="uploadstatus == 'uploading'" class="checkmark__template" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-                            </svg>
-                            <svg ng-if="uploadstatus == 'success'" class="checkmark__fill_green checkmark__template checkmark__template_green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                               <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                            </svg>
-                            <svg ng-if="uploadstatus == 'fail' || uploadstatus == undefined" class="checkmark__fill_red checkmark__template checkmark__template_red" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                <path class="checkmark__check" fill="none" d="M16 16 36 36 M36 16 16 36"/>
-                            </svg>
-                        </span>
-                        </div>
-                        <div class="input-group" ng-if="latest_revision.concerns.q14_value && latest_revision.concerns.q14_filename === null" ng-class="{'has-danger': editDocumentForm.q14_file.$invalid}">
-                            <input
-                               class="form-control"
-                               type="file"
-                               accept="application/pdf,application/zip"
-                               file-change="doUpload"
-                               name="q14_file"
-                               id="q14_file"
-                               ng-model="latest_revision.concerns.q14_filepath"
-                               required=true>
-                            </input>
-                        <span class="input-group-addon" style="width: 74px;">
-                            <svg ng-if="uploadstatus == 'uploading'" class="checkmark__template" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-                            </svg>
-                            <svg ng-if="uploadstatus == 'success'" class="checkmark__fill_green checkmark__template checkmark__template_green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                               <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                            </svg>
-                            <svg ng-if="uploadstatus == 'fail' || uploadstatus == undefined" class="checkmark__fill_red checkmark__template checkmark__template_red" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                <path class="checkmark__check" fill="none" d="M16 16 36 36 M36 16 16 36"/>
-                            </svg>
-                        </span>
-                        </div>                                <br>
-                                <div class="input-group" ng-if="latest_revision.concerns.q14_value" ng-class="{'has-danger': editDocumentForm.q14_explanation.$invalid}">
-                                    <textarea
-                                        class="form-control"
-                                        rows="5"
-                                        placeholder="{{ 'EXPLANATION' | translate }}"
-                                        name="q14_explanation"
-                                        id="q14_explanation"
-                                        ng-model="latest_revision.concerns.q14_explanation"
-                                        ng-required="latest_revision.concerns.q14_value"></textarea>
-                                    <span class="input-group-addon">
-                                        <span class="flag-icon flag-icon-gb"></span>
-                                    </span>
-                                </div>
-                                <span ng-show="editDocumentForm.q14_explanation.$invalid" class="text-danger">
+                                <span ng-show="editDocumentForm.q14_value.$error.required && !editDocumentForm.q14_value.$pristine" class="text-danger">
                                     <small>
                                         {{ 'REQUIRED' | translate }}
                                     </small>
                                 </span>
+                                <div class="form-group">
+                                    <!-- yes + document is attached-->
+                                    <div class="input-group" ng-if="latest_revision.concerns.q14_value && latest_revision.concerns.q14_filename !== null">
+                                        <div class="flexarea">
+                                            {{ 'CURRENTLY_ATTACHED_DOCUMENT' | translate }}
+                                            <br>
+                                            <a href="{{latest_revision.concerns.q14_filepath}}" download="{{latest_revision.concerns.q14_filename}}" target="_blank"><i class="fa fa-file-pdf-o fa-1x text-danger" aria-hidden="true">{{latest_revision.concerns.q14_filename}}</i></a>
+                                        </div>
+                                        <a class="input-group-addon btn btn-danger btn-block-xs-only btn-block-sm-only"  ng-click="resetFile()">{{ 'DELETE_ATTACHED_DOCUMENT' | translate }}</a>
+                                        <span class="input-group-addon" style="width: 74px;">
+                                            <svg ng-if="uploadstatus == 'uploading'" class="checkmark__template" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 52 52">
+                                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                                            </svg>
+                                            <svg ng-if="uploadstatus == 'success'" class="checkmark__fill_green checkmark__template checkmark__template_green" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 52 52">
+                                                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                            </svg>
+                                            <svg ng-if="uploadstatus == 'fail' || uploadstatus == undefined" class="checkmark__fill_red checkmark__template checkmark__template_red" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 52 52">
+                                                <path class="checkmark__check" fill="none" d="M16 16 36 36 M36 16 16 36"/>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div class="input-group" ng-if="latest_revision.concerns.q14_value && latest_revision.concerns.q14_filename === null" ng-class="{'has-danger': editDocumentForm.q14_file.$invalid}">
+                                        <input
+                                            class="form-control"
+                                            type="file"
+                                            accept="application/pdf,application/zip"
+                                            file-change="doUpload"
+                                            name="q14_file"
+                                            id="q14_file"
+                                            ng-model="latest_revision.concerns.q14_filepath"
+                                            required>
+                                        <span class="input-group-addon" style="width: 74px;">
+                                            <svg ng-if="uploadstatus == 'uploading'" class="checkmark__template" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 52 52">
+                                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                                            </svg>
+                                            <svg ng-if="uploadstatus == 'success'" class="checkmark__fill_green checkmark__template checkmark__template_green" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 52 52">
+                                                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                            </svg>
+                                            <svg ng-if="uploadstatus == 'fail' || uploadstatus == undefined" class="checkmark__fill_red checkmark__template checkmark__template_red" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 52 52">
+                                                <path class="checkmark__check" fill="none" d="M16 16 36 36 M36 16 16 36"/>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <br>
+                                    <div class="input-group" ng-if="latest_revision.concerns.q14_value" ng-class="{'has-danger': editDocumentForm.q14_explanation.$invalid}">
+                                        <textarea
+                                            class="form-control"
+                                            rows="5"
+                                            placeholder="{{ 'EXPLANATION' | translate }}"
+                                            name="q14_explanation"
+                                            id="q14_explanation"
+                                            ng-model="latest_revision.concerns.q14_explanation"
+                                            ng-required="latest_revision.concerns.q14_value"></textarea>
+                                        <span class="input-group-addon">
+                                            <span class="flag-icon flag-icon-gb"></span>
+                                        </span>
+                                    </div>
+                                    <span ng-show="editDocumentForm.q14_explanation.$invalid" class="text-danger">
+                                        <small>
+                                            {{ 'REQUIRED' | translate }}
+                                        </small>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
         <div class="card-footer">
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 left">
