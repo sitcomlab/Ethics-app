@@ -49,7 +49,48 @@
                             <i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;&nbsp;<b>{{ 'STATUS' | translate }}</b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <b>{{document.statusText}}</b>
+                            <span class="badge" ng-class="{'badge-default': document.status==0 || document.status==1, 'badge-success': document.status==2 || document.status==6, 'badge-primary': document.status==3, 'badge-info': document.status==4, 'badge-warning': document.status=='5', 'badge-danger': document.status==7}">
+                                <span ng-if="document.status==0">{{ 'INITIALISED' | translate }}</span>
+                                <span ng-if="document.status==1">{{ 'UNSUBMITTED' | translate }}</span>
+                                <span ng-if="document.status==2">{{ 'AUTO_ACCEPTED' | translate }}</span>
+                                <span ng-if="document.status==3">{{ 'REVIEW_REQUIRED' | translate }}</span>
+                                <span ng-if="document.status==4">{{ 'REVIEW_IN_PROGRESS' | translate }}</span>
+                                <span ng-if="document.status==5">{{ 'PARTLY_ACCEPTED' | translate }}</span>
+                                <span ng-if="document.status==6">{{ 'ACCEPTED' | translate }}</span>
+                                <span ng-if="document.status==7">{{ 'REJECTED' | translate }}</span>
+                            </span>
+                            <br>
+                            <small class="form-text">
+                                <i class="fa fa-info-circle " aria-hidden="true"></i>
+                                <span ng-if="document.status==0">
+                                    {{ 'STATUS_INFO_0' | translate }}
+                                </span>
+                                <span ng-if="document.status==1">
+                                    {{ 'STATUS_INFO_1' | translate }}
+                                </span>
+                                <span ng-if="document.status==2">
+                                    {{ 'STATUS_INFO_2' | translate }}
+                                </span>
+                                <span ng-if="document.status==3">
+                                    {{ 'STATUS_INFO_3' | translate }}
+                                </span>
+                                <span ng-if="document.status==4">
+                                    {{ 'STATUS_INFO_4' | translate }}
+                                </span>
+                                <span ng-if="document.status==5">
+                                    {{ 'STATUS_INFO_5' | translate }}
+                                </span>
+                                <span ng-if="document.status==6">
+                                    {{ 'STATUS_INFO_6' | translate }}
+                                </span>
+                                <span ng-if="document.status==7">
+                                    {{ 'STATUS_INFO_7' | translate }}
+                                </span>
+                            </small>
+                            <small class="form-text text-danger" ng-if="document.status==4">
+                                <i class="fa fa-exclamation-circle " aria-hidden="true"></i>
+                                {{ 'STATUS_INFO_4_WARNING' | translate }}
+                            </small>
                         </div>
                     </div>
                 </div>
@@ -82,7 +123,10 @@
                                     <span class="flag-icon flag-icon-gb"></span>
                                 </span>
                             </div>
-                            <small class="form-text text-danger"><i class="fa fa-exclamation-circle " aria-hidden="true"></i> {{ 'NOTES_INFO' | translate }}</small>
+                            <small class="form-text text-danger">
+                                <i class="fa fa-exclamation-circle " aria-hidden="true"></i>
+                                {{ 'NOTES_INFO' | translate }}
+                            </small>
                         </div>
                     </div>
                 </div>
@@ -1906,7 +1950,7 @@
 
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 left">
                 <a href="" class="btn btn-primary btn-block-xs-only btn-block-sm-only" ng-click="closeOverview()">
-                    <i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'CLOSE' | translate }}
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'CLOSE_OVERVIEW' | translate }}
                 </a>
             </div>
 
