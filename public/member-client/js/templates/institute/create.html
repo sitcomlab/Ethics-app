@@ -16,7 +16,7 @@
 
         <div class="card-block">
             <label>
-                <b>{{ 'INSTITUTE_NAME' | translate }}*</b>
+                <b>{{ 'INSTITUTE_NAME' | translate }}</b> <sup class="text-danger">*</sup>
             </label>
             <div class="form-group" ng-class="{'has-danger': createInstituteForm.document_email_address.$invalid && !createInstituteForm.document_email_address.$pristine}">
                 <input
@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <label>
-                        <b>{{ 'UNIVERSITY' | translate }}*</b>
+                        <b>{{ 'UNIVERSITY' | translate }}</b> <sup class="text-danger">*</sup>
                     </label>
                     <div class="form-group" ng-class="{'has-danger': createInstituteForm.university_id.$invalid && !createInstituteForm.university_id.$pristine}">
                         <div class="input-group">
@@ -73,7 +73,7 @@
 
 
             <label>
-                <b>{{ 'FORMER_STATUS' | translate }}*</b>
+                <b>{{ 'FORMER_STATUS' | translate }}</b> <sup class="text-danger">*</sup>
             </label>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
@@ -107,7 +107,7 @@
                                     ng-value="false"
                                     required>
                                     <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">{{ 'FALSE' | translate }} (d)</span>
+                                    <span class="custom-control-description">{{ 'FALSE' | translate }} {{ 'DEFAULT' | translate }}</span>
                                 </label>
                             </span>
                         </div>
@@ -126,13 +126,6 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-muted right">
-                    <small>
-                        * {{ 'REQUIRED' | translate }}&nbsp;&nbsp;|&nbsp;&nbsp;d {{ 'DEFAULT' | translate }}
-                    </small>
-                </div>
-            </div>
         </div>
         <div class="card-footer right">
             <button class="btn btn-success" role="submit">

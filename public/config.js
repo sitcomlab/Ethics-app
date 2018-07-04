@@ -8,7 +8,7 @@ app.constant("config", {
         member_client: "Ethics-app | Committee",
     },
     appGithub: "https://github.com/sitcomlab/Ethics-app",
-    appVersion: "v1.0",
+    appVersion: "1.4.2",
     appLanguage: 'en_US',
     appYear: moment().format("YYYY"),
     timeZone: "Europe/Berlin",

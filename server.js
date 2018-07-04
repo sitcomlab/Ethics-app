@@ -59,11 +59,16 @@ var transporter = nodemailer.createTransport({
 
 // Verify connection configuration
 transporter.verify(function(error, success) {
-   if (error) {
-        console.log(error);
-   } else {
-        console.log('Connection to Email Server successfull!');
-   }
+    if (error) {
+        console.error(colors.red(new Date() + " Connection to Email Server failed!"));
+        console.error(error);
+    } else {
+        if (success) {
+            console.log(colors.green(new Date() + " Connection to Email Server successful!"));
+        } else {
+            console.error(colors.red(new Date() + " Connection to Email Server failed!"));
+        }
+    }
 });
 exports.transporter = transporter;
 

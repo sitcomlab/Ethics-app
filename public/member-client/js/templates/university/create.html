@@ -16,7 +16,7 @@
 
         <div class="card-block">
             <label>
-                <b>{{ 'UNIVERSITY_NAME' | translate }}*</b>
+                <b>{{ 'UNIVERSITY_NAME' | translate }}</b> <sup class="text-danger">*</sup>
             </label>
             <div class="form-group" ng-class="{'has-danger': createUniversityForm.document_email_address.$invalid && !createUniversityForm.document_email_address.$pristine}">
                 <input

@@ -31,7 +31,7 @@ app.controller("documentShowSubmissionController", function($scope, $rootScope, 
      */
     $scope.changeStatusToOne = function(){
         $documentService.changeStatusTo1($documentService.getId());
-        $scope.redirect("/");
+        $scope.redirect("/documents/" + $documentService.getId());
     };
 
 
@@ -177,8 +177,8 @@ app.controller("documentShowSubmissionController", function($scope, $rootScope, 
         descriptions: {
             language: {
                 en: true,
-                de: false,
-                pt: false
+                de: $scope.latest_revision.descriptions.de_used,
+                pt: $scope.latest_revision.descriptions.pt_used
             },
             history: {
                 en: {

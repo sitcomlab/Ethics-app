@@ -16,7 +16,7 @@
 
         <div class="card-block">
             <label>
-                <b>{{ 'WORKING_GROUP_NAME' | translate }}*</b>
+                <b>{{ 'WORKING_GROUP_NAME' | translate }}</b> <sup class="text-danger">*</sup>
             </label>
             <div class="form-group" ng-class="{'has-danger': createWorkingGroupForm.working_group_name.$invalid && !createWorkingGroupForm.working_group_name.$pristine}">
                 <input
@@ -39,7 +39,7 @@
              <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <label>
-                        <b>{{ 'UNIVERSITY' | translate }}*</b>
+                        <b>{{ 'UNIVERSITY' | translate }}</b> <sup class="text-danger">*</sup>
                     </label>
                     <div class="form-group" ng-class="{'has-danger': createWorkingGroupForm.university_id.$invalid && !createWorkingGroupForm.university_id.$pristine}">
                         <div class="input-group">
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <label>
-                        <b>{{ 'INSTITUTE' | translate }}*</b>
+                        <b>{{ 'INSTITUTE' | translate }}</b> <sup class="text-danger">*</sup>
                     </label>
                     <div class="form-group" ng-class="{'has-danger': createWorkingGroupForm.institute_id.$invalid && !createWorkingGroupForm.institute_id.$pristine}">
                         <div class="input-group">
@@ -104,7 +104,7 @@
 
 
             <label>
-                <b>{{ 'FORMER_STATUS' | translate }}*</b>
+                <b>{{ 'FORMER_STATUS' | translate }}</b> <sup class="text-danger">*</sup>
             </label>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
@@ -138,7 +138,7 @@
                                     ng-value="false"
                                     required>
                                     <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">{{ 'FALSE' | translate }} (d)</span>
+                                    <span class="custom-control-description">{{ 'FALSE' | translate }} {{ 'DEFAULT' | translate }}</span>
                                 </label>
                             </span>
                         </div>
@@ -157,13 +157,6 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-muted right">
-                    <small>
-                        * {{ 'REQUIRED' | translate }}&nbsp;&nbsp;|&nbsp;&nbsp;d {{ 'DEFAULT' | translate }}
-                    </small>
-                </div>
-            </div>
         </div>
         <div class="card-footer right">
             <button class="btn btn-success" role="submit">

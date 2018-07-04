@@ -786,12 +786,43 @@
                                             <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                            <i>{{revision.descriptions.de_title}}</i><br>
-                                            <span ng-if="status.descriptions.comments.de">
-                                                <span class="comment" ng-if="revision.comments.de_title_comment !== null && revision.comments.de_title_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_title_comment}}
+                                            <i>
+                                                <span ng-repeat="diff in revision.descriptions.de_title_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </i>
+                                            <br>
+                                            <div ng-if="!$first && status.descriptions.comments.de">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.de_title_comment !== null && revision.comments.de_title_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_title_comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon comment">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <textarea class="form-control comment-textarea"
+                                                        rows="5"
+                                                        ng-model="latest_revision.comments.de_title_comment"
+                                                        name="de_title_comment"
+                                                        id="de_title_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon comment">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -812,12 +843,43 @@
                                             <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                            <i>{{revision.descriptions.de_researcher}}</i><br>
-                                            <span ng-if="status.descriptions.comments.de">
-                                                <span class="comment" ng-if="revision.comments.de_researcher_comment !== null && revision.comments.de_researcher_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_researcher_comment}}
+                                            <i>
+                                                <span ng-repeat="diff in revision.descriptions.de_researcher_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </i>
+                                            <br>
+                                            <div ng-if="!$first && status.descriptions.comments.de">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.de_researcher_comment !== null && revision.comments.de_researcher_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_researcher_comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon comment">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <textarea class="form-control comment-textarea"
+                                                        rows="5"
+                                                        ng-model="latest_revision.comments.de_researcher_comment"
+                                                        name="de_researcher_comment"
+                                                        id="de_researcher_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon comment">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -838,12 +900,43 @@
                                             <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                            <i>{{revision.descriptions.de_study_time}}</i><br>
-                                            <span ng-if="status.descriptions.comments.de">
-                                                <span class="comment" ng-if="revision.comments.de_study_time_comment !== null && revision.comments.de_study_time_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_study_time_comment}}
+                                            <i>
+                                                <span ng-repeat="diff in revision.descriptions.de_study_time_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </i>
+                                            <br>
+                                            <div ng-if="!$first && status.descriptions.comments.de">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.de_study_time_comment !== null && revision.comments.de_study_time_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_study_time_comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon comment">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <textarea class="form-control comment-textarea"
+                                                        rows="5"
+                                                        ng-model="latest_revision.comments.de_study_time_comment"
+                                                        name="de_study_time_comment"
+                                                        id="de_study_time_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon comment">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -864,12 +957,43 @@
                                             <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                            <i>{{revision.descriptions.de_purpose}}</i><br>
-                                            <span ng-if="status.descriptions.comments.de">
-                                                <span class="comment" ng-if="revision.comments.de_purpose_comment !== null && revision.comments.de_purpose_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_purpose_comment}}
+                                            <i>
+                                                <span ng-repeat="diff in revision.descriptions.de_purpose_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </i>
+                                            <br>
+                                            <div ng-if="!$first && status.descriptions.comments.de">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.de_purpose_comment !== null && revision.comments.de_purpose_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_purpose_comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon comment">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <textarea class="form-control comment-textarea"
+                                                        rows="5"
+                                                        ng-model="latest_revision.comments.de_purpose_comment"
+                                                        name="de_purpose_comment"
+                                                        id="de_purpose_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon comment">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -890,12 +1014,43 @@
                                             <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                            <i>{{revision.descriptions.de_procedure}}</i><br>
-                                            <span ng-if="status.descriptions.comments.de">
-                                                <span class="comment" ng-if="revision.comments.de_procedure_comment !== null && revision.comments.de_procedure_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_procedure_comment}}
+                                            <i>
+                                                <span ng-repeat="diff in revision.descriptions.de_procedure_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </i>
+                                            <br>
+                                            <div ng-if="!$first && status.descriptions.comments.de">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.de_procedure_comment !== null && revision.comments.de_procedure_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_procedure_comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon comment">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <textarea class="form-control comment-textarea"
+                                                        rows="5"
+                                                        ng-model="latest_revision.comments.de_procedure_comment"
+                                                        name="de_procedure_comment"
+                                                        id="de_procedure_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon comment">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -916,12 +1071,43 @@
                                             <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                            <i>{{revision.descriptions.de_duration}}</i><br>
-                                            <span ng-if="status.descriptions.comments.de">
-                                                <span class="comment" ng-if="revision.comments.de_duration_comment !== null && revision.comments.de_duration_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_duration_comment}}
+                                            <i>
+                                                <span ng-repeat="diff in revision.descriptions.de_duration_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </i>
+                                            <br>
+                                            <div ng-if="!$first && status.descriptions.comments.de">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.de_duration_comment !== null && revision.comments.de_duration_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_duration_comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon comment">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <textarea class="form-control comment-textarea"
+                                                        rows="5"
+                                                        ng-model="latest_revision.comments.de_duration_comment"
+                                                        name="de_duration_comment"
+                                                        id="de_duration_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon comment">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -942,12 +1128,43 @@
                                             <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                            <i>{{revision.descriptions.de_risks}}</i><br>
-                                            <span ng-if="status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.de_risks_comment !== null && revision.comments.de_risks_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_risks_comment}}
+                                            <i>
+                                                <span ng-repeat="diff in revision.descriptions.de_risks_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </i>
+                                            <br>
+                                            <div ng-if="!$first && status.descriptions.comments.de">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.de_risks_comment !== null && revision.comments.de_risks_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_risks_comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon comment">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <textarea class="form-control comment-textarea"
+                                                        rows="5"
+                                                        ng-model="latest_revision.comments.de_risks_comment"
+                                                        name="de_risks_comment"
+                                                        id="de_risks_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon comment">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -968,12 +1185,43 @@
                                             <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                            <i>{{revision.descriptions.de_benefits}}</i><br>
-                                            <span ng-if="status.descriptions.comments.de">
-                                                <span class="comment" ng-if="revision.comments.de_benefits_comment !== null && revision.comments.de_benefits_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_benefits_comment}}
+                                            <i>
+                                                <span ng-repeat="diff in revision.descriptions.de_benefits_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </i>
+                                            <br>
+                                            <div ng-if="!$first && status.descriptions.comments.de">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.de_benefits_comment !== null && revision.comments.de_benefits_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_benefits_comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon comment">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <textarea class="form-control comment-textarea"
+                                                        rows="5"
+                                                        ng-model="latest_revision.comments.de_benefits_comment"
+                                                        name="de_benefits_comment"
+                                                        id="de_benefits_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon comment">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1044,12 +1292,43 @@
                                             <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                            <i>{{revision.descriptions.pt_title}}</i><br>
-                                            <span ng-if="status.descriptions.comments.pt">
-                                                <span class="comment" ng-if="revision.comments.pt_title_comment !== null && revision.comments.pt_title_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_title_comment}}
+                                            <i>
+                                                <span ng-repeat="diff in revision.descriptions.pt_title_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </i>
+                                            <br>
+                                            <div ng-if="!$first && status.descriptions.comments.pt">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.pt_title_comment !== null && revision.comments.pt_title_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_title_comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon comment">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <textarea class="form-control comment-textarea"
+                                                        rows="5"
+                                                        ng-model="latest_revision.comments.pt_title_comment"
+                                                        name="pt_title_comment"
+                                                        id="pt_title_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon comment">
+                                                        <span class="flag-icon flag-icon-pt"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1070,12 +1349,43 @@
                                             <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                            <i>{{revision.descriptions.pt_researcher}}</i><br>
-                                            <span ng-if="status.descriptions.comments.pt">
-                                                <span class="comment" ng-if="revision.comments.pt_researcher_comment !== null && revision.comments.pt_researcher_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_researcher_comment}}
+                                            <i>
+                                                <span ng-repeat="diff in revision.descriptions.pt_researcher_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </i>
+                                            <br>
+                                            <div ng-if="!$first && status.descriptions.comments.pt">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.pt_researcher_comment !== null && revision.comments.pt_researcher_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_researcher_comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon comment">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <textarea class="form-control comment-textarea"
+                                                        rows="5"
+                                                        ng-model="latest_revision.comments.pt_researcher_comment"
+                                                        name="pt_researcher_comment"
+                                                        id="pt_researcher_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon comment">
+                                                        <span class="flag-icon flag-icon-pt"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1096,12 +1406,43 @@
                                             <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                            <i>{{revision.descriptions.pt_study_time}}</i><br>
-                                            <span ng-if="status.descriptions.comments.pt">
-                                                <span class="comment" ng-if="revision.comments.pt_study_time_comment !== null && revision.comments.pt_study_time_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_study_time_comment}}
+                                            <i>
+                                                <span ng-repeat="diff in revision.descriptions.pt_study_time_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </i>
+                                            <br>
+                                            <div ng-if="!$first && status.descriptions.comments.pt">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.pt_study_time_comment !== null && revision.comments.pt_study_time_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_study_time_comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon comment">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <textarea class="form-control comment-textarea"
+                                                        rows="5"
+                                                        ng-model="latest_revision.comments.pt_study_time_comment"
+                                                        name="pt_study_time_comment"
+                                                        id="pt_study_time_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon comment">
+                                                        <span class="flag-icon flag-icon-pt"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1122,12 +1463,43 @@
                                             <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                            <i>{{revision.descriptions.pt_purpose}}</i><br>
-                                            <span ng-if="status.descriptions.comments.pt">
-                                                <span class="comment" ng-if="revision.comments.de_purpose_comment !== null && revision.comments.pt_purpose_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_purpose_comment}}
+                                            <i>
+                                                <span ng-repeat="diff in revision.descriptions.pt_purpose_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </i>
+                                            <br>
+                                            <div ng-if="!$first && status.descriptions.comments.pt">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.pt_purpose_comment !== null && revision.comments.pt_purpose_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_purpose_comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon comment">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <textarea class="form-control comment-textarea"
+                                                        rows="5"
+                                                        ng-model="latest_revision.comments.pt_purpose_comment"
+                                                        name="pt_purpose_comment"
+                                                        id="pt_purpose_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon comment">
+                                                        <span class="flag-icon flag-icon-pt"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1148,12 +1520,43 @@
                                             <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                            <i>{{revision.descriptions.pt_procedure}}</i><br>
-                                            <span ng-if="status.descriptions.comments.pt">
-                                                <span class="comment" ng-if="revision.comments.pt_procedure_comment !== null && revision.comments.pt_procedure_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_procedure_comment}}
+                                            <i>
+                                                <span ng-repeat="diff in revision.descriptions.pt_procedure_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </i>
+                                            <br>
+                                            <div ng-if="!$first && status.descriptions.comments.pt">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.pt_procedure_comment !== null && revision.comments.pt_procedure_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_procedure_comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon comment">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <textarea class="form-control comment-textarea"
+                                                        rows="5"
+                                                        ng-model="latest_revision.comments.pt_procedure_comment"
+                                                        name="pt_procedure_comment"
+                                                        id="pt_procedure_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon comment">
+                                                        <span class="flag-icon flag-icon-pt"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1174,12 +1577,43 @@
                                             <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                            <i>{{revision.descriptions.pt_duration}}</i><br>
-                                            <span ng-if="status.descriptions.comments.pt">
-                                                <span class="comment" ng-if="revision.comments.pt_duration_comment !== null && revision.comments.pt_duration_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_duration_comment}}
+                                            <i>
+                                                <span ng-repeat="diff in revision.descriptions.pt_duration_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </i>
+                                            <br>
+                                            <div ng-if="!$first && status.descriptions.comments.pt">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.pt_duration_comment !== null && revision.comments.pt_duration_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_duration_comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon comment">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <textarea class="form-control comment-textarea"
+                                                        rows="5"
+                                                        ng-model="latest_revision.comments.pt_duration_comment"
+                                                        name="pt_duration_comment"
+                                                        id="pt_duration_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon comment">
+                                                        <span class="flag-icon flag-icon-pt"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1200,12 +1634,43 @@
                                             <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                            <i>{{revision.descriptions.pt_risks}}</i><br>
-                                            <span ng-if="status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.pt_risks_comment !== null && revision.comments.pt_risks_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_risks_comment}}
+                                            <i>
+                                                <span ng-repeat="diff in revision.descriptions.pt_risks_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </i>
+                                            <br>
+                                            <div ng-if="!$first && status.descriptions.comments.pt">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.pt_risks_comment !== null && revision.comments.pt_risks_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_risks_comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon comment">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <textarea class="form-control comment-textarea"
+                                                        rows="5"
+                                                        ng-model="latest_revision.comments.pt_risks_comment"
+                                                        name="pt_risks_comment"
+                                                        id="pt_risks_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon comment">
+                                                        <span class="flag-icon flag-icon-pt"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1226,12 +1691,43 @@
                                             <span class="badge badge-primary"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp;v{{revision.version}}</span>
                                         </div>
                                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                            <i>{{revision.descriptions.pt_benefits}}</i><br>
-                                            <span ng-if="status.descriptions.comments.pt">
-                                                <span class="comment" ng-if="revision.comments.pt_benefits_comment !== null && revision.comments.pt_benefits_comment !== ''">
-                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_benefits_comment}}
+                                            <i>
+                                                <span ng-repeat="diff in revision.descriptions.pt_benefits_diff">
+                                                    <span ng-if="diff.added" class="text-success">
+                                                        {{diff.value}}
+                                                    </span>
+                                                    <span ng-if="diff.removed" class="text-danger">
+                                                        <s>{{diff.value}}</s>
+                                                    </span>
+                                                    <span ng-if="!diff.added && !diff.removed">
+                                                        {{diff.value}}
+                                                    </span>
                                                 </span>
-                                            </span>
+                                            </i>
+                                            <br>
+                                            <div ng-if="!$first && status.descriptions.comments.pt">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.pt_benefits_comment !== null && revision.comments.pt_benefits_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_benefits_comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon comment">
+                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <textarea class="form-control comment-textarea"
+                                                        rows="5"
+                                                        ng-model="latest_revision.comments.pt_benefits_comment"
+                                                        name="pt_benefits_comment"
+                                                        id="pt_benefits_comment"
+                                                        ></textarea>
+                                                    <span class="input-group-addon comment">
+                                                        <span class="flag-icon flag-icon-pt"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

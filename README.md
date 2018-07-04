@@ -2,6 +2,10 @@
 
 # Ethics-app
 
+[![License](https://img.shields.io/badge/License-MIT-green.svg)]()
+[![Status](https://img.shields.io/badge/Status-maintained-green.svg)]()
+[![Slack channel](https://img.shields.io/badge/Slack-channel-e6186d.svg)](https://ethics-app.slack.com/)
+
 Ethics-application for the approval of user-studies
 
 ### Background

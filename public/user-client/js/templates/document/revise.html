@@ -548,10 +548,8 @@
                                                 <br>
                                             </div>
                                             <div ng-if="!$first && status.descriptions.comments.en">
-                                                <div ng-if="!$first && status.descriptions.comments.en">
-                                                    <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.en_duration_comment !== null && revision.comments.en_duration_comment !== ''">
-                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_duration_comment}}
-                                                    </div>
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.en_duration_comment !== null && revision.comments.en_duration_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_duration_comment}}
                                                 </div>
                                             </div>
                                         </div>
@@ -611,10 +609,8 @@
                                                 <br>
                                             </div>
                                             <div ng-if="!$first && status.descriptions.comments.en">
-                                                <div ng-if="!$first && status.descriptions.comments.en">
-                                                    <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.en_risks_comment !== null && revision.comments.en_risks_comment !== ''">
-                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_risks_comment}}
-                                                    </div>
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.en_risks_comment !== null && revision.comments.en_risks_comment !== ''">
+                                                    <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_risks_comment}}
                                                 </div>
                                             </div>
                                         </div>
@@ -780,14 +776,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.de_title}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.de_title_comment !== null && revision.comments.de_title_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.de_title_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.de">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.de_title_comment !== null && revision.comments.de_title_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_title_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -828,14 +837,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.de_researcher}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.de_researcher_comment !== null && revision.comments.de_researcher_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.de_researcher_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.de">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.de_researcher_comment !== null && revision.comments.de_researcher_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_researcher_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -876,14 +898,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.de_study_time}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.de_study_time_comment !== null && revision.comments.de_study_time_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.de_study_time_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.de">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.de_study_time_comment !== null && revision.comments.de_study_time_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_study_time_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -924,14 +959,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.de_purpose}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.de_purpose_comment !== null && revision.comments.de_purpose_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.de_purpose_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.de">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.de_purpose_comment !== null && revision.comments.de_purpose_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_purpose_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -972,14 +1020,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.de_procedure}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.de_procedure_comment !== null && revision.comments.de_procedure_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.de_procedure_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.de">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.de_procedure_comment !== null && revision.comments.de_procedure_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_procedure_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1020,14 +1081,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.de_duration}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.de_duration_comment !== null && revision.comments.de_duration_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.de_duration_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.de">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.de_duration_comment !== null && revision.comments.de_duration_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_duration_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1068,14 +1142,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.de_risks}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.de_risks_comment !== null && revision.comments.de_risks_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.de_risks_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.de">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.de_risks_comment !== null && revision.comments.de_risks_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_risks_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1116,14 +1203,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.de_risks}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.de_benefits_comment !== null && revision.comments.de_benefits_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.de_benefits_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.de">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.de_benefits_comment !== null && revision.comments.de_benefits_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_benefits_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1225,14 +1325,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.pt_title}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.pt_title_comment !== null && revision.comments.pt_title_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.pt_title_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.en">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.pt_title_comment !== null && revision.comments.pt_title_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_title_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1273,14 +1386,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.pt_researcher}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.pt_researcher_comment !== null && revision.comments.pt_researcher_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.pt_researcher_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.pt">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.pt_researcher_comment !== null && revision.comments.pt_researcher_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_researcher_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1321,14 +1447,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.pt_study_time}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.pt_study_time_comment !== null && revision.comments.pt_study_time_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.pt_study_time_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.pt">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.pt_study_time_comment !== null && revision.comments.pt_study_time_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_study_time_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1369,14 +1508,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.pt_purpose}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.pt_purpose_comment !== null && revision.comments.pt_purpose_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.pt_purpose_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.pt">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.pt_purpose_comment !== null && revision.comments.pt_purpose_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_purpose_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1417,14 +1569,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.pt_procedure}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.pt_procedure_comment !== null && revision.comments.pt_procedure_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.pt_procedure_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.pt">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.pt_procedure_comment !== null && revision.comments.pt_procedure_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_procedure_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1465,14 +1630,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.pt_duration}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.pt_duration_comment !== null && revision.comments.pt_duration_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.pt_duration_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.pt">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.pt_duration_comment !== null && revision.comments.pt_duration_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_duration_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1513,14 +1691,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.pt_risks}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.pt_risks_comment !== null && revision.comments.pt_risks_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.pt_risks_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.pt">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.pt_risks_comment !== null && revision.comments.pt_risks_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_risks_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1561,14 +1752,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span ng-if="!$first">
-                                                <i>{{revision.descriptions.pt_risks}}</i><br>
-                                            </span>
-                                            <span ng-if="!$first && status.descriptions.comments.en">
-                                                <span class="comment" ng-if="revision.comments.pt_benefits_comment !== null && revision.comments.pt_benefits_comment !== ''">
+                                            <div ng-if="!$first">
+                                                <i>
+                                                    <span ng-repeat="diff in revision.descriptions.pt_benefits_diff">
+                                                        <span ng-if="diff.added" class="text-success">
+                                                            {{diff.value}}
+                                                        </span>
+                                                        <span ng-if="diff.removed" class="text-danger">
+                                                            <s>{{diff.value}}</s>
+                                                        </span>
+                                                        <span ng-if="!diff.added && !diff.removed">
+                                                            {{diff.value}}
+                                                        </span>
+                                                    </span>
+                                                </i>
+                                                <br>
+                                            </div>
+                                            <div ng-if="!$first && status.descriptions.comments.pt">
+                                                <div class="alert alert-comment alert-warning justified" role="alert" ng-if="revision.comments.pt_benefits_comment !== null && revision.comments.pt_benefits_comment !== ''">
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_benefits_comment}}
-                                                </span>
-                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1628,7 +1832,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                                <b>1. {{ 'CONCERN_1' | translate }}?</b>
+                                <b>1. {{ 'CONCERN_1' | translate }}?</b> <sup class="text-danger">*</sup>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1711,7 +1915,7 @@
                                                     <textarea
                                                         class="form-control"
                                                         rows="5"
-                                                        placeholder="{{ 'EXPLANATION' | translate }}*"
+                                                        placeholder="{{ 'EXPLANATION' | translate }}"
                                                         name="q01_explanation"
                                                         id="q01_explanation"
                                                         ng-model="latest_revision.concerns.q01_explanation"
@@ -1737,7 +1941,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                                <b>2. {{ 'CONCERN_2' | translate }}?</b>
+                                <b>2. {{ 'CONCERN_2' | translate }}?</b> <sup class="text-danger">*</sup>
                                 <br>
                                 <small class="text-muted">
                                     <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_2_INFO' | translate }}
@@ -1824,7 +2028,7 @@
                                                     <textarea
                                                         class="form-control"
                                                         rows="5"
-                                                        placeholder="{{ 'EXPLANATION' | translate }}*"
+                                                        placeholder="{{ 'EXPLANATION' | translate }}"
                                                         name="q02_explanation"
                                                         id="q02_explanation"
                                                         ng-model="latest_revision.concerns.q02_explanation"
@@ -1850,7 +2054,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                                <b>3. {{ 'CONCERN_3' | translate }}?</b>
+                                <b>3. {{ 'CONCERN_3' | translate }}?</b> <sup class="text-danger">*</sup>
                                 <br>
                                 <small class="text-muted">
                                     <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_3_INFO' | translate }}
@@ -1937,7 +2141,7 @@
                                                     <textarea
                                                         class="form-control"
                                                         rows="5"
-                                                        placeholder="{{ 'EXPLANATION' | translate }}*"
+                                                        placeholder="{{ 'EXPLANATION' | translate }}"
                                                         name="q03_explanation"
                                                         id="q03_explanation"
                                                         ng-model="latest_revision.concerns.q03_explanation"
@@ -1963,7 +2167,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                                <b>4. {{ 'CONCERN_4' | translate }}?</b>
+                                <b>4. {{ 'CONCERN_4' | translate }}?</b> <sup class="text-danger">*</sup>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -2045,7 +2249,7 @@
                                                     <textarea
                                                         class="form-control"
                                                         rows="5"
-                                                        placeholder="{{ 'EXPLANATION' | translate }}*"
+                                                        placeholder="{{ 'EXPLANATION' | translate }}"
                                                         name="q04_explanation"
                                                         id="q04_explanation"
                                                         ng-model="latest_revision.concerns.q04_explanation"
@@ -2071,7 +2275,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                                <b>5. {{ 'CONCERN_5' | translate }}?</b>
+                                <b>5. {{ 'CONCERN_5' | translate }}?</b> <sup class="text-danger">*</sup>
                                 <br>
                                 <small class="text-muted">
                                     <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_5_INFO' | translate }}
@@ -2157,7 +2361,7 @@
                                                     <textarea
                                                         class="form-control"
                                                         rows="5"
-                                                        placeholder="{{ 'EXPLANATION' | translate }}*"
+                                                        placeholder="{{ 'EXPLANATION' | translate }}"
                                                         name="q05_explanation"
                                                         id="q05_explanation"
                                                         ng-model="latest_revision.concerns.q05_explanation"
@@ -2183,7 +2387,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                                <b>6. {{ 'CONCERN_6' | translate }}?</b>
+                                <b>6. {{ 'CONCERN_6' | translate }}?</b> <sup class="text-danger">*</sup>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -2265,7 +2469,7 @@
                                                     <textarea
                                                         class="form-control"
                                                         rows="5"
-                                                        placeholder="{{ 'EXPLANATION' | translate }}*"
+                                                        placeholder="{{ 'EXPLANATION' | translate }}"
                                                         name="q06_explanation"
                                                         id="q06_explanation"
                                                         ng-model="latest_revision.concerns.q06_explanation"
@@ -2291,7 +2495,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                                <b>7. {{ 'CONCERN_7' | translate }}?</b>
+                                <b>7. {{ 'CONCERN_7' | translate }}?</b> <sup class="text-danger">*</sup>
                                 <br>
                                 <small class="text-muted">
                                     <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_7_INFO' | translate }}
@@ -2378,7 +2582,7 @@
                                                     <textarea
                                                         class="form-control"
                                                         rows="5"
-                                                        placeholder="{{ 'EXPLANATION' | translate }}*"
+                                                        placeholder="{{ 'EXPLANATION' | translate }}"
                                                         name="q07_explanation"
                                                         id="q07_explanation"
                                                         ng-model="latest_revision.concerns.q07_explanation"
@@ -2404,7 +2608,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                                <b>8. {{ 'CONCERN_8' | translate }}?</b>
+                                <b>8. {{ 'CONCERN_8' | translate }}?</b> <sup class="text-danger">*</sup>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -2486,7 +2690,7 @@
                                                     <textarea
                                                         class="form-control"
                                                         rows="5"
-                                                        placeholder="{{ 'EXPLANATION' | translate }}*"
+                                                        placeholder="{{ 'EXPLANATION' | translate }}"
                                                         name="q08_explanation"
                                                         id="q08_explanation"
                                                         ng-model="latest_revision.concerns.q08_explanation"
@@ -2512,7 +2716,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                                <b>9. {{ 'CONCERN_9' | translate }}?</b>
+                                <b>9. {{ 'CONCERN_9' | translate }}?</b> <sup class="text-danger">*</sup>
                                 <br>
                                 <small class="text-muted">
                                     <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_9_INFO' | translate }}
@@ -2598,7 +2802,7 @@
                                                     <textarea
                                                         class="form-control"
                                                         rows="5"
-                                                        placeholder="{{ 'EXPLANATION' | translate }}*"
+                                                        placeholder="{{ 'EXPLANATION' | translate }}"
                                                         name="q09_explanation"
                                                         id="q09_explanation"
                                                         ng-model="latest_revision.concerns.q09_explanation"
@@ -2624,7 +2828,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                                <b>10. {{ 'CONCERN_10' | translate }}?</b>
+                                <b>10. {{ 'CONCERN_10' | translate }}?</b> <sup class="text-danger">*</sup>
                                 <br>
                                 <small class="text-muted">
                                     <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_10_INFO' | translate }}
@@ -2710,7 +2914,7 @@
                                                     <textarea
                                                         class="form-control"
                                                         rows="5"
-                                                        placeholder="{{ 'EXPLANATION' | translate }}*"
+                                                        placeholder="{{ 'EXPLANATION' | translate }}"
                                                         name="q10_explanation"
                                                         id="q10_explanation"
                                                         ng-model="latest_revision.concerns.q10_explanation"
@@ -2736,7 +2940,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                                <b>11. {{ 'CONCERN_11_1' | translate }}?</b>
+                                <b>11. {{ 'CONCERN_11_1' | translate }}?</b> <sup class="text-danger">*</sup>
                                 <br>
                                 <small class="text-muted">
                                     <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_11_1_INFO' | translate }}
@@ -2822,7 +3026,7 @@
                                                     <textarea
                                                         class="form-control"
                                                         rows="5"
-                                                        placeholder="{{ 'EXPLANATION' | translate }}*"
+                                                        placeholder="{{ 'EXPLANATION' | translate }}"
                                                         name="q11_1_explanation"
                                                         id="q11_1_explanation"
                                                         ng-model="latest_revision.concerns.q11_1_explanation"
@@ -2848,7 +3052,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                                <b>11.2. {{ 'CONCERN_11_2' | translate }}?</b>
+                                <b>11.2. {{ 'CONCERN_11_2' | translate }}?</b> <sup class="text-danger">*</sup>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -2931,7 +3135,7 @@
                                                     <textarea
                                                         class="form-control"
                                                         rows="5"
-                                                        placeholder="{{ 'EXPLANATION' | translate }}*"
+                                                        placeholder="{{ 'EXPLANATION' | translate }}"
                                                         name="q11_2_explanation"
                                                         id="q11_2_explanation"
                                                         ng-model="latest_revision.concerns.q11_2_explanation"
@@ -2957,7 +3161,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                                <b>12. {{ 'CONCERN_12' | translate }}?</b>
+                                <b>12. {{ 'CONCERN_12' | translate }}?</b> <sup class="text-danger">*</sup>
                                 <br>
                                 <small class="text-muted">
                                     <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_12_INFO' | translate }}
@@ -3044,7 +3248,7 @@
                                                     <textarea
                                                         class="form-control"
                                                         rows="5"
-                                                        placeholder="{{ 'EXPLANATION' | translate }}*"
+                                                        placeholder="{{ 'EXPLANATION' | translate }}"
                                                         name="q12_explanation"
                                                         id="q12_explanation"
                                                         ng-model="latest_revision.concerns.q12_explanation"
@@ -3070,7 +3274,7 @@
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                                <b>13. {{ 'CONCERN_13' | translate }}?</b>
+                                <b>13. {{ 'CONCERN_13' | translate }}?</b> <sup class="text-danger">*</sup>
                                 <br>
                                 <small class="text-muted">
                                     <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_13_INFO' | translate }}
@@ -3157,7 +3361,7 @@
                                                     <textarea
                                                         class="form-control"
                                                         rows="5"
-                                                        placeholder="{{ 'EXPLANATION' | translate }}*"
+                                                        placeholder="{{ 'EXPLANATION' | translate }}"
                                                         name="q13_explanation"
                                                         id="q13_explanation"
                                                         ng-model="latest_revision.concerns.q13_explanation"

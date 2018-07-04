@@ -282,8 +282,8 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
         descriptions: {
             language: {
                 en: true,
-                de: false,
-                pt: false
+                de: $scope.latest_revision.descriptions.de_used,
+                pt: $scope.latest_revision.descriptions.pt_used
             },
             history: {
                 en: {

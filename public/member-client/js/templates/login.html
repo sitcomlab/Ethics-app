@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
                     <label>
-                        <b>{{ 'USERNAME' | translate }}*</b>
+                        <b>{{ 'USERNAME' | translate }}</b> <sup class="text-danger">*</sup>
                     </label>
                     <div class="form-group" ng-class="{'has-danger': loginForm.username.$invalid && !loginForm.username.$pristine}">
                         <div class="input-group">
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
                     <label>
-                        <b>{{ 'PASSWORD' | translate }}*</b>
+                        <b>{{ 'PASSWORD' | translate }}</b> <sup class="text-danger">*</sup>
                     </label>
                     <div class="form-group" ng-class="{'has-danger': loginForm.password.$invalid && !loginForm.password.$pristine}">
                         <div class="input-group">

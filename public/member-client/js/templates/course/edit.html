@@ -16,7 +16,7 @@
 
         <div class="card-block">
             <label>
-                <b>{{ 'COURSE_NAME' | translate }}*</b>
+                <b>{{ 'COURSE_NAME' | translate }}</b> <sup class="text-danger">*</sup>
             </label>
             <div class="form-group" ng-class="{'has-danger': editCourseForm.document_email_address.$invalid && !editCourseForm.document_email_address.$pristine}">
                 <input
@@ -37,7 +37,7 @@
             </div>
 
             <label>
-                <b>{{ 'YEAR' | translate }}*</b>
+                <b>{{ 'YEAR' | translate }}</b> <sup class="text-danger">*</sup>
             </label>
             <div class="form-group" ng-class="{'has-danger': editCourseForm.year.$invalid && !editCourseForm.year.$pristine}">
                 <div class="input-group">
@@ -66,7 +66,7 @@
 
 
             <label>
-                <b>{{ 'TERM' | translate }}*</b>
+                <b>{{ 'TERM' | translate }}</b> <sup class="text-danger">*</sup>
             </label>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -120,7 +120,7 @@
             <br>
 
             <label>
-                <b>{{ 'LECTURER' | translate }}*</b>
+                <b>{{ 'LECTURER' | translate }}</b> <sup class="text-danger">*</sup>
             </label>
             <textarea class="form-control"
                 rows="2"
@@ -139,7 +139,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <label>
-                        <b>{{ 'UNIVERSITY' | translate }}*</b>
+                        <b>{{ 'UNIVERSITY' | translate }}</b> <sup class="text-danger">*</sup>
                     </label>
                     <div class="form-group" ng-class="{'has-danger': editCourseForm.university_id.$invalid && !editCourseForm.university_id.$pristine }">
                         <div class="input-group">
@@ -171,7 +171,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <label>
-                        <b>{{ 'INSTITUTE' | translate }}*</b>
+                        <b>{{ 'INSTITUTE' | translate }}</b> <sup class="text-danger">*</sup>
                     </label>
                     <div class="form-group" ng-class="{'has-danger': editCourseForm.institute_id.$invalid && !editCourseForm.institute_id.$pristine }">
                         <div class="input-group">
@@ -206,7 +206,7 @@
             <!-- Responsible members -->
             <div ng-show="updated_course.institute_id && updated_course.institute_id !== null">
                 <label>
-                    <b>{{ 'RESPONSIBLE_MEMBERS' | translate }}</b>
+                    <b>{{ 'RESPONSIBLE_MEMBERS' | translate }}</b> <sup class="text-danger">*</sup>
                 </label>
                 <div class="list-group">
                     <div class="list-group-item flex-column align-items-start" ng-repeat="member in responsible_members" ng-if="responsible_members && responsible_members.length>0">
@@ -269,13 +269,6 @@
                 <br>
             </div>
 
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-muted right">
-                    <small>
-                        * {{ 'REQUIRED' | translate }}
-                    </small>
-                </div>
-            </div>
         </div>
         <div class="card-footer right">
             <button class="btn btn-success" role="submit">
