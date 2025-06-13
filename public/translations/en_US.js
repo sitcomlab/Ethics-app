@@ -204,7 +204,7 @@ app.constant("en_US", {
     DESCRIPTION_8: 'List benefits (if applicable)',
 
     STUDY_DESCRIPTION_INFO: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally the language-specific version appriopiate for your participants. Depending on the language(s), you will receive the informed consent forms for your experiment',
-    LANGUAGE_OPTIONS: 'Please select the language, in which you want to generate the informed consent forms',
+    LANGUAGE_OPTIONS: 'Please select the language in which you want to generate the informed consent forms. You must select either English or German',
 
     EXAMPLE: 'Example',
     DESCRIPTION_1_INFO: 'Please type in an offical study title',
@@ -238,7 +238,7 @@ app.constant("en_US", {
     CONCERN_13: 'Does the study involve collection of any information without obtaining an Informed Consent in a situation different from public observations or anonymous street surveys',
     CONCERN_14: 'Do you use any additional forms/documents in your study that are relevant to evaluating ethical approval',
 
-    CONCERN_1_INFO: 'For instance: participants under the age of 18, participants with impairments, patients, people assisted by a carer, people recruited from groups associated with a specific mental or physical condition.',
+    CONCERN_1_INFO: 'For instance: participants under the age of 18, participants with impairments, patients, people assisted by a carer, people recruited from groups associated with a specific mental or physical condition. If the data of minors is processed, it is recommended to always obtain the consent of the parents/legal guardians. In the case of data subjects who are younger than 14 years of age, the parents/legal guardians must consent to the processing. If the data of minors between the ages of 14 and 18 is processed, both the minors and their parents/legal guardians should declare their consent by signature. If a parent/legal guardian signs alone, he or she must affirm in writing that he or she may also act on behalf of the other person with custody.',
     CONCERN_2_INFO: 'That is to say: Will participants be deliberately mislead in such a way that they might show distress or ask to retract their data when debriefed?',
     CONCERN_3_INFO: 'For instance: viewing images involving emotional content that participants might want to avoid, discussing topics related to sexuality, asking personal questions in a publicly exposed environment.',
     CONCERN_4_INFO: '',
@@ -273,6 +273,7 @@ app.constant("en_US", {
     DEBRIEFING_INFORMATION: 'Debriefing information',
     STATEMENT_OF_RESEARCHER: 'Statement of researcher',
     INFORMED_CONSENT_FORM: 'Informed consent form',
+    DATA_PROTECTION_FORM: 'Data protection form',
     REVISE_DOCUMENT: 'Revise document',
     HOW_TO_GUIDE: 'How-To Guide',
     WE_PROVIDE_HOW_TO_GUIDE: 'Comprehensive How-To Guide is available here',
