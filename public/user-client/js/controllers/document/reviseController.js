@@ -376,8 +376,8 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
         descriptions: {
             language: {
                 en: true,
-                de: false,
-                pt: false
+                de: true,
+                pt: true
             },
             history: {
                 en: {

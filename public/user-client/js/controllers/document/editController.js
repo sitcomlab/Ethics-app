@@ -247,6 +247,11 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
     $scope.$parent.loading = { status: true, message: $scope.$parent.loading.message };
     $scope.latest_revision = $documentService.getLatestRevision();
 
+    //Prevent undefined errors
+    if (!$scope.latest_revision.descriptions) {
+        $scope.latest_revision.descriptions = {};
+    }
+
     // Check status
     if($documentService.getStatus()>1 && $documentService.getStatus()!=5){
         // Redirect

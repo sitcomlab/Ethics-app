@@ -262,9 +262,12 @@
             <!-- Properties -->
             <div class="bs-fix">
                 <div class="list-group" ng-if="status.descriptions.language.en">
+                    <div class="list-group-item middle" ng-if="!latest_revision.descriptions.en_used">
+                        - {{ 'NOT_USED' | translate }} -
+                    </div>
 
                     <!-- Title -->
-                    <div class="list-group-item">
+                    <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <b>{{ 'TITLE' | translate }}</b>
@@ -305,7 +308,7 @@
                     </div>
 
                     <!-- Researcher -->
-                    <div class="list-group-item">
+                    <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <b>{{ 'RESEARCHER' | translate }}</b>
@@ -346,7 +349,7 @@
                     </div>
 
                     <!-- Time -->
-                    <div class="list-group-item">
+                    <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <b>{{ 'TIME' | translate }}</b>
@@ -387,7 +390,7 @@
                     </div>
 
                     <!-- Purpose -->
-                    <div class="list-group-item">
+                    <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <b>{{ 'PURPOSE' | translate }}</b>
@@ -428,7 +431,7 @@
                     </div>
 
                     <!-- Procedure -->
-                    <div class="list-group-item">
+                    <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <b>{{ 'PROCEDURE' | translate }}</b>
@@ -469,7 +472,7 @@
                     </div>
 
                     <!-- Duration -->
-                    <div class="list-group-item">
+                    <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <b>{{ 'DURATION' | translate }}</b>
@@ -510,7 +513,7 @@
                     </div>
 
                     <!-- Risks -->
-                    <div class="list-group-item">
+                    <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <b>{{ 'RISKS' | translate }}</b>
@@ -551,7 +554,7 @@
                     </div>
 
                     <!-- Benefits -->
-                    <div class="list-group-item">
+                    <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <b>{{ 'BENEFITS' | translate }}</b>
@@ -662,6 +665,21 @@
                                                 </span>
                                             </span>
                                         </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.de_title_comment"
+                                                        name="de_title_comment"
+                                                        id="de_title_comment"
+                                                    ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -687,6 +705,21 @@
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_researcher_comment}}
                                                 </span>
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.de_researcher_comment"
+                                                        name="de_researcher_comment"
+                                                        id="de_researcher_comment"
+                                                    ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -714,6 +747,21 @@
                                                 </span>
                                             </span>
                                         </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.de_study_time_comment"
+                                                        name="de_study_time_comment"
+                                                        id="de_study_time_comment"
+                                                    ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -739,6 +787,21 @@
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_purpose_comment}}
                                                 </span>
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.de_purpose_comment"
+                                                        name="de_purpose_comment"
+                                                        id="de_purpose_comment"
+                                                    ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -766,6 +829,21 @@
                                                 </span>
                                             </span>
                                         </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.de_procedure_comment"
+                                                        name="de_procedure_comment"
+                                                        id="de_procedure_comment"
+                                                    ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -791,6 +869,21 @@
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_duration_comment}}
                                                 </span>
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.de_duration_comment"
+                                                        name="de_duration_comment"
+                                                        id="de_duration_comment"
+                                                    ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -818,6 +911,21 @@
                                                 </span>
                                             </span>
                                         </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.de_risks_comment"
+                                                        name="de_risks_comment"
+                                                        id="de_risks_comment"
+                                                    ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -843,6 +951,21 @@
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_benefits_comment}}
                                                 </span>
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.de_benefits_comment"
+                                                        name="de_benefits_comment"
+                                                        id="de_benefits_comment"
+                                                    ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -920,6 +1043,21 @@
                                                 </span>
                                             </span>
                                         </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.pt_title_comment"
+                                                        name="pt_title_comment"
+                                                        id="pt_title_comment"
+                                                    ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -945,6 +1083,21 @@
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_researcher_comment}}
                                                 </span>
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.pt_researcher_comment"
+                                                        name="pt_researcher_comment"
+                                                        id="pt_researcher_comment"
+                                                    ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -972,6 +1125,21 @@
                                                 </span>
                                             </span>
                                         </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.pt_study_time_comment"
+                                                        name="pt_stude_time_comment"
+                                                        id="pt_study_time_comment"
+                                                    ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -997,6 +1165,21 @@
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_purpose_comment}}
                                                 </span>
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.pt_purpose_comment"
+                                                        name="pt_purpose_comment"
+                                                        id="pt_purpose_comment"
+                                                    ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1024,6 +1207,21 @@
                                                 </span>
                                             </span>
                                         </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.pt_procedure_comment"
+                                                        name="pt_procedure_comment"
+                                                        id="pt_procedure_comment"
+                                                    ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1049,6 +1247,21 @@
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_duration_comment}}
                                                 </span>
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.pt_duration_comment"
+                                                        name="pt_duration_comment"
+                                                        id="pt_duration_comment"
+                                                    ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1076,6 +1289,21 @@
                                                 </span>
                                             </span>
                                         </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.pt_risks_comment"
+                                                        name="pt_risks_comment"
+                                                        id="pt_risks_comment"
+                                                    ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1101,6 +1329,21 @@
                                                     <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_benefits_comment}}
                                                 </span>
                                             </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="$first">
+                                            <p>
+                                                <div class="input-group">
+                                                    <textarea class="form-control"
+                                                        rows="3"
+                                                        ng-model="latest_revision.comments.pt_benefits_comment"
+                                                        name="pt_benefits_comment"
+                                                        id="pt_benefits_comment"
+                                                    ></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-de"></span>
+                                                    </span>
+                                                </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

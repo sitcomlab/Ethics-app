@@ -223,6 +223,7 @@ exports.request = function(req, res) {
                 // Database query
                 client.query(query_create_description, [
                     new_revision.revision_id,
+                    description.en_used,
                     description.en_title,
                     description.en_researcher,
                     description.en_study_time,

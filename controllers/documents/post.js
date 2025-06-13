@@ -103,6 +103,7 @@ exports.request = function(req, res) {
             // Database query
             client.query(query_create_description, [
                 revision.revision_id,
+                false,
                 null,
                 null,
                 null,

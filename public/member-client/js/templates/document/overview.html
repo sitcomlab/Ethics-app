@@ -273,9 +273,12 @@
         <!-- Properties -->
         <div class="bs-fix">
             <div class="list-group" ng-if="status.descriptions.language.en">
+                <div class="list-group-item middle" ng-if="!latest_revision.descriptions.en_used">
+                    - {{ 'NOT_USED' | translate }} -
+                </div>
 
                 <!-- Title -->
-                <div class="list-group-item">
+                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'TITLE' | translate }}</b>
@@ -301,7 +304,7 @@
                 </div>
 
                 <!-- Researcher -->
-                <div class="list-group-item">
+                <div class="list-group-item"  ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'RESEARCHER' | translate }}</b>
@@ -327,7 +330,7 @@
                 </div>
 
                 <!-- Time -->
-                <div class="list-group-item">
+                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'TIME' | translate }}</b>
@@ -353,7 +356,7 @@
                 </div>
 
                 <!-- Purpose -->
-                <div class="list-group-item">
+                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'PURPOSE' | translate }}</b>
@@ -379,7 +382,7 @@
                 </div>
 
                 <!-- Procedure -->
-                <div class="list-group-item">
+                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'PROCEDURE' | translate }}</b>
@@ -405,7 +408,7 @@
                 </div>
 
                 <!-- Duration -->
-                <div class="list-group-item">
+                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'DURATION' | translate }}</b>
@@ -431,7 +434,7 @@
                 </div>
 
                 <!-- Risks -->
-                <div class="list-group-item">
+                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'RISKS' | translate }}</b>
@@ -457,7 +460,7 @@
                 </div>
 
                 <!-- Benefits -->
-                <div class="list-group-item">
+                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'BENEFITS' | translate }}</b>
