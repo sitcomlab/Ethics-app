@@ -138,48 +138,9 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, document, course, revision, description, concern, callback) {
-
-            // Auto-confirmation
-            if(concern.q01_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q01_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q02_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q03_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q04_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q05_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q06_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q07_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q08_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q09_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q10_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q11_1_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q11_2_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q12_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q13_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q14_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else {
-                // Check if document has been already in review
-                if(document.status === 5){
-                    callback(null, client, done, document, course, revision, description, concern, 3);
-                } else {
-                    callback(null, client, done, document, course, revision, description, concern, 2);
-                }
-            }
+            
+            // Always require manual review by setting status to 3
+            callback(null, client, done, document, course, revision, description, concern, 3);
         },
         function(client, done, document, course, revision, description, concern, status, callback) {
             var object = {
