@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle" ng-if="latest_revision.descriptions.en_used">
                 <p>
                     <a href="{{document.files.path}}/consent_form_en.pdf" download="consent_form_en.pdf" target="_blank">
                         <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
@@ -78,6 +78,19 @@
                 </p>
                 <p class="text-muted">
                     <span class="flag-icon flag-icon-pt"></span>&nbsp;&nbsp;<b>{{ 'INFORMED_CONSENT_FORM' | translate }}</b><br>
+                    {{ 'TO_BE_FILLED_OUT_BY_PARTICIPANT' | translate }}
+                </p>
+                <br>
+                <br>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 middle" ng-if="latest_revision.descriptions.en_used">
+                <p>
+                    <a href="{{document.files.path}}/data_protection_en.pdf" download="data_protection_en.pdf" target="_blank">
+                        <i class="fa fa-file-pdf-o fa-5x text-danger" aria-hidden="true"></i>
+                    </a>
+                </p>
+                <p class="text-muted">
+                    <span class="flag-icon flag-icon-gb"></span>&nbsp;&nbsp;<b>{{ 'DATA_PROTECTION_FORM' | translate }}</b><br>
                     {{ 'TO_BE_FILLED_OUT_BY_PARTICIPANT' | translate }}
                 </p>
                 <br>
