@@ -289,12 +289,20 @@ exports.request = function(req, res) {
                     concern.q08_sign = "no";
                 }
 
-                if(concern.q09_value){
-                    concern.q09_label = "badge-danger";
-                    concern.q09_sign = "yes";
+                if(concern.q09_1_value){
+                    concern.q09_1_label = "badge-danger";
+                    concern.q09_1_sign = "yes";
                 } else {
-                    concern.q09_label = "badge-success";
-                    concern.q09_sign = "no";
+                    concern.q09_1_label = "badge-success";
+                    concern.q09_1_sign = "no";
+                }
+
+                if(concern.q09_2_value){
+                    concern.q09_2_label = "badge-danger";
+                    concern.q09_2_sign = "yes";
+                } else {
+                    concern.q09_2_label = "badge-success";
+                    concern.q09_2_sign = "no";
                 }
 
                 if(concern.q10_value){
