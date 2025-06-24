@@ -21,3 +21,4 @@ SET en_used = true;
 -- Enforce the NOT NULL constraint and default going forward
 ALTER TABLE Descriptions
     ALTER COLUMN en_used SET DEFAULT false;
+    ALTER COLUMN en_used SET NOT NULL;
