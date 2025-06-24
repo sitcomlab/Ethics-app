@@ -170,7 +170,8 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
             $scope.editDocumentForm.q06_value.$pristine = false;
             $scope.editDocumentForm.q07_value.$pristine = false;
             $scope.editDocumentForm.q08_value.$pristine = false;
-            $scope.editDocumentForm.q09_value.$pristine = false;
+            $scope.editDocumentForm.q09_1_value.$pristine = false;
+            $scope.editDocumentForm.q09_2_value.$pristine = false;
             $scope.editDocumentForm.q10_value.$pristine = false;
             $scope.editDocumentForm.q11_1_value.$pristine = false;
             $scope.editDocumentForm.q11_2_value.$pristine = false;
@@ -203,8 +204,11 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
             if($scope.editDocumentForm.q08_explanation){
                 $scope.editDocumentForm.q08_explanation.$pristine = false;
             }
-            if($scope.editDocumentForm.q09_explanation){
-                $scope.editDocumentForm.q09_explanation.$pristine = false;
+            if($scope.editDocumentForm.q09_1_explanation){
+                $scope.editDocumentForm.q09_1_explanation.$pristine = false;
+            }
+            if($scope.editDocumentForm.q09_2_explanation){
+                $scope.editDocumentForm.q09_2_explanation.$pristine = false;
             }
             if($scope.editDocumentForm.q10_explanation){
                 $scope.editDocumentForm.q10_explanation.$pristine = false;
@@ -246,6 +250,11 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
      *************************************************/
     $scope.$parent.loading = { status: true, message: $scope.$parent.loading.message };
     $scope.latest_revision = $documentService.getLatestRevision();
+
+    //Prevent undefined errors
+    if (!$scope.latest_revision.descriptions) {
+        $scope.latest_revision.descriptions = {};
+    }
 
     // Check status
     if($documentService.getStatus()>1 && $documentService.getStatus()!=5){

@@ -16,8 +16,10 @@ INSERT INTO Concerns (
     q07_explanation,
     q08_value,
     q08_explanation,
-    q09_value,
-    q09_explanation,
+    q09_1_value,
+    q09_1_explanation,
+    q09_2_value,
+    q09_2_explanation,
     q10_value,
     q10_explanation,
     q11_1_value,
@@ -64,7 +66,9 @@ INSERT INTO Concerns (
     $29::TEXT,
     $30::BOOLEAN,
     $31::TEXT,
-    $32::TEXT,
-    $33::TEXT
+    $32::BOOLEAN,
+    $33::TEXT,
+    $34::TEXT,
+    $35::TEXT
 )
 RETURNING *;

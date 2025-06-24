@@ -177,8 +177,8 @@ app.controller("documentShowSubmissionController", function($scope, $rootScope, 
         descriptions: {
             language: {
                 en: true,
-                de: false,
-                pt: false
+                de: true,
+                pt: true
             },
             history: {
                 en: {

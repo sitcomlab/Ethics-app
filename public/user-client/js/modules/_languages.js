@@ -204,7 +204,7 @@ app.config(function ($translateProvider) {
         DESCRIPTION_8: 'List benefits (if applicable)',
 
         STUDY_DESCRIPTION_INFO: 'This form will be used to automatically generate the informed consent form that every participant of your study will have to sign. Please fill out the English version and optionally the language-specific version appriopiate for your participants. Depending on the language(s), you will receive the informed consent forms for your experiment',
-        LANGUAGE_OPTIONS: 'Please select the language, in which you want to generate the informed consent forms',
+        LANGUAGE_OPTIONS: 'Please select the language in which you want to generate the informed consent forms. You must select either English or German',
 
         DESCRIPTION_1_INFO: '',
         DESCRIPTION_2_INFO: '',
@@ -262,6 +262,7 @@ app.config(function ($translateProvider) {
         DEBRIEFING_INFORMATION: 'Debriefing information',
         STATEMENT_OF_RESEARCHER: 'Statement of researcher',
         INFORMED_CONSENT_FORM: 'Informed consent form',
+        DATA_PROTECTION_FORM: 'Data protection form',
         REVISE_DOCUMENT: 'Revise document',
 
         INTRO: 'Introduction',

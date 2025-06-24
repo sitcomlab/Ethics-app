@@ -223,6 +223,7 @@ exports.request = function(req, res) {
                 // Database query
                 client.query(query_create_description, [
                     new_revision.revision_id,
+                    description.en_used,
                     description.en_title,
                     description.en_researcher,
                     description.en_study_time,
@@ -283,8 +284,10 @@ exports.request = function(req, res) {
                     concern.q07_explanation,
                     concern.q08_value,
                     concern.q08_explanation,
-                    concern.q09_value,
-                    concern.q09_explanation,
+                    concern.q09_1_value,
+                    concern.q09_1_explanation,
+                    concern.q09_2_value,
+                    concern.q09_2_explanation,
                     concern.q10_value,
                     concern.q10_explanation,
                     concern.q11_1_value,

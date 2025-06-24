@@ -152,9 +152,20 @@
             <!-- English descriptions -->
             <div class="row inputs">
                 <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6">
-                    <h6>
-                        <span class="flag-icon flag-icon-gb"></span>&nbsp;&nbsp;{{ 'STUDY_DESCRIPTION' | translate }}
-                    </h6>
+                    <label class="custom-control custom-checkbox">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">
+                            <span class="flag-icon flag-icon-gb"></span>
+                            &nbsp;&nbsp;
+                            <b>{{ 'STUDY_DESCRIPTION' | translate }}</b>
+                        </span>
+                        <input type="checkbox" class="custom-control-input" ng-model="latest_revision.descriptions.en_used">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">
+                            <small class="form-text text-muted">
+                                ({{ 'OPTIONAL' | translate }})</small>
+                        </span>
+                    </label>
                 </div>
                 <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 right">
                     <small>
@@ -192,9 +203,12 @@
             <!-- Properties -->
             <div class="bs-fix">
                 <div class="list-group" ng-if="status.descriptions.language.en">
+                    <div class="list-group-item middle" ng-if="!latest_revision.descriptions.en_used">
+                        - {{ 'NOT_USED' | translate }} -
+                    </div>
 
                     <!-- Title -->
-                    <div class="list-group-item">
+                    <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <b>{{ 'TITLE' | translate }}</b>
@@ -242,7 +256,7 @@
                     </div>
 
                     <!-- Researcher -->
-                    <div class="list-group-item">
+                    <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <b>{{ 'RESEARCHER' | translate }}</b>
@@ -290,7 +304,7 @@
                     </div>
 
                     <!-- Time -->
-                    <div class="list-group-item">
+                    <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <b>{{ 'TIME' | translate }}</b>
@@ -338,7 +352,7 @@
                     </div>
 
                     <!-- Purpose -->
-                    <div class="list-group-item">
+                    <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <b>{{ 'PURPOSE' | translate }}</b>
@@ -386,7 +400,7 @@
                     </div>
 
                     <!-- Procedure -->
-                    <div class="list-group-item">
+                    <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <b>{{ 'PROCEDURE' | translate }}</b>
@@ -434,7 +448,7 @@
                     </div>
 
                     <!-- Duration -->
-                    <div class="list-group-item">
+                    <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <b>{{ 'DURATION' | translate }}</b>
@@ -482,7 +496,7 @@
                     </div>
 
                     <!-- Risks -->
-                    <div class="list-group-item">
+                    <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <b>{{ 'RISKS' | translate }}</b>
@@ -530,7 +544,7 @@
                     </div>
 
                     <!-- Benefits -->
-                    <div class="list-group-item">
+                    <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <b>{{ 'BENEFITS' | translate }}</b>
@@ -2332,14 +2346,14 @@
                         </div>
                     </div>
 
-                    <!-- 9th question -->
+                    <!-- 9.1th question -->
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                                <b>9. {{ 'CONCERN_9' | translate }}?</b>
+                                <b>9.1. {{ 'CONCERN_9_1' | translate }}?</b>
                                 <br>
                                 <small class="text-muted">
-                                    <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_9_INFO' | translate }}
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_9_1_INFO' | translate }}
                                 </small>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -2349,20 +2363,20 @@
                                             <code>{{ 'REV' | translate}}{{revision.version}}</code>
                                         </div>
                                         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ng-if="!$first">
-                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q09_value">
+                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q09_1_value">
                                                 {{ 'YES' | translate }}
                                             </span>
-                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q09_value">
+                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q09_1_value">
                                                 {{ 'NO' | translate }}
                                             </span>
-                                            &nbsp;&nbsp;<i>{{revision.concerns.q09_explanation}}</i>
+                                            &nbsp;&nbsp;<i>{{revision.concerns.q09_1_explanation}}</i>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="!$first">
                                             <!-- devider -->
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
-                                            <span class="comment" ng-if="revision.comments.q09_comment !== null && revision.comments.q09_comment !== ''">
-                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q09_comment}}
+                                            <span class="comment" ng-if="revision.comments.q09_1_comment !== null && revision.comments.q09_1_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q09_1_comment}}
                                             </span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first" style="padding-bottom: 3px;">
@@ -2372,9 +2386,9 @@
                                                         <input
                                                         class="custom-control-input"
                                                         type="radio"
-                                                        name="q09_value"
-                                                        id="q09_value_1"
-                                                        ng-model="latest_revision.concerns.q09_value"
+                                                        name="q09_1_value"
+                                                        id="q09_1_value_1"
+                                                        ng-model="latest_revision.concerns.q09_1_value"
                                                         ng-value="false"
                                                         required>
                                                         <span class="custom-control-indicator"></span>
@@ -2390,9 +2404,9 @@
                                                         <input
                                                         class="custom-control-input"
                                                         type="radio"
-                                                        name="q09_value"
-                                                        id="q09_value_2"
-                                                        ng-model="latest_revision.concerns.q09_value"
+                                                        name="q09_1_value"
+                                                        id="q09_1_value_2"
+                                                        ng-model="latest_revision.concerns.q09_1_value"
                                                         ng-value="true"
                                                         required>
                                                         <span class="custom-control-indicator"></span>
@@ -2409,21 +2423,125 @@
                                             <!-- devider -->
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first">
-                                            <div class="form-group" ng-class="{'has-danger': editDocumentForm.q09_explanation.$invalid && !editDocumentForm.q09_explanation.$pristine }">
-                                                <div class="input-group" ng-if="latest_revision.concerns.q09_value">
+                                            <div class="form-group" ng-class="{'has-danger': editDocumentForm.q09_1_explanation.$invalid && !editDocumentForm.q09_1_explanation.$pristine }">
+                                                <div class="input-group" ng-if="latest_revision.concerns.q09_1_value">
                                                     <textarea
                                                         class="form-control"
                                                         rows="5"
                                                         placeholder="{{ 'EXPLANATION' | translate }}*"
-                                                        name="q09_explanation"
-                                                        id="q09_explanation"
-                                                        ng-model="latest_revision.concerns.q09_explanation"
-                                                        ng-required="latest_revision.concerns.q09_value"></textarea>
+                                                        name="q09_1_explanation"
+                                                        id="q09_1_explanation"
+                                                        ng-model="latest_revision.concerns.q09_1_explanation"
+                                                        ng-required="latest_revision.concerns.q09_1_value"></textarea>
                                                     <span class="input-group-addon">
                                                         <span class="flag-icon flag-icon-gb"></span>
                                                     </span>
                                                 </div>
-                                                <span ng-show="editDocumentForm.q09_explanation.$error.required && !editDocumentForm.q09_explanation.$pristine" class="text-danger">
+                                                <span ng-show="editDocumentForm.q09_1_explanation.$error.required && !editDocumentForm.q09_1_explanation.$pristine" class="text-danger">
+                                                    <small>
+                                                        {{ 'REQUIRED' | translate }}
+                                                    </small>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 9.2th question -->
+                    <div class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
+                                <b>9.2. {{ 'CONCERN_9_2' | translate }}?</b>
+                                <br>
+                                <small class="text-muted">
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'CONCERN_9_2_INFO' | translate }}
+                                </small>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
+                                    <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
+                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                            <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ng-if="!$first">
+                                            <span class="badge badge-pill badge-danger" ng-if="revision.concerns.q09_2_value">
+                                                {{ 'YES' | translate }}
+                                            </span>
+                                            <span class="badge badge-pill badge-success" ng-if="!revision.concerns.q09_2_value">
+                                                {{ 'NO' | translate }}
+                                            </span>
+                                            &nbsp;&nbsp;<i>{{revision.concerns.q09_2_explanation}}</i>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="!$first">
+                                            <!-- devider -->
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="!$first && status.concerns.comments">
+                                            <span class="comment" ng-if="revision.comments.q09_2_comment !== null && revision.comments.q09_2_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q09_2_comment}}
+                                            </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first" style="padding-bottom: 3px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" style="background-color: #FFFFFF; width: 100%;">
+                                                    <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                                        <input
+                                                        class="custom-control-input"
+                                                        type="radio"
+                                                        name="q09_2_value"
+                                                        id="q09_2_value_1"
+                                                        ng-model="latest_revision.concerns.q09_2_value"
+                                                        ng-value="false"
+                                                        required>
+                                                        <span class="custom-control-indicator"></span>
+                                                        <span class="custom-control-description">
+                                                            <span class="badge badge-pill badge-success">
+                                                                {{ 'NO' | translate }}
+                                                            </span>
+                                                        </span>
+                                                    </label>
+                                                </span>
+                                                <span class="input-group-addon" style="background-color: #FFFFFF; width: 100%;">
+                                                    <label class="custom-control custom-radio" style="margin-bottom: 0px;">
+                                                        <input
+                                                        class="custom-control-input"
+                                                        type="radio"
+                                                        name="q09_2_value"
+                                                        id="q09_2_value_2"
+                                                        ng-model="latest_revision.concerns.q09_2_value"
+                                                        ng-value="true"
+                                                        required>
+                                                        <span class="custom-control-indicator"></span>
+                                                        <span class="custom-control-description">
+                                                            <span class="badge badge-pill badge-danger">
+                                                                {{ 'YES' | translate }}
+                                                            </span>
+                                                        </span>
+                                                    </label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" ng-if="$first">
+                                            <!-- devider -->
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="$first">
+                                            <div class="form-group" ng-class="{'has-danger': editDocumentForm.q09_2_explanation.$invalid && !editDocumentForm.q09_2_explanation.$pristine }">
+                                                <div class="input-group" ng-if="latest_revision.concerns.q09_2_value">
+                                                    <textarea
+                                                        class="form-control"
+                                                        rows="5"
+                                                        placeholder="{{ 'EXPLANATION' | translate }}*"
+                                                        name="q09_2_explanation"
+                                                        id="q09_2_explanation"
+                                                        ng-model="latest_revision.concerns.q09_2_explanation"
+                                                        ng-required="latest_revision.concerns.q09_2_value"></textarea>
+                                                    <span class="input-group-addon">
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </span>
+                                                </div>
+                                                <span ng-show="editDocumentForm.q09_2_explanation.$error.required && !editDocumentForm.q09_2_explanation.$pristine" class="text-danger">
                                                     <small>
                                                         {{ 'REQUIRED' | translate }}
                                                     </small>

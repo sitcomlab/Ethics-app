@@ -54,12 +54,13 @@ CREATE TABLE Comments (
     q06_comment TEXT DEFAULT NULL,
     q07_comment TEXT DEFAULT NULL,
     q08_comment TEXT DEFAULT NULL,
-    q09_comment TEXT DEFAULT NULL,
+    q09_1_comment TEXT DEFAULT NULL,
+    q09_2_comment TEXT DEFAULT NULL,
     q10_comment TEXT DEFAULT NULL,
     q11_1_comment TEXT DEFAULT NULL,
     q11_2_comment TEXT DEFAULT NULL,
     q12_comment TEXT DEFAULT NULL,
     q13_comment TEXT DEFAULT NULL,
-    q14_comment TEXT DEFAULT NULL,
+    q14_comment TEXT DEFAULT NULL
     
 );

@@ -12,6 +12,7 @@ CREATE TABLE Descriptions (
     revision_id INTEGER NOT NULL REFERENCES Revisions(revision_id) ON UPDATE CASCADE ON DELETE CASCADE,
 
         -- English
+        en_used BOOLEAN NOT NULL DEFAULT false,
         en_title TEXT DEFAULT NULL,
         en_researcher TEXT DEFAULT NULL,
         en_study_time TEXT DEFAULT NULL,
