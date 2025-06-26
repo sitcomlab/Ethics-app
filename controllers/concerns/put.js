@@ -77,7 +77,13 @@ exports.request = function(req, res) {
                 q13_value: req.body.q13_value,
                 q13_explanation: req.body.q13_explanation,
                 q14_value: req.body.q14_value,
-                q14_explanation: req.body.q14_explanation
+                q14_explanation: req.body.q14_explanation,
+                q15_1_value: req.body.q15_1_value,
+                q15_1_explanation: req.body.q15_1_explanation,
+                q15_2_value: req.body.q15_2_value,
+                q15_2_explanation: req.body.q15_2_explanation,
+                q15_3_value: req.body.q15_3_value,
+                q15_3_explanation: req.body.q15_3_explanation
             };
             var params = _.values(object);
             callback(null, client, done, params);

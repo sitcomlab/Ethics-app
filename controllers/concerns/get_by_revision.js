@@ -16,6 +16,8 @@ var query_get_concern_by_revision = fs.readFileSync(__dirname + dir_2 + 'get_by_
 // GET BY REVISION
 exports.request = function(req, res) {
 
+  console.log(req, res);
+
     async.waterfall([
         function(callback){
             // Connect to database
@@ -38,7 +40,7 @@ exports.request = function(req, res) {
                 } else {
                     // Check if Revision exists
                     if (result.rows.length === 0) {
-                        callback(new Error("Revision not found"), 404);
+                        callback(new Error("Revision not found, concerns"), 404);
                     } else {
                         callback(null, client, done);
                     }
@@ -56,7 +58,7 @@ exports.request = function(req, res) {
                 } else {
                     // Check if Concern exists
                     if (result.rows.length === 0) {
-                        callback(new Error("Concern not found"), 404);
+                        callback(new Error("Concern not found, concerns"), 404);
                     } else {
                         callback(null, 200, result.rows[0]);
                     }

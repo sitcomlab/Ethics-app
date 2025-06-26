@@ -51,7 +51,14 @@ SELECT
     q11_2_comment,
     q12_comment,
     q13_comment,
-    q14_comment
+    q14_comment,
+    q15_1_comment,
+    q15_2_comment,
+    q15_3_comment,
+
+    en_purpose_and_procedure_comment,
+    de_purpose_and_procedure_comment,
+    pt_purpose_and_procedure_comment
 FROM Comments
 WHERE
     revision_id=$1::INTEGER;

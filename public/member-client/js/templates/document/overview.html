@@ -351,6 +351,31 @@
                         </div>
                     </div>
                 </div>
+				<!-- Purpose_and_procedure -->
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <b>{{ 'PURPOSE_AND_PROCEDURE' | translate }}</b>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.en.limit">
+                                <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                    </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <i>{{revision.descriptions.en_purpose_and_procedure}}</i><br>
+                                        <span ng-if="status.descriptions.comments.en">
+                                            <span class="comment" ng-if="revision.comments.en_purpose_and_procedure_comment !== null && revision.comments.en_purpose_and_procedure_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_purpose_and_procedure_comment}}
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Purpose -->
                 <div class="list-group-item">
@@ -602,6 +627,31 @@
                                         <span ng-if="status.descriptions.comments.de">
                                             <span class="comment" ng-if="revision.comments.de_study_time_comment !== null && revision.comments.de_study_time_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_study_time_comment}}
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<!-- Purpose_and_procedure -->
+                <div class="list-group-item" ng-if="latest_revision.descriptions.de_used">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <b>{{ 'PURPOSE_AND_PROCEDURE' | translate }}</b>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.de.limit">
+                                <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                    </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <i>{{revision.descriptions.de_purpose_and_procedure}}</i><br>
+                                        <span ng-if="status.descriptions.comments.de">
+                                            <span class="comment" ng-if="revision.comments.de_purpose_and_procedure_comment !== null && revision.comments.de_purpose_and_procedure_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.de_purpose_and_procedure_comment}}
                                             </span>
                                         </span>
                                     </div>
@@ -868,6 +918,31 @@
                         </div>
                     </div>
                 </div>
+				<!-- Purpose_and_procedure -->
+                <div class="list-group-item" ng-if="latest_revision.descriptions.pt_used">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <b>{{ 'PURPOSE_AND_PROCEDURE' | translate }}</b>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.descriptions.history.pt.limit">
+                                <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                    </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <i>{{revision.descriptions.pt_purpose_and_procedure}}</i><br>
+                                        <span ng-if="status.descriptions.comments.pt">
+                                            <span class="comment" ng-if="revision.comments.pt_purpose_and_procedure_comment !== null && revision.comments.pt_purpose_and_procedure_comment !== ''">
+                                                <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_purpose_and_procedure_comment}}
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Purpose -->
                 <div class="list-group-item" ng-if="latest_revision.descriptions.pt_used">
@@ -884,7 +959,7 @@
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <i>{{revision.descriptions.pt_purpose}}</i><br>
                                         <span ng-if="status.descriptions.comments.pt">
-                                            <span class="comment" ng-if="revision.comments.de_purpose_comment !== null && revision.comments.pt_purpose_comment !== ''">
+                                            <span class="comment" ng-if="revision.comments.pt_purpose_comment !== null && revision.comments.pt_purpose_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.pt_purpose_comment}}
                                             </span>
                                         </span>
@@ -1051,7 +1126,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                            <b>1. {{ 'CONCERN_1' | translate }}?</b>
+                            <b>1. {{ 'CONCERN_1' | translate }} </b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1086,7 +1161,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                            <b>2. {{ 'CONCERN_2' | translate }}?</b>
+                            <b>2. {{ 'CONCERN_2' | translate }} </b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1121,7 +1196,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                            <b>3. {{ 'CONCERN_3' | translate }}?</b>
+                            <b>3. {{ 'CONCERN_3' | translate }} </b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1156,7 +1231,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                            <b>4. {{ 'CONCERN_4' | translate }}?</b>
+                            <b>4. {{ 'CONCERN_4' | translate }} </b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1191,7 +1266,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                            <b>5. {{ 'CONCERN_5' | translate }}?</b>
+                            <b>5. {{ 'CONCERN_5' | translate }} </b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1226,7 +1301,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                            <b>6. {{ 'CONCERN_6' | translate }}?</b>
+                            <b>6. {{ 'CONCERN_6' | translate }} </b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1261,7 +1336,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                            <b>7. {{ 'CONCERN_7' | translate }}?</b>
+                            <b>7. {{ 'CONCERN_7' | translate }} </b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1296,7 +1371,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                            <b>8. {{ 'CONCERN_8' | translate }}?</b>
+                            <b>8. {{ 'CONCERN_8' | translate }} </b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1331,7 +1406,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                            <b>9. {{ 'CONCERN_9' | translate }}?</b>
+                            <b>9. {{ 'CONCERN_9' | translate }} </b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1366,7 +1441,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                            <b>10. {{ 'CONCERN_10' | translate }}?</b>
+                            <b>10. {{ 'CONCERN_10' | translate }} </b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1401,7 +1476,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                            <b>11. {{ 'CONCERN_11_1' | translate }}?</b>
+                            <b>11. {{ 'CONCERN_11_1' | translate }} </b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1436,7 +1511,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                            <b>11.2. {{ 'CONCERN_11_2' | translate }}?</b>
+                            <b>11.2. {{ 'CONCERN_11_2' | translate }} </b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1471,7 +1546,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                            <b>12. {{ 'CONCERN_12' | translate }}?</b>
+                            <b>12. {{ 'CONCERN_12' | translate }} </b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1506,7 +1581,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                            <b>13. {{ 'CONCERN_13' | translate }}?</b>
+                            <b>13. {{ 'CONCERN_13' | translate }} </b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1541,7 +1616,7 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                            <b>14. {{ 'CONCERN_14' | translate }}?</b>
+                            <b>14. {{ 'CONCERN_14' | translate }} </b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1566,6 +1641,109 @@
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
                                         <span class="comment" ng-if="revision.comments.q14_comment !== null && revision.comments.q14_comment !== ''">
                                             <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q14_comment}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<!-- 15.1th question -->
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
+                            <b>15. {{ 'CONCERN_15_1' | translate }} </b>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
+                                <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                    </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q11_1_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q11_1_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        &nbsp;&nbsp;<i>{{revision.concerns.q15_1_explanation}}</i>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <!-- devider -->
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
+                                        <span class="comment" ng-if="revision.comments.q15_1_comment !== null && revision.comments.q15_1_comment !== ''">
+                                            <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q15_1_comment}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 15.2nd question -->
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
+                            <b>15.2. {{ 'CONCERN_15_2' | translate }} </b>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
+                                <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                    </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q15_2_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q15_2_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        &nbsp;&nbsp;<i>{{revision.concerns.q15_2_explanation}}</i>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <!-- devider -->
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
+                                        <span class="comment" ng-if="revision.comments.q11_2_comment !== null && revision.comments.q15_2_comment !== ''">
+                                            <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q15_2_comment}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				 <!-- 15.3rd question -->
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
+                            <b>15.3. {{ 'CONCERN_15_3' | translate }} </b>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
+                                <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                    </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q15_3_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q15_3_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        &nbsp;&nbsp;<i>{{revision.concerns.q15_3_explanation}}</i>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <!-- devider -->
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
+                                        <span class="comment" ng-if="revision.comments.q15_3_comment !== null && revision.comments.q15_3_comment !== ''">
+                                            <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q15_3_comment}}
                                         </span>
                                     </div>
                                 </div>

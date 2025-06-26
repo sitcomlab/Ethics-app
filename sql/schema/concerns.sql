@@ -42,4 +42,10 @@ CREATE TABLE Concerns (
     q14_explanation TEXT DEFAULT NULL,
     q14_filename TEXT DEFAULT NULL,
     q14_filepath TEXT DEFAULT NULL,
+    q15_1_value BOOLEAN DEFAULT NULL,
+    q15_1_explanation TEXT DEFAULT NULL,
+    q15_2_value BOOLEAN DEFAULT NULL,
+    q15_2_explanation TEXT DEFAULT NULL,
+    q15_3_value BOOLEAN DEFAULT NULL,
+    q15_3_explanation TEXT DEFAULT NULL,
 );

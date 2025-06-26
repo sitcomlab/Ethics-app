@@ -270,6 +270,7 @@ app.config(function ($translateProvider) {
         NAME: 'Name',
         TIME: 'Time',
         RESEARCHER: 'Reseacher(s)',
+        PURPOSE_AND_PROCEDURE: 'Purpose and Procedure',
         PURPOSE: 'Purpose',
         PROCEDURE: 'Procedure',
         DURATION: 'Duration',

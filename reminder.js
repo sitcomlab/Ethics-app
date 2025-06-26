@@ -381,6 +381,30 @@ async.waterfall([
                         concern.q14_sign = "no";
                     }
 
+                    if(concern.q15_1_value){
+                        concern.q15_1_label = "badge-danger";
+                        concern.q15_1_sign = "yes";
+                    } else {
+                        concern.q15_1_label = "badge-success";
+                        concern.q15_1_sign = "no";
+                    }
+
+                    if(concern.q15_2_value){
+                        concern.q15_2_label = "badge-danger";
+                        concern.q15_2_sign = "yes";
+                    } else {
+                        concern.q15_2_label = "badge-success";
+                        concern.q15_2_sign = "no";
+                    }
+
+                    if(concern.q15_3_value){
+                        concern.q15_3_label = "badge-danger";
+                        concern.q15_3_sign = "yes";
+                    } else {
+                        concern.q15_3_label = "badge-success";
+                        concern.q15_3_sign = "no";
+                    }
+
                     // Notify each committee member
                     async.eachOfSeries(members, function (member, key, callback) {
 

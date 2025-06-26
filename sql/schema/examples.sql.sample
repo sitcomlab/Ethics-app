@@ -75,6 +75,7 @@ INSERT INTO Descriptions (
     en_title,
     en_researcher,
     en_study_time,
+	en_purpose_and_procedure,
     en_purpose,
     en_procedure,
     en_duration,
@@ -85,6 +86,7 @@ INSERT INTO Descriptions (
     de_title,
     de_researcher,
     de_study_time,
+	de_purpose_and_procedure,
     de_purpose ,
     de_procedure,
     de_duration,
@@ -95,6 +97,7 @@ INSERT INTO Descriptions (
     pt_title,
     pt_researcher,
     pt_study_time,
+	pt_purpose_and_procedure,
     pt_purpose,
     pt_procedure,
     pt_duration,
@@ -135,7 +138,13 @@ INSERT INTO Concerns (
     q13_value,
     q13_explanation,
     q14_value,
-    q14_explanation
+    q14_explanation,
+    q15_1_value,
+    q15_1_explanation,
+    q15_2_value,
+    q15_2_explanation,
+    q15_3_value,
+    q15_3_explanation
 ) VALUES ();
 
 
@@ -148,6 +157,7 @@ INSERT INTO Comments (
     en_title_comment,
     en_researcher_comment,
     en_study_time_comment,
+	en_purpose_and_procedure_comment,
     en_purpose_comment,
     en_procedure_comment,
     en_duration_comment,
@@ -157,6 +167,7 @@ INSERT INTO Comments (
     de_title_comment,
     de_researcher_comment,
     de_study_time_comment,
+	de_purpose_and_procedure_comment,
     de_purpose_comment,
     de_procedure_comment,
     de_duration_comment,
@@ -166,6 +177,7 @@ INSERT INTO Comments (
     pt_title_comment,
     pt_researcher_comment,
     pt_study_time_comment,
+	pt_purpose_and_procedure_comment,
     pt_purpose_comment,
     pt_procedure_comment,
     pt_duration_comment,
@@ -186,7 +198,10 @@ INSERT INTO Comments (
     q11_2_comment,
     q12_comment,
     q13_comment,
-    q14_comment
+    q14_comment,
+    q15_1_comment,
+    q15_2_comment,
+    q15_3_comment
 ) VALUES ();
 
 

@@ -17,7 +17,7 @@ UPDATE Comments SET (
     de_title_comment,
     de_researcher_comment,
     de_study_time_comment,
-    de_purpose_comment,
+	de_purpose_comment,
     de_procedure_comment,
     de_duration_comment,
     de_risks_comment,
@@ -27,7 +27,7 @@ UPDATE Comments SET (
     pt_title_comment,
     pt_researcher_comment,
     pt_study_time_comment,
-    pt_purpose_comment,
+	pt_purpose_comment,
     pt_procedure_comment,
     pt_duration_comment,
     pt_risks_comment,
@@ -48,7 +48,13 @@ UPDATE Comments SET (
     q11_2_comment,
     q12_comment,
     q13_comment,
-    q14_comment
+    q14_comment,
+    q15_1_comment,
+    q15_2_comment,
+    q15_3_comment,
+    en_purpose_and_procedure_comment,
+    de_purpose_and_procedure_comment,
+    pt_purpose_and_procedure_comment
 ) = (
     now(),
     $2::BOOLEAN,
@@ -99,7 +105,13 @@ UPDATE Comments SET (
     $39::TEXT,
     $40::TEXT,
     $41::TEXT,
-    $42::TEXT
+    $42::TEXT,
+    $43::TEXT,
+    $44::TEXT,
+    $45::TEXT,
+    $46::TEXT,
+    $47::TEXT,
+    $48::TEXT
 )
 WHERE
     comment_id=$1::INTEGER

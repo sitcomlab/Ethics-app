@@ -238,7 +238,7 @@ exports.request = function(req, res) {
                         description: description,
                         concern: concern,
                         revision: revision,
-                        support_email_address: process.env.SUPPORT_EMAIL_ADDRESS,
+                        consent_form_email: process.env.CONSENT_FORM_EMAIL,
                         year: moment().format("YYYY")
                     });
 

@@ -26,7 +26,7 @@ CREATE TABLE Descriptions (
         de_title TEXT DEFAULT NULL,
         de_researcher TEXT DEFAULT NULL,
         de_study_time TEXT DEFAULT NULL,
-        de_purpose TEXT DEFAULT NULL,
+	de_purpose TEXT DEFAULT NULL,
         de_procedure TEXT DEFAULT NULL,
         de_duration TEXT DEFAULT NULL,
         de_risks TEXT DEFAULT NULL,
@@ -37,10 +37,13 @@ CREATE TABLE Descriptions (
         pt_title TEXT DEFAULT NULL,
         pt_researcher TEXT DEFAULT NULL,
         pt_study_time TEXT DEFAULT NULL,
-        pt_purpose TEXT DEFAULT NULL,
+	pt_purpose TEXT DEFAULT NULL,
         pt_procedure TEXT DEFAULT NULL,
         pt_duration TEXT DEFAULT NULL,
         pt_risks TEXT DEFAULT NULL,
-        pt_benefits TEXT DEFAULT NULL
-        
+        pt_benefits TEXT DEFAULT NULL,
+
+        en_purpose_and_procedure TEXT DEFAULT NULL,
+        de_purpose_and_procedure TEXT DEFAULT NULL,
+        pt_purpose_and_procedure TEXT DEFAULT NULL
 );

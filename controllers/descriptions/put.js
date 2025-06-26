@@ -73,7 +73,10 @@ exports.request = function(req, res) {
                 pt_procedure: req.body.pt_procedure,
                 pt_duration: req.body.pt_duration,
                 pt_risks: req.body.pt_risks,
-                pt_benefits: req.body.pt_benefits
+                pt_benefits: req.body.pt_benefits,
+      		en_purpose_and_procedure: req.body.en_purpose_and_procedure,
+		de_purpose_and_procedure: req.body.de_purpose_and_procedure,
+		pt_purpose_and_procedure: req.body.pt_purpose_and_procedure
             };
             var params = _.values(object);
             callback(null, client, done, params);

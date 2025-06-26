@@ -29,7 +29,7 @@ CREATE TABLE Comments (
         de_title_comment TEXT DEFAULT NULL,
         de_researcher_comment TEXT DEFAULT NULL,
         de_study_time_comment TEXT DEFAULT NULL,
-        de_purpose_comment TEXT DEFAULT NULL,
+		de_purpose_comment TEXT DEFAULT NULL,
         de_procedure_comment TEXT DEFAULT NULL,
         de_duration_comment TEXT DEFAULT NULL,
         de_risks_comment TEXT DEFAULT NULL,
@@ -61,5 +61,13 @@ CREATE TABLE Comments (
     q12_comment TEXT DEFAULT NULL,
     q13_comment TEXT DEFAULT NULL,
     q14_comment TEXT DEFAULT NULL,
+    q15_1_comment TEXT DEFAULT NULL,
+    q15_2_comment TEXT DEFAULT NULL,
+    q15_3_comment TEXT DEFAULT NULL,
+
     
+    en_purpose_and_procedure_comment TEXT DEFAULT NULL,
+    de_purpose_and_procedure_comment TEXT DEFAULT NULL,
+    pt_purpose_and_procedure_comment TEXT DEFAULT NULL
+
 );

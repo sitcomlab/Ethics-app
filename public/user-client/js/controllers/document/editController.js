@@ -135,6 +135,7 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
             $scope.editDocumentForm.en_title.$pristine = false;
             $scope.editDocumentForm.en_researcher.$pristine = false;
             $scope.editDocumentForm.en_study_time.$pristine = false;
+            $scope.editDocumentForm.en_purpose_and_procedure.$pristine = false;
             $scope.editDocumentForm.en_purpose.$pristine = false;
             $scope.editDocumentForm.en_procedure.$pristine = false;
             $scope.editDocumentForm.en_duration.$pristine = false;
@@ -145,6 +146,7 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
             $scope.editDocumentForm.de_title.$pristine = false;
             $scope.editDocumentForm.de_researcher.$pristine = false;
             $scope.editDocumentForm.de_study_time.$pristine = false;
+            $scope.editDocumentForm.de_purpose_and_procedure.$pristine = false;
             $scope.editDocumentForm.de_purpose.$pristine = false;
             $scope.editDocumentForm.de_procedure.$pristine = false;
             $scope.editDocumentForm.de_duration.$pristine = false;
@@ -155,6 +157,7 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
             $scope.editDocumentForm.pt_title.$pristine = false;
             $scope.editDocumentForm.pt_researcher.$pristine = false;
             $scope.editDocumentForm.pt_study_time.$pristine = false;
+            $scope.editDocumentForm.de_purpose_and_procedure.$pristine = false;
             $scope.editDocumentForm.pt_purpose.$pristine = false;
             $scope.editDocumentForm.pt_procedure.$pristine = false;
             $scope.editDocumentForm.pt_duration.$pristine = false;
@@ -177,6 +180,9 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
             $scope.editDocumentForm.q12_value.$pristine = false;
             $scope.editDocumentForm.q13_value.$pristine = false;
             $scope.editDocumentForm.q14_value.$pristine = false;
+			$scope.editDocumentForm.q15_1_value.$pristine = false;
+			$scope.editDocumentForm.q15_2_value.$pristine = false;
+			$scope.editDocumentForm.q15_3_value.$pristine = false;
 
             // Conerns (explanations)
             if($scope.editDocumentForm.q01_explanation){
@@ -223,6 +229,15 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
             }
             if($scope.editDocumentForm.q14_explanation){
                 $scope.editDocumentForm.q14_explanation.$pristine = false;
+            }
+			if($scope.editDocumentForm.q15_1_explanation){
+                $scope.editDocumentForm.q15_1_explanation.$pristine = false;
+            }
+			if($scope.editDocumentForm.q15_2_explanation){
+                $scope.editDocumentForm.q15_2_explanation.$pristine = false;
+            }
+			if($scope.editDocumentForm.q15_3_explanation){
+                $scope.editDocumentForm.q15_3_explanation.$pristine = false;
             }
 
             $window.alert($filter('translate')('ALERT_SUBMIT_DOCUMENT_FAILED'));

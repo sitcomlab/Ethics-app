@@ -28,7 +28,7 @@ app.constant("config", {
             host: 'https://giv-ethics-app.uni-muenster.de',
             port: 443,
             apiPath: "/app/api",
-	    uploadPath: "/upload",
+	    uploadPath: "/app/upload/",
             memberClientPath: '/app/member-client',
             userClientPath: '/app/user-client'
         }

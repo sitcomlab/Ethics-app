@@ -248,7 +248,10 @@ exports.request = function(req, res) {
                     description.pt_procedure,
                     description.pt_duration,
                     description.pt_risks,
-                    description.pt_benefits
+                    description.pt_benefits,
+                    description.en_purpose_and_procedure,
+                    description.de_purpose_and_procedure,
+                    description.pt_purpose_and_procedure
                 ], function(err, result) {
                     done();
                     if (err) {
@@ -298,7 +301,13 @@ exports.request = function(req, res) {
                     concern.q14_value,
                     concern.q14_explanation,
                     concern.q14_filename,
-                    concern.q14_filepath
+                    concern.q14_filepath,
+                    concern.q15_1_value,
+                    concern.q15_1_explanation,
+                    concern.q15_2_value,
+                    concern.q15_2_explanation,
+                    concern.q15_3_value,
+                    concern.q15_3_explanation
                 ], function(err, result) {
                     done();
                     if (err) {

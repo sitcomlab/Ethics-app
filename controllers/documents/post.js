@@ -128,7 +128,10 @@ exports.request = function(req, res) {
                 null,
                 null,
                 null,
-                null
+                null,
+		null,
+		null,
+		null
             ], function(err, result) {
                 done();
                 if (err) {
@@ -142,6 +145,12 @@ exports.request = function(req, res) {
             // Database query
             client.query(query_create_concern, [
                 revision.revision_id,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
                 null,
                 null,
                 null,
@@ -235,7 +244,8 @@ exports.request = function(req, res) {
                 html: output
             }, function(err, info) {
                 if (err) {
-                    callback(err);
+		    err.message = JSON.stringify(info);
+                    callback(err, 500);
                 } else {
                     callback(null, 201, document);
                 }
