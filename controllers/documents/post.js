@@ -103,14 +103,6 @@ exports.request = function(req, res) {
             // Database query
             client.query(query_create_description, [
                 revision.revision_id,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
                 false,
                 null,
                 null,
@@ -129,9 +121,18 @@ exports.request = function(req, res) {
                 null,
                 null,
                 null,
-		null,
-		null,
-		null
+                false,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+		        null,
+		        null,
+		        null
             ], function(err, result) {
                 done();
                 if (err) {
@@ -145,6 +146,8 @@ exports.request = function(req, res) {
             // Database query
             client.query(query_create_concern, [
                 revision.revision_id,
+                null,
+                null,
                 null,
                 null,
                 null,

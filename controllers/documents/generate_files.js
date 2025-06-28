@@ -23,6 +23,9 @@ var template_statement_of_researcher = fs.readFileSync(__dirname + dir_1 + 'stat
 var template_consent_form_en = fs.readFileSync(__dirname + dir_1 + 'consent_form_en.html', 'utf8').toString();
 var template_consent_form_de = fs.readFileSync(__dirname + dir_1 + 'consent_form_de.html', 'utf8').toString();
 var template_consent_form_pt = fs.readFileSync(__dirname + dir_1 + 'consent_form_pt.html', 'utf8').toString();
+var template_data_protection_en = fs.readFileSync(__dirname + dir_1 + 'data_protection_en.html', 'utf8').toString();
+var template_data_protection_de = fs.readFileSync(__dirname + dir_1 + 'data_protection_de.html', 'utf8').toString();
+var template_data_protection_pt = fs.readFileSync(__dirname + dir_1 + 'data_protection_pt.html', 'utf8').toString();
 var query_get_document_with_user = fs.readFileSync(__dirname + dir_2 + 'get_with_user.sql', 'utf8').toString();
 var query_get_latest_revision = fs.readFileSync(__dirname + dir_3 + 'get_latest_by_document.sql', 'utf8').toString();
 var query_get_description = fs.readFileSync(__dirname + dir_4 + 'get_by_revision.sql', 'utf8').toString();
@@ -232,26 +235,32 @@ exports.request = function(req, res) {
                     });
                 },
                 function(callback) { // Generate consent form (English)
-                    // Render HTML-content
-                    var html = mustache.render(template_consent_form_en, {
-                        document: document,
-                        description: description,
-                        concern: concern,
-                        revision: revision,
-                        consent_form_email: process.env.CONSENT_FORM_EMAIL,
-                        year: moment().format("YYYY")
-                    });
+                    // Check if an english description was used
+                    if(description.en_used){
 
-                    // Create file
-                    var file = fs.createWriteStream(folders.pathFilesFolder + '/consent_form_en.pdf');
+                        // Render HTML-content
+                        var html = mustache.render(template_consent_form_en, {
+                            document: document,
+                            description: description,
+                            concern: concern,
+                            revision: revision,
+                            consent_form_email: process.env.CONSENT_FORM_EMAIL,
+                            year: moment().format("YYYY")
+                        });
 
-                    // Write content into file
-                    pdf.create(html, options).toStream(function(err, stream){
-                        stream.pipe(file);
-                    });
-                    file.on('finish', function() {
+                        // Create file
+                        var file = fs.createWriteStream(folders.pathFilesFolder + '/consent_form_en.pdf');
+
+                        // Write content into file
+                        pdf.create(html, options).toStream(function(err, stream){
+                            stream.pipe(file);
+                        });
+                        file.on('finish', function() {
+                            callback();
+                        });
+                    } else {
                         callback();
-                    });
+                    }
                 },
                 function(callback) { // Generate consent form (German)
                     // Check if a German description was used
@@ -297,6 +306,90 @@ exports.request = function(req, res) {
 
                         // Create file
                         var file = fs.createWriteStream(folders.pathFilesFolder + '/consent_form_pt.pdf');
+
+                        // Write content into file
+                        pdf.create(html, options).toStream(function(err, stream){
+                            stream.pipe(file);
+                        });
+                        file.on('finish', function() {
+                            callback();
+                        });
+                    } else {
+                        callback();
+                    }
+                },
+                function(callback) { // Generate data protection form (English)
+                    // Check if an english description was used
+                    if(description.en_used){
+
+                        // Render HTML-content
+                        var html = mustache.render(template_data_protection_en, {
+                            document: document,
+                            description: description,
+                            concern: concern,
+                            revision: revision,
+                            support_email_address: process.env.SUPPORT_EMAIL_ADDRESS,
+                            year: moment().format("YYYY")
+                        });
+
+                        // Create file
+                        var file = fs.createWriteStream(folders.pathFilesFolder + '/data_protection_en.pdf');
+
+                        // Write content into file
+                        pdf.create(html, options).toStream(function(err, stream){
+                            stream.pipe(file);
+                        });
+                        file.on('finish', function() {
+                            callback();
+                        });
+                    } else {
+                        callback();
+                    }
+                },
+                function(callback) { // Generate data protection form (german)
+                    // Check if a german description was used
+                    if(description.de_used){
+
+                        // Render HTML-content
+                        var html = mustache.render(template_data_protection_de, {
+                            document: document,
+                            description: description,
+                            concern: concern,
+                            revision: revision,
+                            support_email_address: process.env.SUPPORT_EMAIL_ADDRESS,
+                            year: moment().format("YYYY")
+                        });
+
+                        // Create file
+                        var file = fs.createWriteStream(folders.pathFilesFolder + '/data_protection_de.pdf');
+
+                        // Write content into file
+                        pdf.create(html, options).toStream(function(err, stream){
+                            stream.pipe(file);
+                        });
+                        file.on('finish', function() {
+                            callback();
+                        });
+                    } else {
+                        callback();
+                    }
+                },
+                function(callback) { // Generate data protection form (portuguese)
+                    // Check if a portuguese description was used
+                    if(description.pt_used){
+
+                        // Render HTML-content
+                        var html = mustache.render(template_data_protection_pt, {
+                            document: document,
+                            description: description,
+                            concern: concern,
+                            revision: revision,
+                            support_email_address: process.env.SUPPORT_EMAIL_ADDRESS,
+                            year: moment().format("YYYY")
+                        });
+
+                        // Create file
+                        var file = fs.createWriteStream(folders.pathFilesFolder + '/data_protection_pt.pdf');
 
                         // Write content into file
                         pdf.create(html, options).toStream(function(err, stream){

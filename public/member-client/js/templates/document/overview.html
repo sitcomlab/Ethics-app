@@ -273,9 +273,12 @@
         <!-- Properties -->
         <div class="bs-fix">
             <div class="list-group" ng-if="status.descriptions.language.en">
+                <div class="list-group-item middle" ng-if="!latest_revision.descriptions.en_used">
+                    - {{ 'NOT_USED' | translate }} -
+                </div>
 
                 <!-- Title -->
-                <div class="list-group-item">
+                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'TITLE' | translate }}</b>
@@ -301,7 +304,7 @@
                 </div>
 
                 <!-- Researcher -->
-                <div class="list-group-item">
+                <div class="list-group-item"  ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'RESEARCHER' | translate }}</b>
@@ -327,7 +330,7 @@
                 </div>
 
                 <!-- Time -->
-                <div class="list-group-item">
+                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'TIME' | translate }}</b>
@@ -352,7 +355,7 @@
                     </div>
                 </div>
 				<!-- Purpose_and_procedure -->
-                <div class="list-group-item">
+                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'PURPOSE_AND_PROCEDURE' | translate }}</b>
@@ -378,7 +381,7 @@
                 </div>
 
                 <!-- Purpose -->
-                <div class="list-group-item">
+                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'PURPOSE' | translate }}</b>
@@ -404,7 +407,7 @@
                 </div>
 
                 <!-- Procedure -->
-                <div class="list-group-item">
+                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'PROCEDURE' | translate }}</b>
@@ -430,7 +433,7 @@
                 </div>
 
                 <!-- Duration -->
-                <div class="list-group-item">
+                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'DURATION' | translate }}</b>
@@ -456,7 +459,7 @@
                 </div>
 
                 <!-- Risks -->
-                <div class="list-group-item">
+                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'RISKS' | translate }}</b>
@@ -482,7 +485,7 @@
                 </div>
 
                 <!-- Benefits -->
-                <div class="list-group-item">
+                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'BENEFITS' | translate }}</b>
@@ -1402,11 +1405,11 @@
                     </div>
                 </div>
 
-                <!-- 9th question -->
+                <!-- 9.1th question -->
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
-                            <b>9. {{ 'CONCERN_9' | translate }} </b>
+                            <b>9.1. {{ 'CONCERN_9_1' | translate }} </b>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
@@ -1415,20 +1418,55 @@
                                         <code>{{ 'REV' | translate}}{{revision.version}}</code>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q09_value">
+                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q09_1_value">
                                             {{ 'YES' | translate }}
                                         </span>
-                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q09_value">
+                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q09_1_value">
                                             {{ 'NO' | translate }}
                                         </span>
-                                        &nbsp;&nbsp;<i>{{revision.concerns.q09_explanation}}</i>
+                                        &nbsp;&nbsp;<i>{{revision.concerns.q09_1_explanation}}</i>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                         <!-- devider -->
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
-                                        <span class="comment" ng-if="revision.comments.q09_comment !== null && revision.comments.q09_comment !== ''">
-                                            <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q09_comment}}
+                                        <span class="comment" ng-if="revision.comments.q09_1_comment !== null && revision.comments.q09_1_comment !== ''">
+                                            <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q09_1_comment}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9.2th question -->
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justified">
+                            <b>9.2. {{ 'CONCERN_9_2' | translate }}?</b>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div ng-repeat="revision in document.revisions | orderBy: ['version']:true | limitTo: status.concerns.limit">
+                                <div class="row" ng-style="!$last && {'padding-bottom':'2px', 'border-bottom':'1px dashed rgba(0, 0, 0, .125)'}">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <code>{{ 'REV' | translate}}{{revision.version}}</code>
+                                    </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <span class="badge badge-pill badge-danger " ng-if="revision.concerns.q09_2_value">
+                                            {{ 'YES' | translate }}
+                                        </span>
+                                        <span class="badge badge-pill badge-success " ng-if="!revision.concerns.q09_2_value">
+                                            {{ 'NO' | translate }}
+                                        </span>
+                                        &nbsp;&nbsp;<i>{{revision.concerns.q09_2_explanation}}</i>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <!-- devider -->
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" ng-if="status.concerns.comments">
+                                        <span class="comment" ng-if="revision.comments.q09_2_comment !== null && revision.comments.q09_2_comment !== ''">
+                                            <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.q09_2_comment}}
                                         </span>
                                     </div>
                                 </div>

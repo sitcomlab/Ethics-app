@@ -1,5 +1,6 @@
 UPDATE Descriptions SET (
     updated,
+    en_used,
     en_title,
     en_researcher,
     en_study_time,
@@ -31,7 +32,7 @@ UPDATE Descriptions SET (
 	pt_purpose_and_procedure
 ) = (
     now(),
-    $2::TEXT,
+    $2::BOOLEAN,
     $3::TEXT,
     $4::TEXT,
     $5::TEXT,
@@ -39,8 +40,8 @@ UPDATE Descriptions SET (
     $7::TEXT,
     $8::TEXT,
     $9::TEXT,
-    $10::BOOLEAN,
-    $11::TEXT,
+    $10::TEXT,
+    $11::BOOLEAN,
     $12::TEXT,
     $13::TEXT,
     $14::TEXT,
@@ -48,8 +49,8 @@ UPDATE Descriptions SET (
     $16::TEXT,
     $17::TEXT,
     $18::TEXT,
-    $19::BOOLEAN,
-    $20::TEXT,
+    $19::TEXT,
+    $20::BOOLEAN,
     $21::TEXT,
     $22::TEXT,
     $23::TEXT,
@@ -59,7 +60,8 @@ UPDATE Descriptions SET (
     $27::TEXT,
 	$28::TEXT,
 	$29::TEXT,
-	$30::TEXT
+	$30::TEXT,
+    $31::TEXT
 )
 WHERE
     description_id=$1::INTEGER

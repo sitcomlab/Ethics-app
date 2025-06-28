@@ -16,8 +16,10 @@ UPDATE Concerns SET (
     q07_explanation,
     q08_value,
     q08_explanation,
-    q09_value,
-    q09_explanation,
+    q09_1_value,
+    q09_1_explanation,
+    q09_2_value,
+    q09_2_explanation,
     q10_value,
     q10_explanation,
     q11_1_value,
@@ -73,7 +75,9 @@ UPDATE Concerns SET (
     $34::BOOLEAN,
     $35::TEXT,
     $36::BOOLEAN,
-    $37::TEXT
+    $37::TEXT,
+    $38::BOOLEAN,
+    $39::TEXT
 )
 WHERE
     concern_id=$1::INTEGER

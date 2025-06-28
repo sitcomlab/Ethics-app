@@ -282,8 +282,8 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
         descriptions: {
             language: {
                 en: true,
-                de: false,
-                pt: false
+                de: true,
+                pt: true
             },
             history: {
                 en: {
@@ -317,9 +317,7 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
     $scope.toggle('general', 'history');
     $scope.toggle('descriptions', 'history', 'en');
     $scope.toggle('descriptions', 'history', 'de');
-    $scope.toggle('descriptions', 'language', 'de');
     $scope.toggle('descriptions', 'history', 'pt');
-    $scope.toggle('descriptions', 'language', 'de');
     $scope.toggle('concerns', 'history');
 
     $scope.$parent.loading = { status: false, message: "" };

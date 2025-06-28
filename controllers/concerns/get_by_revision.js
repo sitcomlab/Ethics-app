@@ -16,7 +16,7 @@ var query_get_concern_by_revision = fs.readFileSync(__dirname + dir_2 + 'get_by_
 // GET BY REVISION
 exports.request = function(req, res) {
 
-  console.log(req, res);
+  //console.log(req, res);
 
     async.waterfall([
         function(callback){

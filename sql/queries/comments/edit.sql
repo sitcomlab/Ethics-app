@@ -42,7 +42,8 @@ UPDATE Comments SET (
     q06_comment,
     q07_comment,
     q08_comment,
-    q09_comment,
+    q09_1_comment,
+    q09_2_comment,
     q10_comment,
     q11_1_comment,
     q11_2_comment,
@@ -111,7 +112,8 @@ UPDATE Comments SET (
     $45::TEXT,
     $46::TEXT,
     $47::TEXT,
-    $48::TEXT
+    $48::TEXT,
+    $49::TEXT
 )
 WHERE
     comment_id=$1::INTEGER

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Data Protection Policy and Consent Form</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <div class="firstpage">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 50%; text-align: left;">
+                        <img src="images/{{document.institute_logo}}" alt="{{document.institute_name}}" height="45px">
+                    </td>
+                    <td style="width: 50%; text-align: right;">
+                        <img src="images/{{document.university_logo}}" alt="{{document.university_name}}" height="45px">
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <br>
+
+            <h1 style="width:100%; text-align: center;">Data protection policy in accordance with Art. 13 GDPR and consent form</h1>
+            <h3 style="width:100%; text-align: center;">Project/reason: {{description.en_title}}</h3>
+            <h5 style="width:100%; text-align: center;">Revision: {{revision.version}}</h5>
+
+            <br>
+            
+            <p style="text-align: justify;">
+                <b>1. Name and address of the responsible controller</b><br>
+                The responsible controller as defined in the EU General Data Protection Regulation (GDPR) and other national data protection laws of the EU member states as well as other data protection-related provisions is:<br>
+                Universität Münster / University of Münster represented by its Rector Schlossplatz 2, 48149 Münster, Germany<br>
+                tel.: + 49 251 83-0<br>
+                email: mailbox@uni-muenster.de
+            </p>
+            
+            <p style="text-align: justify;">
+                If you have any questions about the project, please contact the responsible staff member:<br>
+                {{description.en_researcher}}
+            </p>
+            
+            <p style="text-align: justify;">
+                <b>2. Contact data of the Data Protection Officer</b><br>
+                You can contact the Data Protection Officer at:<br>
+                Data Protection Office<br>
+                Schlossplatz 2, 48149 Münster<br>
+                tel.: + 49 251 83-22446<br>
+                email: datenschutz@uni-muenster.de
+            </p>
+            
+            <p style="text-align: justify;">
+                <b>3. Data processing in connection with {{description.en_title}}</b><br>
+                {{description.en_purpose}}
+            </p>
+            
+            <p style="text-align: justify;">
+                <b>a) Scope of data processing</b><br>
+                The following personal data is processed in connection with {{description.en_title}}:<br>
+                (1) first and last name<br>
+                (2) date of birth<br>
+                (3) email address and phone number
+            </p>
+        </div>
+        
+        <div class="secondpage" style="page-break-before: always;">
+            <p style="text-align: justify;">
+                <b>b) Purposes of data processing</b><br>
+                The personal data listed above is processed for the purpose of carrying out the project {{description.en_title}}.<br>
+                The personal data listed above will be used to draw scientific conclusions about groups, not about individual participants. Anonymised data might be published in academic journals, presentations, open science data repositories, or other media, but not in a way that would allow individual identification. One week after the completion of the study it might no longer be possible to retract your data from such aggregated analyses.
+            </p>
+            
+            <p style="text-align: justify;">
+                <b>c) Legal basis for processing personal data</b><br>
+                Your consent serves as the legal basis for processing your personal data listed above by the University of Münster, as stipulated by Art. 6 (1, 1a) GDPR and, if applicable, Art. 9 (2a) GDPR.
+            </p>
+            
+            <p style="text-align: justify;">
+                <b>d) Further recipients of your personal data</b><br>
+                {{#concern.q09_1_value}}
+                    Your personal data listed above is forwarded to the following recipients within and outside the University of Münster:<br><br>
+                    <b>Recipients within the University of Münster:</b><br>
+                    {{concern.q09_1_explanation}}<br><br>
+                {{/concern.q09_1_value}}
+
+                {{#concern.q09_2_value}}
+                    {{^concern.q09_1_value}}
+                        Your personal data listed above is forwarded to the following recipients within and outside the University of Münster:<br><br>
+                    {{/concern.q09_1_value}}
+
+                    <b>Recipients outside the University of Münster:</b><br>
+                    {{concern.q09_2_explanation}}<br><br>
+                {{/concern.q09_2_value}}
+
+                {{^concern.q09_1_value}}
+                    {{^concern.q09_2_value}}
+                        Your personal data will neither be shared with other recipients within the University of Münster nor with recipients outside the University.
+                    {{/concern.q09_2_value}}
+                {{/concern.q09_1_value}}
+            </p>
+
+            <p style="text-align: justify;">
+                <b>e) Duration of storage of personal data</b><br>
+                The personal data listed above is stored for as long as necessary for carrying out the project {{description.en_title}} but shall not exceed 12 years. Upon withdrawing your consent, we shall delete your personal data.
+            </p>
+            
+            <p style="text-align: justify;">
+                <b>4. Your rights as a data subject</b><br>
+                You have the right to information about your personal data processed by the University of Münster (Art. 15 GDPR), the right to rectification (Art. 16 GDPR), erasure (Art. 17 GDPR), restriction of processing (Art. 18 GDPR) and the right to withdraw prior consent to such processing (Art. 7 (3) GDPR).<br>
+                You may withdraw your consent in writing or by email from the contact persons listed under nos. 1 and 2 (see above) of this data protection statement.<br>
+                You also have the right to lodge a complaint with the supervisory authority. The responsible supervisory authority is the Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen, Postfach 20 04 44, 40102 Düsseldorf, tel: +49 211 / 38424-0, email: poststelle@ldi.nrw.de
+            </p>
+            
+            <br>
+            <br>
+        </div>
+        <div class="thirdpage" style="page-break-before: always;">
+            <h2>Declaration of consent</h2>
+            <p><strong>Subject/reason:</strong> {{description.en_title}}</p>
+            <p><strong>Full name:</strong> _____________________________________________</p>
+            <p><strong>Date of birth:</strong> _____________________________________________</p>
+            <p><strong>(if applicable) Name of parent or legal guardian:</strong> _____________________________________________</p>
+            <p><strong>Email address:</strong> _____________________________________________</p>
+    
+            <p style="text-align: justify;">
+                With your consent, you hereby grant permission to the University of Münster to collect and process the personal data listed above under (3a) for the purposes indicated in (3b).<br><br>
+                You have the right to withdraw your consent from the responsible party at any time. The legality of all data processing from the time of consent until withdrawal of consent remains unaffected.
+            </p>
+    
+            <p style="text-align: justify;">
+                With your signature, you indicate confirmation of the following:<br>
+                “I have read the data protection statement for the project {{description.en_title}}. I hereby voluntarily consent to having my personal data collected and processed. I have been informed of the scope and purpose of data collection and processing, as well as the right to withdraw consent. I have received a copy of the data protection policy and the declaration of consent.”
+            </p>
+
+            <p style="text-align: justify;">
+                (if applicable) I confirm that I hold sole custody of the underage person named above – or in the case of joint custody – that I am permitted to grant consent on behalf of the other legal guardian or custodial parent.
+            </p>
+
+            <br><br>
+            <p><strong>City, Date:</strong> _____________________________________________</p>
+            <p><strong>Signature:</strong> _____________________________________________<br>
+            <em>(consenting party)</em></p>
+            <br>
+            <p><strong>(if applicable) Signature of the parent or legal guardian:</strong><br>
+            _____________________________________________</p>
+        </div>
+    </body>
+</html>

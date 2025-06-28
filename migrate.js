@@ -2,8 +2,7 @@ var colors = require('colors');
 var async = require('async');
 var pg = require('pg');
 var fs = require('fs');
-var config = require('dotenv').config();
-
+require('dotenv').config();
 
 // DATABASE CONFIGURATION
 var pool = new pg.Pool({
@@ -21,39 +20,37 @@ var dir = "/sql/migration/";
 var queries = [];
 
 
-var query = fs.readFileSync(__dirname + dir + 'migrate_100_to_141.sql', 'utf8').toString();
+var query = fs.readFileSync(__dirname + dir + 'migrate_141_to_142.sql', 'utf8').toString();
 
-// Start setup
+// Start migration
 async.waterfall([
     function(callback) {
-        // Connect to database
         pool.connect(function(err, client, done) {
-            if(err) {
+            if (err) {
                 callback(err);
-            } else {
+            } else {
                 callback(null, client, done);
             }
         });
     },
     function(client, done, callback) {
         client.query(query, function(err, result) {
-                done();
-                if (err) {
-                    callback(err);
-                } else {
-                    console.log(colors.blue(query));
-                    console.log(colors.green("Done!\n\n"));
-                    callback(null);
-                }
+            done();
+            if (err) {
+                callback(err);
+            } else {
+                console.log(colors.blue(query));
+                console.log(colors.green("Migration to 1.4.2 complete!\n"));
+                callback(null);
+            }
         });
     }
-], function(err){
-    // Close database connection
+], function(err) {
     pool.end();
-
-    if(err) {
+    if (err) {
+        console.error(colors.red("Migration failed:"));
         console.error(colors.red(err));
     } else {
-        console.log(colors.green("Migration successfull!"));
+        console.log(colors.green("Migration script finished successfully."));
     }
 });

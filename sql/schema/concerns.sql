@@ -26,8 +26,10 @@ CREATE TABLE Concerns (
     q07_explanation TEXT DEFAULT NULL,
     q08_value BOOLEAN DEFAULT NULL,
     q08_explanation TEXT DEFAULT NULL,
-    q09_value BOOLEAN DEFAULT NULL,
-    q09_explanation TEXT DEFAULT NULL,
+    q09_1_value BOOLEAN DEFAULT NULL,
+    q09_1_explanation TEXT DEFAULT NULL,
+    q09_2_value BOOLEAN DEFAULT NULL,
+    q09_2_explanation TEXT DEFAULT NULL,
     q10_value BOOLEAN DEFAULT NULL,
     q10_explanation TEXT DEFAULT NULL,
     q11_1_value BOOLEAN DEFAULT NULL,
@@ -47,5 +49,5 @@ CREATE TABLE Concerns (
     q15_2_value BOOLEAN DEFAULT NULL,
     q15_2_explanation TEXT DEFAULT NULL,
     q15_3_value BOOLEAN DEFAULT NULL,
-    q15_3_explanation TEXT DEFAULT NULL,
+    q15_3_explanation TEXT DEFAULT NULL
 );

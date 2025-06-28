@@ -1,3 +1,10 @@
+# Version 1.4.2
+ - Expanded q09 to q09_1 and q09_2 
+ - Added en_used column to descriptions to make english an optional language
+ - Always require manual review even when no concerns are marked as yes
+ - Added data protection statement as output
+ - Added data protection statement to consent form
+
 # Version 1.4.1
  - Added Email Notification to all Members when Review is started (and not pending anymore)
  - Added q14 (Custom Files)

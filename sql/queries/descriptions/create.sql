@@ -1,5 +1,6 @@
 INSERT INTO Descriptions (
     revision_id,
+    en_used,
     en_title,
     en_researcher,
     en_study_time,
@@ -31,7 +32,7 @@ INSERT INTO Descriptions (
 	pt_purpose_and_procedure
 ) VALUES (
     $1::INTEGER,
-    $2::TEXT,
+    $2::BOOLEAN,
     $3::TEXT,
     $4::TEXT,
     $5::TEXT,
@@ -39,8 +40,8 @@ INSERT INTO Descriptions (
     $7::TEXT,
     $8::TEXT,
     $9::TEXT,
-    $10::BOOLEAN,
-    $11::TEXT,
+    $10::TEXT,
+    $11::BOOLEAN,
     $12::TEXT,
     $13::TEXT,
     $14::TEXT,
@@ -48,8 +49,8 @@ INSERT INTO Descriptions (
     $16::TEXT,
     $17::TEXT,
     $18::TEXT,
-    $19::BOOLEAN,
-    $20::TEXT,
+    $19::TEXT,
+    $20::BOOLEAN,
     $21::TEXT,
     $22::TEXT,
     $23::TEXT,
@@ -59,6 +60,7 @@ INSERT INTO Descriptions (
     $27::TEXT,
 	$28::TEXT,
 	$29::TEXT,
-	$30::TEXT
+	$30::TEXT,
+    $31::TEXT
 )
 RETURNING *;

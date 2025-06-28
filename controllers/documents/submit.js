@@ -138,54 +138,9 @@ exports.request = function(req, res) {
             });
         },
         function(client, done, document, course, revision, description, concern, callback) {
-
-            // Auto-confirmation
-            if(concern.q01_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q01_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q02_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q03_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q04_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q05_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q06_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q07_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q08_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q09_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q10_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q11_1_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q11_2_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q12_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q13_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q14_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q15_1_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q15_2_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else if(concern.q15_3_value){
-                callback(null, client, done, document, course, revision, description, concern, 3);
-            } else {
-                // Check if document has been already in review
-                if(document.status === 5){
-                    callback(null, client, done, document, course, revision, description, concern, 3);
-                } else {
-                    callback(null, client, done, document, course, revision, description, concern, 2);
-                }
-            }
+            
+            // Always require manual review by setting status to 3
+            callback(null, client, done, document, course, revision, description, concern, 3);
         },
         function(client, done, document, course, revision, description, concern, status, callback) {
             var object = {
@@ -334,12 +289,20 @@ exports.request = function(req, res) {
                     concern.q08_sign = "no";
                 }
 
-                if(concern.q09_value){
-                    concern.q09_label = "badge-danger";
-                    concern.q09_sign = "yes";
+                if(concern.q09_1_value){
+                    concern.q09_1_label = "badge-danger";
+                    concern.q09_1_sign = "yes";
                 } else {
-                    concern.q09_label = "badge-success";
-                    concern.q09_sign = "no";
+                    concern.q09_1_label = "badge-success";
+                    concern.q09_1_sign = "no";
+                }
+
+                if(concern.q09_2_value){
+                    concern.q09_2_label = "badge-danger";
+                    concern.q09_2_sign = "yes";
+                } else {
+                    concern.q09_2_label = "badge-success";
+                    concern.q09_2_sign = "no";
                 }
 
                 if(concern.q10_value){

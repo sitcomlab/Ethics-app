@@ -108,7 +108,8 @@ exports.request = function(req, res) {
                 req.body.q06_comment,
                 req.body.q07_comment,
                 req.body.q08_comment,
-                req.body.q09_comment,
+                req.body.q09_1_comment,
+                req.body.q09_2_comment,
                 req.body.q10_comment,
                 req.body.q11_1_comment,
                 req.body.q11_2_comment,
@@ -119,8 +120,8 @@ exports.request = function(req, res) {
                 req.body.q15_2_comment,
                 req.body.q15_3_comment,
                 req.body.en_purpose_and_procedure_comment,
-                req.body.en_purpose_and_procedure_comment,
-                req.body.en_purpose_and_procedure_comment
+                req.body.de_purpose_and_procedure_comment,
+                req.body.pt_purpose_and_procedure_comment
             ], function(err, result) {
                 done();
                 if (err) {
