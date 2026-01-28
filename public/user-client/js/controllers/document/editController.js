@@ -131,38 +131,44 @@ app.controller("documentEditController", function($scope, $rootScope, $filter, $
         if($scope.editDocumentForm.$invalid || ($scope.latest_revision.concerns.q14_filename == null && $scope.editDocumentForm.q14_value.$modelValue)) {
             // Update UI
             
-            // Descriptions (en)
-            $scope.editDocumentForm.en_title.$pristine = false;
-            $scope.editDocumentForm.en_researcher.$pristine = false;
-            $scope.editDocumentForm.en_study_time.$pristine = false;
-            $scope.editDocumentForm.en_purpose_and_procedure.$pristine = false;
-            $scope.editDocumentForm.en_purpose.$pristine = false;
-            $scope.editDocumentForm.en_procedure.$pristine = false;
-            $scope.editDocumentForm.en_duration.$pristine = false;
-            $scope.editDocumentForm.en_risks.$pristine = false;
-            $scope.editDocumentForm.en_benefits.$pristine = false;
+            // Descriptions (en) - only mark as dirty if en_used is selected
+            if($scope.latest_revision.descriptions.en_used) {
+                $scope.editDocumentForm.en_title.$pristine = false;
+                $scope.editDocumentForm.en_researcher.$pristine = false;
+                $scope.editDocumentForm.en_study_time.$pristine = false;
+                $scope.editDocumentForm.en_purpose_and_procedure.$pristine = false;
+                $scope.editDocumentForm.en_purpose.$pristine = false;
+                $scope.editDocumentForm.en_procedure.$pristine = false;
+                $scope.editDocumentForm.en_duration.$pristine = false;
+                $scope.editDocumentForm.en_risks.$pristine = false;
+                $scope.editDocumentForm.en_benefits.$pristine = false;
+            }
 
-            // Descriptions (de)
-            $scope.editDocumentForm.de_title.$pristine = false;
-            $scope.editDocumentForm.de_researcher.$pristine = false;
-            $scope.editDocumentForm.de_study_time.$pristine = false;
-            $scope.editDocumentForm.de_purpose_and_procedure.$pristine = false;
-            $scope.editDocumentForm.de_purpose.$pristine = false;
-            $scope.editDocumentForm.de_procedure.$pristine = false;
-            $scope.editDocumentForm.de_duration.$pristine = false;
-            $scope.editDocumentForm.de_risks.$pristine = false;
-            $scope.editDocumentForm.de_benefits.$pristine = false;
+            // Descriptions (de) - only mark as dirty if de_used is selected
+            if($scope.latest_revision.descriptions.de_used) {
+                $scope.editDocumentForm.de_title.$pristine = false;
+                $scope.editDocumentForm.de_researcher.$pristine = false;
+                $scope.editDocumentForm.de_study_time.$pristine = false;
+                $scope.editDocumentForm.de_purpose_and_procedure.$pristine = false;
+                $scope.editDocumentForm.de_purpose.$pristine = false;
+                $scope.editDocumentForm.de_procedure.$pristine = false;
+                $scope.editDocumentForm.de_duration.$pristine = false;
+                $scope.editDocumentForm.de_risks.$pristine = false;
+                $scope.editDocumentForm.de_benefits.$pristine = false;
+            }
 
-            // Descriptions (pt)
-            $scope.editDocumentForm.pt_title.$pristine = false;
-            $scope.editDocumentForm.pt_researcher.$pristine = false;
-            $scope.editDocumentForm.pt_study_time.$pristine = false;
-            $scope.editDocumentForm.de_purpose_and_procedure.$pristine = false;
-            $scope.editDocumentForm.pt_purpose.$pristine = false;
-            $scope.editDocumentForm.pt_procedure.$pristine = false;
-            $scope.editDocumentForm.pt_duration.$pristine = false;
-            $scope.editDocumentForm.pt_risks.$pristine = false;
-            $scope.editDocumentForm.pt_benefits.$pristine = false;
+            // Descriptions (pt) - only mark as dirty if pt_used is selected
+            if($scope.latest_revision.descriptions.pt_used) {
+                $scope.editDocumentForm.pt_title.$pristine = false;
+                $scope.editDocumentForm.pt_researcher.$pristine = false;
+                $scope.editDocumentForm.pt_study_time.$pristine = false;
+                $scope.editDocumentForm.pt_purpose_and_procedure.$pristine = false;
+                $scope.editDocumentForm.pt_purpose.$pristine = false;
+                $scope.editDocumentForm.pt_procedure.$pristine = false;
+                $scope.editDocumentForm.pt_duration.$pristine = false;
+                $scope.editDocumentForm.pt_risks.$pristine = false;
+                $scope.editDocumentForm.pt_benefits.$pristine = false;
+            }
 
             // Conerns (values)
             $scope.editDocumentForm.q01_value.$pristine = false;
