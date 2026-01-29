@@ -273,12 +273,12 @@
         <!-- Properties -->
         <div class="bs-fix">
             <div class="list-group" ng-if="status.descriptions.language.en">
-                <div class="list-group-item middle" ng-if="!latest_revision.descriptions.en_used">
+                <div class="list-group-item middle" ng-if="!(latest_revision.descriptions.en_used || latest_revision.descriptions.de_used)">
                     - {{ 'NOT_USED' | translate }} -
                 </div>
 
                 <!-- Title -->
-                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used">
+                <div class="list-group-item" ng-if="latest_revision.descriptions.en_used || latest_revision.descriptions.de_used">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <b>{{ 'TITLE' | translate }}</b>
@@ -290,7 +290,7 @@
                                         <code>{{ 'REV' | translate}}{{revision.version}}</code>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_title}}</i><br>
+                                        <i>{{revision.descriptions.en_title || revision.descriptions.de_title}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.en_title_comment !== null && revision.comments.en_title_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_title_comment}}
@@ -316,7 +316,7 @@
                                         <code>{{ 'REV' | translate}}{{revision.version}}</code>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_researcher}}</i><br>
+                                        <i>{{revision.descriptions.en_researcher || revision.descriptions.de_researcher}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.en_researcher_comment !== null && revision.comments.en_researcher_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_researcher_comment}}
@@ -342,7 +342,7 @@
                                         <code>{{ 'REV' | translate}}{{revision.version}}</code>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_study_time}}</i><br>
+                                        <i>{{revision.descriptions.en_study_time || revision.descriptions.de_study_time}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.en_study_time_comment !== null && revision.comments.en_study_time_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_study_time_comment}}
@@ -367,7 +367,7 @@
                                         <code>{{ 'REV' | translate}}{{revision.version}}</code>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_purpose_and_procedure}}</i><br>
+                                        <i>{{revision.descriptions.en_purpose_and_procedure || revision.descriptions.de_purpose_and_procedure}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.en_purpose_and_procedure_comment !== null && revision.comments.en_purpose_and_procedure_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_purpose_and_procedure_comment}}
@@ -393,7 +393,7 @@
                                         <code>{{ 'REV' | translate}}{{revision.version}}</code>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_purpose}}</i><br>
+                                        <i>{{revision.descriptions.en_purpose || revision.descriptions.de_purpose}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.en_purpose_comment !== null && revision.comments.en_purpose_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_purpose_comment}}
@@ -419,7 +419,7 @@
                                         <code>{{ 'REV' | translate}}{{revision.version}}</code>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_procedure}}</i><br>
+                                        <i>{{revision.descriptions.en_procedure || revision.descriptions.de_procedure}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.en_procedure_comment !== null && revision.comments.en_procedure_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_procedure_comment}}
@@ -445,7 +445,7 @@
                                         <code>{{ 'REV' | translate}}{{revision.version}}</code>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_duration}}</i><br>
+                                        <i>{{revision.descriptions.en_duration || revision.descriptions.de_duration}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.en_duration_comment !== null && revision.comments.en_duration_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_duration_comment}}
@@ -471,7 +471,7 @@
                                         <code>{{ 'REV' | translate}}{{revision.version}}</code>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_risks}}</i><br>
+                                        <i>{{revision.descriptions.en_risks || revision.descriptions.de_risks}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.en_risks_comment !== null && revision.comments.en_risks_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_risks_comment}}
@@ -497,7 +497,7 @@
                                         <code>{{ 'REV' | translate}}{{revision.version}}</code>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <i>{{revision.descriptions.en_benefits}}</i><br>
+                                        <i>{{revision.descriptions.en_benefits || revision.descriptions.de_benefits}}</i><br>
                                         <span ng-if="status.descriptions.comments.en">
                                             <span class="comment" ng-if="revision.comments.en_benefits_comment !== null && revision.comments.en_benefits_comment !== ''">
                                                 <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;{{revision.comments.en_benefits_comment}}
