@@ -74,10 +74,10 @@ exports.request = function(req, res) {
                         html: output
                     }, function(err, info) {
                         if (err) {
-                            callback(err);
-                        } else {
-                            callback(null, 201, user);
+                            // User wurde bereits angelegt; Mail-Fehler darf den Request nicht killen
+                            console.error(colors.red("User created but sending email failed: " + err.message));
                         }
+                        callback(null, 201, user);
                     });
 
                 }
@@ -86,9 +86,9 @@ exports.request = function(req, res) {
     ], function(err, code, result) {
         if(err){
             console.error(colors.red(err));
-            res.status(code).send(err.message);
+            res.status(code || 500).send(err.message);
         } else {
-            res.status(code).send(result);
+            res.status(code || 500).send(result);
         }
     });
 };

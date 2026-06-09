@@ -162,7 +162,7 @@ exports.request = function(req, res) {
                 html: output
             }, function(err, info) {
                 if (err) {
-                    callback(err);
+                    callback(err, 500);
                 } else {
                     callback(null, 204, null);
                 }
@@ -172,9 +172,9 @@ exports.request = function(req, res) {
     ], function(err, code, result) {
         if(err){
             console.error(colors.red(err));
-            res.status(code).send(err.message);
+            res.status(code || 500).send(err.message);
         } else {
-            res.status(code).send();
+            res.status(code || 500).send();
         }
     });
 };

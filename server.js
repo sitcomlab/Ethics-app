@@ -12,6 +12,16 @@ var jwt = require('jsonwebtoken');
 var helmet = require('helmet');
 var config = require('dotenv').config();
 
+// Sicherheitsnetz: ein einzelner Request darf den Prozess nie komplett killen.
+// Wird ohne diese Handler eine Exception ausserhalb der Express-Fehlerbehandlung
+// geworfen (z.B. in einem nodemailer-Callback), stirbt sonst der gesamte Server.
+process.on('uncaughtException', function(err) {
+    console.error(colors.red(new Date() + " Uncaught Exception: " + (err && err.stack ? err.stack : err)));
+});
+process.on('unhandledRejection', function(reason) {
+    console.error(colors.red(new Date() + " Unhandled Rejection: " + (reason && reason.stack ? reason.stack : reason)));
+});
+
 // DATABASE CONFIGURATION
 var pool = new pg.Pool({
     host: process.env.POSTGRES_HOST,
@@ -47,6 +57,24 @@ pool.on('error', function (err, client) {
 
 
 // SMTP CONFIGURATION
+var smtpTls = {
+    // Standardmäßig wird das Zertifikat geprüft. Nur wenn SMTP_REJECT_UNAUTHORIZED
+    // ausdrücklich auf "false" gesetzt ist, wird die Prüfung deaktiviert
+    // (z.B. für interne Mailserver ohne vollständige CA-Kette).
+    rejectUnauthorized: process.env.SMTP_REJECT_UNAUTHORIZED !== 'false'
+};
+
+// Optional: zusätzliche CA-Zertifikate laden (z.B. fehlendes Intermediate des
+// Mailservers). Funktioniert auch unter alten Node-Versionen, anders als
+// NODE_EXTRA_CA_CERTS (erst ab Node 7.3.0). SMTP_CA_FILE auf eine .pem zeigen lassen.
+if(process.env.SMTP_CA_FILE) {
+    try {
+        smtpTls.ca = [fs.readFileSync(process.env.SMTP_CA_FILE, 'utf8')];
+    } catch(e) {
+        console.error(colors.red("Could not read SMTP_CA_FILE (" + process.env.SMTP_CA_FILE + "): " + e.message));
+    }
+}
+
 var trans = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
@@ -54,7 +82,8 @@ var trans = nodemailer.createTransport({
     auth: {
         user: process.env.SMTP_EMAIL_ADDRESS,
         pass: process.env.SMTP_PASSWORD
-    }
+    },
+    tls: smtpTls
 });
 
 // verify connection configuration
