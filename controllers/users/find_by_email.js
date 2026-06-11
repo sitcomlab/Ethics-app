@@ -46,9 +46,9 @@ exports.request = function(req, res) {
     ], function(err, code, result) {
         if(err){
             console.error(colors.red(err));
-            res.status(code).send(err.message);
+            res.status(code || 500).send(err.message);
         } else {
-            res.status(code).send(result);
+            res.status(code || 500).send(result);
         }
     });
 };
