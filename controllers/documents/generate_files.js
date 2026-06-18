@@ -7,8 +7,8 @@ var _ = require('underscore');
 var mustache = require('mustache');
 var moment = require('moment');
 var pool = require('../../server.js').pool;
-var pdf = require('html-pdf');
-var uuid = require("uuid");
+var pdf = require('./pdf');
+var uuidv1 = require("uuid").v1;
 var crypto = require('crypto'); 
 
 var fs = require("fs");
@@ -130,7 +130,7 @@ exports.request = function(req, res) {
             // Prepare working folders
             var folders = {
                 dateFolderName: moment().format("YYYY-MM-DD"),
-                filesFolderName: uuid.v1()
+                filesFolderName: uuidv1()
             };
             folders.pathDateFolder = process.cwd() + '/public/files/temp/' + folders.dateFolderName;
             folders.pathFilesFolder = process.cwd() + '/public/files/temp/' + folders.dateFolderName + "/" + folders.filesFolderName;
@@ -154,13 +154,13 @@ exports.request = function(req, res) {
             // Prepare PDF-options
             var options = {
                 format: 'A4',
-                border: {
+                margin: {
                     top: "1.5cm",
                     left: "2cm",
                     right: "2cm",
                     bottom: "1.5cm"
                 },
-                base: "file://" + __dirname + "/../../templates/pdfs/",
+                baseHref: "file://" + __dirname + "/../../templates/pdfs/",
             };
 
 
@@ -187,16 +187,10 @@ exports.request = function(req, res) {
                         year: moment().format("YYYY")
                     });
 
-                    // Create file
-                    var file = fs.createWriteStream(folders.pathFilesFolder + '/cover_sheet.pdf');
-
                     // Write content into file
-                    pdf.create(html, options).toStream(function(err, stream){
-                        stream.pipe(file);
-                    });
-                    file.on('finish', function() {
-                        callback();
-                    });
+                    pdf.renderToFile(html, folders.pathFilesFolder + '/cover_sheet.pdf', options)
+                        .then(function() { callback(); })
+                        .catch(function(err) { callback(err); });
                 },
                 function(callback) { // Generate debriefing information
                     // Render HTML-content
@@ -205,16 +199,10 @@ exports.request = function(req, res) {
                         year: moment().format("YYYY")
                     });
 
-                    // Create file
-                    var file = fs.createWriteStream(folders.pathFilesFolder + '/debriefing_information.pdf');
-
                     // Write content into file
-                    pdf.create(html, options).toStream(function(err, stream){
-                        stream.pipe(file);
-                    });
-                    file.on('finish', function() {
-                        callback();
-                    });
+                    pdf.renderToFile(html, folders.pathFilesFolder + '/debriefing_information.pdf', options)
+                        .then(function() { callback(); })
+                        .catch(function(err) { callback(err); });
                 },
                 function(callback) { // Generate statement of researcher
                     // Render HTML-content
@@ -223,16 +211,10 @@ exports.request = function(req, res) {
                         year: moment().format("YYYY")
                     });
 
-                    // Create file
-                    var file = fs.createWriteStream(folders.pathFilesFolder + '/statement_of_researcher.pdf');
-
                     // Write content into file
-                    pdf.create(html, options).toStream(function(err, stream){
-                        stream.pipe(file);
-                    });
-                    file.on('finish', function() {
-                        callback();
-                    });
+                    pdf.renderToFile(html, folders.pathFilesFolder + '/statement_of_researcher.pdf', options)
+                        .then(function() { callback(); })
+                        .catch(function(err) { callback(err); });
                 },
                 function(callback) { // Generate consent form (English)
                     // Check if an english description was used
@@ -248,16 +230,10 @@ exports.request = function(req, res) {
                             year: moment().format("YYYY")
                         });
 
-                        // Create file
-                        var file = fs.createWriteStream(folders.pathFilesFolder + '/consent_form_en.pdf');
-
                         // Write content into file
-                        pdf.create(html, options).toStream(function(err, stream){
-                            stream.pipe(file);
-                        });
-                        file.on('finish', function() {
-                            callback();
-                        });
+                        pdf.renderToFile(html, folders.pathFilesFolder + '/consent_form_en.pdf', options)
+                            .then(function() { callback(); })
+                            .catch(function(err) { callback(err); });
                     } else {
                         callback();
                     }
@@ -276,16 +252,10 @@ exports.request = function(req, res) {
                             year: moment().format("YYYY")
                         });
 
-                        // Create file
-                        var file = fs.createWriteStream(folders.pathFilesFolder + '/consent_form_de.pdf');
-
                         // Write content into file
-                        pdf.create(html, options).toStream(function(err, stream){
-                            stream.pipe(file);
-                        });
-                        file.on('finish', function() {
-                            callback();
-                        });
+                        pdf.renderToFile(html, folders.pathFilesFolder + '/consent_form_de.pdf', options)
+                            .then(function() { callback(); })
+                            .catch(function(err) { callback(err); });
                     } else {
                         callback();
                     }
@@ -304,16 +274,10 @@ exports.request = function(req, res) {
                             year: moment().format("YYYY")
                         });
 
-                        // Create file
-                        var file = fs.createWriteStream(folders.pathFilesFolder + '/consent_form_pt.pdf');
-
                         // Write content into file
-                        pdf.create(html, options).toStream(function(err, stream){
-                            stream.pipe(file);
-                        });
-                        file.on('finish', function() {
-                            callback();
-                        });
+                        pdf.renderToFile(html, folders.pathFilesFolder + '/consent_form_pt.pdf', options)
+                            .then(function() { callback(); })
+                            .catch(function(err) { callback(err); });
                     } else {
                         callback();
                     }
@@ -332,16 +296,10 @@ exports.request = function(req, res) {
                             year: moment().format("YYYY")
                         });
 
-                        // Create file
-                        var file = fs.createWriteStream(folders.pathFilesFolder + '/data_protection_en.pdf');
-
                         // Write content into file
-                        pdf.create(html, options).toStream(function(err, stream){
-                            stream.pipe(file);
-                        });
-                        file.on('finish', function() {
-                            callback();
-                        });
+                        pdf.renderToFile(html, folders.pathFilesFolder + '/data_protection_en.pdf', options)
+                            .then(function() { callback(); })
+                            .catch(function(err) { callback(err); });
                     } else {
                         callback();
                     }
@@ -360,16 +318,10 @@ exports.request = function(req, res) {
                             year: moment().format("YYYY")
                         });
 
-                        // Create file
-                        var file = fs.createWriteStream(folders.pathFilesFolder + '/data_protection_de.pdf');
-
                         // Write content into file
-                        pdf.create(html, options).toStream(function(err, stream){
-                            stream.pipe(file);
-                        });
-                        file.on('finish', function() {
-                            callback();
-                        });
+                        pdf.renderToFile(html, folders.pathFilesFolder + '/data_protection_de.pdf', options)
+                            .then(function() { callback(); })
+                            .catch(function(err) { callback(err); });
                     } else {
                         callback();
                     }
@@ -388,23 +340,21 @@ exports.request = function(req, res) {
                             year: moment().format("YYYY")
                         });
 
-                        // Create file
-                        var file = fs.createWriteStream(folders.pathFilesFolder + '/data_protection_pt.pdf');
-
                         // Write content into file
-                        pdf.create(html, options).toStream(function(err, stream){
-                            stream.pipe(file);
-                        });
-                        file.on('finish', function() {
-                            callback();
-                        });
+                        pdf.renderToFile(html, folders.pathFilesFolder + '/data_protection_pt.pdf', options)
+                            .then(function() { callback(); })
+                            .catch(function(err) { callback(err); });
                     } else {
                         callback();
                     }
                 }
             ],
             function(err, results) {
-                callback(null, 201, result);
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    callback(null, 201, result);
+                }
             });
 
         },

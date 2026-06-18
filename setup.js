@@ -58,19 +58,20 @@ async.waterfall([
         });
     },
     function(client, done, callback) {
-        // Run all queries
-        async.eachOfSeries(queries, function (query, key, callback) {
+        // Run all queries on the same client, releasing it only once afterwards.
+        // (pg >= 8 throws if the client is released more than once.)
+        async.eachOfSeries(queries, function (query, key, cb) {
             client.query(query, function(err, result) {
-                done();
                 if (err) {
-                    callback(err);
+                    cb(err);
                 } else {
                     console.log(colors.blue(query));
                     console.log(colors.green("Done!\n\n"));
-                    callback(null);
+                    cb(null);
                 }
             });
         }, function(err){
+            done();
             if (err) {
                 callback(err);
             } else {

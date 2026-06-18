@@ -94,6 +94,17 @@ async.waterfall([
             if(err) {
                 callback(err);
             } else {
+                // The same client is reused across all queries below. pg >= 8
+                // throws on a double release, so guard it: the many done()
+                // calls in this script now release the client exactly once.
+                var release = done;
+                var released = false;
+                done = function() {
+                    if (!released) {
+                        released = true;
+                        release();
+                    }
+                };
                 callback(null, client, done);
             }
         });

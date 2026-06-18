@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var isAuthenticated = require('../server.js').isAuthenticated;
-var filetype = require('file-type');
 var path = require('path');
 var fs = require('fs');
 

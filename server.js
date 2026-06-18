@@ -1,6 +1,5 @@
 var colors = require('colors');
 var express = require('express');
-var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var fs = require('fs');
 var http = require('http');
@@ -108,12 +107,12 @@ exports.transporter = trans;
 // Setup settings
 var app = express();
 
-// create application/json parser
-var jsonParser = bodyParser.json({
+// create application/json parser (body-parser is bundled with Express 5)
+var jsonParser = express.json({
     limit: 52428800 // 50MB
 })
-// create application/json parser
-var urlencodedParser = bodyParser.json({
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = express.urlencoded({
     extended: false,
     limit: 52428800 // 50MB
 })
@@ -143,8 +142,13 @@ exports.isAuthenticated = function isAuthenticated(req, res, next) {
     }
 };
 
-// Security headers
-app.use(helmet());
+// Security headers. Content-Security-Policy is disabled to preserve the
+// behaviour of the legacy AngularJS clients (inline scripts/styles), which
+// matches the default of the previously used Helmet 3.
+app.use(helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false
+}));
 
 // API endpoint
 var prefix = '/api';
@@ -177,10 +181,10 @@ app.use(uploadprefix, require ('./routes/fileupload'));
 app.get('/', function(req, res, next) {
     res.sendFile(path.resolve('public/user-client/index.html'));
 });
-app.get('/user-client/*', function(req, res, next) {
+app.get('/user-client/*splat', function(req, res, next) {
     res.sendFile(path.resolve('public/user-client/index.html'));
 });
-app.get('/member-client/*', function(req, res, next) {
+app.get('/member-client/*splat', function(req, res, next) {
     res.sendFile(path.resolve('public/member-client/index.html'));
 });
 

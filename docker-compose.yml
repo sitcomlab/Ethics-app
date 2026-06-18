@@ -1,0 +1,49 @@
+# Docker Compose setup for the Ethics-app.
+#
+# Reuses the project's existing .env file:
+#   - Compose reads ./.env for ${...} variable substitution below.
+#   - The full .env is injected into the app container via env_file.
+#   - POSTGRES_HOST is overridden to the Postgres service name "db" so the app
+#     can reach the database over the Docker network (the .env value is meant
+#     for non-Docker/localhost setups).
+
+services:
+  db:
+    image: postgres:16-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  app:
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      # Override so the app talks to the "db" service instead of localhost.
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${HTTP_PORT:-5000}:${HTTP_PORT:-5000}"
+    volumes:
+      # Persist uploaded files and generated PDFs without shadowing the
+      # static assets committed under public/files.
+      - uploads_custom:/app/public/files/custom
+      - uploads_temp:/app/public/files/temp
+
+volumes:
+  pgdata:
+  uploads_custom:
+  uploads_temp:
