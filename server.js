@@ -30,6 +30,36 @@ var pool = new pg.Pool({
     password: process.env.POSTGRES_PASSWORD,
     ssl: JSON.parse(process.env.POSTGRES_SSL)
 });
+
+// Compatibility shim for pg >= 8:
+// The controllers were written against pg 6, where many of them call the
+// release callback ("done") after every query while reusing the same client
+// across a waterfall. pg >= 8 throws "Release called on client which has
+// already been released to the pool." on the second call. To preserve the
+// original behaviour without rewriting ~60 controllers, we make the release
+// callback idempotent: only the first call actually releases the client.
+var _originalConnect = pool.connect.bind(pool);
+pool.connect = function(callback) {
+    if (typeof callback !== 'function') {
+        // Promise-based usage is left untouched.
+        return _originalConnect(callback);
+    }
+    return _originalConnect(function(err, client, release) {
+        if (err) {
+            return callback(err, client, release);
+        }
+        var released = false;
+        var safeRelease = function(arg) {
+            if (released) {
+                return;
+            }
+            released = true;
+            return release(arg);
+        };
+        callback(err, client, safeRelease);
+    });
+};
+
 exports.pool = pool;
 
 
