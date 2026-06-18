@@ -10,6 +10,7 @@ var nodemailer = require('nodemailer');
 var jwt = require('jsonwebtoken');
 var helmet = require('helmet');
 var config = require('dotenv').config();
+var parseBool = require('./lib/env').parseBool;
 
 // Sicherheitsnetz: ein einzelner Request darf den Prozess nie komplett killen.
 // Wird ohne diese Handler eine Exception ausserhalb der Express-Fehlerbehandlung
@@ -28,16 +29,25 @@ var pool = new pg.Pool({
     database: process.env.POSTGRES_DB_NAME,
     user: process.env.POSTGRES_USERNAME,
     password: process.env.POSTGRES_PASSWORD,
-    ssl: JSON.parse(process.env.POSTGRES_SSL)
+    ssl: parseBool(process.env.POSTGRES_SSL, false)
 });
 
 // Compatibility shim for pg >= 8:
 // The controllers were written against pg 6, where many of them call the
 // release callback ("done") after every query while reusing the same client
 // across a waterfall. pg >= 8 throws "Release called on client which has
-// already been released to the pool." on the second call. To preserve the
-// original behaviour without rewriting ~60 controllers, we make the release
-// callback idempotent: only the first call actually releases the client.
+// already been released to the pool." on the second call.
+//
+// Simply releasing on the first call (and ignoring the rest) would return the
+// client to the pool while the controller keeps querying it, which under load
+// lets a concurrent request grab the same physical connection -> interleaved
+// queries / errors. To preserve the original behaviour without rewriting ~60
+// controllers, we instead keep the client checked out for the whole waterfall
+// and release it exactly once, only after the last query has finished:
+//   - every done() call merely *requests* a release,
+//   - the actual release is deferred (setImmediate) and cancelled whenever a
+//     new query is issued before it runs,
+//   - so the client is returned to the pool only when no further query follows.
 var _originalConnect = pool.connect.bind(pool);
 pool.connect = function(callback) {
     if (typeof callback !== 'function') {
@@ -48,14 +58,70 @@ pool.connect = function(callback) {
         if (err) {
             return callback(err, client, release);
         }
+
         var released = false;
-        var safeRelease = function(arg) {
+        var releaseRequested = false;
+        var activeQueries = 0;
+        var pendingRelease = null;
+        var originalQuery = client.query;
+
+        function doRelease() {
+            pendingRelease = null;
             if (released) {
                 return;
             }
-            released = true;
-            return release(arg);
+            if (releaseRequested && activeQueries === 0) {
+                released = true;
+                client.query = originalQuery;
+                release();
+            }
+        }
+        function scheduleRelease() {
+            if (released || pendingRelease) {
+                return;
+            }
+            pendingRelease = setImmediate(doRelease);
+        }
+        function cancelRelease() {
+            if (pendingRelease) {
+                clearImmediate(pendingRelease);
+                pendingRelease = null;
+            }
+        }
+
+        // Track in-flight queries so the client is only released while idle.
+        client.query = function() {
+            cancelRelease();
+            activeQueries++;
+            var args = Array.prototype.slice.call(arguments);
+            var last = args[args.length - 1];
+            var settle = function() {
+                activeQueries--;
+                if (releaseRequested && activeQueries === 0) {
+                    scheduleRelease();
+                }
+            };
+            if (typeof last === 'function') {
+                args[args.length - 1] = function() {
+                    settle();
+                    return last.apply(this, arguments);
+                };
+                return originalQuery.apply(client, args);
+            }
+            var result = originalQuery.apply(client, args);
+            if (result && typeof result.then === 'function') {
+                result.then(settle, settle);
+            }
+            return result;
         };
+
+        var safeRelease = function() {
+            releaseRequested = true;
+            if (activeQueries === 0) {
+                scheduleRelease();
+            }
+        };
+
         callback(err, client, safeRelease);
     });
 };
@@ -107,7 +173,7 @@ if(process.env.SMTP_CA_FILE) {
 var trans = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
-    secure: JSON.parse(process.env.SMTP_SSL),
+    secure: parseBool(process.env.SMTP_SSL, false),
     auth: {
         user: process.env.SMTP_EMAIL_ADDRESS,
         pass: process.env.SMTP_PASSWORD

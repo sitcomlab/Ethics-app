@@ -64,7 +64,7 @@ exports.request = function(req, res) {
                                 if(document.status === 0 || document.status === 1){
                                     callback(null, client, done);
                                 } else {
-                                    callback(new Error("Document can not be deleted", 423));
+                                    callback(new Error("Document can not be deleted"), 423);
                                 }
                             } else {
                                 callback(new Error("Authorization failed"), 401);

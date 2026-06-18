@@ -68,7 +68,7 @@ exports.request = function(req, res) {
             if(document.status === 2 || document.status === 6){
                 callback(null, client, done, document);
             } else {
-                callback(new Error("Files can not be generated, please submit your document first", 423));
+                callback(new Error("Files can not be generated, please submit your document first"), 423);
             }
         },
         function(client, done, document, callback) {

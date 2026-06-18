@@ -3,6 +3,7 @@ var async = require('async');
 var pg = require('pg');
 var fs = require('fs');
 var config = require('dotenv').config();
+var parseBool = require('./lib/env').parseBool;
 
 
 // DATABASE CONFIGURATION
@@ -12,7 +13,7 @@ var pool = new pg.Pool({
     database: process.env.POSTGRES_DB_NAME,
     user: process.env.POSTGRES_USERNAME,
     password: process.env.POSTGRES_PASSWORD,
-    ssl: JSON.parse(process.env.POSTGRES_SSL)
+    ssl: parseBool(process.env.POSTGRES_SSL, false)
 });
 exports.pool = pool;
 
@@ -37,10 +38,10 @@ queries.push(fs.readFileSync(__dirname + dir + 'concerns.sql', 'utf8').toString(
 queries.push(fs.readFileSync(__dirname + dir + 'comments.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'notes.sql', 'utf8').toString());
 queries.push(fs.readFileSync(__dirname + dir + 'reviewers.sql', 'utf8').toString());
-if(JSON.parse(process.env.DEFAULTS)){
+if(parseBool(process.env.DEFAULTS, false)){
     queries.push(fs.readFileSync(__dirname + dir + 'defaults.sql', 'utf8').toString());
 }
-if(JSON.parse(process.env.EXAMPLES)){
+if(parseBool(process.env.EXAMPLES, false)){
     queries.push(fs.readFileSync(__dirname + dir + 'examples.sql', 'utf8').toString());
 }
 

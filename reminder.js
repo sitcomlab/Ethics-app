@@ -7,6 +7,7 @@ var mustache = require('mustache');
 var moment = require('moment');
 var jwt = require('jsonwebtoken');
 var config = require('dotenv').config();
+var parseBool = require('./lib/env').parseBool;
 var domain = process.env.SERVER_URL + ":" + process.env.SERVER_PORT;
 var member_client_path = process.env.MEMBER_CLIENT_PATH;
 
@@ -18,7 +19,7 @@ var pool = new pg.Pool({
     database: process.env.POSTGRES_DB_NAME,
     user: process.env.POSTGRES_USERNAME,
     password: process.env.POSTGRES_PASSWORD,
-    ssl: JSON.parse(process.env.POSTGRES_SSL)
+    ssl: parseBool(process.env.POSTGRES_SSL, false)
 });
 exports.pool = pool;
 
@@ -56,7 +57,7 @@ pool.on('error', function (err, client) {
 var transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
-    secure: JSON.parse(process.env.SMTP_SSL),
+    secure: parseBool(process.env.SMTP_SSL, false),
     auth: {
         user: process.env.SMTP_EMAIL_ADDRESS,
         pass: process.env.SMTP_PASSWORD
@@ -227,7 +228,7 @@ async.waterfall([
                 },
                 function(course, revision, description, concern, author, callback){
                     // Find responsible members, when document was referenced to a course
-                    if(course && !JSON.parse(process.env.REMIND_ALL)){
+                    if(course && !parseBool(process.env.REMIND_ALL, false)){
                         // Database query
                         client.query(query_list_members_by_course, [
                             course.course_id
@@ -492,6 +493,6 @@ async.waterfall([
     } else {
         console.log(colors.green(new Date() + " Reminder has been completed!"));
     }
-    // Close reminder
-    process.exit(1);
+    // Close reminder: signal success/failure correctly to the caller (e.g. cron).
+    process.exit(err ? 1 : 0);
 });
