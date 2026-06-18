@@ -14,7 +14,16 @@ app.constant("config", {
     timeZone: "Europe/Berlin",
     debugMode: true,
     html5Mode: true,
-    serverMode: 'production',
+    // Auto-detect the environment from the current hostname so the app works
+    // locally (localhost) and in production without editing this file.
+    // Override manually by replacing this value with 'development' or 'production'.
+    serverMode: (function() {
+        if (typeof window !== 'undefined' && window.location &&
+            /^(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)$/.test(window.location.hostname)) {
+            return 'development';
+        }
+        return 'production';
+    })(),
     serverSettings: {
         development: {
             host: 'http://localhost',

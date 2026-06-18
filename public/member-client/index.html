@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="ethics-app">
     <head>
-        <!-- Base -->
-        <base href="//giv-ethics-app.uni-muenster.de/app/member-client/index.html"/>
+        <!-- Base: relative locally, production domain otherwise (AngularJS html5Mode) -->
+        <script>
+            (function() {
+                var isLocal = /^(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)$/.test(window.location.hostname);
+                var href = isLocal
+                    ? "/member-client/index.html"
+                    : "//giv-ethics-app.uni-muenster.de/app/member-client/index.html";
+                document.write('<base href="' + href + '">');
+            })();
+        </script>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
