@@ -5,7 +5,7 @@ app.constant("config", {
     appName: "Ethics-app",
     appSubnames: {
         user_client: "Ethics-app",
-        member_client: "Ethics-app | Committee",
+        member_client: "Ethics-app | Committee",
     },
     appGithub: "https://github.com/sitcomlab/Ethics-app",
     appVersion: "v1.0",
@@ -14,74 +14,36 @@ app.constant("config", {
     timeZone: "Europe/Berlin",
     debugMode: true,
     html5Mode: true,
-    // Auto-detect the environment from the current hostname so the app works
-    // locally (localhost) and in production without editing this file.
-    // Override manually by replacing this value with 'development' or 'production'.
-    serverMode: (function() {
-        if (typeof window !== 'undefined' && window.location &&
-            /^(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)$/.test(window.location.hostname)) {
-            return 'development';
+    getOrigin: function() {
+        if (typeof window !== 'undefined' && window.location && window.location.origin) {
+            return window.location.origin;
         }
-        return 'production';
-    })(),
-    serverSettings: {
-        development: {
-            host: 'http://localhost',
-            port: 5000,
-            apiPath: "/api",
-            uploadPath: "/upload/",
-            memberClientPath: '/member-client',
-            userClientPath: '/user-client'
-        },
-        production: {
-            host: 'https://giv-ethics-app.uni-muenster.de',
-            port: 443,
-            apiPath: "/app/api",
-	    uploadPath: "/app/upload/",
-            memberClientPath: '/app/member-client',
-            userClientPath: '/app/user-client'
-        }
+        return 'http://localhost:5000';
     },
-    getUploadEndpoint: function(){
-        if(this.serverMode === 'production'){
-            return this.serverSettings.production.host + ":" + this.serverSettings.production.port + this.serverSettings.production.uploadPath
-        } else {
-            return this.serverSettings.development.host + ":" + this.serverSettings.development.port + this.serverSettings.development.uploadPath
+    // Production is served under /app/ (nginx); direct node access uses no prefix.
+    getBasePrefix: function() {
+        if (typeof window !== 'undefined' && window.location) {
+            var pathname = window.location.pathname;
+            if (pathname.indexOf('/app/') === 0 || pathname === '/app') {
+                return '/app';
+            }
         }
+        return '';
     },
-    getApiEndpoint: function(){
-        if(this.serverMode === 'production'){
-            return this.serverSettings.production.host + ":" + this.serverSettings.production.port + this.serverSettings.production.apiPath
-        } else {
-            return this.serverSettings.development.host + ":" + this.serverSettings.development.port + this.serverSettings.development.apiPath
-        }
+    getUploadEndpoint: function() {
+        return this.getOrigin() + this.getBasePrefix() + '/upload/';
     },
-    getURL: function(client){
+    getApiEndpoint: function() {
+        return this.getOrigin() + this.getBasePrefix() + '/api';
+    },
+    getURL: function(client) {
         switch (client) {
-            case 'member': {
-                if(this.serverMode === 'production'){
-                    return this.serverSettings.production.host + ":" + this.serverSettings.production.port + this.serverSettings.production.memberClientPath
-                } else {
-                    return this.serverSettings.development.host + ":" + this.serverSettings.development.port + this.serverSettings.development.memberClientPath
-                }
-                break;
-            }
-            case 'user': {
-                if(this.serverMode === 'production'){
-                    return this.serverSettings.production.host + ":" + this.serverSettings.production.port + this.serverSettings.production.userClientPath
-                } else {
-                    return this.serverSettings.development.host + ":" + this.serverSettings.development.port + this.serverSettings.development.userClientPath
-                }
-                break;
-            }
-            default: {
-                if(this.serverMode === 'production'){
-                    return this.serverSettings.production.host + ":" + this.serverSettings.production.port
-                } else {
-                    return this.serverSettings.development.host + ":" + this.serverSettings.development.port
-                }
-                break;
-            }
+            case 'member':
+                return this.getOrigin() + this.getBasePrefix() + '/member-client';
+            case 'user':
+                return this.getOrigin() + this.getBasePrefix() + '/user-client';
+            default:
+                return this.getOrigin();
         }
     }
 });

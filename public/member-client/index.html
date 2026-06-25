@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="ethics-app">
     <head>
-        <!-- Base: relative locally, production domain otherwise (AngularJS html5Mode) -->
+        <!-- Base href derived from the current page URL (same host, auto-detected /app prefix) -->
         <script>
             (function() {
-                var isLocal = /^(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)$/.test(window.location.hostname);
-                var href = isLocal
-                    ? "/member-client/index.html"
-                    : "//giv-ethics-app.uni-muenster.de/app/member-client/index.html";
-                document.write('<base href="' + href + '">');
+                var pathname = window.location.pathname;
+                var prefix = (pathname.indexOf('/app/') === 0 || pathname === '/app') ? '/app' : '';
+                document.write('<base href="' + prefix + '/member-client/index.html">');
             })();
         </script>
 
