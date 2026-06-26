@@ -76,27 +76,6 @@ app.factory('$documentService', function($http, $log, config, $authenticationSer
                 if(document.revisions[i].revision_id === revision_id){
                     // Attach descriptions
                     document.revisions[i].descriptions = data;
-
-                    // Normalize for UI: if English missing but German present, make English fields available locally
-                    try {
-                        var desc = document.revisions[i].descriptions;
-                        if(desc){
-                            // Treat German content as displayable in the English slots (client-side only)
-                            if((!desc.en_used || desc.en_used === false) && desc.de_used){
-                                desc.en_used = true;
-                            }
-                            // Fill English fallbacks from German if empty (client-side only)
-                            desc.en_title = desc.en_title || desc.de_title;
-                            desc.en_researcher = desc.en_researcher || desc.de_researcher;
-                            desc.en_study_time = desc.en_study_time || desc.de_study_time;
-                            desc.en_purpose = desc.en_purpose || desc.de_purpose;
-                            desc.en_procedure = desc.en_procedure || desc.de_procedure;
-                            desc.en_duration = desc.en_duration || desc.de_duration;
-                            desc.en_risks = desc.en_risks || desc.de_risks;
-                            desc.en_benefits = desc.en_benefits || desc.de_benefits;
-                            desc.en_purpose_and_procedure = desc.en_purpose_and_procedure || desc.de_purpose_and_procedure;
-                        }
-                    } catch(e){}
                 }
             }
         },

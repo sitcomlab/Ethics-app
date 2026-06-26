@@ -315,9 +315,21 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
 
     // Show all comments and history
     $scope.toggle('general', 'history');
-    $scope.toggle('descriptions', 'history', 'en');
-    $scope.toggle('descriptions', 'history', 'de');
-    $scope.toggle('descriptions', 'history', 'pt');
+    if($scope.latest_revision.descriptions.en_used){
+        $scope.toggle('descriptions', 'history', 'en');
+    } else {
+        $scope.toggle('descriptions', 'language', 'en');
+    }
+    if($scope.latest_revision.descriptions.de_used){
+        $scope.toggle('descriptions', 'history', 'de');
+    } else {
+        $scope.toggle('descriptions', 'language', 'de');
+    }
+    if($scope.latest_revision.descriptions.pt_used){
+        $scope.toggle('descriptions', 'history', 'pt');
+    } else {
+        $scope.toggle('descriptions', 'language', 'pt');
+    }
     $scope.toggle('concerns', 'history');
 
     $scope.$parent.loading = { status: false, message: "" };

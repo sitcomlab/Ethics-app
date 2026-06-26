@@ -219,7 +219,7 @@ app.controller("documentShowSubmissionController", function($scope, $rootScope, 
     if($scope.latest_revision.descriptions.pt_used){
         $scope.toggle('descriptions', 'history', 'pt');
     } else {
-        $scope.toggle('descriptions', 'language', 'de');
+        $scope.toggle('descriptions', 'language', 'pt');
     }
     $scope.toggle('concerns', 'history');
 

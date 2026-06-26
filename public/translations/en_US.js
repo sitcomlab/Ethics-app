@@ -168,6 +168,8 @@ app.constant("en_US", {
     TO_BE_FILLED_OUT_BY_PARTICIPANT:'(to be filled out by each participant)',
     SIGN_BY_YOURSELF:'(sign by yourself and add to archive)',
     COVER_SHEET: 'Cover sheet',
+    ETHICAL_CLEARANCE_CONFIRMATION: 'Ethical clearance confirmation',
+    CONFIRMATION_OF_GRANTED_ETHICAL_CLEARANCE: '(confirmation that ethical clearance has been granted)',
 
     DEFAULT:'Default',
     STATUS:'Status',

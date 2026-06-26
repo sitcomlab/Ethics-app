@@ -26,6 +26,7 @@ var template_consent_form_pt = fs.readFileSync(__dirname + dir_1 + 'consent_form
 var template_data_protection_en = fs.readFileSync(__dirname + dir_1 + 'data_protection_en.html', 'utf8').toString();
 var template_data_protection_de = fs.readFileSync(__dirname + dir_1 + 'data_protection_de.html', 'utf8').toString();
 var template_data_protection_pt = fs.readFileSync(__dirname + dir_1 + 'data_protection_pt.html', 'utf8').toString();
+var template_ethical_clearance_confirmation = fs.readFileSync(__dirname + dir_1 + 'ethical_clearance_confirmation.html', 'utf8').toString();
 var query_get_document_with_user = fs.readFileSync(__dirname + dir_2 + 'get_with_user.sql', 'utf8').toString();
 var query_get_latest_revision = fs.readFileSync(__dirname + dir_3 + 'get_latest_by_document.sql', 'utf8').toString();
 var query_get_description = fs.readFileSync(__dirname + dir_4 + 'get_by_revision.sql', 'utf8').toString();
@@ -163,9 +164,24 @@ exports.request = function(req, res) {
                 baseHref: "file://" + __dirname + "/../../templates/pdfs/",
             };
 
+            var authors = description.en_researcher || description.de_researcher || description.pt_researcher;
+            var approval_date = moment(document.updated).format("DD MMMM YYYY");
+
 
             // Create files
             async.parallel([
+                function(callback) { // Generate ethical clearance confirmation
+                    var html = mustache.render(template_ethical_clearance_confirmation, {
+                        document: document,
+                        authors: authors,
+                        approval_date: approval_date,
+                        year: moment().format("YYYY")
+                    });
+
+                    pdf.renderToFile(html, folders.pathFilesFolder + '/ethical_clearance_confirmation.pdf', options)
+                        .then(function() { callback(); })
+                        .catch(function(err) { callback(err); });
+                },
                 function(callback) { // Generate Cover Sheet
                     
                     // create distinguishable password

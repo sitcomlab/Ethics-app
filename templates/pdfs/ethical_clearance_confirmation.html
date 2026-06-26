@@ -1,8 +1,8 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Cover sheet</title>
+        <title>Confirmation of ethical clearance</title>
         <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
@@ -20,7 +20,25 @@
             <br>
             <br>
             <br>
-            <h1 style="width:100%; text-align: center;">Cover sheet for research study</h1>
+            <h1 style="width:100%; text-align: center;">Confirmation of Ethical Clearance</h1>
+            <br>
+            <p style="text-align: justify;">
+                This document confirms that ethical clearance has been granted for the following research project submitted through the Ethics-App.
+            </p>
+            <br>
+            <p style="text-align: justify;">
+                <b>Title of the project:</b>
+            </p>
+            <p style="border: 2px solid black; padding: 10px; color: black">
+                {{document.document_title}}
+            </p>
+            <br>
+            <p style="text-align: justify;">
+                <b>Author(s) of the submission:</b>
+            </p>
+            <p style="border: 2px solid black; padding: 10px; color: black">
+                {{authors}}
+            </p>
             <br>
             <p style="text-align: justify;">
                 <b>Document ID:</b>
@@ -30,38 +48,22 @@
             </p>
             <br>
             <p style="text-align: justify;">
-                <b>Name of the Researcher:</b>
+                <b>Date of granted approval:</b>
             </p>
             <p style="border: 2px solid black; padding: 10px; color: black">
-                {{description.en_researcher || description.de_researcher || description.pt_researcher}}
+                {{approval_date}}
             </p>
             <br>
-            <p style="text-align: justify;">
-                <b>Title of study:</b>
-            </p>
-            <p style="border: 2px solid black; padding: 10px; color: black">
-                {{document.document_title}}
-            </p>
             <br>
             <p style="text-align: justify;">
-                <b>Revision Number:</b>
-            </p>
-            <p style="border: 2px solid black; padding: 10px; color: black">
-                {{revision.version}}
+                The research may proceed in accordance with the submitted and approved application.
             </p>
             <br>
-            <p style="text-align: justify;">
-                <b>Date of last Revision:</b>
-            </p>
-            <p style="border: 2px solid black; padding: 10px; color: black">
-                {{revision.updated}}
-            </p>
             <br>
-            <p style="text-align: justify;">
-                <b>Veracrypt Password:</b>
+            <p style="text-align: center;">
+                {{document.institute_name}}<br>
+                {{document.university_name}}
             </p>
-            <p style="border: 2px solid black; padding: 10px; color: black">
-                {{veracryptpassword}}
-            </p>
-     </div>
-</body>
+        </div>
+    </body>
+</html>

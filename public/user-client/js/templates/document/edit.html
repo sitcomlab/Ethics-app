@@ -9,7 +9,7 @@
                     {{ 'STUDY_DESCRIPTION' | translate }}
                 </div>
                 <div class="col right">
-                    <a href="" class="btn btn-primary" ng-click="saveDocument(tab+1)" ng-disabled="!latest_revision.descriptions.en_used && !latest_revision.descriptions.de_used" ng-class="{'disabled': !latest_revision.descriptions.en_used && !latest_revision.descriptions.de_used}">
+                    <a href="" class="btn btn-primary" ng-click="saveDocument(tab+1)" ng-disabled="!latest_revision.descriptions.en_used && !latest_revision.descriptions.de_used && !latest_revision.descriptions.pt_used" ng-class="{'disabled': !latest_revision.descriptions.en_used && !latest_revision.descriptions.de_used && !latest_revision.descriptions.pt_used}">
                         {{ 'NEXT_PAGE' | translate }}&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
                     </a>
                 </div>
@@ -84,7 +84,7 @@
             </div>
             <div class="row">
                 <!-- English fields -->
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.en_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.en_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_title.$invalid && !editDocumentForm.en_title.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -107,7 +107,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_title.$invalid && !editDocumentForm.de_title.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -130,7 +130,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_title.$invalid && !editDocumentForm.pt_title.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -172,7 +172,7 @@
             </div>
             <div class="row">
                 <!-- English fields -->
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.en_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.en_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_researcher.$invalid && !editDocumentForm.en_researcher.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -195,7 +195,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_researcher.$invalid && !editDocumentForm.de_researcher.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -218,7 +218,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_researcher.$invalid && !editDocumentForm.pt_researcher.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -259,7 +259,7 @@
             </div>
             <div class="row">
                 <!-- English fields -->
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.en_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.en_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_study_time.$invalid && !editDocumentForm.en_study_time.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -282,7 +282,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_study_time.$invalid && !editDocumentForm.de_study_time.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -305,7 +305,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_study_time.$invalid && !editDocumentForm.pt_study_time.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -345,7 +345,7 @@
             </div>
             <div class="row">
                 <!-- English field -->
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.en_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.en_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_purpose_and_procedure.$invalid && !editDocumentForm.en_purpose_and_procedure.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -369,7 +369,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_purpose_and_procedure.$invalid && !editDocumentForm.de_purpose_and_procedure.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -393,7 +393,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_purpose_and_procedure.$invalid && !editDocumentForm.pt_purpose_and_procedure.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -434,7 +434,7 @@
             </div>
             <div class="row">
                 <!-- English fields -->
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.en_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.en_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_purpose.$invalid && !editDocumentForm.en_purpose.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -457,7 +457,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_purpose.$invalid && !editDocumentForm.de_purpose.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -480,7 +480,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_purpose.$invalid && !editDocumentForm.pt_purpose.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -520,7 +520,7 @@
             </div>
             <div class="row">
                 <!-- English fields -->
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.en_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.en_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_procedure.$invalid && !editDocumentForm.en_procedure.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -543,7 +543,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_procedure.$invalid && !editDocumentForm.de_procedure.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -566,7 +566,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_procedure.$invalid && !editDocumentForm.pt_procedure.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -607,7 +607,7 @@
             </div>
             <div class="row">
                 <!-- English fields -->
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.en_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.en_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_duration.$invalid && !editDocumentForm.en_duration.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -630,7 +630,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_duration.$invalid && !editDocumentForm.de_duration.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -653,7 +653,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_duration.$invalid && !editDocumentForm.pt_duration.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -693,7 +693,7 @@
             </div>
             <div class="row">
                 <!-- English fields -->
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.en_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.en_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_risks.$invalid && !editDocumentForm.en_risks.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -716,7 +716,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_risks.$invalid && !editDocumentForm.de_risks.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -739,7 +739,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_risks.$invalid && !editDocumentForm.pt_risks.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -780,7 +780,7 @@
             </div>
             <div class="row">
                 <!-- English fields -->
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.en_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.en_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.en_benefits.$invalid && !editDocumentForm.en_benefits.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -803,7 +803,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.de_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.de_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.de_benefits.$invalid && !editDocumentForm.de_benefits.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -826,7 +826,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="latest_revision.descriptions.pt_used">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="latest_revision.descriptions.pt_used">
                     <div class="form-group" ng-class="{'has-danger': editDocumentForm.pt_benefits.$invalid && !editDocumentForm.pt_benefits.$pristine }">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -860,7 +860,7 @@
                     </a>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 right"></div>
-                    <a href="" class="btn btn-primary btn-block-xs-only btn-block-sm-only" ng-click="saveDocument(tab+1)" ng-disabled="!latest_revision.descriptions.en_used && !latest_revision.descriptions.de_used" ng-class="{'disabled': !latest_revision.descriptions.en_used && !latest_revision.descriptions.de_used}">
+                    <a href="" class="btn btn-primary btn-block-xs-only btn-block-sm-only" ng-click="saveDocument(tab+1)" ng-disabled="!latest_revision.descriptions.en_used && !latest_revision.descriptions.de_used && !latest_revision.descriptions.pt_used" ng-class="{'disabled': !latest_revision.descriptions.en_used && !latest_revision.descriptions.de_used && !latest_revision.descriptions.pt_used}">
                         {{ 'NEXT_PAGE' | translate }}&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
                     </a>
                 </div>

@@ -234,46 +234,39 @@ app.controller("documentReviseController", function($scope, $rootScope, $filter,
     };
 
     /**
+     * Mark description fields as dirty for validation feedback.
+     */
+    var descriptionFields = ['title', 'researcher', 'study_time', 'purpose_and_procedure', 'purpose', 'procedure', 'duration', 'risks', 'benefits'];
+
+    function markDescriptionFieldsDirty(prefix, used) {
+        if(!used) {
+            return;
+        }
+        for(var i = 0; i < descriptionFields.length; i++) {
+            var control = $scope.editDocumentForm[prefix + '_' + descriptionFields[i]];
+            if(control) {
+                control.$pristine = false;
+            }
+        }
+    }
+
+    function isLanguageSelected() {
+        var descriptions = $scope.latest_revision.descriptions;
+        return descriptions.en_used || descriptions.de_used || descriptions.pt_used;
+    }
+
+    /**
      * [submit description]
      * @return {[type]} [description]
      */
     $scope.submit = function() {
         // Validate input
-        if($scope.editDocumentForm.$invalid || ($scope.latest_revision.concerns.q14_filename == null && $scope.editDocumentForm.q14_value.$modelValue)) {
+        if(!isLanguageSelected() || $scope.editDocumentForm.$invalid || ($scope.latest_revision.concerns.q14_filename == null && $scope.editDocumentForm.q14_value.$modelValue)) {
             // Update UI
 
-            // Descriptions (en)
-            $scope.editDocumentForm.en_title.$pristine = false;
-            $scope.editDocumentForm.en_researcher.$pristine = false;
-            $scope.editDocumentForm.en_study_time.$pristine = false;
-            $scope.editDocumentForm.en_purpose_and_procedure.$pristine = false;
-            $scope.editDocumentForm.en_purpose.$pristine = false;
-            $scope.editDocumentForm.en_procedure.$pristine = false;
-            $scope.editDocumentForm.en_duration.$pristine = false;
-            $scope.editDocumentForm.en_risks.$pristine = false;
-            $scope.editDocumentForm.en_benefits.$pristine = false;
-
-            // Descriptions (de)
-            $scope.editDocumentForm.de_title.$pristine = false;
-            $scope.editDocumentForm.de_researcher.$pristine = false;
-            $scope.editDocumentForm.de_study_time.$pristine = false;
-            $scope.editDocumentForm.de_purpose_and_procedure.$pristine = false;
-            $scope.editDocumentForm.de_purpose.$pristine = false;
-            $scope.editDocumentForm.de_procedure.$pristine = false;
-            $scope.editDocumentForm.de_duration.$pristine = false;
-            $scope.editDocumentForm.de_risks.$pristine = false;
-            $scope.editDocumentForm.de_benefits.$pristine = false;
-
-            // Descriptions (pt)
-            $scope.editDocumentForm.pt_title.$pristine = false;
-            $scope.editDocumentForm.pt_researcher.$pristine = false;
-            $scope.editDocumentForm.pt_study_time.$pristine = false;
-            $scope.editDocumentForm.pt_purpose_and_procedure.$pristine = false;
-            $scope.editDocumentForm.pt_purpose.$pristine = false;
-            $scope.editDocumentForm.pt_procedure.$pristine = false;
-            $scope.editDocumentForm.pt_duration.$pristine = false;
-            $scope.editDocumentForm.pt_risks.$pristine = false;
-            $scope.editDocumentForm.pt_benefits.$pristine = false;
+            markDescriptionFieldsDirty('en', $scope.latest_revision.descriptions.en_used);
+            markDescriptionFieldsDirty('de', $scope.latest_revision.descriptions.de_used);
+            markDescriptionFieldsDirty('pt', $scope.latest_revision.descriptions.pt_used);
 
             // Conerns (values)
             $scope.editDocumentForm.q01_value.$pristine = false;
