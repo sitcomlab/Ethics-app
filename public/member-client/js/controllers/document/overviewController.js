@@ -205,8 +205,6 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
                                     .then(function onSuccess(response) {
                                         $documentService.setRevisions(response.data);
 
-                                        // Prepare main-promises
-                                        var checkout_revisions_deferred = $q.defer();
                                         var revision_promises = [];
 
                                         // Checkout description, concerns, comments and reviewers for each revision
@@ -226,8 +224,17 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
                                                 checkout_descriptions_deferred.resolve();
                                             })
                                             .catch(function onError(response) {
-                                                $window.alert(response.data);
-                                                $scope.redirect("/documents");
+                                                if (response.status === 404) {
+                                                    $documentService.setDescriptions(revision.revision_id, {
+                                                        en_used: true,
+                                                        de_used: true,
+                                                        pt_used: true
+                                                    });
+                                                    checkout_descriptions_deferred.resolve();
+                                                } else {
+                                                    $window.alert(response.data);
+                                                    $scope.redirect("/documents");
+                                                }
                                             });
 
                                             // Checkout concerns
@@ -280,20 +287,15 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
                                                 return;
                                             });
 
-                                            // Start parallel sub-requests
-                                            $q.all([
+                                            revision_promises.push($q.all([
                                                 checkout_descriptions_deferred.promise,
                                                 checkout_concerns_deferred.promise,
                                                 checkout_comments_deferred.promise,
                                                 checkout_reviewers_deferred.promise
-                                            ]).then(function(){
-                                                // Resolve main-promises
-                                                revision_promises.push(checkout_revisions_deferred.resolve());
-                                            });
+                                            ]));
 
                                         });
 
-                                        // Start parallel requests for each revision
                                         $q.all(revision_promises).then(function(){
 
                                             // Update navbar
@@ -350,6 +352,21 @@ app.controller("documentOverviewController", function($scope, $rootScope, $route
     $scope.document = $documentService.get();
     $scope.latest_revision = $documentService.getLatestRevision();
     $scope.authenticated_member = $authenticationService.get();
+
+    // Prevent undefined errors (e.g. old documents or incomplete loading)
+    if (!$scope.latest_revision.descriptions) {
+        $scope.latest_revision.descriptions = {
+            en_used: true,
+            de_used: true,
+            pt_used: true
+        };
+    }
+    if (!$scope.latest_revision.concerns) {
+        $scope.latest_revision.concerns = {};
+    }
+    if (!$scope.latest_revision.comments) {
+        $scope.latest_revision.comments = {};
+    }
     
     switch($scope.document.status) {
         case 0:

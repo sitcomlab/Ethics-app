@@ -266,7 +266,22 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
     $scope.authenticated_member = $authenticationService.get();
     $scope.document = $documentService.get();
     $scope.latest_revision = $documentService.getLatestRevision();
-    
+
+    // Prevent undefined errors (e.g. old documents or incomplete loading)
+    if (!$scope.latest_revision.descriptions) {
+        $scope.latest_revision.descriptions = {
+            en_used: true,
+            de_used: true,
+            pt_used: true
+        };
+    }
+    if (!$scope.latest_revision.concerns) {
+        $scope.latest_revision.concerns = {};
+    }
+    if (!$scope.latest_revision.comments) {
+        $scope.latest_revision.comments = {};
+    }
+
     //TODO Add concerns to make filepath available in review.html
 
     // Update navbar

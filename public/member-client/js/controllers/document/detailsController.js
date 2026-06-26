@@ -42,8 +42,6 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                 .then(function onSuccess(response) {
                     $documentService.setRevisions(response.data);
 
-                    // Prepare main-promises
-                    var checkout_revisions_deferred = $q.defer();
                     var revision_promises = [];
 
                     // Checkout description, concerns, comments and reviewers for each revision
@@ -63,8 +61,17 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                             checkout_descriptions_deferred.resolve();
                         })
                         .catch(function onError(response) {
-                            $window.alert(response.data);
-                            $scope.redirect("/documents");
+                            if (response.status === 404) {
+                                $documentService.setDescriptions(revision.revision_id, {
+                                    en_used: true,
+                                    de_used: true,
+                                    pt_used: true
+                                });
+                                checkout_descriptions_deferred.resolve();
+                            } else {
+                                $window.alert(response.data);
+                                $scope.redirect("/documents");
+                            }
                         });
 
                         // Checkout concerns
@@ -117,20 +124,15 @@ app.controller("documentDetailsController", function($scope, $rootScope, $routeP
                             return;
                         });
 
-                        // Start parallel sub-requests
-                        $q.all([
+                        revision_promises.push($q.all([
                             checkout_descriptions_deferred.promise,
                             checkout_concerns_deferred.promise,
                             checkout_comments_deferred.promise,
                             checkout_reviewers_deferred.promise
-                        ]).then(function(){
-                            // Resolve main-promises
-                            revision_promises.push(checkout_revisions_deferred.resolve());
-                        });
+                        ]));
 
                     });
 
-                    // Start parallel requests for each revision
                     $q.all(revision_promises).then(function(){
                         $scope.$parent.loading = { status: false, message: "" };
 
