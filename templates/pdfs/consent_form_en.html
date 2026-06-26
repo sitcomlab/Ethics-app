@@ -10,7 +10,7 @@
             <table style="width: 100%;">
                 <tr>
                     <td style="width: 50%; text-align: left;">
-                        <img src="images/{{document.institute_logo}}" alt="{{document.institute_name}}" height="45px">
+                        <img src="images/{{document.institute_logo}}" alt="{{document.institute_name}}" height="80px">
                     </td>
                     <td style="width: 50%; text-align: right;">
                         <img src="images/{{document.university_logo}}" alt="{{document.university_name}}" height="45px">
@@ -54,6 +54,15 @@
                 {{description.en_risks}}
             </p>
             <p style="text-align: justify;">
+                <b>Privacy:</b><br>
+                Original data obtained from this study will be anonymised and only processed to draw scientific conclusions about groups, not about individual participants. Anonymised data might be published in academic journals, presentations, open science data repositories, or other media, but not in a way that would allow individual identification. One week after the completion of the study it might no longer be possible to retract your data from such aggregated analyses. You can contact the researcher in order to access your data or request its removal.
+                {{#concern.q15_1_value}}
+                    <p>
+                        Once processed, anonymised data from this experiment will be made available under the following link: {{concern.q15_3_explanation}}
+                    </p>
+                {{/concern.q15_1_value}}
+            </p>
+            <p style="text-align: justify;">
                 <b>Benefits:</b><br>
                 {{description.en_benefits}}
             </p>
@@ -65,7 +74,7 @@
                 <b>If you have any questions, please ask them now.</b>
             </p>
             <p>
-                For further questions, complains or issues, please contact the institute's Ethics-Committee: &lt;{{support_email_address}}&gt;.
+                For further questions, complains or issues, please contact the institute's Ethics-Committee: &lt;{{consent_form_email}}&gt;.
             </p>
             <br>
             <p>

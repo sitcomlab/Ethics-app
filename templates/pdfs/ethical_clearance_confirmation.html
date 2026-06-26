@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Confirmation of ethical clearance</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <div class="firstpage">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 50%; text-align: left;">
+                        <img src="images/{{document.institute_logo}}" alt="{{document.institute_name}}" height="80px">
+                    </td>
+                    <td style="width: 50%; text-align: right;">
+                        <img src="images/{{document.university_logo}}" alt="{{document.university_name}}" height="45px">
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <br>
+            <h1 style="width:100%; text-align: center;">Confirmation of Ethical Clearance</h1>
+            <br>
+            <p style="text-align: justify;">
+                This document confirms that ethical clearance has been granted for the following research project submitted through the Ethics-App.
+            </p>
+            <br>
+            <p style="text-align: justify;">
+                <b>Title of the project:</b>
+            </p>
+            <p style="border: 2px solid black; padding: 10px; color: black">
+                {{document.document_title}}
+            </p>
+            <br>
+            <p style="text-align: justify;">
+                <b>Author(s) of the submission:</b>
+            </p>
+            <p style="border: 2px solid black; padding: 10px; color: black">
+                {{authors}}
+            </p>
+            <br>
+            <p style="text-align: justify;">
+                <b>Document ID:</b>
+            </p>
+            <p style="border: 2px solid black; padding: 10px; color: black">
+                {{document.document_id}}
+            </p>
+            <br>
+            <p style="text-align: justify;">
+                <b>Date of granted approval:</b>
+            </p>
+            <p style="border: 2px solid black; padding: 10px; color: black">
+                {{approval_date}}
+            </p>
+            <br>
+            <br>
+            <p style="text-align: justify;">
+                The research may proceed in accordance with the submitted and approved application.
+            </p>
+            <br>
+            <br>
+            <p style="text-align: center;">
+                {{document.institute_name}}<br>
+                {{document.university_name}}
+            </p>
+        </div>
+    </body>
+</html>

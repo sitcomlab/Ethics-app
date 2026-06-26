@@ -7,8 +7,8 @@ var _ = require('underscore');
 var mustache = require('mustache');
 var moment = require('moment');
 var pool = require('../../server.js').pool;
-var pdf = require('html-pdf');
-var uuid = require("uuid");
+var pdf = require('./pdf');
+var uuidv1 = require("uuid").v1;
 var crypto = require('crypto'); 
 
 var fs = require("fs");
@@ -26,6 +26,7 @@ var template_consent_form_pt = fs.readFileSync(__dirname + dir_1 + 'consent_form
 var template_data_protection_en = fs.readFileSync(__dirname + dir_1 + 'data_protection_en.html', 'utf8').toString();
 var template_data_protection_de = fs.readFileSync(__dirname + dir_1 + 'data_protection_de.html', 'utf8').toString();
 var template_data_protection_pt = fs.readFileSync(__dirname + dir_1 + 'data_protection_pt.html', 'utf8').toString();
+var template_ethical_clearance_confirmation = fs.readFileSync(__dirname + dir_1 + 'ethical_clearance_confirmation.html', 'utf8').toString();
 var query_get_document_with_user = fs.readFileSync(__dirname + dir_2 + 'get_with_user.sql', 'utf8').toString();
 var query_get_latest_revision = fs.readFileSync(__dirname + dir_3 + 'get_latest_by_document.sql', 'utf8').toString();
 var query_get_description = fs.readFileSync(__dirname + dir_4 + 'get_by_revision.sql', 'utf8').toString();
@@ -68,7 +69,7 @@ exports.request = function(req, res) {
             if(document.status === 2 || document.status === 6){
                 callback(null, client, done, document);
             } else {
-                callback(new Error("Files can not be generated, please submit your document first", 423));
+                callback(new Error("Files can not be generated, please submit your document first"), 423);
             }
         },
         function(client, done, document, callback) {
@@ -130,7 +131,7 @@ exports.request = function(req, res) {
             // Prepare working folders
             var folders = {
                 dateFolderName: moment().format("YYYY-MM-DD"),
-                filesFolderName: uuid.v1()
+                filesFolderName: uuidv1()
             };
             folders.pathDateFolder = process.cwd() + '/public/files/temp/' + folders.dateFolderName;
             folders.pathFilesFolder = process.cwd() + '/public/files/temp/' + folders.dateFolderName + "/" + folders.filesFolderName;
@@ -154,18 +155,49 @@ exports.request = function(req, res) {
             // Prepare PDF-options
             var options = {
                 format: 'A4',
-                border: {
+                margin: {
                     top: "1.5cm",
                     left: "2cm",
                     right: "2cm",
                     bottom: "1.5cm"
                 },
-                base: "file://" + __dirname + "/../../templates/pdfs/",
+                baseHref: "file://" + __dirname + "/../../templates/pdfs/",
             };
+
+            var authors = [];
+            if (description.en_used && description.en_researcher) {
+                authors.push(description.en_researcher.trim());
+            }
+            if (description.de_used && description.de_researcher) {
+                var deResearcher = description.de_researcher.trim();
+                if (authors.indexOf(deResearcher) === -1) {
+                    authors.push(deResearcher);
+                }
+            }
+            if (description.pt_used && description.pt_researcher) {
+                var ptResearcher = description.pt_researcher.trim();
+                if (authors.indexOf(ptResearcher) === -1) {
+                    authors.push(ptResearcher);
+                }
+            }
+            authors = authors.join('\n');
+            var approval_date = moment(document.updated).format("DD MMMM YYYY");
 
 
             // Create files
             async.parallel([
+                function(callback) { // Generate ethical clearance confirmation
+                    var html = mustache.render(template_ethical_clearance_confirmation, {
+                        document: document,
+                        authors: authors,
+                        approval_date: approval_date,
+                        year: moment().format("YYYY")
+                    });
+
+                    pdf.renderToFile(html, folders.pathFilesFolder + '/ethical_clearance_confirmation.pdf', options)
+                        .then(function() { callback(); })
+                        .catch(function(err) { callback(err); });
+                },
                 function(callback) { // Generate Cover Sheet
                     
                     // create distinguishable password
@@ -182,21 +214,16 @@ exports.request = function(req, res) {
                     var html = mustache.render(template_cover_sheet, {
                         document: document,
                         description: description,
+                        authors: authors,
                         revision: revision,
                         veracryptpassword: psw,
                         year: moment().format("YYYY")
                     });
 
-                    // Create file
-                    var file = fs.createWriteStream(folders.pathFilesFolder + '/cover_sheet.pdf');
-
                     // Write content into file
-                    pdf.create(html, options).toStream(function(err, stream){
-                        stream.pipe(file);
-                    });
-                    file.on('finish', function() {
-                        callback();
-                    });
+                    pdf.renderToFile(html, folders.pathFilesFolder + '/cover_sheet.pdf', options)
+                        .then(function() { callback(); })
+                        .catch(function(err) { callback(err); });
                 },
                 function(callback) { // Generate debriefing information
                     // Render HTML-content
@@ -205,16 +232,10 @@ exports.request = function(req, res) {
                         year: moment().format("YYYY")
                     });
 
-                    // Create file
-                    var file = fs.createWriteStream(folders.pathFilesFolder + '/debriefing_information.pdf');
-
                     // Write content into file
-                    pdf.create(html, options).toStream(function(err, stream){
-                        stream.pipe(file);
-                    });
-                    file.on('finish', function() {
-                        callback();
-                    });
+                    pdf.renderToFile(html, folders.pathFilesFolder + '/debriefing_information.pdf', options)
+                        .then(function() { callback(); })
+                        .catch(function(err) { callback(err); });
                 },
                 function(callback) { // Generate statement of researcher
                     // Render HTML-content
@@ -223,16 +244,10 @@ exports.request = function(req, res) {
                         year: moment().format("YYYY")
                     });
 
-                    // Create file
-                    var file = fs.createWriteStream(folders.pathFilesFolder + '/statement_of_researcher.pdf');
-
                     // Write content into file
-                    pdf.create(html, options).toStream(function(err, stream){
-                        stream.pipe(file);
-                    });
-                    file.on('finish', function() {
-                        callback();
-                    });
+                    pdf.renderToFile(html, folders.pathFilesFolder + '/statement_of_researcher.pdf', options)
+                        .then(function() { callback(); })
+                        .catch(function(err) { callback(err); });
                 },
                 function(callback) { // Generate consent form (English)
                     // Check if an english description was used
@@ -244,20 +259,14 @@ exports.request = function(req, res) {
                             description: description,
                             concern: concern,
                             revision: revision,
-                            support_email_address: process.env.SUPPORT_EMAIL_ADDRESS,
+                            consent_form_email: process.env.CONSENT_FORM_EMAIL,
                             year: moment().format("YYYY")
                         });
 
-                        // Create file
-                        var file = fs.createWriteStream(folders.pathFilesFolder + '/consent_form_en.pdf');
-
                         // Write content into file
-                        pdf.create(html, options).toStream(function(err, stream){
-                            stream.pipe(file);
-                        });
-                        file.on('finish', function() {
-                            callback();
-                        });
+                        pdf.renderToFile(html, folders.pathFilesFolder + '/consent_form_en.pdf', options)
+                            .then(function() { callback(); })
+                            .catch(function(err) { callback(err); });
                     } else {
                         callback();
                     }
@@ -276,16 +285,10 @@ exports.request = function(req, res) {
                             year: moment().format("YYYY")
                         });
 
-                        // Create file
-                        var file = fs.createWriteStream(folders.pathFilesFolder + '/consent_form_de.pdf');
-
                         // Write content into file
-                        pdf.create(html, options).toStream(function(err, stream){
-                            stream.pipe(file);
-                        });
-                        file.on('finish', function() {
-                            callback();
-                        });
+                        pdf.renderToFile(html, folders.pathFilesFolder + '/consent_form_de.pdf', options)
+                            .then(function() { callback(); })
+                            .catch(function(err) { callback(err); });
                     } else {
                         callback();
                     }
@@ -304,16 +307,10 @@ exports.request = function(req, res) {
                             year: moment().format("YYYY")
                         });
 
-                        // Create file
-                        var file = fs.createWriteStream(folders.pathFilesFolder + '/consent_form_pt.pdf');
-
                         // Write content into file
-                        pdf.create(html, options).toStream(function(err, stream){
-                            stream.pipe(file);
-                        });
-                        file.on('finish', function() {
-                            callback();
-                        });
+                        pdf.renderToFile(html, folders.pathFilesFolder + '/consent_form_pt.pdf', options)
+                            .then(function() { callback(); })
+                            .catch(function(err) { callback(err); });
                     } else {
                         callback();
                     }
@@ -332,16 +329,10 @@ exports.request = function(req, res) {
                             year: moment().format("YYYY")
                         });
 
-                        // Create file
-                        var file = fs.createWriteStream(folders.pathFilesFolder + '/data_protection_en.pdf');
-
                         // Write content into file
-                        pdf.create(html, options).toStream(function(err, stream){
-                            stream.pipe(file);
-                        });
-                        file.on('finish', function() {
-                            callback();
-                        });
+                        pdf.renderToFile(html, folders.pathFilesFolder + '/data_protection_en.pdf', options)
+                            .then(function() { callback(); })
+                            .catch(function(err) { callback(err); });
                     } else {
                         callback();
                     }
@@ -360,16 +351,10 @@ exports.request = function(req, res) {
                             year: moment().format("YYYY")
                         });
 
-                        // Create file
-                        var file = fs.createWriteStream(folders.pathFilesFolder + '/data_protection_de.pdf');
-
                         // Write content into file
-                        pdf.create(html, options).toStream(function(err, stream){
-                            stream.pipe(file);
-                        });
-                        file.on('finish', function() {
-                            callback();
-                        });
+                        pdf.renderToFile(html, folders.pathFilesFolder + '/data_protection_de.pdf', options)
+                            .then(function() { callback(); })
+                            .catch(function(err) { callback(err); });
                     } else {
                         callback();
                     }
@@ -388,23 +373,21 @@ exports.request = function(req, res) {
                             year: moment().format("YYYY")
                         });
 
-                        // Create file
-                        var file = fs.createWriteStream(folders.pathFilesFolder + '/data_protection_pt.pdf');
-
                         // Write content into file
-                        pdf.create(html, options).toStream(function(err, stream){
-                            stream.pipe(file);
-                        });
-                        file.on('finish', function() {
-                            callback();
-                        });
+                        pdf.renderToFile(html, folders.pathFilesFolder + '/data_protection_pt.pdf', options)
+                            .then(function() { callback(); })
+                            .catch(function(err) { callback(err); });
                     } else {
                         callback();
                     }
                 }
             ],
             function(err, results) {
-                callback(null, 201, result);
+                if (err) {
+                    callback(err, 500);
+                } else {
+                    callback(null, 201, result);
+                }
             });
 
         },

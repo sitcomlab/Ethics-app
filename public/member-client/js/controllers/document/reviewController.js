@@ -266,7 +266,22 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
     $scope.authenticated_member = $authenticationService.get();
     $scope.document = $documentService.get();
     $scope.latest_revision = $documentService.getLatestRevision();
-    
+
+    // Prevent undefined errors (e.g. old documents or incomplete loading)
+    if (!$scope.latest_revision.descriptions) {
+        $scope.latest_revision.descriptions = {
+            en_used: true,
+            de_used: true,
+            pt_used: true
+        };
+    }
+    if (!$scope.latest_revision.concerns) {
+        $scope.latest_revision.concerns = {};
+    }
+    if (!$scope.latest_revision.comments) {
+        $scope.latest_revision.comments = {};
+    }
+
     //TODO Add concerns to make filepath available in review.html
 
     // Update navbar
@@ -315,9 +330,21 @@ app.controller("documentReviewController", function($scope, $rootScope, $routePa
 
     // Show all comments and history
     $scope.toggle('general', 'history');
-    $scope.toggle('descriptions', 'history', 'en');
-    $scope.toggle('descriptions', 'history', 'de');
-    $scope.toggle('descriptions', 'history', 'pt');
+    if($scope.latest_revision.descriptions.en_used){
+        $scope.toggle('descriptions', 'history', 'en');
+    } else {
+        $scope.toggle('descriptions', 'language', 'en');
+    }
+    if($scope.latest_revision.descriptions.de_used){
+        $scope.toggle('descriptions', 'history', 'de');
+    } else {
+        $scope.toggle('descriptions', 'language', 'de');
+    }
+    if($scope.latest_revision.descriptions.pt_used){
+        $scope.toggle('descriptions', 'history', 'pt');
+    } else {
+        $scope.toggle('descriptions', 'language', 'pt');
+    }
     $scope.toggle('concerns', 'history');
 
     $scope.$parent.loading = { status: false, message: "" };

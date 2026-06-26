@@ -1,0 +1,59 @@
+# Docker Compose setup for the Ethics-app.
+#
+# Reuses the project's existing .env file:
+#   - Compose reads ./.env for ${...} variable substitution below.
+#   - The full .env is injected into the app container via env_file.
+#   - POSTGRES_HOST is overridden so the app reaches Postgres on the host loopback
+#     when using network_mode: host (required on some uni/VPN setups where bridge
+#     containers cannot reach external DNS or SMTP). The db service publishes its
+#     port to the host for that connection.
+#   - network_mode: host lets the app use the host network stack (SMTP, etc.).
+#     Build also uses network: host for apt-get during image build.
+
+services:
+  db:
+    image: postgres:16-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  app:
+    build:
+      context: .
+      # Host network is required on some setups (e.g. uni VPN/DNS) where bridge
+      # containers cannot reach upstream resolvers during apt-get in the Dockerfile.
+      network: host
+      args:
+        HTTP_PROXY: ${HTTP_PROXY}
+        HTTPS_PROXY: ${HTTPS_PROXY}
+        FTP_PROXY: ${FTP_PROXY}
+        NO_PROXY: ${NO_PROXY}
+    network_mode: host
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+    volumes:
+      - uploads_custom:/app/public/files/custom
+      - uploads_temp:/app/public/files/temp
+
+volumes:
+  pgdata:
+  uploads_custom:
+  uploads_temp:

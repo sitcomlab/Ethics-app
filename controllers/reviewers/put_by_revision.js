@@ -194,6 +194,9 @@ exports.request = function(req, res) {
                     if (result.rows.length === 0) {
                         // Notify each committee member
                         async.eachOfSeries(members, function (member, key, callback) {
+
+                            // Choose title for emails (prefer English, fallback to German or document id)
+                            var email_title = description.en_title || description.de_title || revision.document_id;
                             // Render HTML content
                             var output = mustache.render(template_review_claimed, {
                                 member: member,
@@ -217,11 +220,12 @@ exports.request = function(req, res) {
                                 to: member.email_address,
                                 inReplyTo: revision.document_id + "_review_reminder@giv-ethics-app.uni-muenster.de",
                                 references: revision.document_id + "_review_reminder@giv-ethics-app.uni-muenster.de",
-                                subject: "RE: [Ethics-App] A document needs your review - Study Title: " + description.en_title,
+                                subject: "RE: [Ethics-App] A document needs your review - Study Title: " + email_title,
                                 text: text,
                                 html: output,
                             }, function(err, info) {
                                 if (err) {
+                                    console.error(colors.red('Error sending review-claimed email:'), err);
                                     callback(err ,500);
                                 } else {
                                     callback();

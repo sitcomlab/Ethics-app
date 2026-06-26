@@ -52,8 +52,9 @@ app.controller("documentCreateController", function($scope, $rootScope, $filter,
                 // Check if user exists
                 $userService.findByEmail($scope.new_document.email_address)
                 .then(function onSuccess(response) {
-                    // Check if user was found
-                    if(JSON.parse(response.data)){
+                    // Check if user was found (API returns boolean true/false)
+                    var userFound = response.data === true || response.data === 'true';
+                    if(userFound){
                         $timeout(function() {
                             $scope.$parent.loading = { status: true, message: $filter('translate')('CREATING_NEW_DOCUMENT') };
 

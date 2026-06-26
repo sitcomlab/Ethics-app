@@ -46,7 +46,7 @@ app.factory('$userService', function($http, $log, config, $authenticationService
             });
         },
         findByEmail: function(email_address) {
-            return $http.get(config.getApiEndpoint() + "/user/" + email_address);
+            return $http.get(config.getApiEndpoint() + "/user/" + encodeURIComponent(email_address));
         }
     };
 

@@ -177,7 +177,7 @@ app.controller("documentEditSettingsController", function($scope, $rootScope, $f
 
     // Load courses
     $scope.load('courses');
-    console.log($scope.updated_document);
+    //console.log($scope.updated_document);
     $scope.updateCourse($scope.updated_document.course_id);
 
     $scope.$parent.loading = { status: false, message: "" };

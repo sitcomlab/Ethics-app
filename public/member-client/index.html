@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="ethics-app">
     <head>
-        <!-- Base -->
-        <base href="/member-client/index.html"/>
+        <!-- Base href derived from the current page URL (same host, auto-detected /app prefix) -->
+        <script>
+            (function() {
+                var pathname = window.location.pathname;
+                var prefix = (pathname.indexOf('/app/') === 0 || pathname === '/app') ? '/app' : '';
+                document.write('<base href="' + prefix + '/member-client/">');
+            })();
+        </script>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -4,7 +4,7 @@ var pg = require('pg');
 var types = require('pg').types;
 types.setTypeParser(1700, 'text', parseFloat);
 var _ = require('underscore');
-var uuid = require('uuid');
+var uuidv1 = require('uuid').v1;
 var mustache = require('mustache');
 var moment = require('moment');
 var domain = process.env.SERVER_URL + ":" + process.env.SERVER_PORT;
@@ -67,7 +67,7 @@ exports.request = function(req, res) {
         function(client, done, user, callback) {
             // TODO: Add object/schema validation
             var object = {
-                document_id: uuid.v1(),
+                document_id: uuidv1(),
                 document_title: req.body.document_title,
                 user_id: user.user_id
             };
@@ -129,7 +129,10 @@ exports.request = function(req, res) {
                 null,
                 null,
                 null,
-                null
+                null,
+		        null,
+		        null,
+		        null
             ], function(err, result) {
                 done();
                 if (err) {
@@ -143,6 +146,12 @@ exports.request = function(req, res) {
             // Database query
             client.query(query_create_concern, [
                 revision.revision_id,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
                 null,
                 null,
                 null,
@@ -238,7 +247,8 @@ exports.request = function(req, res) {
                 html: output
             }, function(err, info) {
                 if (err) {
-                    callback(err);
+		    err.message = JSON.stringify(info);
+                    callback(err, 500);
                 } else {
                     callback(null, 201, document);
                 }

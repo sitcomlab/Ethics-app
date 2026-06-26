@@ -1,0 +1,16 @@
+node_modules
+public/bower_components
+public/files/temp
+public/files/custom
+.git
+.gitignore
+*.log
+.env
+.env.*
+!.env.sample
+ssl
+.idea
+.DS_Store
+Dockerfile
+docker-compose.yml
+.dockerignore

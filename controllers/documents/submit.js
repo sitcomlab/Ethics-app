@@ -353,8 +353,35 @@ exports.request = function(req, res) {
                     concern.q14_sign = "no";
                 }
 
+                if(concern.q15_1_value){
+                    concern.q15_1_label = "badge-danger";
+                    concern.q15_1_sign = "yes";
+                } else {
+                    concern.q15_1_label = "badge-success";
+                    concern.q15_1_sign = "no";
+                }
+
+                if(concern.q15_2_value){
+                    concern.q15_2_label = "badge-danger";
+                    concern.q15_2_sign = "yes";
+                } else {
+                    concern.q15_2_label = "badge-success";
+                    concern.q15_2_sign = "no";
+                }
+
+                if(concern.q15_3_value){
+                    concern.q15_3_label = "badge-danger";
+                    concern.q15_3_sign = "yes";
+                } else {
+                    concern.q15_3_label = "badge-success";
+                    concern.q15_3_sign = "no";
+                }
+
                 // Notify each committee member
                 async.eachOfSeries(members, function (member, key, callback) {
+
+                    // Choose title for emails (prefer English, fallback to German or document title)
+                    var email_title = description.en_title || description.de_title || document.document_title || document.document_id;
 
                     // Render HTML content
                     var output = mustache.render(template_member_review_required, {
@@ -380,12 +407,13 @@ exports.request = function(req, res) {
                             address: process.env.SENDER_EMAIL_ADDRESS
                         },
                         to: member.email_address,
-                        subject: "[Ethics-App] A Study needs your review - Study Title: " + description.en_title,
+                        subject: "[Ethics-App] A Study needs your review - Study Title: " + email_title,
                         text: text,
                         html: output,
                         messageId: document.document_id + "_review_reminder@giv-ethics-app.uni-muenster.de"
                     }, function(err, info) {
                         if (err) {
+                            console.error(colors.red('Error sending review notification email:'), err);
                             callback(err);
                         } else {
                             callback();
@@ -393,7 +421,12 @@ exports.request = function(req, res) {
                     });
 
                 }, function(err){
-                    callback(null, 204, null);
+                    if(err){
+                        console.error(colors.red(err));
+                        callback(err, 500);
+                    } else {
+                        callback(null, 204, null);
+                    }
                 });
 
             }

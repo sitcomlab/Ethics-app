@@ -3,6 +3,7 @@ var async = require('async');
 var pg = require('pg');
 var fs = require('fs');
 require('dotenv').config();
+var parseBool = require('./lib/env').parseBool;
 
 // DATABASE CONFIGURATION
 var pool = new pg.Pool({
@@ -11,7 +12,7 @@ var pool = new pg.Pool({
     database: process.env.POSTGRES_DB_NAME,
     user: process.env.POSTGRES_USERNAME,
     password: process.env.POSTGRES_PASSWORD,
-    ssl: JSON.parse(process.env.POSTGRES_SSL)
+    ssl: parseBool(process.env.POSTGRES_SSL, false)
 });
 exports.pool = pool;
 

@@ -26,7 +26,10 @@ INSERT INTO Descriptions (
     pt_procedure,
     pt_duration,
     pt_risks,
-    pt_benefits
+    pt_benefits,
+	en_purpose_and_procedure,
+	de_purpose_and_procedure,
+	pt_purpose_and_procedure
 ) VALUES (
     $1::INTEGER,
     $2::BOOLEAN,
@@ -55,6 +58,9 @@ INSERT INTO Descriptions (
     $25::TEXT,
     $26::TEXT,
     $27::TEXT,
-    $28::TEXT
+	$28::TEXT,
+	$29::TEXT,
+	$30::TEXT,
+    $31::TEXT
 )
 RETURNING *;

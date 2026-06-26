@@ -1,8 +1,5 @@
-UPDATE Members SET (
-    password
-) = (
-    crypt($2::TEXT, gen_salt('md5'))
-)
+UPDATE Members SET
+    password = crypt($2::TEXT, gen_salt('md5'))
 WHERE
     member_id=$1::INTEGER
 RETURNING

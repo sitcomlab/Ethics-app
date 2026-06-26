@@ -49,7 +49,7 @@ exports.upload = function(req, res) {
             var object = {
                 concern_id: req.params.concern_id,
                 q14_filename: req.file.originalname,
-                q14_filepath: '/files/custom/' + req.headers['x-documentid'] + "/" + req.file.filename
+                q14_filepath: '/app/files/custom/' + req.headers['x-documentid'] + "/" + req.file.filename
             };
             var params = _.values(object);
             callback(null, client, done, params);
