@@ -164,7 +164,23 @@ exports.request = function(req, res) {
                 baseHref: "file://" + __dirname + "/../../templates/pdfs/",
             };
 
-            var authors = description.en_researcher || description.de_researcher || description.pt_researcher;
+            var authors = [];
+            if (description.en_used && description.en_researcher) {
+                authors.push(description.en_researcher.trim());
+            }
+            if (description.de_used && description.de_researcher) {
+                var deResearcher = description.de_researcher.trim();
+                if (authors.indexOf(deResearcher) === -1) {
+                    authors.push(deResearcher);
+                }
+            }
+            if (description.pt_used && description.pt_researcher) {
+                var ptResearcher = description.pt_researcher.trim();
+                if (authors.indexOf(ptResearcher) === -1) {
+                    authors.push(ptResearcher);
+                }
+            }
+            authors = authors.join('\n');
             var approval_date = moment(document.updated).format("DD MMMM YYYY");
 
 
@@ -198,6 +214,7 @@ exports.request = function(req, res) {
                     var html = mustache.render(template_cover_sheet, {
                         document: document,
                         description: description,
+                        authors: authors,
                         revision: revision,
                         veracryptpassword: psw,
                         year: moment().format("YYYY")
