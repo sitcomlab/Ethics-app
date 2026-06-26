@@ -7,7 +7,7 @@
                     {{ 'NEW_DOCUMENT' | translate }}
                 </div>
                 <div class="col right">
-                    <button class="btn btn-secondary" role="button" ng-click="cancel()">
+                    <button class="btn btn-secondary" type="button" ng-click="cancel()">
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -80,7 +80,7 @@
 
         </div>
         <div class="card-footer right">
-            <button class="btn btn-success" role="submit">
+            <button class="btn btn-success" type="submit">
                 <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SEND' | translate }}
             </button>
         </div>
@@ -96,7 +96,7 @@
                     {{ 'REGISTRATION' | translate }}
                 </div>
                 <div class="col-xs-3 col-sm-3 col-xs-3 col-md-3 col-lg-3 right">
-                    <button class="btn btn-secondary" role="button" ng-click="cancel()">
+                    <button class="btn btn-secondary" type="button" ng-click="cancel()">
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -278,7 +278,7 @@
 
         </div>
         <div class="card-footer right">
-            <button class="btn btn-success" role="submit" ng-disabled="!agreement.data || !agreement.deletion">
+            <button class="btn btn-success" type="submit" ng-disabled="!agreement.data || !agreement.deletion">
                 <i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;{{ 'SIGN_UP' | translate }}
             </button>
         </div>
