@@ -12,7 +12,7 @@ var dir_1 = "/../../sql/queries/users/";
 var dir_2 = "/../../sql/queries/members/";
 var query_get_user = fs.readFileSync(__dirname + dir_1 + 'get.sql', 'utf8').toString();
 var query_get_member = fs.readFileSync(__dirname + dir_2 + 'get.sql', 'utf8').toString();
-var query_search_members_by_institute_of_member = fs.readFileSync(__dirname + dir_2 + 'search_by_institute.sql', 'utf8').toString();
+var query_search_members_by_university_of_member = fs.readFileSync(__dirname + dir_2 + 'search_by_university.sql', 'utf8').toString();
 var query_search_members_by_institute_of_user = fs.readFileSync(__dirname + dir_2 + 'search_by_institute_of_user.sql', 'utf8').toString();
 var query_search_members = fs.readFileSync(__dirname + dir_2 + 'search.sql', 'utf8').toString();
 
@@ -54,7 +54,7 @@ exports.request = function(req, res) {
                                     if (result.rows.length === 0) {
                                         callback(new Error("Member not found"), 404);
                                     } else {
-                                        callback(null, client, done, result.rows[0], undefined, query_search_members_by_institute_of_member);
+                                        callback(null, client, done, result.rows[0], undefined, query_search_members_by_university_of_member);
                                     }
                                 }
                             });
@@ -98,9 +98,9 @@ exports.request = function(req, res) {
             // Filter by former status
             params.push(String(req.query.former));
 
-            // Filter by institute
+            // Filter by university
             if(member){
-                params.push(member.institute_id);
+                params.push(member.university_id);
             }
             if(user){
                 params.push(user.institute_id);
