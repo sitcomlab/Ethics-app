@@ -6,7 +6,7 @@ types.setTypeParser(1700, 'text', parseFloat);
 var _ = require('underscore');
 var mustache = require('mustache');
 var moment = require('moment');
-var domain = process.env.SERVER_URL + ":" + process.env.SERVER_PORT;
+var domain = require('../../lib/env').publicOrigin();
 var user_client_path = process.env.USER_CLIENT_PATH;
 var jwt = require('jsonwebtoken');
 var pool = require('../../server.js').pool;

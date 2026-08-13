@@ -9,7 +9,7 @@ var pool = require('../../server.js').pool;
 var transporter = require('../../server.js').transporter;
 var mustache = require('mustache');
 var moment = require('moment');
-var domain = process.env.SERVER_URL + ":" + process.env.SERVER_PORT;
+var domain = require('../../lib/env').publicOrigin();
 var member_client_path = process.env.MEMBER_CLIENT_PATH;
 
 var fs = require("fs");

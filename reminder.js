@@ -7,8 +7,9 @@ var mustache = require('mustache');
 var moment = require('moment');
 var jwt = require('jsonwebtoken');
 var config = require('dotenv').config();
-var parseBool = require('./lib/env').parseBool;
-var domain = process.env.SERVER_URL + ":" + process.env.SERVER_PORT;
+var env = require('./lib/env');
+var parseBool = env.parseBool;
+var domain = env.publicOrigin();
 var member_client_path = process.env.MEMBER_CLIENT_PATH;
 
 
